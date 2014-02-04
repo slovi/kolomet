@@ -15,6 +15,7 @@ public class Person {
 
     private String lastName;
 
+    private Integer age;
 
     public Integer getId() {
         return id;
@@ -39,5 +40,13 @@ public class Person {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+	public Integer getAge() {
+		return age;
+	}
+
+	public void setAge(Integer age) {
+		this.age = age;
+	}
 
 }
