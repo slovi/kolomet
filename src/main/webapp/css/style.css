@@ -210,7 +210,7 @@ p {
 /* Barvy a pozadí */
 body {
 	color: #333;
-	background: url(../background/body_bg.jpg);
+	background: url(../img/background/body_bg.jpg);
 	}
 div#header_background {
 	background: #f9f9f9;
