@@ -92,7 +92,7 @@
 		        <!-- obsah pro homepage konec -->
 		        </div> <!-- kontejner obsahu konec -->
 		        <div id="footer"> <!-- patka -->
-		        	<p>2014 Kolomet &#169; &nbsp; &nbsp; |
+		        	<p>2014 Kolomet &#169; &#160; &#160; |
 		            <a href="">O nás</a> |
 		            <a href="">Obchodní podmínky</a> |
 		            <a href="">Kontakt</a></p>
