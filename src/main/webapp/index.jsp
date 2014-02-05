@@ -11,8 +11,8 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title><!-- dynamický titulek--></title>
 	</head>
-	<link type="text/css" rel="stylesheet" media="all" href="css/style.css"></link> <!--základní stylesheet-->
-	<script src="./js/side_menu.js" type="text/javascript"></script> <!-- javascript pro postranní menu -->
+	<link type="text/css" rel="stylesheet" media="all" href="css/style.css">&#160;</link> <!--základní stylesheet-->
+	<script src="./js/side_menu.js" type="text/javascript">&#160;</script> <!-- javascript pro postranní menu -->
 	
 	<body>
 		<div id="container"> <!-- hlavní kontejner -->
