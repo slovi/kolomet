@@ -47,6 +47,10 @@ div#side_menu {
 	width: 256px;
 	float: left;
 	}
+
+.left {
+	float: left;
+	}
 	
 div#content_container {
 	width: 944px;
@@ -119,7 +123,7 @@ div#footer {
 	padding: 0 0 4px 0;
 	}
 	
-	div#side_menu img, p.detail_seller {
+	div#side_menu img, .right {
 	float:right;
 	}
 	
@@ -225,6 +229,13 @@ div#footer {
 	margin:0;
 	}
 	
+	div.cat_prodejce {
+	height:111px !important;
+	}
+	div.cat_prodejce_popis {
+	height:81px !important;
+	}
+	
 	div.category_unit div.cat_seller {
 	width:194px;
 	height:116px;
@@ -242,6 +253,10 @@ div#footer {
 	float:none;
 	text-align:center;
 	margin:40px auto 0 auto;
+	}
+	
+	div.category_unit div.cat_prodejce_popis div {
+	margin:34px auto 0 auto !important;
 	}
 	
 	div.detail_description div {
@@ -324,7 +339,6 @@ div#header a.action_button {
 	
 	div#content_container div.detail_tag, div.detail_description {
 	width:394px;
-	float:right;
 	padding:15px;
 	margin:0;
 	}
@@ -342,28 +356,54 @@ div#header a.action_button {
 	margin:6px;
 	}
 	div.detail_info {
-	margin:0;
+	margin:0 6px 0 0;
+	padding:0;
+	width:938px;
+	float:right;
+	}
+	
+	div.detail_info_seller {
+	margin:0 6px 0 6px;
 	padding:0;
 	width:932px;
-	float:left;
+	float:right;
 	}
+	
 	div.detail_specifications {
 	margin:6px 0 0 6px;
 	float:right;
 	padding:15px;
-	width:660px;
+	width:666px;
 	}
-	div.detail_specifications p.left_column {
+	p.left_column {
 	margin: 0 6px 0 0;
 	float:left;
 	}
-	div.detail_specifications p.right_column {
+	p.right_column {
 	margin: 0 0 6px 0;
 	float:right;
-	width:388px;
+	width:50%;
 	}
-
-
+	div.seller_specifications {
+	margin:0;
+	float:left;
+	padding:15px;
+	width:478px;
+	}
+	div.seller_ads {
+	margin:0;
+	float:right;
+	padding:15px;
+	width:394px;
+	}
+	table.ad_list {
+	width:100%;
+	margin:3px 0 0 0;
+	border:0;
+	}
+	table.ad_list td {
+	border:0;
+	}
 /* Text */
 body, nav ul ul a {
 	font-family: Helvetica, "Trebuchet MS", Arial, sans-serif;
@@ -417,23 +457,28 @@ thead {
 h1 {
 	font-weight:700;
 	font-size:1.3em;
+	margin:0;
 	}
 h2 {
 	font-weight:700;
 	font-size:1.2em;
+	margin:0;
 	}
 h3 {
 	font-weight:700;
 	font-size:1.1em;
+	margin:0;
 	}
 h4 {
 	font-weight:700;
 	font-size:1em;
 	font-style:italic;
+	margin:0;
 	}
 h5 {
 	font-weight:700;
 	font-size:1em;
+	margin:0;
 	}
 
 /* Barvy a pozadí */
@@ -458,9 +503,13 @@ a:hover, nav ul ul li a:hover {
 	color: #f1941c;
 	}
 
-thead {
+thead, thead a {
 	background: #58585a;
-	color: #f9f9f9;
+	color: #f9f9f9 !important;
+	text-decoration:none !important;
+	}
+	thead a:hover {
+	color: #f1941c !important;
 	}
 	
 nav a, nav a:hover, nav ul ul li a, a.action_button_dark {
@@ -499,7 +548,6 @@ a.action_button {
 	border-bottom: 4px solid #497f96;
 	background: #f3f3f3;
 	transition: all 0.2s ease-out;
-
 	}
 a.action_button:hover {
 	background: #eee;
@@ -528,10 +576,19 @@ a.action_button_dark:hover {
 	background:#f9f9f9;
 	box-shadow: 0px 0px 6px #C0C0C0;
 	}
+	
+	div.seller_specifications {
+	background:#f9f9f9;
+	}
 
-	div.home_seller, div.cat_seller, div.detail_tag {
+	div.home_seller, div.cat_seller, div.detail_tag, div.seller_ads {
 	background: #f3f3f3;
 	transition: all 0.2s ease-out;
+	}
+	
+	div.detail_info_seller {
+	background:#f3f3f3;
+	box-shadow: 0px 0px 6px #C0C0C0;
 	}
 	
 	div.home_seller:hover, div.cat_seller:hover {
