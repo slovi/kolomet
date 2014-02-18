@@ -8,7 +8,7 @@ require.config({
 		'side_menu': {
 			deps: ['jquery']
 		}
-	}
+	}	
 	
 });
 
