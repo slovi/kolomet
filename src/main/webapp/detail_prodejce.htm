@@ -1,232 +1,240 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><!-- dynamický titulek--></title>
-<link type="text/css" rel="stylesheet" media="all" href="css/style.css"> <!--základní stylesheet-->
-<script src="side_menu.js" type="text/javascript"></script> <!-- javascript pro postranní menu -->
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-		<script type="text/javascript" src="jquery.leanModal.min.js"></script>
-		<script type="text/javascript">
-			$(function() {
-    			$('a[rel*=leanModal]').leanModal({ top : 100, closeButton: ".modal_close" });		
-			});
-		</script>
-</head>
-<body>
-<div id="container"> <!-- hlavní kontejner -->
-	<div id="header_background">  
-    <div id="header"> <!-- hlavička stránky - logo, přihlasovací tlačítko -->
-   		<img src="img/logotyp.png" id="logo"  width="358" height="84" alt="kolomet" title=""/>
-        <a class="action_button" id="go" rel="leanModal" name="login" href="#login">Přihlásit se</a>
-        
-    </div><!-- hlavička stránky konec -->
-    </div>
-    <div id="menu_background"> 
-    <div id="menu_container"> <!-- kontejner hlavního menu -->
-    	<nav>	
-            <ul id="main_menu"><!-- hlavní menu -->
-    			<li><a href="index.php">Úvod</a></li>
-    			<li><a href="dynamická adresa hlavního menu">Dynamická položka</a></li><!-- položka hlavního menu s dynamickým označením a odkazem -->
-    			<li id="admin"><a href="index.php">Náš Kolomet</a>
-                	<ul id="admin_menu"><!-- menu administrace začátek -->
-                    	<li><a href="dynamický odkaz administrace">Položka administrace 1</a></li>
-                        <li><a href="dynamický odkaz administrace">Položka administrace 2</a></li>
-                        <hr color="#f9f9f9" width="85%" align="center" size="1" />  
-                        <li><a href="dynamický odkaz administrace">Položka administrace 3</a></li>
-                        <li><a href="dynamický odkaz administrace">Položka administrace 4</a></li>  
-                    </ul>
-                </li>
-    		</ul><!-- hlavní menu konec -->
-		</nav>
-	</div><!--  kontejner hlavního menu konec -->
-    </div>
-    <div id="center_container"> <!-- kontejner vystředění - boční menu, kontejner obsahu, patka -->
-    	<div id="side_menu"> <!-- boční menu -->
-        	<div id="dd" class="wrapper-dropdown-2 active" tabindex="1">
-            <h1>Typy kol</h1>
-				<ul class="dropdown">
-					<li><a href="#">Horská kola</a></li>
-					<li><a href="#">Silniční kola</a></li>
-					<li><a href="#">Dětská kola</a></li>
-				</ul>
-			</div>
-            <script type="text/javascript">
-
-			function DropDown(el) {
-				this.dd = el;
-				this.initEvents();
-			}
-			DropDown.prototype = {
-				initEvents : function() {
-					var obj = this;
-
-					obj.dd.on('click', function(event){
-						$(this).toggleClass('active');
-						event.stopPropagation();
-					});	
-				}
-			}
-
-			$(function() {
-
-				var dd = new DropDown( $('#dd') );
-
-			});
-
-			</script>
-            <div id="cc" class="wrapper-dropdown-2" tabindex="1">
-            <h1>Značky kol</h1>
-				<ul class="dropdown">
-					<li><a href="#">Author</a></li>
-					<li><a href="#">Rock Machine</a></li>
-					<li><a href="#">Yamaha</a></li>
-                    <li><a href="#">Zephir</a></li>
-				</ul>
-			</div>
-            <script type="text/javascript">
-
-			function DropDown(cl) {
-				this.cc = cl;
-				this.initEvents();
-			}
-			DropDown.prototype = {
-				initEvents : function() {
-					var obj = this;
-
-					obj.cc.on('click', function(event){
-						$(this).toggleClass('active');
-						event.stopPropagation();
-					});	
-				}
-			}
-
-			$(function() {
-
-				var cc = new DropDown( $('#cc') );
-
-			});
-
-			</script>
-        </div> <!-- boční menu konec -->
-        <div id="content_container"> <!-- kontejner obsahu -->
-        <!-- obsah pro detail -->
-        	<div class="detail_header"> 
-                <img src="img/prodejna_sample.png" width="508" height="338" alt="" title=""/>
-            	<div class="detail_description right"> 
-               		<a href="" class="label">Jméno prodejce</a><!-- odkaz na detail inzerátu -->
-                	<p>Naše prodejna se zaměřuje na dětská horskjá kola.</p>
-                    
-            	</div>
-                <div class="detail_tag right"> 
-            		<p class="detail_seller left">Město<br/>
-                	Adresa prodejce <a href="">mapa</a><br/>
-                    telefon</p>
-                    <div><a class="action_button_dark right" href="">Navštívit</a>
-                    </div>
-            	</div>
-            </div>
-            
-            <div class="detail_info_seller"> 
-            	<div class="seller_specifications"> 
-                	<p class="left_column left">
-                    <strong>Zodpovědná osoba:</strong><br />
-					Oslovení zodp.osoby:<br />
-					Titul:<br />
-					Jméno:<br />
-					Příjmení:<br /><br />
-                    <strong>Provozovna:</strong><br />
-					Stát<br />
-					Město<br />
-					Ulice		Č.P.<br />
-					PSČ<br />
-					Oslovení<br />
-					Titul<br />
-					Jméno a příjmení:<br />
-					Email:
-                    </p>
-            		<p class="right_column right">
-                    <strong>Ostatní:</strong><br />
-					Status prodejce (VIP, …. ?)<br />
-					Region:<br />
-					Obec:<br />
-					Web prodejce:<br />
-					Způsob prodeje:<br /><br />
-                    
-                    <strong>Korespondenční adresa:</strong>  <br />
-					Stát<br />
-					Město<br />
-					Ulice		Č.P.<br />
-					PSČ<br />
-					Oslovení<br />
-					Titul<br />
-					Jméno a příjmení:<br />
-					Email:
-
-                    </p>
-            	</div>
-                <div class="seller_ads"> 
-                	<h3>Nejnovější inzeráty prodejce</h3>
-                    <table class="ad_list">
-                    	<thead>
-                        <tr>
-                        	<td><a href=#>Název</a></td>
-                            <td><a href=#>Cena</a></td>
-                        </tr>
-                        </thead>
-                        <tr>
-                        	<td><a href=#>Název inzerátu</a></td>
-                            <td>Cena</td>
-                        </tr>
-                        <tr>
-                        	<td><a href=#>Název inzerátu</a></td>
-                            <td>Cena</td>
-                        </tr>
-                        <tr>
-                        	<td><a href=#>Název inzerátu</a></td>
-                            <td>Cena</td>
-                        </tr>
-                        <tr>
-                        	<td><a href=#>Název inzerátu</a></td>
-                            <td>Cena</td>
-                        </tr>
-                        <tr>
-                        	<td><a href=#>Název inzerátu</a></td>
-                            <td>Cena</td>
-                        </tr>
-                    </table>
-            	</div>
-            </div>
-            
-        <!-- obsah pro detail konec -->
-        </div> <!-- kontejner obsahu konec -->
-        <div id="footer"> <!-- patka -->
-        	<p>2014 Kolomet &#169; &nbsp; &nbsp; |
-            <a href="">O nás</a> |
-            <a href="">Obchodní podmínky</a> |
-            <a href="">Kontakt</a></p>
-            <a href="" class="action_button_dark">Chci zde inzerovat</a>
-            
-        </div> <!-- patka konec -->
-    </div> <!-- kontejner vystředění konec -->
-</div><!-- hlavní kontejner konec -->
-<div id="login">
-                <form action="">
-				    	<div>
-                        <label for="" class="login_label">Přihlášení:</label><br /><br />
-                        <label for="">Přihlasovací jméno</label><br />
-				    	<input id=""  name="" type="text" /><br />
-				    	<label for="">Heslo</label><br />
-				    	<input id="" name="" type="password" /><br />
-                        <a href=#>Zapomenuté heslo</a>
-                        </div>
-                        </span>
-				  		<div class="login_button_field">
-                        <a class=action_button href=#>Registrovat</a> 
-                        <button type="submit">Přihlásit se</button>
-                        </div>
-				 </form>
-			</div>
+	
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Dětská kola</title>
+		<link type="text/css" rel="stylesheet" media="all" href="css/style.css"></link>
+		<script data-main="js/main" src="./js/lib/require.js"></script>
+	</head>
+	
+	<body>
+		<!-- hlavní kontejner -->
+		<div id="container">
+			
+			<div id="header_background">  
+				<!-- hlavička stránky - logo, přihlasovací tlačítko -->
+			    <div id="header"> 
+			   		<img src="img/logotyp.png" id="logo"/>
+			        <a class="action_button" id="go" rel="leanModal" name="login" href="#login">Přihlásit se</a>
+			    </div>
+		    </div>
+		   
+		    <div id="menu_background"> 
+		    	<!-- kontejner hlavního menu -->
+			    <div id="menu_container"> 
+			    	<nav>	
+			    		<!-- hlavní menu -->
+			            <ul id="main_menu">
+			    			
+			    			<li><a href="index.htm">Úvod</a></li>
+			    			<li><a href="#">Kola</a>
+			    				<ul>
+			    					<li><a href="#">Typ kola</a></li>
+			                        <li><a href="#">Značka kola</a></li>			                        
+			    				</ul>
+			    			</li>
+			    			<li><a href="#">Doplňky, oblečení, díly</a>
+			    				<ul>
+			    					<li><a href="#">Body</a></li>
+			                        <li><a href="#">Oblečení</a></li>
+			                        <li><a href="#">Helmy</a></li>
+			                        <li><a href="#">Batohy</a></li>
+			                        <li><a href="#">Doplňky</a></li>
+			                        <li><a href="#">Díly</a></li>
+			                        <li><a href="#">Brýle</a></li>
+			                        <li><a href="#">Dětské sedačky</a></li>			                        
+			    				</ul>
+			    			</li>
+			    			<li><a href="#">Prodejci</a></li>
+			    			<li><a href="#">Vyhledávání</a></li>
+			    			<li><a href="#">Kontakt</a></li>
+			    			
+			    			<li id="admin"><a href="./index.htm">Náš Kolomet</a>
+			    				<!-- menu administrace začátek -->
+			                	<ul id="admin_menu">
+			                    	<li><a href="dynamický odkaz administrace">Položka administrace 1</a></li>
+			                        <li><a href="dynamický odkaz administrace">Položka administrace 2</a></li>
+			                        <hr color="#f9f9f9" width="85%" align="center" size="1" />  
+			                        <li><a href="dynamický odkaz administrace">Položka administrace 3</a></li>
+			                        <li><a href="dynamický odkaz administrace">Položka administrace 4</a></li>  
+			                    </ul>
+			                </li>
+			    		</ul>
+					</nav>
+				</div>
+		    </div>
+		    
+			<!-- kontejner vystředění - boční menu, kontejner obsahu, patka -->
+		    <div id="center_container">
+		    	<!-- boční menu -->
+		    	<div id="side_menu">
+		        	<div class="side-menu active">
+		           		<h1 class="side-menu-header">
+		           			Typy kol
+		           			<img class="side-menu-arrow-on" src="img/arrow_down.png" />
+                    		<img class="side-menu-arrow-off hidden" src="img/arrow_right.png" />
+		           		</h1>
+						<ul class="side-menu-body">
+							<li><a href="#">Všechna kola</a></li>
+							<li><a href="./category_horska.htm">Horská kola</a></li>
+							<li><a href="#">Horská kola 27,5</a></li>
+							<li><a href="#">Horská kola 29</a></li>
+							<li><a href="#">Celoodpružená kola</a></li>
+							<li><a href="#">Krosová kola</a></li>
+							<li><a href="#">Trekingová kola</a></li>
+							<li><a href="./category_detska.htm">Dětská kola a odrážedla</a></li>
+							<li><a href="#">Koloběžky</a></li>
+							<li><a href="#">Elektrokola</a></li>
+							<li><a href="#">Silniční kola</a></li>
+						</ul>
+					</div>
+		            <div class="side-menu">
+		            	<h1 class="side-menu-header">
+		            		Značky kol
+		            		<img class="side-menu-arrow-on hidden" src="img/arrow_down.png" />
+                    		<img class="side-menu-arrow-off" src="img/arrow_right.png" />
+		            	</h1>
+						<ul class="side-menu-body hidden">
+		                    <li><a href="#">4EVER</a></li> 
+							<li><a href="#">4freetime</a></li> 
+							<li><a href="#">ACRA</a></li> 
+							<li><a href="#">Acstar</a></li> 
+							<li><a href="#">Agogs</a></li> 
+							<li><a href="#">ALPINA</a></li> 
+							<li><a href="#">AMULET</a></li> 
+							<li><a href="#">APACHE</a></li> 
+							<li><a href="#">Author</a></li>							
+							<li><a href="#">Azub</a></li> 
+							<li><a href="#">BROTHER</a></li> 
+							<li><a href="#">Cannondale</a></li> 
+							<li><a href="#">Cosmic</a></li> 
+							<li><a href="#">COYOTE</a></li>   
+							<li><a href="#">Rock Machine</a></li>
+							<li><a href="#">Yamaha</a></li>
+		                    <li><a href="#">Zephir</a></li>               
+						</ul>
+					</div>
+		        </div>
+		        
+				<!-- kontejner obsahu -->
+		        <div id="content_container">
+		        	<!-- obsah pro detail -->
+		        	<div class="detail_header"> 
+		                <img src="img/prodejna_sample.png" width="508" height="338" alt="" title=""/>
+		            	<div class="detail_description right"> 
+		               		<a href="" class="label">Jméno prodejce</a><!-- odkaz na detail inzerátu -->
+		                	<p>Naše prodejna se zaměřuje na dětská horskjá kola.</p>
+		                    
+		            	</div>
+		                <div class="detail_tag right"> 
+		            		<p class="detail_seller left">Město<br/>
+		                	Adresa prodejce <a href="">mapa</a><br/>
+		                    telefon</p>
+		                    <div><a class="action_button_dark right" href="">Navštívit</a>
+		                    </div>
+		            	</div>
+		            </div>
+		            
+		            <div class="detail_info_seller"> 
+		            	<div class="seller_specifications"> 
+		                	<p class="left_column left">
+		                    <strong>Zodpovědná osoba:</strong><br />
+							Oslovení zodp.osoby:<br />
+							Titul:<br />
+							Jméno:<br />
+							Příjmení:<br /><br />
+		                    <strong>Provozovna:</strong><br />
+							Stát<br />
+							Město<br />
+							Ulice		Č.P.<br />
+							PSČ<br />
+							Oslovení<br />
+							Titul<br />
+							Jméno a příjmení:<br />
+							Email:
+		                    </p>
+		            		<p class="right_column right">
+		                    <strong>Ostatní:</strong><br />
+							Status prodejce (VIP, …. ?)<br />
+							Region:<br />
+							Obec:<br />
+							Web prodejce:<br />
+							Způsob prodeje:<br /><br />
+		                    
+		                    <strong>Korespondenční adresa:</strong>  <br />
+							Stát<br />
+							Město<br />
+							Ulice		Č.P.<br />
+							PSČ<br />
+							Oslovení<br />
+							Titul<br />
+							Jméno a příjmení:<br />
+							Email:
+		
+		                    </p>
+		            	</div>
+		                <div class="seller_ads"> 
+		                	<h3>Nejnovější inzeráty prodejce</h3>
+		                    <table class="ad_list">
+		                    	<thead>
+		                        <tr>
+		                        	<td><a href=#>Název</a></td>
+		                            <td><a href=#>Cena</a></td>
+		                        </tr>
+		                        </thead>
+		                        <tr>
+		                        	<td><a href=#>Název inzerátu</a></td>
+		                            <td>Cena</td>
+		                        </tr>
+		                        <tr>
+		                        	<td><a href=#>Název inzerátu</a></td>
+		                            <td>Cena</td>
+		                        </tr>
+		                        <tr>
+		                        	<td><a href=#>Název inzerátu</a></td>
+		                            <td>Cena</td>
+		                        </tr>
+		                        <tr>
+		                        	<td><a href=#>Název inzerátu</a></td>
+		                            <td>Cena</td>
+		                        </tr>
+		                        <tr>
+		                        	<td><a href=#>Název inzerátu</a></td>
+		                            <td>Cena</td>
+		                        </tr>
+		                    </table>
+		            	</div>
+		            </div>
+		            
+		        <!-- obsah pro detail konec -->
+		        </div> <!-- kontejner obsahu konec -->
+		        <div id="footer"> <!-- patka -->
+		        	<p>2014 Kolomet &#169; &nbsp; &nbsp; |
+		            <a href="">O nás</a> |
+		            <a href="">Obchodní podmínky</a> |
+		            <a href="">Kontakt</a></p>
+		            <a href="" class="action_button_dark">Chci zde inzerovat</a>
+		            
+		        </div> <!-- patka konec -->
+		    </div> <!-- kontejner vystředění konec -->
+		</div><!-- hlavní kontejner konec -->
+		
+		<div id="login">
+        	<form action="">
+				<div>
+            		<label for="" class="login_label">Přihlášení:</label><br /><br />
+                    <label for="">Přihlasovací jméno</label><br />
+				    <input id=""  name="" type="text" /><br />
+				    <label for="">Heslo</label><br />
+				    <input id="" name="" type="password" /><br />
+                    <a href=#>Zapomenuté heslo</a>
+				</div>
+		  		<div class="login_button_field">
+					<a class=action_button href=#>Registrovat</a> 
+                    <button type="submit">Přihlásit se</button>
+				</div>
+			 </form>
 		</div>
-</body>
+	</body>
 </html>
