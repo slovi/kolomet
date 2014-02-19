@@ -1,0 +1,196 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Úvodní stránka</title>
+		<link type="text/css" rel="stylesheet" media="all" href="css/style.css"></link>
+		<script data-main="js/main" src="./js/lib/require.js"></script>
+	</head>
+	
+	<body>
+		<!-- hlavní kontejner -->
+		<div id="container">
+			
+			<div id="header_background">  
+				<!-- hlavička stránky - logo, přihlasovací tlačítko -->
+			    <div id="header"> 
+			   		<img src="img/logotyp.png" id="logo"/>
+			        <a class="action_button" id="go" rel="leanModal" name="login" href="#login">Přihlásit se</a>
+			    </div>
+		    </div>
+		   
+		    <div id="menu_background"> 
+		    	<!-- kontejner hlavního menu -->
+			    <div id="menu_container"> 
+			    	<nav>	
+			    		<!-- hlavní menu -->
+			            <ul id="main_menu">
+			    			
+			    			<li><a href="index.htm">Úvod</a></li>
+			    			<li><a href="#">Kola</a>
+			    				<ul>
+			    					<li><a href="#">Typ kola</a></li>
+			                        <li><a href="#">Značka kola</a></li>			                        
+			    				</ul>
+			    			</li>
+			    			<li><a href="#">Doplňky, oblečení, díly</a>
+			    				<ul>
+			    					<li><a href="#">Body</a></li>
+			                        <li><a href="#">Oblečení</a></li>
+			                        <li><a href="#">Helmy</a></li>
+			                        <li><a href="#">Batohy</a></li>
+			                        <li><a href="#">Doplňky</a></li>
+			                        <li><a href="#">Díly</a></li>
+			                        <li><a href="#">Brýle</a></li>
+			                        <li><a href="#">Dětské sedačky</a></li>			                        
+			    				</ul>
+			    			</li>
+			    			<li><a href="#">Prodejci</a></li>
+			    			<li><a href="#">Vyhledávání</a></li>
+			    			<li><a href="#">Kontakt</a></li>
+			    			
+			    			<li id="admin"><a href="./index.htm">Náš Kolomet</a>
+			    				<!-- menu administrace začátek -->
+			                	<ul id="admin_menu">
+			                    	<li><a href="dynamický odkaz administrace">Položka administrace 1</a></li>
+			                        <li><a href="dynamický odkaz administrace">Položka administrace 2</a></li>
+			                        <hr color="#f9f9f9" width="85%" align="center" size="1" />  
+			                        <li><a href="dynamický odkaz administrace">Položka administrace 3</a></li>
+			                        <li><a href="dynamický odkaz administrace">Položka administrace 4</a></li>  
+			                    </ul>
+			                </li>
+			    		</ul>
+					</nav>
+				</div>
+		    </div>
+		    
+			<!-- kontejner vystředění - boční menu, kontejner obsahu, patka -->
+		    <div id="center_container">
+		    	<!-- boční menu -->
+		    	<div id="side_menu">
+		        	<div class="side-menu active">
+		           		<h1 class="side-menu-header">
+		           			Typy kol
+		           			<img class="side-menu-arrow-on" src="img/arrow_down.png" />
+                    		<img class="side-menu-arrow-off hidden" src="img/arrow_right.png" />
+		           		</h1>
+						<ul class="side-menu-body">
+							<li><a href="#">Všechna kola</a></li>
+							<li><a href="./category_horska.htm">Horská kola</a></li>
+							<li><a href="#">Horská kola 27,5</a></li>
+							<li><a href="#">Horská kola 29</a></li>
+							<li><a href="#">Celoodpružená kola</a></li>
+							<li><a href="#">Krosová kola</a></li>
+							<li><a href="#">Trekingová kola</a></li>
+							<li><a href="./category_detska.htm">Dětská kola a odrážedla</a></li>
+							<li><a href="#">Koloběžky</a></li>
+							<li><a href="#">Elektrokola</a></li>
+							<li><a href="#">Silniční kola</a></li>
+						</ul>
+					</div>
+		            <div class="side-menu">
+		            	<h1 class="side-menu-header">
+		            		Značky kol
+		            		<img class="side-menu-arrow-on hidden" src="img/arrow_down.png" />
+                    		<img class="side-menu-arrow-off" src="img/arrow_right.png" />
+		            	</h1>
+						<ul class="side-menu-body hidden">
+		                    <li><a href="#">4EVER</a></li> 
+							<li><a href="#">4freetime</a></li> 
+							<li><a href="#">ACRA</a></li> 
+							<li><a href="#">Acstar</a></li> 
+							<li><a href="#">Agogs</a></li> 
+							<li><a href="#">ALPINA</a></li> 
+							<li><a href="#">AMULET</a></li> 
+							<li><a href="#">APACHE</a></li> 
+							<li><a href="#">Author</a></li>							
+							<li><a href="#">Azub</a></li> 
+							<li><a href="#">BROTHER</a></li> 
+							<li><a href="#">Cannondale</a></li> 
+							<li><a href="#">Cosmic</a></li> 
+							<li><a href="#">COYOTE</a></li>   
+							<li><a href="#">Rock Machine</a></li>
+							<li><a href="#">Yamaha</a></li>
+		                    <li><a href="#">Zephir</a></li>               
+						</ul>
+					</div>
+		        </div>
+		
+				<!-- kontejner obsahu -->        
+		        <div id="content_container"> 
+		        
+		        	<!-- obsah pro detail -->
+		        	<div class="detail_header"> 
+		                <img width="508" height="338" src="./img/bike_02_detail.jpg"/>
+		            	<div class="detail_description"> 
+		               		<a href="" class="label">Agang CULT 2.0 2012</a><!-- odkaz na detail inzerátu -->
+		                	<p>Model Cult prezentuje z pohledu značky AGang nejuniverzálnější kolo do horského terénu. Na konstrukci, funkci i designu modelu pracoval tvůrčí tým několik let. Získané zkušenosti umožnily vyladit jeho originální čtyř-čepový systém tak, aby poskytoval maximální komfort odpružení, ovladatelnost v náročnějších terénních pasážích či sjezdech, ale také minimální ztráty při šlapání. Schopnosti modelu Cult vycházejí především z použitých technologií, konstrukčních prvků a geometrie jeho celoodpruženého rámu. Ten disponuje zdvihem 150 mm a naším originálním čtyř-čepovým systémem odpružení zvaný Drive Link Pivot, jenž byl kompletně navržen našimi inženýry v Čechách. Tento systém byl optimalizován tak, aby nabídl jezdci aktivní zadní stavbu a zárověň maximálně omezil její pohupování při šlapání, a to hlavně při jízdě vsedě. Citlivost stavby pak ještě zvyšuje použití tlumiče o délce 200 mm se zdvihem 57 mm.</p>
+		                    <div>
+		                    <a class="action_button_dark" target="_blank" href="http://www.cyklocentrum.cz/kola/horska-kola/celoodpruzena-kola/agang-cult-2-0-2012_p333.htm">Objednat</a>
+		                    </div>
+		            	</div>
+		                <div class="detail_tag"> 
+		                	<p class="detail_price">Cena</p>
+		            		<p class="detail_seller"><a href="">Jméno prodejce</a>, Město<br/>
+		                	Adresa prodejce <a href="">mapa</a><br/>
+		                    telefon</p>
+		            	</div>
+		            </div>
+		            
+		            <div class="detail_info"> 
+		            	<div class="detail_pictures"> 
+		                <img width="104" height="104" src="./img/bike_02.jpg" />
+		                <img width="104" height="104" src="" />
+		                <img width="104" height="104" src="" />
+		                <img width="104" height="104" src="" />
+		            	</div>
+		                <div class="detail_specifications"> 
+		                	<p class="left_column">
+		                    Typ kola: lowrider <br />							
+							Značka kola:	custom	<br />					
+							Velikost rámu: 105	<br />						
+							Záruka: 2 roky<br />
+							Velikost kola:	 26"	<br />							
+							Barva kola: tyrkysová<br />
+							Váha kola: 8 kg<br />
+							Doporučené využití:	 kočkolap
+		                    </p>
+		            		<p class="right_column">
+		                    Region: Texas<br />
+		                    Město prodejce: El Paso<br />
+		                    Možnost zaslat po celé ČR: Ano
+		                    </p>
+		            	</div>
+		            </div>
+		        </div>
+		        
+		        <div id="footer"> <!-- patka -->
+		        	<p>2014 Kolomet &#169; &nbsp; &nbsp; |
+		            <a href="">O nás</a> |
+		            <a href="">Obchodní podmínky</a> |
+		            <a href="">Kontakt</a></p>
+		            <a href="" class="action_button_dark">Chci zde inzerovat</a>
+		            
+		        </div>
+    		</div> <!-- kontejner vystředění konec -->
+		</div><!-- hlavní kontejner konec -->
+		
+		<div id="login">
+        	<form action="">
+				<div>
+            		<label for="" class="login_label">Přihlášení:</label><br /><br />
+                    <label for="">Přihlasovací jméno</label><br />
+				    <input id=""  name="" type="text" /><br />
+				    <label for="">Heslo</label><br />
+				    <input id="" name="" type="password" /><br />
+                    <a href=#>Zapomenuté heslo</a>
+                </div>
+		  		<div class="login_button_field">
+					<a class=action_button href=#>Registrovat</a> 
+                    <button type="submit">Přihlásit se</button>
+                </div>
+			</form>
+		</div>
+	</body>
+</html>
