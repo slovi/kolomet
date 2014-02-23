@@ -5,3 +5,5 @@
 /tomcat.*
 /.idea
 /*.iml
+/dist
+/dist.zip
