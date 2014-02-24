@@ -52,9 +52,49 @@ div#side_menu {
 	float: left;
 }
 
+.clear {
+	clear: both
+}
+
 div#content_container {
 	width: 944px;
 	float: right;
+}
+
+div#content_container_short {
+	margin-left: 260px;
+	margin-right: 225px;
+}
+
+div#news {
+	width: 220px;
+	float: right;
+}
+
+div#news div#news_content {
+	margin: 10px 0 0 6px;
+	height: 500px;
+	padding: 15px;
+}
+
+div#news div#news_content div#news_header {
+	font-family: Helvetica, "Trebuchet MS", Arial, sans-serif;
+	font-size: 1.1em;
+	font-weight: 700;
+	margin: 0;
+	clear: none;
+}
+
+div#news div#news_content div.news_item {
+	margin: 10px 0;
+}
+
+div#news div#news_content div.news_item {
+	margin: 10px 0;
+}
+
+div#news div#news_content div.news_item span.news_item_date {
+	font-style: italic;
 }
 
 div#footer {
@@ -197,7 +237,7 @@ div#footer p {
 }
 
 /* homepage */
-div#content_container div.homepage_unit {
+div#content_container_short div.homepage_unit {
 	width: 224px;
 	float: left;
 	margin: 10px 6px 0px 6px;
@@ -205,6 +245,8 @@ div#content_container div.homepage_unit {
 
 div.homepage_unit div.home_description {
 	width: 194px;
+	height: 90px;
+	overflow: hidden;
 	padding: 15px;
 	margin: 0;
 }
@@ -322,10 +364,8 @@ div#content_container div.pages {
 
 /* generic */
 div#content_container div.general_unit {
-	width: 902px;
-	float: left;
-	margin: 10px 6px 6px 6px;
-	padding: 15px;
+	margin: 10px;
+	padding: 10px;
 }
 
 /* samostatné prvky */
@@ -628,7 +668,7 @@ div#side_menu div,div#content_container div.homepage_unit {
 	box-shadow: 0px 0px 6px #C0C0C0;
 }
 
-div#content_container div.category_unit,div#content_container div.filters,div#content_container div.detail_header,div.detail_specifications,div.detail_pictures img,div.general_unit
+div#content_container div.category_unit,div#content_container div.filters,div#content_container div.detail_header, div#news div#news_content, div.detail_specifications,div.detail_pictures img,div.general_unit
 	{
 	background: #f9f9f9;
 	box-shadow: 0px 0px 6px #C0C0C0;
