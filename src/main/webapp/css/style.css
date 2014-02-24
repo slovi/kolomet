@@ -662,7 +662,7 @@ div#footer {
 }
 
 /* Barvy - vedlejší menu a další */
-div#side_menu div,div#content_container div.homepage_unit {
+div#side_menu div,div#content_container_short div.homepage_unit {
 	background: #f9f9f9;
 	border-bottom: 4px solid #58585a;
 	box-shadow: 0px 0px 6px #C0C0C0;
