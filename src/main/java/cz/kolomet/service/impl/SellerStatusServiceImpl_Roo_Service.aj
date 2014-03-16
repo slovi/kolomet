@@ -4,10 +4,8 @@
 package cz.kolomet.service.impl;
 
 import cz.kolomet.domain.codelist.Producer;
-import cz.kolomet.repository.ProducerRepository;
 import cz.kolomet.service.impl.SellerStatusServiceImpl;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,35 +15,32 @@ privileged aspect SellerStatusServiceImpl_Roo_Service {
     
     declare @type: SellerStatusServiceImpl: @Transactional;
     
-    @Autowired
-    ProducerRepository SellerStatusServiceImpl.producerRepository;
-    
     public long SellerStatusServiceImpl.countAllProducers() {
-        return producerRepository.count();
+        throw new UnsupportedOperationException("Implement me!");
     }
     
     public void SellerStatusServiceImpl.deleteProducer(Producer producer) {
-        producerRepository.delete(producer);
+        throw new UnsupportedOperationException("Implement me!");
     }
     
     public Producer SellerStatusServiceImpl.findProducer(Long id) {
-        return producerRepository.findOne(id);
+        throw new UnsupportedOperationException("Implement me!");
     }
     
     public List<Producer> SellerStatusServiceImpl.findAllProducers() {
-        return producerRepository.findAll();
+        throw new UnsupportedOperationException("Implement me!");
     }
     
     public List<Producer> SellerStatusServiceImpl.findProducerEntries(int firstResult, int maxResults) {
-        return producerRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / maxResults, maxResults)).getContent();
+        throw new UnsupportedOperationException("Implement me!");
     }
     
     public void SellerStatusServiceImpl.saveProducer(Producer producer) {
-        producerRepository.save(producer);
+        throw new UnsupportedOperationException("Implement me!");
     }
     
     public Producer SellerStatusServiceImpl.updateProducer(Producer producer) {
-        return producerRepository.save(producer);
+        throw new UnsupportedOperationException("Implement me!");
     }
     
 }

@@ -140,3 +140,4 @@ web mvc scaffold --class ~.web.RegionController --backingType ~.domain.codelist.
 web mvc scaffold --class ~.web.RegionController --backingType ~.domain.codelist.Region
 // Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2014-03-16 01:43:55
 // Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2014-03-16 02:06:58
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2014-03-16 13:18:46
