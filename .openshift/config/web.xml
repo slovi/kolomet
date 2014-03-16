@@ -31,6 +31,10 @@
   <!-- WARNING:  Do not configure application-specific resources here!      -->
   <!-- They should go in the "/WEB-INF/web.xml" file in your application.   -->
 
+  <context-param>
+  	<param-name>spring.profiles.active</param-name>
+  	<param-value>prod-openshift</param-value>
+  </context-param>
 
   <!-- ================== Built In Servlet Definitions ==================== -->
 
