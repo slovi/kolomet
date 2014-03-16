@@ -4,8 +4,10 @@
 package cz.kolomet.service.impl;
 
 import cz.kolomet.domain.codelist.Producer;
+import cz.kolomet.repository.ProducerRepository;
 import cz.kolomet.service.impl.ProducerServiceImpl;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,32 +17,35 @@ privileged aspect ProducerServiceImpl_Roo_Service {
     
     declare @type: ProducerServiceImpl: @Transactional;
     
+    @Autowired
+    ProducerRepository ProducerServiceImpl.producerRepository;
+    
     public long ProducerServiceImpl.countAllProducers() {
-        throw new UnsupportedOperationException("Implement me!");
+        return producerRepository.count();
     }
     
     public void ProducerServiceImpl.deleteProducer(Producer producer) {
-        throw new UnsupportedOperationException("Implement me!");
+        producerRepository.delete(producer);
     }
     
     public Producer ProducerServiceImpl.findProducer(Long id) {
-        throw new UnsupportedOperationException("Implement me!");
+        return producerRepository.findOne(id);
     }
     
     public List<Producer> ProducerServiceImpl.findAllProducers() {
-        throw new UnsupportedOperationException("Implement me!");
+        return producerRepository.findAll();
     }
     
     public List<Producer> ProducerServiceImpl.findProducerEntries(int firstResult, int maxResults) {
-        throw new UnsupportedOperationException("Implement me!");
+        return producerRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / maxResults, maxResults)).getContent();
     }
     
     public void ProducerServiceImpl.saveProducer(Producer producer) {
-        throw new UnsupportedOperationException("Implement me!");
+        producerRepository.save(producer);
     }
     
     public Producer ProducerServiceImpl.updateProducer(Producer producer) {
-        throw new UnsupportedOperationException("Implement me!");
+        return producerRepository.save(producer);
     }
     
 }

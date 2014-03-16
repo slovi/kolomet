@@ -17,11 +17,11 @@ privileged aspect Product_Roo_Equals {
             return true;
         }
         Product rhs = (Product) obj;
-        return new EqualsBuilder().append(category, rhs.category).append(discount, rhs.discount).append(id, rhs.id).append(price, rhs.price).append(producer, rhs.producer).append(productName, rhs.productName).append(seller, rhs.seller).append(version, rhs.version).isEquals();
+        return new EqualsBuilder().append(category, rhs.category).append(discount, rhs.discount).append(id, rhs.id).append(price, rhs.price).append(producer, rhs.producer).append(productName, rhs.productName).append(seller, rhs.seller).isEquals();
     }
     
     public int Product.hashCode() {
-        return new HashCodeBuilder().append(category).append(discount).append(id).append(price).append(producer).append(productName).append(seller).append(version).toHashCode();
+        return new HashCodeBuilder().append(category).append(discount).append(id).append(price).append(producer).append(productName).append(seller).toHashCode();
     }
     
 }

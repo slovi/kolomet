@@ -3,25 +3,25 @@
 
 package cz.kolomet.domain;
 
-import cz.kolomet.domain.PhotoUrl;
+import cz.kolomet.domain.DomainEntity;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-privileged aspect PhotoUrl_Roo_Equals {
+privileged aspect DomainEntity_Roo_Equals {
     
-    public boolean PhotoUrl.equals(Object obj) {
-        if (!(obj instanceof PhotoUrl)) {
+    public boolean DomainEntity.equals(Object obj) {
+        if (!(obj instanceof DomainEntity)) {
             return false;
         }
         if (this == obj) {
             return true;
         }
-        PhotoUrl rhs = (PhotoUrl) obj;
-        return new EqualsBuilder().append(id, rhs.id).append(urlValue, rhs.urlValue).isEquals();
+        DomainEntity rhs = (DomainEntity) obj;
+        return new EqualsBuilder().append(id, rhs.id).isEquals();
     }
     
-    public int PhotoUrl.hashCode() {
-        return new HashCodeBuilder().append(id).append(urlValue).toHashCode();
+    public int DomainEntity.hashCode() {
+        return new HashCodeBuilder().append(id).toHashCode();
     }
     
 }
