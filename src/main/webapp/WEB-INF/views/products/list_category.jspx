@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    
+    <div class="filters">
+      	<form>
+      		Cena od: <input type="text" size="3"/> do:  <input type="text" size="3"/>
+            <select>
+            	<option>dětská kola</option>
+                <option>horské kola</option>
+                <option>silniční kola</option>
+            </select>
+            <button type="submit">Filtrovat</button>
+    	</form>
+    </div>
+    
+  	<div class="sorting">Řadit podle: <a href="">cena</a></div>
+		        	
+	<div class="pages">Strana: [1] <a href="">[2]</a></div>
+		            
+	<spring:url value="/maps" var="mapUrl" />
+	<spring:url value="http://www.cyklocentrum.cz/kola/horska-kola/celoodpruzena-kola/agang-cult-2-0-2012_p333.htm" var="buyUrl" />
+	
+    <div class="category_unit"> 
+    	<a href=""><img width="224" height="146" src="./img/bike_02.jpg"/></a><!-- odkaz na detail inzerátu -->
+    	<div class="cat_description"> 
+    		<a href="./detail_horska.htm" class="label">Agang CULT 2.0 2012</a><!-- odkaz na detail inzerátu -->
+    		<p class="price">29900,-</p>
+        	<p>Celoodpružené kolo AGANG CULT 2.0 2012 s rámem double butted dural 6061, odpružený vzduchový ...</p>
+        </div>
+        <div class="cat_seller"> 
+        	<p>
+                <a href="./detail_prodejce_cyklocentrum.htm">Cyklocentrum cz</a>, Město<br/>
+            	Řipská 27, 13000 Praha 3 ( Nám. Jiřího z Poděbrad ) <a href="${mapUrl}">mapa</a><br/>
+                724 300 821, 725 085 292 servis
+            </p>
+        	<div>
+                <a class="action_button_dark" target="_blank" href="${buyUrl}">Objednat</a>
+            </div>
+    	</div>
+	</div>
+		            
+       	<div class="category_unit"> 
+       		<a href=""><img width="224" height="146" src="img/bike_04.jpg"/></a><!-- odkaz na detail inzerátu -->
+	       	<div class="cat_description"> 
+	       		<a href="" class="label">A-Gang Capo 16" červená 2012</a><!-- odkaz na detail inzerátu -->
+	           	<p class="price">4590,-</p>
+	           	<p>Dětské kolo A-Gang Capo ve velikosti 16 palců s duralovým rámem v červeném barevném provedení...</p>
+	       	</div>
+       		<div class="cat_seller"> 
+	       		<p>
+	               <a href="">Jméno prodejce</a>, Město<br/>
+	           	Adresa prodejce <a href="">mapa</a><br/>
+	            telefon
+	            </p>
+	            <div>
+	               <a class="action_button_dark" target="_blank" href="">Objednat</a>
+	           	</div>
+           	</div>
+       </div>
+       
+       <div class="category_unit"> 
+       	<a href=""><img width="224" height="146" src="./img/bike_02.jpg"/></a><!-- odkaz na detail inzerátu -->
+       	<div class="cat_description"> 
+       		<a href="./detail_horska.htm" class="label">Agang CULT 2.0 2012</a><!-- odkaz na detail inzerátu -->
+           	<p class="price">29900,-</p>
+           	<p>Celoodpružené kolo AGANG CULT 2.0 2012 s rámem double butted dural 6061, odpružený vzduchový ...</p>
+       	</div>
+       	<div class="cat_seller"> 
+       		<p>
+               <a href="./detail_prodejce_cyklocentrum.htm">Cyklocentrum cz</a>, Město<br/>
+           	Řipská 27, 13000 Praha 3 ( Nám. Jiřího z Poděbrad ) <a href="">mapa</a><br/>
+               724 300 821, 725 085 292 servis</p>
+               <div>
+               <a class="action_button_dark" target="_blank" href="">Objednat</a>
+               </div>
+           </div>
+       </div>
+       
+       <div class="category_unit"> 
+       	<a href=""><img width="224" height="146" src="img/bike_04.jpg"/></a><!-- odkaz na detail inzerátu -->
+       	<div class="cat_description"> 
+       		<a href="" class="label">A-Gang Capo 16" červená 2012</a><!-- odkaz na detail inzerátu -->
+           	<p class="price">4590,-</p>
+           	<p>Dětské kolo A-Gang Capo ve velikosti 16 palců s duralovým rámem v červeném barevném provedení...</p>
+       	</div>
+       	<div class="cat_seller"> 
+       		<p>
+               <a href="">Jméno prodejce</a>, Město<br/>
+           	Adresa prodejce <a href="">mapa</a><br/>
+               telefon</p>
+               <div>
+               <a class="action_button_dark" target="_blank" href="">Objednat</a>
+               </div>
+           </div>
+       </div>
+       
+       <div class="category_unit"> 
+       	<a href=""><img width="224" height="146" src="./img/bike_02.jpg"/></a><!-- odkaz na detail inzerátu -->
+       	<div class="cat_description"> 
+       		<a href="./detail_horska.htm" class="label">Agang CULT 2.0 2012</a><!-- odkaz na detail inzerátu -->
+           	<p class="price">29900,-</p>
+           	<p>Celoodpružené kolo AGANG CULT 2.0 2012 s rámem double butted dural 6061, odpružený vzduchový ...</p>
+       	</div>
+       	<div class="cat_seller"> 
+       		<p>
+               <a href="./detail_prodejce_cyklocentrum.htm">Cyklocentrum cz</a>, Město<br/>
+           	Řipská 27, 13000 Praha 3 ( Nám. Jiřího z Poděbrad ) <a href="">mapa</a><br/>
+               724 300 821, 725 085 292 servis</p>
+               <div>
+               <a class="action_button_dark" target="_blank" href="">Objednat</a>
+               </div>
+           </div>
+       </div>
+       
+       <div class="category_unit"> 
+       	<a href=""><img width="224" height="146" src="img/bike_04.jpg"/></a><!-- odkaz na detail inzerátu -->
+       	<div class="cat_description"> 
+       		<a href="" class="label">A-Gang Capo 16" červená 2012</a><!-- odkaz na detail inzerátu -->
+           	<p class="price">4590,-</p>
+           	<p>Dětské kolo A-Gang Capo ve velikosti 16 palců s duralovým rámem v červeném barevném provedení...</p>
+       	</div>
+       	<div class="cat_seller"> 
+       		<p>
+               <a href="">Jméno prodejce</a>, Město<br/>
+           	Adresa prodejce <a href="">mapa</a><br/>
+               telefon</p>
+               <div>
+               <a class="action_button_dark" target="_blank" href="">Objednat</a>
+               </div>
+           </div>
+       </div>
+       
+       <div class="category_unit"> 
+       	<a href=""><img width="224" height="146" src="./img/bike_02.jpg"/></a><!-- odkaz na detail inzerátu -->
+       	<div class="cat_description"> 
+       		<a href="./detail_horska.htm" class="label">Agang CULT 2.0 2012</a><!-- odkaz na detail inzerátu -->
+           	<p class="price">29900,-</p>
+           	<p>Celoodpružené kolo AGANG CULT 2.0 2012 s rámem double butted dural 6061, odpružený vzduchový ...</p>
+       	</div>
+       	<div class="cat_seller"> 
+       		<p>
+               <a href="./detail_prodejce_cyklocentrum.htm">Cyklocentrum cz</a>, Město<br/>
+           	Řipská 27, 13000 Praha 3 ( Nám. Jiřího z Poděbrad ) <a href="">mapa</a><br/>
+               724 300 821, 725 085 292 servis</p>
+               <div>
+               <a class="action_button_dark" target="_blank" href="">Objednat</a>
+               </div>
+           </div>
+       </div>
+       
+       <div class="category_unit"> 
+       	<a href=""><img width="224" height="146" src="img/bike_04.jpg"/></a><!-- odkaz na detail inzerátu -->
+       	<div class="cat_description"> 
+       		<a href="" class="label">A-Gang Capo 16" červená 2012</a><!-- odkaz na detail inzerátu -->
+           	<p class="price">4590,-</p>
+           	<p>Dětské kolo A-Gang Capo ve velikosti 16 palců s duralovým rámem v červeném barevném provedení...</p>
+       	</div>
+       	<div class="cat_seller"> 
+       		<p>
+               <a href="">Jméno prodejce</a>, Město<br/>
+           	Adresa prodejce <a href="">mapa</a><br/>
+               telefon</p>
+               <div>
+               <a class="action_button_dark" target="_blank" href="">Objednat</a>
+               </div>
+           </div>
+       </div>
+       
+       <div class="category_unit"> 
+       	<a href=""><img width="224" height="146" src="./img/bike_02.jpg"/></a><!-- odkaz na detail inzerátu -->
+       	<div class="cat_description"> 
+       		<a href="./detail_horska.htm" class="label">Agang CULT 2.0 2012</a><!-- odkaz na detail inzerátu -->
+           	<p class="price">29900,-</p>
+           	<p>Celoodpružené kolo AGANG CULT 2.0 2012 s rámem double butted dural 6061, odpružený vzduchový ...</p>
+       	</div>
+       	<div class="cat_seller"> 
+       		<p>
+               <a href="./detail_prodejce_cyklocentrum.htm">Cyklocentrum cz</a>, Město<br/>
+           	Řipská 27, 13000 Praha 3 ( Nám. Jiřího z Poděbrad ) <a href="">mapa</a><br/>
+               724 300 821, 725 085 292 servis</p>
+               <div>
+               <a class="action_button_dark" target="_blank" href="">Objednat</a>
+               </div>
+           </div>
+       </div>
+       
+       <div class="category_unit"> 
+       	<a href=""><img width="224" height="146" src="img/bike_04.jpg"/></a><!-- odkaz na detail inzerátu -->
+       	<div class="cat_description"> 
+       		<a href="" class="label">A-Gang Capo 16" červená 2012</a><!-- odkaz na detail inzerátu -->
+           	<p class="price">4590,-</p>
+           	<p>Dětské kolo A-Gang Capo ve velikosti 16 palců s duralovým rámem v červeném barevném provedení...</p>
+       	</div>
+       	<div class="cat_seller"> 
+       		<p>
+               <a href="">Jméno prodejce</a>, Město<br/>
+           	Adresa prodejce <a href="">mapa</a><br/>
+               telefon</p>
+               <div>
+               <a class="action_button_dark" target="_blank" href="">Objednat</a>
+               </div>
+           </div>
+       </div>
+       
+       
+</div>

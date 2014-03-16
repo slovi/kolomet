@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_cz_kolomet_domain_codelist_Producer" items="${producers}" z="x+eb9OBJK4u+Hoic0824H+1IfLo=">
+        <table:table data="${producers}" id="l_cz_kolomet_domain_codelist_Producer" path="/producers" z="6v80EpYB4AJQY7QWYMmVY1Tut/4=">
+            <table:column id="c_cz_kolomet_domain_codelist_Producer_codeKey" property="codeKey" z="H1bnld5hqc+sNPolt3yw3QWzJoc="/>
+            <table:column id="c_cz_kolomet_domain_codelist_Producer_codeDescription" property="codeDescription" z="ELBZaN1bq0BGU5dDbwlvNRCfcP0="/>
+            <table:column id="c_cz_kolomet_domain_codelist_Producer_name" property="name" z="FOfSWPcAl6O/0VnEfZUxsmGhMKs="/>
+        </table:table>
+    </page:list>
+</div>

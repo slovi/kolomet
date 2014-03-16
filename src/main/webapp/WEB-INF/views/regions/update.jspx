@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_cz_kolomet_domain_codelist_Region" modelAttribute="region" path="/regions" versionField="Version" z="ORsy6TnrT/PzWTAisL0QtEqiBiI=">
+        <field:input field="codeKey" id="c_cz_kolomet_domain_codelist_Region_codeKey" max="20" required="true" z="HZg4YSU/I6NX3jmKqSvQollfN+M="/>
+        <field:textarea field="codeDescription" id="c_cz_kolomet_domain_codelist_Region_codeDescription" required="true" z="TOT23ztMe4yEn2xFDJX76niI1gE="/>
+    </form:update>
+</div>

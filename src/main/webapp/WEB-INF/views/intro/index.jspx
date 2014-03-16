@@ -1,0 +1,133 @@
+<div xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+  <jsp:directive.page contentType="text/html;charset=UTF-8" />
+  <jsp:output omit-xml-declaration="yes" />
+
+ 	<div class="homepage_unit"> 
+     	<a href=""><img width="224" height="146" src="img/bike_01.png"/></a><!-- odkaz na detail inzerÃ¡tu -->
+     	<div class="home_description"> 
+     		<a href="" class="label">Merida Big Ninety-Nine CF Team</a><!-- odkaz na detail inzerÃ¡tu -->
+         	<p class="price">54990,-</p>
+         	<p>NovÃ© horskÃ© kolo, vhodnÃ© pro bÄÅ¾nÃ© vÃ½letnÃ­ky. KolemjdoucÃ­ se za vÃ¡mi...</p>
+     	</div>
+     	<div class="home_seller"> 
+     		<p><a href=""></a><a href="">JmÃ©no prodejce</a>, MÄsto<br/>
+         	Adresa prodejce <a href="">mapa</a><br/>
+             telefon</p>
+     	</div>
+     </div>
+     
+ 	<div class="homepage_unit"> 
+     	<a href=""><img width="224" height="146" src="img/bike_02.jpg"/></a><!-- odkaz na detail inzerÃ¡tu -->
+     	<div class="home_description"> 
+     		<a href="./detail_horska.htm" class="label">Agang CULT 2.0 2012</a><!-- odkaz na detail inzerÃ¡tu -->
+         	<p class="price">29900,-</p>
+         	<p>CeloodpruÅ¾enÃ© kolo AGANG CULT 2.0 2012 s rÃ¡mem double butted dural 6061, odpruÅ¾enÃ½ vzduchovÃ½ ...</p>
+     	</div>
+     	<div class="home_seller"> 
+     		<p><a href=""></a><a href="">JmÃ©no prodejce</a>, MÄsto<br/>
+         	Adresa prodejce <a href="">mapa</a><br/>
+             telefon</p>
+     	</div>
+     </div>
+     
+ 	<div class="homepage_unit"> 
+     	<a href=""><img width="224" height="146" src="img/bike_03.jpg"/></a><!-- odkaz na detail inzerÃ¡tu -->
+     	<div class="home_description"> 
+     		<a href="" class="label">AUTHOR A 33 2013</a><!-- odkaz na detail inzerÃ¡tu -->
+         	<p class="price">16990,-</p>
+         	<p>Chcete-li rychlost a efektivitu, pak je silniÄnÃ­ kolo pro VÃ¡s. DÃ­ky aerodynamickÃ© konstrukci...</p>
+     	</div>
+     	<div class="home_seller"> 
+     		<p><a href=""></a><a href="">JmÃ©no prodejce</a>, MÄsto<br/>
+         	Adresa prodejce <a href="">mapa</a><br/>
+             telefon</p>
+     	</div>
+     </div>		            
+     
+     <div class="homepage_unit"> 
+     	<a href=""><img width="224" height="146" src="img/bike_04.jpg"/></a><!-- odkaz na detail inzerÃ¡tu -->
+     	<div class="home_description"> 
+     		<a href="./detail_detska.htm" class="label">A-Gang Capo 16" ÄervenÃ¡ 2012</a><!-- odkaz na detail inzerÃ¡tu -->
+         	<p class="price">4590,-</p>
+         	<p>DÄtskÃ© kolo A-Gang Capo ve velikosti 16 palcÅ¯ s duralovÃ½m rÃ¡mem v ÄervenÃ©m barevnÃ©m provedenÃ­...</p>
+     	</div>
+     	<div class="home_seller"> 
+     		<p><a href=""></a><a href="">JmÃ©no prodejce</a>, MÄsto<br/>
+         	Adresa prodejce <a href="">mapa</a><br/>
+             telefon</p>
+     	</div>
+     </div>
+     
+     <div class="homepage_unit"> 
+     	<a href=""><img width="224" height="146" src="img/bike_01.png"/></a><!-- odkaz na detail inzerÃ¡tu -->
+     	<div class="home_description"> 
+     		<a href="" class="label">Merida Big Ninety-Nine CF Team</a><!-- odkaz na detail inzerÃ¡tu -->
+         	<p class="price">54990,-</p>
+         	<p>NovÃ© horskÃ© kolo, vhodnÃ© pro bÄÅ¾nÃ© vÃ½letnÃ­ky. KolemjdoucÃ­ se za vÃ¡mi...</p>
+     	</div>
+     	<div class="home_seller"> 
+     		<p><a href=""></a><a href="">JmÃ©no prodejce</a>, MÄsto<br/>
+         	Adresa prodejce <a href="">mapa</a><br/>
+             telefon</p>
+     	</div>
+     </div>
+     
+ 	<div class="homepage_unit"> 
+     	<a href=""><img width="224" height="146" src="img/bike_02.jpg"/></a><!-- odkaz na detail inzerÃ¡tu -->
+     	<div class="home_description"> 
+     		<a href="./detail_horska.htm" class="label">Agang CULT 2.0 2012</a><!-- odkaz na detail inzerÃ¡tu -->
+         	<p class="price">29900,-</p>
+         	<p>CeloodpruÅ¾enÃ© kolo AGANG CULT 2.0 2012 s rÃ¡mem double butted dural 6061, odpruÅ¾enÃ½ vzduchovÃ½ ...</p>
+     	</div>
+     	<div class="home_seller"> 
+     		<p><a href=""></a><a href="">JmÃ©no prodejce</a>, MÄsto<br/>
+         	Adresa prodejce <a href="">mapa</a><br/>
+             telefon</p>
+     	</div>
+     </div>
+     
+ 	<div class="homepage_unit"> 
+     	<a href=""><img width="224" height="146" src="img/bike_03.jpg"/></a><!-- odkaz na detail inzerÃ¡tu -->
+     	<div class="home_description"> 
+     		<a href="" class="label">AUTHOR A 33 2013</a><!-- odkaz na detail inzerÃ¡tu -->
+         	<p class="price">16990,-</p>
+         	<p>Chcete-li rychlost a efektivitu, pak je silniÄnÃ­ kolo pro VÃ¡s. DÃ­ky aerodynamickÃ© konstrukci...</p>
+     	</div>
+     	<div class="home_seller"> 
+     		<p><a href=""></a><a href="">JmÃ©no prodejce</a>, MÄsto<br/>
+         	Adresa prodejce <a href="">mapa</a><br/>
+             telefon</p>
+     	</div>
+     </div>
+     
+     <div class="homepage_unit"> 
+     	<a href=""><img width="224" height="146" src="img/bike_04.jpg"/></a><!-- odkaz na detail inzerÃ¡tu -->
+     	<div class="home_description"> 
+     		<a href="./detail_detska.htm" class="label">A-Gang Capo 16" ÄervenÃ¡ 2012</a><!-- odkaz na detail inzerÃ¡tu -->
+         	<p class="price">4590,-</p>
+         	<p>DÄtskÃ© kolo A-Gang Capo ve velikosti 16 palcÅ¯ s duralovÃ½m rÃ¡mem v ÄervenÃ©m barevnÃ©m provedenÃ­...</p>
+     	</div>
+     	<div class="home_seller"> 
+     		<p><a href=""></a><a href="">JmÃ©no prodejce</a>, MÄsto<br/>
+         	Adresa prodejce <a href="">mapa</a><br/>
+             telefon</p>
+     	</div>
+     </div>
+     
+     <div class="homepage_unit"> 
+     	<a href=""><img width="224" height="146" src="img/bike_01.png"/></a><!-- odkaz na detail inzerÃ¡tu -->
+     	<div class="home_description"> 
+     		<a href="" class="label">Merida Big Ninety-Nine CF Team</a><!-- odkaz na detail inzerÃ¡tu -->
+         	<p class="price">54990,-</p>
+         	<p>NovÃ© horskÃ© kolo, vhodnÃ© pro bÄÅ¾nÃ© vÃ½letnÃ­ky. KolemjdoucÃ­ se za vÃ¡mi...</p>
+     	</div>
+     	<div class="home_seller"> 
+     		<p><a href=""></a><a href="">JmÃ©no prodejce</a>, MÄsto<br/>
+         	Adresa prodejce <a href="">mapa</a><br/>
+             telefon</p>
+     	</div>
+     </div>	
+     
+     <div class="clear" />		           	         
+
+</div>

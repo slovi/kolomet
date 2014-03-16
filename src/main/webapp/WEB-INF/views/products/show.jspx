@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_cz_kolomet_domain_Product" object="${product}" path="/products" z="om/181qkG3CDr8nyeS4iBgAdp70=">
+        <field:display field="productName" id="s_cz_kolomet_domain_Product_productName" object="${product}" z="OgwKo7O8FnRzdsLDlOxiF4TPR1w="/>
+        <field:display field="price" id="s_cz_kolomet_domain_Product_price" object="${product}" z="xpno0xgzkr6bWjdNoFutCzBaIyE="/>
+        <field:display field="discount" id="s_cz_kolomet_domain_Product_discount" object="${product}" z="ZF2WJwqsIZuPwQRx4YSssq69Id8="/>
+        <field:display field="seller" id="s_cz_kolomet_domain_Product_seller" object="${product}" z="l9aQBxj/TdL+b5fuw0y3j8Sq9kE="/>
+        <field:display field="category" id="s_cz_kolomet_domain_Product_category" object="${product}" z="GSlGUvpxnFGPqFGZ+QjVEHYzeEs="/>
+        <field:display field="producer" id="s_cz_kolomet_domain_Product_producer" object="${product}" z="dW/X2YRgPextf24hN2wxAugtvw0="/>
+    </page:show>
+</div>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu" xmlns:spring="http://www.springframework.org/tags" id="menu_background" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    
+    <div id="menu_container"> 
+    	<nav>	
+    		<menu:menu id="main_menu">
+    			<menu:item url="/intro/index" messageCode="menu.main.intro" id="intro" />
+    			<menu:item url="/products/categorytype/cattype.bike" messageCode="menu.main.products.bikes" id="products_bikes" />
+    			<menu:item url="/products/categorytype/cattype.other" messageCode="menu.main.products.other" id="products_other" />
+    			<menu:item url="/sellers_map" messageCode="menu.main.sellers" id="sellers" />
+    			<menu:item url="/search" messageCode="menu.main.search" id="search" />
+    			<menu:item url="/about" messageCode="menu.main.about" id="about" />
+    			
+    			<menu:category id="admin" label="Our kolomet" url="/sellers">
+					<menu:item id="i_seller_list" messageCode="global_menu_list" url="/sellers?page=1&amp;size=${empty param.size ? 10 : param.size}" z="57f7mMa6rXXGgX7UBUaUGHmBSqg="/>
+		            <menu:item id="i_product_list" messageCode="global_menu_list" url="/products?page=1&amp;size=${empty param.size ? 10 : param.size}" z="kEeyCmUUYXShbDEWwOLheaAkM50="/>
+		            <menu:item id="i_productattribute_list" messageCode="global_menu_list" url="/productattributes?page=1&amp;size=${empty param.size ? 10 : param.size}" z="VTVOTRtnhV45+bWn4Cei0rc7as4="/>
+		            <menu:item id="i_photourl_list" messageCode="global_menu_list" url="/photourls?page=1&amp;size=${empty param.size ? 10 : param.size}" z="D+g8dQxzKdkuGRtxnXRvSGL7guI="/>
+		            <menu:item id="i_category_list" messageCode="global_menu_list" url="/categories?page=1&amp;size=${empty param.size ? 10 : param.size}" z="0VEYbn/XUobhsOa74Uf6KyWz8/w="/>
+		            <menu:item id="i_producer_list" messageCode="global_menu_list" url="/producers?page=1&amp;size=${empty param.size ? 10 : param.size}" z="jTOhiGfGTy/mKcMjOgzzIoHDkxg="/>
+		            <menu:item id="i_categorytype_list" messageCode="global_menu_list" url="/categorytypes?page=1&amp;size=${empty param.size ? 10 : param.size}" z="+i+xbCARHICgKqWYpTon7hXJ4S8="/>
+    			</menu:category>
+    			
+    		</menu:menu>
+		</nav>
+	</div>
+</div>

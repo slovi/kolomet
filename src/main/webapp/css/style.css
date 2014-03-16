@@ -240,7 +240,7 @@ div#footer p {
 div#content_container_short div.homepage_unit {
 	width: 224px;
 	float: left;
-	margin: 10px 6px 0px 6px;
+	margin: 0px 6px 10px 6px;
 }
 
 div.homepage_unit div.home_description {
@@ -363,9 +363,23 @@ div#content_container div.pages {
 }
 
 /* generic */
+div#content_container {
+	padding: 10px 0 0 0;
+}
+
+/* generic */
+div#content_container_short {
+	padding: 10px 0 0 0;
+}
+
+/* generic */
 div#content_container div.general_unit {
-	margin: 10px;
-	padding: 10px;
+	padding: 10px 10px;
+}
+
+/* generic */
+div#content_container_short div.general_unit {
+	padding: 10px 10px;
 }
 
 /* samostatné prvky */

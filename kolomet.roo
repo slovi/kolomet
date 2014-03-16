@@ -1,0 +1,84 @@
+project --topLevelPackage cz.kolomet --projectName kolomet
+
+jpa setup --database HYPERSONIC_IN_MEMORY --provider HIBERNATE
+
+entity jpa --class ~.domain.Seller --activeRecord false --equals true --extends ~.domain.Entity --serializable true --abstract true
+entity jpa --class ~.domain.ProductAttribute --extends ~.domain.Entity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --testAutomatically true --activeRecord false
+entity jpa --class ~.domain.PhotoUrl --extends ~.domain.Entity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
+entity jpa --class ~.domain.Product --extends ~.domain.Entity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
+entity jpa --class ~.domain.codelist.Codelist --abstract true --equals true --serializable true --activeRecord false --extends ~.domain.Entity --inheritanceType TABLE_PER_CLASS
+entity jpa --class ~.domain.codelist.Category --extends ~.domain.codelist.Codelist --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
+entity jpa --class ~.domain.codelist.CategoryType --extends ~.domain.codelist.Codelist --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
+entity jpa --class ~.domain.codelist.Producer --extends ~.domain.codelist.Codelist --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
+entity jpa --class ~.domain.codelist.SellerStatus --extends ~.domain.codelist.Codelist --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
+entity jpa --class ~.domain.codelist.CountryState --extends ~.domain.codelist.Codelist --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
+entity jpa --class ~.domain.codelist.Region --extends ~.domain.codelist.Codelist --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
+
+// address
+field string --fieldName street --class ~.domain.Address --notNull --sizeMax 100
+field string --fieldName city --class ~.domain.Address --notNull --sizeMax 100
+field string --fieldName postCode --class ~.domain.Address --notNull --sizeMax 10
+field number --fieldName streetNr --type java.lang.Integer --class ~.domain.Address --notNull
+
+// seller
+field string --fieldName sellerName --class ~.domain.Seller --notNull --sizeMax 50
+field embedded --fieldName address --type ~.domain.Address --class ~.domain.Seller
+field list --fieldName products --type ~.domain.Product --class ~.domain.Seller --cardinality ONE_TO_MANY --mappedBy seller
+
+// productAttribute
+field string --fieldName attributeKey --class ~.domain.ProductAttribute --notNull --sizeMax 40
+field string --fieldName attributeValue --class ~.domain.ProductAttribute --notNull --sizeMax 100
+
+// photoUrl
+field string --fieldName urlValue --class ~.domain.PhotoUrl --notNull --sizeMax 20
+
+// product
+field string --fieldName productName --class ~.domain.Product --notNull --sizeMax 50
+field number --fieldName price --class ~.domain.Product --notNull --type java.math.BigDecimal
+field number --fieldName discount --class ~.domain.Product --type java.math.BigDecimal
+field reference --fieldName seller --type ~.domain.Seller --cardinality MANY_TO_ONE --class ~.domain.Product
+field reference --fieldName category --type ~.domain.codelist.Category --cardinality MANY_TO_ONE --class ~.domain.Product
+field reference --fieldName producer --type ~.domain.codelist.Producer --cardinality MANY_TO_ONE --class ~.domain.Product
+field list --fieldName photoUrls --type ~.domain.PhotoUrl --class ~.domain.Product --cardinality ONE_TO_MANY
+field list --fieldName productAttributes --type ~.domain.ProductAttribute --class ~.domain.Product --cardinality ONE_TO_MANY
+
+// codelist
+field string --fieldName codeKey --class ~.domain.codelist.Codelist --notNull --sizeMax 20
+field string --fieldName codeDescription --class ~.domain.codelist.Codelist --notNull --sizeMax 100
+
+// category
+field reference --fieldName parent --type ~.domain.codelist.CategoryType --cardinality MANY_TO_ONE --class ~.domain.codelist.CategoryType
+
+
+repository jpa --interface ~.repository.ProductRepository --entity ~.domain.Product
+repository jpa --interface ~.repository.SellerRepository --entity ~.domain.Seller
+repository jpa --interface ~.repository.ProductAttributeRepository --entity ~.domain.ProductAttribute
+repository jpa --interface ~.repository.PhotoUrlRepository --entity ~.domain.PhotoUrl
+repository jpa --interface ~.repository.CategoryRepository --entity ~.domain.codelist.Category
+repository jpa --interface ~.repository.CategoryTypeRepository --entity ~.domain.codelist.CategoryType
+repository jpa --interface ~.repository.ProducerRepository --entity ~.domain.codelist.Producer
+repository jpa --interface ~.repository.SellerStatusRepository --entity ~.domain.codelist.SellerStatus
+repository jpa --interface ~.repository.CountryStateRepository --entity ~.domain.codelist.CountryState
+repository jpa --interface ~.repository.RegionRepository --entity ~.domain.codelist.Region
+
+service type --interface ~.service.ProductService --entity ~.domain.Product --class ~.service.impl.ProductServiceImpl
+service type --interface ~.service.SellerService --entity ~.domain.Seller --class ~.service.impl.SellerServiceImpl
+service type --interface ~.service.ProductAttributeService --entity ~.domain.ProductAttribute --class ~.service.impl.ProductAttributeServiceImpl
+service type --interface ~.service.PhotoUrlService --entity ~.domain.PhotoUrl --class ~.service.impl.PhotoUrlServiceImpl
+service type --interface ~.service.CategoryService --entity ~.domain.codelist.Category --class ~.service.impl.CategoryServiceImpl
+service type --interface ~.service.CategoryTypeService --entity ~.domain.codelist.CategoryType --class ~.service.impl.CategoryTypeServiceImpl
+service type --interface ~.service.ProducerService --entity ~.domain.codelist.Producer --class ~.service.impl.ProducerServiceImpl
+service type --interface ~.service.SellerStatusService --entity ~.domain.codelist.Producer --class ~.service.impl.SellerStatusServiceImpl
+service type --interface ~.service.CountryStateService --entity ~.domain.codelist.Producer --class ~.service.impl.CountryStateServiceImpl
+service type --interface ~.service.RegionService --entity ~.domain.codelist.Producer --class ~.service.impl.RegionServiceImpl
+
+web mvc setup
+web mvc scaffold --class ~.web.SellerController --backingType ~.domain.Seller
+web mvc scaffold --class ~.web.ProductController --backingType ~.domain.Product
+web mvc scaffold --class ~.web.ProductAttributeController --backingType ~.domain.ProductAttribute
+web mvc scaffold --class ~.web.PhotoUrlController --backingType ~.domain.PhotoUrl
+web mvc scaffold --class ~.web.CategoryController --backingType ~.domain.codelist.Category
+web mvc scaffold --class ~.web.ProducerController --backingType ~.domain.codelist.Producer
+web mvc scaffold --class ~.web.SellerStatusController --backingType ~.domain.codelist.SellerStatus
+web mvc scaffold --class ~.web.CountryStateController --backingType ~.domain.codelist.CountryState
+web mvc scaffold --class ~.web.RegionController --backingType ~.domain.codelist.RegionState

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_cz_kolomet_domain_Seller" items="${sellers}" z="j9ifeCdeyF2uVnrzON+WGO1/Ks8=">
+        <table:table data="${sellers}" id="l_cz_kolomet_domain_Seller" path="/sellers" z="qouSD8JkxXHlg/iqmcXfWXAKU2E=">
+            <table:column id="c_cz_kolomet_domain_Seller_sellerName" property="sellerName" z="EjbVTlfNxS4U7LqshAe5pL5U0aA="/>
+            <table:column id="c_cz_kolomet_domain_Seller_personSalutation" property="personSalutation" z="biJqsNTpxmYm/LpUTQLsnKX0QZ4="/>
+            <table:column id="c_cz_kolomet_domain_Seller_personDegree" property="personDegree" z="ABl7Hxw7yZKvufvB3CefEudaUVk="/>
+            <table:column id="c_cz_kolomet_domain_Seller_personName" property="personName" z="xXE+CA/U4lBiTzw1iQ7dUwaWEnA="/>
+            <table:column id="c_cz_kolomet_domain_Seller_personSurname" property="personSurname" z="95WIrbMZipkFRDWlLYd6PaNO8Sg="/>
+        </table:table>
+    </page:list>
+</div>
