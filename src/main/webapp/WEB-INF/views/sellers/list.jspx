@@ -9,6 +9,7 @@
             <table:column id="c_cz_kolomet_domain_Seller_personDegree" property="personDegree" z="ABl7Hxw7yZKvufvB3CefEudaUVk="/>
             <table:column id="c_cz_kolomet_domain_Seller_personName" property="personName" z="xXE+CA/U4lBiTzw1iQ7dUwaWEnA="/>
             <table:column id="c_cz_kolomet_domain_Seller_personSurname" property="personSurname" z="95WIrbMZipkFRDWlLYd6PaNO8Sg="/>
+            <table:column id="c_cz_kolomet_domain_Seller_sellerDescription" property="sellerDescription" z="N9t3v32uHkEUuvTDWq8FygHw5NY="/>
         </table:table>
     </page:list>
 </div>

@@ -19,19 +19,19 @@
         <field:input field="businessSalutation" id="c_cz_kolomet_domain_Seller_businessSalutation" max="20" z="RP2egUSPL8BSYhO3EAjyz+n4+1Y="/>
         <field:input field="businessDegree" id="c_cz_kolomet_domain_Seller_businessDegree" max="20" z="mqg3svz75qRa+EmRBiqB4viTd/Q="/>
         <field:input field="businessName" id="c_cz_kolomet_domain_Seller_businessName" max="30" z="wMff26/IKdgvlIGrTVyOW3Z1j48="/>
-        <field:input field="businessEmail" id="c_cz_kolomet_domain_Seller_businessEmail" max="30" z="rLhRblI4O0cHe/UcdE7W3bwTd4o="/>
+        <field:textarea field="businessEmail" id="c_cz_kolomet_domain_Seller_businessEmail" z="AJoA26ZCBhcR3XKpvQWOcq34Xso="/>
         <field:input field="businessPhoneNumber" id="c_cz_kolomet_domain_Seller_businessPhoneNumber" max="30" z="xPi0a02wQAR9AEEEZZQTflBLDyY="/>
         <field:select field="region" id="c_cz_kolomet_domain_Seller_region" itemValue="id" items="${regions}" path="/regions" required="true" z="X1tFfSYqrkWRD/69kGzvUnaA90o="/>
         <field:textarea field="web" id="c_cz_kolomet_domain_Seller_web" z="myu210fXlXUPBcI53jRe4Vneb38="/>
         <field:textarea field="saleType" id="c_cz_kolomet_domain_Seller_saleType" z="T4Cb+TKo2Kp3HWWlNRJJ1K2aKf8="/>
         <field:select field="addressCountry" id="c_cz_kolomet_domain_Seller_addressCountry" itemValue="id" items="${countrystates}" path="/countrystates" required="true" z="LFk65lYXHqrNBRf1/RcsRazT3Fo="/>
-        <field:input field="addressCity" id="c_cz_kolomet_domain_Seller_addressCity" z="l0DKxueXNg1pNTYw26Acm37YXTI="/>
-        <field:input field="addressStreet" id="c_cz_kolomet_domain_Seller_addressStreet" z="fJ249BCr1UEIZbD80QakNZ1k/9w="/>
-        <field:input field="addressPostCode" id="c_cz_kolomet_domain_Seller_addressPostCode" z="WYUhsZ9Ak3mwWhujFusDDUQpFIo="/>
-        <field:input field="addressSalutation" id="c_cz_kolomet_domain_Seller_addressSalutation" z="GDvydaIsMpkqnJPX/rThsgWLldE="/>
-        <field:input field="addressDegree" id="c_cz_kolomet_domain_Seller_addressDegree" z="NnmWxpTEo8RucuFxJHRjVX4jYSc="/>
-        <field:input field="addressName" id="c_cz_kolomet_domain_Seller_addressName" z="GzK2BYHGGhoaxO9SOtQYx3yi2Yc="/>
-        <field:input field="addressEmail" id="c_cz_kolomet_domain_Seller_addressEmail" z="HB0VepNVrdzsnOeHpIAg5gxaBk4="/>
+        <field:input field="addressCity" id="c_cz_kolomet_domain_Seller_addressCity" max="30" z="ZWd3o2WyzWRTIGCFNgQhY3kkFsw="/>
+        <field:textarea field="addressStreet" id="c_cz_kolomet_domain_Seller_addressStreet" z="2HYFkRw9+Ha209l1ivQAxbAq0zk="/>
+        <field:input field="addressPostCode" id="c_cz_kolomet_domain_Seller_addressPostCode" max="5" z="QcE6/V1teYe69NOj68xVdM+Bgyo="/>
+        <field:input field="addressSalutation" id="c_cz_kolomet_domain_Seller_addressSalutation" max="20" z="8B57Ycu938uxqawRmmkXY8P8Ecg="/>
+        <field:input field="addressDegree" id="c_cz_kolomet_domain_Seller_addressDegree" max="20" z="gvxpNRke+QW5x4b3AoablbclrZA="/>
+        <field:textarea field="addressName" id="c_cz_kolomet_domain_Seller_addressName" z="q/PqbWpmHILs4mP1Os6h+kRKb70="/>
+        <field:textarea field="addressEmail" id="c_cz_kolomet_domain_Seller_addressEmail" z="b040cbjtTAnHdEZ3j5X1JtGIouI="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_cz_kolomet_domain_Seller" render="${not empty dependencies}" z="wOb4nwhLxol+WOVpFAt/d7koDnE="/>
 </div>

@@ -138,3 +138,5 @@ repository jpa --interface ~.repository.RegionRepository --entity ~.domain.codel
 service --interface ~.service.RegionService --entity ~.domain.codelist.Producer --class ~.service.impl.RegionServiceImpl
 web mvc scaffold --class ~.web.RegionController --backingType ~.domain.codelist.RegionState
 web mvc scaffold --class ~.web.RegionController --backingType ~.domain.codelist.Region
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2014-03-16 01:43:55
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2014-03-16 02:06:58
