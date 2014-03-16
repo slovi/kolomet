@@ -19,3 +19,9 @@ OPENSHIFT:
 The OpenShift `jbossews` cartridge documentation can be found at:
 
 http://openshift.github.io/documentation/oo_cartridge_guide.html#tomcat
+
+Pristupy: 
+
+	jenkins (https://jenkins-slovi.rhcloud.com/job/kolomet-build/: system_builder/xhS1_DZZTeNp), 
+	mysql (adminH32h99S/pUsGtcszG9N)
+	phpadmin (https://kolomet-slovi.rhcloud.com/phpmyadmin/: adminH32h99S/pUsGtcszG9N)
