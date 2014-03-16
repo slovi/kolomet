@@ -24,7 +24,7 @@ public class AbstractController {
 	
 	protected void setDefaultModel(Map<String, Object> model, String categoryTypeCodeKey) {
 		model.put("categories", categoryRepository.find(StringUtils.isEmpty(categoryTypeCodeKey) ? defaultCategoryCodeKey : categoryTypeCodeKey));
-		//model.put("producers", producerRepository.findAll());
+		model.put("producers", producerRepository.findAll());
 	}
 
 }
