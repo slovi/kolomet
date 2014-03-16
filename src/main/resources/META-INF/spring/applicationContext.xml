@@ -71,12 +71,6 @@
 	</beans>
 
 	<beans profile="prod-openshift">
-		<bean class="java.net.URI" id="dbHost">
-			<constructor-arg value="#{}" />
-		</bean>
-		<bean class="java.net.URI" id="dbPort">
-			<constructor-arg value="#{}" />
-		</bean>
 
 		<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 			<property name="url"
