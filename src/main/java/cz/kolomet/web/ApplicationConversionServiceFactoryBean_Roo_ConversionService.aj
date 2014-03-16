@@ -12,10 +12,8 @@ import cz.kolomet.domain.codelist.CategoryType;
 import cz.kolomet.domain.codelist.CountryState;
 import cz.kolomet.domain.codelist.Producer;
 import cz.kolomet.domain.codelist.Region;
-import cz.kolomet.domain.codelist.SellerStatus;
 import cz.kolomet.repository.CountryStateRepository;
 import cz.kolomet.repository.RegionRepository;
-import cz.kolomet.repository.SellerStatusRepository;
 import cz.kolomet.service.CategoryService;
 import cz.kolomet.service.CategoryTypeService;
 import cz.kolomet.service.CountryStateService;
@@ -59,9 +57,6 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     
     @Autowired
     RegionRepository ApplicationConversionServiceFactoryBean.regionRepository;
-    
-    @Autowired
-    SellerStatusRepository ApplicationConversionServiceFactoryBean.sellerStatusRepository;
     
     public Converter<PhotoUrl, String> ApplicationConversionServiceFactoryBean.getPhotoUrlToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<cz.kolomet.domain.PhotoUrl, java.lang.String>() {
@@ -279,30 +274,6 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         };
     }
     
-    public Converter<SellerStatus, String> ApplicationConversionServiceFactoryBean.getSellerStatusToStringConverter() {
-        return new org.springframework.core.convert.converter.Converter<cz.kolomet.domain.codelist.SellerStatus, java.lang.String>() {
-            public String convert(SellerStatus sellerStatus) {
-                return new StringBuilder().append(sellerStatus.getCodeKey()).append(' ').append(sellerStatus.getCodeDescription()).append(' ').append(sellerStatus.getPriority()).toString();
-            }
-        };
-    }
-    
-    public Converter<Long, SellerStatus> ApplicationConversionServiceFactoryBean.getIdToSellerStatusConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.Long, cz.kolomet.domain.codelist.SellerStatus>() {
-            public cz.kolomet.domain.codelist.SellerStatus convert(java.lang.Long id) {
-                return sellerStatusRepository.findOne(id);
-            }
-        };
-    }
-    
-    public Converter<String, SellerStatus> ApplicationConversionServiceFactoryBean.getStringToSellerStatusConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.String, cz.kolomet.domain.codelist.SellerStatus>() {
-            public cz.kolomet.domain.codelist.SellerStatus convert(String id) {
-                return getObject().convert(getObject().convert(id, Long.class), SellerStatus.class);
-            }
-        };
-    }
-    
     public void ApplicationConversionServiceFactoryBean.installLabelConverters(FormatterRegistry registry) {
         registry.addConverter(getPhotoUrlToStringConverter());
         registry.addConverter(getIdToPhotoUrlConverter());
@@ -331,9 +302,6 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         registry.addConverter(getRegionToStringConverter());
         registry.addConverter(getIdToRegionConverter());
         registry.addConverter(getStringToRegionConverter());
-        registry.addConverter(getSellerStatusToStringConverter());
-        registry.addConverter(getIdToSellerStatusConverter());
-        registry.addConverter(getStringToSellerStatusConverter());
     }
     
     public void ApplicationConversionServiceFactoryBean.afterPropertiesSet() {
