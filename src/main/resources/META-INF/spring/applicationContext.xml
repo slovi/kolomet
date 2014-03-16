@@ -77,6 +77,7 @@
 				value="#{ 'jdbc:mysql://' + systemEnvironment['OPENSHIFT_MYSQL_DB_HOST'] + ':' + systemEnvironment['OPENSHIFT_MYSQL_DB_PORT'] + '/kolomet' }" />
 			<property name="username" value="adminH32h99S" />
 			<property name="password" value="pUsGtTcszG9N" />
+			<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		</bean>
 
 		<bean id="entityManagerFactory"
