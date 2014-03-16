@@ -5,7 +5,7 @@
     <form:create id="fc_cz_kolomet_domain_codelist_Category" modelAttribute="category" path="/categories" render="${empty dependencies}" z="6NQ7kC6eAYmlw0M1xHRO8nZ3TE4=">
         <field:input field="codeKey" id="c_cz_kolomet_domain_codelist_Category_codeKey" max="20" required="true" z="mQvr5G5mkuC6bgQi3q/9QJGg0uk="/>
         <field:textarea field="codeDescription" id="c_cz_kolomet_domain_codelist_Category_codeDescription" required="true" z="xp79gBoLwzZm/okY1V6ytJKGqbA="/>
-        <field:input field="categoryType" id="c_cz_kolomet_domain_codelist_Category_categoryType" required="true" z="yXgL6MIJ8tjh1ZWa9GqGQbo9v/g="/>
+        <field:select field="categoryType" id="c_cz_kolomet_domain_codelist_Category_categoryType" itemValue="id" items="${categorytypes}" path="/categorytypes" required="true" z="eoo4HBfF/I9bTpDi+B/8w/om8m8="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_cz_kolomet_domain_codelist_Category" render="${not empty dependencies}" z="+JBuUuuvGPH+ZBfipZzel7/kiVk="/>
 </div>

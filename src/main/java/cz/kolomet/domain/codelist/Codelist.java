@@ -1,5 +1,5 @@
 package cz.kolomet.domain.codelist;
-import cz.kolomet.domain.Entity;
+import cz.kolomet.domain.DomainEntity;
 import org.springframework.roo.addon.equals.RooEquals;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.entity.RooJpaEntity;
@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 @RooJpaEntity(mappedSuperclass = true)
 @RooEquals
 @RooSerializable
-public abstract class Codelist extends Entity {
+public abstract class Codelist extends DomainEntity {
 
     /**
      */

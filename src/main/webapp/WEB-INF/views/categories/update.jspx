@@ -5,6 +5,6 @@
     <form:update id="fu_cz_kolomet_domain_codelist_Category" modelAttribute="category" path="/categories" versionField="Version" z="S3820aAIjlzvMzbf0u82mK4+xx0=">
         <field:input field="codeKey" id="c_cz_kolomet_domain_codelist_Category_codeKey" max="20" required="true" z="mQvr5G5mkuC6bgQi3q/9QJGg0uk="/>
         <field:textarea field="codeDescription" id="c_cz_kolomet_domain_codelist_Category_codeDescription" required="true" z="xp79gBoLwzZm/okY1V6ytJKGqbA="/>
-        <field:input field="categoryType" id="c_cz_kolomet_domain_codelist_Category_categoryType" required="true" z="yXgL6MIJ8tjh1ZWa9GqGQbo9v/g="/>
+        <field:select field="categoryType" id="c_cz_kolomet_domain_codelist_Category_categoryType" itemValue="id" items="${categorytypes}" path="/categorytypes" required="true" z="eoo4HBfF/I9bTpDi+B/8w/om8m8="/>
     </form:update>
 </div>

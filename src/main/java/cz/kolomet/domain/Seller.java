@@ -19,7 +19,7 @@ import cz.kolomet.domain.codelist.SellerStatus;
 @RooJpaEntity
 @RooEquals
 @RooSerializable
-public class Seller extends Entity {
+public class Seller extends DomainEntity {
 	
 	@NotNull
 	@Size(max = 20)

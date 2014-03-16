@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 @RooJpaEntity(inheritanceType = "TABLE_PER_CLASS")
 @RooEquals
 @RooSerializable
-public class ProductAttribute extends Entity {
+public class ProductAttribute extends DomainEntity {
 
     /**
      */

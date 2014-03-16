@@ -17,11 +17,11 @@ privileged aspect ProductAttribute_Roo_Equals {
             return true;
         }
         ProductAttribute rhs = (ProductAttribute) obj;
-        return new EqualsBuilder().append(attributeKey, rhs.attributeKey).append(attributeValue, rhs.attributeValue).append(id, rhs.id).isEquals();
+        return new EqualsBuilder().append(attributeKey, rhs.attributeKey).append(attributeValue, rhs.attributeValue).append(id, rhs.id).append(version, rhs.version).isEquals();
     }
     
     public int ProductAttribute.hashCode() {
-        return new HashCodeBuilder().append(attributeKey).append(attributeValue).append(id).toHashCode();
+        return new HashCodeBuilder().append(attributeKey).append(attributeValue).append(id).append(version).toHashCode();
     }
     
 }

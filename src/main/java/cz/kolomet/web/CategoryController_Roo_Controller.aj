@@ -4,9 +4,13 @@
 package cz.kolomet.web;
 
 import cz.kolomet.domain.codelist.Category;
+import cz.kolomet.domain.codelist.CategoryType;
 import cz.kolomet.service.CategoryService;
+import cz.kolomet.service.CategoryTypeService;
 import cz.kolomet.web.CategoryController;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +28,9 @@ privileged aspect CategoryController_Roo_Controller {
     @Autowired
     CategoryService CategoryController.categoryService;
     
+    @Autowired
+    CategoryTypeService CategoryController.categoryTypeService;
+    
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String CategoryController.create(@Valid Category category, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
@@ -38,6 +45,11 @@ privileged aspect CategoryController_Roo_Controller {
     @RequestMapping(params = "form", produces = "text/html")
     public String CategoryController.createForm(Model uiModel) {
         populateEditForm(uiModel, new Category());
+        List<String[]> dependencies = new ArrayList<String[]>();
+        if (categoryTypeService.countAllCategoryTypes() == 0) {
+            dependencies.add(new String[] { "categorytype", "categorytypes" });
+        }
+        uiModel.addAttribute("dependencies", dependencies);
         return "categories/create";
     }
     
@@ -91,6 +103,7 @@ privileged aspect CategoryController_Roo_Controller {
     
     void CategoryController.populateEditForm(Model uiModel, Category category) {
         uiModel.addAttribute("category", category);
+        uiModel.addAttribute("categorytypes", categoryTypeService.findAllCategoryTypes());
     }
     
     String CategoryController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

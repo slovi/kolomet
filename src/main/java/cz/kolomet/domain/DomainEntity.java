@@ -10,5 +10,5 @@ import org.springframework.roo.addon.tostring.RooToString;
 @RooJpaEntity(schema="sa", mappedSuperclass = true)
 @RooEquals
 @RooSerializable
-public abstract class Entity {
+public abstract class DomainEntity {
 }

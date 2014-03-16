@@ -20,7 +20,7 @@ import javax.persistence.OneToMany;
 @RooJpaEntity(inheritanceType = "TABLE_PER_CLASS")
 @RooEquals
 @RooSerializable
-public class Product extends Entity {
+public class Product extends DomainEntity {
 
     /**
      */
