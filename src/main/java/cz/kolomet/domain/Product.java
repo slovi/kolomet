@@ -13,6 +13,7 @@ import cz.kolomet.domain.codelist.Producer;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 
 @RooJavaBean
@@ -36,6 +37,9 @@ public class Product extends DomainEntity {
     /**
      */
     private BigDecimal discount;
+    
+    @Lob
+    private String description;
 
     /**
      */

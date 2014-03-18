@@ -4,9 +4,13 @@
 package cz.kolomet.web;
 
 import cz.kolomet.domain.codelist.Category;
+import cz.kolomet.domain.codelist.CategoryType;
 import cz.kolomet.service.CategoryService;
+import cz.kolomet.service.CategoryTypeService;
 import cz.kolomet.web.CategoryController;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,28 +28,36 @@ privileged aspect CategoryController_Roo_Controller {
     @Autowired
     CategoryService CategoryController.categoryService;
     
+    @Autowired
+    CategoryTypeService CategoryController.categoryTypeService;
+    
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String CategoryController.create(@Valid Category category, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
             populateEditForm(uiModel, category);
-            return "categories/create";
+            return "categorys/create";
         }
         uiModel.asMap().clear();
         categoryService.saveCategory(category);
-        return "redirect:/categories/" + encodeUrlPathSegment(category.getId().toString(), httpServletRequest);
+        return "redirect:/categorys/" + encodeUrlPathSegment(category.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(params = "form", produces = "text/html")
     public String CategoryController.createForm(Model uiModel) {
         populateEditForm(uiModel, new Category());
-        return "categories/create";
+        List<String[]> dependencies = new ArrayList<String[]>();
+        if (categoryTypeService.countAllCategoryTypes() == 0) {
+            dependencies.add(new String[] { "categorytype", "categorytypes" });
+        }
+        uiModel.addAttribute("dependencies", dependencies);
+        return "categorys/create";
     }
     
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String CategoryController.show(@PathVariable("id") Long id, Model uiModel) {
         uiModel.addAttribute("category", categoryService.findCategory(id));
         uiModel.addAttribute("itemId", id);
-        return "categories/show";
+        return "categorys/show";
     }
     
     @RequestMapping(produces = "text/html")
@@ -59,24 +71,24 @@ privileged aspect CategoryController_Roo_Controller {
         } else {
             uiModel.addAttribute("categorys", categoryService.findAllCategorys());
         }
-        return "categories/list";
+        return "categorys/list";
     }
     
     @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
     public String CategoryController.update(@Valid Category category, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
             populateEditForm(uiModel, category);
-            return "categories/update";
+            return "categorys/update";
         }
         uiModel.asMap().clear();
         categoryService.updateCategory(category);
-        return "redirect:/categories/" + encodeUrlPathSegment(category.getId().toString(), httpServletRequest);
+        return "redirect:/categorys/" + encodeUrlPathSegment(category.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String CategoryController.updateForm(@PathVariable("id") Long id, Model uiModel) {
         populateEditForm(uiModel, categoryService.findCategory(id));
-        return "categories/update";
+        return "categorys/update";
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
@@ -86,11 +98,12 @@ privileged aspect CategoryController_Roo_Controller {
         uiModel.asMap().clear();
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
-        return "redirect:/categories";
+        return "redirect:/categorys";
     }
     
     void CategoryController.populateEditForm(Model uiModel, Category category) {
         uiModel.addAttribute("category", category);
+        uiModel.addAttribute("categorytypes", categoryTypeService.findAllCategoryTypes());
     }
     
     String CategoryController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

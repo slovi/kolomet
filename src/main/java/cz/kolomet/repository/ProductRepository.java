@@ -10,6 +10,9 @@ import org.springframework.roo.addon.layers.repository.jpa.RooJpaRepository;
 @RooJpaRepository(domainType = Product.class)
 public interface ProductRepository {
 	
+	@Query("select p from Product p inner join p.seller s inner join s.sellerStatus ss order by ss.priority desc")
+	List<Product> findByPriority();
+	
 	@Query("select p from Product p inner join p.category c where c.codeKey = :categoryCodeKey")
 	List<Product> findByCategory(@Param("categoryCodeKey") String categoryCodeKey);
 	

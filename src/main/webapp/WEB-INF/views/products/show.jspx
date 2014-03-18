@@ -9,5 +9,6 @@
         <field:display field="seller" id="s_cz_kolomet_domain_Product_seller" object="${product}" z="l9aQBxj/TdL+b5fuw0y3j8Sq9kE="/>
         <field:display field="category" id="s_cz_kolomet_domain_Product_category" object="${product}" z="GSlGUvpxnFGPqFGZ+QjVEHYzeEs="/>
         <field:display field="producer" id="s_cz_kolomet_domain_Product_producer" object="${product}" z="dW/X2YRgPextf24hN2wxAugtvw0="/>
+        <field:display field="description" id="s_cz_kolomet_domain_Product_description" object="${product}" z="LPSKMJTVZ2Ovji3LmzZm6NI/M1s="/>
     </page:show>
 </div>

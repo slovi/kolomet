@@ -4,9 +4,10 @@
     <jsp:output omit-xml-declaration="yes"/>
     <form:update id="fu_cz_kolomet_domain_Product" modelAttribute="product" path="/products" versionField="Version" z="7HMLzrdkHxpwS+MFgkL/IDEP8JA=">
         <field:textarea field="productName" id="c_cz_kolomet_domain_Product_productName" required="true" z="9VRS4DrGEb9AJgsJiZnH90xhO8Q="/>
+        <field:textarea field="description" id="c_cz_kolomet_domain_Product_description" required="true" z="AKcv+YPgxA7p5CAGUqr5CDJRCi4="/>
         <field:input field="price" id="c_cz_kolomet_domain_Product_price" required="true" validationMessageCode="field_invalid_number" z="8WBt5dfoVCIiZbaItCV+D0Ny6fc="/>
         <field:input field="discount" id="c_cz_kolomet_domain_Product_discount" validationMessageCode="field_invalid_number" z="uv6z4+8sEz83BAFjjftyHYknDNY="/>
-        <field:input field="seller" id="c_cz_kolomet_domain_Product_seller" z="8nOHEwnh/jG/J7JBi0p9yaq1VEM="/>
+        <field:select field="seller" id="c_cz_kolomet_domain_Product_seller" itemValue="id" items="${sellers}" path="/sellers" z="n2LM6UtZBxSNvd+5O1yFsjhfPtQ="/>
         <field:select field="category" id="c_cz_kolomet_domain_Product_category" itemValue="id" items="${categorys}" path="/categories" z="jcgjyABOZl4vNpitC7JR0VGrNSA="/>
         <field:select field="producer" id="c_cz_kolomet_domain_Product_producer" itemValue="id" items="${producers}" path="/producers" z="AxpqTO8BGX72BcngzBaVOGOCLKo="/>
         <field:simple field="photoUrls" id="c_cz_kolomet_domain_Product_photoUrls" messageCode="entity_reference_not_managed" messageCodeAttribute="Photo Url" z="0I/yqZ5hrbgbfKtBvg7iv376CBQ="/>

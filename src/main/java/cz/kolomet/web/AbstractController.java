@@ -16,7 +16,7 @@ public class AbstractController {
 	@Autowired
 	private CategoryRepository categoryRepository;
 	
-	private String defaultCategoryCodeKey = "cattype.bike"; // TODO nastavit jako property
+	private String defaultCategoryCodeKey = "cattype_bike"; // TODO nastavit jako property
 
 	protected void setDefaultModel(Map<String, Object> model) {
 		this.setDefaultModel(model, this.defaultCategoryCodeKey);

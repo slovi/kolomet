@@ -16,17 +16,6 @@
 	    	<c:forEach items="${categories}" var="category">
 				<menu:item url="/products/category/${category.codeKey}" id="menuitem_${category.codeKey}" label="${category.codeDescription}" />
 			</c:forEach>
-	     	<!-- <li><a href="./category_vse.htm">Vsechna kola</a></li>
-			<li><a href="./category_horska.htm">Horska kola</a></li>
-			<li><a href="#">Horska kola 27,5</a></li>
-			<li><a href="#">Horska kola 29</a></li>
-			<li><a href="#">Celoodpruzena kola</a></li>
-			<li><a href="#">Krosova kola</a></li>
-			<li><a href="#">Trekingova kola</a></li>
-			<li><a href="./category_detska.htm">Detska kola a odrazedla</a></li>
-			<li><a href="#">Kolobezky</a></li>
-			<li><a href="#">Elektrokola</a></li>
-			<li><a href="#">Silnicni ­ kola</a></li>-->
 	     </menu:menu>
 	</div>
     <div class="side-menu">

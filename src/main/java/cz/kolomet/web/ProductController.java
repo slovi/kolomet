@@ -25,11 +25,15 @@ public class ProductController extends AbstractController {
 		
 		Map<String, Object> model = new HashMap<String, Object>();
 		setDefaultModel(model);
-		model.put("products", productRepository.findByCategory(categoryCodeKey));
+		if (!categoryCodeKey.equals("cat_bike_all")) {
+			model.put("products", productRepository.findByCategory(categoryCodeKey));
+		} else {
+			model.put("products", productRepository.findByPriority());
+		}
 		return new ModelAndView("products/list_category", model);
 	}
 	
-	@RequestMapping("/categorytype/{categoryCodeKey}")
+	@RequestMapping("/categorytype/{categoryTypeCodeKey}")
 	public ModelAndView listByCategoryType(@PathVariable("categoryTypeCodeKey") String categoryTypeCodeKey) {
 		
 		Map<String, Object> model = new HashMap<String, Object>();

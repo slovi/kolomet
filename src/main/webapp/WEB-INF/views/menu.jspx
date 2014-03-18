@@ -20,8 +20,8 @@
             <menu:item id="i_photourl_list" messageCode="global_menu_list" url="/photourls?page=1&amp;size=${empty param.size ? 10 : param.size}" z="D+g8dQxzKdkuGRtxnXRvSGL7guI="/>
         </menu:category>
         <menu:category id="c_category" z="kY676wLbZKc59UbcUGM8ogjOGOc=">
-            <menu:item id="i_category_new" messageCode="global_menu_new" url="/categories?form" z="R8G5KokBNW58hWEWwUGatYfs6kM="/>
-            <menu:item id="i_category_list" messageCode="global_menu_list" url="/categories?page=1&amp;size=${empty param.size ? 10 : param.size}" z="0VEYbn/XUobhsOa74Uf6KyWz8/w="/>
+            <menu:item id="i_category_new" messageCode="global_menu_new" url="/categorys?form" z="user-managed"/>
+            <menu:item id="i_category_list" messageCode="global_menu_list" url="/categorys?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
         </menu:category>
         <menu:category id="c_producer" z="KeWK2wm/jJeEIu2+gOkYbZDbXr8=">
             <menu:item id="i_producer_new" messageCode="global_menu_new" url="/producers?form" z="k7PTYTPGXGN68Ox7Dlk4DSm4Zyc="/>
