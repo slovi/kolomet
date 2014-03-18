@@ -6,8 +6,10 @@ package cz.kolomet.web;
 import cz.kolomet.domain.Seller;
 import cz.kolomet.domain.codelist.CountryState;
 import cz.kolomet.domain.codelist.Region;
+import cz.kolomet.domain.codelist.SellerStatus;
 import cz.kolomet.repository.CountryStateRepository;
 import cz.kolomet.repository.RegionRepository;
+import cz.kolomet.repository.SellerStatusRepository;
 import cz.kolomet.service.SellerService;
 import cz.kolomet.web.SellerController;
 import java.io.UnsupportedEncodingException;
@@ -36,6 +38,9 @@ privileged aspect SellerController_Roo_Controller {
     @Autowired
     RegionRepository SellerController.regionRepository;
     
+    @Autowired
+    SellerStatusRepository SellerController.sellerStatusRepository;
+    
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String SellerController.create(@Valid Seller seller, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
@@ -53,6 +58,9 @@ privileged aspect SellerController_Roo_Controller {
         List<String[]> dependencies = new ArrayList<String[]>();
         if (countryStateRepository.count() == 0) {
             dependencies.add(new String[] { "countrystate", "countrystates" });
+        }
+        if (sellerStatusRepository.count() == 0) {
+            dependencies.add(new String[] { "sellerstatus", "sellerstatuses" });
         }
         if (regionRepository.count() == 0) {
             dependencies.add(new String[] { "region", "regions" });
@@ -116,6 +124,7 @@ privileged aspect SellerController_Roo_Controller {
         uiModel.addAttribute("seller", seller);
         uiModel.addAttribute("countrystates", countryStateRepository.findAll());
         uiModel.addAttribute("regions", regionRepository.findAll());
+        uiModel.addAttribute("sellerstatuses", sellerStatusRepository.findAll());
     }
     
     String SellerController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {
