@@ -10,10 +10,10 @@ import java.util.List;
 privileged aspect CountryStateService_Roo_Service {
     
     public abstract long CountryStateService.countAllCountryStates();    
-    public abstract void CountryStateService.deleteCountryState(CountryState category);    
+    public abstract void CountryStateService.deleteCountryState(CountryState countryState);    
     public abstract CountryState CountryStateService.findCountryState(Long id);    
     public abstract List<CountryState> CountryStateService.findAllCountryStates();    
     public abstract List<CountryState> CountryStateService.findCountryStateEntries(int firstResult, int maxResults);    
-    public abstract void CountryStateService.saveCountryState(CountryState category);    
-    public abstract CountryState CountryStateService.updateCountryState(CountryState category);    
+    public abstract void CountryStateService.saveCountryState(CountryState countryState);    
+    public abstract CountryState CountryStateService.updateCountryState(CountryState countryState);    
 }

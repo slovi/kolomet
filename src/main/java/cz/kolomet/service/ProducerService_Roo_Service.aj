@@ -3,9 +3,9 @@
 
 package cz.kolomet.service;
 
-import java.util.List;
-
 import cz.kolomet.domain.Producer;
+import cz.kolomet.service.ProducerService;
+import java.util.List;
 
 privileged aspect ProducerService_Roo_Service {
     

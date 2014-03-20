@@ -10,10 +10,10 @@ import java.util.List;
 privileged aspect ApplicationRoleService_Roo_Service {
     
     public abstract long ApplicationRoleService.countAllApplicationRoles();    
-    public abstract void ApplicationRoleService.deleteApplicationRole(ApplicationRole ApplicationRole);    
+    public abstract void ApplicationRoleService.deleteApplicationRole(ApplicationRole applicationRole);    
     public abstract ApplicationRole ApplicationRoleService.findApplicationRole(Long id);    
     public abstract List<ApplicationRole> ApplicationRoleService.findAllApplicationRoles();    
     public abstract List<ApplicationRole> ApplicationRoleService.findApplicationRoleEntries(int firstResult, int maxResults);    
-    public abstract void ApplicationRoleService.saveApplicationRole(ApplicationRole ApplicationRole);    
-    public abstract ApplicationRole ApplicationRoleService.updateApplicationRole(ApplicationRole ApplicationRole);    
+    public abstract void ApplicationRoleService.saveApplicationRole(ApplicationRole applicationRole);    
+    public abstract ApplicationRole ApplicationRoleService.updateApplicationRole(ApplicationRole applicationRole);    
 }

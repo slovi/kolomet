@@ -4,7 +4,7 @@
     <jsp:output omit-xml-declaration="yes"/>
     <form:create id="fc_cz_kolomet_domain_ApplicationPermission" modelAttribute="applicationPermission" path="/applicationpermissions" render="${empty dependencies}" z="jW3B/fhJ285gl4UN5V/JURdD+Y0=">
         <field:input field="permissionName" id="c_cz_kolomet_domain_ApplicationPermission_permissionName" z="AYwk5EBY8NovlE7+3KjMLhJ6mL0="/>
-        <field:input field="roles" id="c_cz_kolomet_domain_ApplicationPermission_roles" z="QeOWb53QX/u9DLy5h5+Xv8vXiwU="/>
+        <field:select field="roles" id="c_cz_kolomet_domain_ApplicationPermission_roles" itemValue="id" items="${applicationroles}" multiple="true" path="/applicationroles" z="fWdnNQ8XtQivimYh52hJZRJ0VwY="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_cz_kolomet_domain_ApplicationPermission" render="${not empty dependencies}" z="TD16aq726bA/YsndgFNG/SNjgbg="/>
 </div>

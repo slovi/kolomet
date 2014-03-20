@@ -11,13 +11,13 @@ entity jpa --class ~.domain.Product --extends ~.domain.DomainEntity --inheritanc
 entity jpa --class ~.domain.ApplicationUser --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 entity jpa --class ~.domain.ApplicationRole --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 entity jpa --class ~.domain.ApplicationPermission --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
+entity jpa --class ~.domain.NewsItem --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 entity jpa --class ~.domain.codelist.Codelist --abstract true --equals true --serializable true --activeRecord false --extends ~.domain.Entity --inheritanceType TABLE_PER_CLASS
 entity jpa --class ~.domain.codelist.CategoryType --extends ~.domain.codelist.Codelist --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 entity jpa --class ~.domain.codelist.SellerStatus --extends ~.domain.codelist.Codelist --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 entity jpa --class ~.domain.codelist.CountryState --extends ~.domain.codelist.Codelist --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 entity jpa --class ~.domain.codelist.Region --extends ~.domain.codelist.Codelist --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 entity jpa --class ~.domain.codelist.ProductAttributeType --extends ~.domain.codelist.Codelist --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
-
 
 repository jpa --interface ~.repository.ProductRepository --entity ~.domain.Product
 repository jpa --interface ~.repository.SellerRepository --entity ~.domain.Seller
@@ -33,6 +33,7 @@ repository jpa --interface ~.repository.ProductAttributeTypeRepository --entity 
 repository jpa --interface ~.repository.ApplicationUserRepository --entity ~.domain.ApplicationUser
 repository jpa --interface ~.repository.ApplicationRoleRepository --entity ~.domain.ApplicationRole
 repository jpa --interface ~.repository.ApplicationPermissionRepository --entity ~.domain.ApplicationPermission
+repository jpa --interface ~.repository.NewsItemRepository --entity ~.domain.NewsItem
 
 service type --interface ~.service.ProductService --entity ~.domain.Product --class ~.service.impl.ProductServiceImpl
 service type --interface ~.service.SellerService --entity ~.domain.Seller --class ~.service.impl.SellerServiceImpl
@@ -48,6 +49,7 @@ service type --interface ~.service.ProductAttributeTypeService --entity ~.domain
 service type --interface ~.service.ApplicationUserService --entity ~.domain.ApplicationUser --class ~.service.impl.ApplicationUserServiceImpl
 service type --interface ~.service.ApplicationRoleService --entity ~.domain.ApplicationRole --class ~.service.impl.ApplicationRoleServiceImpl
 service type --interface ~.service.ApplicationPermissionService --entity ~.domain.ApplicationPermission --class ~.service.impl.ApplicationPermissionServiceImpl
+service type --interface ~.service.NewsItemService --entity ~.domain.NewsItem --class ~.service.impl.NewsItemServiceImpl
 
 web mvc setup
 web mvc scaffold --class ~.web.SellerController --backingType ~.domain.Seller
@@ -63,3 +65,4 @@ web mvc scaffold --class ~.web.ProductAttributeTypeController --backingType ~.do
 web mvc scaffold --class ~.web.ApplicationUserController --backingType ~.domain.ApplicationUser
 web mvc scaffold --class ~.web.ApplicationRoleController --backingType ~.domain.ApplicationRole
 web mvc scaffold --class ~.web.ApplicationPermissionController --backingType ~.domain.ApplicationPermission
+web mvc scaffold --class ~.web.NewsItemController --backingType ~.domain.NewsItem

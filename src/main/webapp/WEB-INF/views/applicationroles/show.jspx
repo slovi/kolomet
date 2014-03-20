@@ -4,5 +4,6 @@
     <jsp:output omit-xml-declaration="yes"/>
     <page:show id="ps_cz_kolomet_domain_ApplicationRole" object="${applicationrole}" path="/applicationroles" z="xoPps7RMHJRpVuDcVFKO6AVmwW8=">
         <field:display field="roleName" id="s_cz_kolomet_domain_ApplicationRole_roleName" object="${applicationrole}" z="8HsxOcadx6FniJx0PCUvnzuaOK4="/>
+        <field:display field="permissions" id="s_cz_kolomet_domain_ApplicationRole_permissions" object="${applicationrole}" z="xkXw7oXctFjGiVn1LJjJSwtt66k="/>
     </page:show>
 </div>

@@ -3,7 +3,9 @@
 
 package cz.kolomet.domain;
 
+import cz.kolomet.domain.Category;
 import cz.kolomet.domain.PhotoUrl;
+import cz.kolomet.domain.Producer;
 import cz.kolomet.domain.Product;
 import cz.kolomet.domain.ProductAttribute;
 import cz.kolomet.domain.Seller;

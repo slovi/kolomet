@@ -3,13 +3,18 @@
 
 package cz.kolomet.web;
 
+import cz.kolomet.domain.Seller;
+import cz.kolomet.domain.codelist.CountryState;
+import cz.kolomet.domain.codelist.Region;
+import cz.kolomet.service.CountryStateService;
+import cz.kolomet.service.RegionService;
+import cz.kolomet.service.SellerService;
+import cz.kolomet.web.SellerController;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,11 +24,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
-
-import cz.kolomet.domain.Seller;
-import cz.kolomet.service.CountryStateService;
-import cz.kolomet.service.RegionService;
-import cz.kolomet.service.SellerService;
 
 privileged aspect SellerController_Roo_Controller {
     

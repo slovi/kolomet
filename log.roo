@@ -174,3 +174,13 @@ web mvc scaffold --class ~.web.ApplicationPermissionController --backingType ~.d
 service --interface ~.service.CategoryService --entity ~.domain.Category --class ~.service.impl.CategoryServiceImpl
 service --interface ~.service.CategoryService --entity ~.domain.Category --class ~.service.impl.CategoryServiceImpl
 service --interface ~.service.CountryStateService --entity ~.domain.codelist.CountryState --class ~.service.impl.CountryStateServiceImpl
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2014-03-20 22:18:25
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2014-03-20 22:20:26
+entity jpa --class ~.domain.NewsItem --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
+entity jpa --class ~.domain.NewsItem --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
+entity jpa --class ~.domain.NewsItem --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
+repository jpa --interface ~.repository.NewsItemRepository --entity ~.domain.NewsItem
+service --interface ~.service.NewsItemService --entity ~.domain.NewsItem --class ~.service.impl.NewsItemServiceImpl
+web mvc scaffold --class ~.web.NewsItemController --backingType ~.domain.NewsItem
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2014-03-20 22:36:28
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2014-03-20 22:36:53

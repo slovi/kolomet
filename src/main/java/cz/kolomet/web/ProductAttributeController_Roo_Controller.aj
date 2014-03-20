@@ -3,10 +3,16 @@
 
 package cz.kolomet.web;
 
+import cz.kolomet.domain.Product;
 import cz.kolomet.domain.ProductAttribute;
+import cz.kolomet.domain.codelist.ProductAttributeType;
 import cz.kolomet.service.ProductAttributeService;
+import cz.kolomet.service.ProductAttributeTypeService;
+import cz.kolomet.service.ProductService;
 import cz.kolomet.web.ProductAttributeController;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +30,12 @@ privileged aspect ProductAttributeController_Roo_Controller {
     @Autowired
     ProductAttributeService ProductAttributeController.productAttributeService;
     
+    @Autowired
+    ProductService ProductAttributeController.productService;
+    
+    @Autowired
+    ProductAttributeTypeService ProductAttributeController.productAttributeTypeService;
+    
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String ProductAttributeController.create(@Valid ProductAttribute productAttribute, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
@@ -38,6 +50,14 @@ privileged aspect ProductAttributeController_Roo_Controller {
     @RequestMapping(params = "form", produces = "text/html")
     public String ProductAttributeController.createForm(Model uiModel) {
         populateEditForm(uiModel, new ProductAttribute());
+        List<String[]> dependencies = new ArrayList<String[]>();
+        if (productAttributeTypeService.countAllProductAttributeTypes() == 0) {
+            dependencies.add(new String[] { "productattributetype", "productattributetypes" });
+        }
+        if (productService.countAllProducts() == 0) {
+            dependencies.add(new String[] { "product", "products" });
+        }
+        uiModel.addAttribute("dependencies", dependencies);
         return "productattributes/create";
     }
     
@@ -91,6 +111,8 @@ privileged aspect ProductAttributeController_Roo_Controller {
     
     void ProductAttributeController.populateEditForm(Model uiModel, ProductAttribute productAttribute) {
         uiModel.addAttribute("productAttribute", productAttribute);
+        uiModel.addAttribute("products", productService.findAllProducts());
+        uiModel.addAttribute("productattributetypes", productAttributeTypeService.findAllProductAttributeTypes());
     }
     
     String ProductAttributeController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

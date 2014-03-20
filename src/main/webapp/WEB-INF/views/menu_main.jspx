@@ -14,17 +14,22 @@
     			<menu:item url="/about" messageCode="menu.main.about" id="about" />
     			
     			<menu:category id="admin" label="Our kolomet" url="/sellers">
+    				<menu:item id="i_applicationuser_list" messageCode="global_menu_list" url="/applicationusers?page=1&amp;size=${empty param.size ? 10 : param.size}" z="18oGQE63MUIZ2YAKBPnDk0gNcZA="/>
+    				<menu:item id="i_applicationrole_list" messageCode="global_menu_list" url="/applicationroles?page=1&amp;size=${empty param.size ? 10 : param.size}" z="5BKruYLjsrCLDE9itOj1TlqWcRk="/>
+    				<menu:item id="i_applicationpermission_list" messageCode="global_menu_list" url="/applicationpermissions?page=1&amp;size=${empty param.size ? 10 : param.size}" z="Wl97kcGOo9MYPdeFlSYOwi7lAZs="/>
+    				<hr color="#f9f9f9" width="85%" align="center" size="1" /> 
 					<menu:item id="i_seller_list" messageCode="global_menu_list" url="/sellers?page=1&amp;size=${empty param.size ? 10 : param.size}" z="57f7mMa6rXXGgX7UBUaUGHmBSqg="/>
+		            <menu:item id="i_sellerstatus_list" messageCode="global_menu_list" url="/sellerstatuses?page=1&amp;size=${empty param.size ? 10 : param.size}" z="9tyOGUgA53BPcQ2WMBbQvObHThE="/>
+		            <menu:item id="i_region_list" messageCode="global_menu_list" url="/regions?page=1&amp;size=${empty param.size ? 10 : param.size}" z="R4yrjjgk2KXYIlMw++M9nLkYTpE="/>
+		            <menu:item id="i_countrystate_list" messageCode="global_menu_list" url="/countrystates?page=1&amp;size=${empty param.size ? 10 : param.size}" z="6376x50wFxJokyFZdSoG7iIslIs="/>
+					<hr color="#f9f9f9" width="85%" align="center" size="1" /> 
 		            <menu:item id="i_product_list" messageCode="global_menu_list" url="/products?page=1&amp;size=${empty param.size ? 10 : param.size}" z="kEeyCmUUYXShbDEWwOLheaAkM50="/>
 		            <menu:item id="i_productattribute_list" messageCode="global_menu_list" url="/productattributes?page=1&amp;size=${empty param.size ? 10 : param.size}" z="VTVOTRtnhV45+bWn4Cei0rc7as4="/>
 		            <menu:item id="i_productattributetype_list" messageCode="global_menu_list" url="/productattributetypes?page=1&amp;size=${empty param.size ? 10 : param.size}" z="y9XTmdd/EfLHKNBZ/zQWt6JP+QQ="/>
-		            <menu:item id="i_photourl_list" messageCode="global_menu_list" url="/photourls?page=1&amp;size=${empty param.size ? 10 : param.size}" z="D+g8dQxzKdkuGRtxnXRvSGL7guI="/>
-		            <menu:item id="i_category_list" messageCode="global_menu_list" url="/categorys?page=1&amp;size=${empty param.size ? 10 : param.size}" z="0VEYbn/XUobhsOa74Uf6KyWz8/w="/>
 		            <menu:item id="i_producer_list" messageCode="global_menu_list" url="/producers?page=1&amp;size=${empty param.size ? 10 : param.size}" z="jTOhiGfGTy/mKcMjOgzzIoHDkxg="/>
+		            <menu:item id="i_category_list" messageCode="global_menu_list" url="/categorys?page=1&amp;size=${empty param.size ? 10 : param.size}" z="0VEYbn/XUobhsOa74Uf6KyWz8/w="/>
 		            <menu:item id="i_categorytype_list" messageCode="global_menu_list" url="/categorytypes?page=1&amp;size=${empty param.size ? 10 : param.size}" z="+i+xbCARHICgKqWYpTon7hXJ4S8="/>
-		            <menu:item id="i_sellerstatus_list" messageCode="global_menu_list" url="/sellerstatuses?page=1&amp;size=${empty param.size ? 10 : param.size}" z="9tyOGUgA53BPcQ2WMBbQvObHThE="/>
-		            <menu:item id="i_countrystate_list" messageCode="global_menu_list" url="/countrystates?page=1&amp;size=${empty param.size ? 10 : param.size}" z="6376x50wFxJokyFZdSoG7iIslIs="/>
-		            <menu:item id="i_region_list" messageCode="global_menu_list" url="/regions?page=1&amp;size=${empty param.size ? 10 : param.size}" z="R4yrjjgk2KXYIlMw++M9nLkYTpE="/>
+		            <menu:item id="i_photourl_list" messageCode="global_menu_list" url="/photourls?page=1&amp;size=${empty param.size ? 10 : param.size}" z="D+g8dQxzKdkuGRtxnXRvSGL7guI="/>
     			</menu:category>
     			
     		</menu:menu>

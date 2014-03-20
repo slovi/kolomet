@@ -4,7 +4,7 @@
     <jsp:output omit-xml-declaration="yes"/>
     <form:update id="fu_cz_kolomet_domain_ProductAttribute" modelAttribute="productAttribute" path="/productattributes" versionField="Version" z="5AsxF56CyExKhP0NHRlLbCdOnP0=">
         <field:textarea field="attributeValue" id="c_cz_kolomet_domain_ProductAttribute_attributeValue" required="true" z="aJifQC1LjGhaqGS6UdWGd3Hnfkk="/>
-        <field:input field="attributeType" id="c_cz_kolomet_domain_ProductAttribute_attributeType" required="true" z="pEjhL4x+VkTUH4PF5gDsFN+6vwY="/>
-        <field:input field="product" id="c_cz_kolomet_domain_ProductAttribute_product" required="true" z="r3jkpJ+q5fDa3/ILqIjXMF5sJ0A="/>
+        <field:select field="attributeType" id="c_cz_kolomet_domain_ProductAttribute_attributeType" itemValue="id" items="${productattributetypes}" path="/productattributetypes" required="true" z="5jwj1w2RVAb20xaJpyMs6XR/9Xc="/>
+        <field:select field="product" id="c_cz_kolomet_domain_ProductAttribute_product" itemValue="id" items="${products}" path="/products" required="true" z="a/5/pLcREtyA4PIgSopxARP9Z/w="/>
     </form:update>
 </div>

@@ -4,6 +4,6 @@
     <jsp:output omit-xml-declaration="yes"/>
     <form:update id="fu_cz_kolomet_domain_ApplicationPermission" modelAttribute="applicationPermission" path="/applicationpermissions" versionField="Version" z="NiB8nxP66iKSytLdSqU917ZEnrQ=">
         <field:input field="permissionName" id="c_cz_kolomet_domain_ApplicationPermission_permissionName" z="AYwk5EBY8NovlE7+3KjMLhJ6mL0="/>
-        <field:input field="roles" id="c_cz_kolomet_domain_ApplicationPermission_roles" z="QeOWb53QX/u9DLy5h5+Xv8vXiwU="/>
+        <field:select field="roles" id="c_cz_kolomet_domain_ApplicationPermission_roles" itemValue="id" items="${applicationroles}" multiple="true" path="/applicationroles" z="fWdnNQ8XtQivimYh52hJZRJ0VwY="/>
     </form:update>
 </div>

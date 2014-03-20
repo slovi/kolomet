@@ -3,7 +3,9 @@
 
 package cz.kolomet.domain;
 
+import cz.kolomet.domain.ApplicationPermission;
 import cz.kolomet.domain.ApplicationRole;
+import java.util.List;
 
 privileged aspect ApplicationRole_Roo_JavaBean {
     
@@ -13,6 +15,14 @@ privileged aspect ApplicationRole_Roo_JavaBean {
     
     public void ApplicationRole.setRoleName(String roleName) {
         this.roleName = roleName;
+    }
+    
+    public List<ApplicationPermission> ApplicationRole.getPermissions() {
+        return this.permissions;
+    }
+    
+    public void ApplicationRole.setPermissions(List<ApplicationPermission> permissions) {
+        this.permissions = permissions;
     }
     
 }

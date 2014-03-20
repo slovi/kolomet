@@ -8,14 +8,12 @@ import org.springframework.roo.addon.jpa.entity.RooJpaEntity;
 import org.springframework.roo.addon.serializable.RooSerializable;
 import org.springframework.roo.addon.tostring.RooToString;
 
-import cz.kolomet.domain.codelist.Codelist;
-
 @RooJavaBean
 @RooToString
 @RooJpaEntity(inheritanceType = "TABLE_PER_CLASS")
 @RooEquals
 @RooSerializable
-public class Producer extends Codelist {
+public class Producer extends DomainEntity {
 
 	/**
 	 */

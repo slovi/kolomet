@@ -10,10 +10,10 @@ import java.util.List;
 privileged aspect RegionService_Roo_Service {
     
     public abstract long RegionService.countAllRegions();    
-    public abstract void RegionService.deleteRegion(Region producer);    
+    public abstract void RegionService.deleteRegion(Region region);    
     public abstract Region RegionService.findRegion(Long id);    
     public abstract List<Region> RegionService.findAllRegions();    
     public abstract List<Region> RegionService.findRegionEntries(int firstResult, int maxResults);    
-    public abstract void RegionService.saveRegion(Region producer);    
-    public abstract Region RegionService.updateRegion(Region producer);    
+    public abstract void RegionService.saveRegion(Region region);    
+    public abstract Region RegionService.updateRegion(Region region);    
 }

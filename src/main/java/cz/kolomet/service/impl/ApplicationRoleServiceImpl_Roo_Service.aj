@@ -3,14 +3,13 @@
 
 package cz.kolomet.service.impl;
 
+import cz.kolomet.domain.ApplicationRole;
+import cz.kolomet.repository.ApplicationRoleRepository;
+import cz.kolomet.service.impl.ApplicationRoleServiceImpl;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import cz.kolomet.domain.ApplicationRole;
-import cz.kolomet.repository.ApplicationRoleRepository;
 
 privileged aspect ApplicationRoleServiceImpl_Roo_Service {
     
@@ -25,8 +24,8 @@ privileged aspect ApplicationRoleServiceImpl_Roo_Service {
         return applicationRoleRepository.count();
     }
     
-    public void ApplicationRoleServiceImpl.deleteApplicationRole(ApplicationRole ApplicationRole) {
-        applicationRoleRepository.delete(ApplicationRole);
+    public void ApplicationRoleServiceImpl.deleteApplicationRole(ApplicationRole applicationRole) {
+        applicationRoleRepository.delete(applicationRole);
     }
     
     public ApplicationRole ApplicationRoleServiceImpl.findApplicationRole(Long id) {
@@ -41,12 +40,12 @@ privileged aspect ApplicationRoleServiceImpl_Roo_Service {
         return applicationRoleRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / maxResults, maxResults)).getContent();
     }
     
-    public void ApplicationRoleServiceImpl.saveApplicationRole(ApplicationRole ApplicationRole) {
-        applicationRoleRepository.save(ApplicationRole);
+    public void ApplicationRoleServiceImpl.saveApplicationRole(ApplicationRole applicationRole) {
+        applicationRoleRepository.save(applicationRole);
     }
     
-    public ApplicationRole ApplicationRoleServiceImpl.updateApplicationRole(ApplicationRole ApplicationRole) {
-        return applicationRoleRepository.save(ApplicationRole);
+    public ApplicationRole ApplicationRoleServiceImpl.updateApplicationRole(ApplicationRole applicationRole) {
+        return applicationRoleRepository.save(applicationRole);
     }
     
 }

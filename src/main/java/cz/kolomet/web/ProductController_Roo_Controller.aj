@@ -4,10 +4,11 @@
 package cz.kolomet.web;
 
 import cz.kolomet.domain.Product;
+import cz.kolomet.service.CategoryService;
 import cz.kolomet.service.PhotoUrlService;
+import cz.kolomet.service.ProducerService;
 import cz.kolomet.service.ProductAttributeService;
 import cz.kolomet.service.ProductService;
-import cz.kolomet.service.SellerService;
 import cz.kolomet.web.ProductController;
 import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
@@ -30,13 +31,16 @@ privileged aspect ProductController_Roo_Controller {
     ProductService ProductController.productService;
     
     @Autowired
+    CategoryService ProductController.categoryService;
+    
+    @Autowired
     PhotoUrlService ProductController.photoUrlService;
     
     @Autowired
-    ProductAttributeService ProductController.productAttributeService;
+    ProducerService ProductController.producerService;
     
     @Autowired
-    SellerService ProductController.sellerService;
+    ProductAttributeService ProductController.productAttributeService;
     
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String ProductController.create(@Valid Product product, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
@@ -112,9 +116,10 @@ privileged aspect ProductController_Roo_Controller {
     void ProductController.populateEditForm(Model uiModel, Product product) {
         uiModel.addAttribute("product", product);
         addDateTimeFormatPatterns(uiModel);
+        uiModel.addAttribute("categorys", categoryService.findAllCategorys());
         uiModel.addAttribute("photourls", photoUrlService.findAllPhotoUrls());
+        uiModel.addAttribute("producers", producerService.findAllProducers());
         uiModel.addAttribute("productattributes", productAttributeService.findAllProductAttributes());
-        uiModel.addAttribute("sellers", sellerService.findAllSellers());
     }
     
     String ProductController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

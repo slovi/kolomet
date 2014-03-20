@@ -3,15 +3,15 @@
 
 package cz.kolomet.domain;
 
-import cz.kolomet.domain.ApplicationRole;
+import cz.kolomet.domain.NewsItem;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
-privileged aspect ApplicationRole_Roo_Jpa_Entity {
+privileged aspect NewsItem_Roo_Jpa_Entity {
     
-    declare @type: ApplicationRole: @Entity;
+    declare @type: NewsItem: @Entity;
     
-    declare @type: ApplicationRole: @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS);
+    declare @type: NewsItem: @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS);
     
 }
