@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_cz_kolomet_domain_NewsItem" object="${newsitem}" path="/newsitems" z="a4LPTQ6nov+bbgJF9LTc4yaYWL0=">
+        <field:display field="header" id="s_cz_kolomet_domain_NewsItem_header" object="${newsitem}" z="48Wx6YTF88R2CwVn2Ucflli7c2g="/>
+        <field:display date="true" dateTimePattern="${newsItem_newsitemdate_date_format}" field="newsItemDate" id="s_cz_kolomet_domain_NewsItem_newsItemDate" object="${newsitem}" z="WvUoKBJa3/eh80tAtu1QKYWcPag="/>
+        <field:display field="text" id="s_cz_kolomet_domain_NewsItem_text" object="${newsitem}" z="HFJFPDfqDM2yxLZBaNesLBpdA60="/>
+        <field:display field="creater" id="s_cz_kolomet_domain_NewsItem_creater" object="${newsitem}" z="/cTnfRGcp6L98nQlwSx/qa1of2s="/>
+    </page:show>
+</div>

@@ -184,3 +184,4 @@ service --interface ~.service.NewsItemService --entity ~.domain.NewsItem --class
 web mvc scaffold --class ~.web.NewsItemController --backingType ~.domain.NewsItem
 // Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2014-03-20 22:36:28
 // Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2014-03-20 22:36:53
+web mvc scaffold --class ~.web.NewsItemController --backingType ~.domain.NewsItem

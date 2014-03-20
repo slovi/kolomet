@@ -7,6 +7,7 @@ import cz.kolomet.domain.ApplicationPermission;
 import cz.kolomet.domain.ApplicationRole;
 import cz.kolomet.domain.ApplicationUser;
 import cz.kolomet.domain.Category;
+import cz.kolomet.domain.NewsItem;
 import cz.kolomet.domain.PhotoUrl;
 import cz.kolomet.domain.Producer;
 import cz.kolomet.domain.Product;
@@ -23,6 +24,7 @@ import cz.kolomet.service.ApplicationUserService;
 import cz.kolomet.service.CategoryService;
 import cz.kolomet.service.CategoryTypeService;
 import cz.kolomet.service.CountryStateService;
+import cz.kolomet.service.NewsItemService;
 import cz.kolomet.service.PhotoUrlService;
 import cz.kolomet.service.ProducerService;
 import cz.kolomet.service.ProductAttributeService;
@@ -52,6 +54,9 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     
     @Autowired
     CategoryService ApplicationConversionServiceFactoryBean.categoryService;
+    
+    @Autowired
+    NewsItemService ApplicationConversionServiceFactoryBean.newsItemService;
     
     @Autowired
     PhotoUrlService ApplicationConversionServiceFactoryBean.photoUrlService;
@@ -167,6 +172,30 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         return new org.springframework.core.convert.converter.Converter<java.lang.String, cz.kolomet.domain.Category>() {
             public cz.kolomet.domain.Category convert(String id) {
                 return getObject().convert(getObject().convert(id, Long.class), Category.class);
+            }
+        };
+    }
+    
+    public Converter<NewsItem, String> ApplicationConversionServiceFactoryBean.getNewsItemToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<cz.kolomet.domain.NewsItem, java.lang.String>() {
+            public String convert(NewsItem newsItem) {
+                return new StringBuilder().append(newsItem.getHeader()).append(' ').append(newsItem.getNewsItemDate()).append(' ').append(newsItem.getText()).toString();
+            }
+        };
+    }
+    
+    public Converter<Long, NewsItem> ApplicationConversionServiceFactoryBean.getIdToNewsItemConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, cz.kolomet.domain.NewsItem>() {
+            public cz.kolomet.domain.NewsItem convert(java.lang.Long id) {
+                return newsItemService.findNewsItem(id);
+            }
+        };
+    }
+    
+    public Converter<String, NewsItem> ApplicationConversionServiceFactoryBean.getStringToNewsItemConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, cz.kolomet.domain.NewsItem>() {
+            public cz.kolomet.domain.NewsItem convert(String id) {
+                return getObject().convert(getObject().convert(id, Long.class), NewsItem.class);
             }
         };
     }
@@ -384,6 +413,9 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         registry.addConverter(getCategoryToStringConverter());
         registry.addConverter(getIdToCategoryConverter());
         registry.addConverter(getStringToCategoryConverter());
+        registry.addConverter(getNewsItemToStringConverter());
+        registry.addConverter(getIdToNewsItemConverter());
+        registry.addConverter(getStringToNewsItemConverter());
         registry.addConverter(getPhotoUrlToStringConverter());
         registry.addConverter(getIdToPhotoUrlConverter());
         registry.addConverter(getStringToPhotoUrlConverter());
