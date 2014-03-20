@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_cz_kolomet_domain_ApplicationPermission" items="${applicationpermissions}" z="SHc1CpaXSc6CFf7xeblUv6YYXIw=">
+        <table:table data="${applicationpermissions}" id="l_cz_kolomet_domain_ApplicationPermission" path="/applicationpermissions" z="iH/B/pQFCSo7SfwVg9tYAQkJDAw=">
+            <table:column id="c_cz_kolomet_domain_ApplicationPermission_permissionName" property="permissionName" z="idbciYnyHGhtfwiZh5lWNzJ7zUM="/>
+            <table:column id="c_cz_kolomet_domain_ApplicationPermission_roles" property="roles" z="ePT/lBxu8RSaqkEFBXAoxAlfIaA="/>
+        </table:table>
+    </page:list>
+</div>

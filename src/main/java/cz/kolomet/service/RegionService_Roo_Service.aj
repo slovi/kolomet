@@ -3,17 +3,17 @@
 
 package cz.kolomet.service;
 
-import cz.kolomet.domain.codelist.Producer;
+import cz.kolomet.domain.codelist.Region;
 import cz.kolomet.service.RegionService;
 import java.util.List;
 
 privileged aspect RegionService_Roo_Service {
     
-    public abstract long RegionService.countAllProducers();    
-    public abstract void RegionService.deleteProducer(Producer producer);    
-    public abstract Producer RegionService.findProducer(Long id);    
-    public abstract List<Producer> RegionService.findAllProducers();    
-    public abstract List<Producer> RegionService.findProducerEntries(int firstResult, int maxResults);    
-    public abstract void RegionService.saveProducer(Producer producer);    
-    public abstract Producer RegionService.updateProducer(Producer producer);    
+    public abstract long RegionService.countAllRegions();    
+    public abstract void RegionService.deleteRegion(Region producer);    
+    public abstract Region RegionService.findRegion(Long id);    
+    public abstract List<Region> RegionService.findAllRegions();    
+    public abstract List<Region> RegionService.findRegionEntries(int firstResult, int maxResults);    
+    public abstract void RegionService.saveRegion(Region producer);    
+    public abstract Region RegionService.updateRegion(Region producer);    
 }

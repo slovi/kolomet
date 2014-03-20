@@ -3,17 +3,17 @@
 
 package cz.kolomet.service;
 
-import cz.kolomet.domain.codelist.Producer;
-import cz.kolomet.service.SellerStatusService;
 import java.util.List;
+
+import cz.kolomet.domain.codelist.SellerStatus;
 
 privileged aspect SellerStatusService_Roo_Service {
     
-    public abstract long SellerStatusService.countAllProducers();    
-    public abstract void SellerStatusService.deleteProducer(Producer producer);    
-    public abstract Producer SellerStatusService.findProducer(Long id);    
-    public abstract List<Producer> SellerStatusService.findAllProducers();    
-    public abstract List<Producer> SellerStatusService.findProducerEntries(int firstResult, int maxResults);    
-    public abstract void SellerStatusService.saveProducer(Producer producer);    
-    public abstract Producer SellerStatusService.updateProducer(Producer producer);    
+    public abstract long SellerStatusService.countAllSellerStatuses();    
+    public abstract void SellerStatusService.deleteSellerStatus(SellerStatus sellerStatus);    
+    public abstract SellerStatus SellerStatusService.findSellerStatus(Long id);    
+    public abstract List<SellerStatus> SellerStatusService.findAllSellerStatuses();    
+    public abstract List<SellerStatus> SellerStatusService.findSellerStatusEntries(int firstResult, int maxResults);    
+    public abstract void SellerStatusService.saveSellerStatus(SellerStatus producer);    
+    public abstract SellerStatus SellerStatusService.updateSellerStatus(SellerStatus producer);    
 }

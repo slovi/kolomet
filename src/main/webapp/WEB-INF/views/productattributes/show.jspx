@@ -3,7 +3,8 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:show id="ps_cz_kolomet_domain_ProductAttribute" object="${productattribute}" path="/productattributes" z="/nbrwRQmJxfS6VBuHtmiJ7xpAo8=">
-        <field:display field="attributeKey" id="s_cz_kolomet_domain_ProductAttribute_attributeKey" object="${productattribute}" z="YoGuZ8RAd5WtlIckLzn+CT5PhfI="/>
         <field:display field="attributeValue" id="s_cz_kolomet_domain_ProductAttribute_attributeValue" object="${productattribute}" z="f6a4l4uPwQkjz7FMoq+U37O7A00="/>
+        <field:display field="attributeType" id="s_cz_kolomet_domain_ProductAttribute_attributeType" object="${productattribute}" z="IePOQKAK2Fd7kMi9jtd08MgAqnU="/>
+        <field:display field="product" id="s_cz_kolomet_domain_ProductAttribute_product" object="${productattribute}" z="OQ+U31yu+nzZ6wq9JVDd6yW8naw="/>
     </page:show>
 </div>

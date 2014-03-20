@@ -7,9 +7,8 @@ import cz.kolomet.domain.PhotoUrl;
 import cz.kolomet.domain.Product;
 import cz.kolomet.domain.ProductAttribute;
 import cz.kolomet.domain.Seller;
-import cz.kolomet.domain.codelist.Category;
-import cz.kolomet.domain.codelist.Producer;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 privileged aspect Product_Roo_JavaBean {
@@ -68,6 +67,22 @@ privileged aspect Product_Roo_JavaBean {
     
     public void Product.setProducer(Producer producer) {
         this.producer = producer;
+    }
+    
+    public Boolean Product.getActive() {
+        return this.active;
+    }
+    
+    public void Product.setActive(Boolean active) {
+        this.active = active;
+    }
+    
+    public Date Product.getValidTo() {
+        return this.validTo;
+    }
+    
+    public void Product.setValidTo(Date validTo) {
+        this.validTo = validTo;
     }
     
     public List<PhotoUrl> Product.getPhotoUrls() {

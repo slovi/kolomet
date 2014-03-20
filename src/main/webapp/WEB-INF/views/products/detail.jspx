@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    
+   	<div class="detail_header"> 
+   		<spring:url value="/img/bike_02_detail.jpg" var="detailImgUrl" />
+    	<img src="${detailImgUrl}" width="508" height="338" alt="" title=""/>
+       	<div class="detail_description right"> 
+        	<a href="" class="label"><c:out value="${product.productName}" /></a>
+        	<p><c:out value="${product.description}" /></p>
+        	<div>        
+        		<a class="action_button_dark" href=""><spring:message code="detail.order" /></a>
+            </div>
+       	</div>
+        <div class="detail_tag right"> 
+           	<p class="detail_price"><spring:message code="detail.price" /></p>
+           	<spring:url value="/seller/detail/${product.seller.id}" var="sellerUrl" />
+       		<p class="detail_seller right"><a href="${sellerUrl}"><c:out value="${product.seller.sellerName}" /></a>, <c:out value="${product.seller.addressCity}" /><br/>
+           		<c:out value="${product.seller.addressStreet}" />, <c:out value="${product.seller.addressPostCode}" /><a href="">mapa</a><br/>
+            	<c:out value="${product.seller.businessPhoneNumber}" />
+            </p>
+       	</div>
+	</div>
+     
+    <div class="detail_info_seller"> 
+    	<div class="seller_specifications">    	
+        	<p class="left_column">
+        		<spring:message code="detail.product.category" />: <c:out value="${product.category.codeDescription}" /><br />
+        		<spring:message code="detail.product.category_type" />: <c:out value="${product.category.categoryType.codeDescription}" /><br />
+        		<c:forEach items="${product.productAttributes}" var="attribute">
+        			<c:out value="${attribute.attributeType.codeDescription}" />: <c:out value="${attribute.attributeValue}" /><br />
+        		</c:forEach>        		          
+            </p>
+       		<p class="right_column">
+               <spring:message code="detail.seller.region" />: <c:out value="${product.seller.region.codeKey}" /><br />
+               <spring:message code="detail.seller.city" />: <c:out value="${product.seller.addressCity}" /><br />
+               <spring:message code="detail.seller.sent_all_region" />: <c:out value="${product.seller.region.codeKey}" /><br />
+            </p>
+       	</div>
+		<div class="seller_ads"> 
+			<spring:url value="/img/bike_02.jpg" var="photoUrl" />
+    		<img width="80" height="80" src="${photoUrl}" />
+    		<img width="80" height="80" src="" />
+    		<img width="80" height="80" src="" />
+    	</div>
+    </div>
+    
+</div>

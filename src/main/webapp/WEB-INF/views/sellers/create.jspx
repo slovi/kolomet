@@ -7,7 +7,7 @@
         <field:textarea field="sellerDescription" id="c_cz_kolomet_domain_Seller_sellerDescription" label="popis" required="true" z="user-managed"/>
         <field:textarea field="mapUrl" id="c_cz_kolomet_domain_Seller_mapUrl" z="l4+of1NGD4kA6p7robYOfSeBf5c="/>
         <field:textarea field="photoUrl" id="c_cz_kolomet_domain_Seller_photoUrl" z="P25lgLvSyJ6Nd0k4xLbVrxe+L+A="/>
-        <field:select field="sellerStatus" id="c_cz_kolomet_domain_Seller_sellerStatus" itemValue="id" items="${sellerstatuses}" path="/sellerstatuses" required="true" z="bfCR8pNBLpX1/CiNFkA5+Rvni54="/>
+        <field:input field="sellerStatus" id="c_cz_kolomet_domain_Seller_sellerStatus" required="true" z="H+9kdKkpjCIeslD8+I2vnqezg2U="/>
         <field:input field="personSalutation" id="c_cz_kolomet_domain_Seller_personSalutation" max="20" z="dnwzisYNI0tikfWCGZUYMTTS6FM="/>
         <field:input field="personDegree" id="c_cz_kolomet_domain_Seller_personDegree" max="20" z="E4WTBYQ4lqh1s4hOAJY7D6XkDrs="/>
         <field:input field="personName" id="c_cz_kolomet_domain_Seller_personName" max="20" z="jzxeTLWGrdFhvBxUikyixzbaycI="/>
@@ -32,6 +32,7 @@
         <field:input field="addressDegree" id="c_cz_kolomet_domain_Seller_addressDegree" max="20" z="gvxpNRke+QW5x4b3AoablbclrZA="/>
         <field:textarea field="addressName" id="c_cz_kolomet_domain_Seller_addressName" z="q/PqbWpmHILs4mP1Os6h+kRKb70="/>
         <field:textarea field="addressEmail" id="c_cz_kolomet_domain_Seller_addressEmail" z="b040cbjtTAnHdEZ3j5X1JtGIouI="/>
+        <field:checkbox field="active" id="c_cz_kolomet_domain_Seller_active" z="hC2PuHN9yqlAITMv8KQVPnOdzRg="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_cz_kolomet_domain_Seller" render="${not empty dependencies}" z="wOb4nwhLxol+WOVpFAt/d7koDnE="/>
 </div>

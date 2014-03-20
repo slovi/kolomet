@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.roo.addon.layers.repository.jpa.RooJpaRepository;
 
-import cz.kolomet.domain.codelist.Category;
+import cz.kolomet.domain.Category;
 
 @RooJpaRepository(domainType = Category.class)
 public interface CategoryRepository {

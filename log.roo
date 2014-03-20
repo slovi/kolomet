@@ -149,3 +149,28 @@ web mvc scaffold --class ~.web.SellerController --backingType ~.domain.Seller
 // Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2014-03-18 10:08:02
 // Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2014-03-18 20:56:25
 web mvc scaffold --class ~.web.CategoryController --backingType ~.domain.codelist.Category
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2014-03-19 10:00:53
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2014-03-19 23:13:53
+entity jpa --class ~.domain.codelist.ProductAttributeType --extends ~.domain.codelist.Codelist --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
+repository jpa --interface ~.repository.ProductAttributeTypeRepository --entity ~.domain.codelist.ProductAttributeType
+service --interface ~.service.ProductAttributeTypeService --entity ~.domain.codelist.ProductAttributeType --class ~.service.impl.ProductAttributeTypeServiceImpl
+web mvc scaffold --class ~.web.ProductAttributeTypeController --backingType ~.domain.codelist.ProductAttributeTypeController
+web mvc scaffold --class ~.web.ProductAttributeTypeController --backingType ~.domain.codelist.ProductAttributeType
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2014-03-20 00:10:42
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2014-03-20 21:28:55
+// [failed] entity jpa --class ~.domain.User --extends ~.domain.Entity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
+entity jpa --class ~.domain.ApplicationUser --extends ~.domain.Entity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
+entity jpa --class ~.domain.ApplicationRole --extends ~.domain.Entity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
+entity jpa --class ~.domain.ApplicationPermission --extends ~.domain.Entity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
+repository jpa --interface ~.repository.ApplicationUserRepository --entity ~.domain.ApplicationUser
+repository jpa --interface ~.repository.ApplicationRoleRepository --entity ~.domain.ApplicationRole
+repository jpa --interface ~.repository.ApplicationPermissionRepository --entity ~.domain.ApplicationPermission
+service --interface ~.service.ApplicationUserService --entity ~.domain.ApplicationUser --class ~.service.impl.ApplicationUserServiceImpl
+service --interface ~.service.ApplicationRoleService --entity ~.domain.ApplicationRole --class ~.service.impl.ApplicationRoleServiceImpl
+service --interface ~.service.ApplicationPermissionService --entity ~.domain.ApplicationPermission --class ~.service.impl.ApplicationPermissionServiceImpl
+web mvc scaffold --class ~.web.ApplicationUserController --backingType ~.domain.ApplicationUser
+web mvc scaffold --class ~.web.ApplicationRoleController --backingType ~.domain.ApplicationRole
+web mvc scaffold --class ~.web.ApplicationPermissionController --backingType ~.domain.ApplicationPermission
+service --interface ~.service.CategoryService --entity ~.domain.Category --class ~.service.impl.CategoryServiceImpl
+service --interface ~.service.CategoryService --entity ~.domain.Category --class ~.service.impl.CategoryServiceImpl
+service --interface ~.service.CountryStateService --entity ~.domain.codelist.CountryState --class ~.service.impl.CountryStateServiceImpl

@@ -4,7 +4,7 @@
 package cz.kolomet.web;
 
 import cz.kolomet.domain.codelist.SellerStatus;
-import cz.kolomet.repository.SellerStatusRepository;
+import cz.kolomet.service.SellerStatusService;
 import cz.kolomet.web.SellerStatusController;
 import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +22,7 @@ import org.springframework.web.util.WebUtils;
 privileged aspect SellerStatusController_Roo_Controller {
     
     @Autowired
-    SellerStatusRepository SellerStatusController.sellerStatusRepository;
+    SellerStatusService SellerStatusController.sellerStatusService;
     
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String SellerStatusController.create(@Valid SellerStatus sellerStatus, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
@@ -31,7 +31,7 @@ privileged aspect SellerStatusController_Roo_Controller {
             return "sellerstatuses/create";
         }
         uiModel.asMap().clear();
-        sellerStatusRepository.save(sellerStatus);
+        sellerStatusService.saveSellerStatus(sellerStatus);
         return "redirect:/sellerstatuses/" + encodeUrlPathSegment(sellerStatus.getId().toString(), httpServletRequest);
     }
     
@@ -43,7 +43,7 @@ privileged aspect SellerStatusController_Roo_Controller {
     
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String SellerStatusController.show(@PathVariable("id") Long id, Model uiModel) {
-        uiModel.addAttribute("sellerstatus", sellerStatusRepository.findOne(id));
+        uiModel.addAttribute("sellerstatus", sellerStatusService.findSellerStatus(id));
         uiModel.addAttribute("itemId", id);
         return "sellerstatuses/show";
     }
@@ -53,11 +53,11 @@ privileged aspect SellerStatusController_Roo_Controller {
         if (page != null || size != null) {
             int sizeNo = size == null ? 10 : size.intValue();
             final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
-            uiModel.addAttribute("sellerstatuses", sellerStatusRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / sizeNo, sizeNo)).getContent());
-            float nrOfPages = (float) sellerStatusRepository.count() / sizeNo;
+            uiModel.addAttribute("sellerstatuses", sellerStatusService.findSellerStatusEntries(firstResult, sizeNo));
+            float nrOfPages = (float) sellerStatusService.countAllSellerStatuses() / sizeNo;
             uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
         } else {
-            uiModel.addAttribute("sellerstatuses", sellerStatusRepository.findAll());
+            uiModel.addAttribute("sellerstatuses", sellerStatusService.findAllSellerStatuses());
         }
         return "sellerstatuses/list";
     }
@@ -69,20 +69,20 @@ privileged aspect SellerStatusController_Roo_Controller {
             return "sellerstatuses/update";
         }
         uiModel.asMap().clear();
-        sellerStatusRepository.save(sellerStatus);
+        sellerStatusService.updateSellerStatus(sellerStatus);
         return "redirect:/sellerstatuses/" + encodeUrlPathSegment(sellerStatus.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String SellerStatusController.updateForm(@PathVariable("id") Long id, Model uiModel) {
-        populateEditForm(uiModel, sellerStatusRepository.findOne(id));
+        populateEditForm(uiModel, sellerStatusService.findSellerStatus(id));
         return "sellerstatuses/update";
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
     public String SellerStatusController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        SellerStatus sellerStatus = sellerStatusRepository.findOne(id);
-        sellerStatusRepository.delete(sellerStatus);
+        SellerStatus sellerStatus = sellerStatusService.findSellerStatus(id);
+        sellerStatusService.deleteSellerStatus(sellerStatus);
         uiModel.asMap().clear();
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());

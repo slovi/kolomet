@@ -23,11 +23,11 @@
 		<spring:url value="/maps" var="mapUrl" />
 		<spring:url value="http://www.cyklocentrum.cz/kola/horska-kola/celoodpruzena-kola/agang-cult-2-0-2012_p333.htm" var="buyUrl" />
 		<spring:url value="/img/bike_02.jpg" var="productImgUrl" />
-	
 	    <div class="category_unit"> 
-	    	<a href=""><img width="224" height="146" src="${productImgUrl}"/></a>
+	    	<spring:url value="/products/detail/${product.id}" var="productIdUrl" />
+	    	<a href="${productIdUrl}"><img width="224" height="146" src="${productImgUrl}"/></a>
 	    	<div class="cat_description"> 
-	    		<a href="./detail_horska.htm" class="label"><c:out value="${product.productName}" /></a>
+	    		<a href="${productIdUrl}" class="label"><c:out value="${product.productName}" /></a>
 	    		<p class="price"><c:out value="${product.price}" /></p>
 	        	<p><c:out value="${fn:substring(product.description, 0, 250)}" />...</p>
 	        </div>

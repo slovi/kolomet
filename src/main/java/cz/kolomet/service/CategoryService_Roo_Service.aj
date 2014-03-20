@@ -3,7 +3,7 @@
 
 package cz.kolomet.service;
 
-import cz.kolomet.domain.codelist.Category;
+import cz.kolomet.domain.Category;
 import cz.kolomet.service.CategoryService;
 import java.util.List;
 

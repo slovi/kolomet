@@ -31,6 +31,8 @@ public class Seller extends DomainEntity {
     @Lob
     private String sellerDescription;
     
+    private Boolean active;
+    
     // zodpovedna osoba
     @Size(max = 20)
     private String personSalutation;

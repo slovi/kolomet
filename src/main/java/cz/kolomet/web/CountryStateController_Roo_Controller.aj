@@ -4,7 +4,7 @@
 package cz.kolomet.web;
 
 import cz.kolomet.domain.codelist.CountryState;
-import cz.kolomet.repository.CountryStateRepository;
+import cz.kolomet.service.CountryStateService;
 import cz.kolomet.web.CountryStateController;
 import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +22,7 @@ import org.springframework.web.util.WebUtils;
 privileged aspect CountryStateController_Roo_Controller {
     
     @Autowired
-    CountryStateRepository CountryStateController.countryStateRepository;
+    CountryStateService CountryStateController.countryStateService;
     
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String CountryStateController.create(@Valid CountryState countryState, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
@@ -31,7 +31,7 @@ privileged aspect CountryStateController_Roo_Controller {
             return "countrystates/create";
         }
         uiModel.asMap().clear();
-        countryStateRepository.save(countryState);
+        countryStateService.saveCountryState(countryState);
         return "redirect:/countrystates/" + encodeUrlPathSegment(countryState.getId().toString(), httpServletRequest);
     }
     
@@ -43,7 +43,7 @@ privileged aspect CountryStateController_Roo_Controller {
     
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String CountryStateController.show(@PathVariable("id") Long id, Model uiModel) {
-        uiModel.addAttribute("countrystate", countryStateRepository.findOne(id));
+        uiModel.addAttribute("countrystate", countryStateService.findCountryState(id));
         uiModel.addAttribute("itemId", id);
         return "countrystates/show";
     }
@@ -53,11 +53,11 @@ privileged aspect CountryStateController_Roo_Controller {
         if (page != null || size != null) {
             int sizeNo = size == null ? 10 : size.intValue();
             final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
-            uiModel.addAttribute("countrystates", countryStateRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / sizeNo, sizeNo)).getContent());
-            float nrOfPages = (float) countryStateRepository.count() / sizeNo;
+            uiModel.addAttribute("countrystates", countryStateService.findCountryStateEntries(firstResult, sizeNo));
+            float nrOfPages = (float) countryStateService.countAllCountryStates() / sizeNo;
             uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
         } else {
-            uiModel.addAttribute("countrystates", countryStateRepository.findAll());
+            uiModel.addAttribute("countrystates", countryStateService.findAllCountryStates());
         }
         return "countrystates/list";
     }
@@ -69,20 +69,20 @@ privileged aspect CountryStateController_Roo_Controller {
             return "countrystates/update";
         }
         uiModel.asMap().clear();
-        countryStateRepository.save(countryState);
+        countryStateService.updateCountryState(countryState);
         return "redirect:/countrystates/" + encodeUrlPathSegment(countryState.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String CountryStateController.updateForm(@PathVariable("id") Long id, Model uiModel) {
-        populateEditForm(uiModel, countryStateRepository.findOne(id));
+        populateEditForm(uiModel, countryStateService.findCountryState(id));
         return "countrystates/update";
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
     public String CountryStateController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        CountryState countryState = countryStateRepository.findOne(id);
-        countryStateRepository.delete(countryState);
+        CountryState countryState = countryStateService.findCountryState(id);
+        countryStateService.deleteCountryState(countryState);
         uiModel.asMap().clear();
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());

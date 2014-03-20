@@ -3,26 +3,32 @@
 
 package cz.kolomet.web;
 
+import cz.kolomet.domain.ApplicationPermission;
+import cz.kolomet.domain.ApplicationUser;
+import cz.kolomet.domain.Category;
 import cz.kolomet.domain.PhotoUrl;
+import cz.kolomet.domain.Producer;
 import cz.kolomet.domain.Product;
 import cz.kolomet.domain.ProductAttribute;
 import cz.kolomet.domain.Seller;
-import cz.kolomet.domain.codelist.Category;
 import cz.kolomet.domain.codelist.CategoryType;
 import cz.kolomet.domain.codelist.CountryState;
-import cz.kolomet.domain.codelist.Producer;
+import cz.kolomet.domain.codelist.ProductAttributeType;
 import cz.kolomet.domain.codelist.Region;
 import cz.kolomet.domain.codelist.SellerStatus;
-import cz.kolomet.repository.CountryStateRepository;
-import cz.kolomet.repository.RegionRepository;
-import cz.kolomet.repository.SellerStatusRepository;
+import cz.kolomet.service.ApplicationPermissionService;
+import cz.kolomet.service.ApplicationUserService;
 import cz.kolomet.service.CategoryService;
 import cz.kolomet.service.CategoryTypeService;
 import cz.kolomet.service.CountryStateService;
 import cz.kolomet.service.PhotoUrlService;
+import cz.kolomet.service.ProducerService;
 import cz.kolomet.service.ProductAttributeService;
+import cz.kolomet.service.ProductAttributeTypeService;
 import cz.kolomet.service.ProductService;
+import cz.kolomet.service.RegionService;
 import cz.kolomet.service.SellerService;
+import cz.kolomet.service.SellerStatusService;
 import cz.kolomet.web.ApplicationConversionServiceFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
@@ -32,6 +38,12 @@ import org.springframework.format.FormatterRegistry;
 privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService {
     
     declare @type: ApplicationConversionServiceFactoryBean: @Configurable;
+    
+    @Autowired
+    ApplicationPermissionService ApplicationConversionServiceFactoryBean.applicationPermissionService;
+    
+    @Autowired
+    ApplicationUserService ApplicationConversionServiceFactoryBean.applicationUserService;
     
     @Autowired
     PhotoUrlService ApplicationConversionServiceFactoryBean.photoUrlService;
@@ -52,16 +64,67 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     CategoryTypeService ApplicationConversionServiceFactoryBean.categoryTypeService;
     
     @Autowired
-    CountryStateRepository ApplicationConversionServiceFactoryBean.countryStateRepository;
-    
-    @Autowired
     CountryStateService ApplicationConversionServiceFactoryBean.countryStateService;
     
     @Autowired
-    RegionRepository ApplicationConversionServiceFactoryBean.regionRepository;
+    ProducerService ApplicationConversionServiceFactoryBean.producerService;
     
     @Autowired
-    SellerStatusRepository ApplicationConversionServiceFactoryBean.sellerStatusRepository;
+    ProductAttributeTypeService ApplicationConversionServiceFactoryBean.productAttributeTypeService;
+    
+    @Autowired
+    RegionService ApplicationConversionServiceFactoryBean.regionService;
+    
+    @Autowired
+    SellerStatusService ApplicationConversionServiceFactoryBean.sellerStatusService;
+    
+    public Converter<ApplicationPermission, String> ApplicationConversionServiceFactoryBean.getApplicationPermissionToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<cz.kolomet.domain.ApplicationPermission, java.lang.String>() {
+            public String convert(ApplicationPermission applicationPermission) {
+                return "(no displayable fields)";
+            }
+        };
+    }
+    
+    public Converter<Long, ApplicationPermission> ApplicationConversionServiceFactoryBean.getIdToApplicationPermissionConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, cz.kolomet.domain.ApplicationPermission>() {
+            public cz.kolomet.domain.ApplicationPermission convert(java.lang.Long id) {
+                return applicationPermissionService.findApplicationPermission(id);
+            }
+        };
+    }
+    
+    public Converter<String, ApplicationPermission> ApplicationConversionServiceFactoryBean.getStringToApplicationPermissionConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, cz.kolomet.domain.ApplicationPermission>() {
+            public cz.kolomet.domain.ApplicationPermission convert(String id) {
+                return getObject().convert(getObject().convert(id, Long.class), ApplicationPermission.class);
+            }
+        };
+    }
+    
+    public Converter<ApplicationUser, String> ApplicationConversionServiceFactoryBean.getApplicationUserToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<cz.kolomet.domain.ApplicationUser, java.lang.String>() {
+            public String convert(ApplicationUser applicationUser) {
+                return new StringBuilder().append(applicationUser.getUsername()).append(' ').append(applicationUser.getPassword()).toString();
+            }
+        };
+    }
+    
+    public Converter<Long, ApplicationUser> ApplicationConversionServiceFactoryBean.getIdToApplicationUserConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, cz.kolomet.domain.ApplicationUser>() {
+            public cz.kolomet.domain.ApplicationUser convert(java.lang.Long id) {
+                return applicationUserService.findApplicationUser(id);
+            }
+        };
+    }
+    
+    public Converter<String, ApplicationUser> ApplicationConversionServiceFactoryBean.getStringToApplicationUserConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, cz.kolomet.domain.ApplicationUser>() {
+            public cz.kolomet.domain.ApplicationUser convert(String id) {
+                return getObject().convert(getObject().convert(id, Long.class), ApplicationUser.class);
+            }
+        };
+    }
     
     public Converter<PhotoUrl, String> ApplicationConversionServiceFactoryBean.getPhotoUrlToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<cz.kolomet.domain.PhotoUrl, java.lang.String>() {
@@ -87,14 +150,6 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         };
     }
     
-    public Converter<Product, String> ApplicationConversionServiceFactoryBean.getProductToStringConverter() {
-        return new org.springframework.core.convert.converter.Converter<cz.kolomet.domain.Product, java.lang.String>() {
-            public String convert(Product product) {
-                return new StringBuilder().append(product.getProductName()).append(' ').append(product.getPrice()).append(' ').append(product.getDiscount()).append(' ').append(product.getDescription()).toString();
-            }
-        };
-    }
-    
     public Converter<Long, Product> ApplicationConversionServiceFactoryBean.getIdToProductConverter() {
         return new org.springframework.core.convert.converter.Converter<java.lang.Long, cz.kolomet.domain.Product>() {
             public cz.kolomet.domain.Product convert(java.lang.Long id) {
@@ -114,7 +169,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<ProductAttribute, String> ApplicationConversionServiceFactoryBean.getProductAttributeToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<cz.kolomet.domain.ProductAttribute, java.lang.String>() {
             public String convert(ProductAttribute productAttribute) {
-                return new StringBuilder().append(productAttribute.getAttributeKey()).append(' ').append(productAttribute.getAttributeValue()).toString();
+                return new StringBuilder().append(productAttribute.getAttributeValue()).toString();
             }
         };
     }
@@ -152,16 +207,16 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     }
     
     public Converter<Long, Category> ApplicationConversionServiceFactoryBean.getIdToCategoryConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.Long, cz.kolomet.domain.codelist.Category>() {
-            public cz.kolomet.domain.codelist.Category convert(java.lang.Long id) {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, cz.kolomet.domain.Category>() {
+            public cz.kolomet.domain.Category convert(java.lang.Long id) {
                 return categoryService.findCategory(id);
             }
         };
     }
     
     public Converter<String, Category> ApplicationConversionServiceFactoryBean.getStringToCategoryConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.String, cz.kolomet.domain.codelist.Category>() {
-            public cz.kolomet.domain.codelist.Category convert(String id) {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, cz.kolomet.domain.Category>() {
+            public cz.kolomet.domain.Category convert(String id) {
                 return getObject().convert(getObject().convert(id, Long.class), Category.class);
             }
         };
@@ -194,7 +249,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<Long, CountryState> ApplicationConversionServiceFactoryBean.getIdToCountryStateConverter() {
         return new org.springframework.core.convert.converter.Converter<java.lang.Long, cz.kolomet.domain.codelist.CountryState>() {
             public cz.kolomet.domain.codelist.CountryState convert(java.lang.Long id) {
-                return countryStateRepository.findOne(id);
+                return countryStateService.findCountryState(id);
             }
         };
     }
@@ -208,17 +263,33 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     }
     
     public Converter<Long, Producer> ApplicationConversionServiceFactoryBean.getIdToProducerConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.Long, cz.kolomet.domain.codelist.Producer>() {
-            public cz.kolomet.domain.codelist.Producer convert(java.lang.Long id) {
-                return countryStateService.findProducer(id);
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, cz.kolomet.domain.Producer>() {
+            public cz.kolomet.domain.Producer convert(java.lang.Long id) {
+                return producerService.findProducer(id);
             }
         };
     }
     
     public Converter<String, Producer> ApplicationConversionServiceFactoryBean.getStringToProducerConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.String, cz.kolomet.domain.codelist.Producer>() {
-            public cz.kolomet.domain.codelist.Producer convert(String id) {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, cz.kolomet.domain.Producer>() {
+            public cz.kolomet.domain.Producer convert(String id) {
                 return getObject().convert(getObject().convert(id, Long.class), Producer.class);
+            }
+        };
+    }
+    
+    public Converter<Long, ProductAttributeType> ApplicationConversionServiceFactoryBean.getIdToProductAttributeTypeConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, cz.kolomet.domain.codelist.ProductAttributeType>() {
+            public cz.kolomet.domain.codelist.ProductAttributeType convert(java.lang.Long id) {
+                return productAttributeTypeService.findProductAttributeType(id);
+            }
+        };
+    }
+    
+    public Converter<String, ProductAttributeType> ApplicationConversionServiceFactoryBean.getStringToProductAttributeTypeConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, cz.kolomet.domain.codelist.ProductAttributeType>() {
+            public cz.kolomet.domain.codelist.ProductAttributeType convert(String id) {
+                return getObject().convert(getObject().convert(id, Long.class), ProductAttributeType.class);
             }
         };
     }
@@ -234,7 +305,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<Long, Region> ApplicationConversionServiceFactoryBean.getIdToRegionConverter() {
         return new org.springframework.core.convert.converter.Converter<java.lang.Long, cz.kolomet.domain.codelist.Region>() {
             public cz.kolomet.domain.codelist.Region convert(java.lang.Long id) {
-                return regionRepository.findOne(id);
+                return regionService.findRegion(id);
             }
         };
     }
@@ -258,7 +329,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<Long, SellerStatus> ApplicationConversionServiceFactoryBean.getIdToSellerStatusConverter() {
         return new org.springframework.core.convert.converter.Converter<java.lang.Long, cz.kolomet.domain.codelist.SellerStatus>() {
             public cz.kolomet.domain.codelist.SellerStatus convert(java.lang.Long id) {
-                return sellerStatusRepository.findOne(id);
+                return sellerStatusService.findSellerStatus(id);
             }
         };
     }
@@ -272,6 +343,12 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     }
     
     public void ApplicationConversionServiceFactoryBean.installLabelConverters(FormatterRegistry registry) {
+        registry.addConverter(getApplicationPermissionToStringConverter());
+        registry.addConverter(getIdToApplicationPermissionConverter());
+        registry.addConverter(getStringToApplicationPermissionConverter());
+        registry.addConverter(getApplicationUserToStringConverter());
+        registry.addConverter(getIdToApplicationUserConverter());
+        registry.addConverter(getStringToApplicationUserConverter());
         registry.addConverter(getPhotoUrlToStringConverter());
         registry.addConverter(getIdToPhotoUrlConverter());
         registry.addConverter(getStringToPhotoUrlConverter());
@@ -296,6 +373,9 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         registry.addConverter(getProducerToStringConverter());
         registry.addConverter(getIdToProducerConverter());
         registry.addConverter(getStringToProducerConverter());
+        registry.addConverter(getProductAttributeTypeToStringConverter());
+        registry.addConverter(getIdToProductAttributeTypeConverter());
+        registry.addConverter(getStringToProductAttributeTypeConverter());
         registry.addConverter(getRegionToStringConverter());
         registry.addConverter(getIdToRegionConverter());
         registry.addConverter(getStringToRegionConverter());

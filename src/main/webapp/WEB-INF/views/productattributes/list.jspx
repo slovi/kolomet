@@ -4,8 +4,9 @@
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_cz_kolomet_domain_ProductAttribute" items="${productattributes}" z="K49OIronUICYt56KrRg62XucDcs=">
         <table:table data="${productattributes}" id="l_cz_kolomet_domain_ProductAttribute" path="/productattributes" z="RBWDOjqz7QPiqusrtouH26eKIak=">
-            <table:column id="c_cz_kolomet_domain_ProductAttribute_attributeKey" property="attributeKey" z="HQ9hotRMnGxiKRfSgmseCRRZxP8="/>
             <table:column id="c_cz_kolomet_domain_ProductAttribute_attributeValue" property="attributeValue" z="iEr9p8sClkxJ861VII6M3NNocWg="/>
+            <table:column id="c_cz_kolomet_domain_ProductAttribute_attributeType" property="attributeType" z="6wuZfzgfFiT102hIlK9Gxs0wU1E="/>
+            <table:column id="c_cz_kolomet_domain_ProductAttribute_product" property="product" z="cd6lKc69qSnLK6Du4l90AqD77+c="/>
         </table:table>
     </page:list>
 </div>

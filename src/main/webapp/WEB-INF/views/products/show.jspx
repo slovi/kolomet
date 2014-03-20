@@ -10,5 +10,7 @@
         <field:display field="category" id="s_cz_kolomet_domain_Product_category" object="${product}" z="GSlGUvpxnFGPqFGZ+QjVEHYzeEs="/>
         <field:display field="producer" id="s_cz_kolomet_domain_Product_producer" object="${product}" z="dW/X2YRgPextf24hN2wxAugtvw0="/>
         <field:display field="description" id="s_cz_kolomet_domain_Product_description" object="${product}" z="LPSKMJTVZ2Ovji3LmzZm6NI/M1s="/>
+        <field:display field="active" id="s_cz_kolomet_domain_Product_active" object="${product}" z="+3OZkseTzvwCtfOg0pPBSOhEr2o="/>
+        <field:display date="true" dateTimePattern="${product_validto_date_format}" field="validTo" id="s_cz_kolomet_domain_Product_validTo" object="${product}" z="1B16372FTICFbxZCes59kEITbMw="/>
     </page:show>
 </div>

@@ -4,8 +4,6 @@
 package cz.kolomet.web;
 
 import cz.kolomet.domain.Product;
-import cz.kolomet.service.CategoryService;
-import cz.kolomet.service.CountryStateService;
 import cz.kolomet.service.PhotoUrlService;
 import cz.kolomet.service.ProductAttributeService;
 import cz.kolomet.service.ProductService;
@@ -14,7 +12,9 @@ import cz.kolomet.web.ProductController;
 import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,12 +38,6 @@ privileged aspect ProductController_Roo_Controller {
     @Autowired
     SellerService ProductController.sellerService;
     
-    @Autowired
-    CategoryService ProductController.categoryService;
-    
-    @Autowired
-    CountryStateService ProductController.countryStateService;
-    
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String ProductController.create(@Valid Product product, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
@@ -63,6 +57,7 @@ privileged aspect ProductController_Roo_Controller {
     
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String ProductController.show(@PathVariable("id") Long id, Model uiModel) {
+        addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("product", productService.findProduct(id));
         uiModel.addAttribute("itemId", id);
         return "products/show";
@@ -79,6 +74,7 @@ privileged aspect ProductController_Roo_Controller {
         } else {
             uiModel.addAttribute("products", productService.findAllProducts());
         }
+        addDateTimeFormatPatterns(uiModel);
         return "products/list";
     }
     
@@ -109,13 +105,16 @@ privileged aspect ProductController_Roo_Controller {
         return "redirect:/products";
     }
     
+    void ProductController.addDateTimeFormatPatterns(Model uiModel) {
+        uiModel.addAttribute("product_validto_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
+    }
+    
     void ProductController.populateEditForm(Model uiModel, Product product) {
         uiModel.addAttribute("product", product);
+        addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("photourls", photoUrlService.findAllPhotoUrls());
         uiModel.addAttribute("productattributes", productAttributeService.findAllProductAttributes());
         uiModel.addAttribute("sellers", sellerService.findAllSellers());
-        uiModel.addAttribute("categorys", categoryService.findAllCategorys());
-        uiModel.addAttribute("producers", countryStateService.findAllProducers());
     }
     
     String ProductController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

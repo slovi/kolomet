@@ -16,4 +16,7 @@
     <definition extends="default_wide" name="products/list_category">
         <put-attribute name="body" value="/WEB-INF/views/products/list_category.jspx"/>
     </definition>
+    <definition extends="default_wide" name="products/detail">
+        <put-attribute name="body" value="/WEB-INF/views/products/detail.jspx"/>
+    </definition>
 </tiles-definitions>

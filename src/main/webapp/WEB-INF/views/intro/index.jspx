@@ -5,9 +5,10 @@
 	<c:forEach items="${products}" var="product">
 		<spring:url value="/img/bike_02.jpg" var="productImgUrl" />
 		<div class="homepage_unit"> 
-	     	<a href=""><img width="224" height="146" src="${productImgUrl}"/></a>
+			<spring:url value="/products/detail/${product.id}" var="productIdUrl" />
+	     	<a href="${productIdUrl}"><img width="224" height="146" src="${productImgUrl}"/></a>
 	     	<div class="home_description"> 
-	     		<a href="" class="label"><c:out value="${product.productName}" /></a>
+	     		<a href="${productIdUrl}" class="label"><c:out value="${product.productName}" /></a>
 	         	<p class="price"><c:out value="${product.price}" /></p>
 	         	<p><c:out value="${fn:substring(product.description, 0, 80)}" />...</p>
 	     	</div>
@@ -21,6 +22,6 @@
 	     </div>
 	</c:forEach>
 
-     <div class="clear" />		           	         
+    <div class="clear" />		           	         
 
 </div>

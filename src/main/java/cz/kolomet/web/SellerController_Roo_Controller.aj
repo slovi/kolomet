@@ -3,20 +3,13 @@
 
 package cz.kolomet.web;
 
-import cz.kolomet.domain.Seller;
-import cz.kolomet.domain.codelist.CountryState;
-import cz.kolomet.domain.codelist.Region;
-import cz.kolomet.domain.codelist.SellerStatus;
-import cz.kolomet.repository.CountryStateRepository;
-import cz.kolomet.repository.RegionRepository;
-import cz.kolomet.repository.SellerStatusRepository;
-import cz.kolomet.service.SellerService;
-import cz.kolomet.web.SellerController;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,19 +20,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
+import cz.kolomet.domain.Seller;
+import cz.kolomet.service.CountryStateService;
+import cz.kolomet.service.RegionService;
+import cz.kolomet.service.SellerService;
+
 privileged aspect SellerController_Roo_Controller {
     
     @Autowired
     SellerService SellerController.sellerService;
     
     @Autowired
-    CountryStateRepository SellerController.countryStateRepository;
+    CountryStateService SellerController.countryStateService;
     
     @Autowired
-    RegionRepository SellerController.regionRepository;
-    
-    @Autowired
-    SellerStatusRepository SellerController.sellerStatusRepository;
+    RegionService SellerController.regionService;
     
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String SellerController.create(@Valid Seller seller, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
@@ -56,16 +51,13 @@ privileged aspect SellerController_Roo_Controller {
     public String SellerController.createForm(Model uiModel) {
         populateEditForm(uiModel, new Seller());
         List<String[]> dependencies = new ArrayList<String[]>();
-        if (countryStateRepository.count() == 0) {
+        if (countryStateService.countAllCountryStates() == 0) {
             dependencies.add(new String[] { "countrystate", "countrystates" });
         }
-        if (sellerStatusRepository.count() == 0) {
-            dependencies.add(new String[] { "sellerstatus", "sellerstatuses" });
-        }
-        if (regionRepository.count() == 0) {
+        if (regionService.countAllRegions() == 0) {
             dependencies.add(new String[] { "region", "regions" });
         }
-        if (countryStateRepository.count() == 0) {
+        if (countryStateService.countAllCountryStates() == 0) {
             dependencies.add(new String[] { "countrystate", "countrystates" });
         }
         uiModel.addAttribute("dependencies", dependencies);
@@ -122,9 +114,8 @@ privileged aspect SellerController_Roo_Controller {
     
     void SellerController.populateEditForm(Model uiModel, Seller seller) {
         uiModel.addAttribute("seller", seller);
-        uiModel.addAttribute("countrystates", countryStateRepository.findAll());
-        uiModel.addAttribute("regions", regionRepository.findAll());
-        uiModel.addAttribute("sellerstatuses", sellerStatusRepository.findAll());
+        uiModel.addAttribute("countrystates", countryStateService.findAllCountryStates());
+        uiModel.addAttribute("regions", regionService.findAllRegions());
     }
     
     String SellerController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

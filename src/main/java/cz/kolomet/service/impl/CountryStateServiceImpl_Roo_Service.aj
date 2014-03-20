@@ -3,8 +3,8 @@
 
 package cz.kolomet.service.impl;
 
-import cz.kolomet.domain.codelist.Producer;
-import cz.kolomet.repository.ProducerRepository;
+import cz.kolomet.domain.codelist.CountryState;
+import cz.kolomet.repository.CountryStateRepository;
 import cz.kolomet.service.impl.CountryStateServiceImpl;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,34 +18,34 @@ privileged aspect CountryStateServiceImpl_Roo_Service {
     declare @type: CountryStateServiceImpl: @Transactional;
     
     @Autowired
-    ProducerRepository CountryStateServiceImpl.producerRepository;
+    CountryStateRepository CountryStateServiceImpl.countryStateRepository;
     
-    public long CountryStateServiceImpl.countAllProducers() {
-        return producerRepository.count();
+    public long CountryStateServiceImpl.countAllCountryStates() {
+        return countryStateRepository.count();
     }
     
-    public void CountryStateServiceImpl.deleteProducer(Producer producer) {
-        producerRepository.delete(producer);
+    public void CountryStateServiceImpl.deleteCountryState(CountryState countryState) {
+        countryStateRepository.delete(countryState);
     }
     
-    public Producer CountryStateServiceImpl.findProducer(Long id) {
-        return producerRepository.findOne(id);
+    public CountryState CountryStateServiceImpl.findCountryState(Long id) {
+        return countryStateRepository.findOne(id);
     }
     
-    public List<Producer> CountryStateServiceImpl.findAllProducers() {
-        return producerRepository.findAll();
+    public List<CountryState> CountryStateServiceImpl.findAllCountryStates() {
+        return countryStateRepository.findAll();
     }
     
-    public List<Producer> CountryStateServiceImpl.findProducerEntries(int firstResult, int maxResults) {
-        return producerRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / maxResults, maxResults)).getContent();
+    public List<CountryState> CountryStateServiceImpl.findCountryStateEntries(int firstResult, int maxResults) {
+        return countryStateRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / maxResults, maxResults)).getContent();
     }
     
-    public void CountryStateServiceImpl.saveProducer(Producer producer) {
-        producerRepository.save(producer);
+    public void CountryStateServiceImpl.saveCountryState(CountryState countryState) {
+        countryStateRepository.save(countryState);
     }
     
-    public Producer CountryStateServiceImpl.updateProducer(Producer producer) {
-        return producerRepository.save(producer);
+    public CountryState CountryStateServiceImpl.updateCountryState(CountryState countryState) {
+        return countryStateRepository.save(countryState);
     }
     
 }

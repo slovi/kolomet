@@ -17,6 +17,7 @@
 					<menu:item id="i_seller_list" messageCode="global_menu_list" url="/sellers?page=1&amp;size=${empty param.size ? 10 : param.size}" z="57f7mMa6rXXGgX7UBUaUGHmBSqg="/>
 		            <menu:item id="i_product_list" messageCode="global_menu_list" url="/products?page=1&amp;size=${empty param.size ? 10 : param.size}" z="kEeyCmUUYXShbDEWwOLheaAkM50="/>
 		            <menu:item id="i_productattribute_list" messageCode="global_menu_list" url="/productattributes?page=1&amp;size=${empty param.size ? 10 : param.size}" z="VTVOTRtnhV45+bWn4Cei0rc7as4="/>
+		            <menu:item id="i_productattributetype_list" messageCode="global_menu_list" url="/productattributetypes?page=1&amp;size=${empty param.size ? 10 : param.size}" z="y9XTmdd/EfLHKNBZ/zQWt6JP+QQ="/>
 		            <menu:item id="i_photourl_list" messageCode="global_menu_list" url="/photourls?page=1&amp;size=${empty param.size ? 10 : param.size}" z="D+g8dQxzKdkuGRtxnXRvSGL7guI="/>
 		            <menu:item id="i_category_list" messageCode="global_menu_list" url="/categorys?page=1&amp;size=${empty param.size ? 10 : param.size}" z="0VEYbn/XUobhsOa74Uf6KyWz8/w="/>
 		            <menu:item id="i_producer_list" messageCode="global_menu_list" url="/producers?page=1&amp;size=${empty param.size ? 10 : param.size}" z="jTOhiGfGTy/mKcMjOgzzIoHDkxg="/>

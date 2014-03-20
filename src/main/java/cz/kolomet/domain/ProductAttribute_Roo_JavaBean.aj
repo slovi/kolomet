@@ -3,16 +3,26 @@
 
 package cz.kolomet.domain;
 
+import cz.kolomet.domain.Product;
 import cz.kolomet.domain.ProductAttribute;
+import cz.kolomet.domain.codelist.ProductAttributeType;
 
 privileged aspect ProductAttribute_Roo_JavaBean {
     
-    public String ProductAttribute.getAttributeKey() {
-        return this.attributeKey;
+    public ProductAttributeType ProductAttribute.getAttributeType() {
+        return this.attributeType;
     }
     
-    public void ProductAttribute.setAttributeKey(String attributeKey) {
-        this.attributeKey = attributeKey;
+    public void ProductAttribute.setAttributeType(ProductAttributeType attributeType) {
+        this.attributeType = attributeType;
+    }
+    
+    public Product ProductAttribute.getProduct() {
+        return this.product;
+    }
+    
+    public void ProductAttribute.setProduct(Product product) {
+        this.product = product;
     }
     
     public String ProductAttribute.getAttributeValue() {

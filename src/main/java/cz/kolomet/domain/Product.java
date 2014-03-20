@@ -1,4 +1,5 @@
 package cz.kolomet.domain;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.equals.RooEquals;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.entity.RooJpaEntity;
@@ -8,9 +9,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import javax.persistence.ManyToOne;
-import cz.kolomet.domain.codelist.Category;
-import cz.kolomet.domain.codelist.Producer;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Lob;
@@ -55,6 +55,15 @@ public class Product extends DomainEntity {
      */
     @ManyToOne
     private Producer producer;
+    
+    /**
+     */
+    private Boolean active;
+    
+    /**
+     */
+    @DateTimeFormat(style="M-")
+    private Date validTo;
 
     /**
      */
@@ -63,6 +72,6 @@ public class Product extends DomainEntity {
 
     /**
      */
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
     private List<ProductAttribute> productAttributes = new ArrayList<ProductAttribute>();
 }

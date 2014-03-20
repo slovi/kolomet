@@ -2,52 +2,21 @@ project --topLevelPackage cz.kolomet --projectName kolomet
 
 jpa setup --database HYPERSONIC_IN_MEMORY --provider HIBERNATE
 
-entity jpa --class ~.domain.Seller --activeRecord false --equals true --extends ~.domain.Entity --serializable true --abstract true
-entity jpa --class ~.domain.ProductAttribute --extends ~.domain.Entity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --testAutomatically true --activeRecord false
-entity jpa --class ~.domain.PhotoUrl --extends ~.domain.Entity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
-entity jpa --class ~.domain.Product --extends ~.domain.Entity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
+entity jpa --class ~.domain.Category --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
+entity jpa --class ~.domain.Seller --activeRecord false --equals true --extends ~.domain.DomainEntity --serializable true --abstract true
+entity jpa --class ~.domain.Producer --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
+entity jpa --class ~.domain.ProductAttribute --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --testAutomatically true --activeRecord false
+entity jpa --class ~.domain.PhotoUrl --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
+entity jpa --class ~.domain.Product --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
+entity jpa --class ~.domain.ApplicationUser --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
+entity jpa --class ~.domain.ApplicationRole --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
+entity jpa --class ~.domain.ApplicationPermission --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 entity jpa --class ~.domain.codelist.Codelist --abstract true --equals true --serializable true --activeRecord false --extends ~.domain.Entity --inheritanceType TABLE_PER_CLASS
-entity jpa --class ~.domain.codelist.Category --extends ~.domain.codelist.Codelist --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 entity jpa --class ~.domain.codelist.CategoryType --extends ~.domain.codelist.Codelist --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
-entity jpa --class ~.domain.codelist.Producer --extends ~.domain.codelist.Codelist --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 entity jpa --class ~.domain.codelist.SellerStatus --extends ~.domain.codelist.Codelist --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 entity jpa --class ~.domain.codelist.CountryState --extends ~.domain.codelist.Codelist --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 entity jpa --class ~.domain.codelist.Region --extends ~.domain.codelist.Codelist --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
-
-// address
-field string --fieldName street --class ~.domain.Address --notNull --sizeMax 100
-field string --fieldName city --class ~.domain.Address --notNull --sizeMax 100
-field string --fieldName postCode --class ~.domain.Address --notNull --sizeMax 10
-field number --fieldName streetNr --type java.lang.Integer --class ~.domain.Address --notNull
-
-// seller
-field string --fieldName sellerName --class ~.domain.Seller --notNull --sizeMax 50
-field embedded --fieldName address --type ~.domain.Address --class ~.domain.Seller
-field list --fieldName products --type ~.domain.Product --class ~.domain.Seller --cardinality ONE_TO_MANY --mappedBy seller
-
-// productAttribute
-field string --fieldName attributeKey --class ~.domain.ProductAttribute --notNull --sizeMax 40
-field string --fieldName attributeValue --class ~.domain.ProductAttribute --notNull --sizeMax 100
-
-// photoUrl
-field string --fieldName urlValue --class ~.domain.PhotoUrl --notNull --sizeMax 20
-
-// product
-field string --fieldName productName --class ~.domain.Product --notNull --sizeMax 50
-field number --fieldName price --class ~.domain.Product --notNull --type java.math.BigDecimal
-field number --fieldName discount --class ~.domain.Product --type java.math.BigDecimal
-field reference --fieldName seller --type ~.domain.Seller --cardinality MANY_TO_ONE --class ~.domain.Product
-field reference --fieldName category --type ~.domain.codelist.Category --cardinality MANY_TO_ONE --class ~.domain.Product
-field reference --fieldName producer --type ~.domain.codelist.Producer --cardinality MANY_TO_ONE --class ~.domain.Product
-field list --fieldName photoUrls --type ~.domain.PhotoUrl --class ~.domain.Product --cardinality ONE_TO_MANY
-field list --fieldName productAttributes --type ~.domain.ProductAttribute --class ~.domain.Product --cardinality ONE_TO_MANY
-
-// codelist
-field string --fieldName codeKey --class ~.domain.codelist.Codelist --notNull --sizeMax 20
-field string --fieldName codeDescription --class ~.domain.codelist.Codelist --notNull --sizeMax 100
-
-// category
-field reference --fieldName parent --type ~.domain.codelist.CategoryType --cardinality MANY_TO_ONE --class ~.domain.codelist.CategoryType
+entity jpa --class ~.domain.codelist.ProductAttributeType --extends ~.domain.codelist.Codelist --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 
 
 repository jpa --interface ~.repository.ProductRepository --entity ~.domain.Product
@@ -60,17 +29,25 @@ repository jpa --interface ~.repository.ProducerRepository --entity ~.domain.cod
 repository jpa --interface ~.repository.SellerStatusRepository --entity ~.domain.codelist.SellerStatus
 repository jpa --interface ~.repository.CountryStateRepository --entity ~.domain.codelist.CountryState
 repository jpa --interface ~.repository.RegionRepository --entity ~.domain.codelist.Region
+repository jpa --interface ~.repository.ProductAttributeTypeRepository --entity ~.domain.codelist.ProductAttributeType
+repository jpa --interface ~.repository.ApplicationUserRepository --entity ~.domain.ApplicationUser
+repository jpa --interface ~.repository.ApplicationRoleRepository --entity ~.domain.ApplicationRole
+repository jpa --interface ~.repository.ApplicationPermissionRepository --entity ~.domain.ApplicationPermission
 
 service type --interface ~.service.ProductService --entity ~.domain.Product --class ~.service.impl.ProductServiceImpl
 service type --interface ~.service.SellerService --entity ~.domain.Seller --class ~.service.impl.SellerServiceImpl
 service type --interface ~.service.ProductAttributeService --entity ~.domain.ProductAttribute --class ~.service.impl.ProductAttributeServiceImpl
 service type --interface ~.service.PhotoUrlService --entity ~.domain.PhotoUrl --class ~.service.impl.PhotoUrlServiceImpl
-service type --interface ~.service.CategoryService --entity ~.domain.codelist.Category --class ~.service.impl.CategoryServiceImpl
+service type --interface ~.service.CategoryService --entity ~.domain.Category --class ~.service.impl.CategoryServiceImpl
 service type --interface ~.service.CategoryTypeService --entity ~.domain.codelist.CategoryType --class ~.service.impl.CategoryTypeServiceImpl
 service type --interface ~.service.ProducerService --entity ~.domain.codelist.Producer --class ~.service.impl.ProducerServiceImpl
-service type --interface ~.service.SellerStatusService --entity ~.domain.codelist.Producer --class ~.service.impl.SellerStatusServiceImpl
-service type --interface ~.service.CountryStateService --entity ~.domain.codelist.Producer --class ~.service.impl.CountryStateServiceImpl
-service type --interface ~.service.RegionService --entity ~.domain.codelist.Producer --class ~.service.impl.RegionServiceImpl
+service type --interface ~.service.SellerStatusService --entity ~.domain.codelist.SellerSatus --class ~.service.impl.SellerStatusServiceImpl
+service type --interface ~.service.CountryStateService --entity ~.domain.codelist.CountryState --class ~.service.impl.CountryStateServiceImpl
+service type --interface ~.service.RegionService --entity ~.domain.codelist.Region --class ~.service.impl.RegionServiceImpl
+service type --interface ~.service.ProductAttributeTypeService --entity ~.domain.codelist.ProductAttributeType --class ~.service.impl.ProductAttributeTypeServiceImpl
+service type --interface ~.service.ApplicationUserService --entity ~.domain.ApplicationUser --class ~.service.impl.ApplicationUserServiceImpl
+service type --interface ~.service.ApplicationRoleService --entity ~.domain.ApplicationRole --class ~.service.impl.ApplicationRoleServiceImpl
+service type --interface ~.service.ApplicationPermissionService --entity ~.domain.ApplicationPermission --class ~.service.impl.ApplicationPermissionServiceImpl
 
 web mvc setup
 web mvc scaffold --class ~.web.SellerController --backingType ~.domain.Seller
@@ -82,3 +59,7 @@ web mvc scaffold --class ~.web.ProducerController --backingType ~.domain.codelis
 web mvc scaffold --class ~.web.SellerStatusController --backingType ~.domain.codelist.SellerStatus
 web mvc scaffold --class ~.web.CountryStateController --backingType ~.domain.codelist.CountryState
 web mvc scaffold --class ~.web.RegionController --backingType ~.domain.codelist.RegionState
+web mvc scaffold --class ~.web.ProductAttributeTypeController --backingType ~.domain.codelist.ProductAttributeType
+web mvc scaffold --class ~.web.ApplicationUserController --backingType ~.domain.ApplicationUser
+web mvc scaffold --class ~.web.ApplicationRoleController --backingType ~.domain.ApplicationRole
+web mvc scaffold --class ~.web.ApplicationPermissionController --backingType ~.domain.ApplicationPermission

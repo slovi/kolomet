@@ -3,8 +3,8 @@
 
 package cz.kolomet.service.impl;
 
-import cz.kolomet.domain.codelist.Producer;
-import cz.kolomet.repository.ProducerRepository;
+import cz.kolomet.domain.codelist.SellerStatus;
+import cz.kolomet.repository.SellerStatusRepository;
 import cz.kolomet.service.impl.SellerStatusServiceImpl;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,34 +18,34 @@ privileged aspect SellerStatusServiceImpl_Roo_Service {
     declare @type: SellerStatusServiceImpl: @Transactional;
     
     @Autowired
-    ProducerRepository SellerStatusServiceImpl.producerRepository;
+    SellerStatusRepository SellerStatusServiceImpl.sellerStatusRepository;
     
-    public long SellerStatusServiceImpl.countAllProducers() {
-        return producerRepository.count();
+    public long SellerStatusServiceImpl.countAllSellerStatuses() {
+        return sellerStatusRepository.count();
     }
     
-    public void SellerStatusServiceImpl.deleteProducer(Producer producer) {
-        producerRepository.delete(producer);
+    public void SellerStatusServiceImpl.deleteSellerStatus(SellerStatus sellerStatus) {
+        sellerStatusRepository.delete(sellerStatus);
     }
     
-    public Producer SellerStatusServiceImpl.findProducer(Long id) {
-        return producerRepository.findOne(id);
+    public SellerStatus SellerStatusServiceImpl.findSellerStatus(Long id) {
+        return sellerStatusRepository.findOne(id);
     }
     
-    public List<Producer> SellerStatusServiceImpl.findAllProducers() {
-        return producerRepository.findAll();
+    public List<SellerStatus> SellerStatusServiceImpl.findAllSellerStatuses() {
+        return sellerStatusRepository.findAll();
     }
     
-    public List<Producer> SellerStatusServiceImpl.findProducerEntries(int firstResult, int maxResults) {
-        return producerRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / maxResults, maxResults)).getContent();
+    public List<SellerStatus> SellerStatusServiceImpl.findSellerStatusEntries(int firstResult, int maxResults) {
+        return sellerStatusRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / maxResults, maxResults)).getContent();
     }
     
-    public void SellerStatusServiceImpl.saveProducer(Producer producer) {
-        producerRepository.save(producer);
+    public void SellerStatusServiceImpl.saveSellerStatus(SellerStatus sellerStatus) {
+        sellerStatusRepository.save(sellerStatus);
     }
     
-    public Producer SellerStatusServiceImpl.updateProducer(Producer producer) {
-        return producerRepository.save(producer);
+    public SellerStatus SellerStatusServiceImpl.updateSellerStatus(SellerStatus sellerStatus) {
+        return sellerStatusRepository.save(sellerStatus);
     }
     
 }

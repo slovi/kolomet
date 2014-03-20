@@ -15,6 +15,10 @@
             <menu:item id="i_productattribute_new" messageCode="global_menu_new" url="/productattributes?form" z="Kqnwqr7otyFGZLzsCIIHlxCH+AI="/>
             <menu:item id="i_productattribute_list" messageCode="global_menu_list" url="/productattributes?page=1&amp;size=${empty param.size ? 10 : param.size}" z="VTVOTRtnhV45+bWn4Cei0rc7as4="/>
         </menu:category>
+        <menu:category id="c_productattributetype" z="YYrI63201eIVm4H2iQVETGccPUE=">
+            <menu:item id="i_productattributetype_new" messageCode="global_menu_new" url="/productattributetypes?form" z="bKsjEKO88Nz4mE7VQLdReoNwQfE="/>
+            <menu:item id="i_productattributetype_list" messageCode="global_menu_list" url="/productattributetypes?page=1&amp;size=${empty param.size ? 10 : param.size}" z="y9XTmdd/EfLHKNBZ/zQWt6JP+QQ="/>
+        </menu:category>
         <menu:category id="c_photourl" z="aDteTgCOPAw12KdkHqmdKd27SC8=">
             <menu:item id="i_photourl_new" messageCode="global_menu_new" url="/photourls?form" z="xyqm1rInfgTMWcZMm0mk3bcld8U="/>
             <menu:item id="i_photourl_list" messageCode="global_menu_list" url="/photourls?page=1&amp;size=${empty param.size ? 10 : param.size}" z="D+g8dQxzKdkuGRtxnXRvSGL7guI="/>
@@ -42,6 +46,18 @@
         <menu:category id="c_region" z="c6fLb1dSC6E3lOpc6tTzfRXdsVo=">
             <menu:item id="i_region_new" messageCode="global_menu_new" url="/regions?form" z="zcyY7k/YcUshfD7FTv/o/904YhM="/>
             <menu:item id="i_region_list" messageCode="global_menu_list" url="/regions?page=1&amp;size=${empty param.size ? 10 : param.size}" z="R4yrjjgk2KXYIlMw++M9nLkYTpE="/>
+        </menu:category>
+        <menu:category id="c_applicationuser" z="v79aQ/QkMH7PCPKfrV5dAc2kaIs=">
+            <menu:item id="i_applicationuser_new" messageCode="global_menu_new" url="/applicationusers?form" z="my4Meg61ezcWcDO+i5f9Fl7SsfU="/>
+            <menu:item id="i_applicationuser_list" messageCode="global_menu_list" url="/applicationusers?page=1&amp;size=${empty param.size ? 10 : param.size}" z="18oGQE63MUIZ2YAKBPnDk0gNcZA="/>
+        </menu:category>
+        <menu:category id="c_applicationrole" z="swwnRIpYcou5y4NHrQZG8OVMeGA=">
+            <menu:item id="i_applicationrole_new" messageCode="global_menu_new" url="/applicationroles?form" z="PPsgdI0tjSz5gkEBs/Mp7PNNzaU="/>
+            <menu:item id="i_applicationrole_list" messageCode="global_menu_list" url="/applicationroles?page=1&amp;size=${empty param.size ? 10 : param.size}" z="5BKruYLjsrCLDE9itOj1TlqWcRk="/>
+        </menu:category>
+        <menu:category id="c_applicationpermission" z="KdzULWSn7kmOMhnPoqVBa2vG1B4=">
+            <menu:item id="i_applicationpermission_new" messageCode="global_menu_new" url="/applicationpermissions?form" z="fsQJRKi5IUcoy/SiYhQJRdZJjZ4="/>
+            <menu:item id="i_applicationpermission_list" messageCode="global_menu_list" url="/applicationpermissions?page=1&amp;size=${empty param.size ? 10 : param.size}" z="Wl97kcGOo9MYPdeFlSYOwi7lAZs="/>
         </menu:category>
     </menu:menu>
 </jsp:root>

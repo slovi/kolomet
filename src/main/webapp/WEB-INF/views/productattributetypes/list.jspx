@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_cz_kolomet_domain_codelist_ProductAttributeType" items="${productattributetypes}" z="3kkS5S66v+o/fIdx+37LLGpCho4=">
+        <table:table data="${productattributetypes}" id="l_cz_kolomet_domain_codelist_ProductAttributeType" path="/productattributetypes" z="C6VTp/NAgg+Ks6P9yohwB3cWms4=">
+            <table:column id="c_cz_kolomet_domain_codelist_ProductAttributeType_codeKey" property="codeKey" z="64vyxAaQjj7FN4iO86NN71Ib/F8="/>
+            <table:column id="c_cz_kolomet_domain_codelist_ProductAttributeType_codeDescription" property="codeDescription" z="zhpzNps0RzWs/kykityS93TScwI="/>
+        </table:table>
+    </page:list>
+</div>

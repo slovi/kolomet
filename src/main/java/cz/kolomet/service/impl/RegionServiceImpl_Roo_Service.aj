@@ -3,8 +3,8 @@
 
 package cz.kolomet.service.impl;
 
-import cz.kolomet.domain.codelist.Producer;
-import cz.kolomet.repository.ProducerRepository;
+import cz.kolomet.domain.codelist.Region;
+import cz.kolomet.repository.RegionRepository;
 import cz.kolomet.service.impl.RegionServiceImpl;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,34 +18,34 @@ privileged aspect RegionServiceImpl_Roo_Service {
     declare @type: RegionServiceImpl: @Transactional;
     
     @Autowired
-    ProducerRepository RegionServiceImpl.producerRepository;
+    RegionRepository RegionServiceImpl.regionRepository;
     
-    public long RegionServiceImpl.countAllProducers() {
-        return producerRepository.count();
+    public long RegionServiceImpl.countAllRegions() {
+        return regionRepository.count();
     }
     
-    public void RegionServiceImpl.deleteProducer(Producer producer) {
-        producerRepository.delete(producer);
+    public void RegionServiceImpl.deleteRegion(Region region) {
+        regionRepository.delete(region);
     }
     
-    public Producer RegionServiceImpl.findProducer(Long id) {
-        return producerRepository.findOne(id);
+    public Region RegionServiceImpl.findRegion(Long id) {
+        return regionRepository.findOne(id);
     }
     
-    public List<Producer> RegionServiceImpl.findAllProducers() {
-        return producerRepository.findAll();
+    public List<Region> RegionServiceImpl.findAllRegions() {
+        return regionRepository.findAll();
     }
     
-    public List<Producer> RegionServiceImpl.findProducerEntries(int firstResult, int maxResults) {
-        return producerRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / maxResults, maxResults)).getContent();
+    public List<Region> RegionServiceImpl.findRegionEntries(int firstResult, int maxResults) {
+        return regionRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / maxResults, maxResults)).getContent();
     }
     
-    public void RegionServiceImpl.saveProducer(Producer producer) {
-        producerRepository.save(producer);
+    public void RegionServiceImpl.saveRegion(Region region) {
+        regionRepository.save(region);
     }
     
-    public Producer RegionServiceImpl.updateProducer(Producer producer) {
-        return producerRepository.save(producer);
+    public Region RegionServiceImpl.updateRegion(Region region) {
+        return regionRepository.save(region);
     }
     
 }

@@ -4,6 +4,12 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.entity.RooJpaEntity;
 import org.springframework.roo.addon.serializable.RooSerializable;
 import org.springframework.roo.addon.tostring.RooToString;
+
+import cz.kolomet.domain.codelist.ProductAttributeType;
+
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -13,12 +19,17 @@ import javax.validation.constraints.Size;
 @RooEquals
 @RooSerializable
 public class ProductAttribute extends DomainEntity {
-
+    
     /**
      */
     @NotNull
-    @Size(max = 40)
-    private String attributeKey;
+    @ManyToOne
+    private ProductAttributeType attributeType;
+    
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PRODUCT_ID")
+    private Product product;
 
     /**
      */
