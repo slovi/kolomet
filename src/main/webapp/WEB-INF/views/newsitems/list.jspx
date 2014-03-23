@@ -4,10 +4,10 @@
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_cz_kolomet_domain_NewsItem" items="${newsitems}" z="EdonLnudWq22eyfrC6cVJF06bN8=">
         <table:table data="${newsitems}" id="l_cz_kolomet_domain_NewsItem" path="/newsitems" z="ni9TlmJnqGNRyxd9VR7/rCrOkK4=">
-            <table:column id="c_cz_kolomet_domain_NewsItem_header" property="header" z="Q7JqaIL9vd6qbDsoX368PVHvWNg="/>
             <table:column date="true" dateTimePattern="${newsItem_newsitemdate_date_format}" id="c_cz_kolomet_domain_NewsItem_newsItemDate" property="newsItemDate" z="hpbItkUpEgI3kl4eBPgz6mjtY9s="/>
             <table:column id="c_cz_kolomet_domain_NewsItem_text" property="text" z="udPLisrCvlg285z3LPAAMJjtJJI="/>
             <table:column id="c_cz_kolomet_domain_NewsItem_creater" property="creater" z="B8euYhJGk7BK5vH/Ojnd8teDyvU="/>
+            <table:column id="c_cz_kolomet_domain_NewsItem_enabled" property="enabled" z="nf3mqWLZLYHog6DTvBNMwOVNjLA="/>
         </table:table>
     </page:list>
 </div>

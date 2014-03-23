@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu" id="menu" version="2.0">
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu" xmlns:spring="http://www.springframework.org/tags" xmlns:c="http://java.sun.com/jsp/jstl/core" id="menu" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     
     <div id="news">
        	<div id="news_content">
        		<div id="news_header">
-	    		Novinky
+	    		<spring:message code="news_header" />
        		</div>
-       		<div class="news_item">
-       			<p>
-       				<span class="news_item_date">27.3.2014 -</span>
-       				<br />
-       				<span class="news_item_content">Spuštění webu kolomet. Web specializovaný na prodej kol od profesionálů na českém trhu.</span>		        			
-       			</p>
-       		</div>
+       		<c:forEach items="${newsItems}" var="newsItem">
+	       		<div class="news_item">
+	       			<p>
+	       				<span class="news_item_date"><c:out value="${newsItem.newsItemDate}" /></span>
+	       				<br />
+	       				<span class="news_item_content"><c:out value="${newsItem.text}" /></span>		        			
+	       			</p>
+	       		</div>
+       		</c:forEach>
     	</div>
     </div>
     

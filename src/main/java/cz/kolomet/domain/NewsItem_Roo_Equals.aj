@@ -17,11 +17,11 @@ privileged aspect NewsItem_Roo_Equals {
             return true;
         }
         NewsItem rhs = (NewsItem) obj;
-        return new EqualsBuilder().append(creater, rhs.creater).append(header, rhs.header).append(id, rhs.id).append(newsItemDate, rhs.newsItemDate).append(text, rhs.text).isEquals();
+        return new EqualsBuilder().append(creater, rhs.creater).append(enabled, rhs.enabled).append(id, rhs.id).append(newsItemDate, rhs.newsItemDate).append(text, rhs.text).isEquals();
     }
     
     public int NewsItem.hashCode() {
-        return new HashCodeBuilder().append(creater).append(header).append(id).append(newsItemDate).append(text).toHashCode();
+        return new HashCodeBuilder().append(creater).append(enabled).append(id).append(newsItemDate).append(text).toHashCode();
     }
     
 }

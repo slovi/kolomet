@@ -4,13 +4,19 @@
     <definition extends="default_admin" name="sellers/list">
         <put-attribute name="body" value="/WEB-INF/views/sellers/list.jspx"/>
     </definition>
-<definition extends="default_admin" name="sellers/show">
+	<definition extends="default_admin" name="sellers/show">
         <put-attribute name="body" value="/WEB-INF/views/sellers/show.jspx"/>
     </definition>
-<definition extends="default_admin" name="sellers/create">
+	<definition extends="default_admin" name="sellers/create">
         <put-attribute name="body" value="/WEB-INF/views/sellers/create.jspx"/>
     </definition>
-<definition extends="default_admin" name="sellers/update">
+	<definition extends="default_admin" name="sellers/update">
         <put-attribute name="body" value="/WEB-INF/views/sellers/update.jspx"/>
+    </definition>
+    <definition extends="default_wide" name="sellers/map">
+        <put-attribute name="body" value="/WEB-INF/views/sellers/map.jspx"/>
+    </definition>
+    <definition extends="default_wide" name="sellers/detail">
+        <put-attribute name="body" value="/WEB-INF/views/sellers/detail.jspx"/>
     </definition>
 </tiles-definitions>

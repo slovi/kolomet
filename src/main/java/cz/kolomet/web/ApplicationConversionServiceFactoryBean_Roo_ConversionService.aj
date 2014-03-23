@@ -179,7 +179,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<NewsItem, String> ApplicationConversionServiceFactoryBean.getNewsItemToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<cz.kolomet.domain.NewsItem, java.lang.String>() {
             public String convert(NewsItem newsItem) {
-                return new StringBuilder().append(newsItem.getHeader()).append(' ').append(newsItem.getNewsItemDate()).append(' ').append(newsItem.getText()).toString();
+                return new StringBuilder().append(newsItem.getNewsItemDate()).append(' ').append(newsItem.getText()).toString();
             }
         };
     }

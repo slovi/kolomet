@@ -5,7 +5,7 @@
     
     <div class="side-menu active">
     	<h1 class="side-menu-header">
-      		<spring:message code="admin.menu_side.header"/>
+      		<spring:message code="admin_menu_side_header"/>
       		<img class="side-menu-arrow-on" src="img/arrow_down.png" />
             <img class="side-menu-arrow-off hidden" src="img/arrow_right.png" />
       	</h1>

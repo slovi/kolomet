@@ -6,11 +6,11 @@
         <field:display field="productName" id="s_cz_kolomet_domain_Product_productName" object="${product}" z="OgwKo7O8FnRzdsLDlOxiF4TPR1w="/>
         <field:display field="price" id="s_cz_kolomet_domain_Product_price" object="${product}" z="xpno0xgzkr6bWjdNoFutCzBaIyE="/>
         <field:display field="discount" id="s_cz_kolomet_domain_Product_discount" object="${product}" z="ZF2WJwqsIZuPwQRx4YSssq69Id8="/>
-        <field:display field="seller" id="s_cz_kolomet_domain_Product_seller" object="${product}" z="l9aQBxj/TdL+b5fuw0y3j8Sq9kE="/>
         <field:display field="category" id="s_cz_kolomet_domain_Product_category" object="${product}" z="GSlGUvpxnFGPqFGZ+QjVEHYzeEs="/>
         <field:display field="producer" id="s_cz_kolomet_domain_Product_producer" object="${product}" z="dW/X2YRgPextf24hN2wxAugtvw0="/>
         <field:display field="description" id="s_cz_kolomet_domain_Product_description" object="${product}" z="LPSKMJTVZ2Ovji3LmzZm6NI/M1s="/>
         <field:display field="active" id="s_cz_kolomet_domain_Product_active" object="${product}" z="+3OZkseTzvwCtfOg0pPBSOhEr2o="/>
         <field:display date="true" dateTimePattern="${product_validto_date_format}" field="validTo" id="s_cz_kolomet_domain_Product_validTo" object="${product}" z="1B16372FTICFbxZCes59kEITbMw="/>
+        <field:display field="seller" id="s_cz_kolomet_domain_Product_seller" object="${product}" z="l9aQBxj/TdL+b5fuw0y3j8Sq9kE="/>
     </page:show>
 </div>

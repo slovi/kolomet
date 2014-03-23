@@ -6,14 +6,14 @@
     <div id="menu_container"> 
     	<nav>	
     		<menu:menu id="main_menu">
-    			<menu:item url="/intro/index" messageCode="menu.main.intro" id="intro" />
-    			<menu:item url="/products/categorytype/cattype_bike" messageCode="menu.main.products.bikes" id="products_bikes" />
-    			<menu:item url="/products/categorytype/cattype_other" messageCode="menu.main.products.other" id="products_other" />
-    			<menu:item url="/sellers_map" messageCode="menu.main.sellers" id="sellers" />
-    			<menu:item url="/search" messageCode="menu.main.search" id="search" />
-    			<menu:item url="/about" messageCode="menu.main.about" id="about" />
+    			<menu:item url="/intro/index" messageCode="menu_main_intro" id="intro" />
+    			<menu:item url="/products/categorytype/cattype_bike" messageCode="menu_main_products_bikes" id="products_bikes" />
+    			<menu:item url="/products/categorytype/cattype_other" messageCode="menu_main_products_other" id="products_other" />
+    			<menu:item url="/sellers/map" messageCode="menu_main_sellers" id="sellers" />
+    			<menu:item url="#" messageCode="menu_main_search" id="search" />
+    			<menu:item url="/about" messageCode="menu_main_about" id="about" />
     			
-    			<menu:category id="admin" label="Our kolomet" url="/sellers">
+    			<menu:category id="admin" messageCode="menu_main_our_kolomet" url="/sellers">
     				<menu:item id="i_applicationuser_list" messageCode="global_menu_list" url="/applicationusers?page=1&amp;size=${empty param.size ? 10 : param.size}" z="18oGQE63MUIZ2YAKBPnDk0gNcZA="/>
     				<menu:item id="i_applicationrole_list" messageCode="global_menu_list" url="/applicationroles?page=1&amp;size=${empty param.size ? 10 : param.size}" z="5BKruYLjsrCLDE9itOj1TlqWcRk="/>
     				<menu:item id="i_applicationpermission_list" messageCode="global_menu_list" url="/applicationpermissions?page=1&amp;size=${empty param.size ? 10 : param.size}" z="Wl97kcGOo9MYPdeFlSYOwi7lAZs="/>
@@ -30,6 +30,8 @@
 		            <menu:item id="i_category_list" messageCode="global_menu_list" url="/categorys?page=1&amp;size=${empty param.size ? 10 : param.size}" z="0VEYbn/XUobhsOa74Uf6KyWz8/w="/>
 		            <menu:item id="i_categorytype_list" messageCode="global_menu_list" url="/categorytypes?page=1&amp;size=${empty param.size ? 10 : param.size}" z="+i+xbCARHICgKqWYpTon7hXJ4S8="/>
 		            <menu:item id="i_photourl_list" messageCode="global_menu_list" url="/photourls?page=1&amp;size=${empty param.size ? 10 : param.size}" z="D+g8dQxzKdkuGRtxnXRvSGL7guI="/>
+		            <hr color="#f9f9f9" width="85%" align="center" size="1" /> 
+		            <menu:item id="i_newsitem_list" messageCode="global_menu_list" url="/newsitems?page=1&amp;size=${empty param.size ? 10 : param.size}" z="KOnlcMRbr4BntwwokrnIdkGVvTE="/>
     			</menu:category>
     			
     		</menu:menu>

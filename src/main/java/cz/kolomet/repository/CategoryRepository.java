@@ -10,7 +10,9 @@ import cz.kolomet.domain.Category;
 @RooJpaRepository(domainType = Category.class)
 public interface CategoryRepository {
 	
-	@Query("select c from Category c inner join c.categoryType ct where ct.codeKey = :categoryCodeKey")
-	List<Category> find(@Param("categoryCodeKey") String categoryCodeKey);
+	List<Category> findByCodeKey(String codeKey);
+	
+	@Query("select c from Category c inner join c.categoryType ct where ct.codeKey = :categoryTypeCodeKey")
+	List<Category> find(@Param("categoryTypeCodeKey") String categoryTypeCodeKey);
 	
 }

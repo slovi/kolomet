@@ -7,9 +7,9 @@
             <table:column id="c_cz_kolomet_domain_Product_productName" property="productName" z="a0TMwRPIIK+uZVPOhkqtLmfD/D8="/>
             <table:column id="c_cz_kolomet_domain_Product_price" property="price" z="Ectb0BurZX7mhNije3YfGMubn2g="/>
             <table:column id="c_cz_kolomet_domain_Product_discount" property="discount" z="pnt8BEVJhtqhFMbBqNByYO5DRKM="/>
-            <table:column id="c_cz_kolomet_domain_Product_seller" property="seller" z="xXlUW9wBZCidPifcwIpt6Sk16Zw="/>
             <table:column id="c_cz_kolomet_domain_Product_category" property="category" z="M9AWgCLGzk7rvSSltx+ZL6fn8t8="/>
             <table:column id="c_cz_kolomet_domain_Product_description" property="description" z="6TZQgqQEIEErldXbIwdJ6L66o3Y="/>
+            <table:column id="c_cz_kolomet_domain_Product_seller" property="seller" z="xXlUW9wBZCidPifcwIpt6Sk16Zw="/>
         </table:table>
     </page:list>
 </div>

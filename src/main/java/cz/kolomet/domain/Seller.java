@@ -4,6 +4,7 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.roo.addon.equals.RooEquals;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.entity.RooJpaEntity;
@@ -30,6 +31,8 @@ public class Seller extends DomainEntity {
     @NotNull
     @Lob
     private String sellerDescription;
+    
+    private String sellerTitle;
     
     private Boolean active;
     
@@ -122,5 +125,56 @@ public class Seller extends DomainEntity {
     
     @Size(max = 50)
     private String addressEmail;
+    
+    public String getPersonString() {
+    	
+    	StringBuilder builder = new StringBuilder();
+    	if (StringUtils.isNotEmpty(personSalutation)) {
+    		builder.append(personSalutation);
+    		builder.append(" ");
+    	}
+    	if (StringUtils.isNotEmpty(personDegree)) {
+    		builder.append(personDegree);
+    		builder.append(" ");
+    	}
+    	if (StringUtils.isNotEmpty(personName)) {
+    		builder.append(personName);
+    		builder.append(" ");
+    	}
+    	if (StringUtils.isNotEmpty(personSurname)) {
+    		builder.append(personSurname);
+    		builder.append(" ");
+    	}
+    	return builder.toString();
+    }
+    
+    public String getAddressString() {
+    	StringBuilder builder = new StringBuilder();
+    	if (StringUtils.isNotEmpty(addressStreet)) {
+    		builder.append(addressStreet);
+    		builder.append(", ");
+    	}
+    	if (StringUtils.isNotEmpty(addressCity)) {
+    		builder.append(addressCity);
+    		builder.append(", ");
+    	}
+    	if (StringUtils.isNotEmpty(addressPostCode)) {
+    		builder.append(addressPostCode);
+    		builder.append(addressPostCode);
+    	}
+    	return builder.toString();
+    }
+    
+    public String getContactString() {
+    	StringBuilder builder = new StringBuilder();
+    	if (StringUtils.isNotEmpty(businessEmail)) {
+    		builder.append(businessEmail);
+    		builder.append(", ");
+    	}
+    	if (StringUtils.isNotEmpty(businessPhoneNumber)) {
+    		builder.append(businessPhoneNumber);
+    	}
+    	return builder.toString();
+    }
     
 }

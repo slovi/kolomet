@@ -8,6 +8,8 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.FilterDef;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.equals.RooEquals;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.entity.RooJpaEntity;
@@ -19,11 +21,13 @@ import org.springframework.roo.addon.tostring.RooToString;
 @RooJpaEntity(inheritanceType = "TABLE_PER_CLASS")
 @RooEquals
 @RooSerializable
+@FilterDef(name = "enabled")
 public class NewsItem extends DomainEntity {
 
 	@NotNull
-	private String header;
-
+	private Boolean enabled = true;
+	
+	@DateTimeFormat(style="M-")
 	private Date newsItemDate;
 	
 	@Lob

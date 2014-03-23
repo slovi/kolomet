@@ -26,7 +26,7 @@
         </h1>
 		<menu:menu id="side_menu_body_producers" styleClass="side-menu-body hidden">
 			<c:forEach items="${producers}" var="producer" varStatus="status">
-				<menu:item url="?${producer.name}" id="menuitem_${producer.codeKey}" label="${producer.name}" />
+				<menu:item url="/products/producer/${producer.id}" id="menuitem_${producer.codeKey}" label="${producer.name}" />
 			</c:forEach>
 		</menu:menu>
 	</div>

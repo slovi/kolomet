@@ -185,3 +185,5 @@ web mvc scaffold --class ~.web.NewsItemController --backingType ~.domain.NewsIte
 // Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2014-03-20 22:36:28
 // Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2014-03-20 22:36:53
 web mvc scaffold --class ~.web.NewsItemController --backingType ~.domain.NewsItem
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2014-03-20 23:50:32
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2014-03-22 22:14:20

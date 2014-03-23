@@ -10,7 +10,6 @@ public class AboutController extends AbstractController {
 
     @RequestMapping
     public String index(Model model) {
-    	setDefaultModel(model);
         return "about/index";
     }
 

@@ -6,10 +6,11 @@
 
   	<div id="footer"> 
 		<p>2014 Kolomet &#169; &#32; &#32; |
-    	<a href="">O nás</a> |
-    	<a href="">Obchodní podmínky</a> |
-    	<a href="">Kontakt</a></p>
-    	<a href="" class="action_button_dark">Chci zde inzerovat</a>
-	</div> <!-- patka konec -->
+		<spring:url value="/about" var="aboutUrl" />
+    	<a href="${aboutUrl}"><spring:message code="footer_about" /></a> |
+    	<a href="#"><spring:message code="footer_conditions" /></a> |
+    	<a href="#"><spring:message code="footer_contact" /></a></p>
+    	<a href="#" class="action_button_dark"><spring:message code="footer_add" /></a>
+	</div>
 	
 </div>

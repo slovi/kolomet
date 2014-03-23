@@ -1,13 +1,22 @@
 package cz.kolomet.web;
 
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.web.bind.annotation.ModelAttribute;
+
+import cz.kolomet.domain.Category;
+import cz.kolomet.domain.NewsItem;
+import cz.kolomet.domain.Producer;
 import cz.kolomet.repository.CategoryRepository;
+import cz.kolomet.repository.NewsItemRepository;
 import cz.kolomet.repository.ProducerRepository;
 
 public class AbstractController {
+	
+	private Integer newsItemsSize = 10;
+	private String defaultCategoryCodeKey = "cattype_bike"; // TODO nastavit jako property
 	
 	@Autowired
 	private ProducerRepository producerRepository; 
@@ -15,15 +24,22 @@ public class AbstractController {
 	@Autowired
 	private CategoryRepository categoryRepository;
 	
-	private String defaultCategoryCodeKey = "cattype_bike"; // TODO nastavit jako property
-
-	protected void setDefaultModel(Model model) {
-		this.setDefaultModel(model, this.defaultCategoryCodeKey);
+	@Autowired
+	private NewsItemRepository newsItemRepository;
+	
+	@ModelAttribute("categories")
+	public List<Category> loadCategories() {
+		return categoryRepository.find(defaultCategoryCodeKey);
 	}
 	
-	protected void setDefaultModel(Model model, String categoryTypeCodeKey) {
-		model.addAttribute("categories", categoryRepository.find(StringUtils.isEmpty(categoryTypeCodeKey) ? defaultCategoryCodeKey : categoryTypeCodeKey));
-		model.addAttribute("producers", producerRepository.findAll());
+	@ModelAttribute("producers")
+	public List<Producer> loadProducers() {
+		return producerRepository.findAll();
+	}
+	
+	@ModelAttribute("newsItems")
+	public List<NewsItem> loadNewsItems() {
+		return newsItemRepository.findAll(new PageRequest(0, newsItemsSize)).getContent();
 	}
 
 }

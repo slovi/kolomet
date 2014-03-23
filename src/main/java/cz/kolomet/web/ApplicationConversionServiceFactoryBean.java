@@ -1,6 +1,10 @@
 package cz.kolomet.web;
 
+import java.text.ParseException;
+import java.util.Locale;
+
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.format.Formatter;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.format.support.FormattingConversionServiceFactoryBean;
 import org.springframework.roo.addon.web.mvc.controller.converter.RooConversionService;
@@ -10,6 +14,7 @@ import cz.kolomet.domain.Producer;
 import cz.kolomet.domain.Product;
 import cz.kolomet.domain.Seller;
 import cz.kolomet.domain.codelist.CategoryType;
+import cz.kolomet.domain.codelist.CountryState;
 import cz.kolomet.domain.codelist.ProductAttributeType;
 
 /**
@@ -22,6 +27,7 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 	@SuppressWarnings("deprecation")
 	protected void installFormatters(FormatterRegistry registry) {
 		super.installFormatters(registry);
+		registry.addFormatter(getCountryStateFormatter());
 	}
 	
 	public Converter<Seller, String> getSellerToStringConverter() {
@@ -71,5 +77,22 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
             }
         };
     }
+	
+	// formatters
+	
+	public Formatter<CountryState> getCountryStateFormatter() {
+		return new Formatter<CountryState>() {
+	
+			@Override
+			public String print(CountryState object, Locale locale) {
+				return object.getCodeDescription();
+			}
+	
+			@Override
+			public CountryState parse(String text, Locale locale) throws ParseException {
+				throw new UnsupportedOperationException();
+			}
+		};
+	}
 	
 }

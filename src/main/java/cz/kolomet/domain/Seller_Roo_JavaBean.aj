@@ -26,6 +26,14 @@ privileged aspect Seller_Roo_JavaBean {
         this.sellerDescription = sellerDescription;
     }
     
+    public String Seller.getSellerTitle() {
+        return this.sellerTitle;
+    }
+    
+    public void Seller.setSellerTitle(String sellerTitle) {
+        this.sellerTitle = sellerTitle;
+    }
+    
     public Boolean Seller.getActive() {
         return this.active;
     }

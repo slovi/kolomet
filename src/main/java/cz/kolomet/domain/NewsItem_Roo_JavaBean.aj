@@ -9,12 +9,12 @@ import java.util.Date;
 
 privileged aspect NewsItem_Roo_JavaBean {
     
-    public String NewsItem.getHeader() {
-        return this.header;
+    public Boolean NewsItem.getEnabled() {
+        return this.enabled;
     }
     
-    public void NewsItem.setHeader(String header) {
-        this.header = header;
+    public void NewsItem.setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
     
     public Date NewsItem.getNewsItemDate() {

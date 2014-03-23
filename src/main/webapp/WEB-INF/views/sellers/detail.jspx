@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    
+    <div class="detail_header"> 
+   		
+   		<spring:url value="${seller.photoUrl}" var="logoUrl" />
+   		<div class="detail_img left">
+   			.
+           	<img class="detail_img_content" src="${logoUrl}" alt="" title=""/>
+           	.
+        </div>
+        
+       	<div class="detail_description right"> 
+        	<a href="${seller.web}" target="_blank" class="label"><c:out value="${seller.sellerName}" /></a>
+           	<p><c:out value="${seller.sellerTitle}" /><a href="${seller.web}" target="_blank"><c:out value="${seller.web}" /></a>
+           	<br/>
+           	<c:out value="${seller.sellerDescription}" />
+           	</p>
+       	</div>
+
+		<div class="detail_tag right"> 
+    		<p class="detail_seller left">${seller.personString}<br/>
+           	${seller.addressString}<a target="_blank" href="">mapa</a><br />
+            <spring:message code="seller.detail.contact" />: <c:out value="${seller.contactString}" /></p>
+            <div>
+            	<a class="action_button_dark right" href="${seller.web}" target="_blank"><spring:message code="seller.detail.visit" /></a>
+            </div>
+    	</div>
+	</div>
+       
+    <div class="detail_info_seller"> 
+       	<div class="seller_specifications"> 
+           	<p class="left_column left">
+               	<strong><spring:message code="seller.detail.person" /></strong><br />
+				<spring:message code="label_cz_kolomet_domain_seller_personsalutation" />: <spring:eval expression="seller.personSalutation" /><br />
+				<spring:message code="label_cz_kolomet_domain_seller_persondegree" />: <spring:eval expression="seller.personDegree" /><br />
+				<spring:message code="label_cz_kolomet_domain_seller_personname" />: <spring:eval expression="seller.personName" /><br />
+				<spring:message code="label_cz_kolomet_domain_seller_personsurname" />: <spring:eval expression="seller.personSurname" /><br />			
+				<strong><spring:message code="seller.detail.business" /></strong><br />
+				<spring:message code="label_cz_kolomet_domain_seller_businesscountry" />: <spring:eval expression="seller.businessCountry" /><br />
+				<spring:message code="label_cz_kolomet_domain_seller_businesscity" />: <spring:eval expression="seller.businessCity" /><br />
+				<spring:message code="label_cz_kolomet_domain_seller_businessstreet" />: <spring:eval expression="seller.businessStreet" /><br />
+				<spring:message code="label_cz_kolomet_domain_seller_businesspostcode" />: <spring:eval expression="seller.businessPostCode" /><br />
+				<spring:message code="label_cz_kolomet_domain_seller_businesssalutation" />: <spring:eval expression="seller.businessSalutation" /><br />
+				<spring:message code="label_cz_kolomet_domain_seller_businessdegree" />: <spring:eval expression="seller.businessDegree" /><br />
+				<spring:message code="label_cz_kolomet_domain_seller_businessname" />: <spring:eval expression="seller.businessName" /><br />
+				<spring:message code="label_cz_kolomet_domain_seller_businessemail" />: <spring:eval expression="seller.businessEmail" />
+			</p>
+			<p class="right_column right">
+				<strong><spring:message code="seller.detail.other" /></strong><br />
+				<spring:message code="label_cz_kolomet_domain_seller_sellerstatus" />: <spring:eval expression="seller.sellerStatus" /><br />
+				<spring:message code="label_cz_kolomet_domain_seller_region" />: <spring:eval expression="seller.region" /><br />
+				<spring:message code="label_cz_kolomet_domain_seller_web" />: <spring:eval expression="seller.web" /><br />
+				<spring:message code="label_cz_kolomet_domain_seller_saleType" />: <spring:eval expression="seller.saleType" /><br />
+				<strong><spring:message code="seller.detail.address" /></strong><br />
+				<spring:message code="label_cz_kolomet_domain_seller_addresscountry" />: <spring:eval expression="seller.addressCountry" /><br />
+				<spring:message code="label_cz_kolomet_domain_seller_addresscity" />: <spring:eval expression="seller.addressCity" /><br />
+				<spring:message code="label_cz_kolomet_domain_seller_addressstreet" />: <spring:eval expression="seller.addressStreet" /><br />
+				<spring:message code="label_cz_kolomet_domain_seller_addresspostcode" />: <spring:eval expression="seller.addressPostCode" /><br />
+				<spring:message code="label_cz_kolomet_domain_seller_addresssalutation" />: <spring:eval expression="seller.addressSalutation" /><br />
+				<spring:message code="label_cz_kolomet_domain_seller_addressdegree" />: <spring:eval expression="seller.addressDegree" /><br />
+				<spring:message code="label_cz_kolomet_domain_seller_addressname" />: <spring:eval expression="seller.addressName" /><br />
+				<spring:message code="label_cz_kolomet_domain_seller_addressemail" />: <spring:eval expression="seller.addressEmail" /><br />
+            </p>
+       		</div>
+           
+           	<div class="seller_ads"> 
+           		<h3><spring:message code="seller.detail.last_adds" /></h3>
+               	<table class="ad_list">
+               		<thead>               		
+                   	<tr>
+                   		<td><spring:message code="detail_seller_product_name" /></td>
+                       	<td><spring:message code="detail_seller_product_price" /></td>
+                   	</tr>
+                   	</thead>
+                   	<c:forEach items="${products}" var="product">
+	                   	<tr>
+	                   		<spring:url value="/products/detail" var="productDetailUrl" />
+	                   		<td><a href="${productDetailUrl}/${product.id}">${product.productName}</a></td>
+	                       	<td>${product.price }</td>
+	                   	</tr>
+               		</c:forEach>
+               </table>
+       		</div>
+    	</div>
+
+</div>

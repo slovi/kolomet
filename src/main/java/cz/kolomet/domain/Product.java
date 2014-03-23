@@ -63,6 +63,11 @@ public class Product extends DomainEntity {
     /**
      */
     @DateTimeFormat(style="M-")
+    private Date created;
+    
+    /**
+     */
+    @DateTimeFormat(style="M-")
     private Date validTo;
 
     /**

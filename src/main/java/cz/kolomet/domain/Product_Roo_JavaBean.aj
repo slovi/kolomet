@@ -79,6 +79,14 @@ privileged aspect Product_Roo_JavaBean {
         this.active = active;
     }
     
+    public Date Product.getCreated() {
+        return this.created;
+    }
+    
+    public void Product.setCreated(Date created) {
+        this.created = created;
+    }
+    
     public Date Product.getValidTo() {
         return this.validTo;
     }

@@ -18,6 +18,8 @@ import cz.kolomet.domain.codelist.CategoryType;
 @RooSerializable
 public class Category extends DomainEntity {
 	
+	public static final String ALL_CATEGORY_CODE_KEY = "cat_bike_all";
+	
     /**
      */
     @NotNull

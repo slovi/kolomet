@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:spring="http://www.springframework.org/tags" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+
+	<div class="general_unit">
+    
+		<script type="text/javascript">
+		
+				 var DHTML = (document.getElementById || document.all || document.layers);
+				 var flag = 1;
+		
+				 function highlight(category){
+				 		 var mapa;
+				 		 mapa = document.getElementById('mapacr');
+		
+				 		 switch(category){
+				 		 		 case('CZ011')		 		 		 :  mapa.style.backgroundPosition = '0px -1500px'; break;
+				 		 		 case('CZ031')		 		 		 :  mapa.style.backgroundPosition = '0px -2000px'; break;
+				 		 		 case('CZ062')		 		 		 :  mapa.style.backgroundPosition = '0px -2750px'; break;
+				 		 		 case('CZ041')		 		 		 :  mapa.style.backgroundPosition = '0px -250px'; break;
+				 		 		 case('CZ052')		 		 		 :  mapa.style.backgroundPosition = '0px -1750px'; break;
+				 		 		 case('CZ051')		 		 		 :  mapa.style.backgroundPosition = '0px -750px'; break;
+				 		 		 case('CZ081')		 		 		 :  mapa.style.backgroundPosition = '0px -3500px'; break;
+				 		 		 case('CZ071')		 		 		 :  mapa.style.backgroundPosition = '0px -3000px'; break;
+				 		 		 case('CZ053')		 		 		 :  mapa.style.backgroundPosition = '0px -2500px'; break;
+				 		 		 case('CZ032')		 		 		 :  mapa.style.backgroundPosition = '0px -1000px'; break;
+				 		 		 case('CZ021')		 		 		 :  mapa.style.backgroundPosition = '0px -1250px'; break;
+				 		 		 case('CZ042')		 		 		 :  mapa.style.backgroundPosition = '0px -500px'; break;
+				 		 		 case('CZ061')		 		 		 :  mapa.style.backgroundPosition = '0px -2250px'; break;
+				 		 		 case('CZ072')		 		 		 :  mapa.style.backgroundPosition = '0px -3250px'; break;
+		
+				 		 		 case('none')		 		 		 :  mapa.style.backgroundPosition = '0 0'; break;
+				 		 		 case('')		 		 		 		 :  mapa.style.backgroundPosition = '0 0'; break;
+				 		 }
+				 }		 
+		
+		// Create the tooltips only when document ready
+		$(document).ready(function()
+		{
+		   // Use the each() method to gain access to each elements attributes
+		   $('area').each(function()
+		   {
+		      $(this).qtip(
+		      {
+		        content: $(this).attr('alt'), // Use the ALT attribute of the area map
+				 		 position: { corner: { target: 'rightMiddle', tooltip: 'leftMiddle' } },
+		        style: {
+				 		 		 'font-size': 12,
+				 		 		 background: '#b22c1b',
+				 		 		 color: '#ffffff',
+				 		 		 textAlign: 'center',
+		            tip: false,
+				 		 		 border: {
+				 		 		 		 width: 0,
+				 		 		 		 radius: 0
+				 		 		 }
+		         }
+		      });
+		   });
+		});		 
+		
+		
+		</script>
+
+ 		<div id="mapa">
+ 			<div id="mapa_inner">
+ 		 		<map name="map" id="map"> 
+ 		 			
+ 		 			<spring:url value="/sellers/map" var="sellersMapUrl" />
+					<area shape="poly" id="area1" coords="134,94,153,88,160,99,141,109" href="${sellersMapUrl}?regionCodeKey=reg_pha" 
+							 onmouseover="highlight('CZ011');" 
+							 onmouseout="highlight('');" 
+							 alt="Praha"
+							 />
+					<area shape="poly" id="area2" coords="92,202,106,150,176,144,178,169,218,188,215,207,181,197,180,221,162,234,130,237" href="${sellersMapUrl}?regionCodeKey=reg_jhc" 
+							 onmouseover="highlight('CZ031');" 
+							 onmouseout="highlight('');"
+							 alt="Jihočeský kraj"
+							 />
+					<area shape="poly" id="area3" coords="218,205,259,189,269,144,292,142,315,172,318,194,344,212,314,214,302,235,273,217,268,225," href="${sellersMapUrl}?regionCodeKey=reg_jhm" 
+							 onmouseover="highlight('CZ062');" 
+							 onmouseout="highlight('');" 
+							 alt="Jihomoravský kraj"
+							 />
+					<area shape="poly" id="area4" coords="5,73,16,82,49,58,77,94,31,113,10,94" href="${sellersMapUrl}?regionCodeKey=reg_klv" 
+							 onmouseover="highlight('CZ041');" 
+							 onmouseout="highlight('');" 
+							 alt="Karlovarský kraj"
+							 />
+					<area shape="poly" id="area5" coords="191,55,220,53,216,30,271,46,256,63,278,89,259,99,233,88,208,93,190,70" href="${sellersMapUrl}?regionCodeKey=reg_khr" 
+							 onmouseover="highlight('CZ052');" 
+							 onmouseout="highlight('');" 
+							 alt="Královéhradecký kraj"
+							 />
+					<area shape="poly" id="area6" coords="159,22,182,20,200,11,205,27,215,30,219,53,190,54,178,44,153,55,142,37,149,27" href="${sellersMapUrl}?regionCodeKey=reg_lib" 
+							 onmouseover="highlight('CZ051');" 
+							 onmouseout="highlight('');" 
+							 alt="Liberecký kraj"
+							 />
+					<area shape="poly" id="area7" coords="316,117,332,79,352,75,352,84,343,90,361,106,371,101,402,114,406,131,417,136,419,149,392,160,362,147,344,128" href="${sellersMapUrl}?regionCodeKey=reg_msl" 
+							 onmouseover="highlight('CZ081');" 
+							 onmouseout="highlight('');" 
+							 alt="Moravskoslezský kraj"
+							 />
+					<area shape="poly" id="area8" coords="288,104,300,83,307,75,298,62,332,78,320,91,316,117,347,128,361,148,316,172,301,152,296,162,291,157" href="${sellersMapUrl}?regionCodeKey=reg_olo" 
+							 onmouseover="highlight('CZ071');" 
+							 onmouseout="highlight('');" 
+							 alt="Olomoucký kraj"
+							 />
+					<area shape="poly" id="area9" coords="209,94,240,88,263,98,279,89,286,94,297,85,289,103,291,141,269,142,214,118" href="${sellersMapUrl}?regionCodeKey=reg_par" 
+							 onmouseover="highlight('CZ053');" 
+							 onmouseout="highlight('');" 
+							 alt="Pardubický kraj"
+							 />
+					<area shape="poly" id="area10" coords="31,113,79,96,109,111,102,136,105,168,89,204,57,167,44,165,22,128" href="${sellersMapUrl}?regionCodeKey=reg_plz" 
+							 onmouseover="highlight('CZ032');" 
+							 onmouseout="highlight('');" 
+							 alt="Plzeňský kraj"
+							 />
+					<area shape="poly" id="area11" coords="83,94,180,46,197,76,208,93,213,116,178,145,107,149,101,132,110,112" href="${sellersMapUrl}?regionCodeKey=reg_str" 
+							 onmouseover="highlight('CZ021');" 
+							 onmouseout="highlight('');" 
+							 alt="Středočeský kraj"
+							 />
+					<area shape="poly" id="area12" coords="56,63,144,16,136,4,156,9,158,22,142,40,150,55,139,67,79,94,72,71" href="${sellersMapUrl}?regionCodeKey=reg_ust" 
+							 onmouseover="highlight('CZ042');" 
+							 onmouseout="highlight('');" 
+							 alt="Ústecký kraj"
+							 />
+					<area shape="poly" id="area13" coords="177,145,195,138,195,128,213,117,268,144,257,187,216,204,217,188,180,172" href="${sellersMapUrl}?regionCodeKey=reg_vys" 
+							 onmouseover="highlight('CZ061');" 
+							 onmouseout="highlight('');" 
+							 alt="Vysočina"
+							 />
+					<area shape="poly" id="area14" coords="315,173,362,148,393,162,376,174,372,194,345,211,314,189" href="${sellersMapUrl}?regionCodeKey=reg_zln" 
+							 onmouseover="highlight('CZ072');" 
+							 onmouseout="highlight('');" 
+							 alt="Zlínský kraj"
+							 />
+				</map> 
+ 		 		
+ 		 		<spring:url value="/background/transparent_pixel.gif" var="transparentPixelUrl" />
+ 		 		<spring:url value="/img/mapacrtmp_01.gif" var="mapUrl" />
+ 		 		<img src="${transparentPixelUrl}" width="430" height="250" alt="" id="mapacr" usemap="#map" />
+ 		 		                         
+	            <style>
+					 #mapacr {
+						 display: block;
+						 background: transparent url('${mapUrl}') 0px 0px no-repeat;
+						 width: 430px;
+						 height: 250px;							 
+						 }
+					 #mapa_inner {
+						 margin:15px auto;
+						 width:430px;						 
+						 }
+				</style>  
+        	</div>
+       	</div>            	 	
+	</div>
+
+	<c:forEach items="${sellers}" var="seller">	
+		<spring:url value="/sellers/detail" var="sellersDetailUrl" />
+		<div class="category_unit cat_prodejce"> 
+	    	<div class="cat_description cat_prodejce_popis"> 
+	    		<a href="${sellersDetailUrl}/${seller.id}" class="label"><spring:eval expression="seller.sellerName" /></a>
+	        	<p>${seller.sellerTitle}<a href="${seller.web}" target="_blank"><spring:eval expression="seller.web" /></a></p>
+	        	<br/>
+	            <p>
+	            <spring:eval expression="seller.personString" /> - <spring:eval expression="seller.sellerName" /> - <spring:eval expression="seller.addressString" /><a target="_blank" href="">mapa</a>
+	            </p>
+	            <p>
+	           	<spring:message code="seller.map.contacts" /><spring:eval expression="seller.contactString" />							
+	            </p>		                    
+	    	</div>
+	    	<div class="cat_seller cat_prodejce_popis"> 
+	            <div>
+	            	<a class="action_button_dark" href="${sellersDetailUrl}/${seller.id}">Detail</a>
+	            </div>
+	  		</div>
+	 	</div>
+	</c:forEach>
+	
+	<div class="clear" />
+</jsp:root>
+
