@@ -75,7 +75,7 @@
                        	<td><spring:message code="detail_seller_product_price" /></td>
                    	</tr>
                    	</thead>
-                   	<c:forEach items="${products}" var="product">
+                   	<c:forEach items="${products.content}" var="product">
 	                   	<tr>
 	                   		<spring:url value="/products/detail" var="productDetailUrl" />
 	                   		<td><a href="${productDetailUrl}/${product.id}">${product.productName}</a></td>
