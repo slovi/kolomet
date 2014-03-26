@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <form:update id="fu_cz_kolomet_domain_Product" modelAttribute="product" path="/products" versionField="Version" z="7HMLzrdkHxpwS+MFgkL/IDEP8JA=">
@@ -9,10 +9,18 @@
         <field:input field="discount" id="c_cz_kolomet_domain_Product_discount" validationMessageCode="field_invalid_number" z="uv6z4+8sEz83BAFjjftyHYknDNY="/>
         <field:select field="category" id="c_cz_kolomet_domain_Product_category" itemValue="id" items="${categorys}" path="/categorys" z="eT10diRPV/47lFJga+1qWSNV4Ao="/>
         <field:select field="producer" id="c_cz_kolomet_domain_Product_producer" itemValue="id" items="${producers}" path="/producers" z="AxpqTO8BGX72BcngzBaVOGOCLKo="/>
-        <field:simple field="photoUrls" id="c_cz_kolomet_domain_Product_photoUrls" messageCode="entity_reference_not_managed" messageCodeAttribute="Photo Url" z="0I/yqZ5hrbgbfKtBvg7iv376CBQ="/>
-        <field:simple field="productAttributes" id="c_cz_kolomet_domain_Product_productAttributes" messageCode="entity_reference_not_managed" messageCodeAttribute="Product Attribute" z="aws05A7yGAWx8lIhx+EGnW0TKW4="/>
-        <field:checkbox field="active" id="c_cz_kolomet_domain_Product_active" z="fo43YqIqtjtf0lvXgK4X8lCHFls="/>
         <field:datetime dateTimePattern="${product_validto_date_format}" field="validTo" id="c_cz_kolomet_domain_Product_validTo" z="2UFsBNvdW5vSrMA8Vstjhd9fDys="/>
         <field:select field="seller" id="c_cz_kolomet_domain_Product_seller" itemValue="id" items="${sellers}" path="/sellers" z="n2LM6UtZBxSNvd+5O1yFsjhfPtQ="/>
+        <field:simple field="photoUrls" id="c_cz_kolomet_domain_Product_photoUrls" messageCode="entity_reference_not_managed" messageCodeAttribute="Photo Url" render="false" z="user-managed"/>
+        <field:simple field="productAttributes" id="c_cz_kolomet_domain_Product_productAttributes" messageCode="entity_reference_not_managed" messageCodeAttribute="Product Attribute" render="false" z="user-managed"/>
+        <h2>Product attributes</h2>
+        <c:set scope="request" value="${product.productAttributes}" var="productattributes"/>
+        <jsp:include flush="true" page="../productattributes/list.jspx"/>
+        <br/>
+        <h2>Photo urls</h2>
+        <c:set scope="request" value="${product.photoUrls}" var="photourls"/>
+        <jsp:include flush="true" page="../photourls/list.jspx"/>
+        <br/>
+        <field:checkbox field="enabled" id="c_cz_kolomet_domain_Product_enabled" z="TQuxy01gHsypW2/Tbt4RWNqp11k="/>
     </form:update>
 </div>

@@ -68,7 +68,7 @@
  			<div id="mapa_inner">
  		 		<map name="map" id="map"> 
  		 			
- 		 			<spring:url value="/sellers/map" var="sellersMapUrl" />
+ 		 			<spring:url value="/public/sellers/map" var="sellersMapUrl" />
 					<area shape="poly" id="area1" coords="134,94,153,88,160,99,141,109" href="${sellersMapUrl}?regionCodeKey=reg_pha" 
 							 onmouseover="highlight('CZ011');" 
 							 onmouseout="highlight('');" 
@@ -162,7 +162,7 @@
 	</div>
 
 	<c:forEach items="${sellers}" var="seller">	
-		<spring:url value="/sellers/detail" var="sellersDetailUrl" />
+		<spring:url value="/public/sellers/detail" var="sellersDetailUrl" />
 		<div class="category_unit cat_prodejce"> 
 	    	<div class="cat_description cat_prodejce_popis"> 
 	    		<a href="${sellersDetailUrl}/${seller.id}" class="label"><spring:eval expression="seller.sellerName" /></a>

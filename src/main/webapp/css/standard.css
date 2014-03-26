@@ -1,6 +1,6 @@
-.quicklinks {
-	clear:both; 
-	padding-bottom: 15px
+.quicklinks { 
+	padding-bottom: 15px;
+	margin-top: 40px;
 }
 .quicklinks span {
 	float: right;

@@ -23,6 +23,7 @@ import cz.kolomet.domain.codelist.ProductAttributeType;
 @RooConversionService
 public class ApplicationConversionServiceFactoryBean extends FormattingConversionServiceFactoryBean {
 
+	
 	@Override
 	@SuppressWarnings("deprecation")
 	protected void installFormatters(FormatterRegistry registry) {

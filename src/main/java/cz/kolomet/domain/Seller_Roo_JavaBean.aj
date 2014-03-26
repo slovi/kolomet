@@ -34,12 +34,12 @@ privileged aspect Seller_Roo_JavaBean {
         this.sellerTitle = sellerTitle;
     }
     
-    public Boolean Seller.getActive() {
-        return this.active;
+    public Boolean Seller.getEnabled() {
+        return this.enabled;
     }
     
-    public void Seller.setActive(Boolean active) {
-        this.active = active;
+    public void Seller.setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
     
     public String Seller.getPersonSalutation() {

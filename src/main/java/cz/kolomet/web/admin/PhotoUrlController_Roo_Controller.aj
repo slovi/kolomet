@@ -8,10 +8,8 @@ import cz.kolomet.service.PhotoUrlService;
 import cz.kolomet.web.admin.PhotoUrlController;
 import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,23 +21,6 @@ privileged aspect PhotoUrlController_Roo_Controller {
     
     @Autowired
     PhotoUrlService PhotoUrlController.photoUrlService;
-    
-    @RequestMapping(method = RequestMethod.POST, produces = "text/html")
-    public String PhotoUrlController.create(@Valid PhotoUrl photoUrl, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
-            populateEditForm(uiModel, photoUrl);
-            return "photourls/create";
-        }
-        uiModel.asMap().clear();
-        photoUrlService.savePhotoUrl(photoUrl);
-        return "redirect:/photourls/" + encodeUrlPathSegment(photoUrl.getId().toString(), httpServletRequest);
-    }
-    
-    @RequestMapping(params = "form", produces = "text/html")
-    public String PhotoUrlController.createForm(Model uiModel) {
-        populateEditForm(uiModel, new PhotoUrl());
-        return "photourls/create";
-    }
     
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String PhotoUrlController.show(@PathVariable("id") Long id, Model uiModel) {
@@ -62,23 +43,6 @@ privileged aspect PhotoUrlController_Roo_Controller {
         return "photourls/list";
     }
     
-    @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
-    public String PhotoUrlController.update(@Valid PhotoUrl photoUrl, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
-            populateEditForm(uiModel, photoUrl);
-            return "photourls/update";
-        }
-        uiModel.asMap().clear();
-        photoUrlService.updatePhotoUrl(photoUrl);
-        return "redirect:/photourls/" + encodeUrlPathSegment(photoUrl.getId().toString(), httpServletRequest);
-    }
-    
-    @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
-    public String PhotoUrlController.updateForm(@PathVariable("id") Long id, Model uiModel) {
-        populateEditForm(uiModel, photoUrlService.findPhotoUrl(id));
-        return "photourls/update";
-    }
-    
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
     public String PhotoUrlController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         PhotoUrl photoUrl = photoUrlService.findPhotoUrl(id);
@@ -91,6 +55,7 @@ privileged aspect PhotoUrlController_Roo_Controller {
     
     void PhotoUrlController.populateEditForm(Model uiModel, PhotoUrl photoUrl) {
         uiModel.addAttribute("photoUrl", photoUrl);
+        uiModel.addAttribute("products", productService.findAllProducts());
     }
     
     String PhotoUrlController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

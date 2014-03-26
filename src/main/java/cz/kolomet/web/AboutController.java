@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping("/about/**")
+@RequestMapping("/public/about/**")
 @Controller
 public class AboutController extends AbstractController {
 

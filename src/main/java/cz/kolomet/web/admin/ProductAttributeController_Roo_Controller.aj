@@ -3,21 +3,13 @@
 
 package cz.kolomet.web.admin;
 
-import cz.kolomet.domain.Product;
 import cz.kolomet.domain.ProductAttribute;
-import cz.kolomet.domain.codelist.ProductAttributeType;
 import cz.kolomet.service.ProductAttributeService;
-import cz.kolomet.service.ProductAttributeTypeService;
-import cz.kolomet.service.ProductService;
 import cz.kolomet.web.admin.ProductAttributeController;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,37 +21,6 @@ privileged aspect ProductAttributeController_Roo_Controller {
     
     @Autowired
     ProductAttributeService ProductAttributeController.productAttributeService;
-    
-    @Autowired
-    ProductService ProductAttributeController.productService;
-    
-    @Autowired
-    ProductAttributeTypeService ProductAttributeController.productAttributeTypeService;
-    
-    @RequestMapping(method = RequestMethod.POST, produces = "text/html")
-    public String ProductAttributeController.create(@Valid ProductAttribute productAttribute, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
-            populateEditForm(uiModel, productAttribute);
-            return "productattributes/create";
-        }
-        uiModel.asMap().clear();
-        productAttributeService.saveProductAttribute(productAttribute);
-        return "redirect:/productattributes/" + encodeUrlPathSegment(productAttribute.getId().toString(), httpServletRequest);
-    }
-    
-    @RequestMapping(params = "form", produces = "text/html")
-    public String ProductAttributeController.createForm(Model uiModel) {
-        populateEditForm(uiModel, new ProductAttribute());
-        List<String[]> dependencies = new ArrayList<String[]>();
-        if (productAttributeTypeService.countAllProductAttributeTypes() == 0) {
-            dependencies.add(new String[] { "productattributetype", "productattributetypes" });
-        }
-        if (productService.countAllProducts() == 0) {
-            dependencies.add(new String[] { "product", "products" });
-        }
-        uiModel.addAttribute("dependencies", dependencies);
-        return "productattributes/create";
-    }
     
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String ProductAttributeController.show(@PathVariable("id") Long id, Model uiModel) {
@@ -80,23 +41,6 @@ privileged aspect ProductAttributeController_Roo_Controller {
             uiModel.addAttribute("productattributes", productAttributeService.findAllProductAttributes());
         }
         return "productattributes/list";
-    }
-    
-    @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
-    public String ProductAttributeController.update(@Valid ProductAttribute productAttribute, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
-            populateEditForm(uiModel, productAttribute);
-            return "productattributes/update";
-        }
-        uiModel.asMap().clear();
-        productAttributeService.updateProductAttribute(productAttribute);
-        return "redirect:/productattributes/" + encodeUrlPathSegment(productAttribute.getId().toString(), httpServletRequest);
-    }
-    
-    @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
-    public String ProductAttributeController.updateForm(@PathVariable("id") Long id, Model uiModel) {
-        populateEditForm(uiModel, productAttributeService.findProductAttribute(id));
-        return "productattributes/update";
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")

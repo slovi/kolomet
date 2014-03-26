@@ -3,8 +3,8 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
 
-	<spring:url value="/img/arrow_down.png" var="arrowDownImageUrl"/>
-	<spring:url value="/img/arrow_right.png" var="arrowRightImageUrl" />
+	<spring:url value="/resources/img/arrow_down.png" var="arrowDownImageUrl"/>
+	<spring:url value="/resources/img/arrow_right.png" var="arrowRightImageUrl" />
     
 	<div class="side-menu active">
 		<h1 class="side-menu-header">
@@ -14,7 +14,7 @@
 	    </h1>
 	    <menu:menu id="side_menu_body_types" styleClass="side-menu-body">
 	    	<c:forEach items="${categories}" var="category">
-				<menu:item url="/products/category/${category.codeKey}" id="menuitem_${category.codeKey}" label="${category.codeDescription}" />
+				<menu:item url="/public/products/category/${category.codeKey}" id="menuitem_${category.codeKey}" label="${category.codeDescription}" />
 			</c:forEach>
 	     </menu:menu>
 	</div>
@@ -26,7 +26,7 @@
         </h1>
 		<menu:menu id="side_menu_body_producers" styleClass="side-menu-body hidden">
 			<c:forEach items="${producers}" var="producer" varStatus="status">
-				<menu:item url="/products/producer/${producer.id}" id="menuitem_${producer.codeKey}" label="${producer.name}" />
+				<menu:item url="/public/products/producer/${producer.id}" id="menuitem_${producer.codeKey}" label="${producer.name}" />
 			</c:forEach>
 		</menu:menu>
 	</div>

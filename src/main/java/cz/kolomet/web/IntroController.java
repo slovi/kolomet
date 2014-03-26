@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import cz.kolomet.repository.ProductRepository;
 
-@RequestMapping("/")
+@RequestMapping("/public")
 @Controller
 public class IntroController extends AbstractController {
 	

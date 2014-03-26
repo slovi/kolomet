@@ -32,7 +32,7 @@
         <field:input field="addressDegree" id="c_cz_kolomet_domain_Seller_addressDegree" max="20" z="gvxpNRke+QW5x4b3AoablbclrZA="/>
         <field:textarea field="addressName" id="c_cz_kolomet_domain_Seller_addressName" z="q/PqbWpmHILs4mP1Os6h+kRKb70="/>
         <field:textarea field="addressEmail" id="c_cz_kolomet_domain_Seller_addressEmail" z="b040cbjtTAnHdEZ3j5X1JtGIouI="/>
-        <field:checkbox field="active" id="c_cz_kolomet_domain_Seller_active" z="hC2PuHN9yqlAITMv8KQVPnOdzRg="/>
-        <field:input field="sellerTitle" id="c_cz_kolomet_domain_Seller_sellerTitle" required="true" z="rgW2Nss+ZAdqZIcPmrvYG9C1Pzw="/>
+        <field:input field="sellerTitle" id="c_cz_kolomet_domain_Seller_sellerTitle" z="R4dz35yvkTZK+P/pzzqfsKGYfnM="/>
+        <field:checkbox field="enabled" id="c_cz_kolomet_domain_Seller_enabled" z="ZbUSvy6nfnljauAUjU6yJhQCH9g="/>
     </form:update>
 </div>

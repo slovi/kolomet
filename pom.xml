@@ -41,7 +41,7 @@
 			<snapshots>
 				<enabled>true</enabled>
 			</snapshots>
-		</repository>	
+		</repository>
 	</repositories>
 	<pluginRepositories>
 		<pluginRepository>
@@ -308,6 +308,11 @@
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>1.7.2</version>
 		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.1</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -398,14 +403,14 @@
 				<version>3.0</version>
 				<configuration>
 					<hibernatetool>
-						<jpaconfiguration/>
-						<hbm2ddl export="false" outputfilename="sql.ddl"/>
+						<jpaconfiguration />
+						<hbm2ddl export="false" outputfilename="sql.ddl" />
 					</hibernatetool>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
-	
+
 	<profiles>
 		<profile>
 			<!-- When built in OpenShift the 'openshift' profile will be used when 
@@ -431,5 +436,5 @@
 			</build>
 		</profile>
 	</profiles>
-	
+
 </project>

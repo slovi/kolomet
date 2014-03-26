@@ -1,4 +1,8 @@
 package cz.kolomet.domain;
+import org.hibernate.annotations.Filter;
+import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.Filters;
+import org.hibernate.annotations.ParamDef;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.equals.RooEquals;
 import org.springframework.roo.addon.javabean.RooJavaBean;
@@ -21,6 +25,10 @@ import javax.persistence.OneToMany;
 @RooJpaEntity(inheritanceType = "TABLE_PER_CLASS")
 @RooEquals
 @RooSerializable
+@FilterDef(name = "productEnabledFilter", parameters = @ParamDef(type = "boolean", name = "enabled"))
+@Filters({
+	@Filter(name = "productEnabledFilter", condition = "enabled = :enabled")
+})
 public class Product extends DomainEntity {
 
     /**
@@ -58,7 +66,7 @@ public class Product extends DomainEntity {
     
     /**
      */
-    private Boolean active;
+    private Boolean enabled;
     
     /**
      */
@@ -72,7 +80,7 @@ public class Product extends DomainEntity {
 
     /**
      */
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
     private List<PhotoUrl> photoUrls = new ArrayList<PhotoUrl>();
 
     /**

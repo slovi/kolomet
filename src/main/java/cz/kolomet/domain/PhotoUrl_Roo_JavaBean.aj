@@ -4,15 +4,32 @@
 package cz.kolomet.domain;
 
 import cz.kolomet.domain.PhotoUrl;
+import cz.kolomet.domain.Product;
 
 privileged aspect PhotoUrl_Roo_JavaBean {
     
-    public String PhotoUrl.getUrlValue() {
-        return this.urlValue;
+    public String PhotoUrl.getFileName() {
+        return this.fileName;
     }
     
-    public void PhotoUrl.setUrlValue(String urlValue) {
-        this.urlValue = urlValue;
+    public void PhotoUrl.setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+    
+    public String PhotoUrl.getContentType() {
+        return this.contentType;
+    }
+    
+    public void PhotoUrl.setContentType(String contentType) {
+        this.contentType = contentType;
+    }
+    
+    public Product PhotoUrl.getProduct() {
+        return this.product;
+    }
+    
+    public void PhotoUrl.setProduct(Product product) {
+        this.product = product;
     }
     
 }

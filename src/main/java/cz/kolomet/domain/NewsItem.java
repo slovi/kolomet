@@ -8,7 +8,10 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Filter;
 import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.Filters;
+import org.hibernate.annotations.ParamDef;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.equals.RooEquals;
 import org.springframework.roo.addon.javabean.RooJavaBean;
@@ -21,9 +24,12 @@ import org.springframework.roo.addon.tostring.RooToString;
 @RooJpaEntity(inheritanceType = "TABLE_PER_CLASS")
 @RooEquals
 @RooSerializable
-@FilterDef(name = "enabled")
+@FilterDef(name = "newsItemEnabledFilter", parameters = @ParamDef(type = "boolean", name = "enabled"))
+@Filters({
+	@Filter(name = "newsItemEnabledFilter", condition = "enabled = :enabled")
+})
 public class NewsItem extends DomainEntity {
-
+	
 	@NotNull
 	private Boolean enabled = true;
 	

@@ -71,12 +71,12 @@ privileged aspect Product_Roo_JavaBean {
         this.producer = producer;
     }
     
-    public Boolean Product.getActive() {
-        return this.active;
+    public Boolean Product.getEnabled() {
+        return this.enabled;
     }
     
-    public void Product.setActive(Boolean active) {
-        this.active = active;
+    public void Product.setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
     
     public Date Product.getCreated() {

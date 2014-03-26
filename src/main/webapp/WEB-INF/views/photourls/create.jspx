@@ -2,8 +2,11 @@
 <div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <form:create id="fc_cz_kolomet_domain_PhotoUrl" modelAttribute="photoUrl" path="/photourls" render="${empty dependencies}" z="+wdZRG4Iu1E2whRHq6newrwiIfY=">
-        <field:input field="urlValue" id="c_cz_kolomet_domain_PhotoUrl_urlValue" max="20" required="true" z="cVCMIc+nOXrPrBR7XyZn2Zs3q+0="/>
+    <form:create id="fc_cz_kolomet_domain_PhotoUrl" modelAttribute="photoUrl" multipart="true" path="/photourls" render="${empty dependencies}" z="user-managed">
+        <field:input disableFormBinding="true" field="content" id="c_cz_kolomet_domain_PhotoUrl_urlValue" max="20" required="true" type="file" z="user-managed"/>
+        <field:select field="product" id="c_cz_kolomet_domain_PhotoUrl_product" itemValue="id" items="${products}" path="/products" required="true" z="f2HcSC6MmGFmYB9ML4YpGwmhv8Y="/>
+        <field:input field="fileName" id="c_cz_kolomet_domain_PhotoUrl_fileName" max="20" render="false" required="false" z="user-managed"/>
+        <field:input field="contentType" id="c_cz_kolomet_domain_PhotoUrl_contentType" max="20" render="false" required="false" z="user-managed"/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_cz_kolomet_domain_PhotoUrl" render="${not empty dependencies}" z="jcOoQML0AKB84/p0a52QIY3Fbl4="/>
 </div>

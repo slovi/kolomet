@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <page:list id="pl_cz_kolomet_domain_ProductAttribute" items="${productattributes}" z="K49OIronUICYt56KrRg62XucDcs=">
+    <page:list id="pl_cz_kolomet_domain_ProductAttribute" items="${productattributes}" path="/productattributes" z="user-managed">
         <table:table data="${productattributes}" id="l_cz_kolomet_domain_ProductAttribute" path="/productattributes" z="RBWDOjqz7QPiqusrtouH26eKIak=">
             <table:column id="c_cz_kolomet_domain_ProductAttribute_attributeValue" property="attributeValue" z="iEr9p8sClkxJ861VII6M3NNocWg="/>
             <table:column id="c_cz_kolomet_domain_ProductAttribute_attributeType" property="attributeType" z="6wuZfzgfFiT102hIlK9Gxs0wU1E="/>

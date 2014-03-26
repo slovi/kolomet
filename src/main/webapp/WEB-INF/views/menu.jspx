@@ -23,7 +23,7 @@
             <menu:item id="i_product_new" messageCode="global_menu_new" url="/products?form" z="Ezf8cTW61d2RkMNEcYkDJpG01kc="/>
             <menu:item id="i_product_list" messageCode="global_menu_list" url="/products?page=1&amp;size=${empty param.size ? 10 : param.size}" z="kEeyCmUUYXShbDEWwOLheaAkM50="/>
         </menu:category>
-        <menu:category id="c_productattribute" z="VDW5lj3HFKQaYlsIvHmV/duXM7Q=">
+        <menu:category id="c_productattribute" render="false" z="user-managed">
             <menu:item id="i_productattribute_new" messageCode="global_menu_new" url="/productattributes?form" z="Kqnwqr7otyFGZLzsCIIHlxCH+AI="/>
             <menu:item id="i_productattribute_list" messageCode="global_menu_list" url="/productattributes?page=1&amp;size=${empty param.size ? 10 : param.size}" z="VTVOTRtnhV45+bWn4Cei0rc7as4="/>
         </menu:category>
@@ -31,7 +31,7 @@
             <menu:item id="i_productattributetype_new" messageCode="global_menu_new" url="/productattributetypes?form" z="bKsjEKO88Nz4mE7VQLdReoNwQfE="/>
             <menu:item id="i_productattributetype_list" messageCode="global_menu_list" url="/productattributetypes?page=1&amp;size=${empty param.size ? 10 : param.size}" z="y9XTmdd/EfLHKNBZ/zQWt6JP+QQ="/>
         </menu:category>
-        <menu:category id="c_photourl" z="aDteTgCOPAw12KdkHqmdKd27SC8=">
+        <menu:category id="c_photourl" render="false" z="user-managed">
             <menu:item id="i_photourl_new" messageCode="global_menu_new" url="/photourls?form" z="xyqm1rInfgTMWcZMm0mk3bcld8U="/>
             <menu:item id="i_photourl_list" messageCode="global_menu_list" url="/photourls?page=1&amp;size=${empty param.size ? 10 : param.size}" z="D+g8dQxzKdkuGRtxnXRvSGL7guI="/>
         </menu:category>

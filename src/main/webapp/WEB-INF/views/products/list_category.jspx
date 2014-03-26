@@ -3,7 +3,7 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     
-   	<spring:url value="/products/filter" var="filterActionUrl" />
+   	<spring:url value="/public/products/filter" var="filterActionUrl" />
    	<form:form id="filterForm" action="${filterActionUrl}" method="get" modelAttribute="productFilter">
 	    <div class="filters">
       		<form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
@@ -38,11 +38,11 @@
     </form:form>
 		            
 	<c:forEach items="${products.content}" var="product">           
-		<spring:url value="/maps" var="mapUrl" />
+		<spring:url value="/public/maps" var="mapUrl" />
 		<spring:url value="http://www.cyklocentrum.cz/kola/horska-kola/celoodpruzena-kola/agang-cult-2-0-2012_p333.htm" var="buyUrl" />
-		<spring:url value="/img/bike_02.jpg" var="productImgUrl" />
+		<spring:url value="/resources/img/bike_02.jpg" var="productImgUrl" />
 	    <div class="category_unit"> 
-	    	<spring:url value="/products/detail/${product.id}" var="productIdUrl" />
+	    	<spring:url value="/public/products/detail/${product.id}" var="productIdUrl" />
 	    	<a href="${productIdUrl}"><img width="224" height="146" src="${productImgUrl}"/></a>
 	    	<div class="cat_description"> 
 	    		<a href="${productIdUrl}" class="label"><c:out value="${product.productName}" /></a>
@@ -51,7 +51,8 @@
 	        </div>
 	        <div class="cat_seller"> 
 	        	<p>
-	                <a href="./detail_prodejce_cyklocentrum.htm"><c:out value="${product.seller.sellerName}" /></a>, ${product.seller.addressCity}<br/>
+	        		<spring:url value="/public/seller/${product.seller.id}" var="sellerIdUrl" />
+	                <a href="${sellerIdUrl}"><c:out value="${product.seller.sellerName}" /></a>, ${product.seller.addressCity}<br/>
 	            	<c:out value="${product.seller.addressStreet}" />, <c:out value="${product.seller.addressPostCode}" />, <c:out value="${product.seller.addressCity}" /><a href="${mapUrl}">mapa</a><br/>
 	                <c:out value="${product.seller.businessPhoneNumber}" />
 	            </p>

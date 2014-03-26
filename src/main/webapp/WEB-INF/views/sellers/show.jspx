@@ -32,7 +32,7 @@
         <field:display field="addressDegree" id="s_cz_kolomet_domain_Seller_addressDegree" object="${seller}" z="M/5vywWHjUjUdF9qBzXmCtTN6sM="/>
         <field:display field="addressName" id="s_cz_kolomet_domain_Seller_addressName" object="${seller}" z="Xqr9NUBujwOGHJTkDgRWFdwojjg="/>
         <field:display field="addressEmail" id="s_cz_kolomet_domain_Seller_addressEmail" object="${seller}" z="MdRlkzTu4hvtWYfmPeSgj2q1oJo="/>
-        <field:display field="active" id="s_cz_kolomet_domain_Seller_active" object="${seller}" z="BLW22HsUFDrI+z7o9wfB5vHGP9g="/>
         <field:display field="sellerTitle" id="s_cz_kolomet_domain_Seller_sellerTitle" object="${seller}" z="z5TBZq07pCUAKbQVWxRDJIW/qEk="/>
+        <field:display field="enabled" id="s_cz_kolomet_domain_Seller_enabled" object="${seller}" z="uWfb4xM4tGrF6WwFCslUskccrvE="/>
     </page:show>
 </div>

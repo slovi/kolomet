@@ -4,6 +4,7 @@ import javax.validation.Valid;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,7 +19,7 @@ import cz.kolomet.repository.ProducerRepository;
 import cz.kolomet.repository.ProductRepository;
 import cz.kolomet.repository.ProductSpecifications;
 
-@RequestMapping("/products")
+@RequestMapping("/public/products")
 @Controller("publicProductController")
 public class ProductController extends AbstractController {
 	
@@ -41,7 +42,7 @@ public class ProductController extends AbstractController {
 	@RequestMapping("/filter")
 	public String filterByProductFilter(@Valid ProductFilter productFilter, BindingResult result, Model model) {	
 		populateFilterForm(productFilter, null, null, model);
-		model.addAttribute("products", productRepository.findAll(ProductSpecifications.forProductFilter(productFilter), new PageRequest(0, 10)));
+		model.addAttribute("products", productRepository.findAll(ProductSpecifications.forProductFilter(productFilter), new PageRequest(0, 10, Direction.DESC, "priority")));
 		return "products/list_category";
 	}
 	

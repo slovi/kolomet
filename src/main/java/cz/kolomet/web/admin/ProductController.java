@@ -10,4 +10,6 @@ import cz.kolomet.domain.Product;
 @RooWebScaffold(path = "products", formBackingObject = Product.class)
 public class ProductController extends AbstractAdminController {
 	
+	
+	
 }
