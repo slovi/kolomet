@@ -95,6 +95,14 @@ privileged aspect Product_Roo_JavaBean {
         this.validTo = validTo;
     }
     
+    public Boolean Product.getCanSendToAllCountry() {
+        return this.canSendToAllCountry;
+    }
+    
+    public void Product.setCanSendToAllCountry(Boolean canSendToAllCountry) {
+        this.canSendToAllCountry = canSendToAllCountry;
+    }
+    
     public List<PhotoUrl> Product.getPhotoUrls() {
         return this.photoUrls;
     }

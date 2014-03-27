@@ -33,7 +33,7 @@ public class NewsItem extends DomainEntity {
 	@NotNull
 	private Boolean enabled = true;
 	
-	@DateTimeFormat(style="M-")
+	@DateTimeFormat(style="S-")
 	private Date newsItemDate;
 	
 	@Lob

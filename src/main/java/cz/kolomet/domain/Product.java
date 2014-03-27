@@ -4,6 +4,8 @@ import org.hibernate.annotations.FilterDef;
 import org.hibernate.annotations.Filters;
 import org.hibernate.annotations.ParamDef;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.NumberFormat;
+import org.springframework.format.annotation.NumberFormat.Style;
 import org.springframework.roo.addon.equals.RooEquals;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.entity.RooJpaEntity;
@@ -40,10 +42,12 @@ public class Product extends DomainEntity {
     /**
      */
     @NotNull
+    @NumberFormat(style = Style.NUMBER)
     private BigDecimal price;
 
     /**
      */
+    @NumberFormat(style = Style.NUMBER)
     private BigDecimal discount;
     
     @Lob
@@ -77,6 +81,8 @@ public class Product extends DomainEntity {
      */
     @DateTimeFormat(style="M-")
     private Date validTo;
+    
+    private Boolean canSendToAllCountry;
 
     /**
      */

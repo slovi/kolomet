@@ -3,18 +3,20 @@
   	<jsp:output omit-xml-declaration="yes" />
 
 	<c:forEach items="${products.content}" var="product">
-		<spring:url value="/img/bike_02.jpg" var="productImgUrl" />
 		<div class="homepage_unit"> 
-			<spring:url value="/products/detail/${product.id}" var="productIdUrl" />
-	     	<a href="${productIdUrl}"><img width="224" height="146" src="${productImgUrl}"/></a>
+			<spring:url value="/public/products/detail/${product.id}" var="productIdUrl" />
+	     	<a href="${productIdUrl}">
+	     		<util:product-image height="146" width="224" product="${product}" />
+	     	</a>
 	     	<div class="home_description"> 
 	     		<a href="${productIdUrl}" class="label"><c:out value="${product.productName}" /></a>
-	         	<p class="price"><c:out value="${product.price}" /></p>
+	         	<p class="price"><spring:eval expression="${product.price}" /><spring:message code="currency" /></p>
 	         	<p><c:out value="${fn:substring(product.description, 0, 80)}" />...</p>
 	     	</div>
 	     	<div class="home_seller"> 
 	     		<p>
-	                <a href="./detail_prodejce_cyklocentrum.htm"><c:out value="${product.seller.sellerName}" /></a>, ${product.seller.addressCity}<br/>
+	     			<spring:url value="/public/sellers/detail/${product.seller.id}" var="sellerIdUrl" />
+	                <a href="${sellerIdUrl}"><c:out value="${product.seller.sellerName}" /></a>, ${product.seller.addressCity}<br/>
 	            	<c:out value="${product.seller.addressStreet}" />, <c:out value="${product.seller.addressPostCode}" />, <c:out value="${product.seller.addressCity}" /><a href="${mapUrl}">mapa</a><br/>
 	                <c:out value="${product.seller.businessPhoneNumber}" />
 	            </p>

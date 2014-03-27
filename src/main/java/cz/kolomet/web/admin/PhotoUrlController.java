@@ -87,6 +87,16 @@ public class PhotoUrlController extends AbstractAdminController {
         return "redirect:/products/" + encodeUrlPathSegment(photoUrl.getProduct().getId().toString(), httpServletRequest);
     }
 	
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
+    public String delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
+        PhotoUrl photoUrl = photoUrlService.findPhotoUrl(id);
+        photoUrlService.deletePhotoUrl(photoUrl);
+        uiModel.asMap().clear();
+        uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
+        uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
+        return "redirect:/products/" + photoUrl.getProduct().getId();
+    }
+	
 	void populateEditForm(Model uiModel, PhotoUrl photoUrl, Product product) {
 		if (product != null) {
 			photoUrl.setProduct(product);

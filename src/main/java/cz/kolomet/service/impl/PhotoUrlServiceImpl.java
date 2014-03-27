@@ -21,6 +21,11 @@ public class PhotoUrlServiceImpl implements PhotoUrlService {
 	@Value("${product.img.height}")
 	private Integer height;
 	
+	@Value("${product.img.overview.width}")
+	private Integer overviewWidth;
+	@Value("${product.img.overview.height}")
+	private Integer overviewHeight;
+	
 	@Value("${product.img.thumbnail.width}")
 	private Integer thumbnailWidth;
 	@Value("${product.img.thumbnail.height}")
@@ -32,6 +37,9 @@ public class PhotoUrlServiceImpl implements PhotoUrlService {
         
     	// save original image
         String targetFileName = FilenameUtils.getBaseName(file.getName()) + PhotoUrl.ORIGINAL_IMG_SUFFIX;
+        imageService.resizeAndSave(file, new File(targetRootDir, targetFileName), new Dimension(width, height));
+        
+        String targetOverviewFileName = FilenameUtils.getBaseName(file.getName()) + PhotoUrl.OVERVIEW_IMG_SUFFIX;
         imageService.resizeAndSave(file, new File(targetRootDir, targetFileName), new Dimension(width, height));
         
         // save thumb image

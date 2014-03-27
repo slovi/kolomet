@@ -11,7 +11,7 @@ import cz.kolomet.domain.Product;
 @RooJpaRepository(domainType = Product.class)
 public interface ProductRepository {
 	
-	@Query("select p from Product p inner join p.seller s inner join s.sellerStatus ss")
+	@Query("select p from Product p inner join p.seller s inner join s.sellerStatus ss order by ss.priority desc")
 	Page<Product> findByPriority(Pageable pageable);
 	
 	@Query("select p from Product p inner join p.seller s where s.id = :sellerId order by p.created desc")

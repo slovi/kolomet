@@ -193,3 +193,5 @@ web mvc scaffold --class ~.web.NewsItemController --backingType ~.domain.NewsIte
 web mvc controller --class ~.web.DownloadFileController --preferredMapping /file/
 // Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2014-03-26 09:09:29
 // Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2014-03-26 22:48:26
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2014-03-27 10:55:46
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2014-03-27 17:52:47

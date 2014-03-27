@@ -77,6 +77,16 @@ public class ProductAttributeController extends AbstractAdminController {
         return "redirect:/products/" + encodeUrlPathSegment(productAttribute.getProduct().getId().toString(), httpServletRequest);
     }
     
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
+    public String delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
+        ProductAttribute productAttribute = productAttributeService.findProductAttribute(id);
+        productAttributeService.deleteProductAttribute(productAttribute);
+        uiModel.asMap().clear();
+        uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
+        uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
+        return "redirect:/products/" + productAttribute.getProduct().getId();
+    }
+    
     void populateEditForm(Model uiModel, ProductAttribute productAttribute, Product product) {
         uiModel.addAttribute("productAttribute", productAttribute);
         if (product != null) {

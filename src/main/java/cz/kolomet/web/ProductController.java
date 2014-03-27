@@ -42,7 +42,7 @@ public class ProductController extends AbstractController {
 	@RequestMapping("/filter")
 	public String filterByProductFilter(@Valid ProductFilter productFilter, BindingResult result, Model model) {	
 		populateFilterForm(productFilter, null, null, model);
-		model.addAttribute("products", productRepository.findAll(ProductSpecifications.forProductFilter(productFilter), new PageRequest(0, 10, Direction.DESC, "priority")));
+		model.addAttribute("products", productRepository.findAll(ProductSpecifications.forProductFilter(productFilter), new PageRequest(0, 10)));
 		return "products/list_category";
 	}
 	

@@ -20,6 +20,7 @@ import org.springframework.roo.addon.tostring.RooToString;
 public class PhotoUrl extends DomainEntity {
 	
 	public static String ORIGINAL_IMG_SUFFIX = "_orig.jpg";
+	public static String OVERVIEW_IMG_SUFFIX = "_over.jpg";
 	public static String THUMBNAIL_IMG_SUFFIX = "_thumb.jpg";
 	
     /**
@@ -43,6 +44,10 @@ public class PhotoUrl extends DomainEntity {
     
     public String getThumbPhotoUrl() {
     	return product.getId() + "/" + FilenameUtils.getBaseName(fileName) + THUMBNAIL_IMG_SUFFIX;
+    }
+    
+    public String getOverPhotoUrl() {
+    	return product.getId() + "/" + FilenameUtils.getBaseName(fileName) + OVERVIEW_IMG_SUFFIX;
     }
     
 }

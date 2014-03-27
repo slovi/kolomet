@@ -13,6 +13,8 @@
         <field:select field="seller" id="c_cz_kolomet_domain_Product_seller" itemValue="id" items="${sellers}" path="/sellers" z="n2LM6UtZBxSNvd+5O1yFsjhfPtQ="/>
         <field:simple field="photoUrls" id="c_cz_kolomet_domain_Product_photoUrls" messageCode="entity_reference_not_managed" messageCodeAttribute="Photo Url" render="false" z="user-managed"/>
         <field:simple field="productAttributes" id="c_cz_kolomet_domain_Product_productAttributes" messageCode="entity_reference_not_managed" messageCodeAttribute="Product Attribute" render="false" z="user-managed"/>
+        <field:checkbox field="enabled" id="c_cz_kolomet_domain_Product_enabled" z="TQuxy01gHsypW2/Tbt4RWNqp11k="/>
+        <field:checkbox field="canSendToAllCountry" id="c_cz_kolomet_domain_Product_canSendToAllCountry" z="8sX6jZghVHGKYZWe/Q5nXF2KvS0="/>
         <h2>Product attributes</h2>
         <c:set scope="request" value="${product.productAttributes}" var="productattributes"/>
         <jsp:include flush="true" page="../productattributes/list.jspx"/>
@@ -21,6 +23,5 @@
         <c:set scope="request" value="${product.photoUrls}" var="photourls"/>
         <jsp:include flush="true" page="../photourls/list.jspx"/>
         <br/>
-        <field:checkbox field="enabled" id="c_cz_kolomet_domain_Product_enabled" z="TQuxy01gHsypW2/Tbt4RWNqp11k="/>
     </form:update>
 </div>
