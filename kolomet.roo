@@ -7,6 +7,7 @@ entity jpa --class ~.domain.Seller --activeRecord false --equals true --extends 
 entity jpa --class ~.domain.Producer --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 entity jpa --class ~.domain.ProductAttribute --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --testAutomatically true --activeRecord false
 entity jpa --class ~.domain.PhotoUrl --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
+entity jpa --class ~.domain.SellerPhotoUrl --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 entity jpa --class ~.domain.Product --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 entity jpa --class ~.domain.ApplicationUser --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 entity jpa --class ~.domain.ApplicationRole --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
@@ -23,6 +24,7 @@ repository jpa --interface ~.repository.ProductRepository --entity ~.domain.Prod
 repository jpa --interface ~.repository.SellerRepository --entity ~.domain.Seller
 repository jpa --interface ~.repository.ProductAttributeRepository --entity ~.domain.ProductAttribute
 repository jpa --interface ~.repository.PhotoUrlRepository --entity ~.domain.PhotoUrl
+repository jpa --interface ~.repository.SellerPhotoUrlRepository --entity ~.domain.SellerPhotoUrl
 repository jpa --interface ~.repository.CategoryRepository --entity ~.domain.codelist.Category
 repository jpa --interface ~.repository.CategoryTypeRepository --entity ~.domain.codelist.CategoryType
 repository jpa --interface ~.repository.ProducerRepository --entity ~.domain.codelist.Producer
@@ -39,6 +41,7 @@ service type --interface ~.service.ProductService --entity ~.domain.Product --cl
 service type --interface ~.service.SellerService --entity ~.domain.Seller --class ~.service.impl.SellerServiceImpl
 service type --interface ~.service.ProductAttributeService --entity ~.domain.ProductAttribute --class ~.service.impl.ProductAttributeServiceImpl
 service type --interface ~.service.PhotoUrlService --entity ~.domain.PhotoUrl --class ~.service.impl.PhotoUrlServiceImpl
+service type --interface ~.service.SellerPhotoUrlService --entity ~.domain.SellerPhotoUrl --class ~.service.impl.SellerPhotoUrlServiceImpl
 service type --interface ~.service.CategoryService --entity ~.domain.Category --class ~.service.impl.CategoryServiceImpl
 service type --interface ~.service.CategoryTypeService --entity ~.domain.codelist.CategoryType --class ~.service.impl.CategoryTypeServiceImpl
 service type --interface ~.service.ProducerService --entity ~.domain.codelist.Producer --class ~.service.impl.ProducerServiceImpl
@@ -56,6 +59,7 @@ web mvc scaffold --class ~.web.SellerController --backingType ~.domain.Seller
 web mvc scaffold --class ~.web.ProductController --backingType ~.domain.Product
 web mvc scaffold --class ~.web.ProductAttributeController --backingType ~.domain.ProductAttribute
 web mvc scaffold --class ~.web.PhotoUrlController --backingType ~.domain.PhotoUrl
+web mvc scaffold --class ~.web.SellerPhotoUrlController --backingType ~.domain.SellerPhotoUrl
 web mvc scaffold --class ~.web.CategoryController --backingType ~.domain.codelist.Category
 web mvc scaffold --class ~.web.ProducerController --backingType ~.domain.codelist.Producer
 web mvc scaffold --class ~.web.SellerStatusController --backingType ~.domain.codelist.SellerStatus

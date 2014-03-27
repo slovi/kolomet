@@ -403,8 +403,8 @@
 				<version>3.0</version>
 				<configuration>
 					<hibernatetool>
-						<jpaconfiguration />
-						<hbm2ddl export="false" outputfilename="sql.ddl" />
+						<jpaconfiguration/>
+						<hbm2ddl export="false" outputfilename="sql.ddl"/>
 					</hibernatetool>
 				</configuration>
 			</plugin>

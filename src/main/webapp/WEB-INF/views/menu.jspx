@@ -63,5 +63,9 @@
             <menu:item id="i_newsitem_new" messageCode="global_menu_new" url="/newsitems?form" z="1tSaBYC8gn+lwkPBDz8JwFaYW4Q="/>
             <menu:item id="i_newsitem_list" messageCode="global_menu_list" url="/newsitems?page=1&amp;size=${empty param.size ? 10 : param.size}" z="KOnlcMRbr4BntwwokrnIdkGVvTE="/>
         </menu:category>
+        <menu:category id="c_sellerphotourl" z="olY/0YCZ5FyptXPockHbe07OqrA=">
+            <menu:item id="i_sellerphotourl_new" messageCode="global_menu_new" url="/sellerphotourls?form" z="jzEqGyAPL7maHiC5KacTdaz8fSo="/>
+            <menu:item id="i_sellerphotourl_list" messageCode="global_menu_list" url="/sellerphotourls?page=1&amp;size=${empty param.size ? 10 : param.size}" z="C2oxGN+TpdOGJbliU1jPuXF8HZg="/>
+        </menu:category>
     </menu:menu>
 </jsp:root>

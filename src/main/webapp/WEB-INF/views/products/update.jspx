@@ -15,6 +15,7 @@
         <field:simple field="productAttributes" id="c_cz_kolomet_domain_Product_productAttributes" messageCode="entity_reference_not_managed" messageCodeAttribute="Product Attribute" render="false" z="user-managed"/>
         <field:checkbox field="enabled" id="c_cz_kolomet_domain_Product_enabled" z="TQuxy01gHsypW2/Tbt4RWNqp11k="/>
         <field:checkbox field="canSendToAllCountry" id="c_cz_kolomet_domain_Product_canSendToAllCountry" z="8sX6jZghVHGKYZWe/Q5nXF2KvS0="/>
+        <c:set scope="request" value="${product.id}" var="parentEntityId"/>
         <h2>Product attributes</h2>
         <c:set scope="request" value="${product.productAttributes}" var="productattributes"/>
         <jsp:include flush="true" page="../productattributes/list.jspx"/>

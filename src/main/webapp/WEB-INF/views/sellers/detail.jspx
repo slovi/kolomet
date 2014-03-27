@@ -7,9 +7,7 @@
    		
    		<spring:url value="${seller.photoUrl}" var="logoUrl" />
    		<div class="detail_img left">
-   			.
-           	<img class="detail_img_content" src="${logoUrl}" alt="" title=""/>
-           	.
+           	<util:product-image photos="${seller.sellerPhotoUrls}" entity="seller" height="338" width="508" />
         </div>
         
        	<div class="detail_description right"> 

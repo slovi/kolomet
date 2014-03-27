@@ -4,9 +4,11 @@
 package cz.kolomet.domain;
 
 import cz.kolomet.domain.Seller;
+import cz.kolomet.domain.SellerPhotoUrl;
 import cz.kolomet.domain.codelist.CountryState;
 import cz.kolomet.domain.codelist.Region;
 import cz.kolomet.domain.codelist.SellerStatus;
+import java.util.List;
 
 privileged aspect Seller_Roo_JavaBean {
     
@@ -256,6 +258,14 @@ privileged aspect Seller_Roo_JavaBean {
     
     public void Seller.setAddressEmail(String addressEmail) {
         this.addressEmail = addressEmail;
+    }
+    
+    public List<SellerPhotoUrl> Seller.getSellerPhotoUrls() {
+        return this.sellerPhotoUrls;
+    }
+    
+    public void Seller.setSellerPhotoUrls(List<SellerPhotoUrl> sellerPhotoUrls) {
+        this.sellerPhotoUrls = sellerPhotoUrls;
     }
     
 }

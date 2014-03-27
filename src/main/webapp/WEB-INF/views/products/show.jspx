@@ -12,6 +12,7 @@
         <field:display date="true" dateTimePattern="${product_validto_date_format}" field="validTo" id="s_cz_kolomet_domain_Product_validTo" object="${product}" z="1B16372FTICFbxZCes59kEITbMw="/>
         <field:display field="seller" id="s_cz_kolomet_domain_Product_seller" object="${product}" z="l9aQBxj/TdL+b5fuw0y3j8Sq9kE="/>
         <field:display field="enabled" id="s_cz_kolomet_domain_Product_enabled" object="${product}" z="G0IkR8nTGchiaDDiIzk06toa8tY="/>
+        <field:display field="canSendToAllCountry" id="s_cz_kolomet_domain_Product_canSendToAllCountry" object="${product}" z="O9nFMtTV8x+xjzRoJ3W5IeBEVgs="/>
         <c:set scope="request" value="${product.id}" var="parentEntityId"/>
         <h2>Product attributes</h2>
         <c:set scope="request" value="${product.productAttributes}" var="productattributes"/>
@@ -20,6 +21,5 @@
         <h2>Photo urls</h2>
         <c:set scope="request" value="${product.photoUrls}" var="photourls"/>
         <jsp:include flush="true" page="../photourls/list.jspx"/>
-        <field:display field="canSendToAllCountry" id="s_cz_kolomet_domain_Product_canSendToAllCountry" object="${product}" z="O9nFMtTV8x+xjzRoJ3W5IeBEVgs="/>
     </page:show>
 </div>

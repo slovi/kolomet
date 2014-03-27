@@ -40,7 +40,7 @@ public class PhotoUrlServiceImpl implements PhotoUrlService {
         imageService.resizeAndSave(file, new File(targetRootDir, targetFileName), new Dimension(width, height));
         
         String targetOverviewFileName = FilenameUtils.getBaseName(file.getName()) + PhotoUrl.OVERVIEW_IMG_SUFFIX;
-        imageService.resizeAndSave(file, new File(targetRootDir, targetFileName), new Dimension(width, height));
+        imageService.resizeAndSave(file, new File(targetRootDir, targetOverviewFileName), new Dimension(overviewWidth, overviewHeight));
         
         // save thumb image
         String targetThumbFileName = FilenameUtils.getBaseName(file.getName()) + PhotoUrl.THUMBNAIL_IMG_SUFFIX;

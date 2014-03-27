@@ -34,6 +34,7 @@
         <field:textarea field="addressEmail" id="c_cz_kolomet_domain_Seller_addressEmail" z="b040cbjtTAnHdEZ3j5X1JtGIouI="/>
         <field:input field="sellerTitle" id="c_cz_kolomet_domain_Seller_sellerTitle" z="R4dz35yvkTZK+P/pzzqfsKGYfnM="/>
         <field:checkbox field="enabled" id="c_cz_kolomet_domain_Seller_enabled" z="ZbUSvy6nfnljauAUjU6yJhQCH9g="/>
+        <field:simple field="sellerPhotoUrls" id="c_cz_kolomet_domain_Seller_sellerPhotoUrls" messageCode="entity_reference_not_managed" messageCodeAttribute="Seller Photo Url" z="S65AtaxIF1oprs2bs+Kghp7r5XQ="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_cz_kolomet_domain_Seller" render="${not empty dependencies}" z="wOb4nwhLxol+WOVpFAt/d7koDnE="/>
 </div>

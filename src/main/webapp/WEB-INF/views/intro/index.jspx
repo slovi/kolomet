@@ -6,7 +6,7 @@
 		<div class="homepage_unit"> 
 			<spring:url value="/public/products/detail/${product.id}" var="productIdUrl" />
 	     	<a href="${productIdUrl}">
-	     		<util:product-image height="146" width="224" product="${product}" />
+	     		<util:product-image photos="${product.photoUrls}" entity="product" height="146" width="224" />
 	     	</a>
 	     	<div class="home_description"> 
 	     		<a href="${productIdUrl}" class="label"><c:out value="${product.productName}" /></a>

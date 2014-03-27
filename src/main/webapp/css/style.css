@@ -328,7 +328,7 @@ div.detail_description p {
 div#content_container div.filters {
 	width: 902px;
 	height: 24px;
-	margin: 10px 6px 6px 6px;
+	margin: 0px 6px 6px 6px;
 	padding: 15px;
 }
 
@@ -406,7 +406,7 @@ div#header a.action_button {
 div#content_container div.detail_header {
 	width: 932px;
 	float: left;
-	margin: 10px 6px 6px 6px;
+	margin: 0px 6px 6px 6px;
 }
 
 div#content_container div.detail_header div.detail_img {

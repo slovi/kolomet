@@ -13,6 +13,7 @@ import cz.kolomet.domain.Producer;
 import cz.kolomet.domain.Product;
 import cz.kolomet.domain.ProductAttribute;
 import cz.kolomet.domain.Seller;
+import cz.kolomet.domain.SellerPhotoUrl;
 import cz.kolomet.domain.codelist.CategoryType;
 import cz.kolomet.domain.codelist.CountryState;
 import cz.kolomet.domain.codelist.ProductAttributeType;
@@ -31,6 +32,7 @@ import cz.kolomet.service.ProductAttributeService;
 import cz.kolomet.service.ProductAttributeTypeService;
 import cz.kolomet.service.ProductService;
 import cz.kolomet.service.RegionService;
+import cz.kolomet.service.SellerPhotoUrlService;
 import cz.kolomet.service.SellerService;
 import cz.kolomet.service.SellerStatusService;
 import cz.kolomet.web.ApplicationConversionServiceFactoryBean;
@@ -72,6 +74,9 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     
     @Autowired
     SellerService ApplicationConversionServiceFactoryBean.sellerService;
+    
+    @Autowired
+    SellerPhotoUrlService ApplicationConversionServiceFactoryBean.sellerPhotoUrlService;
     
     @Autowired
     CategoryTypeService ApplicationConversionServiceFactoryBean.categoryTypeService;
@@ -203,7 +208,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<PhotoUrl, String> ApplicationConversionServiceFactoryBean.getPhotoUrlToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<cz.kolomet.domain.PhotoUrl, java.lang.String>() {
             public String convert(PhotoUrl photoUrl) {
-                return new StringBuilder().append(photoUrl.getUrlValue()).toString();
+                return new StringBuilder().append(photoUrl.getFileName()).append(' ').append(photoUrl.getContentType()).toString();
             }
         };
     }
@@ -292,6 +297,30 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         return new org.springframework.core.convert.converter.Converter<java.lang.String, cz.kolomet.domain.Seller>() {
             public cz.kolomet.domain.Seller convert(String id) {
                 return getObject().convert(getObject().convert(id, Long.class), Seller.class);
+            }
+        };
+    }
+    
+    public Converter<SellerPhotoUrl, String> ApplicationConversionServiceFactoryBean.getSellerPhotoUrlToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<cz.kolomet.domain.SellerPhotoUrl, java.lang.String>() {
+            public String convert(SellerPhotoUrl sellerPhotoUrl) {
+                return new StringBuilder().append(sellerPhotoUrl.getFileName()).append(' ').append(sellerPhotoUrl.getContentType()).toString();
+            }
+        };
+    }
+    
+    public Converter<Long, SellerPhotoUrl> ApplicationConversionServiceFactoryBean.getIdToSellerPhotoUrlConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, cz.kolomet.domain.SellerPhotoUrl>() {
+            public cz.kolomet.domain.SellerPhotoUrl convert(java.lang.Long id) {
+                return sellerPhotoUrlService.findSellerPhotoUrl(id);
+            }
+        };
+    }
+    
+    public Converter<String, SellerPhotoUrl> ApplicationConversionServiceFactoryBean.getStringToSellerPhotoUrlConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, cz.kolomet.domain.SellerPhotoUrl>() {
+            public cz.kolomet.domain.SellerPhotoUrl convert(String id) {
+                return getObject().convert(getObject().convert(id, Long.class), SellerPhotoUrl.class);
             }
         };
     }
@@ -431,6 +460,9 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         registry.addConverter(getSellerToStringConverter());
         registry.addConverter(getIdToSellerConverter());
         registry.addConverter(getStringToSellerConverter());
+        registry.addConverter(getSellerPhotoUrlToStringConverter());
+        registry.addConverter(getIdToSellerPhotoUrlConverter());
+        registry.addConverter(getStringToSellerPhotoUrlConverter());
         registry.addConverter(getCategoryTypeToStringConverter());
         registry.addConverter(getIdToCategoryTypeConverter());
         registry.addConverter(getStringToCategoryTypeConverter());

@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class DownloadPhotoUrlFileController {
 
-	@Value("${product.img.rootdir}")
-	private String productRootDir;
+	@Value("${img.rootdir}")
+	private String rootDir;
 	
     @RequestMapping(method = RequestMethod.GET)
     public void download(ModelMap modelMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -27,7 +27,7 @@ public class DownloadPhotoUrlFileController {
     	
     	response.setContentType("image/jpeg");
 
-    	File file  = new File(productRootDir + pathInfo);
+    	File file  = new File(rootDir + pathInfo);
 		
 		IOUtils.copy(new FileInputStream(file), response.getOutputStream());
     }

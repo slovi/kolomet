@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_cz_kolomet_domain_SellerPhotoUrl" modelAttribute="sellerPhotoUrl" path="/sellerphotourls" versionField="Version" z="BhsLw/GTXQ4es9YKSrF3o2pGWKE=">
+        <field:input field="fileName" id="c_cz_kolomet_domain_SellerPhotoUrl_fileName" max="20" z="F8/9iN149/CuuqyJ3xVIATUrtG8="/>
+        <field:input field="contentType" id="c_cz_kolomet_domain_SellerPhotoUrl_contentType" max="20" z="qcHyZ9RPmIOnrzUM7PkI0WVxIIs="/>
+        <field:select field="seller" id="c_cz_kolomet_domain_SellerPhotoUrl_seller" itemValue="id" items="${sellers}" path="/sellers" required="true" z="gpKztn0uF5e6WnIDhfY5TFlHNyU="/>
+    </form:update>
+</div>

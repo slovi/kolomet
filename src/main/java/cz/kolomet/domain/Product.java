@@ -1,4 +1,16 @@
 package cz.kolomet.domain;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import org.hibernate.annotations.Filter;
 import org.hibernate.annotations.FilterDef;
 import org.hibernate.annotations.Filters;
@@ -11,16 +23,6 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.entity.RooJpaEntity;
 import org.springframework.roo.addon.serializable.RooSerializable;
 import org.springframework.roo.addon.tostring.RooToString;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.math.BigDecimal;
-import javax.persistence.ManyToOne;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.Lob;
-import javax.persistence.OneToMany;
 
 @RooJavaBean
 @RooToString

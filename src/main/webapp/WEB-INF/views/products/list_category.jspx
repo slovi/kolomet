@@ -28,7 +28,15 @@
 			</c:if>
 			<c:forEach begin="0" end="${totalPages}" varStatus="status" step="1">
 				<c:if test="${status.index != products.number}">
-					<a href="#" onclick="document.getElementById('filterForm').submit(); return false;">[<spring:eval expression="status.index" />]</a>
+					<spring:url value="/public/products/filter" var="pageUrl">
+						<spring:param name="priceFrom" value="${productFilter.priceFrom}" />
+						<spring:param name="priceTo" value="${productFilter.priceTo}" />
+						<spring:param name="category" value="${productFilter.category.id}" />
+						<spring:param name="producer" value="${productFilter.producer.id}" />
+						<spring:param name="page.page" value="${status.index + 1}" />
+						<spring:param name="page.size" value="${products.size}" />
+					</spring:url>
+					<a href="${pageUrl}">[<spring:eval expression="status.index" />]</a>
 				</c:if>
 				<c:if test="${status.index == products.number}">
 					[<spring:eval expression="status.index" />]
@@ -44,7 +52,7 @@
 	    <div class="category_unit"> 
 	    	<spring:url value="/public/products/detail/${product.id}" var="productIdUrl" />
 	    	<a href="${productIdUrl}">
-	    		<util:product-image height="146" width="224" product="${product}" />
+	    		<util:product-image photos="${product.photoUrls}" entity="product" height="146" width="224" />
 	    	</a>
 	    	<div class="cat_description"> 
 	    		<a href="${productIdUrl}" class="label"><c:out value="${product.productName}" /></a>
