@@ -24,5 +24,8 @@
         <c:set scope="request" value="${product.photoUrls}" var="photourls"/>
         <jsp:include flush="true" page="../photourls/list.jspx"/>
         <br/>
+        <field:input field="createdBy" id="c_cz_kolomet_domain_Product_createdBy" z="DH64gcykUpFf6vg+N3jTWs5PtJs="/>
+        <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_Product_lastModifiedBy" z="kKhWS8fWx9jNPbBkdwzuNNvLwOU="/>
+        <field:datetime dateTimePattern="${product_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_Product_lastModified" z="bZxncCGuVYWjTAPE7gGh7n18KBU="/>
     </form:update>
 </div>

@@ -6,7 +6,12 @@
         <field:display field="fileName" id="s_cz_kolomet_domain_SellerPhotoUrl_fileName" object="${sellerphotourl}" z="heCSgLuZikljbURldUuiYaZyJUU="/>
         <field:display field="contentType" id="s_cz_kolomet_domain_SellerPhotoUrl_contentType" object="${sellerphotourl}" z="gr6uvnSFP1cAnS6Ay4vvofPzBhg="/>
         <field:display field="seller" id="s_cz_kolomet_domain_SellerPhotoUrl_seller" object="${sellerphotourl}" z="U/Ez7NXencX8MPdvkuBhM2lM1bk="/>
+        <field:display field="createdDate" id="s_cz_kolomet_domain_SellerPhotoUrl_createdDate" object="${sellerphotourl}" z="iyhcVn3XEUErUN06Kaei0/viNY4="/>
+        <field:display field="lastModifiedDate" id="s_cz_kolomet_domain_SellerPhotoUrl_lastModifiedDate" object="${sellerphotourl}" z="iyhcVn3XEUErUN06Kaei0/viNY4="/>
+        <field:display field="createdBy" id="s_cz_kolomet_domain_SellerPhotoUrl_createdBy" object="${sellerphotourl}" z="iyhcVn3XEUErUN06Kaei0/viNY4="/>
+        <field:display field="lastModifiedBy" id="s_cz_kolomet_domain_SellerPhotoUrl_lastModifiedBy" object="${sellerphotourl}" z="d7YXDsodsDG9WLr+JS3dyjt/lSQ="/>
         <spring:url value="/file/seller/${sellerphotourl.photoUrl}" var="sellerPhotoUrlImg"/>
         <img src="${sellerPhotoUrlImg}"/>
+        <field:display date="true" dateTimePattern="${sellerPhotoUrl_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_SellerPhotoUrl_lastModified" object="${sellerphotourl}" z="v7aHGg8zfB5ulYm4E7ea1MY6k6c="/>
     </page:show>
 </div>

@@ -4,9 +4,12 @@
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_cz_kolomet_domain_ProductAttribute" items="${productattributes}" path="/productattributes" z="user-managed">
         <table:table data="${productattributes}" id="l_cz_kolomet_domain_ProductAttribute" path="/productattributes" z="RBWDOjqz7QPiqusrtouH26eKIak=">
-            <table:column id="c_cz_kolomet_domain_ProductAttribute_attributeValue" property="attributeValue" z="iEr9p8sClkxJ861VII6M3NNocWg="/>
             <table:column id="c_cz_kolomet_domain_ProductAttribute_attributeType" property="attributeType" z="6wuZfzgfFiT102hIlK9Gxs0wU1E="/>
             <table:column id="c_cz_kolomet_domain_ProductAttribute_product" property="product" z="cd6lKc69qSnLK6Du4l90AqD77+c="/>
+            <table:column id="c_cz_kolomet_domain_ProductAttribute_createdBy" property="createdBy" z="lPrLzTg4fNX0NL5AIFKpOfWGXuM="/>
+            <table:column id="c_cz_kolomet_domain_ProductAttribute_lastModifiedBy" property="lastModifiedBy" z="Ks5TLOEf2zI0ABjaryLvH37i6Lg="/>
+            <table:column date="true" dateTimePattern="${productAttribute_created_date_format}" id="c_cz_kolomet_domain_ProductAttribute_created" property="created" z="VG0YUSHsPRcTawMCKG2d1gBBtyI="/>
+            <table:column date="true" dateTimePattern="${productAttribute_lastmodified_date_format}" id="c_cz_kolomet_domain_ProductAttribute_lastModified" property="lastModified" z="zWOUqC3KIUGbWxgQ6sOfIOmn0S8="/>
         </table:table>
     </page:list>
 </div>

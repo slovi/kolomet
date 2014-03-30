@@ -6,5 +6,8 @@
         <field:display field="codeKey" id="s_cz_kolomet_domain_codelist_SellerStatus_codeKey" object="${sellerstatus}" z="YfxxfHPmt3b7MbGNRxkB8VIjtyE="/>
         <field:display field="codeDescription" id="s_cz_kolomet_domain_codelist_SellerStatus_codeDescription" object="${sellerstatus}" z="f1kimyJKWgegu406x56xjosEcxo="/>
         <field:display field="priority" id="s_cz_kolomet_domain_codelist_SellerStatus_priority" object="${sellerstatus}" z="TN9ERsq5srLk70801s4sFXU4B9Y="/>
+        <field:display field="createdBy" id="s_cz_kolomet_domain_codelist_SellerStatus_createdBy" object="${sellerstatus}" z="3Ttv5KbHuyuMbpOyL+jFLk2YB08="/>
+        <field:display field="lastModifiedBy" id="s_cz_kolomet_domain_codelist_SellerStatus_lastModifiedBy" object="${sellerstatus}" z="GmFKf98VYV8jmTmNCUIfqsGN2eQ="/>
+        <field:display date="true" dateTimePattern="${sellerStatus_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_codelist_SellerStatus_lastModified" object="${sellerstatus}" z="FkDGFL9A13GFtxZL+xB3CNuDMXc="/>
     </page:show>
 </div>

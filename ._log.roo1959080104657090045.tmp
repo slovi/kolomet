@@ -200,7 +200,3 @@ repository jpa --interface ~.repository.SellerPhotoUrlRepository --entity ~.doma
 service --interface ~.service.SellerPhotoUrlService --entity ~.domain.SellerPhotoUrl --class ~.service.impl.SellerPhotoUrlServiceImpl
 // [failed] web mvc scaffold --class ~.web.SellerPhotoUrlController --backingType ~.domain.SellerPhotoUrl
 web mvc scaffold --class ~.web.SellerPhotoUrlController --backingType ~.domain.SellerPhotoUrl
-// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2014-03-30 04:18:06
-field date --class ~.domain.DomainEntity --fieldName test --type org.joda.time.DateTime
-// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2014-03-30 12:32:02
-// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2014-03-30 12:32:44

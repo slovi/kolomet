@@ -17,11 +17,11 @@ privileged aspect Product_Roo_Equals {
             return true;
         }
         Product rhs = (Product) obj;
-        return new EqualsBuilder().append(canSendToAllCountry, rhs.canSendToAllCountry).append(category, rhs.category).append(created, rhs.created).append(description, rhs.description).append(discount, rhs.discount).append(enabled, rhs.enabled).append(id, rhs.id).append(price, rhs.price).append(producer, rhs.producer).append(productName, rhs.productName).append(seller, rhs.seller).append(validTo, rhs.validTo).isEquals();
+        return new EqualsBuilder().append(canSendToAllCountry, rhs.canSendToAllCountry).append(category, rhs.category).append(created, rhs.created).append(createdBy, rhs.createdBy).append(description, rhs.description).append(discount, rhs.discount).append(enabled, rhs.enabled).append(id, rhs.id).append(lastModified, rhs.lastModified).append(lastModifiedBy, rhs.lastModifiedBy).append(price, rhs.price).append(producer, rhs.producer).append(productName, rhs.productName).append(seller, rhs.seller).append(validTo, rhs.validTo).isEquals();
     }
     
     public int Product.hashCode() {
-        return new HashCodeBuilder().append(canSendToAllCountry).append(category).append(created).append(description).append(discount).append(enabled).append(id).append(price).append(producer).append(productName).append(seller).append(validTo).toHashCode();
+        return new HashCodeBuilder().append(canSendToAllCountry).append(category).append(created).append(createdBy).append(description).append(discount).append(enabled).append(id).append(lastModified).append(lastModifiedBy).append(price).append(producer).append(productName).append(seller).append(validTo).toHashCode();
     }
     
 }

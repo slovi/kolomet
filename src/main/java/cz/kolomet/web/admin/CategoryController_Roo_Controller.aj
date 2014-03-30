@@ -5,6 +5,7 @@ package cz.kolomet.web.admin;
 
 import cz.kolomet.domain.Category;
 import cz.kolomet.domain.codelist.CategoryType;
+import cz.kolomet.service.ApplicationUserService;
 import cz.kolomet.service.CategoryService;
 import cz.kolomet.service.CategoryTypeService;
 import cz.kolomet.web.admin.CategoryController;
@@ -13,7 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +30,9 @@ privileged aspect CategoryController_Roo_Controller {
     
     @Autowired
     CategoryService CategoryController.categoryService;
+    
+    @Autowired
+    ApplicationUserService CategoryController.applicationUserService;
     
     @Autowired
     CategoryTypeService CategoryController.categoryTypeService;
@@ -55,6 +61,7 @@ privileged aspect CategoryController_Roo_Controller {
     
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String CategoryController.show(@PathVariable("id") Long id, Model uiModel) {
+        addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("category", categoryService.findCategory(id));
         uiModel.addAttribute("itemId", id);
         return "categorys/show";
@@ -71,6 +78,7 @@ privileged aspect CategoryController_Roo_Controller {
         } else {
             uiModel.addAttribute("categorys", categoryService.findAllCategorys());
         }
+        addDateTimeFormatPatterns(uiModel);
         return "categorys/list";
     }
     
@@ -101,8 +109,15 @@ privileged aspect CategoryController_Roo_Controller {
         return "redirect:/categorys";
     }
     
+    void CategoryController.addDateTimeFormatPatterns(Model uiModel) {
+        uiModel.addAttribute("category_created_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("category_lastmodified_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
+    }
+    
     void CategoryController.populateEditForm(Model uiModel, Category category) {
         uiModel.addAttribute("category", category);
+        addDateTimeFormatPatterns(uiModel);
+        uiModel.addAttribute("applicationusers", applicationUserService.findAllApplicationUsers());
         uiModel.addAttribute("categorytypes", categoryTypeService.findAllCategoryTypes());
     }
     

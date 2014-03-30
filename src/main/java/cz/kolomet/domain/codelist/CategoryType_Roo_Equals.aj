@@ -17,11 +17,11 @@ privileged aspect CategoryType_Roo_Equals {
             return true;
         }
         CategoryType rhs = (CategoryType) obj;
-        return new EqualsBuilder().append(codeDescription, rhs.codeDescription).append(codeKey, rhs.codeKey).append(id, rhs.id).isEquals();
+        return new EqualsBuilder().append(codeDescription, rhs.codeDescription).append(codeKey, rhs.codeKey).append(created, rhs.created).append(createdBy, rhs.createdBy).append(id, rhs.id).append(lastModified, rhs.lastModified).append(lastModifiedBy, rhs.lastModifiedBy).isEquals();
     }
     
     public int CategoryType.hashCode() {
-        return new HashCodeBuilder().append(codeDescription).append(codeKey).append(id).toHashCode();
+        return new HashCodeBuilder().append(codeDescription).append(codeKey).append(created).append(createdBy).append(id).append(lastModified).append(lastModifiedBy).toHashCode();
     }
     
 }

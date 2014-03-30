@@ -5,5 +5,8 @@
     <form:update id="fu_cz_kolomet_domain_ApplicationPermission" modelAttribute="applicationPermission" path="/applicationpermissions" versionField="Version" z="NiB8nxP66iKSytLdSqU917ZEnrQ=">
         <field:input field="permissionName" id="c_cz_kolomet_domain_ApplicationPermission_permissionName" z="AYwk5EBY8NovlE7+3KjMLhJ6mL0="/>
         <field:select field="roles" id="c_cz_kolomet_domain_ApplicationPermission_roles" itemValue="id" items="${applicationroles}" multiple="true" path="/applicationroles" z="fWdnNQ8XtQivimYh52hJZRJ0VwY="/>
+        <field:input field="createdBy" id="c_cz_kolomet_domain_ApplicationPermission_createdBy" z="dkeA2U0iiyMCVqXu/2Vy0A6IWhE="/>
+        <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_ApplicationPermission_lastModifiedBy" z="rPc2mzFpEjkhvjcFEPPB3T0GCyY="/>
+        <field:datetime dateTimePattern="${applicationPermission_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_ApplicationPermission_lastModified" z="Wt7oiHovc3gwqmAmbyN1Gk/0ZiI="/>
     </form:update>
 </div>

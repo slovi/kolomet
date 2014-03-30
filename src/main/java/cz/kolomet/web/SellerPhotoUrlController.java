@@ -98,7 +98,7 @@ public class SellerPhotoUrlController {
         uiModel.asMap().clear();
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
-        return "redirect:/products/" + sellerPhotoUrl.getSeller().getId();
+        return "redirect:/sellers/" + sellerPhotoUrl.getSeller().getId();
     }
     
     void populateEditForm(Model uiModel, SellerPhotoUrl sellerPhotoUrl, Seller seller) {

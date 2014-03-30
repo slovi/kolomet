@@ -3,7 +3,7 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <form:update id="fu_cz_kolomet_domain_Seller" modelAttribute="seller" path="/sellers" versionField="Version" z="OuRE/eqg2b9/6SAnUicUjkCtVy8=">
-    	<field:input field="id" id="c_cz_kolomet_domain_Seller_id" type="hidden" z="user-managed" />
+        <field:input field="id" id="c_cz_kolomet_domain_Seller_id" type="hidden" z="user-managed"/>
         <field:input field="sellerName" id="c_cz_kolomet_domain_Seller_sellerName" max="20" required="true" z="18SNXoCBy1CBbMKA285H7uvBX9w="/>
         <field:textarea field="sellerDescription" id="c_cz_kolomet_domain_Seller_sellerDescription" required="true" z="2R0DVyToPC38OsSnW+TMQ2eJ1Ao="/>
         <field:textarea field="mapUrl" id="c_cz_kolomet_domain_Seller_mapUrl" z="l4+of1NGD4kA6p7robYOfSeBf5c="/>
@@ -35,12 +35,14 @@
         <field:input field="sellerTitle" id="c_cz_kolomet_domain_Seller_sellerTitle" z="R4dz35yvkTZK+P/pzzqfsKGYfnM="/>
         <field:checkbox field="enabled" id="c_cz_kolomet_domain_Seller_enabled" z="ZbUSvy6nfnljauAUjU6yJhQCH9g="/>
         <field:simple field="sellerPhotoUrls" id="c_cz_kolomet_domain_Seller_sellerPhotoUrls" messageCode="entity_reference_not_managed" messageCodeAttribute="Seller Photo Url" render="false" z="user-managed"/>
-        <field:simple field="products" id="c_cz_kolomet_domain_Seller_products" render="false" messageCode="entity_reference_not_managed" messageCodeAttribute="Product" z="AZCEE9YJtU0xKL2/6KEiz1JBwQE="/>
-
+        <field:simple field="products" id="c_cz_kolomet_domain_Seller_products" messageCode="entity_reference_not_managed" messageCodeAttribute="Product" render="false" z="user-managed"/>
+        <field:input field="createdBy" id="c_cz_kolomet_domain_Seller_createdBy" z="W7xMtOhfHDbQCtQ2ruugx2WLYaM="/>
+        <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_Seller_lastModifiedBy" z="ddfMIgC1ztwVzqzPP10PfpmHjhc="/>
         <c:set scope="request" value="${seller.id}" var="parentEntityId"/>
         <h2>Seller photos</h2>
         <c:set scope="request" value="${seller.sellerPhotoUrls}" var="sellerphotourls"/>
         <jsp:include flush="true" page="../sellerphotourls/list.jspx"/>
         <br/>
+        <field:datetime dateTimePattern="${seller_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_Seller_lastModified" z="O3z1wQEzY537/fYZg7d+x/JYU3I="/>
     </form:update>
 </div>

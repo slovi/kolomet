@@ -1,10 +1,8 @@
 package cz.kolomet.domain;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -112,9 +110,6 @@ public class Seller extends DomainEntity {
     @Size(max = 255)
     private String mapUrl;
     
-    @Size(max = 255)
-    private String photoUrl;
-    
     // korespondencni adresa
     @NotNull
     @ManyToOne
@@ -141,8 +136,11 @@ public class Seller extends DomainEntity {
     @Size(max = 50)
     private String addressEmail;
     
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "seller")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "seller", cascade = CascadeType.REMOVE)
     private List<SellerPhotoUrl> sellerPhotoUrls;
+    
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "seller", cascade = CascadeType.REMOVE)
+    private List<Product> products;
     
     public String getPersonString() {
     	

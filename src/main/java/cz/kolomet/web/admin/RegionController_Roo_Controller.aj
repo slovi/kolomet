@@ -4,12 +4,15 @@
 package cz.kolomet.web.admin;
 
 import cz.kolomet.domain.codelist.Region;
+import cz.kolomet.service.ApplicationUserService;
 import cz.kolomet.service.RegionService;
 import cz.kolomet.web.admin.RegionController;
 import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +26,9 @@ privileged aspect RegionController_Roo_Controller {
     
     @Autowired
     RegionService RegionController.regionService;
+    
+    @Autowired
+    ApplicationUserService RegionController.applicationUserService;
     
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String RegionController.create(@Valid Region region, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
@@ -43,6 +49,7 @@ privileged aspect RegionController_Roo_Controller {
     
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String RegionController.show(@PathVariable("id") Long id, Model uiModel) {
+        addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("region", regionService.findRegion(id));
         uiModel.addAttribute("itemId", id);
         return "regions/show";
@@ -59,6 +66,7 @@ privileged aspect RegionController_Roo_Controller {
         } else {
             uiModel.addAttribute("regions", regionService.findAllRegions());
         }
+        addDateTimeFormatPatterns(uiModel);
         return "regions/list";
     }
     
@@ -89,8 +97,15 @@ privileged aspect RegionController_Roo_Controller {
         return "redirect:/regions";
     }
     
+    void RegionController.addDateTimeFormatPatterns(Model uiModel) {
+        uiModel.addAttribute("region_created_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("region_lastmodified_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
+    }
+    
     void RegionController.populateEditForm(Model uiModel, Region region) {
         uiModel.addAttribute("region", region);
+        addDateTimeFormatPatterns(uiModel);
+        uiModel.addAttribute("applicationusers", applicationUserService.findAllApplicationUsers());
     }
     
     String RegionController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

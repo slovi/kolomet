@@ -7,6 +7,7 @@ import cz.kolomet.domain.Seller;
 import cz.kolomet.domain.codelist.CountryState;
 import cz.kolomet.domain.codelist.Region;
 import cz.kolomet.domain.codelist.SellerStatus;
+import cz.kolomet.service.ApplicationUserService;
 import cz.kolomet.service.CountryStateService;
 import cz.kolomet.service.ProductService;
 import cz.kolomet.service.RegionService;
@@ -19,7 +20,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,6 +36,9 @@ privileged aspect SellerController_Roo_Controller {
     
     @Autowired
     SellerService SellerController.sellerService;
+    
+    @Autowired
+    ApplicationUserService SellerController.applicationUserService;
     
     @Autowired
     ProductService SellerController.productService;
@@ -82,6 +88,7 @@ privileged aspect SellerController_Roo_Controller {
     
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String SellerController.show(@PathVariable("id") Long id, Model uiModel) {
+        addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("seller", sellerService.findSeller(id));
         uiModel.addAttribute("itemId", id);
         return "sellers/show";
@@ -98,6 +105,7 @@ privileged aspect SellerController_Roo_Controller {
         } else {
             uiModel.addAttribute("sellers", sellerService.findAllSellers());
         }
+        addDateTimeFormatPatterns(uiModel);
         return "sellers/list";
     }
     
@@ -128,8 +136,15 @@ privileged aspect SellerController_Roo_Controller {
         return "redirect:/sellers";
     }
     
+    void SellerController.addDateTimeFormatPatterns(Model uiModel) {
+        uiModel.addAttribute("seller_created_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("seller_lastmodified_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
+    }
+    
     void SellerController.populateEditForm(Model uiModel, Seller seller) {
         uiModel.addAttribute("seller", seller);
+        addDateTimeFormatPatterns(uiModel);
+        uiModel.addAttribute("applicationusers", applicationUserService.findAllApplicationUsers());
         uiModel.addAttribute("products", productService.findAllProducts());
         uiModel.addAttribute("sellerphotourls", sellerPhotoUrlService.findAllSellerPhotoUrls());
         uiModel.addAttribute("countrystates", countryStateService.findAllCountryStates());

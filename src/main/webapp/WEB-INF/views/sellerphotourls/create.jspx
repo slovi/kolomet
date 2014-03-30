@@ -7,6 +7,9 @@
         <field:select field="seller" id="c_cz_kolomet_domain_SellerPhotoUrl_seller" itemValue="id" items="${sellers}" path="/sellers" required="true" z="gpKztn0uF5e6WnIDhfY5TFlHNyU="/>
         <field:input field="fileName" id="c_cz_kolomet_domain_SellerPhotoUrl_fileName" max="20" render="false" required="false" z="F8/9iN149/CuuqyJ3xVIATUrtG8="/>
         <field:input field="contentType" id="c_cz_kolomet_domain_SellerPhotoUrl_contentType" max="20" render="false" required="false" z="user-managed"/>
+        <field:input field="createdBy" id="c_cz_kolomet_domain_SellerPhotoUrl_createdBy" render="false" z="user-managed"/>
+        <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_SellerPhotoUrl_lastModifiedBy" render="false" z="user-managed"/>
+        <field:datetime dateTimePattern="${sellerPhotoUrl_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_SellerPhotoUrl_lastModified" render="false" z="user-managed"/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_cz_kolomet_domain_SellerPhotoUrl" render="${not empty dependencies}" z="0gSXWyj810mhGfb5AKu2eBDnx60="/>
 </div>

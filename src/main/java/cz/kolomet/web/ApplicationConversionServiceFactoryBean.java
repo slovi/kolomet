@@ -3,6 +3,7 @@ package cz.kolomet.web;
 import java.text.ParseException;
 import java.util.Locale;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.Formatter;
 import org.springframework.format.FormatterRegistry;
@@ -16,6 +17,9 @@ import cz.kolomet.domain.Seller;
 import cz.kolomet.domain.codelist.CategoryType;
 import cz.kolomet.domain.codelist.CountryState;
 import cz.kolomet.domain.codelist.ProductAttributeType;
+import cz.kolomet.domain.codelist.Region;
+import cz.kolomet.domain.codelist.SellerStatus;
+import cz.kolomet.service.SellerStatusService;
 
 /**
  * A central place to register application converters and formatters. 
@@ -23,12 +27,15 @@ import cz.kolomet.domain.codelist.ProductAttributeType;
 @RooConversionService
 public class ApplicationConversionServiceFactoryBean extends FormattingConversionServiceFactoryBean {
 
+	@Autowired
+	private SellerStatusService sellerStatusService;
 	
 	@Override
 	@SuppressWarnings("deprecation")
 	protected void installFormatters(FormatterRegistry registry) {
 		super.installFormatters(registry);
 		registry.addFormatter(getCountryStateFormatter());
+		registry.addConverter(getSellerStatusToStringConverter());
 	}
 	
 	public Converter<Seller, String> getSellerToStringConverter() {
@@ -75,6 +82,38 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
         return new Converter<ProductAttributeType, String>() {
             public String convert(ProductAttributeType productAttributeType) {
                 return new StringBuilder().append(productAttributeType.getCodeDescription()).toString();
+            }
+        };
+    }
+	
+	public Converter<SellerStatus, String> getSellerStatusToStringConverter() {
+        return new Converter<SellerStatus, String>() {
+            public String convert(SellerStatus sellerStatus) {
+                return new StringBuilder().append(sellerStatus.getCodeKey()).append(' ').append(sellerStatus.getCodeDescription()).toString();
+            }
+        };
+    }
+	
+	public Converter<CountryState, String> getCountryStateToStringConverter() {
+        return new Converter<cz.kolomet.domain.codelist.CountryState, java.lang.String>() {
+            public String convert(CountryState countryState) {
+                return new StringBuilder().append(countryState.getCodeKey()).append(' ').append(countryState.getCodeDescription()).toString();
+            }
+        };
+    }
+	
+	public Converter<Long, SellerStatus> getIdToSellerStatusConverter() {
+        return new Converter<Long, SellerStatus>() {
+            public SellerStatus convert(Long id) {
+                return sellerStatusService.findSellerStatus(id);
+            }
+        };
+    }
+	
+	public Converter<Region, String> getRegionToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<cz.kolomet.domain.codelist.Region, java.lang.String>() {
+            public String convert(Region region) {
+                return new StringBuilder().append(region.getCodeKey()).append(' ').append(region.getCodeDescription()).toString();
             }
         };
     }

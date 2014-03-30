@@ -4,12 +4,15 @@
 package cz.kolomet.web.admin;
 
 import cz.kolomet.domain.Producer;
+import cz.kolomet.service.ApplicationUserService;
 import cz.kolomet.service.ProducerService;
 import cz.kolomet.web.admin.ProducerController;
 import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +26,9 @@ privileged aspect ProducerController_Roo_Controller {
     
     @Autowired
     ProducerService ProducerController.producerService;
+    
+    @Autowired
+    ApplicationUserService ProducerController.applicationUserService;
     
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String ProducerController.create(@Valid Producer producer, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
@@ -43,6 +49,7 @@ privileged aspect ProducerController_Roo_Controller {
     
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String ProducerController.show(@PathVariable("id") Long id, Model uiModel) {
+        addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("producer", producerService.findProducer(id));
         uiModel.addAttribute("itemId", id);
         return "producers/show";
@@ -59,6 +66,7 @@ privileged aspect ProducerController_Roo_Controller {
         } else {
             uiModel.addAttribute("producers", producerService.findAllProducers());
         }
+        addDateTimeFormatPatterns(uiModel);
         return "producers/list";
     }
     
@@ -89,8 +97,15 @@ privileged aspect ProducerController_Roo_Controller {
         return "redirect:/producers";
     }
     
+    void ProducerController.addDateTimeFormatPatterns(Model uiModel) {
+        uiModel.addAttribute("producer_created_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("producer_lastmodified_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
+    }
+    
     void ProducerController.populateEditForm(Model uiModel, Producer producer) {
         uiModel.addAttribute("producer", producer);
+        addDateTimeFormatPatterns(uiModel);
+        uiModel.addAttribute("applicationusers", applicationUserService.findAllApplicationUsers());
     }
     
     String ProducerController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

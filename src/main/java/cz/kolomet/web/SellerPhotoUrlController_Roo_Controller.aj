@@ -4,11 +4,14 @@
 package cz.kolomet.web;
 
 import cz.kolomet.domain.SellerPhotoUrl;
+import cz.kolomet.service.ApplicationUserService;
 import cz.kolomet.service.SellerPhotoUrlService;
 import cz.kolomet.web.SellerPhotoUrlController;
 import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
+import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,8 +24,12 @@ privileged aspect SellerPhotoUrlController_Roo_Controller {
     @Autowired
     SellerPhotoUrlService SellerPhotoUrlController.sellerPhotoUrlService;
     
+    @Autowired
+    ApplicationUserService SellerPhotoUrlController.applicationUserService;
+    
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String SellerPhotoUrlController.show(@PathVariable("id") Long id, Model uiModel) {
+        addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("sellerphotourl", sellerPhotoUrlService.findSellerPhotoUrl(id));
         uiModel.addAttribute("itemId", id);
         return "sellerphotourls/show";
@@ -39,11 +46,19 @@ privileged aspect SellerPhotoUrlController_Roo_Controller {
         } else {
             uiModel.addAttribute("sellerphotourls", sellerPhotoUrlService.findAllSellerPhotoUrls());
         }
+        addDateTimeFormatPatterns(uiModel);
         return "sellerphotourls/list";
+    }
+    
+    void SellerPhotoUrlController.addDateTimeFormatPatterns(Model uiModel) {
+        uiModel.addAttribute("sellerPhotoUrl_created_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("sellerPhotoUrl_lastmodified_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
     }
     
     void SellerPhotoUrlController.populateEditForm(Model uiModel, SellerPhotoUrl sellerPhotoUrl) {
         uiModel.addAttribute("sellerPhotoUrl", sellerPhotoUrl);
+        addDateTimeFormatPatterns(uiModel);
+        uiModel.addAttribute("applicationusers", applicationUserService.findAllApplicationUsers());
         uiModel.addAttribute("sellers", sellerService.findAllSellers());
     }
     

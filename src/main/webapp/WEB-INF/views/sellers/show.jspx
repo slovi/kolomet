@@ -3,9 +3,10 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:show detailUrl="/public/sellers/detail/${seller.id}" id="ps_cz_kolomet_domain_Seller" object="${seller}" path="/sellers" z="user-managed">
-        <field:display field="mapUrl" id="s_cz_kolomet_domain_Seller_mapUrl" object="${seller}" z="lV1SeuAmllK/9DIVCLihc2Y4IY4="/>
         <field:display field="sellerName" id="s_cz_kolomet_domain_Seller_sellerName" object="${seller}" z="UBe15Jtz4JIhAkGXcqY49L1eT10="/>
+        <field:display field="sellerTitle" id="s_cz_kolomet_domain_Seller_sellerTitle" object="${seller}" z="z5TBZq07pCUAKbQVWxRDJIW/qEk="/>
         <field:display field="sellerDescription" id="s_cz_kolomet_domain_Seller_sellerDescription" object="${seller}" z="MLbtGAIw9ZosGWITElbK9Qw8MNI="/>
+        <field:display field="mapUrl" id="s_cz_kolomet_domain_Seller_mapUrl" object="${seller}" z="lV1SeuAmllK/9DIVCLihc2Y4IY4="/>
         <field:display field="sellerStatus" id="s_cz_kolomet_domain_Seller_sellerStatus" object="${seller}" z="2bxS6KxRWKX5uC4J6O7vsjoup6Y="/>
         <field:display field="personSalutation" id="s_cz_kolomet_domain_Seller_personSalutation" object="${seller}" z="4upIjsBGcz8gLPmTJBzfBw9l0AY="/>
         <field:display field="personDegree" id="s_cz_kolomet_domain_Seller_personDegree" object="${seller}" z="zODKfQlIbTYTO8gfgbdTZiXiTqU="/>
@@ -31,8 +32,11 @@
         <field:display field="addressDegree" id="s_cz_kolomet_domain_Seller_addressDegree" object="${seller}" z="M/5vywWHjUjUdF9qBzXmCtTN6sM="/>
         <field:display field="addressName" id="s_cz_kolomet_domain_Seller_addressName" object="${seller}" z="Xqr9NUBujwOGHJTkDgRWFdwojjg="/>
         <field:display field="addressEmail" id="s_cz_kolomet_domain_Seller_addressEmail" object="${seller}" z="MdRlkzTu4hvtWYfmPeSgj2q1oJo="/>
-        <field:display field="sellerTitle" id="s_cz_kolomet_domain_Seller_sellerTitle" object="${seller}" z="z5TBZq07pCUAKbQVWxRDJIW/qEk="/>
         <field:display field="enabled" id="s_cz_kolomet_domain_Seller_enabled" object="${seller}" z="uWfb4xM4tGrF6WwFCslUskccrvE="/>
+        <field:display field="createdBy" id="s_cz_kolomet_domain_Seller_createdBy" object="${seller}" render="false" z="user-managed"/>
+        <field:display field="lastModifiedBy" id="s_cz_kolomet_domain_Seller_lastModifiedBy" object="${seller}" render="false" z="user-managed"/>
+        <field:display date="true" dateTimePattern="${seller_created_date_format}" field="created" id="s_cz_kolomet_domain_Seller_created" object="${seller}" render="false" z="48dU29Z1V3aNxnXqlKa9LAmsrG4="/>
+        <field:display date="true" dateTimePattern="${seller_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_Seller_lastModified" object="${seller}" render="false" z="user-managed"/>
         <c:set scope="request" value="${seller.id}" var="parentEntityId"/>
         <h2>Seller photos</h2>
         <c:set scope="request" value="${seller.sellerPhotoUrls}" var="sellerphotourls"/>

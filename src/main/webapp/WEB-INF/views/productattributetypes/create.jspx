@@ -5,6 +5,9 @@
     <form:create id="fc_cz_kolomet_domain_codelist_ProductAttributeType" modelAttribute="productAttributeType" path="/productattributetypes" render="${empty dependencies}" z="gzDJXDSYJ6v2d2GjXEMqRooK/FU=">
         <field:input field="codeKey" id="c_cz_kolomet_domain_codelist_ProductAttributeType_codeKey" max="20" required="true" z="k6wLAK0ayW9TPD4BIS4i0buEawQ="/>
         <field:textarea field="codeDescription" id="c_cz_kolomet_domain_codelist_ProductAttributeType_codeDescription" required="true" z="5667ZdUQUTxjgaYb0fl0pOPjV44="/>
+        <field:input field="createdBy" id="c_cz_kolomet_domain_codelist_ProductAttributeType_createdBy" z="TTla64ofR/5wWx180y6droS0M7M="/>
+        <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_codelist_ProductAttributeType_lastModifiedBy" z="yeBjebU4LdJ8FoWHiKOxnhXsOrA="/>
+        <field:datetime dateTimePattern="${productAttributeType_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_codelist_ProductAttributeType_lastModified" z="DuyMHF1zwJZmJnINHFXws4UluZ8="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_cz_kolomet_domain_codelist_ProductAttributeType" render="${not empty dependencies}" z="AFkrxMAl6lF9W6vdIrK74UrLwS0="/>
 </div>

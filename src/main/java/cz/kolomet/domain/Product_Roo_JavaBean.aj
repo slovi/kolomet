@@ -79,14 +79,6 @@ privileged aspect Product_Roo_JavaBean {
         this.enabled = enabled;
     }
     
-    public Date Product.getCreated() {
-        return this.created;
-    }
-    
-    public void Product.setCreated(Date created) {
-        this.created = created;
-    }
-    
     public Date Product.getValidTo() {
         return this.validTo;
     }

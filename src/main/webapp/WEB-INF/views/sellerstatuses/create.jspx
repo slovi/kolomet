@@ -6,6 +6,9 @@
         <field:input field="codeKey" id="c_cz_kolomet_domain_codelist_SellerStatus_codeKey" max="20" required="true" z="qnAmfKnQVoGXkX3cAH9P0pClORU="/>
         <field:textarea field="codeDescription" id="c_cz_kolomet_domain_codelist_SellerStatus_codeDescription" required="true" z="AfN4+oBUcago6Y2vHuOq4QyIWEU="/>
         <field:input field="priority" id="c_cz_kolomet_domain_codelist_SellerStatus_priority" validationMessageCode="field_invalid_integer" z="6sDNuwdJix3J0rH+h/84t+a69hk="/>
+        <field:input field="createdBy" id="c_cz_kolomet_domain_codelist_SellerStatus_createdBy" z="pINrbKt3gZBAsCj4nz0okE7Vwa8="/>
+        <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_codelist_SellerStatus_lastModifiedBy" z="jjXizMrmToY1VN0liL1CIYT3b00="/>
+        <field:datetime dateTimePattern="${sellerStatus_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_codelist_SellerStatus_lastModified" z="mAb3v+bJHVJuRmlNRQnSKy8yq+0="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_cz_kolomet_domain_codelist_SellerStatus" render="${not empty dependencies}" z="D/GopUo3/lSW30UcA7hDloT6e0M="/>
 </div>

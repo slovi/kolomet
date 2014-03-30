@@ -5,5 +5,8 @@
     <page:show id="ps_cz_kolomet_domain_ApplicationPermission" object="${applicationpermission}" path="/applicationpermissions" z="yIkNecIjx7Bji2HQluxhW63Id1g=">
         <field:display field="permissionName" id="s_cz_kolomet_domain_ApplicationPermission_permissionName" object="${applicationpermission}" z="WA5lW0WLm4M2teELfzkN3PRHlNs="/>
         <field:display field="roles" id="s_cz_kolomet_domain_ApplicationPermission_roles" object="${applicationpermission}" z="dlDHbt25HtKFb5BLYTPqrG53h18="/>
+        <field:display field="createdBy" id="s_cz_kolomet_domain_ApplicationPermission_createdBy" object="${applicationpermission}" z="1kCJFM+sXuJNbjlAGhQRqqhMcrk="/>
+        <field:display field="lastModifiedBy" id="s_cz_kolomet_domain_ApplicationPermission_lastModifiedBy" object="${applicationpermission}" z="ZBetl5hOuv/086MSdmA/mCE1NIQ="/>
+        <field:display date="true" dateTimePattern="${applicationPermission_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_ApplicationPermission_lastModified" object="${applicationpermission}" z="LFq7IoddI8fLYTetuLiqw32ECcg="/>
     </page:show>
 </div>

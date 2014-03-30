@@ -4,12 +4,15 @@
 package cz.kolomet.web.admin;
 
 import cz.kolomet.domain.codelist.SellerStatus;
+import cz.kolomet.service.ApplicationUserService;
 import cz.kolomet.service.SellerStatusService;
 import cz.kolomet.web.admin.SellerStatusController;
 import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +26,9 @@ privileged aspect SellerStatusController_Roo_Controller {
     
     @Autowired
     SellerStatusService SellerStatusController.sellerStatusService;
+    
+    @Autowired
+    ApplicationUserService SellerStatusController.applicationUserService;
     
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String SellerStatusController.create(@Valid SellerStatus sellerStatus, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
@@ -43,6 +49,7 @@ privileged aspect SellerStatusController_Roo_Controller {
     
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String SellerStatusController.show(@PathVariable("id") Long id, Model uiModel) {
+        addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("sellerstatus", sellerStatusService.findSellerStatus(id));
         uiModel.addAttribute("itemId", id);
         return "sellerstatuses/show";
@@ -59,6 +66,7 @@ privileged aspect SellerStatusController_Roo_Controller {
         } else {
             uiModel.addAttribute("sellerstatuses", sellerStatusService.findAllSellerStatuses());
         }
+        addDateTimeFormatPatterns(uiModel);
         return "sellerstatuses/list";
     }
     
@@ -89,8 +97,15 @@ privileged aspect SellerStatusController_Roo_Controller {
         return "redirect:/sellerstatuses";
     }
     
+    void SellerStatusController.addDateTimeFormatPatterns(Model uiModel) {
+        uiModel.addAttribute("sellerStatus_created_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("sellerStatus_lastmodified_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
+    }
+    
     void SellerStatusController.populateEditForm(Model uiModel, SellerStatus sellerStatus) {
         uiModel.addAttribute("sellerStatus", sellerStatus);
+        addDateTimeFormatPatterns(uiModel);
+        uiModel.addAttribute("applicationusers", applicationUserService.findAllApplicationUsers());
     }
     
     String SellerStatusController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

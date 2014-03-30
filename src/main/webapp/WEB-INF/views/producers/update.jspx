@@ -6,5 +6,8 @@
         <field:input field="codeKey" id="c_cz_kolomet_domain_Producer_codeKey" max="20" required="true" z="m11i/hBgf3JS9AAjzMuquDA8CRU="/>
         <field:textarea field="codeDescription" id="c_cz_kolomet_domain_Producer_codeDescription" required="true" z="xgffU7JNJrggr46+nBazfsG+MNc="/>
         <field:input field="name" id="c_cz_kolomet_domain_Producer_name" z="xF57S7C/CmH2msN+W17OAliO+ms="/>
+        <field:input field="createdBy" id="c_cz_kolomet_domain_Producer_createdBy" z="ZJrd7kh3HBJaqEGogYsweDF2ntI="/>
+        <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_Producer_lastModifiedBy" z="xkebaSq58UUuQN6XmjJ/4fqps6g="/>
+        <field:datetime dateTimePattern="${producer_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_Producer_lastModified" z="JcTJVaWd/qLd4ic4ZtwpuDuzU/s="/>
     </form:update>
 </div>

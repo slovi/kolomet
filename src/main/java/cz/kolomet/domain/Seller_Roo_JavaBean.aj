@@ -3,6 +3,7 @@
 
 package cz.kolomet.domain;
 
+import cz.kolomet.domain.Product;
 import cz.kolomet.domain.Seller;
 import cz.kolomet.domain.SellerPhotoUrl;
 import cz.kolomet.domain.codelist.CountryState;
@@ -188,14 +189,6 @@ privileged aspect Seller_Roo_JavaBean {
         this.mapUrl = mapUrl;
     }
     
-    public String Seller.getPhotoUrl() {
-        return this.photoUrl;
-    }
-    
-    public void Seller.setPhotoUrl(String photoUrl) {
-        this.photoUrl = photoUrl;
-    }
-    
     public CountryState Seller.getAddressCountry() {
         return this.addressCountry;
     }
@@ -266,6 +259,14 @@ privileged aspect Seller_Roo_JavaBean {
     
     public void Seller.setSellerPhotoUrls(List<SellerPhotoUrl> sellerPhotoUrls) {
         this.sellerPhotoUrls = sellerPhotoUrls;
+    }
+    
+    public List<Product> Seller.getProducts() {
+        return this.products;
+    }
+    
+    public void Seller.setProducts(List<Product> products) {
+        this.products = products;
     }
     
 }

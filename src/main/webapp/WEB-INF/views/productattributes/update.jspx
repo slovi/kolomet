@@ -6,5 +6,8 @@
         <field:textarea field="attributeValue" id="c_cz_kolomet_domain_ProductAttribute_attributeValue" required="true" z="aJifQC1LjGhaqGS6UdWGd3Hnfkk="/>
         <field:select field="attributeType" id="c_cz_kolomet_domain_ProductAttribute_attributeType" itemValue="id" items="${productattributetypes}" path="/productattributetypes" required="true" z="5jwj1w2RVAb20xaJpyMs6XR/9Xc="/>
         <field:select field="product" id="c_cz_kolomet_domain_ProductAttribute_product" itemValue="id" items="${products}" path="/products" required="true" z="a/5/pLcREtyA4PIgSopxARP9Z/w="/>
+        <field:input field="createdBy" id="c_cz_kolomet_domain_ProductAttribute_createdBy" z="6B+tAB+ui/wa07behxj/B1xd2H0="/>
+        <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_ProductAttribute_lastModifiedBy" z="OEYLuEqWORbSZ71bQSK6Hlb9hcQ="/>
+        <field:datetime dateTimePattern="${productAttribute_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_ProductAttribute_lastModified" z="i3Fbdr60rlcRKz3CjS48x+j48b8="/>
     </form:update>
 </div>

@@ -4,6 +4,7 @@
 package cz.kolomet.web.admin;
 
 import cz.kolomet.domain.Product;
+import cz.kolomet.service.ApplicationUserService;
 import cz.kolomet.service.CategoryService;
 import cz.kolomet.service.PhotoUrlService;
 import cz.kolomet.service.ProducerService;
@@ -30,6 +31,9 @@ privileged aspect ProductController_Roo_Controller {
     
     @Autowired
     ProductService ProductController.productService;
+    
+    @Autowired
+    ApplicationUserService ProductController.applicationUserService;
     
     @Autowired
     CategoryService ProductController.categoryService;
@@ -114,12 +118,15 @@ privileged aspect ProductController_Roo_Controller {
     }
     
     void ProductController.addDateTimeFormatPatterns(Model uiModel) {
+        uiModel.addAttribute("product_created_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("product_lastmodified_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
         uiModel.addAttribute("product_validto_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
     }
     
     void ProductController.populateEditForm(Model uiModel, Product product) {
         uiModel.addAttribute("product", product);
         addDateTimeFormatPatterns(uiModel);
+        uiModel.addAttribute("applicationusers", applicationUserService.findAllApplicationUsers());
         uiModel.addAttribute("categorys", categoryService.findAllCategorys());
         uiModel.addAttribute("photourls", photoUrlService.findAllPhotoUrls());
         uiModel.addAttribute("producers", producerService.findAllProducers());

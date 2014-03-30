@@ -8,5 +8,8 @@
         <field:display field="contentType" id="s_cz_kolomet_domain_PhotoUrl_contentType" object="${photourl}" z="SBKoc3UrjmpKY0XasfHRc3hsQsA="/>
         <spring:url value="/file/${photourl.photoUrl}" var="photoUrlImg"/>
         <img src="${photoUrlImg}"/>
+        <field:display field="createdBy" id="s_cz_kolomet_domain_PhotoUrl_createdBy" object="${photourl}" z="Z7NHzG+UOTcBBEOxcA8yQRhY7ww="/>
+        <field:display field="lastModifiedBy" id="s_cz_kolomet_domain_PhotoUrl_lastModifiedBy" object="${photourl}" z="kjyiYVV4R7Od1HGkMi/fiSfaw8g="/>
+        <field:display date="true" dateTimePattern="${photoUrl_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_PhotoUrl_lastModified" object="${photourl}" z="vBO8S+s+F21O2jgO3GsVZu/4j58="/>
     </page:show>
 </div>

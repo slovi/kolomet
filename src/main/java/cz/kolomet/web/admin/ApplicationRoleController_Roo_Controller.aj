@@ -6,11 +6,14 @@ package cz.kolomet.web.admin;
 import cz.kolomet.domain.ApplicationRole;
 import cz.kolomet.service.ApplicationPermissionService;
 import cz.kolomet.service.ApplicationRoleService;
+import cz.kolomet.service.ApplicationUserService;
 import cz.kolomet.web.admin.ApplicationRoleController;
 import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +30,9 @@ privileged aspect ApplicationRoleController_Roo_Controller {
     
     @Autowired
     ApplicationPermissionService ApplicationRoleController.applicationPermissionService;
+    
+    @Autowired
+    ApplicationUserService ApplicationRoleController.applicationUserService;
     
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String ApplicationRoleController.create(@Valid ApplicationRole applicationRole, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
@@ -47,6 +53,7 @@ privileged aspect ApplicationRoleController_Roo_Controller {
     
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String ApplicationRoleController.show(@PathVariable("id") Long id, Model uiModel) {
+        addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("applicationrole", applicationRoleService.findApplicationRole(id));
         uiModel.addAttribute("itemId", id);
         return "applicationroles/show";
@@ -63,6 +70,7 @@ privileged aspect ApplicationRoleController_Roo_Controller {
         } else {
             uiModel.addAttribute("applicationroles", applicationRoleService.findAllApplicationRoles());
         }
+        addDateTimeFormatPatterns(uiModel);
         return "applicationroles/list";
     }
     
@@ -93,9 +101,16 @@ privileged aspect ApplicationRoleController_Roo_Controller {
         return "redirect:/applicationroles";
     }
     
+    void ApplicationRoleController.addDateTimeFormatPatterns(Model uiModel) {
+        uiModel.addAttribute("applicationRole_created_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("applicationRole_lastmodified_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
+    }
+    
     void ApplicationRoleController.populateEditForm(Model uiModel, ApplicationRole applicationRole) {
         uiModel.addAttribute("applicationRole", applicationRole);
+        addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("applicationpermissions", applicationPermissionService.findAllApplicationPermissions());
+        uiModel.addAttribute("applicationusers", applicationUserService.findAllApplicationUsers());
     }
     
     String ApplicationRoleController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

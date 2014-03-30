@@ -5,5 +5,8 @@
     <page:show id="ps_cz_kolomet_domain_ApplicationRole" object="${applicationrole}" path="/applicationroles" z="xoPps7RMHJRpVuDcVFKO6AVmwW8=">
         <field:display field="roleName" id="s_cz_kolomet_domain_ApplicationRole_roleName" object="${applicationrole}" z="8HsxOcadx6FniJx0PCUvnzuaOK4="/>
         <field:display field="permissions" id="s_cz_kolomet_domain_ApplicationRole_permissions" object="${applicationrole}" z="xkXw7oXctFjGiVn1LJjJSwtt66k="/>
+        <field:display field="createdBy" id="s_cz_kolomet_domain_ApplicationRole_createdBy" object="${applicationrole}" z="kbJND2YCE7C3bRx361JOZzqDTHM="/>
+        <field:display field="lastModifiedBy" id="s_cz_kolomet_domain_ApplicationRole_lastModifiedBy" object="${applicationrole}" z="r2qBR83j/ArC88zLNNiUyHaEI0Y="/>
+        <field:display date="true" dateTimePattern="${applicationRole_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_ApplicationRole_lastModified" object="${applicationrole}" z="bkro+wnkB6+CsAKpEJnq6rgD6Nc="/>
     </page:show>
 </div>

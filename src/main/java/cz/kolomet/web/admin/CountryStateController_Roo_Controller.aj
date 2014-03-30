@@ -4,12 +4,15 @@
 package cz.kolomet.web.admin;
 
 import cz.kolomet.domain.codelist.CountryState;
+import cz.kolomet.service.ApplicationUserService;
 import cz.kolomet.service.CountryStateService;
 import cz.kolomet.web.admin.CountryStateController;
 import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +26,9 @@ privileged aspect CountryStateController_Roo_Controller {
     
     @Autowired
     CountryStateService CountryStateController.countryStateService;
+    
+    @Autowired
+    ApplicationUserService CountryStateController.applicationUserService;
     
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String CountryStateController.create(@Valid CountryState countryState, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
@@ -43,6 +49,7 @@ privileged aspect CountryStateController_Roo_Controller {
     
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String CountryStateController.show(@PathVariable("id") Long id, Model uiModel) {
+        addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("countrystate", countryStateService.findCountryState(id));
         uiModel.addAttribute("itemId", id);
         return "countrystates/show";
@@ -59,6 +66,7 @@ privileged aspect CountryStateController_Roo_Controller {
         } else {
             uiModel.addAttribute("countrystates", countryStateService.findAllCountryStates());
         }
+        addDateTimeFormatPatterns(uiModel);
         return "countrystates/list";
     }
     
@@ -89,8 +97,15 @@ privileged aspect CountryStateController_Roo_Controller {
         return "redirect:/countrystates";
     }
     
+    void CountryStateController.addDateTimeFormatPatterns(Model uiModel) {
+        uiModel.addAttribute("countryState_created_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("countryState_lastmodified_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
+    }
+    
     void CountryStateController.populateEditForm(Model uiModel, CountryState countryState) {
         uiModel.addAttribute("countryState", countryState);
+        addDateTimeFormatPatterns(uiModel);
+        uiModel.addAttribute("applicationusers", applicationUserService.findAllApplicationUsers());
     }
     
     String CountryStateController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

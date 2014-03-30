@@ -5,5 +5,8 @@
     <page:show id="ps_cz_kolomet_domain_codelist_CategoryType" object="${categorytype}" path="/categorytypes" z="2xXBm0Ap6A+eH5UAulQdEii7vfY=">
         <field:display field="codeKey" id="s_cz_kolomet_domain_codelist_CategoryType_codeKey" object="${categorytype}" z="cAsDW+uQfYvzkzxPqXZm9BPBMHc="/>
         <field:display field="codeDescription" id="s_cz_kolomet_domain_codelist_CategoryType_codeDescription" object="${categorytype}" z="50rCArn5WSuMmXXuPxR1TkVfJjs="/>
+        <field:display field="createdBy" id="s_cz_kolomet_domain_codelist_CategoryType_createdBy" object="${categorytype}" z="WafIqA3qaxvu1oFwTJFQlFO5IuU="/>
+        <field:display field="lastModifiedBy" id="s_cz_kolomet_domain_codelist_CategoryType_lastModifiedBy" object="${categorytype}" z="OGoRUsQ44jeg+AZ/phsCIO7HN/w="/>
+        <field:display date="true" dateTimePattern="${categoryType_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_codelist_CategoryType_lastModified" object="${categorytype}" z="zpfB9MLLV8FAMmAoZXjloazm3jg="/>
     </page:show>
 </div>

@@ -4,9 +4,12 @@
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_cz_kolomet_domain_PhotoUrl" items="${photourls}" path="/photourls" z="user-managed">
         <table:table data="${photourls}" id="l_cz_kolomet_domain_PhotoUrl" path="/photourls" z="zQvzlpYzTMg057/oczT4XCZTxLg=">
-            <table:column id="c_cz_kolomet_domain_PhotoUrl_product" property="product" z="l3sFEEakzeVgB60t9couu6bVTno="/>
             <table:column id="c_cz_kolomet_domain_PhotoUrl_fileName" property="fileName" z="3vBFb3d7oCYwh9mEfaliHVKzU7E="/>
             <table:column id="c_cz_kolomet_domain_PhotoUrl_contentType" property="contentType" z="Rr7Xm5QfvSDmkqRcbo2XauqUBbc="/>
+            <table:column id="c_cz_kolomet_domain_PhotoUrl_createdBy" property="createdBy" z="US7i6j2DdHL8MatgfxcXRhUCkJw="/>
+            <table:column id="c_cz_kolomet_domain_PhotoUrl_lastModifiedBy" property="lastModifiedBy" z="ex0PZCGaGhYH0DgybIdSp6BvnfU="/>
+            <table:column date="true" dateTimePattern="${photoUrl_created_date_format}" id="c_cz_kolomet_domain_PhotoUrl_created" property="created" z="gha9doeutQhGogumIsAFGOVeOvY="/>
+            <table:column date="true" dateTimePattern="${photoUrl_lastmodified_date_format}" id="c_cz_kolomet_domain_PhotoUrl_lastModified" property="lastModified" z="88NUjB+5u9lBUljdvIFgHgJz7F4="/>
         </table:table>
     </page:list>
 </div>

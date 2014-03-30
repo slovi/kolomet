@@ -5,5 +5,8 @@
     <form:update id="fu_cz_kolomet_domain_codelist_Region" modelAttribute="region" path="/regions" versionField="Version" z="ORsy6TnrT/PzWTAisL0QtEqiBiI=">
         <field:input field="codeKey" id="c_cz_kolomet_domain_codelist_Region_codeKey" max="20" required="true" z="HZg4YSU/I6NX3jmKqSvQollfN+M="/>
         <field:textarea field="codeDescription" id="c_cz_kolomet_domain_codelist_Region_codeDescription" required="true" z="TOT23ztMe4yEn2xFDJX76niI1gE="/>
+        <field:input field="createdBy" id="c_cz_kolomet_domain_codelist_Region_createdBy" z="+JKyZNDDGsDssZ5RJgaUjYif7z0="/>
+        <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_codelist_Region_lastModifiedBy" z="+OJb8MDddr2lWyrmKaiWLWDtjek="/>
+        <field:datetime dateTimePattern="${region_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_codelist_Region_lastModified" z="LhCBMbZahvV38kkdkrW7JPp7HKI="/>
     </form:update>
 </div>

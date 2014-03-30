@@ -6,7 +6,10 @@
         <table:table data="${sellerstatuses}" id="l_cz_kolomet_domain_codelist_SellerStatus" path="/sellerstatuses" z="HgQfEc0u37ygR+rS/AaRubYBtUs=">
             <table:column id="c_cz_kolomet_domain_codelist_SellerStatus_codeKey" property="codeKey" z="yJS/isGEBkqkOqzc9rPIhoPfJA0="/>
             <table:column id="c_cz_kolomet_domain_codelist_SellerStatus_codeDescription" property="codeDescription" z="3DqWe+pvFGgMF/5Lf8mSpwvsEF0="/>
-            <table:column id="c_cz_kolomet_domain_codelist_SellerStatus_priority" property="priority" z="0f7xKfY56nu2qGyHGJDIoE2KBHM="/>
+            <table:column id="c_cz_kolomet_domain_codelist_SellerStatus_createdBy" property="createdBy" z="bX555Pv/ieQ+zWZmltjgDoPhraI="/>
+            <table:column id="c_cz_kolomet_domain_codelist_SellerStatus_lastModifiedBy" property="lastModifiedBy" z="gF6Xshb2ctGYUwf90nB100qRvNE="/>
+            <table:column date="true" dateTimePattern="${sellerStatus_created_date_format}" id="c_cz_kolomet_domain_codelist_SellerStatus_created" property="created" z="MvofHrFI4e//pZ6y/75cjhHbVHg="/>
+            <table:column date="true" dateTimePattern="${sellerStatus_lastmodified_date_format}" id="c_cz_kolomet_domain_codelist_SellerStatus_lastModified" property="lastModified" z="BJBSm6Jyfu8U7V8dcuU+piG8jd4="/>
         </table:table>
     </page:list>
 </div>

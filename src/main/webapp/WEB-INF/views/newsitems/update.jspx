@@ -6,5 +6,9 @@
         <field:datetime dateTimePattern="${newsItem_newsitemdate_date_format}" field="newsItemDate" id="c_cz_kolomet_domain_NewsItem_newsItemDate" z="FB5WVicWURlynFC/lm03NXQZr5Y="/>
         <field:textarea field="text" id="c_cz_kolomet_domain_NewsItem_text" required="true" z="DZ+w2/DZOzfxdSGqNLkmev6oqFA="/>
         <field:checkbox field="enabled" id="c_cz_kolomet_domain_NewsItem_enabled" z="4dW1KYPDc1uE1qbCHNRQWsxtRwQ="/>
+        <field:select field="creater" id="c_cz_kolomet_domain_NewsItem_creater" itemValue="id" items="${applicationusers}" path="/applicationusers" z="43kmZVmihoYflXb6G2X54TzXmEw="/>
+        <field:input field="createdBy" id="c_cz_kolomet_domain_NewsItem_createdBy" z="4g5MMN9Q/ss+yUzfKvIeibZNHTk="/>
+        <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_NewsItem_lastModifiedBy" z="iuxkpLcHJhy1bDnFLAOYla3KDx0="/>
+        <field:datetime dateTimePattern="${newsItem_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_NewsItem_lastModified" z="WGmY9z6QaC/H/4o0gGiwwMiemvk="/>
     </form:update>
 </div>

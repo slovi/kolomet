@@ -21,5 +21,8 @@
         <h2>Photo urls</h2>
         <c:set scope="request" value="${product.photoUrls}" var="photourls"/>
         <jsp:include flush="true" page="../photourls/list.jspx"/>
+        <field:display field="createdBy" id="s_cz_kolomet_domain_Product_createdBy" object="${product}" z="5Vg+fbN/d0tcEic+hEw/+JsTKlw="/>
+        <field:display field="lastModifiedBy" id="s_cz_kolomet_domain_Product_lastModifiedBy" object="${product}" z="s65qNTiKmGg5ABoB0x59wClx/hc="/>
+        <field:display date="true" dateTimePattern="${product_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_Product_lastModified" object="${product}" z="ZCK6v15HOwhsvMXPFw5ks6hRW6s="/>
     </page:show>
 </div>

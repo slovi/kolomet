@@ -6,7 +6,10 @@
         <table:table data="${categorys}" id="l_cz_kolomet_domain_Category" path="/categorys" z="L7Pg4A/wNrE+/FEIH6fjX5aCE2k=">
             <table:column id="c_cz_kolomet_domain_Category_codeKey" property="codeKey" z="Jlj0SzRX7GP6Te2G3WXrDZlTXHY="/>
             <table:column id="c_cz_kolomet_domain_Category_codeDescription" property="codeDescription" z="XCVDLHgA3w3HIr82xDL80HPWMP0="/>
-            <table:column id="c_cz_kolomet_domain_Category_categoryType" property="categoryType" z="kfGMWcWd8fsJ2/hUIr7VQIl1Sh0="/>
+            <table:column id="c_cz_kolomet_domain_Category_createdBy" property="createdBy" z="bAxFjMFpR4lWcX17lG2aQISyzzo="/>
+            <table:column id="c_cz_kolomet_domain_Category_lastModifiedBy" property="lastModifiedBy" z="uQFFZCHW+n0BoGCXqIsIS3V/cog="/>
+            <table:column date="true" dateTimePattern="${category_created_date_format}" id="c_cz_kolomet_domain_Category_created" property="created" z="pEk424KNh5hTkPP6w82r3vB1zlc="/>
+            <table:column date="true" dateTimePattern="${category_lastmodified_date_format}" id="c_cz_kolomet_domain_Category_lastModified" property="lastModified" z="AUFy+dT9zUl8po4o43N1k26wKWc="/>
         </table:table>
     </page:list>
 </div>

@@ -5,5 +5,8 @@
     <page:show id="ps_cz_kolomet_domain_codelist_CountryState" object="${countrystate}" path="/countrystates" z="pE70BmgHv09lWBvi/LV9VriNZk8=">
         <field:display field="codeKey" id="s_cz_kolomet_domain_codelist_CountryState_codeKey" object="${countrystate}" z="aiwjoD/5xLl99hWEHMdY2KEx1pA="/>
         <field:display field="codeDescription" id="s_cz_kolomet_domain_codelist_CountryState_codeDescription" object="${countrystate}" z="otj8GPBRMEqcir2/25YocGV9VzQ="/>
+        <field:display field="createdBy" id="s_cz_kolomet_domain_codelist_CountryState_createdBy" object="${countrystate}" z="9YOSTW/B8TeGQrHUfezCDs4sz8g="/>
+        <field:display field="lastModifiedBy" id="s_cz_kolomet_domain_codelist_CountryState_lastModifiedBy" object="${countrystate}" z="qYopWBnqYbAGV1wCH8kGM3we6Hw="/>
+        <field:display date="true" dateTimePattern="${countryState_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_codelist_CountryState_lastModified" object="${countrystate}" z="GPUpPkS1jtsiSgUOf5ecVmkkpBA="/>
     </page:show>
 </div>

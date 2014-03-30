@@ -4,11 +4,14 @@
 package cz.kolomet.web.admin;
 
 import cz.kolomet.domain.PhotoUrl;
+import cz.kolomet.service.ApplicationUserService;
 import cz.kolomet.service.PhotoUrlService;
 import cz.kolomet.web.admin.PhotoUrlController;
 import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
+import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,8 +24,12 @@ privileged aspect PhotoUrlController_Roo_Controller {
     @Autowired
     PhotoUrlService PhotoUrlController.photoUrlService;
     
+    @Autowired
+    ApplicationUserService PhotoUrlController.applicationUserService;
+    
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String PhotoUrlController.show(@PathVariable("id") Long id, Model uiModel) {
+        addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("photourl", photoUrlService.findPhotoUrl(id));
         uiModel.addAttribute("itemId", id);
         return "photourls/show";
@@ -39,11 +46,19 @@ privileged aspect PhotoUrlController_Roo_Controller {
         } else {
             uiModel.addAttribute("photourls", photoUrlService.findAllPhotoUrls());
         }
+        addDateTimeFormatPatterns(uiModel);
         return "photourls/list";
+    }
+    
+    void PhotoUrlController.addDateTimeFormatPatterns(Model uiModel) {
+        uiModel.addAttribute("photoUrl_created_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("photoUrl_lastmodified_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
     }
     
     void PhotoUrlController.populateEditForm(Model uiModel, PhotoUrl photoUrl) {
         uiModel.addAttribute("photoUrl", photoUrl);
+        addDateTimeFormatPatterns(uiModel);
+        uiModel.addAttribute("applicationusers", applicationUserService.findAllApplicationUsers());
         uiModel.addAttribute("products", productService.findAllProducts());
     }
     

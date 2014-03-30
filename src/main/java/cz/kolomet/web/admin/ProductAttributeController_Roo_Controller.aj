@@ -4,11 +4,14 @@
 package cz.kolomet.web.admin;
 
 import cz.kolomet.domain.ProductAttribute;
+import cz.kolomet.service.ApplicationUserService;
 import cz.kolomet.service.ProductAttributeService;
 import cz.kolomet.web.admin.ProductAttributeController;
 import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
+import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,8 +24,12 @@ privileged aspect ProductAttributeController_Roo_Controller {
     @Autowired
     ProductAttributeService ProductAttributeController.productAttributeService;
     
+    @Autowired
+    ApplicationUserService ProductAttributeController.applicationUserService;
+    
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String ProductAttributeController.show(@PathVariable("id") Long id, Model uiModel) {
+        addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("productattribute", productAttributeService.findProductAttribute(id));
         uiModel.addAttribute("itemId", id);
         return "productattributes/show";
@@ -39,11 +46,19 @@ privileged aspect ProductAttributeController_Roo_Controller {
         } else {
             uiModel.addAttribute("productattributes", productAttributeService.findAllProductAttributes());
         }
+        addDateTimeFormatPatterns(uiModel);
         return "productattributes/list";
+    }
+    
+    void ProductAttributeController.addDateTimeFormatPatterns(Model uiModel) {
+        uiModel.addAttribute("productAttribute_created_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("productAttribute_lastmodified_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
     }
     
     void ProductAttributeController.populateEditForm(Model uiModel, ProductAttribute productAttribute) {
         uiModel.addAttribute("productAttribute", productAttribute);
+        addDateTimeFormatPatterns(uiModel);
+        uiModel.addAttribute("applicationusers", applicationUserService.findAllApplicationUsers());
         uiModel.addAttribute("products", productService.findAllProducts());
         uiModel.addAttribute("productattributetypes", productAttributeTypeService.findAllProductAttributeTypes());
     }

@@ -6,5 +6,8 @@
         <field:input field="fileName" id="c_cz_kolomet_domain_SellerPhotoUrl_fileName" max="20" z="F8/9iN149/CuuqyJ3xVIATUrtG8="/>
         <field:input field="contentType" id="c_cz_kolomet_domain_SellerPhotoUrl_contentType" max="20" z="qcHyZ9RPmIOnrzUM7PkI0WVxIIs="/>
         <field:select field="seller" id="c_cz_kolomet_domain_SellerPhotoUrl_seller" itemValue="id" items="${sellers}" path="/sellers" required="true" z="gpKztn0uF5e6WnIDhfY5TFlHNyU="/>
+        <field:input field="createdBy" id="c_cz_kolomet_domain_SellerPhotoUrl_createdBy" z="VA80D+WbWPjRDstL8nEowF0wXQA="/>
+        <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_SellerPhotoUrl_lastModifiedBy" z="yWvnXzSTIxiDpV0qaA3fE6Djk7I="/>
+        <field:datetime dateTimePattern="${sellerPhotoUrl_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_SellerPhotoUrl_lastModified" z="vaMwsiyLLfjT2+zxq/EACzBgjxA="/>
     </form:update>
 </div>

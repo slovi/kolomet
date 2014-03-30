@@ -4,12 +4,15 @@
 package cz.kolomet.web.admin;
 
 import cz.kolomet.domain.codelist.ProductAttributeType;
+import cz.kolomet.service.ApplicationUserService;
 import cz.kolomet.service.ProductAttributeTypeService;
 import cz.kolomet.web.admin.ProductAttributeTypeController;
 import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +26,9 @@ privileged aspect ProductAttributeTypeController_Roo_Controller {
     
     @Autowired
     ProductAttributeTypeService ProductAttributeTypeController.productAttributeTypeService;
+    
+    @Autowired
+    ApplicationUserService ProductAttributeTypeController.applicationUserService;
     
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String ProductAttributeTypeController.create(@Valid ProductAttributeType productAttributeType, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
@@ -43,6 +49,7 @@ privileged aspect ProductAttributeTypeController_Roo_Controller {
     
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String ProductAttributeTypeController.show(@PathVariable("id") Long id, Model uiModel) {
+        addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("productattributetype", productAttributeTypeService.findProductAttributeType(id));
         uiModel.addAttribute("itemId", id);
         return "productattributetypes/show";
@@ -59,6 +66,7 @@ privileged aspect ProductAttributeTypeController_Roo_Controller {
         } else {
             uiModel.addAttribute("productattributetypes", productAttributeTypeService.findAllProductAttributeTypes());
         }
+        addDateTimeFormatPatterns(uiModel);
         return "productattributetypes/list";
     }
     
@@ -89,8 +97,15 @@ privileged aspect ProductAttributeTypeController_Roo_Controller {
         return "redirect:/productattributetypes";
     }
     
+    void ProductAttributeTypeController.addDateTimeFormatPatterns(Model uiModel) {
+        uiModel.addAttribute("productAttributeType_created_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("productAttributeType_lastmodified_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
+    }
+    
     void ProductAttributeTypeController.populateEditForm(Model uiModel, ProductAttributeType productAttributeType) {
         uiModel.addAttribute("productAttributeType", productAttributeType);
+        addDateTimeFormatPatterns(uiModel);
+        uiModel.addAttribute("applicationusers", applicationUserService.findAllApplicationUsers());
     }
     
     String ProductAttributeTypeController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

@@ -34,7 +34,7 @@ import org.springframework.roo.addon.tostring.RooToString;
 	@Filter(name = "productEnabledFilter", condition = "enabled = :enabled")
 })
 public class Product extends DomainEntity {
-
+	
     /**
      */
     @NotNull
@@ -73,11 +73,6 @@ public class Product extends DomainEntity {
     /**
      */
     private Boolean enabled;
-    
-    /**
-     */
-    @DateTimeFormat(style="M-")
-    private Date created;
     
     /**
      */

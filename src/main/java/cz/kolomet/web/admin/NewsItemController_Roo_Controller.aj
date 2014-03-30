@@ -4,6 +4,7 @@
 package cz.kolomet.web.admin;
 
 import cz.kolomet.domain.NewsItem;
+import cz.kolomet.service.ApplicationUserService;
 import cz.kolomet.service.NewsItemService;
 import cz.kolomet.web.admin.NewsItemController;
 import java.io.UnsupportedEncodingException;
@@ -25,6 +26,9 @@ privileged aspect NewsItemController_Roo_Controller {
     
     @Autowired
     NewsItemService NewsItemController.newsItemService;
+    
+    @Autowired
+    ApplicationUserService NewsItemController.applicationUserService;
     
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String NewsItemController.create(@Valid NewsItem newsItem, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
@@ -94,12 +98,15 @@ privileged aspect NewsItemController_Roo_Controller {
     }
     
     void NewsItemController.addDateTimeFormatPatterns(Model uiModel) {
+        uiModel.addAttribute("newsItem_created_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("newsItem_lastmodified_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
         uiModel.addAttribute("newsItem_newsitemdate_date_format", DateTimeFormat.patternForStyle("S-", LocaleContextHolder.getLocale()));
     }
     
     void NewsItemController.populateEditForm(Model uiModel, NewsItem newsItem) {
         uiModel.addAttribute("newsItem", newsItem);
         addDateTimeFormatPatterns(uiModel);
+        uiModel.addAttribute("applicationusers", applicationUserService.findAllApplicationUsers());
     }
     
     String NewsItemController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

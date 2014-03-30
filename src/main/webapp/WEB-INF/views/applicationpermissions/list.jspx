@@ -6,6 +6,10 @@
         <table:table data="${applicationpermissions}" id="l_cz_kolomet_domain_ApplicationPermission" path="/applicationpermissions" z="iH/B/pQFCSo7SfwVg9tYAQkJDAw=">
             <table:column id="c_cz_kolomet_domain_ApplicationPermission_permissionName" property="permissionName" z="idbciYnyHGhtfwiZh5lWNzJ7zUM="/>
             <table:column id="c_cz_kolomet_domain_ApplicationPermission_roles" property="roles" z="ePT/lBxu8RSaqkEFBXAoxAlfIaA="/>
+            <table:column id="c_cz_kolomet_domain_ApplicationPermission_createdBy" property="createdBy" z="umynPfgu9sbWGMfk+Aug8xZKrOg="/>
+            <table:column id="c_cz_kolomet_domain_ApplicationPermission_lastModifiedBy" property="lastModifiedBy" z="YdFOD3Fln7trGwOUfsdIISYX7MM="/>
+            <table:column date="true" dateTimePattern="${applicationPermission_created_date_format}" id="c_cz_kolomet_domain_ApplicationPermission_created" property="created" z="iVeFEubW7+/Pk6mkFp92UAmJJP0="/>
+            <table:column date="true" dateTimePattern="${applicationPermission_lastmodified_date_format}" id="c_cz_kolomet_domain_ApplicationPermission_lastModified" property="lastModified" z="2EuNcvbyb4Ubp+GybLFUPWpF8Cc="/>
         </table:table>
     </page:list>
 </div>

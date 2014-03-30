@@ -5,8 +5,11 @@
     <page:list id="pl_cz_kolomet_domain_Producer" items="${producers}" z="QcQvYyH+p3QZRfiD7hvaA9CGANw=">
         <table:table data="${producers}" id="l_cz_kolomet_domain_Producer" path="/producers" z="jKOi0/w/AllkZy3aTUI2Fgb2Lv8=">
             <table:column id="c_cz_kolomet_domain_Producer_codeKey" property="codeKey" z="qJcVLqUn6+ejjYt6Ih/HLhDVtsQ="/>
-            <table:column id="c_cz_kolomet_domain_Producer_codeDescription" property="codeDescription" z="SfK25GsKOfDaAKEIHwOypXwIGk8="/>
             <table:column id="c_cz_kolomet_domain_Producer_name" property="name" z="x3A9kAB0tj0Jji8Uh5qS1k/qLfk="/>
+            <table:column id="c_cz_kolomet_domain_Producer_createdBy" property="createdBy" z="IC12f+NGs5Ym6SUeoOlGcC5oae8="/>
+            <table:column id="c_cz_kolomet_domain_Producer_lastModifiedBy" property="lastModifiedBy" z="Zn5xNgx9PVi/EZwiQ03339x6cZs="/>
+            <table:column date="true" dateTimePattern="${producer_created_date_format}" id="c_cz_kolomet_domain_Producer_created" property="created" z="xj50P3vy/f5yMa3u5LF/HOfvzoA="/>
+            <table:column date="true" dateTimePattern="${producer_lastmodified_date_format}" id="c_cz_kolomet_domain_Producer_lastModified" property="lastModified" z="V319sZv8c1i1Eu58aMFCVoAMbq0="/>
         </table:table>
     </page:list>
 </div>
