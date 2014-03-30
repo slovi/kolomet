@@ -3,7 +3,6 @@
 
 package cz.kolomet.domain;
 
-import cz.kolomet.domain.ApplicationUser;
 import cz.kolomet.domain.NewsItem;
 import java.util.Date;
 
@@ -31,14 +30,6 @@ privileged aspect NewsItem_Roo_JavaBean {
     
     public void NewsItem.setText(String text) {
         this.text = text;
-    }
-    
-    public ApplicationUser NewsItem.getCreater() {
-        return this.creater;
-    }
-    
-    public void NewsItem.setCreater(ApplicationUser creater) {
-        this.creater = creater;
     }
     
 }

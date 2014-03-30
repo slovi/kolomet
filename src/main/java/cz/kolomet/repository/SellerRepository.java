@@ -10,6 +10,8 @@ import cz.kolomet.domain.Seller;
 @RooJpaRepository(domainType = Seller.class)
 public interface SellerRepository {
 	
+	public Seller findByIdAndEnabled(Long id, Boolean enabled);
+	
 	@Query("select s from Seller s inner join s.region r where r.codeKey = :regionCodeKey order by s.sellerName desc")
 	public List<Seller> findByRegionCodeKeyOrderBySellerNameDesc(@Param("regionCodeKey") String regionCodeKey);
 	

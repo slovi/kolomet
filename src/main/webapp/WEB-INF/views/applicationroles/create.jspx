@@ -5,9 +5,10 @@
     <form:create id="fc_cz_kolomet_domain_ApplicationRole" modelAttribute="applicationRole" path="/applicationroles" render="${empty dependencies}" z="mZT0/RG+QGRMKKsavmULgtUM7VQ=">
         <field:input field="roleName" id="c_cz_kolomet_domain_ApplicationRole_roleName" z="R7E7vkFXrodLtvzr9hzLsUI8uJ0="/>
         <field:select field="permissions" id="c_cz_kolomet_domain_ApplicationRole_permissions" itemValue="id" items="${applicationpermissions}" multiple="true" path="/applicationpermissions" z="eyTKslSplczD/J7mHelJ9DX3DFw="/>
-        <field:input field="createdBy" id="c_cz_kolomet_domain_ApplicationRole_createdBy" z="Qi/q2M7p3CqaqJbMaWO66uNXAVk="/>
-        <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_ApplicationRole_lastModifiedBy" z="m+46dExeTbxlVe02NrKNUXF3xC0="/>
-        <field:datetime dateTimePattern="${applicationRole_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_ApplicationRole_lastModified" z="+c+LqH8J3NBGcnx4JZoG1sATwmg="/>
+        <field:input field="createdBy" id="c_cz_kolomet_domain_ApplicationRole_createdBy" z="Qi/q2M7p3CqaqJbMaWO66uNXAVk=" render="false"/>
+        <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_ApplicationRole_lastModifiedBy" z="m+46dExeTbxlVe02NrKNUXF3xC0=" render="false"/>
+        <field:datetime dateTimePattern="${applicationRole_created_date_format}" field="created" id="c_cz_kolomet_domain_ApplicationRole_created" z="+c+LqH8J3NBGcnx4JZoG1sATwmg=" render="false"/>
+        <field:datetime dateTimePattern="${applicationRole_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_ApplicationRole_lastModified" z="+c+LqH8J3NBGcnx4JZoG1sATwmg=" render="false"/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_cz_kolomet_domain_ApplicationRole" render="${not empty dependencies}" z="mWJ3EY2aHY/c26uYW4b7GEyA248="/>
 </div>

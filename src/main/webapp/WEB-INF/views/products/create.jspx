@@ -15,9 +15,9 @@
         <field:simple field="productAttributes" id="c_cz_kolomet_domain_Product_productAttributes" messageCode="entity_reference_not_managed" messageCodeAttribute="Product Attribute" render="false" z="user-managed"/>
         <field:checkbox field="enabled" id="c_cz_kolomet_domain_Product_enabled" z="TQuxy01gHsypW2/Tbt4RWNqp11k="/>
         <field:checkbox field="canSendToAllCountry" id="c_cz_kolomet_domain_Product_canSendToAllCountry" z="8sX6jZghVHGKYZWe/Q5nXF2KvS0="/>
-        <field:input field="createdBy" id="c_cz_kolomet_domain_Product_createdBy" z="DH64gcykUpFf6vg+N3jTWs5PtJs="/>
-        <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_Product_lastModifiedBy" z="kKhWS8fWx9jNPbBkdwzuNNvLwOU="/>
-        <field:datetime dateTimePattern="${product_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_Product_lastModified" z="bZxncCGuVYWjTAPE7gGh7n18KBU="/>
+        <field:input field="createdBy" id="c_cz_kolomet_domain_Product_createdBy" z="DH64gcykUpFf6vg+N3jTWs5PtJs=" render="false"/>
+        <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_Product_lastModifiedBy" z="kKhWS8fWx9jNPbBkdwzuNNvLwOU=" render="false"/>
+        <field:datetime dateTimePattern="${product_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_Product_lastModified" z="bZxncCGuVYWjTAPE7gGh7n18KBU=" render="false"/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_cz_kolomet_domain_Product" render="${not empty dependencies}" z="JG9sb7H3rDmiMgYvz+ZgFJEQh6g="/>
 </div>

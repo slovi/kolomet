@@ -7,9 +7,9 @@
         <field:select field="product" id="c_cz_kolomet_domain_PhotoUrl_product" itemValue="id" items="${products}" path="/products" required="true" z="f2HcSC6MmGFmYB9ML4YpGwmhv8Y="/>
         <field:input field="fileName" id="c_cz_kolomet_domain_PhotoUrl_fileName" max="20" render="false" required="false" z="user-managed"/>
         <field:input field="contentType" id="c_cz_kolomet_domain_PhotoUrl_contentType" max="20" render="false" required="false" z="user-managed"/>
-        <field:input field="createdBy" id="c_cz_kolomet_domain_PhotoUrl_createdBy" z="smtmhMDO6B3oFoYxAPTJJXeMGTc="/>
-        <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_PhotoUrl_lastModifiedBy" z="znIzvT3qzceQUUZ9PsYLKxalz/A="/>
-        <field:datetime dateTimePattern="${photoUrl_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_PhotoUrl_lastModified" z="94oQSXXr9lV4QAuR6KwFO4OC9Ic="/>
+        <field:input field="createdBy" id="c_cz_kolomet_domain_PhotoUrl_createdBy" z="smtmhMDO6B3oFoYxAPTJJXeMGTc=" render="false"/>
+        <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_PhotoUrl_lastModifiedBy" z="znIzvT3qzceQUUZ9PsYLKxalz/A=" render="false"/>
+        <field:datetime dateTimePattern="${photoUrl_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_PhotoUrl_lastModified" z="94oQSXXr9lV4QAuR6KwFO4OC9Ic=" render="false"/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_cz_kolomet_domain_PhotoUrl" render="${not empty dependencies}" z="jcOoQML0AKB84/p0a52QIY3Fbl4="/>
 </div>

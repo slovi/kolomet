@@ -21,8 +21,7 @@
 		    <tiles:insertAttribute name="menu_main"/>   
 		    <div id="center_container">
 		    	<tiles:insertAttribute name="menu_side"/>
-		    	<tiles:insertAttribute name="news"/>
-		    	<div id="content_container_short">
+		    	<div id="content_container">
 		    		<div class="general_unit">
 	    				<tiles:insertAttribute name="body"/>
 	    			</div>

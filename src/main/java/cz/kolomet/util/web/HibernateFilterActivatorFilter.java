@@ -19,9 +19,9 @@ public class HibernateFilterActivatorFilter extends OpenEntityManagerInViewFilte
 	
 	public static final String NEWS_ITEM_ENABLE_FILTER = "newsItemEnabledFilter";
 	public static final String PRODUCT_ENABLED_FILTER = "productEnabledFilter";
-	public static final String PRODUCERS_ENABLED_FILTER = "sellerEnabledFilter";
+	public static final String SELLER_ENABLED_FILTER = "sellerEnabledFilter";
 	
-	private String[] enabledFilters = {PRODUCT_ENABLED_FILTER, PRODUCERS_ENABLED_FILTER};
+	private String[] enabledFilters = {PRODUCT_ENABLED_FILTER, SELLER_ENABLED_FILTER};
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -47,8 +47,8 @@ public class HibernateFilterActivatorFilter extends OpenEntityManagerInViewFilte
 	protected void enableFilters(Session session) {
 		
 		for (String enabledFilter: enabledFilters) {
-			Filter newsItemFilter = session.enableFilter(enabledFilter);
-			newsItemFilter.setParameter("enabled", true);
+			Filter filter = session.enableFilter(enabledFilter);
+			filter.setParameter("enabled", true);
 		}
 	}
 

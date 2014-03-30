@@ -33,10 +33,11 @@
         <field:display field="addressName" id="s_cz_kolomet_domain_Seller_addressName" object="${seller}" z="Xqr9NUBujwOGHJTkDgRWFdwojjg="/>
         <field:display field="addressEmail" id="s_cz_kolomet_domain_Seller_addressEmail" object="${seller}" z="MdRlkzTu4hvtWYfmPeSgj2q1oJo="/>
         <field:display field="enabled" id="s_cz_kolomet_domain_Seller_enabled" object="${seller}" z="uWfb4xM4tGrF6WwFCslUskccrvE="/>
-        <field:display field="createdBy" id="s_cz_kolomet_domain_Seller_createdBy" object="${seller}" render="false" z="user-managed"/>
-        <field:display field="lastModifiedBy" id="s_cz_kolomet_domain_Seller_lastModifiedBy" object="${seller}" render="false" z="user-managed"/>
-        <field:display date="true" dateTimePattern="${seller_created_date_format}" field="created" id="s_cz_kolomet_domain_Seller_created" object="${seller}" render="false" z="48dU29Z1V3aNxnXqlKa9LAmsrG4="/>
-        <field:display date="true" dateTimePattern="${seller_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_Seller_lastModified" object="${seller}" render="false" z="user-managed"/>
+        <field:display field="createdBy" id="s_cz_kolomet_domain_Seller_createdBy" object="${seller}" z="user-managed"/>
+        <field:display field="lastModifiedBy" id="s_cz_kolomet_domain_Seller_lastModifiedBy" object="${seller}" z="user-managed"/>
+        <field:display date="true" dateTimePattern="${seller_created_date_format}" field="created" id="s_cz_kolomet_domain_Seller_created" object="${seller}" z="48dU29Z1V3aNxnXqlKa9LAmsrG4="/>
+        <field:display date="true" dateTimePattern="${seller_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_Seller_lastModified" object="${seller}" z="user-managed"/>
+        
         <c:set scope="request" value="${seller.id}" var="parentEntityId"/>
         <h2>Seller photos</h2>
         <c:set scope="request" value="${seller.sellerPhotoUrls}" var="sellerphotourls"/>

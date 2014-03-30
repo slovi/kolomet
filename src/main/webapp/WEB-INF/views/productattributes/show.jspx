@@ -8,6 +8,7 @@
         <field:display field="product" id="s_cz_kolomet_domain_ProductAttribute_product" object="${productattribute}" z="OQ+U31yu+nzZ6wq9JVDd6yW8naw="/>
         <field:display field="createdBy" id="s_cz_kolomet_domain_ProductAttribute_createdBy" object="${productattribute}" z="bCjZ0GAEVnlq8T1nBS602+7a5hs="/>
         <field:display field="lastModifiedBy" id="s_cz_kolomet_domain_ProductAttribute_lastModifiedBy" object="${productattribute}" z="mfEoXaBA3GDthVrfSi2uT/476iI="/>
+        <field:display date="true" dateTimePattern="${productAttribute_created_date_format}" field="created" id="s_cz_kolomet_domain_ProductAttribute_created" object="${productattribute}" z="U2zefkRrm97uFWzTz2XwDLw4X18="/>
         <field:display date="true" dateTimePattern="${productAttribute_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_ProductAttribute_lastModified" object="${productattribute}" z="U2zefkRrm97uFWzTz2XwDLw4X18="/>
     </page:show>
 </div>

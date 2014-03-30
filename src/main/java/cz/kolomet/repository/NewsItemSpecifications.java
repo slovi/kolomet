@@ -22,8 +22,8 @@ public class NewsItemSpecifications {
 			public Predicate toPredicate(Root<NewsItem> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 				
 				List<Predicate> predicates = new ArrayList<Predicate>();
-				cb.lessThan(root.<Date>get("newsItemDate"), new Date());
-				cb.equal(root.get("enabled"), true);
+				predicates.add(cb.lessThanOrEqualTo(root.<Date>get("newsItemDate"), new Date()));
+				predicates.add(cb.equal(root.get("enabled"), true));
 				return cb.and(predicates.toArray(new Predicate[predicates.size()]));
 			}
 		};

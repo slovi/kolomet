@@ -10,9 +10,12 @@ public class ProductFilter {
 	
 	private BigDecimal priceFrom;
 	private BigDecimal priceTo;
+	private BigDecimal discountFrom;
+	private BigDecimal discountTo;
 	private Category category;
 	private Producer producer;
 	private Region region;
+	private Boolean canSendToAllCountry;
 	
 	public BigDecimal getPriceFrom() {
 		return priceFrom;
@@ -30,6 +33,22 @@ public class ProductFilter {
 		this.priceTo = priceTo;
 	}
 	
+	public BigDecimal getDiscountFrom() {
+		return discountFrom;
+	}
+
+	public void setDiscountFrom(BigDecimal discountFrom) {
+		this.discountFrom = discountFrom;
+	}
+
+	public BigDecimal getDiscountTo() {
+		return discountTo;
+	}
+
+	public void setDiscountTo(BigDecimal discountTo) {
+		this.discountTo = discountTo;
+	}
+
 	public Category getCategory() {
 		return category;
 	}
@@ -52,6 +71,14 @@ public class ProductFilter {
 
 	public void setRegion(Region region) {
 		this.region = region;
+	}
+
+	public Boolean getCanSendToAllCountry() {
+		return canSendToAllCountry;
+	}
+
+	public void setCanSendToAllCountry(Boolean canSendToAllCountry) {
+		this.canSendToAllCountry = canSendToAllCountry;
 	}
 
 }

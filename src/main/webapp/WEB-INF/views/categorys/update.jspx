@@ -6,8 +6,8 @@
         <field:input field="codeKey" id="c_cz_kolomet_domain_Category_codeKey" max="20" required="true" z="kHTZyEL4/TvgxgZ00CnmSYVSXJY="/>
         <field:textarea field="codeDescription" id="c_cz_kolomet_domain_Category_codeDescription" required="true" z="eeovqOjIfx/Yn7hwOJywW5SejXI="/>
         <field:select field="categoryType" id="c_cz_kolomet_domain_Category_categoryType" itemValue="id" items="${categorytypes}" path="/categorytypes" required="true" z="XsZNTVU7x/t5UzTHhGtJ2vAVyak="/>
-        <field:input field="createdBy" id="c_cz_kolomet_domain_Category_createdBy" z="Vysb6QABHfFR+oveVIE+BxTQPTg="/>
-        <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_Category_lastModifiedBy" z="3cZTnOlCDSYBq/BsVx1u5tWO/8c="/>
-        <field:datetime dateTimePattern="${category_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_Category_lastModified" z="kyqy6LBm5AYmyN9qc2oFHOZQ7XY="/>
+        <field:input field="createdBy" id="c_cz_kolomet_domain_Category_createdBy" z="Vysb6QABHfFR+oveVIE+BxTQPTg=" render="false"/>
+        <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_Category_lastModifiedBy" z="3cZTnOlCDSYBq/BsVx1u5tWO/8c=" render="false"/>
+        <field:datetime dateTimePattern="${category_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_Category_lastModified" z="kyqy6LBm5AYmyN9qc2oFHOZQ7XY=" render="false"/>
     </form:update>
 </div>

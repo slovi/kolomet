@@ -5,9 +5,10 @@
     <form:create id="fc_cz_kolomet_domain_codelist_Region" modelAttribute="region" path="/regions" render="${empty dependencies}" z="UWvBai+l+jkM5rSGtyLFKP9awro=">
         <field:input field="codeKey" id="c_cz_kolomet_domain_codelist_Region_codeKey" max="20" required="true" z="HZg4YSU/I6NX3jmKqSvQollfN+M="/>
         <field:textarea field="codeDescription" id="c_cz_kolomet_domain_codelist_Region_codeDescription" required="true" z="TOT23ztMe4yEn2xFDJX76niI1gE="/>
-        <field:input field="createdBy" id="c_cz_kolomet_domain_codelist_Region_createdBy" z="+JKyZNDDGsDssZ5RJgaUjYif7z0="/>
-        <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_codelist_Region_lastModifiedBy" z="+OJb8MDddr2lWyrmKaiWLWDtjek="/>
-        <field:datetime dateTimePattern="${region_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_codelist_Region_lastModified" z="LhCBMbZahvV38kkdkrW7JPp7HKI="/>
+        <field:input field="createdBy" id="c_cz_kolomet_domain_codelist_Region_createdBy" z="+JKyZNDDGsDssZ5RJgaUjYif7z0=" render="false"/>
+        <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_codelist_Region_lastModifiedBy" z="+OJb8MDddr2lWyrmKaiWLWDtjek=" render="false"/>
+        <field:datetime dateTimePattern="${region_created_date_format}" field="c" id="c_cz_kolomet_domain_codelist_Region_created" z="LhCBMbZahvV38kkdkrW7JPp7HKI=" render="false"/>
+        <field:datetime dateTimePattern="${region_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_codelist_Region_lastModified" z="LhCBMbZahvV38kkdkrW7JPp7HKI=" render="false"/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_cz_kolomet_domain_codelist_Region" render="${not empty dependencies}" z="8Qkgvcr6xkMl3Q8bwZG+53n2hNQ="/>
 </div>

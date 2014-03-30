@@ -7,6 +7,7 @@
         <field:display field="codeDescription" id="s_cz_kolomet_domain_codelist_CategoryType_codeDescription" object="${categorytype}" z="50rCArn5WSuMmXXuPxR1TkVfJjs="/>
         <field:display field="createdBy" id="s_cz_kolomet_domain_codelist_CategoryType_createdBy" object="${categorytype}" z="WafIqA3qaxvu1oFwTJFQlFO5IuU="/>
         <field:display field="lastModifiedBy" id="s_cz_kolomet_domain_codelist_CategoryType_lastModifiedBy" object="${categorytype}" z="OGoRUsQ44jeg+AZ/phsCIO7HN/w="/>
+        <field:display date="true" dateTimePattern="${categoryType_created_date_format}" field="created" id="s_cz_kolomet_domain_codelist_CategoryType_created" object="${categorytype}" z="zpfB9MLLV8FAMmAoZXjloazm3jg="/>
         <field:display date="true" dateTimePattern="${categoryType_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_codelist_CategoryType_lastModified" object="${categorytype}" z="zpfB9MLLV8FAMmAoZXjloazm3jg="/>
     </page:show>
 </div>

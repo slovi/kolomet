@@ -2,10 +2,7 @@ package cz.kolomet.domain;
 
 import java.util.Date;
 
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Filter;
@@ -34,14 +31,10 @@ public class NewsItem extends DomainEntity {
 	private Boolean enabled = true;
 	
 	@DateTimeFormat(style="S-")
-	private Date newsItemDate;
+	private Date newsItemDate = new Date();
 	
 	@Lob
 	@NotNull
 	private String text;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "APPLICATIONUSER_ID")
-	private ApplicationUser creater;
 	
 }
