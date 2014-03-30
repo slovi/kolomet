@@ -20,6 +20,8 @@ public class HibernateFilterActivatorFilter extends OpenEntityManagerInViewFilte
 	public static final String NEWS_ITEM_ENABLE_FILTER = "newsItemEnabledFilter";
 	public static final String PRODUCT_ENABLED_FILTER = "productEnabledFilter";
 	public static final String PRODUCERS_ENABLED_FILTER = "sellerEnabledFilter";
+	
+	private String[] enabledFilters = {PRODUCT_ENABLED_FILTER, PRODUCERS_ENABLED_FILTER};
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -44,20 +46,20 @@ public class HibernateFilterActivatorFilter extends OpenEntityManagerInViewFilte
 	
 	protected void enableFilters(Session session) {
 		
-		Filter newsItemFilter = session.enableFilter(NEWS_ITEM_ENABLE_FILTER);
-		newsItemFilter.setParameter("enabled", true);
-		
-		Filter productsFilter = session.enableFilter(PRODUCT_ENABLED_FILTER);
-		productsFilter.setParameter("enabled", true);
-		
-		Filter producersFilter = session.enableFilter(PRODUCERS_ENABLED_FILTER);
-		producersFilter.setParameter("enabled", true);
+		for (String enabledFilter: enabledFilters) {
+			Filter newsItemFilter = session.enableFilter(enabledFilter);
+			newsItemFilter.setParameter("enabled", true);
+		}
 	}
 
 	protected void disableFilters(Session session) {
-		session.disableFilter(NEWS_ITEM_ENABLE_FILTER);
-		session.disableFilter(PRODUCT_ENABLED_FILTER);
-		session.disableFilter(PRODUCERS_ENABLED_FILTER);
+		for (String enabledFilter: enabledFilters) {
+			session.disableFilter(enabledFilter);
+		}
+	}
+	
+	public void setEnabledFilters(String filterNames) {
+		this.enabledFilters = filterNames.split(", ");
 	}
 	
 }

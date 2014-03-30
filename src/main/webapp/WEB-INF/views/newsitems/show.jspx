@@ -5,7 +5,6 @@
     <page:show id="ps_cz_kolomet_domain_NewsItem" object="${newsitem}" path="/newsitems" z="a4LPTQ6nov+bbgJF9LTc4yaYWL0=">
         <field:display date="true" dateTimePattern="${newsItem_newsitemdate_date_format}" field="newsItemDate" id="s_cz_kolomet_domain_NewsItem_newsItemDate" object="${newsitem}" z="WvUoKBJa3/eh80tAtu1QKYWcPag="/>
         <field:display field="text" id="s_cz_kolomet_domain_NewsItem_text" object="${newsitem}" z="HFJFPDfqDM2yxLZBaNesLBpdA60="/>
-        <field:display field="creater" id="s_cz_kolomet_domain_NewsItem_creater" object="${newsitem}" z="/cTnfRGcp6L98nQlwSx/qa1of2s="/>
         <field:display field="enabled" id="s_cz_kolomet_domain_NewsItem_enabled" object="${newsitem}" z="28YIQvX/doH4pFwH3sm3qLRNXKU="/>
     </page:show>
 </div>

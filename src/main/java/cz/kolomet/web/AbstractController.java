@@ -11,6 +11,7 @@ import cz.kolomet.domain.NewsItem;
 import cz.kolomet.domain.Producer;
 import cz.kolomet.repository.CategoryRepository;
 import cz.kolomet.repository.NewsItemRepository;
+import cz.kolomet.repository.NewsItemSpecifications;
 import cz.kolomet.repository.ProducerRepository;
 
 public class AbstractController {
@@ -39,7 +40,7 @@ public class AbstractController {
 	
 	@ModelAttribute("newsItems")
 	public List<NewsItem> loadNewsItems() {
-		return newsItemRepository.findAll(new PageRequest(0, newsItemsSize)).getContent();
+		return newsItemRepository.findAll(NewsItemSpecifications.allNewsItems(), new PageRequest(0, newsItemsSize)).getContent();
 	}
 
 }

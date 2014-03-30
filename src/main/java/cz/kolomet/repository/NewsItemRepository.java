@@ -6,5 +6,5 @@ import cz.kolomet.domain.NewsItem;
 
 @RooJpaRepository(domainType = NewsItem.class)
 public interface NewsItemRepository {
-	
+	 
 }

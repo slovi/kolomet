@@ -6,7 +6,6 @@
         <field:input field="sellerName" id="c_cz_kolomet_domain_Seller_sellerName" label="nazev" max="20" required="true" z="user-managed"/>
         <field:textarea field="sellerDescription" id="c_cz_kolomet_domain_Seller_sellerDescription" label="popis" required="true" z="user-managed"/>
         <field:textarea field="mapUrl" id="c_cz_kolomet_domain_Seller_mapUrl" z="l4+of1NGD4kA6p7robYOfSeBf5c="/>
-        <field:textarea field="photoUrl" id="c_cz_kolomet_domain_Seller_photoUrl" z="P25lgLvSyJ6Nd0k4xLbVrxe+L+A="/>
         <field:select field="sellerStatus" id="c_cz_kolomet_domain_Seller_sellerStatus" itemValue="id" items="${sellerstatuses}" path="/sellerstatuses" required="true" z="bfCR8pNBLpX1/CiNFkA5+Rvni54="/>
         <field:input field="personSalutation" id="c_cz_kolomet_domain_Seller_personSalutation" max="20" z="dnwzisYNI0tikfWCGZUYMTTS6FM="/>
         <field:input field="personDegree" id="c_cz_kolomet_domain_Seller_personDegree" max="20" z="E4WTBYQ4lqh1s4hOAJY7D6XkDrs="/>
@@ -35,6 +34,7 @@
         <field:input field="sellerTitle" id="c_cz_kolomet_domain_Seller_sellerTitle" z="R4dz35yvkTZK+P/pzzqfsKGYfnM="/>
         <field:checkbox field="enabled" id="c_cz_kolomet_domain_Seller_enabled" z="ZbUSvy6nfnljauAUjU6yJhQCH9g="/>
         <field:simple field="sellerPhotoUrls" id="c_cz_kolomet_domain_Seller_sellerPhotoUrls" messageCode="entity_reference_not_managed" messageCodeAttribute="Seller Photo Url" z="S65AtaxIF1oprs2bs+Kghp7r5XQ="/>
+        <field:simple field="products" id="c_cz_kolomet_domain_Seller_products" messageCode="entity_reference_not_managed" messageCodeAttribute="Product" z="AZCEE9YJtU0xKL2/6KEiz1JBwQE="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_cz_kolomet_domain_Seller" render="${not empty dependencies}" z="wOb4nwhLxol+WOVpFAt/d7koDnE="/>
 </div>

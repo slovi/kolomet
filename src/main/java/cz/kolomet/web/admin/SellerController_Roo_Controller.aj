@@ -8,6 +8,7 @@ import cz.kolomet.domain.codelist.CountryState;
 import cz.kolomet.domain.codelist.Region;
 import cz.kolomet.domain.codelist.SellerStatus;
 import cz.kolomet.service.CountryStateService;
+import cz.kolomet.service.ProductService;
 import cz.kolomet.service.RegionService;
 import cz.kolomet.service.SellerPhotoUrlService;
 import cz.kolomet.service.SellerService;
@@ -32,6 +33,9 @@ privileged aspect SellerController_Roo_Controller {
     
     @Autowired
     SellerService SellerController.sellerService;
+    
+    @Autowired
+    ProductService SellerController.productService;
     
     @Autowired
     SellerPhotoUrlService SellerController.sellerPhotoUrlService;
@@ -126,6 +130,7 @@ privileged aspect SellerController_Roo_Controller {
     
     void SellerController.populateEditForm(Model uiModel, Seller seller) {
         uiModel.addAttribute("seller", seller);
+        uiModel.addAttribute("products", productService.findAllProducts());
         uiModel.addAttribute("sellerphotourls", sellerPhotoUrlService.findAllSellerPhotoUrls());
         uiModel.addAttribute("countrystates", countryStateService.findAllCountryStates());
         uiModel.addAttribute("regions", regionService.findAllRegions());

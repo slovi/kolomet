@@ -15,13 +15,13 @@ import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-import cz.kolomet.domain.Product;
 import cz.kolomet.domain.Seller;
 import cz.kolomet.domain.SellerPhotoUrl;
 import cz.kolomet.service.SellerService;
@@ -36,6 +36,9 @@ public class SellerPhotoUrlController {
 	
 	@Autowired
 	private SellerService sellerService;
+	
+	@Autowired
+	private Validator validator;
 	
     @RequestMapping(params = "form", produces = "text/html")
     public String createForm(Model uiModel, @RequestParam(value = "parentEntityId", required = false) Long parentEntityId) {
@@ -57,19 +60,21 @@ public class SellerPhotoUrlController {
     }
     
 	@RequestMapping(method = RequestMethod.POST, produces = "text/html")
-    public String create(@Valid SellerPhotoUrl sellerPhotoUrl, BindingResult bindingResult, Model uiModel, @RequestParam("content") CommonsMultipartFile content, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
-            populateEditForm(uiModel, sellerPhotoUrl, null);
-            return "sellerphotourls/create";
-        }
+    public String create(SellerPhotoUrl sellerPhotoUrl, BindingResult bindingResult, Model uiModel, @RequestParam("content") CommonsMultipartFile content, HttpServletRequest httpServletRequest) {
+        
         File dest = getDestFile(sellerPhotoUrl, content);
 		try {
 			content.transferTo(dest);
 			sellerPhotoUrl.setFileName(dest.getName());
 			sellerPhotoUrl.setContentType(content.getContentType());
+			validator.validate(sellerPhotoUrl, bindingResult);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+		if (bindingResult.hasErrors()) {
+            populateEditForm(uiModel, sellerPhotoUrl, null);
+            return "sellerphotourls/create";
+        }
         uiModel.asMap().clear();
         sellerPhotoUrlService.saveSellerPhotoUrl(sellerPhotoUrl, dest, new File(rootDir, sellerPhotoUrl.getSeller().getId().toString()));
         return "redirect:/sellers/" + encodeUrlPathSegment(sellerPhotoUrl.getSeller().getId().toString(), httpServletRequest);

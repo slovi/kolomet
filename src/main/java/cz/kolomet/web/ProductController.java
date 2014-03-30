@@ -64,7 +64,7 @@ public class ProductController extends AbstractController {
 	public String listByProducer(@PathVariable("producerId") Long producerId, Model model) {
 		Producer producer = producerRepository.findOne(producerId);
 		populateFilterForm(new ProductFilter(), null, producer, model);
-		model.addAttribute("products", productRepository.findByProducerOrderByCreatedDesc(producer, new PageRequest(0, maxPageItems)));
+		model.addAttribute("products", productRepository.findByProducerOrderByCreatedDateDesc(producer, new PageRequest(0, maxPageItems)));
 		return "products/list_category";
 	}
 	

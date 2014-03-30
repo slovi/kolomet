@@ -5,7 +5,6 @@
     <form:update id="fu_cz_kolomet_domain_NewsItem" modelAttribute="newsItem" path="/newsitems" versionField="Version" z="Ysrxzq8fUJmsUh73ymaWKILwPnE=">
         <field:datetime dateTimePattern="${newsItem_newsitemdate_date_format}" field="newsItemDate" id="c_cz_kolomet_domain_NewsItem_newsItemDate" z="FB5WVicWURlynFC/lm03NXQZr5Y="/>
         <field:textarea field="text" id="c_cz_kolomet_domain_NewsItem_text" required="true" z="DZ+w2/DZOzfxdSGqNLkmev6oqFA="/>
-        <field:select field="creater" id="c_cz_kolomet_domain_NewsItem_creater" itemValue="id" items="${applicationusers}" path="/applicationusers" z="43kmZVmihoYflXb6G2X54TzXmEw="/>
         <field:checkbox field="enabled" id="c_cz_kolomet_domain_NewsItem_enabled" z="4dW1KYPDc1uE1qbCHNRQWsxtRwQ="/>
     </form:update>
 </div>
