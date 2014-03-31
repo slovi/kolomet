@@ -204,3 +204,6 @@ web mvc scaffold --class ~.web.SellerPhotoUrlController --backingType ~.domain.S
 field date --class ~.domain.DomainEntity --fieldName test --type org.joda.time.DateTime
 // Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2014-03-30 12:32:02
 // Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2014-03-30 12:32:44
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2014-03-30 23:32:34
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2014-03-31 01:45:27
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2014-03-31 02:06:53

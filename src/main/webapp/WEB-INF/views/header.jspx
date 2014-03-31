@@ -6,7 +6,7 @@
   <div id="header_background">  
     <div id="header"> 
    		<img src="${logoUrl}" id="logo"/>
-        <a class="action_button" id="go" rel="leanModal" name="login" href="#login"><spring:message code="header_login" /></a>
+        <a class="action_button" id="login_button" rel="login" name="login" href="#login"><spring:message code="header_login" /></a>
     </div>
    </div>
   

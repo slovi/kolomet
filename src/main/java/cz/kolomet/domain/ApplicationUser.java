@@ -1,7 +1,11 @@
 package cz.kolomet.domain;
 
+import java.util.List;
+
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 import org.springframework.roo.addon.equals.RooEquals;
@@ -24,11 +28,22 @@ public class ApplicationUser extends DomainEntity {
 	/**
 	 */
 	private String password;
+	
+	/**
+	 */
+	private Boolean enabled;
 
 	/**
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "SELLER_ID")
 	private Seller seller;
+		
+	@ManyToMany
+	  @JoinTable(
+	      name="APPLICATION_USER_ROLE",
+	      joinColumns={@JoinColumn(name="USER_ID", referencedColumnName="ID")},
+	      inverseJoinColumns={@JoinColumn(name="ROLE_ID", referencedColumnName="ID")})
+	private List<ApplicationRole> roles;
 	
 }

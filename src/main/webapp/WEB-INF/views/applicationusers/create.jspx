@@ -5,10 +5,12 @@
     <form:create id="fc_cz_kolomet_domain_ApplicationUser" modelAttribute="applicationUser" path="/applicationusers" render="${empty dependencies}" z="uR5cBD44E6HZCvEeccrqOjjnhTk=">
         <field:input field="username" id="c_cz_kolomet_domain_ApplicationUser_username" z="UXsndPwpDsrRTptgCctDJviF6OE="/>
         <field:input field="password" id="c_cz_kolomet_domain_ApplicationUser_password" z="Laa1a+VT+ET52ZCnpN1vgsec2jI="/>
-        <field:select field="seller" id="c_cz_kolomet_domain_ApplicationUser_seller" itemValue="id" items="${sellers}" path="/sellers" z="AZ+UVf7lIbfchlwC3hygp2lzYGQ="/>
-        <field:input field="createdBy" id="c_cz_kolomet_domain_ApplicationUser_createdBy" z="kwU/bXjP+4typjFXT5IfaZh0ytA=" render="false"/>
-        <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_ApplicationUser_lastModifiedBy" z="6nyGrPsY4UmauN7eNNG1FeQg+tg=" render="false"/>
-        <field:datetime dateTimePattern="${applicationUser_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_ApplicationUser_lastModified" z="rYfg37XuZhmc4xhjgtrxG9zaD1w=" render="false"/>
+        <field:input field="seller" id="c_cz_kolomet_domain_ApplicationUser_seller" z="Rirgzb2MVNg4Vk2HygBqO9BgRms="/>
+        <field:input field="createdBy" id="c_cz_kolomet_domain_ApplicationUser_createdBy" render="false" z="user-managed"/>
+        <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_ApplicationUser_lastModifiedBy" render="false" z="user-managed"/>
+        <field:datetime dateTimePattern="${applicationUser_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_ApplicationUser_lastModified" render="false" z="user-managed"/>
+        <field:checkbox field="enabled" id="c_cz_kolomet_domain_ApplicationUser_enabled" z="uzXxkkgzlcZXoLOUlr+qlbytIj0="/>
+        <field:select field="roles" id="c_cz_kolomet_domain_ApplicationUser_roles" itemValue="id" items="${applicationroles}" multiple="true" path="/applicationroles" z="RzgxXnIkTYAtbWqpXxHD54Jf3bw="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_cz_kolomet_domain_ApplicationUser" render="${not empty dependencies}" z="Svf97I0u8Iv4axjHEq7hx4B9uc8="/>
 </div>

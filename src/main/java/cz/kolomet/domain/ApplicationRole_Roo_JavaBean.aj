@@ -5,6 +5,7 @@ package cz.kolomet.domain;
 
 import cz.kolomet.domain.ApplicationPermission;
 import cz.kolomet.domain.ApplicationRole;
+import cz.kolomet.domain.ApplicationUser;
 import java.util.List;
 
 privileged aspect ApplicationRole_Roo_JavaBean {
@@ -15,6 +16,14 @@ privileged aspect ApplicationRole_Roo_JavaBean {
     
     public void ApplicationRole.setRoleName(String roleName) {
         this.roleName = roleName;
+    }
+    
+    public List<ApplicationUser> ApplicationRole.getUsers() {
+        return this.users;
+    }
+    
+    public void ApplicationRole.setUsers(List<ApplicationUser> users) {
+        this.users = users;
     }
     
     public List<ApplicationPermission> ApplicationRole.getPermissions() {

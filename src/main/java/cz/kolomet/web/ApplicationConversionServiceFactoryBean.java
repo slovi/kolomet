@@ -10,6 +10,9 @@ import org.springframework.format.FormatterRegistry;
 import org.springframework.format.support.FormattingConversionServiceFactoryBean;
 import org.springframework.roo.addon.web.mvc.controller.converter.RooConversionService;
 
+import cz.kolomet.domain.ApplicationPermission;
+import cz.kolomet.domain.ApplicationRole;
+import cz.kolomet.domain.ApplicationUser;
 import cz.kolomet.domain.Category;
 import cz.kolomet.domain.Producer;
 import cz.kolomet.domain.Product;
@@ -114,6 +117,30 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
         return new org.springframework.core.convert.converter.Converter<cz.kolomet.domain.codelist.Region, java.lang.String>() {
             public String convert(Region region) {
                 return new StringBuilder().append(region.getCodeKey()).append(' ').append(region.getCodeDescription()).toString();
+            }
+        };
+    }
+	
+    public Converter<ApplicationRole, String> getApplicationRoleToStringConverter() {
+        return new Converter<ApplicationRole, String>() {
+            public String convert(ApplicationRole applicationRole) {
+                return new StringBuilder().append(applicationRole.getRoleName()).toString();
+            }
+        };
+    }
+    
+    public Converter<ApplicationUser, String> getApplicationUserToStringConverter() {
+        return new Converter<ApplicationUser, String>() {
+            public String convert(ApplicationUser applicationUser) {
+                return new StringBuilder().append(applicationUser.getUsername()).toString();
+            }
+        };
+    }
+    
+    public Converter<ApplicationPermission, String> getApplicationPermissionToStringConverter() {
+        return new Converter<ApplicationPermission, String>() {
+            public String convert(ApplicationPermission applicationPermission) {
+                return new StringBuilder().append(applicationPermission.getPermissionName()).toString();
             }
         };
     }

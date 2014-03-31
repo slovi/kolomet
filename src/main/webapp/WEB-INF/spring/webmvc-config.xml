@@ -61,6 +61,7 @@
     The default behaviour of DispatcherServlet - is to propagate all exceptions to the servlet 
     container: this will happen - here with all other types of exceptions. -->
     <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver" p:defaultErrorView="uncaughtException">
+    	<property name="warnLogCategory" value="errorLogger" />
         <property name="exceptionMappings">
             <props>
                 <prop key=".DataAccessException">dataAccessFailure</prop>

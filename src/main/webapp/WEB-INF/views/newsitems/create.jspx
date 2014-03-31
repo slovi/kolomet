@@ -7,8 +7,8 @@
         <field:textarea field="text" id="c_cz_kolomet_domain_NewsItem_text" required="true" z="DZ+w2/DZOzfxdSGqNLkmev6oqFA="/>
         <field:checkbox field="enabled" id="c_cz_kolomet_domain_NewsItem_enabled" z="4dW1KYPDc1uE1qbCHNRQWsxtRwQ="/>
         <field:input field="createdBy" id="c_cz_kolomet_domain_NewsItem_createdBy" render="false" z="user-managed"/>
-        <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_NewsItem_lastModifiedBy" z="iuxkpLcHJhy1bDnFLAOYla3KDx0=" render="false"/>
-        <field:datetime dateTimePattern="${newsItem_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_NewsItem_lastModified" z="WGmY9z6QaC/H/4o0gGiwwMiemvk=" render="false"/>
+        <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_NewsItem_lastModifiedBy" render="false" z="user-managed"/>
+        <field:datetime dateTimePattern="${newsItem_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_NewsItem_lastModified" render="false" z="user-managed"/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_cz_kolomet_domain_NewsItem" render="${not empty dependencies}" z="LldooaVFU3hPfMHyc4kOXwbETpE="/>
 </div>

@@ -136,10 +136,10 @@ public class Seller extends DomainEntity {
     @Size(max = 50)
     private String addressEmail;
     
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "seller", cascade = CascadeType.REMOVE)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "seller", cascade = CascadeType.ALL)
     private List<SellerPhotoUrl> sellerPhotoUrls;
     
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "seller", cascade = CascadeType.REMOVE)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "seller", cascade = CascadeType.ALL)
     private List<Product> products;
     
     public String getPersonString() {

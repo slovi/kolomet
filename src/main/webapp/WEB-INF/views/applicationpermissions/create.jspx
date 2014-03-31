@@ -4,11 +4,11 @@
     <jsp:output omit-xml-declaration="yes"/>
     <form:create id="fc_cz_kolomet_domain_ApplicationPermission" modelAttribute="applicationPermission" path="/applicationpermissions" render="${empty dependencies}" z="jW3B/fhJ285gl4UN5V/JURdD+Y0=">
         <field:input field="permissionName" id="c_cz_kolomet_domain_ApplicationPermission_permissionName" z="AYwk5EBY8NovlE7+3KjMLhJ6mL0="/>
-        <field:select field="roles" id="c_cz_kolomet_domain_ApplicationPermission_roles" itemValue="id" items="${applicationroles}" multiple="true" path="/applicationroles" z="fWdnNQ8XtQivimYh52hJZRJ0VwY="/>
-        <field:input field="createdBy" id="c_cz_kolomet_domain_ApplicationPermission_createdBy" z="dkeA2U0iiyMCVqXu/2Vy0A6IWhE=" render="false" />
-        <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_ApplicationPermission_lastModifiedBy" z="rPc2mzFpEjkhvjcFEPPB3T0GCyY=" render="false" />
-        <field:datetime dateTimePattern="${applicationPermission_created_date_format}" field="created" id="c_cz_kolomet_domain_ApplicationPermission_created" z="Wt7oiHovc3gwqmAmbyN1Gk/0ZiI=" render="false" />
-        <field:datetime dateTimePattern="${applicationPermission_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_ApplicationPermission_lastModified" z="Wt7oiHovc3gwqmAmbyN1Gk/0ZiI=" render="false" />
+        <field:input field="roles" id="c_cz_kolomet_domain_ApplicationPermission_roles" z="QeOWb53QX/u9DLy5h5+Xv8vXiwU="/>
+        <field:input field="createdBy" id="c_cz_kolomet_domain_ApplicationPermission_createdBy" render="false" z="user-managed"/>
+        <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_ApplicationPermission_lastModifiedBy" render="false" z="user-managed"/>
+        <field:datetime dateTimePattern="${applicationPermission_created_date_format}" field="created" id="c_cz_kolomet_domain_ApplicationPermission_created" render="false" z="Wt7oiHovc3gwqmAmbyN1Gk/0ZiI="/>
+        <field:datetime dateTimePattern="${applicationPermission_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_ApplicationPermission_lastModified" render="false" z="user-managed"/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_cz_kolomet_domain_ApplicationPermission" render="${not empty dependencies}" z="TD16aq726bA/YsndgFNG/SNjgbg="/>
 </div>

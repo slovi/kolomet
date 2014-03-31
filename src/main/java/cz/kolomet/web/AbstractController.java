@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import cz.kolomet.domain.Category;
@@ -40,7 +41,7 @@ public class AbstractController {
 	
 	@ModelAttribute("newsItems")
 	public List<NewsItem> loadNewsItems() {
-		return newsItemRepository.findAll(NewsItemSpecifications.allNewsItems(), new PageRequest(0, newsItemsSize)).getContent();
+		return newsItemRepository.findAll(NewsItemSpecifications.allNewsItems(), new PageRequest(0, newsItemsSize, Direction.DESC, "newsItemDate")).getContent();
 	}
 
 }

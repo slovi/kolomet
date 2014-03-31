@@ -21,6 +21,11 @@ td {
 	padding: 3px;
 }
 
+span.error {
+	color: red;
+	font: bold;
+}
+
 div#container,div#header_background,div#menu_background {
 	width: 100%;
 	min-width: 1200px;
@@ -740,11 +745,25 @@ p.price,p.detail_price {
 }
 
 #login {
-	display: none;
-	background: #f9f9f9;
-	border: 0 margin:0;
-	padding: 0px;
-	width: 338px;
+	display: none; 
+	background: white;
+	position: fixed; 
+	opacity: 1; 
+	z-index: 11000; 
+	left: 50%; 	
+	top: 200px;
+	width: 350px;
+}
+
+#lean_overlay {
+    position: fixed;
+    z-index:100;
+    top: 0px;
+    left: 0px;
+    height:100%;
+    width:100%;
+    background: #000;
+    display: none;
 }
 
 #login form div.login_button_field {

@@ -5,11 +5,11 @@
     <page:list id="pl_cz_kolomet_domain_ApplicationRole" items="${applicationroles}" z="i9qtyV7NKoD0f5bmDlt2g4zNNEA=">
         <table:table data="${applicationroles}" id="l_cz_kolomet_domain_ApplicationRole" path="/applicationroles" z="9gEQOkBjD8n+GiQLdA6ypTKa7IA=">
             <table:column id="c_cz_kolomet_domain_ApplicationRole_roleName" property="roleName" z="dScE0Ck/rU2TyDZ0VcdyhbRGyTo="/>
-            <table:column id="c_cz_kolomet_domain_ApplicationRole_permissions" property="permissions" z="seEUZSRDR483G9x2cSFTtcqAqkQ="/>
             <table:column id="c_cz_kolomet_domain_ApplicationRole_createdBy" property="createdBy" z="6vg9sFrDUiXOa0IhmVsiO3HSgqk="/>
             <table:column id="c_cz_kolomet_domain_ApplicationRole_lastModifiedBy" property="lastModifiedBy" z="osKuuZ66y1c9LrTiLbxlSm9SX2k="/>
             <table:column date="true" dateTimePattern="${applicationRole_created_date_format}" id="c_cz_kolomet_domain_ApplicationRole_created" property="created" z="u4ZRRWingrEJU/ihZ9uA5x9Fifg="/>
             <table:column date="true" dateTimePattern="${applicationRole_lastmodified_date_format}" id="c_cz_kolomet_domain_ApplicationRole_lastModified" property="lastModified" z="qAZxnq9QXPJksgBtnDRfQtEZUKE="/>
+            <table:column id="c_cz_kolomet_domain_ApplicationRole_users" property="users" z="eH9o2AtLDypCLv/IogkLw5aMpWA="/>
         </table:table>
     </page:list>
 </div>

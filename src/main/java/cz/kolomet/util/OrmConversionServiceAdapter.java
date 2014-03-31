@@ -9,35 +9,58 @@ public class OrmConversionServiceAdapter implements ConversionService {
 
 	@Override
 	public boolean canConvert(Class<?> sourceType, Class<?> targetType) {
-		return conversionService.canConvert(sourceType, targetType);
+		Class<?> optimizedClass = optimizeClass(targetType);
+		return conversionService.canConvert(sourceType, optimizedClass);
 	}
 
 	@Override
 	public boolean canConvert(TypeDescriptor sourceType, TypeDescriptor targetType) {
-		
-		String className = targetType.getType().getName(); 
-		if (className.contains("_javassist")) {
-			int index = className.indexOf('_');
-			try {
-				TypeDescriptor convertedTargetType = TypeDescriptor.valueOf(Class.forName(className.substring(0, index)));
-				return conversionService.canConvert(sourceType, convertedTargetType);
-			} catch (ClassNotFoundException e) {
-				throw new RuntimeException(e);
-			}
-		} else {
-			return conversionService.canConvert(sourceType, targetType);
-		}
-		
+		TypeDescriptor optimizedSourceDescriptor = optimizeTypeDescriptor(sourceType);
+		TypeDescriptor optimizedTargetDescriptor = optimizeTypeDescriptor(targetType);
+		return conversionService.canConvert(optimizedSourceDescriptor, optimizedTargetDescriptor);
 	}
 
 	@Override
 	public <T> T convert(Object source, Class<T> targetType) {
-		return conversionService.convert(source, targetType);
+		Class<T> optimizedClass = optimizeClass(targetType);
+		return conversionService.convert(source, optimizedClass);
 	}
-
+	
 	@Override
 	public Object convert(Object source, TypeDescriptor sourceType, TypeDescriptor targetType) {
-		return conversionService.convert(source, sourceType, targetType);
+		TypeDescriptor optimizedSourceDescriptor = optimizeTypeDescriptor(sourceType);
+		TypeDescriptor optimizedTargetDescriptor = optimizeTypeDescriptor(targetType);
+		return conversionService.convert(source, optimizedSourceDescriptor, optimizedTargetDescriptor);
+	}
+
+	private TypeDescriptor optimizeTypeDescriptor(TypeDescriptor type) {
+		if (isJavassistClass(type.getName())) {
+			return TypeDescriptor.valueOf(optimizeClassName(type.getName()));
+		} else {
+			return type;
+		}
+	}
+	
+	private <T> Class<T> optimizeClass(Class<T> clazz) {
+		if (isJavassistClass(clazz.getName())) {
+			return optimizeClassName(clazz.getName());
+		} else {
+			return clazz;
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	private <T> Class<T> optimizeClassName(String className) {
+		try {
+			int index = className.indexOf('_');
+			return (Class<T>) Class.forName(className.substring(0, index));
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	private boolean isJavassistClass(String className) {
+		return className.contains("_$$_");
 	}
 
 	public ConversionService getConversionService() {

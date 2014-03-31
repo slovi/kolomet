@@ -3,8 +3,10 @@
 
 package cz.kolomet.domain;
 
+import cz.kolomet.domain.ApplicationRole;
 import cz.kolomet.domain.ApplicationUser;
 import cz.kolomet.domain.Seller;
+import java.util.List;
 
 privileged aspect ApplicationUser_Roo_JavaBean {
     
@@ -24,12 +26,28 @@ privileged aspect ApplicationUser_Roo_JavaBean {
         this.password = password;
     }
     
+    public Boolean ApplicationUser.getEnabled() {
+        return this.enabled;
+    }
+    
+    public void ApplicationUser.setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+    
     public Seller ApplicationUser.getSeller() {
         return this.seller;
     }
     
     public void ApplicationUser.setSeller(Seller seller) {
         this.seller = seller;
+    }
+    
+    public List<ApplicationRole> ApplicationUser.getRoles() {
+        return this.roles;
+    }
+    
+    public void ApplicationUser.setRoles(List<ApplicationRole> roles) {
+        this.roles = roles;
     }
     
 }

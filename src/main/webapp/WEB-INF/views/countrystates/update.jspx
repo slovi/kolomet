@@ -5,8 +5,8 @@
     <form:update id="fu_cz_kolomet_domain_codelist_CountryState" modelAttribute="countryState" path="/countrystates" versionField="Version" z="U+FR+GmDfLsllwIurDr95xo2EyY=">
         <field:input field="codeKey" id="c_cz_kolomet_domain_codelist_CountryState_codeKey" max="20" required="true" z="fRJA/LVGre6HoSL2hx99FTgqEn8="/>
         <field:textarea field="codeDescription" id="c_cz_kolomet_domain_codelist_CountryState_codeDescription" required="true" z="4KyebyTlhG3gki8WWsMTUQLX9e0="/>
-        <field:input field="createdBy" id="c_cz_kolomet_domain_codelist_CountryState_createdBy" z="OxuPWU9WaYxg/jelMzoQMNs9XKc=" render="false"/>
-        <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_codelist_CountryState_lastModifiedBy" z="rPqMuRRTvi6r6EVy2A7WZ5WR3xI=" render="false"/>
-        <field:datetime dateTimePattern="${countryState_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_codelist_CountryState_lastModified" z="DzM79sPmUEkomO4nZ/sriuev1Jg=" render="false"/>
+        <field:input field="createdBy" id="c_cz_kolomet_domain_codelist_CountryState_createdBy" render="false" z="user-managed"/>
+        <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_codelist_CountryState_lastModifiedBy" render="false" z="user-managed"/>
+        <field:datetime dateTimePattern="${countryState_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_codelist_CountryState_lastModified" render="false" z="user-managed"/>
     </form:update>
 </div>

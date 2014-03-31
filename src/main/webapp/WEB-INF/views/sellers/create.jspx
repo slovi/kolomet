@@ -6,7 +6,7 @@
         <field:input field="sellerName" id="c_cz_kolomet_domain_Seller_sellerName" label="nazev" max="20" required="true" z="user-managed"/>
         <field:textarea field="sellerDescription" id="c_cz_kolomet_domain_Seller_sellerDescription" label="popis" required="true" z="user-managed"/>
         <field:textarea field="mapUrl" id="c_cz_kolomet_domain_Seller_mapUrl" z="l4+of1NGD4kA6p7robYOfSeBf5c="/>
-        <field:select field="sellerStatus" id="c_cz_kolomet_domain_Seller_sellerStatus" itemValue="id" items="${sellerstatuses}" path="/sellerstatuses" required="true" z="bfCR8pNBLpX1/CiNFkA5+Rvni54="/>
+        <field:input field="sellerStatus" id="c_cz_kolomet_domain_Seller_sellerStatus" required="true" z="H+9kdKkpjCIeslD8+I2vnqezg2U="/>
         <field:input field="personSalutation" id="c_cz_kolomet_domain_Seller_personSalutation" max="20" z="dnwzisYNI0tikfWCGZUYMTTS6FM="/>
         <field:input field="personDegree" id="c_cz_kolomet_domain_Seller_personDegree" max="20" z="E4WTBYQ4lqh1s4hOAJY7D6XkDrs="/>
         <field:input field="personName" id="c_cz_kolomet_domain_Seller_personName" max="20" z="jzxeTLWGrdFhvBxUikyixzbaycI="/>
@@ -33,10 +33,9 @@
         <field:textarea field="addressEmail" id="c_cz_kolomet_domain_Seller_addressEmail" z="b040cbjtTAnHdEZ3j5X1JtGIouI="/>
         <field:input field="sellerTitle" id="c_cz_kolomet_domain_Seller_sellerTitle" z="R4dz35yvkTZK+P/pzzqfsKGYfnM="/>
         <field:checkbox field="enabled" id="c_cz_kolomet_domain_Seller_enabled" z="ZbUSvy6nfnljauAUjU6yJhQCH9g="/>
-        <field:input field="createdBy" id="c_cz_kolomet_domain_Seller_createdBy" z="W7xMtOhfHDbQCtQ2ruugx2WLYaM=" render="false"/>
-        <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_Seller_lastModifiedBy" z="ddfMIgC1ztwVzqzPP10PfpmHjhc=" render="false"/>
-        <field:datetime dateTimePattern="${seller_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_Seller_lastModified" z="O3z1wQEzY537/fYZg7d+x/JYU3I=" render="false"/>
-        <field:simple field="sellerPhotoUrls" id="c_cz_kolomet_domain_Seller_sellerPhotoUrls" messageCode="entity_reference_not_managed" messageCodeAttribute="Seller Photo Url" z="S65AtaxIF1oprs2bs+Kghp7r5XQ="/>
+        <field:input field="createdBy" id="c_cz_kolomet_domain_Seller_createdBy" render="false" z="user-managed"/>
+        <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_Seller_lastModifiedBy" render="false" z="user-managed"/>
+        <field:datetime dateTimePattern="${seller_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_Seller_lastModified" render="false" z="user-managed"/>
         <field:simple field="products" id="c_cz_kolomet_domain_Seller_products" messageCode="entity_reference_not_managed" messageCodeAttribute="Product" z="AZCEE9YJtU0xKL2/6KEiz1JBwQE="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_cz_kolomet_domain_Seller" render="${not empty dependencies}" z="wOb4nwhLxol+WOVpFAt/d7koDnE="/>

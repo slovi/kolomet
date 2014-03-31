@@ -89,14 +89,6 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     @Autowired
     RegionService ApplicationConversionServiceFactoryBean.regionService;
     
-    public Converter<ApplicationPermission, String> ApplicationConversionServiceFactoryBean.getApplicationPermissionToStringConverter() {
-        return new org.springframework.core.convert.converter.Converter<cz.kolomet.domain.ApplicationPermission, java.lang.String>() {
-            public String convert(ApplicationPermission applicationPermission) {
-                return new StringBuilder().append(applicationPermission.getCreated()).append(' ').append(applicationPermission.getLastModified()).append(' ').append(applicationPermission.getPermissionName()).toString();
-            }
-        };
-    }
-    
     public Converter<Long, ApplicationPermission> ApplicationConversionServiceFactoryBean.getIdToApplicationPermissionConverter() {
         return new org.springframework.core.convert.converter.Converter<java.lang.Long, cz.kolomet.domain.ApplicationPermission>() {
             public cz.kolomet.domain.ApplicationPermission convert(java.lang.Long id) {
@@ -113,14 +105,6 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         };
     }
     
-    public Converter<ApplicationRole, String> ApplicationConversionServiceFactoryBean.getApplicationRoleToStringConverter() {
-        return new org.springframework.core.convert.converter.Converter<cz.kolomet.domain.ApplicationRole, java.lang.String>() {
-            public String convert(ApplicationRole applicationRole) {
-                return new StringBuilder().append(applicationRole.getCreated()).append(' ').append(applicationRole.getLastModified()).append(' ').append(applicationRole.getRoleName()).toString();
-            }
-        };
-    }
-    
     public Converter<Long, ApplicationRole> ApplicationConversionServiceFactoryBean.getIdToApplicationRoleConverter() {
         return new org.springframework.core.convert.converter.Converter<java.lang.Long, cz.kolomet.domain.ApplicationRole>() {
             public cz.kolomet.domain.ApplicationRole convert(java.lang.Long id) {
@@ -133,14 +117,6 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         return new org.springframework.core.convert.converter.Converter<java.lang.String, cz.kolomet.domain.ApplicationRole>() {
             public cz.kolomet.domain.ApplicationRole convert(String id) {
                 return getObject().convert(getObject().convert(id, Long.class), ApplicationRole.class);
-            }
-        };
-    }
-    
-    public Converter<ApplicationUser, String> ApplicationConversionServiceFactoryBean.getApplicationUserToStringConverter() {
-        return new org.springframework.core.convert.converter.Converter<cz.kolomet.domain.ApplicationUser, java.lang.String>() {
-            public String convert(ApplicationUser applicationUser) {
-                return new StringBuilder().append(applicationUser.getCreated()).append(' ').append(applicationUser.getLastModified()).append(' ').append(applicationUser.getUsername()).append(' ').append(applicationUser.getPassword()).toString();
             }
         };
     }

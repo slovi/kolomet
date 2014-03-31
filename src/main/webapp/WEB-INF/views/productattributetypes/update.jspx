@@ -5,8 +5,8 @@
     <form:update id="fu_cz_kolomet_domain_codelist_ProductAttributeType" modelAttribute="productAttributeType" path="/productattributetypes" versionField="Version" z="7AMUMKe7FzXi7b4KLM+fHNItQg8=">
         <field:input field="codeKey" id="c_cz_kolomet_domain_codelist_ProductAttributeType_codeKey" max="20" required="true" z="k6wLAK0ayW9TPD4BIS4i0buEawQ="/>
         <field:textarea field="codeDescription" id="c_cz_kolomet_domain_codelist_ProductAttributeType_codeDescription" required="true" z="5667ZdUQUTxjgaYb0fl0pOPjV44="/>
-        <field:input field="createdBy" id="c_cz_kolomet_domain_codelist_ProductAttributeType_createdBy" z="TTla64ofR/5wWx180y6droS0M7M=" render="false"/>
-        <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_codelist_ProductAttributeType_lastModifiedBy" z="yeBjebU4LdJ8FoWHiKOxnhXsOrA=" render="false"/>
-        <field:datetime dateTimePattern="${productAttributeType_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_codelist_ProductAttributeType_lastModified" z="DuyMHF1zwJZmJnINHFXws4UluZ8=" render="false"/>
+        <field:input field="createdBy" id="c_cz_kolomet_domain_codelist_ProductAttributeType_createdBy" render="false" z="user-managed"/>
+        <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_codelist_ProductAttributeType_lastModifiedBy" render="false" z="user-managed"/>
+        <field:datetime dateTimePattern="${productAttributeType_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_codelist_ProductAttributeType_lastModified" render="false" z="user-managed"/>
     </form:update>
 </div>

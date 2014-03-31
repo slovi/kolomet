@@ -4,8 +4,8 @@
 package cz.kolomet.web.admin;
 
 import cz.kolomet.domain.ApplicationUser;
+import cz.kolomet.service.ApplicationRoleService;
 import cz.kolomet.service.ApplicationUserService;
-import cz.kolomet.service.SellerService;
 import cz.kolomet.web.admin.ApplicationUserController;
 import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
@@ -28,7 +28,7 @@ privileged aspect ApplicationUserController_Roo_Controller {
     ApplicationUserService ApplicationUserController.applicationUserService;
     
     @Autowired
-    SellerService ApplicationUserController.sellerService;
+    ApplicationRoleService ApplicationUserController.applicationRoleService;
     
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String ApplicationUserController.create(@Valid ApplicationUser applicationUser, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
@@ -105,8 +105,8 @@ privileged aspect ApplicationUserController_Roo_Controller {
     void ApplicationUserController.populateEditForm(Model uiModel, ApplicationUser applicationUser) {
         uiModel.addAttribute("applicationUser", applicationUser);
         addDateTimeFormatPatterns(uiModel);
+        uiModel.addAttribute("applicationroles", applicationRoleService.findAllApplicationRoles());
         uiModel.addAttribute("applicationusers", applicationUserService.findAllApplicationUsers());
-        uiModel.addAttribute("sellers", sellerService.findAllSellers());
     }
     
     String ApplicationUserController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

@@ -2,6 +2,8 @@ package cz.kolomet.domain;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -23,11 +25,14 @@ public class ApplicationRole extends DomainEntity {
 	 */
 	private String roleName;
 	
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "roles", cascade = CascadeType.REMOVE)
+	private List<ApplicationUser> users;
+	
 	@ManyToMany
 	  @JoinTable(
 	      name="APPLICATION_ROLE_PERMISSION",
-	      joinColumns={@JoinColumn(name="PERMISSION_ID", referencedColumnName="ID")},
-	      inverseJoinColumns={@JoinColumn(name="ROLE_ID", referencedColumnName="ID")})
+	      joinColumns={@JoinColumn(name="ROLE_ID", referencedColumnName="ID")},
+	      inverseJoinColumns={@JoinColumn(name="PERMISSION_ID", referencedColumnName="ID")})
 	private List<ApplicationPermission> permissions;
 	
 }
