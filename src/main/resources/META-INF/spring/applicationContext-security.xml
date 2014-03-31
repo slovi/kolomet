@@ -31,7 +31,7 @@
 		<intercept-url pattern="/region/*" access="hasAnyRole('ROLE_per_regions')" />
 		<intercept-url pattern="/products*" access="hasAnyRole('ROLE_per_products')" />
 		<intercept-url pattern="/products/*" access="hasAnyRole('ROLE_per_products')" />
-		<intercept-url pattern="/photourls*" access="hasAnyRole('ROLE_per_products')" />l
+		<intercept-url pattern="/photourls*" access="hasAnyRole('ROLE_per_products')" />
 		<intercept-url pattern="/photourls/*" access="hasAnyRole('ROLE_per_products')" />
 		<intercept-url pattern="/productattributes*" access="hasAnyRole('ROLE_per_products')" />
 		<intercept-url pattern="/productattributes/*" access="hasAnyRole('ROLE_per_products')" />
