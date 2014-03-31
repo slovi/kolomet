@@ -14,9 +14,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @RooJavaBean
-@RooToString
+@RooToString(excludeFields = {"createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate", "product"})
 @RooJpaEntity(inheritanceType = "TABLE_PER_CLASS")
-@RooEquals
+@RooEquals(excludeFields = {"createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate", "product"})
 @RooSerializable
 public class ProductAttribute extends DomainEntity {
     

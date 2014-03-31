@@ -13,9 +13,9 @@ import org.springframework.roo.addon.serializable.RooSerializable;
 import org.springframework.roo.addon.tostring.RooToString;
 
 @RooJavaBean
-@RooToString
+@RooToString(excludeFields = {"createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate"})
 @RooJpaEntity(inheritanceType = "TABLE_PER_CLASS")
-@RooEquals
+@RooEquals(excludeFields = {"product", "createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate"}, appendSuper = false)
 @RooSerializable
 public class PhotoUrl extends DomainEntity {
 	

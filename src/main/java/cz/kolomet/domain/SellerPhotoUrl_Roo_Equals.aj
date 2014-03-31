@@ -17,11 +17,11 @@ privileged aspect SellerPhotoUrl_Roo_Equals {
             return true;
         }
         SellerPhotoUrl rhs = (SellerPhotoUrl) obj;
-        return new EqualsBuilder().append(contentType, rhs.contentType).append(created, rhs.created).append(createdBy, rhs.createdBy).append(fileName, rhs.fileName).append(id, rhs.id).append(lastModified, rhs.lastModified).append(lastModifiedBy, rhs.lastModifiedBy).append(seller, rhs.seller).isEquals();
+        return new EqualsBuilder().append(contentType, rhs.contentType).append(created, rhs.created).append(fileName, rhs.fileName).append(id, rhs.id).append(lastModified, rhs.lastModified).isEquals();
     }
     
     public int SellerPhotoUrl.hashCode() {
-        return new HashCodeBuilder().append(contentType).append(created).append(createdBy).append(fileName).append(id).append(lastModified).append(lastModifiedBy).append(seller).toHashCode();
+        return new HashCodeBuilder().append(contentType).append(created).append(fileName).append(id).append(lastModified).toHashCode();
     }
     
 }

@@ -12,9 +12,9 @@ import org.springframework.roo.addon.tostring.RooToString;
 import cz.kolomet.domain.codelist.CategoryType;
 
 @RooJavaBean
-@RooToString
+@RooToString(excludeFields = {"createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate"})
 @RooJpaEntity(inheritanceType = "TABLE_PER_CLASS")
-@RooEquals
+@RooEquals(excludeFields = {"createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate"})
 @RooSerializable
 public class Category extends DomainEntity {
 	

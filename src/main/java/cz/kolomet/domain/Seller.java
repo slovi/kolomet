@@ -25,9 +25,9 @@ import cz.kolomet.domain.codelist.Region;
 import cz.kolomet.domain.codelist.SellerStatus;
 
 @RooJavaBean
-@RooToString
+@RooToString(excludeFields = {"createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate", "products", "sellersPhotoUrls"})
 @RooJpaEntity
-@RooEquals
+@RooEquals(excludeFields = {"createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate", "products", "sellersPhotoUrls"})
 @RooSerializable
 @FilterDef(name = "sellerEnabledFilter", parameters = @ParamDef(type = "boolean", name = "enabled"))
 @Filters({

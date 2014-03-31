@@ -17,11 +17,11 @@ privileged aspect ApplicationRole_Roo_Equals {
             return true;
         }
         ApplicationRole rhs = (ApplicationRole) obj;
-        return new EqualsBuilder().append(created, rhs.created).append(createdBy, rhs.createdBy).append(id, rhs.id).append(lastModified, rhs.lastModified).append(lastModifiedBy, rhs.lastModifiedBy).append(roleName, rhs.roleName).isEquals();
+        return new EqualsBuilder().append(created, rhs.created).append(id, rhs.id).append(lastModified, rhs.lastModified).append(roleName, rhs.roleName).isEquals();
     }
     
     public int ApplicationRole.hashCode() {
-        return new HashCodeBuilder().append(created).append(createdBy).append(id).append(lastModified).append(lastModifiedBy).append(roleName).toHashCode();
+        return new HashCodeBuilder().append(created).append(id).append(lastModified).append(roleName).toHashCode();
     }
     
 }

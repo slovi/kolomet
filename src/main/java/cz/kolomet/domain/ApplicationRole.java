@@ -15,9 +15,9 @@ import org.springframework.roo.addon.serializable.RooSerializable;
 import org.springframework.roo.addon.tostring.RooToString;
 
 @RooJavaBean
-@RooToString
+@RooToString(excludeFields = {"createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate", "permissions", "users"})
 @RooJpaEntity(inheritanceType = "TABLE_PER_CLASS")
-@RooEquals
+@RooEquals(excludeFields = {"createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate", "permissions", "users"})
 @RooSerializable
 public class ApplicationRole extends DomainEntity {
 	

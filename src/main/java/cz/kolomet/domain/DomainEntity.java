@@ -18,9 +18,9 @@ import org.springframework.roo.addon.serializable.RooSerializable;
 import org.springframework.roo.addon.tostring.RooToString;
 
 @RooJavaBean
-@RooToString
+@RooToString(excludeFields = {"createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate"})
 @RooJpaEntity(schema = "sa", mappedSuperclass = true)
-@RooEquals
+@RooEquals(excludeFields = {"createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate"})
 @RooSerializable
 @EntityListeners({ org.springframework.data.jpa.domain.support.AuditingEntityListener.class })
 public abstract class DomainEntity implements Auditable<ApplicationUser, Long> {

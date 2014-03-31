@@ -17,11 +17,11 @@ privileged aspect ApplicationPermission_Roo_Equals {
             return true;
         }
         ApplicationPermission rhs = (ApplicationPermission) obj;
-        return new EqualsBuilder().append(created, rhs.created).append(createdBy, rhs.createdBy).append(id, rhs.id).append(lastModified, rhs.lastModified).append(lastModifiedBy, rhs.lastModifiedBy).append(permissionName, rhs.permissionName).isEquals();
+        return new EqualsBuilder().append(created, rhs.created).append(id, rhs.id).append(lastModified, rhs.lastModified).append(permissionName, rhs.permissionName).isEquals();
     }
     
     public int ApplicationPermission.hashCode() {
-        return new HashCodeBuilder().append(created).append(createdBy).append(id).append(lastModified).append(lastModifiedBy).append(permissionName).toHashCode();
+        return new HashCodeBuilder().append(created).append(id).append(lastModified).append(permissionName).toHashCode();
     }
     
 }
