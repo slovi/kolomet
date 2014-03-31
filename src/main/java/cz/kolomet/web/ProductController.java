@@ -18,6 +18,7 @@ import cz.kolomet.repository.CategoryRepository;
 import cz.kolomet.repository.ProducerRepository;
 import cz.kolomet.repository.ProductRepository;
 import cz.kolomet.repository.ProductSpecifications;
+import cz.kolomet.repository.RegionRepository;
 
 @RequestMapping("/public/products")
 @Controller("publicProductController")
@@ -31,6 +32,9 @@ public class ProductController extends AbstractController {
 	
 	@Autowired
 	private ProducerRepository producerRepository;
+	
+	@Autowired
+	private RegionRepository regionRepository;
 	
 	private Integer maxPageItems = 6;
 	
@@ -84,6 +88,7 @@ public class ProductController extends AbstractController {
 			productFilter.setProducer(producer);
 		}
 		model.addAttribute("producers", producerRepository.findAll());
+		model.addAttribute("regions", regionRepository.findAll());
 		model.addAttribute("productFilter", productFilter);
 	}
 	

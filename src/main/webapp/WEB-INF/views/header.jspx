@@ -1,12 +1,23 @@
-<div id="header" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+<div id="header" xmlns:security="http://www.springframework.org/security/tags" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:spring="http://www.springframework.org/tags" version="2.0">
   <jsp:directive.page contentType="text/html;charset=UTF-8" />
   <jsp:output omit-xml-declaration="yes" />
   
   <spring:url var="logoUrl" value="/img/logotyp.png" />
-  <div id="header_background">  
-    <div id="header"> 
+  <div id="header_background"> 
+    <div id="header"> 		    
    		<img src="${logoUrl}" id="logo"/>
-        <a class="action_button" id="login_button" rel="login" name="login" href="#login"><spring:message code="header_login" /></a>
+   		<security:authorize access="isAnonymous()">
+   			<div> 
+        		<a class="action_button" id="login_button" rel="login" name="login" href="#login"><spring:message code="header_login" /></a>
+        	</div>
+        </security:authorize>
+        <security:authorize access="isFullyAuthenticated()">
+        	<div>
+        		<spring:message code="logged_as" />: <security:authentication property="principal.username"/>
+        		<spring:url value="/j_spring_security_logout" var="logoutUrl" />
+        		<a class="action_button" id="logout_button" rel="logout" name="login" href="${logoutUrl}"><spring:message code="header_logout" /></a>
+        	</div>
+        </security:authorize>
     </div>
    </div>
   

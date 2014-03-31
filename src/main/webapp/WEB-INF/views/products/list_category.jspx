@@ -15,8 +15,8 @@
      			<form:options items="${producers}" itemLabel="codeDescription" itemValue="id" />
 			</form:select>
 			<form:select path="region" title="country" >
-     			<form:option value="" label="Všechny značky">&#32;</form:option>
-     			<form:options items="${producers}" itemLabel="codeDescription" itemValue="id" />
+     			<form:option value="" label="Všechny regiony">&#32;</form:option>
+     			<form:options items="${regions}" itemLabel="codeDescription" itemValue="id" />
 			</form:select>
 			<br />
 			<spring:message code="label_cz_kolomet_domain_product_cansendtoallcountry" />

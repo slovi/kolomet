@@ -44,9 +44,9 @@ public class ProductSpecifications {
 				if (BooleanUtils.isTrue(productFilter.getCanSendToAllCountry())) {
 					predicates.add(cb.equal(root.get("canSendToAllCountry"), true));
 				}
-				if (BooleanUtils.isTrue(productFilter.getCanSendToAllCountry())) {
+				if (productFilter.getRegion() != null) {
 					Join<Seller, Region> region = seller.join("region");
-					cb.equal(region, productFilter.getRegion());
+					predicates.add(cb.equal(region, productFilter.getRegion()));
 				}
 				predicates.add(cb.equal(seller.get("enabled"), true));
 				return cb.and(predicates.toArray(new Predicate[predicates.size()]));

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu" xmlns:spring="http://www.springframework.org/tags" id="menu_background" version="2.0">
+<div xmlns:security="http://www.springframework.org/security/tags" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu" xmlns:spring="http://www.springframework.org/tags" id="menu_background" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     
@@ -13,24 +13,52 @@
     			<menu:item url="#" messageCode="menu_main_search" id="search" />
     			<menu:item url="/public/about" messageCode="menu_main_about" id="about" />
     			
+    			<security:authorize access="isFullyAuthenticated()">
     			<menu:category id="admin" messageCode="menu_main_our_kolomet" url="/sellers">
+    				<security:authorize access="hasAnyRole('ROLE_per_applicationusers')">
     				<menu:item id="i_applicationuser_list" messageCode="global_menu_list" url="/applicationusers?page=1&amp;size=${empty param.size ? 10 : param.size}" z="18oGQE63MUIZ2YAKBPnDk0gNcZA="/>
+    				</security:authorize>
+    				<security:authorize access="hasAnyRole('ROLE_per_applicationusers')">
     				<menu:item id="i_applicationrole_list" messageCode="global_menu_list" url="/applicationroles?page=1&amp;size=${empty param.size ? 10 : param.size}" z="5BKruYLjsrCLDE9itOj1TlqWcRk="/>
+    				</security:authorize>
+    				<security:authorize access="hasAnyRole('ROLE_per_applicationusers')">
     				<menu:item id="i_applicationpermission_list" messageCode="global_menu_list" url="/applicationpermissions?page=1&amp;size=${empty param.size ? 10 : param.size}" z="Wl97kcGOo9MYPdeFlSYOwi7lAZs="/>
-    				<hr color="#f9f9f9" width="85%" align="center" size="1" /> 
+    				</security:authorize>
+    				<hr color="#f9f9f9" width="85%" align="center" size="1" />
+    				<security:authorize access="hasAnyRole('ROLE_per_sellers')"> 
 					<menu:item id="i_seller_list" messageCode="global_menu_list" url="/sellers?page=1&amp;size=${empty param.size ? 10 : param.size}" z="57f7mMa6rXXGgX7UBUaUGHmBSqg="/>
+					</security:authorize>
+					<security:authorize access="hasAnyRole('ROLE_per_sellerstatuses')">
 		            <menu:item id="i_sellerstatus_list" messageCode="global_menu_list" url="/sellerstatuses?page=1&amp;size=${empty param.size ? 10 : param.size}" z="9tyOGUgA53BPcQ2WMBbQvObHThE="/>
+		            </security:authorize>
+		            <security:authorize access="hasAnyRole('ROLE_per_regions')">
 		            <menu:item id="i_region_list" messageCode="global_menu_list" url="/regions?page=1&amp;size=${empty param.size ? 10 : param.size}" z="R4yrjjgk2KXYIlMw++M9nLkYTpE="/>
+		            </security:authorize>
+		            <security:authorize access="hasAnyRole('ROLE_per_countrystates')">
 		            <menu:item id="i_countrystate_list" messageCode="global_menu_list" url="/countrystates?page=1&amp;size=${empty param.size ? 10 : param.size}" z="6376x50wFxJokyFZdSoG7iIslIs="/>
-					<hr color="#f9f9f9" width="85%" align="center" size="1" /> 
+		            </security:authorize>
+					<hr color="#f9f9f9" width="85%" align="center" size="1" />
+					<security:authorize access="hasAnyRole('ROLE_per_products')"> 
 		            <menu:item id="i_product_list" messageCode="global_menu_list" url="/products?page=1&amp;size=${empty param.size ? 10 : param.size}" z="kEeyCmUUYXShbDEWwOLheaAkM50="/>
+		            </security:authorize>
+		            <security:authorize access="hasAnyRole('ROLE_per_productattributetypes')">
 		            <menu:item id="i_productattributetype_list" messageCode="global_menu_list" url="/productattributetypes?page=1&amp;size=${empty param.size ? 10 : param.size}" z="y9XTmdd/EfLHKNBZ/zQWt6JP+QQ="/>
+		            </security:authorize>
+		            <security:authorize access="hasAnyRole('ROLE_per_producers')">
 		            <menu:item id="i_producer_list" messageCode="global_menu_list" url="/producers?page=1&amp;size=${empty param.size ? 10 : param.size}" z="jTOhiGfGTy/mKcMjOgzzIoHDkxg="/>
+		            </security:authorize>
+		            <security:authorize access="hasAnyRole('ROLE_per_categorys')">
 		            <menu:item id="i_category_list" messageCode="global_menu_list" url="/categorys?page=1&amp;size=${empty param.size ? 10 : param.size}" z="0VEYbn/XUobhsOa74Uf6KyWz8/w="/>
+		            </security:authorize>
+		            <security:authorize access="hasAnyRole('ROLE_per_categorytypes')">
 		            <menu:item id="i_categorytype_list" messageCode="global_menu_list" url="/categorytypes?page=1&amp;size=${empty param.size ? 10 : param.size}" z="+i+xbCARHICgKqWYpTon7hXJ4S8="/>
-		            <hr color="#f9f9f9" width="85%" align="center" size="1" /> 
+		            </security:authorize>
+		            <hr color="#f9f9f9" width="85%" align="center" size="1" />
+		            <security:authorize access="hasAnyRole('ROLE_per_newsitems')"> 
 		            <menu:item id="i_newsitem_list" messageCode="global_menu_list" url="/newsitems?page=1&amp;size=${empty param.size ? 10 : param.size}" z="KOnlcMRbr4BntwwokrnIdkGVvTE="/>
+		            </security:authorize>
     			</menu:category>
+    			</security:authorize>
     			
     		</menu:menu>
 		</nav>

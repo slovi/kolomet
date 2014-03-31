@@ -2,6 +2,7 @@ package cz.kolomet.domain;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -27,6 +28,7 @@ public class ApplicationUser extends DomainEntity {
 
 	/**
 	 */
+	@Column(updatable=false)
 	private String password;
 	
 	/**
