@@ -10,6 +10,7 @@ $( document ).ready(function() {
 		event.preventDefault();		
 		
 		var form = $(this);
+		
 		var posting = $.post(form.attr( "action" ), form.serialize());
 		posting.done(function(data) {
 			if ("OK" == data) {
