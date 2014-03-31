@@ -2,7 +2,7 @@ require.config({
 	
 	paths: {
 		jquery: 'lib/jquery-1.11.0.min',
-		jquery_lean: 'lib/jquery.leanModal.min'
+		jquery_lean: 'lib/jquery.leanModal.min',
 	},
 	shim: {
 		'side_menu': {

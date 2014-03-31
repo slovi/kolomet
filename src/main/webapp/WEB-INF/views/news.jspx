@@ -13,7 +13,7 @@
 	       			<p>
 	       				<span class="news_item_date"><spring:eval expression="newsItem.newsItemDate"/></span>
 	       				<br />
-	       				<span class="news_item_content"><c:out value="${newsItem.text}" /></span>		        			
+	       				<span class="news_item_content"><c:out value="${newsItem.text}" escapeXml="false" /></span>		        			
 	       			</p>
 	       		</div>
        		</c:forEach>

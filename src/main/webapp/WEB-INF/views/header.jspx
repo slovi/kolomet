@@ -12,10 +12,9 @@
         	</div>
         </security:authorize>
         <security:authorize access="isFullyAuthenticated()">
-        	<div>
-        		<spring:message code="logged_as" />: <security:authentication property="principal.username"/>
+        	<div> 
         		<spring:url value="/j_spring_security_logout" var="logoutUrl" />
-        		<a class="action_button" id="logout_button" rel="logout" name="login" href="${logoutUrl}"><spring:message code="header_logout" /></a>
+        		<a class="action_button" id="logout_button" rel="logout" name="login" href="${logoutUrl}"><spring:message code="header_logout" /> (<security:authentication property="principal.username"/>)</a>
         	</div>
         </security:authorize>
     </div>
