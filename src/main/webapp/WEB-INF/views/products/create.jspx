@@ -10,7 +10,7 @@
         <field:select field="category" id="c_cz_kolomet_domain_Product_category" itemValue="id" items="${categorys}" path="/categorys" z="eT10diRPV/47lFJga+1qWSNV4Ao="/>
         <field:select field="producer" id="c_cz_kolomet_domain_Product_producer" itemValue="id" items="${producers}" path="/producers" z="AxpqTO8BGX72BcngzBaVOGOCLKo="/>
         <field:datetime dateTimePattern="${product_validto_date_format}" field="validTo" id="c_cz_kolomet_domain_Product_validTo" z="2UFsBNvdW5vSrMA8Vstjhd9fDys="/>
-        <field:input field="seller" id="c_cz_kolomet_domain_Product_seller" z="8nOHEwnh/jG/J7JBi0p9yaq1VEM="/>
+        <field:select field="seller" id="c_cz_kolomet_domain_Product_seller" itemValue="id" items="${sellers}" path="/sellers" z="n2LM6UtZBxSNvd+5O1yFsjhfPtQ="/>
         <field:simple field="photoUrls" id="c_cz_kolomet_domain_Product_photoUrls" messageCode="entity_reference_not_managed" messageCodeAttribute="Photo Url" render="false" z="user-managed"/>
         <field:simple field="productAttributes" id="c_cz_kolomet_domain_Product_productAttributes" messageCode="entity_reference_not_managed" messageCodeAttribute="Product Attribute" render="false" z="user-managed"/>
         <field:checkbox field="enabled" id="c_cz_kolomet_domain_Product_enabled" z="TQuxy01gHsypW2/Tbt4RWNqp11k="/>

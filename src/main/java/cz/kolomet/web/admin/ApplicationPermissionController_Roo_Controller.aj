@@ -5,6 +5,8 @@ package cz.kolomet.web.admin;
 
 import cz.kolomet.domain.ApplicationPermission;
 import cz.kolomet.service.ApplicationPermissionService;
+import cz.kolomet.service.ApplicationRoleService;
+import cz.kolomet.service.ApplicationUserService;
 import cz.kolomet.web.admin.ApplicationPermissionController;
 import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +27,12 @@ privileged aspect ApplicationPermissionController_Roo_Controller {
     
     @Autowired
     ApplicationPermissionService ApplicationPermissionController.applicationPermissionService;
+    
+    @Autowired
+    ApplicationRoleService ApplicationPermissionController.applicationRoleService;
+    
+    @Autowired
+    ApplicationUserService ApplicationPermissionController.applicationUserService;
     
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String ApplicationPermissionController.create(@Valid ApplicationPermission applicationPermission, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
@@ -101,6 +109,8 @@ privileged aspect ApplicationPermissionController_Roo_Controller {
     void ApplicationPermissionController.populateEditForm(Model uiModel, ApplicationPermission applicationPermission) {
         uiModel.addAttribute("applicationPermission", applicationPermission);
         addDateTimeFormatPatterns(uiModel);
+        uiModel.addAttribute("applicationroles", applicationRoleService.findAllApplicationRoles());
+        uiModel.addAttribute("applicationusers", applicationUserService.findAllApplicationUsers());
     }
     
     String ApplicationPermissionController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {
