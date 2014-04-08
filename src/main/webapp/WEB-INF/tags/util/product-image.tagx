@@ -17,6 +17,6 @@
 				<spring:url value="/img/no_photo.jpg" var="detailImgUrl" />
 			</c:otherwise>
 		</c:choose>
-		<img src="${detailImgUrl}" width="${width}" height="${height}" alt="" title=""/>
+		<img id="detail_image" src="${detailImgUrl}" width="${width}" height="${height}" alt="" title=""/>
 	</c:if>
 </jsp:root>

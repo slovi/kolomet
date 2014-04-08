@@ -1,5 +1,6 @@
 package cz.kolomet.domain;
 
+import javax.persistence.Column;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -30,6 +31,7 @@ public class SellerPhotoUrl extends DomainEntity {
     /**
      */
     @Size(max = 20)
+    @Column(updatable = false)
     private String contentType;
     
     @NotNull

@@ -16,6 +16,7 @@ import cz.kolomet.domain.ApplicationUser;
 import cz.kolomet.domain.Category;
 import cz.kolomet.domain.Producer;
 import cz.kolomet.domain.Product;
+import cz.kolomet.domain.ProductAttribute;
 import cz.kolomet.domain.Seller;
 import cz.kolomet.domain.codelist.CategoryType;
 import cz.kolomet.domain.codelist.CountryState;
@@ -84,7 +85,7 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 	public Converter<ProductAttributeType, String> getProductAttributeTypeToStringConverter() {
         return new Converter<ProductAttributeType, String>() {
             public String convert(ProductAttributeType productAttributeType) {
-                return new StringBuilder().append(productAttributeType.getCodeDescription()).toString();
+                return new StringBuilder().append(productAttributeType.getId()).toString();
             }
         };
     }

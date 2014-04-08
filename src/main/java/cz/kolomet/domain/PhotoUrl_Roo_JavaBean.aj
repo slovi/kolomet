@@ -5,6 +5,8 @@ package cz.kolomet.domain;
 
 import cz.kolomet.domain.PhotoUrl;
 import cz.kolomet.domain.Product;
+import java.util.List;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 privileged aspect PhotoUrl_Roo_JavaBean {
     
@@ -30,6 +32,14 @@ privileged aspect PhotoUrl_Roo_JavaBean {
     
     public void PhotoUrl.setProduct(Product product) {
         this.product = product;
+    }
+    
+    public List<CommonsMultipartFile> PhotoUrl.getContents() {
+        return this.contents;
+    }
+    
+    public void PhotoUrl.setContents(List<CommonsMultipartFile> contents) {
+        this.contents = contents;
     }
     
 }

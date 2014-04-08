@@ -5,9 +5,10 @@
     <form:update id="fu_cz_kolomet_domain_PhotoUrl" modelAttribute="photoUrl" path="/photourls" versionField="Version" z="fSDUcHsFbS+c0cNJLv6P3JkqcwU=">
         <field:select field="product" id="c_cz_kolomet_domain_PhotoUrl_product" itemValue="id" items="${products}" path="/products" required="true" z="f2HcSC6MmGFmYB9ML4YpGwmhv8Y="/>
         <field:input field="fileName" id="c_cz_kolomet_domain_PhotoUrl_fileName" max="20" z="qaYQNBQa+SFSypsiDLso6LlWcGE="/>
-        <field:input field="contentType" id="c_cz_kolomet_domain_PhotoUrl_contentType" max="20" z="lOeGfuN2o8tq/K9eumjLiWX7bV8="/>
+        <field:input disabled="true" field="contentType" id="c_cz_kolomet_domain_PhotoUrl_contentType" max="20" z="user-managed"/>
         <field:input field="createdBy" id="c_cz_kolomet_domain_PhotoUrl_createdBy" render="false" z="user-managed"/>
         <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_PhotoUrl_lastModifiedBy" render="false" z="user-managed"/>
         <field:datetime dateTimePattern="${photoUrl_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_PhotoUrl_lastModified" render="false" z="user-managed"/>
+        <field:input field="contents" id="c_cz_kolomet_domain_PhotoUrl_contents" z="94S94A2GiB+Kv4OdH8hKW18PxuI="/>
     </form:update>
 </div>

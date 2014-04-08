@@ -7,6 +7,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Async;
 
 import cz.kolomet.domain.PhotoUrl;
 import cz.kolomet.domain.SellerPhotoUrl;
@@ -23,6 +24,7 @@ public class SellerPhotoUrlServiceImpl implements SellerPhotoUrlService {
 	@Autowired
 	private ImageService imageService;
 	
+	@Async
 	public void saveSellerPhotoUrl(SellerPhotoUrl photoUrl, File file, File targetRootDir) {
 		
 		sellerPhotoUrlRepository.save(photoUrl);

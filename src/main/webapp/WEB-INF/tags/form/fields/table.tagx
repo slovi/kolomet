@@ -107,6 +107,12 @@
             <c:set var="columnMaxLength" value="${lengths[num.count-1]}" />
             <c:set var="columnType" value="${types[num.count-1]}" />
             <c:set var="columnDatePattern" value="${patterns[num.count-1]}" />
+            <c:set var="prop" value="${item}" />
+			<c:forTokens items="${column}" delims="." var="subprop">
+			    <c:if test="${not empty prop}">
+			        <c:set var="prop" value="${prop[subprop]}" />
+			    </c:if>
+			</c:forTokens>
             <td>
               <c:choose>
                 <c:when test="${columnType eq 'date'}">
@@ -121,7 +127,9 @@
                 </c:when>
                 <c:otherwise>
                   <c:set var="colTxt">
-                    <spring:eval expression="item[column]" htmlEscape="false" />
+                  	<c:if test="${not empty prop}">
+                    	<spring:eval expression="prop" htmlEscape="false" />
+                    </c:if>
                   </c:set>
                 </c:otherwise>
               </c:choose>

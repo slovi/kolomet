@@ -3,6 +3,12 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     
+    <script type="text/javascript">
+    	require(['images'], function(images) {
+    		images.preloadImages('detail_image');	    	
+    	});
+    </script>
+    
    	<div class="detail_header"> 
    		<util:product-image photos="${product.photoUrls}" entity="product" width="508" height="338" />    
        	<div class="detail_description right"> 
@@ -42,16 +48,21 @@
        	</div>
 		<div class="seller_ads">
 			<c:set value="${fn:length(product.photoUrls)}" var="photoSize" />
-			<c:forEach begin="1" end="3" varStatus="status">
+			<c:forEach begin="0" end="3" varStatus="status">
 				<c:choose>
 					<c:when test="${photoSize gt status.index}">
+						<spring:url value="/file/product/${product.photoUrls[status.index].thumbPhotoUrl}" var="thumbPhotoUrl" />
 						<spring:url value="/file/product/${product.photoUrls[status.index].photoUrl}" var="photoUrl" />
+						<a href="#">
+			    			<img class="preloaded" width="80" height="80" src="${thumbPhotoUrl}" />
+			    			<span style="display: none;"><c:out value="${photoUrl}" /></span>
+			    		</a>
 					</c:when>
 					<c:otherwise>
-						<spring:url value="/img/no_photo_thumb.jpg" var="photoUrl" />		
+						<spring:url value="/img/no_photo_thumb.jpg" var="photoUrl" />
+						<img width="80" height="80" src="${photoUrl}" />		
 					</c:otherwise>
 				</c:choose>
-	    		<img width="80" height="80" src="${photoUrl}" />
 			</c:forEach>
     	</div>
     </div>

@@ -6,7 +6,6 @@ package cz.kolomet.web.admin;
 import cz.kolomet.domain.ApplicationRole;
 import cz.kolomet.service.ApplicationPermissionService;
 import cz.kolomet.service.ApplicationRoleService;
-import cz.kolomet.service.ApplicationUserService;
 import cz.kolomet.web.admin.ApplicationRoleController;
 import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
@@ -30,9 +29,6 @@ privileged aspect ApplicationRoleController_Roo_Controller {
     
     @Autowired
     ApplicationPermissionService ApplicationRoleController.applicationPermissionService;
-    
-    @Autowired
-    ApplicationUserService ApplicationRoleController.applicationUserService;
     
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String ApplicationRoleController.create(@Valid ApplicationRole applicationRole, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
@@ -110,7 +106,6 @@ privileged aspect ApplicationRoleController_Roo_Controller {
         uiModel.addAttribute("applicationRole", applicationRole);
         addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("applicationpermissions", applicationPermissionService.findAllApplicationPermissions());
-        uiModel.addAttribute("applicationusers", applicationUserService.findAllApplicationUsers());
     }
     
     String ApplicationRoleController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

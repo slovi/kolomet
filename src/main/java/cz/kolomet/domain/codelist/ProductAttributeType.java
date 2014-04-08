@@ -1,5 +1,7 @@
 package cz.kolomet.domain.codelist;
 
+import javax.persistence.ManyToOne;
+
 import org.springframework.roo.addon.equals.RooEquals;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.entity.RooJpaEntity;
@@ -12,4 +14,8 @@ import org.springframework.roo.addon.tostring.RooToString;
 @RooEquals(excludeFields = {"createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate"})
 @RooSerializable
 public class ProductAttributeType extends Codelist {
+	
+	@ManyToOne
+	private CategoryType categoryType;
+	
 }

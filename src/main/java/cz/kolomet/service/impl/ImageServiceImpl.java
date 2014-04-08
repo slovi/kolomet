@@ -15,6 +15,7 @@ import java.io.OutputStream;
 
 import javax.imageio.ImageIO;
 
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import cz.kolomet.service.ImageService;
@@ -22,6 +23,7 @@ import cz.kolomet.service.ImageService;
 @Service
 public class ImageServiceImpl implements ImageService {
 
+	@Async
 	@Override
 	public void resizeAndSave(InputStream inputStream, OutputStream outputStream, Dimension toDimension) {
 		BufferedImage image = read(inputStream);
@@ -35,6 +37,7 @@ public class ImageServiceImpl implements ImageService {
 		}
 	}
 	
+	@Async
 	@Override
 	public void resizeAndSave(File sourceFile, File targetFile, Dimension toDimension) {
 		try {

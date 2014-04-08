@@ -1,7 +1,11 @@
 package cz.kolomet.domain;
+import java.util.List;
+
+import javax.persistence.Column;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -11,6 +15,7 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.entity.RooJpaEntity;
 import org.springframework.roo.addon.serializable.RooSerializable;
 import org.springframework.roo.addon.tostring.RooToString;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 @RooJavaBean
 @RooToString(excludeFields = {"createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate"})
@@ -31,6 +36,7 @@ public class PhotoUrl extends DomainEntity {
     /**
      */
     @Size(max = 20)
+    @Column(updatable = false)
     private String contentType;
     
     @NotNull
@@ -49,5 +55,8 @@ public class PhotoUrl extends DomainEntity {
     public String getOverPhotoUrl() {
     	return product.getId() + "/" + FilenameUtils.getBaseName(fileName) + OVERVIEW_IMG_SUFFIX;
     }
+    
+    @Transient
+    private List<CommonsMultipartFile> contents;
     
 }

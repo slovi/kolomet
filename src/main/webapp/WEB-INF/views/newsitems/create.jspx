@@ -4,7 +4,7 @@
     <jsp:output omit-xml-declaration="yes"/>
     <form:create id="fc_cz_kolomet_domain_NewsItem" modelAttribute="newsItem" path="/newsitems" render="${empty dependencies}" z="NlCCFA0ykyNYnWPs+hoL0B0hxw8=">
         <field:datetime dateTimePattern="${newsItem_newsitemdate_date_format}" field="newsItemDate" id="c_cz_kolomet_domain_NewsItem_newsItemDate" z="FB5WVicWURlynFC/lm03NXQZr5Y="/>
-        <field:editor field="text" id="c_cz_kolomet_domain_NewsItem_text" required="true" z="DZ+w2/DZOzfxdSGqNLkmev6oqFA="/>
+        <field:editor field="text" id="c_cz_kolomet_domain_NewsItem_text" required="true" z="user-managed"/>
         <field:checkbox field="enabled" id="c_cz_kolomet_domain_NewsItem_enabled" z="4dW1KYPDc1uE1qbCHNRQWsxtRwQ="/>
         <field:input field="createdBy" id="c_cz_kolomet_domain_NewsItem_createdBy" render="false" z="user-managed"/>
         <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_NewsItem_lastModifiedBy" render="false" z="user-managed"/>

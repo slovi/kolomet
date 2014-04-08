@@ -12,6 +12,7 @@ import cz.kolomet.domain.Seller;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 privileged aspect Product_Roo_JavaBean {
     
@@ -109,6 +110,14 @@ privileged aspect Product_Roo_JavaBean {
     
     public void Product.setProductAttributes(List<ProductAttribute> productAttributes) {
         this.productAttributes = productAttributes;
+    }
+    
+    public List<CommonsMultipartFile> Product.getContents() {
+        return this.contents;
+    }
+    
+    public void Product.setContents(List<CommonsMultipartFile> contents) {
+        this.contents = contents;
     }
     
 }

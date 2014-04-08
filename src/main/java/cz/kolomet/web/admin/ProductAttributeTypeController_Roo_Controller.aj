@@ -5,6 +5,7 @@ package cz.kolomet.web.admin;
 
 import cz.kolomet.domain.codelist.ProductAttributeType;
 import cz.kolomet.service.ApplicationUserService;
+import cz.kolomet.service.CategoryTypeService;
 import cz.kolomet.service.ProductAttributeTypeService;
 import cz.kolomet.web.admin.ProductAttributeTypeController;
 import java.io.UnsupportedEncodingException;
@@ -29,6 +30,9 @@ privileged aspect ProductAttributeTypeController_Roo_Controller {
     
     @Autowired
     ApplicationUserService ProductAttributeTypeController.applicationUserService;
+    
+    @Autowired
+    CategoryTypeService ProductAttributeTypeController.categoryTypeService;
     
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String ProductAttributeTypeController.create(@Valid ProductAttributeType productAttributeType, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
@@ -106,6 +110,7 @@ privileged aspect ProductAttributeTypeController_Roo_Controller {
         uiModel.addAttribute("productAttributeType", productAttributeType);
         addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("applicationusers", applicationUserService.findAllApplicationUsers());
+        uiModel.addAttribute("categorytypes", categoryTypeService.findAllCategoryTypes());
     }
     
     String ProductAttributeTypeController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

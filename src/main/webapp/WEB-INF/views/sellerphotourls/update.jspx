@@ -4,7 +4,7 @@
     <jsp:output omit-xml-declaration="yes"/>
     <form:update id="fu_cz_kolomet_domain_SellerPhotoUrl" modelAttribute="sellerPhotoUrl" path="/sellerphotourls" versionField="Version" z="BhsLw/GTXQ4es9YKSrF3o2pGWKE=">
         <field:input field="fileName" id="c_cz_kolomet_domain_SellerPhotoUrl_fileName" max="20" z="F8/9iN149/CuuqyJ3xVIATUrtG8="/>
-        <field:input field="contentType" id="c_cz_kolomet_domain_SellerPhotoUrl_contentType" max="20" z="qcHyZ9RPmIOnrzUM7PkI0WVxIIs="/>
+        <field:input disabled="true" field="contentType" id="c_cz_kolomet_domain_SellerPhotoUrl_contentType" max="20" z="user-managed"/>
         <field:select field="seller" id="c_cz_kolomet_domain_SellerPhotoUrl_seller" itemValue="id" items="${sellers}" path="/sellers" required="true" z="gpKztn0uF5e6WnIDhfY5TFlHNyU="/>
         <field:input field="createdBy" id="c_cz_kolomet_domain_SellerPhotoUrl_createdBy" render="false" z="user-managed"/>
         <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_SellerPhotoUrl_lastModifiedBy" render="false" z="user-managed"/>

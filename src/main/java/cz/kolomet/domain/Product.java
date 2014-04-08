@@ -8,6 +8,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -23,6 +24,7 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.entity.RooJpaEntity;
 import org.springframework.roo.addon.serializable.RooSerializable;
 import org.springframework.roo.addon.tostring.RooToString;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 @RooJavaBean
 @RooToString(excludeFields = {"createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate", "seller", "category", "producer", "photoUrls", "productAttributes"})
@@ -72,7 +74,7 @@ public class Product extends DomainEntity {
     
     /**
      */
-    private Boolean enabled;
+    private Boolean enabled = true;
     
     /**
      */
@@ -90,4 +92,8 @@ public class Product extends DomainEntity {
      */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
     private List<ProductAttribute> productAttributes = new ArrayList<ProductAttribute>();
+    
+    @Transient
+    private List<CommonsMultipartFile> contents;
+    
 }

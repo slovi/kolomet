@@ -17,7 +17,7 @@
         <field:display field="lastModifiedBy" id="s_cz_kolomet_domain_Product_lastModifiedBy" object="${product}" z="s65qNTiKmGg5ABoB0x59wClx/hc="/>
         <field:display date="true" dateTimePattern="${product_created_date_format}" field="created" id="s_cz_kolomet_domain_Product_created" object="${product}" z="ZCK6v15HOwhsvMXPFw5ks6hRW6s="/>
         <field:display date="true" dateTimePattern="${product_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_Product_lastModified" object="${product}" z="ZCK6v15HOwhsvMXPFw5ks6hRW6s="/>
-
+        <field:display field="contents" id="s_cz_kolomet_domain_Product_contents" object="${product}" render="false" z="user-managed"/>
         <c:set scope="request" value="${product.id}" var="parentEntityId"/>
         <h2>Product attributes</h2>
         <c:set scope="request" value="${product.productAttributes}" var="productattributes"/>

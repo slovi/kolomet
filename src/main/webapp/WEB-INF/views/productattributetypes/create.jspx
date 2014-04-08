@@ -8,6 +8,7 @@
         <field:input field="createdBy" id="c_cz_kolomet_domain_codelist_ProductAttributeType_createdBy" render="false" z="user-managed"/>
         <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_codelist_ProductAttributeType_lastModifiedBy" render="false" z="user-managed"/>
         <field:datetime dateTimePattern="${productAttributeType_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_codelist_ProductAttributeType_lastModified" render="false" z="user-managed"/>
+        <field:select field="categoryType" id="c_cz_kolomet_domain_codelist_ProductAttributeType_categoryType" itemValue="id" items="${categorytypes}" path="/categorytypes" z="vg3IYI3XnxWP+o4Cb2oWRIDjCeI="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_cz_kolomet_domain_codelist_ProductAttributeType" render="${not empty dependencies}" z="AFkrxMAl6lF9W6vdIrK74UrLwS0="/>
 </div>

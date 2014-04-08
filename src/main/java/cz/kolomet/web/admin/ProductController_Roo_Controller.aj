@@ -4,13 +4,7 @@
 package cz.kolomet.web.admin;
 
 import cz.kolomet.domain.Product;
-import cz.kolomet.service.ApplicationUserService;
-import cz.kolomet.service.CategoryService;
-import cz.kolomet.service.PhotoUrlService;
-import cz.kolomet.service.ProducerService;
-import cz.kolomet.service.ProductAttributeService;
 import cz.kolomet.service.ProductService;
-import cz.kolomet.service.SellerService;
 import cz.kolomet.web.admin.ProductController;
 import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
@@ -31,35 +25,6 @@ privileged aspect ProductController_Roo_Controller {
     
     @Autowired
     ProductService ProductController.productService;
-    
-    @Autowired
-    ApplicationUserService ProductController.applicationUserService;
-    
-    @Autowired
-    CategoryService ProductController.categoryService;
-    
-    @Autowired
-    PhotoUrlService ProductController.photoUrlService;
-    
-    @Autowired
-    ProducerService ProductController.producerService;
-    
-    @Autowired
-    ProductAttributeService ProductController.productAttributeService;
-    
-    @Autowired
-    SellerService ProductController.sellerService;
-    
-    @RequestMapping(method = RequestMethod.POST, produces = "text/html")
-    public String ProductController.create(@Valid Product product, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
-            populateEditForm(uiModel, product);
-            return "products/create";
-        }
-        uiModel.asMap().clear();
-        productService.saveProduct(product);
-        return "redirect:/products/" + encodeUrlPathSegment(product.getId().toString(), httpServletRequest);
-    }
     
     @RequestMapping(params = "form", produces = "text/html")
     public String ProductController.createForm(Model uiModel) {
@@ -121,17 +86,6 @@ privileged aspect ProductController_Roo_Controller {
         uiModel.addAttribute("product_created_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
         uiModel.addAttribute("product_lastmodified_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
         uiModel.addAttribute("product_validto_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
-    }
-    
-    void ProductController.populateEditForm(Model uiModel, Product product) {
-        uiModel.addAttribute("product", product);
-        addDateTimeFormatPatterns(uiModel);
-        uiModel.addAttribute("applicationusers", applicationUserService.findAllApplicationUsers());
-        uiModel.addAttribute("categorys", categoryService.findAllCategorys());
-        uiModel.addAttribute("photourls", photoUrlService.findAllPhotoUrls());
-        uiModel.addAttribute("producers", producerService.findAllProducers());
-        uiModel.addAttribute("productattributes", productAttributeService.findAllProductAttributes());
-        uiModel.addAttribute("sellers", sellerService.findAllSellers());
     }
     
     String ProductController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

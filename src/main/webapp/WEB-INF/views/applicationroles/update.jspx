@@ -9,6 +9,6 @@
         <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_ApplicationRole_lastModifiedBy" render="false" z="user-managed"/>
         <field:datetime dateTimePattern="${applicationRole_created_date_format}" field="created" id="c_cz_kolomet_domain_ApplicationRole_created" render="false" z="+c+LqH8J3NBGcnx4JZoG1sATwmg="/>
         <field:datetime dateTimePattern="${applicationRole_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_ApplicationRole_lastModified" render="false" z="user-managed"/>
-        <field:select field="users" id="c_cz_kolomet_domain_ApplicationRole_users" itemValue="id" items="${applicationusers}" multiple="true" path="/applicationusers" z="LlTJBuoYoWEzFCZoc3ypjim97lM="/>
+        <field:input field="users" id="c_cz_kolomet_domain_ApplicationRole_users" z="g5vCFP/jGlnA04XjEiE1h4DBkNo="/>
     </form:update>
 </div>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <form:create id="fc_cz_kolomet_domain_Product" modelAttribute="product" path="/products" render="${empty dependencies}" z="9KJjwTsE59weMdJxxUAdK667k3Q=">
+    <form:create id="fc_cz_kolomet_domain_Product" modelAttribute="product" multipart="true" path="/products" render="${empty dependencies}" z="user-managed">
         <field:textarea field="productName" id="c_cz_kolomet_domain_Product_productName" required="true" z="9VRS4DrGEb9AJgsJiZnH90xhO8Q="/>
         <field:textarea field="description" id="c_cz_kolomet_domain_Product_description" z="9dE5/03cbd/gzh1b8utpXr2xi74="/>
         <field:input field="price" id="c_cz_kolomet_domain_Product_price" required="true" validationMessageCode="field_invalid_number" z="8WBt5dfoVCIiZbaItCV+D0Ny6fc="/>
@@ -10,7 +10,7 @@
         <field:select field="category" id="c_cz_kolomet_domain_Product_category" itemValue="id" items="${categorys}" path="/categorys" z="eT10diRPV/47lFJga+1qWSNV4Ao="/>
         <field:select field="producer" id="c_cz_kolomet_domain_Product_producer" itemValue="id" items="${producers}" path="/producers" z="AxpqTO8BGX72BcngzBaVOGOCLKo="/>
         <field:datetime dateTimePattern="${product_validto_date_format}" field="validTo" id="c_cz_kolomet_domain_Product_validTo" z="2UFsBNvdW5vSrMA8Vstjhd9fDys="/>
-        <field:select field="seller" id="c_cz_kolomet_domain_Product_seller" itemValue="id" items="${sellers}" path="/sellers" z="n2LM6UtZBxSNvd+5O1yFsjhfPtQ="/>
+        <field:input field="seller" id="c_cz_kolomet_domain_Product_seller" z="8nOHEwnh/jG/J7JBi0p9yaq1VEM="/>
         <field:simple field="photoUrls" id="c_cz_kolomet_domain_Product_photoUrls" messageCode="entity_reference_not_managed" messageCodeAttribute="Photo Url" render="false" z="user-managed"/>
         <field:simple field="productAttributes" id="c_cz_kolomet_domain_Product_productAttributes" messageCode="entity_reference_not_managed" messageCodeAttribute="Product Attribute" render="false" z="user-managed"/>
         <field:checkbox field="enabled" id="c_cz_kolomet_domain_Product_enabled" z="TQuxy01gHsypW2/Tbt4RWNqp11k="/>
@@ -18,6 +18,16 @@
         <field:input field="createdBy" id="c_cz_kolomet_domain_Product_createdBy" render="false" z="user-managed"/>
         <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_Product_lastModifiedBy" render="false" z="user-managed"/>
         <field:datetime dateTimePattern="${product_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_Product_lastModified" render="false" z="user-managed"/>
+        <field:input field="contents" id="c_cz_kolomet_domain_Product_contents" render="false" z="user-managed"/>
+        <util:panel id="fc_cz_kolomet_domain_Product_productAttributes" title="ProductAttributes">
+            <c:forEach items="${product.productAttributes}" var="productAttribute" varStatus="status">
+                <field:hidden field="productAttributes[${status.index}].attributeType" id="fc_cz_kolomet_domain_Product_productAttribute_type_${status.index}"/>
+                <field:input field="productAttributes[${status.index}].attributeValue" id="fc_cz_kolomet_domain_Product_productAttribute_value_${status.index}" label="${productAttribute.attributeType.codeDescription}"/>
+            </c:forEach>
+        </util:panel>
+        <util:panel id="fc_cz_kolomet_domain_Product_photoUrls" title="PhotoUrls">
+            <field:files id="files"/>
+        </util:panel>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_cz_kolomet_domain_Product" render="${not empty dependencies}" z="JG9sb7H3rDmiMgYvz+ZgFJEQh6g="/>
 </div>

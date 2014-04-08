@@ -1,15 +1,12 @@
 package cz.kolomet.web.admin;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,9 +25,6 @@ import cz.kolomet.service.ProductService;
 @Controller
 @RooWebScaffold(path = "photourls", formBackingObject = PhotoUrl.class)
 public class PhotoUrlController extends AbstractAdminController {
-	
-	@Value("${product.img.rootdir}")
-	private String rootDir;
 	
 	@Autowired
 	private ProductService productService;
@@ -64,15 +58,7 @@ public class PhotoUrlController extends AbstractAdminController {
 	        return "photourls/update";
 		}
 		
-		File dest = getDestFile(photoUrl, content);
-		try {
-			content.transferTo(dest);
-			photoUrl.setFileName(dest.getName());
-			photoUrl.setContentType(content.getContentType());
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-		photoUrlService.savePhotoUrl(photoUrl, dest, new File(rootDir, photoUrl.getProduct().getId().toString()));
+		savePhotos(photoUrl.getProduct(), photoUrl.getContents());
 		return "redirect:/products/" + encodeUrlPathSegment(photoUrl.getProduct().getId().toString(), httpServletRequest);
 	}
 	
@@ -102,18 +88,6 @@ public class PhotoUrlController extends AbstractAdminController {
 			photoUrl.setProduct(product);
 		}
         uiModel.addAttribute("photoUrl", photoUrl);
-        uiModel.addAttribute("products", productService.findAllProducts());
     }
-	
-	private File getDestFile(PhotoUrl photoUrl, CommonsMultipartFile content) {
-		File parent = new File(rootDir + "/" + photoUrl.getProduct().getId());
-		try {
-			FileUtils.forceMkdir(parent);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-		File dest = new File(parent, content.getOriginalFilename());
-		return dest;
-	}
 	
 }
