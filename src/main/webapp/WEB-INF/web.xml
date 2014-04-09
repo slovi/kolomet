@@ -78,7 +78,7 @@
 		<filter-class>cz.kolomet.util.web.HibernateFilterActivatorFilter</filter-class>
 		<init-param>
 			<param-name>enabledFilters</param-name>
-			<param-value>newsItemEnabledFilter,productEnabledFilter,sellerEnabledFilter</param-value>
+			<param-value>newsItemEnabledFilter,productEnabledFilter,sellerEnabledFilter,productValidToFilter</param-value>
 		</init-param>
 	</filter>
 	<filter-mapping>

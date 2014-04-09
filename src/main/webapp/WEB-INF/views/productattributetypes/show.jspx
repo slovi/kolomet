@@ -10,5 +10,6 @@
         <field:display date="true" dateTimePattern="${productAttributeType_created_date_format}" field="created" id="s_cz_kolomet_domain_codelist_ProductAttributeType_created" object="${productattributetype}" z="UZmMQBAGS+eVmvrw5/Q0N9Y4ykU="/>
         <field:display date="true" dateTimePattern="${productAttributeType_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_codelist_ProductAttributeType_lastModified" object="${productattributetype}" z="UZmMQBAGS+eVmvrw5/Q0N9Y4ykU="/>
         <field:display field="categoryType" id="s_cz_kolomet_domain_codelist_ProductAttributeType_categoryType" object="${productattributetype}" z="nrTODCgbOiwu++jaGfaKVpwHNiY="/>
+        <field:display field="required" id="s_cz_kolomet_domain_codelist_ProductAttributeType_required" object="${productattributetype}" z="V2xqs7+72aCzkgqmvcmjkH0e/ec="/>
     </page:show>
 </div>

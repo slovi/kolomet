@@ -16,4 +16,12 @@ privileged aspect ProductAttributeType_Roo_JavaBean {
         this.categoryType = categoryType;
     }
     
+    public Boolean ProductAttributeType.getRequired() {
+        return this.required;
+    }
+    
+    public void ProductAttributeType.setRequired(Boolean required) {
+        this.required = required;
+    }
+    
 }

@@ -10,8 +10,9 @@
 	     	</a>
 	     	<div class="home_description"> 
 	     		<a href="${productIdUrl}" class="label"><c:out value="${product.productName}" /></a>
-	         	<p class="price"><spring:eval expression="${product.price}" /><spring:message code="currency" /></p>
+	         	<p class="price"><spring:eval expression="product.price" /><spring:message code="currency" /></p>
 	         	<p><c:out value="${fn:substring(product.description, 0, 80)}" />...</p>
+	         	<p><spring:eval expression="product.created" /></p>
 	     	</div>
 	     	<div class="home_seller"> 
 	     		<p>

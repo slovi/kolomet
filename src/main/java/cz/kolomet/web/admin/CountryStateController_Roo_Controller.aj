@@ -98,8 +98,8 @@ privileged aspect CountryStateController_Roo_Controller {
     }
     
     void CountryStateController.addDateTimeFormatPatterns(Model uiModel) {
-        uiModel.addAttribute("countryState_created_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
-        uiModel.addAttribute("countryState_lastmodified_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("countryState_created_date_format", DateTimeFormat.patternForStyle("MM", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("countryState_lastmodified_date_format", DateTimeFormat.patternForStyle("MM", LocaleContextHolder.getLocale()));
     }
     
     void CountryStateController.populateEditForm(Model uiModel, CountryState countryState) {

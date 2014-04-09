@@ -13,6 +13,9 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.apache.commons.lang3.BooleanUtils;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.data.jpa.domain.Specification;
 
 import cz.kolomet.domain.Category;
@@ -23,6 +26,12 @@ import cz.kolomet.domain.codelist.Region;
 import cz.kolomet.dto.ProductFilter;
 
 public class ProductSpecifications {
+	
+	public static Sort getDefaultSort() {
+		Order priorityOrder = new Order(Direction.DESC, "seller.sellerStatus.priority");
+    	Order createdOrder = new Order(Direction.DESC, "created");
+    	return new Sort(priorityOrder, createdOrder);
+	}
 	
 	public static Specification<Product> forProductFilter(final ProductFilter productFilter) {
 		return new Specification<Product>() {

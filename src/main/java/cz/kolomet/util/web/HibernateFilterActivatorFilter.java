@@ -1,6 +1,7 @@
 package cz.kolomet.util.web;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,6 +27,7 @@ public class HibernateFilterActivatorFilter extends OpenEntityManagerInViewFilte
 	
 	public static final String NEWS_ITEM_ENABLE_FILTER = "newsItemEnabledFilter";
 	public static final String PRODUCT_ENABLED_FILTER = "productEnabledFilter";
+	public static final String PRODUCT_VALIDTO_FILTER = "productValidToFilter";
 	public static final String SELLER_ENABLED_FILTER = "sellerEnabledFilter";
 	public static final String SELLER_OWN_FILTER = "sellerOwnFilter";
 	
@@ -35,6 +37,7 @@ public class HibernateFilterActivatorFilter extends OpenEntityManagerInViewFilte
 		filters.put(NEWS_ITEM_ENABLE_FILTER, new EnabledFilterParamValueResolver());
 		filters.put(PRODUCT_ENABLED_FILTER, new EnabledFilterParamValueResolver());
 		filters.put(SELLER_ENABLED_FILTER, new EnabledFilterParamValueResolver());
+		filters.put(PRODUCT_VALIDTO_FILTER, new ProductValidToValueResolver());
 		filters.put(SELLER_OWN_FILTER, new SellerOwnValueResolver());
 	}
 	
@@ -132,5 +135,24 @@ public class HibernateFilterActivatorFilter extends OpenEntityManagerInViewFilte
 		}
 		
 	}
+	
+	static class ProductValidToValueResolver implements FilterInfo<Date> {
+		
+		@Override
+		public Boolean apply() {
+			return true;
+		}
+		
+		@Override
+		public String paramName() {
+			return "actualDate";
+		}
+		
+		@Override
+		public Date paramValue() {
+			return new Date();
+		}		
+		
+	} 
 	
 }

@@ -51,8 +51,8 @@ privileged aspect SellerPhotoUrlController_Roo_Controller {
     }
     
     void SellerPhotoUrlController.addDateTimeFormatPatterns(Model uiModel) {
-        uiModel.addAttribute("sellerPhotoUrl_created_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
-        uiModel.addAttribute("sellerPhotoUrl_lastmodified_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("sellerPhotoUrl_created_date_format", DateTimeFormat.patternForStyle("MM", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("sellerPhotoUrl_lastmodified_date_format", DateTimeFormat.patternForStyle("MM", LocaleContextHolder.getLocale()));
     }
     
     void SellerPhotoUrlController.populateEditForm(Model uiModel, SellerPhotoUrl sellerPhotoUrl) {

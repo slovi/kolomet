@@ -14,7 +14,7 @@
 	    </h1>
 	    <menu:menu id="side_menu_body_categories" styleClass="side-menu-body">
 	    	<c:forEach items="${categories}" var="category">
-				<menu:item url="/public/products/category/${category.codeKey}" id="menuitem_${category.codeKey}" label="${category.codeDescription}" />
+				<menu:item url="/public/products/category/${category.id}" id="menuitem_${category.codeKey}" label="${category.codeDescription}" />
 			</c:forEach>
 	     </menu:menu>
 	</div>

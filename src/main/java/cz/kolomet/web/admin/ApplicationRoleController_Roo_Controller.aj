@@ -102,8 +102,8 @@ privileged aspect ApplicationRoleController_Roo_Controller {
     }
     
     void ApplicationRoleController.addDateTimeFormatPatterns(Model uiModel) {
-        uiModel.addAttribute("applicationRole_created_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
-        uiModel.addAttribute("applicationRole_lastmodified_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("applicationRole_created_date_format", DateTimeFormat.patternForStyle("MM", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("applicationRole_lastmodified_date_format", DateTimeFormat.patternForStyle("MM", LocaleContextHolder.getLocale()));
     }
     
     void ApplicationRoleController.populateEditForm(Model uiModel, ApplicationRole applicationRole) {

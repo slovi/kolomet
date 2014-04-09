@@ -98,8 +98,8 @@ privileged aspect CategoryTypeController_Roo_Controller {
     }
     
     void CategoryTypeController.addDateTimeFormatPatterns(Model uiModel) {
-        uiModel.addAttribute("categoryType_created_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
-        uiModel.addAttribute("categoryType_lastmodified_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("categoryType_created_date_format", DateTimeFormat.patternForStyle("MM", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("categoryType_lastmodified_date_format", DateTimeFormat.patternForStyle("MM", LocaleContextHolder.getLocale()));
     }
     
     void CategoryTypeController.populateEditForm(Model uiModel, CategoryType categoryType) {

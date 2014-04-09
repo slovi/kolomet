@@ -14,6 +14,8 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Filter;
 import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.FilterDefs;
+import org.hibernate.annotations.FilterJoinTable;
 import org.hibernate.annotations.Filters;
 import org.hibernate.annotations.ParamDef;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -31,10 +33,14 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 @RooJpaEntity(inheritanceType = "TABLE_PER_CLASS")
 @RooEquals(excludeFields = {"createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate", "seller", "category", "producer", "photoUrls", "productAttributes"})
 @RooSerializable
-@FilterDef(name = "productEnabledFilter", parameters = @ParamDef(type = "boolean", name = "enabled"))
+@FilterDefs({
+	@FilterDef(name = "productEnabledFilter", parameters = @ParamDef(type = "boolean", name = "enabled")),
+	@FilterDef(name = "productValidToFilter", parameters = @ParamDef(type = "date", name = "actualDate")),
+})
 @Filters({
+	@Filter(name = "productValidToFilter", condition = "validto > :actualDate"),
 	@Filter(name = "productEnabledFilter", condition = "enabled = :enabled"),
-	@Filter(name = "sellerOwnFilter", condition = "SELLER_ID = :sellerId")
+	@Filter(name = "sellerOwnFilter", condition = "seller_id = :sellerId")
 })
 public class Product extends DomainEntity {
 	
@@ -61,6 +67,7 @@ public class Product extends DomainEntity {
     /**
      */
     @ManyToOne
+    @FilterJoinTable(name = "sellerEnabledFilter", condition = "enabled = :enabled")
     private Seller seller;
 
     /**

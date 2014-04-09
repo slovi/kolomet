@@ -51,14 +51,15 @@ privileged aspect PhotoUrlController_Roo_Controller {
     }
     
     void PhotoUrlController.addDateTimeFormatPatterns(Model uiModel) {
-        uiModel.addAttribute("photoUrl_created_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
-        uiModel.addAttribute("photoUrl_lastmodified_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("photoUrl_created_date_format", DateTimeFormat.patternForStyle("MM", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("photoUrl_lastmodified_date_format", DateTimeFormat.patternForStyle("MM", LocaleContextHolder.getLocale()));
     }
     
     void PhotoUrlController.populateEditForm(Model uiModel, PhotoUrl photoUrl) {
         uiModel.addAttribute("photoUrl", photoUrl);
         addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("applicationusers", applicationUserService.findAllApplicationUsers());
+        uiModel.addAttribute("products", productService.findAllProducts());
     }
     
     String PhotoUrlController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

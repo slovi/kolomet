@@ -98,8 +98,8 @@ privileged aspect RegionController_Roo_Controller {
     }
     
     void RegionController.addDateTimeFormatPatterns(Model uiModel) {
-        uiModel.addAttribute("region_created_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
-        uiModel.addAttribute("region_lastmodified_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("region_created_date_format", DateTimeFormat.patternForStyle("MM", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("region_lastmodified_date_format", DateTimeFormat.patternForStyle("MM", LocaleContextHolder.getLocale()));
     }
     
     void RegionController.populateEditForm(Model uiModel, Region region) {

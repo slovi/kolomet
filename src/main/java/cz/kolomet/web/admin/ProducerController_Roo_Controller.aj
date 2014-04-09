@@ -98,8 +98,8 @@ privileged aspect ProducerController_Roo_Controller {
     }
     
     void ProducerController.addDateTimeFormatPatterns(Model uiModel) {
-        uiModel.addAttribute("producer_created_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
-        uiModel.addAttribute("producer_lastmodified_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("producer_created_date_format", DateTimeFormat.patternForStyle("MM", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("producer_lastmodified_date_format", DateTimeFormat.patternForStyle("MM", LocaleContextHolder.getLocale()));
     }
     
     void ProducerController.populateEditForm(Model uiModel, Producer producer) {

@@ -33,11 +33,11 @@ public abstract class DomainEntity implements Auditable<ApplicationUser, Long> {
     @JoinColumn(name = "LAST_MODIFIED_ID")
     private ApplicationUser lastModifiedBy;
 
-    @DateTimeFormat(style = "M-")
+    @DateTimeFormat(style = "MM")
     @Column(updatable = false)
     private Date created;
 
-    @DateTimeFormat(style = "M-")
+    @DateTimeFormat(style = "MM")
     private Date lastModified;
 
     @Override

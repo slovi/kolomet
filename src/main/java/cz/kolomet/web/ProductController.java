@@ -2,6 +2,7 @@ package cz.kolomet.web;
 import javax.validation.Valid;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -22,7 +23,7 @@ import cz.kolomet.repository.RegionRepository;
 
 @RequestMapping("/public/products")
 @Controller("publicProductController")
-public class ProductController extends AbstractController {
+public class ProductController extends AbstractController implements InitializingBean {
 	
 	@Autowired
 	private ProductRepository productRepository;
@@ -38,6 +39,8 @@ public class ProductController extends AbstractController {
 	
 	private Integer maxPageItems = 6;
 	
+	private PageRequest pageRequest;
+	
 	@RequestMapping("/detail/{id}")
 	public String detail(@PathVariable("id") Long id, Model model) {
 		
@@ -48,19 +51,18 @@ public class ProductController extends AbstractController {
 	@RequestMapping("/filter")
 	public String filterByProductFilter(@Valid ProductFilter productFilter, BindingResult result, Model model, Pageable pageable) {	
 		populateFilterForm(productFilter, null, null, model);
-		model.addAttribute("products", productRepository.findAll(ProductSpecifications.forProductFilter(productFilter), pageable));
+		
+		Pageable orderedPageable = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(), ProductSpecifications.getDefaultSort());
+		model.addAttribute("products", productRepository.findAll(ProductSpecifications.forProductFilter(productFilter), orderedPageable));
 		return "products/list_category";
 	}
 	
 	// TODO: predelat category na long
-	@RequestMapping("/category/{categoryCodeKey}")
-	public String listByCategory(@PathVariable("categoryCodeKey") String categoryCodeKey, Model model) {
-		populateFilterForm(new ProductFilter(), categoryCodeKey, null, model);
-		if (!categoryCodeKey.equals(Category.ALL_CATEGORY_CODE_KEY)) {
-			model.addAttribute("products", productRepository.findByCategory(categoryCodeKey, new PageRequest(0, maxPageItems)));
-		} else {
-			model.addAttribute("products", productRepository.findByPriority(new PageRequest(0, maxPageItems)));
-		}
+	@RequestMapping("/category/{categoryId}")
+	public String listByCategory(@PathVariable("categoryId") Long categoryId, Model model) {
+		Category category = categoryRepository.findOne(categoryId);
+		populateFilterForm(new ProductFilter(), category, null, model);
+		model.addAttribute("products", productRepository.findByCategory(category, pageRequest));
 		return "products/list_category";
 	}
 	
@@ -68,28 +70,32 @@ public class ProductController extends AbstractController {
 	public String listByProducer(@PathVariable("producerId") Long producerId, Model model) {
 		Producer producer = producerRepository.findOne(producerId);
 		populateFilterForm(new ProductFilter(), null, producer, model);
-		model.addAttribute("products", productRepository.findByProducerOrderByCreatedDateDesc(producer, new PageRequest(0, maxPageItems)));
+		model.addAttribute("products", productRepository.findByProducerOrderByCreatedDateDesc(producer, pageRequest));
 		return "products/list_category";
 	}
 	
 	@RequestMapping("/categorytype/{categoryTypeCodeKey}")
 	public String listByCategoryType(@PathVariable("categoryTypeCodeKey") String categoryTypeCodeKey, Model model) {
 		populateFilterForm(new ProductFilter(), null, null, model);
-		model.addAttribute("products", productRepository.findByCategoryType(categoryTypeCodeKey, new PageRequest(0, maxPageItems)));		
+		model.addAttribute("products", productRepository.findByCategoryType(categoryTypeCodeKey, pageRequest));		
 		return "products/list_category";
 	}
 	
-	private void populateFilterForm(ProductFilter productFilter, String categoryCodeKey, Producer producer, Model model) {		
-		if (StringUtils.isNotEmpty(categoryCodeKey)) {
-			Category category = categoryRepository.findByCodeKey(categoryCodeKey).get(0);
+	private void populateFilterForm(ProductFilter productFilter, Category category, Producer producer, Model model) {		
+		if (category != null) {
 			productFilter.setCategory(category);
 		}
-		if (producer != null) {
+		if (producer != null) {			
 			productFilter.setProducer(producer);
 		}
 		model.addAttribute("producers", producerRepository.findAll());
 		model.addAttribute("regions", regionRepository.findAll());
 		model.addAttribute("productFilter", productFilter);
+	}
+	
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		this.pageRequest = new PageRequest(0, maxPageItems, ProductSpecifications.getDefaultSort());
 	}
 	
 }

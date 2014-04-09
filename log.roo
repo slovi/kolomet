@@ -211,3 +211,5 @@ field date --class ~.domain.DomainEntity --fieldName test --type org.joda.time.D
 // Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2014-04-07 01:03:57
 // Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2014-04-08 22:53:25
 // Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2014-04-09 02:21:53
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2014-04-09 09:04:37
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2014-04-09 20:39:41

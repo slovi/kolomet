@@ -22,7 +22,7 @@
         <util:panel id="fc_cz_kolomet_domain_Product_productAttributes" title="ProductAttributes">
             <c:forEach items="${product.productAttributes}" var="productAttribute" varStatus="status">
                 <field:hidden field="productAttributes[${status.index}].attributeType" id="fc_cz_kolomet_domain_Product_productAttribute_type_${status.index}"/>
-                <field:input field="productAttributes[${status.index}].attributeValue" id="fc_cz_kolomet_domain_Product_productAttribute_value_${status.index}" label="${productAttribute.attributeType.codeDescription}"/>
+                <field:input field="productAttributes[${status.index}].attributeValue" id="fc_cz_kolomet_domain_Product_productAttribute_value_${status.index}" required="productAttributes[${status.index}].attributeType.required" label="${productAttribute.attributeType.codeDescription}"/>
             </c:forEach>
         </util:panel>
         <util:panel id="fc_cz_kolomet_domain_Product_photoUrls" title="PhotoUrls">

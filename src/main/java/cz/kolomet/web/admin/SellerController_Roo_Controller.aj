@@ -137,8 +137,8 @@ privileged aspect SellerController_Roo_Controller {
     }
     
     void SellerController.addDateTimeFormatPatterns(Model uiModel) {
-        uiModel.addAttribute("seller_created_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
-        uiModel.addAttribute("seller_lastmodified_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("seller_created_date_format", DateTimeFormat.patternForStyle("MM", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("seller_lastmodified_date_format", DateTimeFormat.patternForStyle("MM", LocaleContextHolder.getLocale()));
     }
     
     void SellerController.populateEditForm(Model uiModel, Seller seller) {

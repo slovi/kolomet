@@ -6,6 +6,7 @@ package cz.kolomet.web.admin;
 import cz.kolomet.domain.ApplicationUser;
 import cz.kolomet.service.ApplicationRoleService;
 import cz.kolomet.service.ApplicationUserService;
+import cz.kolomet.service.SellerService;
 import cz.kolomet.web.admin.ApplicationUserController;
 import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +30,9 @@ privileged aspect ApplicationUserController_Roo_Controller {
     
     @Autowired
     ApplicationRoleService ApplicationUserController.applicationRoleService;
+    
+    @Autowired
+    SellerService ApplicationUserController.sellerService;
     
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String ApplicationUserController.create(@Valid ApplicationUser applicationUser, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
@@ -98,8 +102,8 @@ privileged aspect ApplicationUserController_Roo_Controller {
     }
     
     void ApplicationUserController.addDateTimeFormatPatterns(Model uiModel) {
-        uiModel.addAttribute("applicationUser_created_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
-        uiModel.addAttribute("applicationUser_lastmodified_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("applicationUser_created_date_format", DateTimeFormat.patternForStyle("MM", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("applicationUser_lastmodified_date_format", DateTimeFormat.patternForStyle("MM", LocaleContextHolder.getLocale()));
     }
     
     void ApplicationUserController.populateEditForm(Model uiModel, ApplicationUser applicationUser) {
@@ -107,6 +111,7 @@ privileged aspect ApplicationUserController_Roo_Controller {
         addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("applicationroles", applicationRoleService.findAllApplicationRoles());
         uiModel.addAttribute("applicationusers", applicationUserService.findAllApplicationUsers());
+        uiModel.addAttribute("sellers", sellerService.findAllSellers());
     }
     
     String ApplicationUserController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

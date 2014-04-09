@@ -51,8 +51,8 @@ privileged aspect ProductAttributeController_Roo_Controller {
     }
     
     void ProductAttributeController.addDateTimeFormatPatterns(Model uiModel) {
-        uiModel.addAttribute("productAttribute_created_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
-        uiModel.addAttribute("productAttribute_lastmodified_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("productAttribute_created_date_format", DateTimeFormat.patternForStyle("MM", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("productAttribute_lastmodified_date_format", DateTimeFormat.patternForStyle("MM", LocaleContextHolder.getLocale()));
     }
     
     void ProductAttributeController.populateEditForm(Model uiModel, ProductAttribute productAttribute) {
