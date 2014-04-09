@@ -77,7 +77,7 @@ public class SellerPhotoUrlController {
         }
         uiModel.asMap().clear();
         sellerPhotoUrlService.saveSellerPhotoUrl(sellerPhotoUrl, dest, new File(rootDir, sellerPhotoUrl.getSeller().getId().toString()));
-        return "redirect:/sellers/" + encodeUrlPathSegment(sellerPhotoUrl.getSeller().getId().toString(), httpServletRequest);
+        return "redirect:/admin/sellers/" + encodeUrlPathSegment(sellerPhotoUrl.getSeller().getId().toString(), httpServletRequest);
     }
 	
     @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
@@ -88,7 +88,7 @@ public class SellerPhotoUrlController {
         }
         uiModel.asMap().clear();
         sellerPhotoUrlService.updateSellerPhotoUrl(sellerPhotoUrl);
-        return "redirect:/sellers/" + encodeUrlPathSegment(sellerPhotoUrl.getSeller().getId().toString(), httpServletRequest);
+        return "redirect:/admin/sellers/" + encodeUrlPathSegment(sellerPhotoUrl.getSeller().getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
@@ -98,7 +98,7 @@ public class SellerPhotoUrlController {
         uiModel.asMap().clear();
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
-        return "redirect:/sellers/" + sellerPhotoUrl.getSeller().getId();
+        return "redirect:/admin/sellers/" + sellerPhotoUrl.getSeller().getId();
     }
     
     void populateEditForm(Model uiModel, SellerPhotoUrl sellerPhotoUrl, Seller seller) {

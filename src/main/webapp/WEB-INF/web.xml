@@ -74,12 +74,29 @@
 	</filter-mapping>
 
 	<filter>
-		<filter-name>hibernateFilterActivatorFilter</filter-name>
+		<filter-name>publicHibernateFilterActivatorFilter</filter-name>
 		<filter-class>cz.kolomet.util.web.HibernateFilterActivatorFilter</filter-class>
+		<init-param>
+			<param-name>enabledFilters</param-name>
+			<param-value>newsItemEnabledFilter,productEnabledFilter,sellerEnabledFilter</param-value>
+		</init-param>
 	</filter>
 	<filter-mapping>
-		<filter-name>hibernateFilterActivatorFilter</filter-name>
+		<filter-name>publicHibernateFilterActivatorFilter</filter-name>
 		<url-pattern>/public/*</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>adminHibernateFilterActivatorFilter</filter-name>
+		<filter-class>cz.kolomet.util.web.HibernateFilterActivatorFilter</filter-class>
+		<init-param>
+			<param-name>enabledFilters</param-name>
+			<param-value>sellerOwnFilter</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>adminHibernateFilterActivatorFilter</filter-name>
+		<url-pattern>/admin/*</url-pattern>
 	</filter-mapping>
 
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->

@@ -2,8 +2,8 @@
 <div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <page:list id="pl_cz_kolomet_domain_PhotoUrl" items="${photourls}" path="/photourls" z="user-managed">
-        <table:table data="${photourls}" id="l_cz_kolomet_domain_PhotoUrl" path="/photourls" z="zQvzlpYzTMg057/oczT4XCZTxLg=">
+    <page:list id="pl_cz_kolomet_domain_PhotoUrl" items="${photourls}" path="/admin/photourls" z="user-managed">
+        <table:table data="${photourls}" id="l_cz_kolomet_domain_PhotoUrl" path="/admin/photourls" z="user-managed">
             <table:column id="c_cz_kolomet_domain_PhotoUrl_fileName" property="fileName" z="3vBFb3d7oCYwh9mEfaliHVKzU7E="/>
             <table:column id="c_cz_kolomet_domain_PhotoUrl_contentType" property="contentType" z="Rr7Xm5QfvSDmkqRcbo2XauqUBbc="/>
             <table:column id="c_cz_kolomet_domain_PhotoUrl_createdBy" property="createdBy" z="US7i6j2DdHL8MatgfxcXRhUCkJw="/>

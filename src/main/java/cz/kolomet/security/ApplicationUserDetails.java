@@ -4,7 +4,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.springframework.security.access.vote.RoleVoter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,10 +15,12 @@ import cz.kolomet.domain.ApplicationUser;
 public class ApplicationUserDetails implements UserDetails {
 	
 	private final ApplicationUser user;
+	private final Long sellerId;
 	private final Collection<? extends GrantedAuthority> authorities;
 	
 	public ApplicationUserDetails(ApplicationUser user) {
 		this.user = user;
+		this.sellerId = user.getSeller().getId();
 		this.authorities = resolveAuthorities();
 	}
 
@@ -70,6 +71,10 @@ public class ApplicationUserDetails implements UserDetails {
 
 	public ApplicationUser getUser() {
 		return user;
+	}
+
+	public Long getSellerId() {
+		return sellerId;
 	}
 
 }

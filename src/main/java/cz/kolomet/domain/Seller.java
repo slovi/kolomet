@@ -12,6 +12,7 @@ import javax.validation.constraints.Size;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.Filter;
 import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.FilterDefs;
 import org.hibernate.annotations.Filters;
 import org.hibernate.annotations.ParamDef;
 import org.springframework.roo.addon.equals.RooEquals;
@@ -29,9 +30,13 @@ import cz.kolomet.domain.codelist.SellerStatus;
 @RooJpaEntity
 @RooEquals(excludeFields = {"createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate", "products", "sellersPhotoUrls"})
 @RooSerializable
-@FilterDef(name = "sellerEnabledFilter", parameters = @ParamDef(type = "boolean", name = "enabled"))
+@FilterDefs({
+	@FilterDef(name = "sellerEnabledFilter", parameters = @ParamDef(type = "boolean", name = "enabled")),
+	@FilterDef(name = "sellerOwnFilter", parameters = @ParamDef(type = "long", name= "sellerId"))
+})
 @Filters({
-	@Filter(name = "sellerEnabledFilter", condition = "enabled = :enabled")
+	@Filter(name = "sellerEnabledFilter", condition = "enabled = :enabled"),
+	@Filter(name = "sellerOwnFilter", condition = "id = :sellerId")
 })
 public class Seller extends DomainEntity {
 	

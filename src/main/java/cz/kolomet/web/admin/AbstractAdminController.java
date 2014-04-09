@@ -23,7 +23,7 @@ public class AbstractAdminController {
 	protected String rootDir;
 	
 	@Autowired
-    private PhotoUrlService photoUrlService;
+    protected PhotoUrlService photoUrlService;
 	
 	@Autowired
 	private NewsItemRepository newsItemRepository;
@@ -33,11 +33,15 @@ public class AbstractAdminController {
 		return newsItemRepository.findAll();
 	}
 	
-	protected void savePhotos(Product product, List<CommonsMultipartFile> files) throws IOException {
-		for (CommonsMultipartFile content: product.getContents()) {
+	protected void savePhotos(Product product, List<CommonsMultipartFile> files) {
+		for (CommonsMultipartFile content: files) {
         	if (StringUtils.isNotEmpty(content.getOriginalFilename())) {
 	        	File dest = getDestFile(product.getId(), content);
-	        	content.transferTo(dest);
+	        	try {
+					content.transferTo(dest);
+				} catch (Exception e) {
+					throw new RuntimeException(e);
+				}
 	        	PhotoUrl photoUrl = new PhotoUrl();
 	        	photoUrl.setFileName(dest.getName());
 				photoUrl.setContentType(content.getContentType());

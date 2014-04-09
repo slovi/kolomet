@@ -1,5 +1,4 @@
 package cz.kolomet.web.admin;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,13 +14,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import cz.kolomet.domain.PhotoUrl;
 import cz.kolomet.domain.Product;
 import cz.kolomet.service.ProductService;
 
-@RequestMapping("/photourls")
+@RequestMapping("/admin/photourls")
 @Controller
 @RooWebScaffold(path = "photourls", formBackingObject = PhotoUrl.class)
 public class PhotoUrlController extends AbstractAdminController {
@@ -49,9 +47,7 @@ public class PhotoUrlController extends AbstractAdminController {
     }
 	
 	@RequestMapping(method = RequestMethod.POST, produces = "text/html")
-	public String create(@Valid PhotoUrl photoUrl, BindingResult bindingResult, Model model,
-	       @RequestParam("content") CommonsMultipartFile content,
-	       HttpServletRequest httpServletRequest) {
+	public String create(@Valid PhotoUrl photoUrl, BindingResult bindingResult, Model model, HttpServletRequest httpServletRequest) {
 		
 		if (bindingResult.hasErrors()) {
 			populateEditForm(model, photoUrl, null);
@@ -59,7 +55,7 @@ public class PhotoUrlController extends AbstractAdminController {
 		}
 		
 		savePhotos(photoUrl.getProduct(), photoUrl.getContents());
-		return "redirect:/products/" + encodeUrlPathSegment(photoUrl.getProduct().getId().toString(), httpServletRequest);
+		return "redirect:/admin/products/" + encodeUrlPathSegment(photoUrl.getProduct().getId().toString(), httpServletRequest);
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT, produces = "text/html")
@@ -70,7 +66,7 @@ public class PhotoUrlController extends AbstractAdminController {
         }
         uiModel.asMap().clear();
         photoUrlService.updatePhotoUrl(photoUrl);
-        return "redirect:/products/" + encodeUrlPathSegment(photoUrl.getProduct().getId().toString(), httpServletRequest);
+        return "redirect:/admin/products/" + encodeUrlPathSegment(photoUrl.getProduct().getId().toString(), httpServletRequest);
     }
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
@@ -80,7 +76,7 @@ public class PhotoUrlController extends AbstractAdminController {
         uiModel.asMap().clear();
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
-        return "redirect:/products/" + photoUrl.getProduct().getId();
+        return "redirect:/admin/products/" + photoUrl.getProduct().getId();
     }
 	
 	void populateEditForm(Model uiModel, PhotoUrl photoUrl, Product product) {

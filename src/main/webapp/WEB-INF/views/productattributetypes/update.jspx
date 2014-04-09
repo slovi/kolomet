@@ -2,12 +2,12 @@
 <div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <form:update id="fu_cz_kolomet_domain_codelist_ProductAttributeType" modelAttribute="productAttributeType" path="/productattributetypes" versionField="Version" z="7AMUMKe7FzXi7b4KLM+fHNItQg8=">
+    <form:update id="fu_cz_kolomet_domain_codelist_ProductAttributeType" modelAttribute="productAttributeType" path="/admin/productattributetypes" versionField="Version" z="user-managed">
         <field:input field="codeKey" id="c_cz_kolomet_domain_codelist_ProductAttributeType_codeKey" max="20" required="true" z="k6wLAK0ayW9TPD4BIS4i0buEawQ="/>
         <field:textarea field="codeDescription" id="c_cz_kolomet_domain_codelist_ProductAttributeType_codeDescription" required="true" z="5667ZdUQUTxjgaYb0fl0pOPjV44="/>
         <field:input field="createdBy" id="c_cz_kolomet_domain_codelist_ProductAttributeType_createdBy" render="false" z="user-managed"/>
         <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_codelist_ProductAttributeType_lastModifiedBy" render="false" z="user-managed"/>
         <field:datetime dateTimePattern="${productAttributeType_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_codelist_ProductAttributeType_lastModified" render="false" z="user-managed"/>
-        <field:select field="categoryType" id="c_cz_kolomet_domain_codelist_ProductAttributeType_categoryType" itemValue="id" items="${categorytypes}" path="/categorytypes" z="vg3IYI3XnxWP+o4Cb2oWRIDjCeI="/>
+        <field:select field="categoryType" id="c_cz_kolomet_domain_codelist_ProductAttributeType_categoryType" itemValue="id" items="${categorytypes}" path="/admin/categorytypes" z="user-managed"/>
     </form:update>
 </div>

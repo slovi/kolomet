@@ -21,7 +21,7 @@ import cz.kolomet.service.ProductAttributeTypeService;
 import cz.kolomet.service.ProductService;
 import cz.kolomet.util.db.OrmUtils;
 
-@RequestMapping("/productattributes")
+@RequestMapping("/admin/productattributes")
 @Controller
 @RooWebScaffold(path = "productattributes", formBackingObject = ProductAttribute.class)
 public class ProductAttributeController extends AbstractAdminController {
@@ -63,7 +63,7 @@ public class ProductAttributeController extends AbstractAdminController {
         }
         uiModel.asMap().clear();
         productAttributeService.saveProductAttribute(productAttribute);
-        return "redirect:/products/" + encodeUrlPathSegment(productAttribute.getProduct().getId().toString(), httpServletRequest);
+        return "redirect:/admin/products/" + encodeUrlPathSegment(productAttribute.getProduct().getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
@@ -74,7 +74,7 @@ public class ProductAttributeController extends AbstractAdminController {
         }
         uiModel.asMap().clear();
         productAttributeService.updateProductAttribute(productAttribute);
-        return "redirect:/products/" + encodeUrlPathSegment(productAttribute.getProduct().getId().toString(), httpServletRequest);
+        return "redirect:/admin/products/" + encodeUrlPathSegment(productAttribute.getProduct().getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")

@@ -3,7 +3,7 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_cz_kolomet_domain_ApplicationPermission" items="${applicationpermissions}" z="SHc1CpaXSc6CFf7xeblUv6YYXIw=">
-        <table:table data="${applicationpermissions}" id="l_cz_kolomet_domain_ApplicationPermission" path="/applicationpermissions" z="iH/B/pQFCSo7SfwVg9tYAQkJDAw=">
+        <table:table data="${applicationpermissions}" id="l_cz_kolomet_domain_ApplicationPermission" path="/admin/applicationpermissions" z="user-managed">
             <table:column id="c_cz_kolomet_domain_ApplicationPermission_permissionName" property="permissionName" z="idbciYnyHGhtfwiZh5lWNzJ7zUM="/>
             <table:column id="c_cz_kolomet_domain_ApplicationPermission_roles" property="roles" z="ePT/lBxu8RSaqkEFBXAoxAlfIaA="/>
             <table:column id="c_cz_kolomet_domain_ApplicationPermission_createdBy" property="createdBy" z="umynPfgu9sbWGMfk+Aug8xZKrOg="/>

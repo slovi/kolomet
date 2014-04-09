@@ -6,7 +6,7 @@ import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping("/applicationpermissions")
+@RequestMapping("/admin/applicationpermissions")
 @Controller
 @RooWebScaffold(path = "applicationpermissions", formBackingObject = ApplicationPermission.class)
 public class ApplicationPermissionController extends AbstractAdminController {

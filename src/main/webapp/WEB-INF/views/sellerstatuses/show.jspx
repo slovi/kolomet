@@ -2,7 +2,7 @@
 <div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <page:show id="ps_cz_kolomet_domain_codelist_SellerStatus" object="${sellerstatus}" path="/sellerstatuses" z="ViXDCxBiJ4eWK2rmfXU8/IXgPLA=">
+    <page:show id="ps_cz_kolomet_domain_codelist_SellerStatus" object="${sellerstatus}" path="/admin/sellerstatuses" z="user-managed">
         <field:display field="codeKey" id="s_cz_kolomet_domain_codelist_SellerStatus_codeKey" object="${sellerstatus}" z="YfxxfHPmt3b7MbGNRxkB8VIjtyE="/>
         <field:display field="codeDescription" id="s_cz_kolomet_domain_codelist_SellerStatus_codeDescription" object="${sellerstatus}" z="f1kimyJKWgegu406x56xjosEcxo="/>
         <field:display field="priority" id="s_cz_kolomet_domain_codelist_SellerStatus_priority" object="${sellerstatus}" z="TN9ERsq5srLk70801s4sFXU4B9Y="/>

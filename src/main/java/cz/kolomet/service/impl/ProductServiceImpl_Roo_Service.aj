@@ -24,28 +24,12 @@ privileged aspect ProductServiceImpl_Roo_Service {
         return productRepository.count();
     }
     
-    public void ProductServiceImpl.deleteProduct(Product product) {
-        productRepository.delete(product);
-    }
-    
-    public Product ProductServiceImpl.findProduct(Long id) {
-        return productRepository.findOne(id);
-    }
-    
     public List<Product> ProductServiceImpl.findAllProducts() {
         return productRepository.findAll();
     }
     
     public List<Product> ProductServiceImpl.findProductEntries(int firstResult, int maxResults) {
         return productRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / maxResults, maxResults)).getContent();
-    }
-    
-    public void ProductServiceImpl.saveProduct(Product product) {
-        productRepository.save(product);
-    }
-    
-    public Product ProductServiceImpl.updateProduct(Product product) {
-        return productRepository.save(product);
     }
     
 }

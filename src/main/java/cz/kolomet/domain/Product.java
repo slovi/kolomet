@@ -33,7 +33,8 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 @RooSerializable
 @FilterDef(name = "productEnabledFilter", parameters = @ParamDef(type = "boolean", name = "enabled"))
 @Filters({
-	@Filter(name = "productEnabledFilter", condition = "enabled = :enabled")
+	@Filter(name = "productEnabledFilter", condition = "enabled = :enabled"),
+	@Filter(name = "sellerOwnFilter", condition = "SELLER_ID = :sellerId")
 })
 public class Product extends DomainEntity {
 	

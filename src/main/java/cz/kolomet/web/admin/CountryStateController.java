@@ -6,7 +6,7 @@ import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping("/countrystates")
+@RequestMapping("/admin/countrystates")
 @Controller
 @RooWebScaffold(path = "countrystates", formBackingObject = CountryState.class)
 public class CountryStateController extends AbstractAdminController {

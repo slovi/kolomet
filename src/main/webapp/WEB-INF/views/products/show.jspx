@@ -2,7 +2,7 @@
 <div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <page:show detailUrl="/public/products/detail/${product.id}" id="ps_cz_kolomet_domain_Product" object="${product}" path="/products" z="user-managed">
+    <page:show detailUrl="/public/products/detail/${product.id}" id="ps_cz_kolomet_domain_Product" object="${product}" path="/admin/products" z="user-managed">
         <field:display field="productName" id="s_cz_kolomet_domain_Product_productName" object="${product}" z="OgwKo7O8FnRzdsLDlOxiF4TPR1w="/>
         <field:display field="price" id="s_cz_kolomet_domain_Product_price" object="${product}" z="xpno0xgzkr6bWjdNoFutCzBaIyE="/>
         <field:display field="discount" id="s_cz_kolomet_domain_Product_discount" object="${product}" z="ZF2WJwqsIZuPwQRx4YSssq69Id8="/>

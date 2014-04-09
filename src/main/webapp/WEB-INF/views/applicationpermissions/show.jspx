@@ -2,7 +2,7 @@
 <div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <page:show id="ps_cz_kolomet_domain_ApplicationPermission" object="${applicationpermission}" path="/applicationpermissions" z="yIkNecIjx7Bji2HQluxhW63Id1g=">
+    <page:show id="ps_cz_kolomet_domain_ApplicationPermission" object="${applicationpermission}" path="/admin/applicationpermissions" z="user-managed">
         <field:display field="permissionName" id="s_cz_kolomet_domain_ApplicationPermission_permissionName" object="${applicationpermission}" z="WA5lW0WLm4M2teELfzkN3PRHlNs="/>
         <field:display field="roles" id="s_cz_kolomet_domain_ApplicationPermission_roles" object="${applicationpermission}" z="dlDHbt25HtKFb5BLYTPqrG53h18="/>
         <field:display field="createdBy" id="s_cz_kolomet_domain_ApplicationPermission_createdBy" object="${applicationpermission}" z="1kCJFM+sXuJNbjlAGhQRqqhMcrk="/>

@@ -61,7 +61,6 @@
         </c:when>
         <c:otherwise>
           <form:hidden id="_${sec_field}_id" path="${sec_field}" disabled="${disabled}" />
-          <br />
           <form:errors cssClass="errors" id="_${sec_field}_error_id" path="${sec_field}" />
         </c:otherwise>
       </c:choose>

@@ -9,12 +9,15 @@
       		<form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
       		<spring:message code="products_list_filter_price_from" />: <form:input path="priceFrom" size="3" /> <spring:message code="products_list_filter_price_to" />: <form:input path="priceTo" size="3" />
       		<spring:message code="products_list_filter_discount_from" />: <form:input path="discountFrom" size="3" /> <spring:message code="products_list_filter_discount_to" />: <form:input path="discountTo" size="3" />
-      		<form:select path="category" items="${categories}" itemLabel="codeDescription" itemValue="id" />
-      		<form:select path="producer" title="country" >
+      		<form:select path="category" title="category" >
+      			<form:option value="" label="Všechny kategorie">&#32;</form:option>
+      			<form:options items="${categories}" itemLabel="codeDescription" itemValue="id" />
+      		</form:select>
+      		<form:select path="producer" title="producer">
      			<form:option value="" label="Všechny značky">&#32;</form:option>
      			<form:options items="${producers}" itemLabel="codeDescription" itemValue="id" />
 			</form:select>
-			<form:select path="region" title="country" >
+			<form:select path="region" title="region">
      			<form:option value="" label="Všechny regiony">&#32;</form:option>
      			<form:options items="${regions}" itemLabel="codeDescription" itemValue="id" />
 			</form:select>

@@ -3,7 +3,7 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_cz_kolomet_domain_Producer" items="${producers}" z="QcQvYyH+p3QZRfiD7hvaA9CGANw=">
-        <table:table data="${producers}" id="l_cz_kolomet_domain_Producer" path="/producers" z="jKOi0/w/AllkZy3aTUI2Fgb2Lv8=">
+        <table:table data="${producers}" id="l_cz_kolomet_domain_Producer" path="/admin/producers" z="user-managed">
             <table:column id="c_cz_kolomet_domain_Producer_codeKey" property="codeKey" z="qJcVLqUn6+ejjYt6Ih/HLhDVtsQ="/>
             <table:column id="c_cz_kolomet_domain_Producer_name" property="name" z="x3A9kAB0tj0Jji8Uh5qS1k/qLfk="/>
             <table:column id="c_cz_kolomet_domain_Producer_createdBy" property="createdBy" z="IC12f+NGs5Ym6SUeoOlGcC5oae8="/>

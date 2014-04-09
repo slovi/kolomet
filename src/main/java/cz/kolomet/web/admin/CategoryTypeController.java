@@ -6,7 +6,7 @@ import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping("/categorytypes")
+@RequestMapping("/admin/categorytypes")
 @Controller
 @RooWebScaffold(path = "categorytypes", formBackingObject = CategoryType.class)
 public class CategoryTypeController extends AbstractAdminController {
