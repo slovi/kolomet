@@ -26,7 +26,7 @@ import cz.kolomet.service.SellerService;
 
 @RequestMapping("/admin/products")
 @Controller
-@RooWebScaffold(path = "products", formBackingObject = Product.class)
+@RooWebScaffold(path = "admin/products", formBackingObject = Product.class)
 public class ProductController extends AbstractAdminController {
 	
     @Autowired

@@ -23,7 +23,7 @@ import cz.kolomet.util.db.OrmUtils;
 
 @RequestMapping("/admin/productattributes")
 @Controller
-@RooWebScaffold(path = "productattributes", formBackingObject = ProductAttribute.class)
+@RooWebScaffold(path = "admin/productattributes", formBackingObject = ProductAttribute.class)
 public class ProductAttributeController extends AbstractAdminController {
 	
 	@Autowired

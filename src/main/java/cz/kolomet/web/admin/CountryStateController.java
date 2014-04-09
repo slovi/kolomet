@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @RequestMapping("/admin/countrystates")
 @Controller
-@RooWebScaffold(path = "countrystates", formBackingObject = CountryState.class)
+@RooWebScaffold(path = "admin/countrystates", formBackingObject = CountryState.class)
 public class CountryStateController extends AbstractAdminController {
 }

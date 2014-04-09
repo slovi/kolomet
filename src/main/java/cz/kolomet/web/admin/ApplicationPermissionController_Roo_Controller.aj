@@ -38,17 +38,17 @@ privileged aspect ApplicationPermissionController_Roo_Controller {
     public String ApplicationPermissionController.create(@Valid ApplicationPermission applicationPermission, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
             populateEditForm(uiModel, applicationPermission);
-            return "applicationpermissions/create";
+            return "admin/applicationpermissions/create";
         }
         uiModel.asMap().clear();
         applicationPermissionService.saveApplicationPermission(applicationPermission);
-        return "redirect:/applicationpermissions/" + encodeUrlPathSegment(applicationPermission.getId().toString(), httpServletRequest);
+        return "redirect:/admin/applicationpermissions/" + encodeUrlPathSegment(applicationPermission.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(params = "form", produces = "text/html")
     public String ApplicationPermissionController.createForm(Model uiModel) {
         populateEditForm(uiModel, new ApplicationPermission());
-        return "applicationpermissions/create";
+        return "admin/applicationpermissions/create";
     }
     
     @RequestMapping(value = "/{id}", produces = "text/html")
@@ -56,7 +56,7 @@ privileged aspect ApplicationPermissionController_Roo_Controller {
         addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("applicationpermission", applicationPermissionService.findApplicationPermission(id));
         uiModel.addAttribute("itemId", id);
-        return "applicationpermissions/show";
+        return "admin/applicationpermissions/show";
     }
     
     @RequestMapping(produces = "text/html")
@@ -71,24 +71,24 @@ privileged aspect ApplicationPermissionController_Roo_Controller {
             uiModel.addAttribute("applicationpermissions", applicationPermissionService.findAllApplicationPermissions());
         }
         addDateTimeFormatPatterns(uiModel);
-        return "applicationpermissions/list";
+        return "admin/applicationpermissions/list";
     }
     
     @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
     public String ApplicationPermissionController.update(@Valid ApplicationPermission applicationPermission, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
             populateEditForm(uiModel, applicationPermission);
-            return "applicationpermissions/update";
+            return "admin/applicationpermissions/update";
         }
         uiModel.asMap().clear();
         applicationPermissionService.updateApplicationPermission(applicationPermission);
-        return "redirect:/applicationpermissions/" + encodeUrlPathSegment(applicationPermission.getId().toString(), httpServletRequest);
+        return "redirect:/admin/applicationpermissions/" + encodeUrlPathSegment(applicationPermission.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String ApplicationPermissionController.updateForm(@PathVariable("id") Long id, Model uiModel) {
         populateEditForm(uiModel, applicationPermissionService.findApplicationPermission(id));
-        return "applicationpermissions/update";
+        return "admin/applicationpermissions/update";
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
@@ -98,7 +98,7 @@ privileged aspect ApplicationPermissionController_Roo_Controller {
         uiModel.asMap().clear();
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
-        return "redirect:/applicationpermissions";
+        return "redirect:/admin/applicationpermissions";
     }
     
     void ApplicationPermissionController.addDateTimeFormatPatterns(Model uiModel) {

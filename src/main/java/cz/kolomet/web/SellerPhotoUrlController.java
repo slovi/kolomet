@@ -26,9 +26,9 @@ import cz.kolomet.domain.Seller;
 import cz.kolomet.domain.SellerPhotoUrl;
 import cz.kolomet.service.SellerService;
 
-@RequestMapping("/sellerphotourls")
+@RequestMapping("/admin/sellerphotourls")
 @Controller
-@RooWebScaffold(path = "sellerphotourls", formBackingObject = SellerPhotoUrl.class)
+@RooWebScaffold(path = "admin/sellerphotourls", formBackingObject = SellerPhotoUrl.class)
 public class SellerPhotoUrlController {
 	
 	@Value("${seller.img.rootdir}")

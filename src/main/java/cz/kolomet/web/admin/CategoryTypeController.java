@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @RequestMapping("/admin/categorytypes")
 @Controller
-@RooWebScaffold(path = "categorytypes", formBackingObject = CategoryType.class)
+@RooWebScaffold(path = "admin/categorytypes", formBackingObject = CategoryType.class)
 public class CategoryTypeController extends AbstractAdminController {
 }

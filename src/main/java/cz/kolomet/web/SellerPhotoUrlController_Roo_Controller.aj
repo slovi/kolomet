@@ -32,7 +32,7 @@ privileged aspect SellerPhotoUrlController_Roo_Controller {
         addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("sellerphotourl", sellerPhotoUrlService.findSellerPhotoUrl(id));
         uiModel.addAttribute("itemId", id);
-        return "sellerphotourls/show";
+        return "admin/sellerphotourls/show";
     }
     
     @RequestMapping(produces = "text/html")
@@ -47,7 +47,7 @@ privileged aspect SellerPhotoUrlController_Roo_Controller {
             uiModel.addAttribute("sellerphotourls", sellerPhotoUrlService.findAllSellerPhotoUrls());
         }
         addDateTimeFormatPatterns(uiModel);
-        return "sellerphotourls/list";
+        return "admin/sellerphotourls/list";
     }
     
     void SellerPhotoUrlController.addDateTimeFormatPatterns(Model uiModel) {

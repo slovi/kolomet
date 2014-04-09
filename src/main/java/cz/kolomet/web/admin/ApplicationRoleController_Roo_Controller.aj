@@ -38,17 +38,17 @@ privileged aspect ApplicationRoleController_Roo_Controller {
     public String ApplicationRoleController.create(@Valid ApplicationRole applicationRole, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
             populateEditForm(uiModel, applicationRole);
-            return "applicationroles/create";
+            return "admin/applicationroles/create";
         }
         uiModel.asMap().clear();
         applicationRoleService.saveApplicationRole(applicationRole);
-        return "redirect:/applicationroles/" + encodeUrlPathSegment(applicationRole.getId().toString(), httpServletRequest);
+        return "redirect:/admin/applicationroles/" + encodeUrlPathSegment(applicationRole.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(params = "form", produces = "text/html")
     public String ApplicationRoleController.createForm(Model uiModel) {
         populateEditForm(uiModel, new ApplicationRole());
-        return "applicationroles/create";
+        return "admin/applicationroles/create";
     }
     
     @RequestMapping(value = "/{id}", produces = "text/html")
@@ -56,7 +56,7 @@ privileged aspect ApplicationRoleController_Roo_Controller {
         addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("applicationrole", applicationRoleService.findApplicationRole(id));
         uiModel.addAttribute("itemId", id);
-        return "applicationroles/show";
+        return "admin/applicationroles/show";
     }
     
     @RequestMapping(produces = "text/html")
@@ -71,24 +71,24 @@ privileged aspect ApplicationRoleController_Roo_Controller {
             uiModel.addAttribute("applicationroles", applicationRoleService.findAllApplicationRoles());
         }
         addDateTimeFormatPatterns(uiModel);
-        return "applicationroles/list";
+        return "admin/applicationroles/list";
     }
     
     @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
     public String ApplicationRoleController.update(@Valid ApplicationRole applicationRole, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
             populateEditForm(uiModel, applicationRole);
-            return "applicationroles/update";
+            return "admin/applicationroles/update";
         }
         uiModel.asMap().clear();
         applicationRoleService.updateApplicationRole(applicationRole);
-        return "redirect:/applicationroles/" + encodeUrlPathSegment(applicationRole.getId().toString(), httpServletRequest);
+        return "redirect:/admin/applicationroles/" + encodeUrlPathSegment(applicationRole.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String ApplicationRoleController.updateForm(@PathVariable("id") Long id, Model uiModel) {
         populateEditForm(uiModel, applicationRoleService.findApplicationRole(id));
-        return "applicationroles/update";
+        return "admin/applicationroles/update";
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
@@ -98,7 +98,7 @@ privileged aspect ApplicationRoleController_Roo_Controller {
         uiModel.asMap().clear();
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
-        return "redirect:/applicationroles";
+        return "redirect:/admin/applicationroles";
     }
     
     void ApplicationRoleController.addDateTimeFormatPatterns(Model uiModel) {

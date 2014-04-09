@@ -32,7 +32,7 @@ privileged aspect ProductAttributeController_Roo_Controller {
         addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("productattribute", productAttributeService.findProductAttribute(id));
         uiModel.addAttribute("itemId", id);
-        return "productattributes/show";
+        return "admin/productattributes/show";
     }
     
     @RequestMapping(produces = "text/html")
@@ -47,7 +47,7 @@ privileged aspect ProductAttributeController_Roo_Controller {
             uiModel.addAttribute("productattributes", productAttributeService.findAllProductAttributes());
         }
         addDateTimeFormatPatterns(uiModel);
-        return "productattributes/list";
+        return "admin/productattributes/list";
     }
     
     void ProductAttributeController.addDateTimeFormatPatterns(Model uiModel) {

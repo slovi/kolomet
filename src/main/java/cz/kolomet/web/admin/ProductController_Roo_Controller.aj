@@ -27,7 +27,7 @@ privileged aspect ProductController_Roo_Controller {
     @RequestMapping(params = "form", produces = "text/html")
     public String ProductController.createForm(Model uiModel) {
         populateEditForm(uiModel, new Product());
-        return "products/create";
+        return "admin/products/create";
     }
     
     @RequestMapping(value = "/{id}", produces = "text/html")
@@ -35,7 +35,7 @@ privileged aspect ProductController_Roo_Controller {
         addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("product", productService.findProduct(id));
         uiModel.addAttribute("itemId", id);
-        return "products/show";
+        return "admin/products/show";
     }
     
     @RequestMapping(produces = "text/html")
@@ -50,13 +50,13 @@ privileged aspect ProductController_Roo_Controller {
             uiModel.addAttribute("products", productService.findAllProducts());
         }
         addDateTimeFormatPatterns(uiModel);
-        return "products/list";
+        return "admin/products/list";
     }
     
     @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String ProductController.updateForm(@PathVariable("id") Long id, Model uiModel) {
         populateEditForm(uiModel, productService.findProduct(id));
-        return "products/update";
+        return "admin/products/update";
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
@@ -66,7 +66,7 @@ privileged aspect ProductController_Roo_Controller {
         uiModel.asMap().clear();
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
-        return "redirect:/products";
+        return "redirect:/admin/products";
     }
     
     void ProductController.addDateTimeFormatPatterns(Model uiModel) {

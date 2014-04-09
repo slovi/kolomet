@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @RequestMapping("/admin/producers")
 @Controller
-@RooWebScaffold(path = "producers", formBackingObject = Producer.class)
+@RooWebScaffold(path = "admin/producers", formBackingObject = Producer.class)
 public class ProducerController extends AbstractAdminController {
 }

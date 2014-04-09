@@ -34,17 +34,17 @@ privileged aspect CountryStateController_Roo_Controller {
     public String CountryStateController.create(@Valid CountryState countryState, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
             populateEditForm(uiModel, countryState);
-            return "countrystates/create";
+            return "admin/countrystates/create";
         }
         uiModel.asMap().clear();
         countryStateService.saveCountryState(countryState);
-        return "redirect:/countrystates/" + encodeUrlPathSegment(countryState.getId().toString(), httpServletRequest);
+        return "redirect:/admin/countrystates/" + encodeUrlPathSegment(countryState.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(params = "form", produces = "text/html")
     public String CountryStateController.createForm(Model uiModel) {
         populateEditForm(uiModel, new CountryState());
-        return "countrystates/create";
+        return "admin/countrystates/create";
     }
     
     @RequestMapping(value = "/{id}", produces = "text/html")
@@ -52,7 +52,7 @@ privileged aspect CountryStateController_Roo_Controller {
         addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("countrystate", countryStateService.findCountryState(id));
         uiModel.addAttribute("itemId", id);
-        return "countrystates/show";
+        return "admin/countrystates/show";
     }
     
     @RequestMapping(produces = "text/html")
@@ -67,24 +67,24 @@ privileged aspect CountryStateController_Roo_Controller {
             uiModel.addAttribute("countrystates", countryStateService.findAllCountryStates());
         }
         addDateTimeFormatPatterns(uiModel);
-        return "countrystates/list";
+        return "admin/countrystates/list";
     }
     
     @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
     public String CountryStateController.update(@Valid CountryState countryState, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
             populateEditForm(uiModel, countryState);
-            return "countrystates/update";
+            return "admin/countrystates/update";
         }
         uiModel.asMap().clear();
         countryStateService.updateCountryState(countryState);
-        return "redirect:/countrystates/" + encodeUrlPathSegment(countryState.getId().toString(), httpServletRequest);
+        return "redirect:/admin/countrystates/" + encodeUrlPathSegment(countryState.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String CountryStateController.updateForm(@PathVariable("id") Long id, Model uiModel) {
         populateEditForm(uiModel, countryStateService.findCountryState(id));
-        return "countrystates/update";
+        return "admin/countrystates/update";
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
@@ -94,7 +94,7 @@ privileged aspect CountryStateController_Roo_Controller {
         uiModel.asMap().clear();
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
-        return "redirect:/countrystates";
+        return "redirect:/admin/countrystates";
     }
     
     void CountryStateController.addDateTimeFormatPatterns(Model uiModel) {

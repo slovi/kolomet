@@ -21,7 +21,7 @@ import cz.kolomet.service.ProductService;
 
 @RequestMapping("/admin/photourls")
 @Controller
-@RooWebScaffold(path = "photourls", formBackingObject = PhotoUrl.class)
+@RooWebScaffold(path = "admin/photourls", formBackingObject = PhotoUrl.class)
 public class PhotoUrlController extends AbstractAdminController {
 	
 	@Autowired

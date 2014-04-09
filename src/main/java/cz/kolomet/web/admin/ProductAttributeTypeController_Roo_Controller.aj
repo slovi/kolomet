@@ -38,17 +38,17 @@ privileged aspect ProductAttributeTypeController_Roo_Controller {
     public String ProductAttributeTypeController.create(@Valid ProductAttributeType productAttributeType, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
             populateEditForm(uiModel, productAttributeType);
-            return "productattributetypes/create";
+            return "admin/productattributetypes/create";
         }
         uiModel.asMap().clear();
         productAttributeTypeService.saveProductAttributeType(productAttributeType);
-        return "redirect:/productattributetypes/" + encodeUrlPathSegment(productAttributeType.getId().toString(), httpServletRequest);
+        return "redirect:/admin/productattributetypes/" + encodeUrlPathSegment(productAttributeType.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(params = "form", produces = "text/html")
     public String ProductAttributeTypeController.createForm(Model uiModel) {
         populateEditForm(uiModel, new ProductAttributeType());
-        return "productattributetypes/create";
+        return "admin/productattributetypes/create";
     }
     
     @RequestMapping(value = "/{id}", produces = "text/html")
@@ -56,7 +56,7 @@ privileged aspect ProductAttributeTypeController_Roo_Controller {
         addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("productattributetype", productAttributeTypeService.findProductAttributeType(id));
         uiModel.addAttribute("itemId", id);
-        return "productattributetypes/show";
+        return "admin/productattributetypes/show";
     }
     
     @RequestMapping(produces = "text/html")
@@ -71,24 +71,24 @@ privileged aspect ProductAttributeTypeController_Roo_Controller {
             uiModel.addAttribute("productattributetypes", productAttributeTypeService.findAllProductAttributeTypes());
         }
         addDateTimeFormatPatterns(uiModel);
-        return "productattributetypes/list";
+        return "admin/productattributetypes/list";
     }
     
     @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
     public String ProductAttributeTypeController.update(@Valid ProductAttributeType productAttributeType, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
             populateEditForm(uiModel, productAttributeType);
-            return "productattributetypes/update";
+            return "admin/productattributetypes/update";
         }
         uiModel.asMap().clear();
         productAttributeTypeService.updateProductAttributeType(productAttributeType);
-        return "redirect:/productattributetypes/" + encodeUrlPathSegment(productAttributeType.getId().toString(), httpServletRequest);
+        return "redirect:/admin/productattributetypes/" + encodeUrlPathSegment(productAttributeType.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String ProductAttributeTypeController.updateForm(@PathVariable("id") Long id, Model uiModel) {
         populateEditForm(uiModel, productAttributeTypeService.findProductAttributeType(id));
-        return "productattributetypes/update";
+        return "admin/productattributetypes/update";
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
@@ -98,7 +98,7 @@ privileged aspect ProductAttributeTypeController_Roo_Controller {
         uiModel.asMap().clear();
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
-        return "redirect:/productattributetypes";
+        return "redirect:/admin/productattributetypes";
     }
     
     void ProductAttributeTypeController.addDateTimeFormatPatterns(Model uiModel) {

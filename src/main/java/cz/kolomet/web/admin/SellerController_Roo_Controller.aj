@@ -59,11 +59,11 @@ privileged aspect SellerController_Roo_Controller {
     public String SellerController.create(@Valid Seller seller, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
             populateEditForm(uiModel, seller);
-            return "sellers/create";
+            return "admin/sellers/create";
         }
         uiModel.asMap().clear();
         sellerService.saveSeller(seller);
-        return "redirect:/sellers/" + encodeUrlPathSegment(seller.getId().toString(), httpServletRequest);
+        return "redirect:/admin/sellers/" + encodeUrlPathSegment(seller.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(params = "form", produces = "text/html")
@@ -83,7 +83,7 @@ privileged aspect SellerController_Roo_Controller {
             dependencies.add(new String[] { "countrystate", "countrystates" });
         }
         uiModel.addAttribute("dependencies", dependencies);
-        return "sellers/create";
+        return "admin/sellers/create";
     }
     
     @RequestMapping(value = "/{id}", produces = "text/html")
@@ -91,7 +91,7 @@ privileged aspect SellerController_Roo_Controller {
         addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("seller", sellerService.findSeller(id));
         uiModel.addAttribute("itemId", id);
-        return "sellers/show";
+        return "admin/sellers/show";
     }
     
     @RequestMapping(produces = "text/html")
@@ -106,24 +106,24 @@ privileged aspect SellerController_Roo_Controller {
             uiModel.addAttribute("sellers", sellerService.findAllSellers());
         }
         addDateTimeFormatPatterns(uiModel);
-        return "sellers/list";
+        return "admin/sellers/list";
     }
     
     @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
     public String SellerController.update(@Valid Seller seller, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
             populateEditForm(uiModel, seller);
-            return "sellers/update";
+            return "admin/sellers/update";
         }
         uiModel.asMap().clear();
         sellerService.updateSeller(seller);
-        return "redirect:/sellers/" + encodeUrlPathSegment(seller.getId().toString(), httpServletRequest);
+        return "redirect:/admin/sellers/" + encodeUrlPathSegment(seller.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String SellerController.updateForm(@PathVariable("id") Long id, Model uiModel) {
         populateEditForm(uiModel, sellerService.findSeller(id));
-        return "sellers/update";
+        return "admin/sellers/update";
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
@@ -133,7 +133,7 @@ privileged aspect SellerController_Roo_Controller {
         uiModel.asMap().clear();
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
-        return "redirect:/sellers";
+        return "redirect:/admin/sellers";
     }
     
     void SellerController.addDateTimeFormatPatterns(Model uiModel) {

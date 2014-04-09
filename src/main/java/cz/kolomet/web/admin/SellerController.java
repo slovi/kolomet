@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @RequestMapping("/admin/sellers")
 @Controller
-@RooWebScaffold(path = "sellers", formBackingObject = Seller.class)
+@RooWebScaffold(path = "admin/sellers", formBackingObject = Seller.class)
 public class SellerController extends AbstractAdminController {
 }

@@ -41,11 +41,11 @@ privileged aspect CategoryController_Roo_Controller {
     public String CategoryController.create(@Valid Category category, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
             populateEditForm(uiModel, category);
-            return "categorys/create";
+            return "admin/categorys/create";
         }
         uiModel.asMap().clear();
         categoryService.saveCategory(category);
-        return "redirect:/categorys/" + encodeUrlPathSegment(category.getId().toString(), httpServletRequest);
+        return "redirect:/admin/categorys/" + encodeUrlPathSegment(category.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(params = "form", produces = "text/html")
@@ -56,7 +56,7 @@ privileged aspect CategoryController_Roo_Controller {
             dependencies.add(new String[] { "categorytype", "categorytypes" });
         }
         uiModel.addAttribute("dependencies", dependencies);
-        return "categorys/create";
+        return "admin/categorys/create";
     }
     
     @RequestMapping(value = "/{id}", produces = "text/html")
@@ -64,7 +64,7 @@ privileged aspect CategoryController_Roo_Controller {
         addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("category", categoryService.findCategory(id));
         uiModel.addAttribute("itemId", id);
-        return "categorys/show";
+        return "admin/categorys/show";
     }
     
     @RequestMapping(produces = "text/html")
@@ -79,24 +79,24 @@ privileged aspect CategoryController_Roo_Controller {
             uiModel.addAttribute("categorys", categoryService.findAllCategorys());
         }
         addDateTimeFormatPatterns(uiModel);
-        return "categorys/list";
+        return "admin/categorys/list";
     }
     
     @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
     public String CategoryController.update(@Valid Category category, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
             populateEditForm(uiModel, category);
-            return "categorys/update";
+            return "admin/categorys/update";
         }
         uiModel.asMap().clear();
         categoryService.updateCategory(category);
-        return "redirect:/categorys/" + encodeUrlPathSegment(category.getId().toString(), httpServletRequest);
+        return "redirect:/admin/categorys/" + encodeUrlPathSegment(category.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String CategoryController.updateForm(@PathVariable("id") Long id, Model uiModel) {
         populateEditForm(uiModel, categoryService.findCategory(id));
-        return "categorys/update";
+        return "admin/categorys/update";
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
@@ -106,7 +106,7 @@ privileged aspect CategoryController_Roo_Controller {
         uiModel.asMap().clear();
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
-        return "redirect:/categorys";
+        return "redirect:/admin/categorys";
     }
     
     void CategoryController.addDateTimeFormatPatterns(Model uiModel) {

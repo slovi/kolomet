@@ -34,17 +34,17 @@ privileged aspect SellerStatusController_Roo_Controller {
     public String SellerStatusController.create(@Valid SellerStatus sellerStatus, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
             populateEditForm(uiModel, sellerStatus);
-            return "sellerstatuses/create";
+            return "admin/sellerstatuses/create";
         }
         uiModel.asMap().clear();
         sellerStatusService.saveSellerStatus(sellerStatus);
-        return "redirect:/sellerstatuses/" + encodeUrlPathSegment(sellerStatus.getId().toString(), httpServletRequest);
+        return "redirect:/admin/sellerstatuses/" + encodeUrlPathSegment(sellerStatus.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(params = "form", produces = "text/html")
     public String SellerStatusController.createForm(Model uiModel) {
         populateEditForm(uiModel, new SellerStatus());
-        return "sellerstatuses/create";
+        return "admin/sellerstatuses/create";
     }
     
     @RequestMapping(value = "/{id}", produces = "text/html")
@@ -52,7 +52,7 @@ privileged aspect SellerStatusController_Roo_Controller {
         addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("sellerstatus", sellerStatusService.findSellerStatus(id));
         uiModel.addAttribute("itemId", id);
-        return "sellerstatuses/show";
+        return "admin/sellerstatuses/show";
     }
     
     @RequestMapping(produces = "text/html")
@@ -67,24 +67,24 @@ privileged aspect SellerStatusController_Roo_Controller {
             uiModel.addAttribute("sellerstatuses", sellerStatusService.findAllSellerStatuses());
         }
         addDateTimeFormatPatterns(uiModel);
-        return "sellerstatuses/list";
+        return "admin/sellerstatuses/list";
     }
     
     @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
     public String SellerStatusController.update(@Valid SellerStatus sellerStatus, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
             populateEditForm(uiModel, sellerStatus);
-            return "sellerstatuses/update";
+            return "admin/sellerstatuses/update";
         }
         uiModel.asMap().clear();
         sellerStatusService.updateSellerStatus(sellerStatus);
-        return "redirect:/sellerstatuses/" + encodeUrlPathSegment(sellerStatus.getId().toString(), httpServletRequest);
+        return "redirect:/admin/sellerstatuses/" + encodeUrlPathSegment(sellerStatus.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String SellerStatusController.updateForm(@PathVariable("id") Long id, Model uiModel) {
         populateEditForm(uiModel, sellerStatusService.findSellerStatus(id));
-        return "sellerstatuses/update";
+        return "admin/sellerstatuses/update";
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
@@ -94,7 +94,7 @@ privileged aspect SellerStatusController_Roo_Controller {
         uiModel.asMap().clear();
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
-        return "redirect:/sellerstatuses";
+        return "redirect:/admin/sellerstatuses";
     }
     
     void SellerStatusController.addDateTimeFormatPatterns(Model uiModel) {

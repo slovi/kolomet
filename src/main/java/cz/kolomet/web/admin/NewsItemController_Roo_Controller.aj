@@ -34,17 +34,17 @@ privileged aspect NewsItemController_Roo_Controller {
     public String NewsItemController.create(@Valid NewsItem newsItem, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
             populateEditForm(uiModel, newsItem);
-            return "newsitems/create";
+            return "admin/newsitems/create";
         }
         uiModel.asMap().clear();
         newsItemService.saveNewsItem(newsItem);
-        return "redirect:/newsitems/" + encodeUrlPathSegment(newsItem.getId().toString(), httpServletRequest);
+        return "redirect:/admin/newsitems/" + encodeUrlPathSegment(newsItem.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(params = "form", produces = "text/html")
     public String NewsItemController.createForm(Model uiModel) {
         populateEditForm(uiModel, new NewsItem());
-        return "newsitems/create";
+        return "admin/newsitems/create";
     }
     
     @RequestMapping(value = "/{id}", produces = "text/html")
@@ -52,7 +52,7 @@ privileged aspect NewsItemController_Roo_Controller {
         addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("newsitem", newsItemService.findNewsItem(id));
         uiModel.addAttribute("itemId", id);
-        return "newsitems/show";
+        return "admin/newsitems/show";
     }
     
     @RequestMapping(produces = "text/html")
@@ -67,24 +67,24 @@ privileged aspect NewsItemController_Roo_Controller {
             uiModel.addAttribute("newsitems", newsItemService.findAllNewsItems());
         }
         addDateTimeFormatPatterns(uiModel);
-        return "newsitems/list";
+        return "admin/newsitems/list";
     }
     
     @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
     public String NewsItemController.update(@Valid NewsItem newsItem, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
             populateEditForm(uiModel, newsItem);
-            return "newsitems/update";
+            return "admin/newsitems/update";
         }
         uiModel.asMap().clear();
         newsItemService.updateNewsItem(newsItem);
-        return "redirect:/newsitems/" + encodeUrlPathSegment(newsItem.getId().toString(), httpServletRequest);
+        return "redirect:/admin/newsitems/" + encodeUrlPathSegment(newsItem.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String NewsItemController.updateForm(@PathVariable("id") Long id, Model uiModel) {
         populateEditForm(uiModel, newsItemService.findNewsItem(id));
-        return "newsitems/update";
+        return "admin/newsitems/update";
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
@@ -94,7 +94,7 @@ privileged aspect NewsItemController_Roo_Controller {
         uiModel.asMap().clear();
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
-        return "redirect:/newsitems";
+        return "redirect:/admin/newsitems";
     }
     
     void NewsItemController.addDateTimeFormatPatterns(Model uiModel) {

@@ -34,17 +34,17 @@ privileged aspect RegionController_Roo_Controller {
     public String RegionController.create(@Valid Region region, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
             populateEditForm(uiModel, region);
-            return "regions/create";
+            return "admin/regions/create";
         }
         uiModel.asMap().clear();
         regionService.saveRegion(region);
-        return "redirect:/regions/" + encodeUrlPathSegment(region.getId().toString(), httpServletRequest);
+        return "redirect:/admin/regions/" + encodeUrlPathSegment(region.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(params = "form", produces = "text/html")
     public String RegionController.createForm(Model uiModel) {
         populateEditForm(uiModel, new Region());
-        return "regions/create";
+        return "admin/regions/create";
     }
     
     @RequestMapping(value = "/{id}", produces = "text/html")
@@ -52,7 +52,7 @@ privileged aspect RegionController_Roo_Controller {
         addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("region", regionService.findRegion(id));
         uiModel.addAttribute("itemId", id);
-        return "regions/show";
+        return "admin/regions/show";
     }
     
     @RequestMapping(produces = "text/html")
@@ -67,24 +67,24 @@ privileged aspect RegionController_Roo_Controller {
             uiModel.addAttribute("regions", regionService.findAllRegions());
         }
         addDateTimeFormatPatterns(uiModel);
-        return "regions/list";
+        return "admin/regions/list";
     }
     
     @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
     public String RegionController.update(@Valid Region region, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
             populateEditForm(uiModel, region);
-            return "regions/update";
+            return "admin/regions/update";
         }
         uiModel.asMap().clear();
         regionService.updateRegion(region);
-        return "redirect:/regions/" + encodeUrlPathSegment(region.getId().toString(), httpServletRequest);
+        return "redirect:/admin/regions/" + encodeUrlPathSegment(region.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String RegionController.updateForm(@PathVariable("id") Long id, Model uiModel) {
         populateEditForm(uiModel, regionService.findRegion(id));
-        return "regions/update";
+        return "admin/regions/update";
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
@@ -94,7 +94,7 @@ privileged aspect RegionController_Roo_Controller {
         uiModel.asMap().clear();
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
-        return "redirect:/regions";
+        return "redirect:/admin/regions";
     }
     
     void RegionController.addDateTimeFormatPatterns(Model uiModel) {
