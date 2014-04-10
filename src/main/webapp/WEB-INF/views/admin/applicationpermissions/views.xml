@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 <tiles-definitions>
-    <definition extends="default_admin" name="applicationpermissions/list">
-        <put-attribute name="body" value="/WEB-INF/views/applicationpermissions/list.jspx"/>
+    <definition extends="default_admin" name="admin/applicationpermissions/list">
+        <put-attribute name="body" value="/WEB-INF/views/admin/applicationpermissions/list.jspx"/>
     </definition>
-<definition extends="default_admin" name="applicationpermissions/show">
-        <put-attribute name="body" value="/WEB-INF/views/applicationpermissions/show.jspx"/>
+<definition extends="default_admin" name="admin/applicationpermissions/show">
+        <put-attribute name="body" value="/WEB-INF/views/admin/applicationpermissions/show.jspx"/>
     </definition>
-<definition extends="default_admin" name="applicationpermissions/create">
-        <put-attribute name="body" value="/WEB-INF/views/applicationpermissions/create.jspx"/>
+<definition extends="default_admin" name="admin/applicationpermissions/create">
+        <put-attribute name="body" value="/WEB-INF/views/admin/applicationpermissions/create.jspx"/>
     </definition>
-<definition extends="default_admin" name="applicationpermissions/update">
-        <put-attribute name="body" value="/WEB-INF/views/applicationpermissions/update.jspx"/>
+<definition extends="default_admin" name="admin/applicationpermissions/update">
+        <put-attribute name="body" value="/WEB-INF/views/admin/applicationpermissions/update.jspx"/>
     </definition>
 </tiles-definitions>

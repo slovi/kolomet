@@ -36,14 +36,14 @@ public class PhotoUrlController extends AbstractAdminController {
             dependencies.add(new String[] { "product", "products" });
         }
         uiModel.addAttribute("dependencies", dependencies);
-        return "photourls/create";
+        return "admin/photourls/create";
     }
 
     @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String updateForm(@PathVariable("id") Long id, @RequestParam(value = "parentEntityId", required = false) Long parentEntityId, Model uiModel) {
     	Product product = parentEntityId != null ? productService.findProduct(parentEntityId) : null;
         populateEditForm(uiModel, photoUrlService.findPhotoUrl(id), product);
-        return "photourls/update";
+        return "admin/photourls/update";
     }
 	
 	@RequestMapping(method = RequestMethod.POST, produces = "text/html")
@@ -51,7 +51,7 @@ public class PhotoUrlController extends AbstractAdminController {
 		
 		if (bindingResult.hasErrors()) {
 			populateEditForm(model, photoUrl, null);
-	        return "photourls/update";
+	        return "admin/photourls/update";
 		}
 		
 		savePhotos(photoUrl.getProduct(), photoUrl.getContents());
@@ -62,7 +62,7 @@ public class PhotoUrlController extends AbstractAdminController {
     public String update(@Valid PhotoUrl photoUrl, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
             populateEditForm(uiModel, photoUrl, null);
-            return "photourls/update";
+            return "admin/photourls/update";
         }
         uiModel.asMap().clear();
         photoUrlService.updatePhotoUrl(photoUrl);

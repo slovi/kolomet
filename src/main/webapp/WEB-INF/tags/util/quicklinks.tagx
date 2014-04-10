@@ -11,13 +11,21 @@
   <jsp:directive.attribute name="typeName" type="java.lang.String" required="true" rtexprvalue="true" description="type name" />
   <jsp:directive.attribute name="typeNamePlural" type="java.lang.String" required="true" rtexprvalue="true" description="type name plural" />
   <jsp:directive.attribute name="detailUrl" type="java.lang.String" required="false" rtexprvalue="true" description="detail url" />
+  <jsp:directive.attribute name="largeIcons" type="java.lang.Boolean" required="false" rtexprvalue="true" description="render large icons?" />
 
   <c:if test="${empty render or render}">
 	  <div class="quicklinks">
 	   <span>
 	     <c:if test="${delete}">
 	       <spring:url value="${path}/${itemId}" var="delete_form_url" />
-	       <spring:url value="/resources/images/delete.png" var="delete_image_url" />
+	       <c:choose>
+	       	<c:when test="${largeIcons}">
+	       		<spring:url value="/resources/images/delete_48.png" var="delete_image_url" />
+	       	</c:when>
+	       	<c:otherwise>
+	       		<spring:url value="/resources/images/delete.png" var="delete_image_url" />
+	       	</c:otherwise>	       	
+	       </c:choose>	       
 	       <form:form action="${delete_form_url}" method="DELETE">
 	         <spring:message arguments="${typeName}" code="entity_delete" var="delete_label" htmlEscape="false" />
 	         <c:set var="delete_confirm_msg">
@@ -34,7 +42,14 @@
 	       <spring:url value="${path}/${itemId}" var="update_form_url">
 	         <spring:param name="form" />
 	       </spring:url>
-	       <spring:url value="/resources/images/update.png" var="update_image_url" />
+	       <c:choose>
+		       <c:when test="${largeIcons}">
+		       		<spring:url value="/resources/images/pencil_48.png" var="update_image_url" />
+		       	</c:when>
+		       	<c:otherwise>
+		       		<spring:url value="/resources/images/update.png" var="update_image_url" />
+		       	</c:otherwise>
+	       	</c:choose>	    	       
 	       <spring:message arguments="${typeName}" code="entity_update" var="update_label" htmlEscape="false" />
 	       <a href="${update_form_url}" alt="${fn:escapeXml(update_label)}" title="${fn:escapeXml(update_label)}">
 	         <img alt="${fn:escapeXml(update_label)}" class="image" src="${update_image_url}" title="${fn:escapeXml(update_label)}" />

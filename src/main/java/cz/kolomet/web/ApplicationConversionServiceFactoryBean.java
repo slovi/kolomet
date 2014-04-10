@@ -3,6 +3,7 @@ package cz.kolomet.web;
 import java.text.ParseException;
 import java.util.Locale;
 
+import org.apache.commons.lang3.BooleanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.Formatter;
@@ -38,6 +39,7 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 	protected void installFormatters(FormatterRegistry registry) {
 		super.installFormatters(registry);
 		registry.addFormatter(getCountryStateFormatter());
+		registry.addFormatter(getBooleanFormatter());
 		registry.addConverter(getSellerStatusToStringConverter());
 	}
 	
@@ -159,6 +161,22 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 			public CountryState parse(String text, Locale locale) throws ParseException {
 				throw new UnsupportedOperationException();
 			}
+		};
+	}
+	
+	public Formatter<Boolean> getBooleanFormatter() {
+		return new Formatter<Boolean>() {
+			
+			@Override
+			public String print(Boolean object, Locale locale) {
+				return BooleanUtils.isTrue(object) ? "Ano" : "Ne"; // TODO: lokalizace
+			}
+			
+			@Override
+			public Boolean parse(String text, Locale locale) throws ParseException {
+				return null;
+			}
+			
 		};
 	}
 	

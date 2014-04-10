@@ -52,7 +52,7 @@ public class ProductController extends AbstractAdminController {
         
     	if (bindingResult.hasErrors()) {
             populateEditForm(uiModel, product);
-            return "products/create";
+            return "admin/products/create";
         }
         
     	uiModel.asMap().clear();              
@@ -71,7 +71,7 @@ public class ProductController extends AbstractAdminController {
     public String update(@Valid Product product, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
             populateEditForm(uiModel, product);
-            return "products/update";
+            return "admin/products/update";
         }
         uiModel.asMap().clear();
         for (ProductAttribute productAttribute: product.getProductAttributes()) {

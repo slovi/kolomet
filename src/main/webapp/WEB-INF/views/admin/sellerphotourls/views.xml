@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 <tiles-definitions>
-    <definition extends="default_admin" name="sellerphotourls/list">
-        <put-attribute name="body" value="/WEB-INF/views/sellerphotourls/list.jspx"/>
+    <definition extends="default_admin" name="admin/sellerphotourls/list">
+        <put-attribute name="body" value="/WEB-INF/views/admin/sellerphotourls/list.jspx"/>
     </definition>
-	<definition extends="default_admin" name="sellerphotourls/show">
-        <put-attribute name="body" value="/WEB-INF/views/sellerphotourls/show.jspx"/>
+	<definition extends="default_admin" name="admin/sellerphotourls/show">
+        <put-attribute name="body" value="/WEB-INF/views/admin/sellerphotourls/show.jspx"/>
     </definition>
-	<definition extends="default_admin" name="sellerphotourls/create">
-        <put-attribute name="body" value="/WEB-INF/views/sellerphotourls/create.jspx"/>
+	<definition extends="default_admin" name="admin/sellerphotourls/create">
+        <put-attribute name="body" value="/WEB-INF/views/admin/sellerphotourls/create.jspx"/>
     </definition>
-	<definition extends="default_admin" name="sellerphotourls/update">
-        <put-attribute name="body" value="/WEB-INF/views/sellerphotourls/update.jspx"/>
+	<definition extends="default_admin" name="admin/sellerphotourls/update">
+        <put-attribute name="body" value="/WEB-INF/views/admin/sellerphotourls/update.jspx"/>
     </definition>
 </tiles-definitions>

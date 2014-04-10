@@ -5,15 +5,15 @@
 
 <tiles-definitions>
 
-  <definition name="dataAccessFailure" extends="default">
+  <definition name="dataAccessFailure" extends="default_wide">
     <put-attribute name="body" value="/WEB-INF/views/dataAccessFailure.jspx" />
   </definition>
 
-  <definition name="resourceNotFound" extends="default">
+  <definition name="resourceNotFound" extends="default_wide">
     <put-attribute name="body" value="/WEB-INF/views/resourceNotFound.jspx" />
   </definition>
 
-  <definition name="uncaughtException" extends="default">
+  <definition name="uncaughtException" extends="default_wide">
     <put-attribute name="body" value="/WEB-INF/views/uncaughtException.jspx" />
   </definition>
 

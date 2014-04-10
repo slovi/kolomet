@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 <tiles-definitions>
-    <definition extends="default_admin" name="photourls/list">
-        <put-attribute name="body" value="/WEB-INF/views/photourls/list.jspx"/>
+    <definition extends="default_admin" name="admin/photourls/list">
+        <put-attribute name="body" value="/WEB-INF/views/admin/photourls/list.jspx"/>
     </definition>
-<definition extends="default_admin" name="photourls/show">
-        <put-attribute name="body" value="/WEB-INF/views/photourls/show.jspx"/>
+<definition extends="default_admin" name="admin/photourls/show">
+        <put-attribute name="body" value="/WEB-INF/views/admin/photourls/show.jspx"/>
     </definition>
-<definition extends="default_admin" name="photourls/create">
-        <put-attribute name="body" value="/WEB-INF/views/photourls/create.jspx"/>
+<definition extends="default_admin" name="admin/photourls/create">
+        <put-attribute name="body" value="/WEB-INF/views/admin/photourls/create.jspx"/>
     </definition>
-<definition extends="default_admin" name="photourls/update">
-        <put-attribute name="body" value="/WEB-INF/views/photourls/update.jspx"/>
+<definition extends="default_admin" name="admin/photourls/update">
+        <put-attribute name="body" value="/WEB-INF/views/admin/photourls/update.jspx"/>
     </definition>
 </tiles-definitions>

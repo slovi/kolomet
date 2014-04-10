@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 <tiles-definitions>
-	<definition extends="default_admin" name="categorys/list">
-		<put-attribute name="body" value="/WEB-INF/views/categorys/list.jspx" />
+	<definition extends="default_admin" name="admin/categorys/list">
+		<put-attribute name="body" value="/WEB-INF/views/admin/categorys/list.jspx" />
 	</definition>
-	<definition extends="default_admin" name="categorys/show">
-		<put-attribute name="body" value="/WEB-INF/views/categorys/show.jspx" />
+	<definition extends="default_admin" name="admin/categorys/show">
+		<put-attribute name="body" value="/WEB-INF/views/admin/categorys/show.jspx" />
 	</definition>
-	<definition extends="default_admin" name="categorys/create">
+	<definition extends="default_admin" name="admin/categorys/create">
 		<put-attribute name="body"
-			value="/WEB-INF/views/categorys/create.jspx" />
+			value="/WEB-INF/views/admin/categorys/create.jspx" />
 	</definition>
-	<definition extends="default_admin" name="categorys/update">
+	<definition extends="default_admin" name="admin/categorys/update">
 		<put-attribute name="body"
-			value="/WEB-INF/views/categorys/update.jspx" />
+			value="/WEB-INF/views/admin/categorys/update.jspx" />
 	</definition>
 </tiles-definitions>

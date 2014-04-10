@@ -34,21 +34,23 @@ public class AbstractAdminController {
 	}
 	
 	protected void savePhotos(Product product, List<CommonsMultipartFile> files) {
-		for (CommonsMultipartFile content: files) {
-        	if (StringUtils.isNotEmpty(content.getOriginalFilename())) {
-	        	File dest = getDestFile(product.getId(), content);
-	        	try {
-					content.transferTo(dest);
-				} catch (Exception e) {
-					throw new RuntimeException(e);
-				}
-	        	PhotoUrl photoUrl = new PhotoUrl();
-	        	photoUrl.setFileName(dest.getName());
-				photoUrl.setContentType(content.getContentType());
-				photoUrl.setProduct(product);
-	        	photoUrlService.savePhotoUrl(photoUrl, dest);
-        	}
-        }
+		if (files != null) {
+			for (CommonsMultipartFile content: files) {
+	        	if (StringUtils.isNotEmpty(content.getOriginalFilename())) {
+		        	File dest = getDestFile(product.getId(), content);
+		        	try {
+						content.transferTo(dest);
+					} catch (Exception e) {
+						throw new RuntimeException(e);
+					}
+		        	PhotoUrl photoUrl = new PhotoUrl();
+		        	photoUrl.setFileName(dest.getName());
+					photoUrl.setContentType(content.getContentType());
+					photoUrl.setProduct(product);
+		        	photoUrlService.savePhotoUrl(photoUrl, dest);
+	        	}
+	        }
+		}
 	}
 	
 	protected File getDestFile(Long id, CommonsMultipartFile content) {

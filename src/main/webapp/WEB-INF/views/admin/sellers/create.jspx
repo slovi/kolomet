@@ -4,7 +4,7 @@
     <jsp:output omit-xml-declaration="yes"/>
     <form:create id="fc_cz_kolomet_domain_Seller" modelAttribute="seller" path="/admin/sellers" render="${empty dependencies}" z="user-managed">
         <field:input field="sellerName" id="c_cz_kolomet_domain_Seller_sellerName" label="nazev" max="20" required="true" z="user-managed"/>
-        <field:textarea field="sellerDescription" id="c_cz_kolomet_domain_Seller_sellerDescription" label="popis" required="true" z="user-managed"/>
+        <field:editor field="sellerDescription" id="c_cz_kolomet_domain_Seller_sellerDescription" label="popis" required="true" z="user-managed"/>
         <field:textarea field="mapUrl" id="c_cz_kolomet_domain_Seller_mapUrl" z="l4+of1NGD4kA6p7robYOfSeBf5c="/>
         <field:select field="sellerStatus" id="c_cz_kolomet_domain_Seller_sellerStatus" itemValue="id" items="${sellerstatuses}" path="/admin/sellerstatuses" required="true" z="user-managed"/>
         <field:input field="personSalutation" id="c_cz_kolomet_domain_Seller_personSalutation" max="20" z="dnwzisYNI0tikfWCGZUYMTTS6FM="/>

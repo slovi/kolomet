@@ -5,7 +5,7 @@ define(['jquery', 'jquery_lean'], function($) {
 			$("#login_button").click(function(event) {
 				$("#login_button").leanModal({top : 200, overlay : 0.4, closeButton: ".modal_close"});
 				$("#login_form .error").html('');
-			});	
+			});			
 			
 			$("#login_form").submit(function(event) {
 				

@@ -49,14 +49,14 @@ public class SellerPhotoUrlController {
             dependencies.add(new String[] { "seller", "sellers" });
         }
         uiModel.addAttribute("dependencies", dependencies);
-        return "sellerphotourls/create";
+        return "admin/sellerphotourls/create";
     }
 	
     @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String updateForm(@PathVariable("id") Long id, Model uiModel, @RequestParam(value = "parentEntityId", required = false) Long parentEntityId) {
     	Seller seller = parentEntityId != null ? sellerService.findSeller(parentEntityId) : null;
         populateEditForm(uiModel, sellerPhotoUrlService.findSellerPhotoUrl(id), seller);
-        return "sellerphotourls/update";
+        return "admin/sellerphotourls/update";
     }
     
 	@RequestMapping(method = RequestMethod.POST, produces = "text/html")
@@ -73,7 +73,7 @@ public class SellerPhotoUrlController {
 		}
 		if (bindingResult.hasErrors()) {
             populateEditForm(uiModel, sellerPhotoUrl, null);
-            return "sellerphotourls/create";
+            return "admin/sellerphotourls/create";
         }
         uiModel.asMap().clear();
         sellerPhotoUrlService.saveSellerPhotoUrl(sellerPhotoUrl, dest, new File(rootDir, sellerPhotoUrl.getSeller().getId().toString()));
@@ -84,7 +84,7 @@ public class SellerPhotoUrlController {
     public String update(@Valid SellerPhotoUrl sellerPhotoUrl, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
             populateEditForm(uiModel, sellerPhotoUrl, null);
-            return "sellerphotourls/update";
+            return "admin/sellerphotourls/update";
         }
         uiModel.asMap().clear();
         sellerPhotoUrlService.updateSellerPhotoUrl(sellerPhotoUrl);

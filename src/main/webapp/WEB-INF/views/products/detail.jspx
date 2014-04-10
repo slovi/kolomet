@@ -21,7 +21,10 @@
         <div class="detail_tag right"> 
            	<p class="detail_price">
            		<spring:message code="label_cz_kolomet_domain_product_price" />: <spring:eval expression="product.price" /><spring:message code="currency" /><br />
-           		<spring:message code="label_cz_kolomet_domain_product_discount" />: <spring:eval expression="product.discount" /><spring:message code="currency" />
+           		<c:if test="${not empty product.discount}">
+	           		<br />
+	           		<spring:message code="label_cz_kolomet_domain_product_discount" />: <span class="discount"><spring:eval expression="product.discount" /></span><spring:message code="currency" />
+           		</c:if>
            	</p>
            	<spring:url value="/public/sellers/detail/${product.seller.id}" var="sellerUrl" />
        		<p class="detail_seller right"><a href="${sellerUrl}"><c:out value="${product.seller.sellerName}" /></a>, <c:out value="${product.seller.addressCity}" /><br/>
@@ -33,18 +36,36 @@
      
     <div class="detail_info_seller"> 
     	<div class="seller_specifications">    	
-        	<p class="left_column">
-        		<spring:message code="label_cz_kolomet_domain_product_category" />: <c:out value="${product.category.codeDescription}" /><br />
-        		<spring:message code="label_cz_kolomet_domain_category_categorytype" />: <c:out value="${product.category.categoryType.codeDescription}" /><br />
+       		<table class="left_column">
+       			<tr>
+       				<td><b><spring:message code="label_cz_kolomet_domain_product_category" /></b></td>
+       				<td><c:out value="${product.category.codeDescription}" /></td>
+       			</tr>
+       			<tr>
+       				<td><b><spring:message code="label_cz_kolomet_domain_category_categorytype" /></b></td>
+       				<td><c:out value="${product.category.categoryType.codeDescription}" /></td>
+       			</tr>
         		<c:forEach items="${product.productAttributes}" var="attribute">
-        			<c:out value="${attribute.attributeType.codeDescription}" />: <c:out value="${attribute.attributeValue}" /><br />
-        		</c:forEach>        		          
-            </p>
-       		<p class="right_column">
-               <spring:message code="label_cz_kolomet_domain_seller_region" />: <c:out value="${product.seller.region.codeDescription}" /><br />
-               <spring:message code="label_cz_kolomet_domain_seller_addresscity" />: <c:out value="${product.seller.addressCity}" /><br />
-               <spring:message code="label_cz_kolomet_domain_product_cansendtoallcountry" />: <c:out value="${product.canSendToAllCountry}" /><br />
-            </p>
+        			<tr>
+        				<td><b><c:out value="${attribute.attributeType.codeDescription}" /></b></td>
+        				<td><c:out value="${attribute.attributeValue}" /></td>
+        			</tr>
+        		</c:forEach>
+       		</table>        		          
+       		<table class="right_column">
+       			<tr>
+       				<td><b><spring:message code="label_cz_kolomet_domain_seller_region" /></b></td>
+       				<td><c:out value="${product.seller.region.codeDescription}" /></td>
+       			</tr>
+       			<tr>
+       				<td><b><spring:message code="label_cz_kolomet_domain_seller_addresscity" /></b></td>
+       				<td><c:out value="${product.seller.addressCity}" /></td>
+       			</tr>
+       			<tr>
+       				<td><b><spring:message code="label_cz_kolomet_domain_product_cansendtoallcountry" /></b></td>
+       				<td><spring:eval expression="product.canSendToAllCountry" /></td>
+       			</tr>
+            </table>
        	</div>
 		<div class="seller_ads">
 			<c:set value="${fn:length(product.photoUrls)}" var="photoSize" />
@@ -69,7 +90,7 @@
     
     <div style="clear: both; padding: 5px;">
     	<security:authorize access="hasAnyRole('ROLE_per_products')">
-    	<util:quicklinks update="true" create="false" list="false" itemId="${product.id}" typeName="product" delete="true" typeNamePlural="products" path="/products" />
+    	<util:quicklinks update="true" create="false" list="false" itemId="${product.id}" typeName="product" delete="true" typeNamePlural="products" path="/admin/products" largeIcons="true" />
     	</security:authorize>
     </div>
 </div>

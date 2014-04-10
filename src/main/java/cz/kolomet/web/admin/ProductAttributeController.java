@@ -44,7 +44,7 @@ public class ProductAttributeController extends AbstractAdminController {
             dependencies.add(new String[] { "product", "products" });
         }
         uiModel.addAttribute("dependencies", dependencies);
-        return "productattributes/create";
+        return "admin/productattributes/create";
     }
     
     @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
@@ -52,14 +52,14 @@ public class ProductAttributeController extends AbstractAdminController {
     	ProductAttribute productAttribute = productAttributeService.findProductAttribute(id); 
     	productAttribute.setProduct(OrmUtils.deproxy(productAttribute.getProduct())); // TODO vyresit cistsim zpusobem
         populateEditForm(uiModel, productAttribute, null);
-        return "productattributes/update";
+        return "admin/productattributes/update";
     }
 	
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String create(@Valid ProductAttribute productAttribute, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
             populateEditForm(uiModel, productAttribute, null);
-            return "productattributes/create";
+            return "admin/productattributes/create";
         }
         uiModel.asMap().clear();
         productAttributeService.saveProductAttribute(productAttribute);
@@ -70,7 +70,7 @@ public class ProductAttributeController extends AbstractAdminController {
     public String update(@Valid ProductAttribute productAttribute, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
             populateEditForm(uiModel, productAttribute, null);
-            return "productattributes/update";
+            return "admin/productattributes/update";
         }
         uiModel.asMap().clear();
         productAttributeService.updateProductAttribute(productAttribute);
@@ -84,7 +84,7 @@ public class ProductAttributeController extends AbstractAdminController {
         uiModel.asMap().clear();
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
-        return "redirect:/products/" + productAttribute.getProduct().getId();
+        return "redirect:/admin/products/" + productAttribute.getProduct().getId();
     }
     
     void populateEditForm(Model uiModel, ProductAttribute productAttribute, Product product) {

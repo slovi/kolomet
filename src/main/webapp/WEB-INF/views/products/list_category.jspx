@@ -25,6 +25,8 @@
 			<spring:message code="label_cz_kolomet_domain_product_cansendtoallcountry" />
 			<form:checkbox path="canSendToAllCountry" />
       		<spring:message code="button_filter" var="save_filter" htmlEscape="false" />
+      		<input type="hidden" name="page.page" value="${products.number}" />
+      		<input type="hidden" name="page.size" value="${products.size}" />
           	<input type="submit" value="${fn:escapeXml(save_filter)}"/>            
 	    </div>
 	    
@@ -37,22 +39,107 @@
 			<c:if test="${products.totalPages le 0}">
 				<c:set value="${products.totalPages}" var="totalPages" />
 			</c:if>
+			
+			<c:choose>
+				<c:when test="${products.number + 1 gt 1}">
+					<spring:url value="/public/products/filter" var="firstPageUrl">
+						<spring:param name="priceFrom" value="${productFilter.priceFrom}" />
+						<spring:param name="priceTo" value="${productFilter.priceTo}" />
+						<spring:param name="discountFrom" value="${discountFrom.discountFrom}" />
+						<spring:param name="discountTo" value="${discountTo.discountTo}" />
+						<spring:param name="category" value="${productFilter.category.id}" />
+						<spring:param name="producer" value="${productFilter.producer.id}" />
+						<spring:param name="region" value="${productFilter.region.id}" />
+						<spring:param name="page.page" value="1" />
+						<spring:param name="page.size" value="${products.size}" />
+					</spring:url>
+					<a href="${firstPageUrl}">&#171;</a>&#160;
+				</c:when>
+				<c:otherwise>
+					&#171;&#160;
+				</c:otherwise>
+			</c:choose>			
+			
+			<c:choose>
+				<c:when test="${products.number + 1 gt 1}">
+					<spring:url value="/public/products/filter" var="previousPageUrl">
+						<spring:param name="priceFrom" value="${productFilter.priceFrom}" />
+						<spring:param name="priceTo" value="${productFilter.priceTo}" />
+						<spring:param name="discountFrom" value="${discountFrom.discountFrom}" />
+						<spring:param name="discountTo" value="${discountTo.discountTo}" />
+						<spring:param name="category" value="${productFilter.category.id}" />
+						<spring:param name="producer" value="${productFilter.producer.id}" />
+						<spring:param name="region" value="${productFilter.region.id}" />
+						<spring:param name="page.page" value="${products.number}" />
+						<spring:param name="page.size" value="${products.size}" />
+					</spring:url>
+					<a href="${previousPageUrl}">&#8249;</a>&#160;
+				</c:when>
+				<c:otherwise>
+					&#8249;&#160;
+				</c:otherwise>
+			</c:choose>
+			
 			<c:forEach begin="0" end="${totalPages}" varStatus="status" step="1">
 				<c:if test="${status.index != products.number}">
 					<spring:url value="/public/products/filter" var="pageUrl">
 						<spring:param name="priceFrom" value="${productFilter.priceFrom}" />
 						<spring:param name="priceTo" value="${productFilter.priceTo}" />
+						<spring:param name="discountFrom" value="${discountFrom.discountFrom}" />
+						<spring:param name="discountTo" value="${discountTo.discountTo}" />
 						<spring:param name="category" value="${productFilter.category.id}" />
 						<spring:param name="producer" value="${productFilter.producer.id}" />
+						<spring:param name="region" value="${productFilter.region.id}" />
 						<spring:param name="page.page" value="${status.index + 1}" />
 						<spring:param name="page.size" value="${products.size}" />
 					</spring:url>
-					<a href="${pageUrl}">[<spring:eval expression="status.index" />]</a>
+					<a href="${pageUrl}">[<spring:eval expression="status.index" />]</a>&#160;&#160;
 				</c:if>
 				<c:if test="${status.index == products.number}">
-					[<spring:eval expression="status.index" />]
+					[<spring:eval expression="status.index" />]&#160;
 				</c:if>
-			</c:forEach>
+			</c:forEach>					
+			
+			<c:choose>
+				<c:when test="${products.number + 1 lt products.totalPages}">
+					<spring:url value="/public/products/filter" var="previousPageUrl">
+						<spring:param name="priceFrom" value="${productFilter.priceFrom}" />
+						<spring:param name="priceTo" value="${productFilter.priceTo}" />
+						<spring:param name="discountFrom" value="${discountFrom.discountFrom}" />
+						<spring:param name="discountTo" value="${discountTo.discountTo}" />
+						<spring:param name="category" value="${productFilter.category.id}" />
+						<spring:param name="producer" value="${productFilter.producer.id}" />
+						<spring:param name="region" value="${productFilter.region.id}" />
+						<spring:param name="page.page" value="${products.totalPages}" />
+						<spring:param name="page.size" value="${products.size}" />
+					</spring:url>
+					<a href="${previousPageUrl}">&#8250;</a>&#160;
+				</c:when>
+				<c:otherwise>
+					&#8250;&#160;
+				</c:otherwise>
+			</c:choose>
+			
+			<c:choose>
+				<c:when test="${products.number + 1 lt products.totalPages}">
+					<spring:url value="/public/products/filter" var="firstPageUrl">
+						<spring:param name="priceFrom" value="${productFilter.priceFrom}" />
+						<spring:param name="priceTo" value="${productFilter.priceTo}" />
+						<spring:param name="discountFrom" value="${discountFrom.discountFrom}" />
+						<spring:param name="discountTo" value="${discountTo.discountTo}" />
+						<spring:param name="category" value="${productFilter.category.id}" />
+						<spring:param name="producer" value="${productFilter.producer.id}" />
+						<spring:param name="region" value="${productFilter.region.id}" />
+						<spring:param name="page.page" value="${products.number + 2}" />
+						<spring:param name="page.size" value="${products.size}" />
+					</spring:url>
+					<a href="${firstPageUrl}">&#187;</a>&#160;
+				</c:when>
+				<c:otherwise>
+					&#187;&#160;
+				</c:otherwise>
+			</c:choose>	
+			
 		</div>
     </form:form>
 		            

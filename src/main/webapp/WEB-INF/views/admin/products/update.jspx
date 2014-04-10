@@ -4,7 +4,7 @@
     <jsp:output omit-xml-declaration="yes"/>
     <form:update id="fu_cz_kolomet_domain_Product" modelAttribute="product" path="/admin/products" versionField="Version" z="user-managed">
         <field:textarea field="productName" id="c_cz_kolomet_domain_Product_productName" required="true" z="9VRS4DrGEb9AJgsJiZnH90xhO8Q="/>
-        <field:textarea field="description" id="c_cz_kolomet_domain_Product_description" z="9dE5/03cbd/gzh1b8utpXr2xi74="/>
+        <field:editor field="description" id="c_cz_kolomet_domain_Product_description" z="9dE5/03cbd/gzh1b8utpXr2xi74="/>
         <field:input field="price" id="c_cz_kolomet_domain_Product_price" required="true" validationMessageCode="field_invalid_number" z="8WBt5dfoVCIiZbaItCV+D0Ny6fc="/>
         <field:input field="discount" id="c_cz_kolomet_domain_Product_discount" validationMessageCode="field_invalid_number" z="uv6z4+8sEz83BAFjjftyHYknDNY="/>
         <field:select field="category" id="c_cz_kolomet_domain_Product_category" itemValue="id" items="${categorys}" path="/admin/categorys" z="user-managed"/>
@@ -25,7 +25,7 @@
                 <field:hidden field="productAttributes[${status.index}].id" id="fc_cz_kolomet_domain_Product_productAttribute_id_${status.index}"/>
                 <field:hidden field="productAttributes[${status.index}].version" id="fc_cz_kolomet_domain_Product_productAttribute_version_${status.index}"/>
                 <field:hidden field="productAttributes[${status.index}].attributeType" id="fc_cz_kolomet_domain_Product_productAttribute_type_${status.index}"/>
-                <field:input field="productAttributes[${status.index}].attributeValue" id="fc_cz_kolomet_domain_Product_productAttribute_value_${status.index}" label="${productAttribute.attributeType.codeDescription}"/>
+                <field:input field="productAttributes[${status.index}].attributeValue" required="${productAttribute.attributeType.required}" id="fc_cz_kolomet_domain_Product_productAttribute_value_${status.index}" label="${productAttribute.attributeType.codeDescription}"/>
             </c:forEach>
         </util:panel>
         <br/>

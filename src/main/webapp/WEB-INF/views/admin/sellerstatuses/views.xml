@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 <tiles-definitions>
-    <definition extends="default_admin" name="sellerstatuses/list">
-        <put-attribute name="body" value="/WEB-INF/views/sellerstatuses/list.jspx"/>
+    <definition extends="default_admin" name="admin/sellerstatuses/list">
+        <put-attribute name="body" value="/WEB-INF/views/admin/sellerstatuses/list.jspx"/>
     </definition>
-<definition extends="default_admin" name="sellerstatuses/show">
-        <put-attribute name="body" value="/WEB-INF/views/sellerstatuses/show.jspx"/>
+<definition extends="default_admin" name="admin/sellerstatuses/show">
+        <put-attribute name="body" value="/WEB-INF/views/admin/sellerstatuses/show.jspx"/>
     </definition>
-<definition extends="default_admin" name="sellerstatuses/create">
-        <put-attribute name="body" value="/WEB-INF/views/sellerstatuses/create.jspx"/>
+<definition extends="default_admin" name="admin/sellerstatuses/create">
+        <put-attribute name="body" value="/WEB-INF/views/admin/sellerstatuses/create.jspx"/>
     </definition>
-<definition extends="default_admin" name="sellerstatuses/update">
-        <put-attribute name="body" value="/WEB-INF/views/sellerstatuses/update.jspx"/>
+<definition extends="default_admin" name="admin/sellerstatuses/update">
+        <put-attribute name="body" value="/WEB-INF/views/admin/sellerstatuses/update.jspx"/>
     </definition>
 </tiles-definitions>

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 <tiles-definitions>
-    <definition extends="default_admin" name="applicationroles/list">
-        <put-attribute name="body" value="/WEB-INF/views/applicationroles/list.jspx"/>
+    <definition extends="default_admin" name="admin/applicationroles/list">
+        <put-attribute name="body" value="/WEB-INF/views/admin/applicationroles/list.jspx"/>
     </definition>
-<definition extends="default_admin" name="applicationroles/show">
-        <put-attribute name="body" value="/WEB-INF/views/applicationroles/show.jspx"/>
+<definition extends="default_admin" name="admin/applicationroles/show">
+        <put-attribute name="body" value="/WEB-INF/views/admin/applicationroles/show.jspx"/>
     </definition>
-<definition extends="default_admin" name="applicationroles/create">
-        <put-attribute name="body" value="/WEB-INF/views/applicationroles/create.jspx"/>
+<definition extends="default_admin" name="admin/applicationroles/create">
+        <put-attribute name="body" value="/WEB-INF/views/admin/applicationroles/create.jspx"/>
     </definition>
-<definition extends="default_admin" name="applicationroles/update">
-        <put-attribute name="body" value="/WEB-INF/views/applicationroles/update.jspx"/>
+<definition extends="default_admin" name="admin/applicationroles/update">
+        <put-attribute name="body" value="/WEB-INF/views/admin/applicationroles/update.jspx"/>
     </definition>
 </tiles-definitions>

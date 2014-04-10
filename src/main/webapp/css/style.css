@@ -26,6 +26,10 @@ span.error {
 	font: bold;
 }
 
+span.discount {
+	font-size: 1.5em;
+}
+
 div#container,div#header_background,div#menu_background {
 	width: 100%;
 	min-width: 1200px;
@@ -469,15 +473,25 @@ div.detail_specifications {
 	width: 666px;
 }
 
-p.left_column {
+table.left_column {
+	width: 48%;
 	margin: 0 6px 0 0;
 	float: left;
 }
 
-p.right_column {
+table.left_column td {
+	width: 48%;
+}
+
+table.right_column {
+	width: 48%;
 	margin: 0 0 6px 0;
 	float: right;
 	width: 50%;
+}
+
+table.right_column td {
+	width: 48%;
 }
 
 div.seller_specifications {

@@ -6,11 +6,12 @@
 
   	<div id="footer"> 
 		<p>2014 Kolomet &#169; &#32; &#32; |
-		<spring:url value="/about" var="aboutUrl" />
+		<spring:url value="/public/about" var="aboutUrl" />
     	<a href="${aboutUrl}"><spring:message code="footer_about" /></a> |
     	<a href="#"><spring:message code="footer_conditions" /></a> |
-    	<a href="#"><spring:message code="footer_contact" /></a></p>
-    	<a href="#" class="action_button_dark"><spring:message code="footer_add" /></a>
+    	<a href="${aboutUrl}"><spring:message code="footer_contact" /></a></p>
+    	<spring:url value="/public/registration/index" var="registrationUrl" />
+    	<a href="${registrationUrl}" class="action_button_dark"><spring:message code="footer_add" /></a>
 	</div>
 	
 </div>
