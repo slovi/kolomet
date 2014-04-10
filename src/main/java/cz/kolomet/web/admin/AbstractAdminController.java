@@ -8,6 +8,9 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
@@ -15,6 +18,7 @@ import cz.kolomet.domain.NewsItem;
 import cz.kolomet.domain.PhotoUrl;
 import cz.kolomet.domain.Product;
 import cz.kolomet.repository.NewsItemRepository;
+import cz.kolomet.security.ApplicationUserDetails;
 import cz.kolomet.service.PhotoUrlService;
 
 public class AbstractAdminController {
@@ -31,6 +35,13 @@ public class AbstractAdminController {
 	@ModelAttribute("newsItems")
 	public List<NewsItem> loadNewsItems() {
 		return newsItemRepository.findAll();
+	}
+	
+	protected String getUsername() {
+		SecurityContext context = SecurityContextHolder.getContext();
+		Authentication authentication = context.getAuthentication();
+		ApplicationUserDetails details = (ApplicationUserDetails) authentication.getPrincipal();
+		return details.getUsername();
 	}
 	
 	protected void savePhotos(Product product, List<CommonsMultipartFile> files) {

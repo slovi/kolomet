@@ -18,7 +18,7 @@
          Also registers default Formatters and Validators for use across all @Controllers -->
     <mvc:annotation-driven conversion-service="applicationConversionService">
     	<mvc:argument-resolvers>
-    		<bean class="org.springframework.data.web.PageableArgumentResolver" />
+    		<bean class="org.springframework.data.web.PageableArgumentResolver"/>
     	</mvc:argument-resolvers>
     </mvc:annotation-driven>
     
@@ -45,7 +45,7 @@
     The messages*.properties files translate Roo generated messages which are part of the admin interface, the 
     application.properties resource bundle localizes all application specific messages such as entity names and menu items. -->
     <bean class="org.springframework.context.support.ReloadableResourceBundleMessageSource" id="messageSource" p:basenames="WEB-INF/i18n/messages,WEB-INF/i18n/application" p:fallbackToSystemLocale="false">
-    	 <property name="useCodeAsDefaultMessage" value="true" />
+    	 <property name="useCodeAsDefaultMessage" value="true"/>
     </bean>
 
     <!-- Store preferred language configuration in a cookie -->
@@ -61,7 +61,7 @@
     The default behaviour of DispatcherServlet - is to propagate all exceptions to the servlet 
     container: this will happen - here with all other types of exceptions. -->
     <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver" p:defaultErrorView="uncaughtException">
-    	<property name="warnLogCategory" value="errorLogger" />
+    	<property name="warnLogCategory" value="errorLogger"/>
         <property name="exceptionMappings">
             <props>
                 <prop key=".DataAccessException">dataAccessFailure</prop>
@@ -90,10 +90,12 @@
     	</property>
   	</bean>
 
-	<bean id="applicationConversionService" class="cz.kolomet.util.OrmConversionServiceAdapter">
-		<property name="conversionService">
-			<bean class="cz.kolomet.web.ApplicationConversionServiceFactoryBean"/>
-		</property>
-	</bean>
+	<bean class="cz.kolomet.web.ApplicationConversionServiceFactoryBean" id="applicationConversionService"/>
+
+<!-- 	<bean id="applicationConversionService" class="cz.kolomet.util.OrmConversionServiceAdapter"> -->
+<!-- 		<property name="conversionService"> -->
+			
+<!-- 		</property> -->
+<!-- 	</bean> -->
 		
 </beans>

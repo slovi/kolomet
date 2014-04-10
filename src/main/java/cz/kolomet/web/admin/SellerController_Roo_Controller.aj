@@ -5,12 +5,10 @@ package cz.kolomet.web.admin;
 
 import cz.kolomet.domain.Seller;
 import cz.kolomet.domain.codelist.CountryState;
-import cz.kolomet.domain.codelist.Region;
 import cz.kolomet.domain.codelist.SellerStatus;
 import cz.kolomet.service.ApplicationUserService;
 import cz.kolomet.service.CountryStateService;
 import cz.kolomet.service.ProductService;
-import cz.kolomet.service.RegionService;
 import cz.kolomet.service.SellerPhotoUrlService;
 import cz.kolomet.service.SellerService;
 import cz.kolomet.service.SellerStatusService;
@@ -50,9 +48,6 @@ privileged aspect SellerController_Roo_Controller {
     CountryStateService SellerController.countryStateService;
     
     @Autowired
-    RegionService SellerController.regionService;
-    
-    @Autowired
     SellerStatusService SellerController.sellerStatusService;
     
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
@@ -71,16 +66,13 @@ privileged aspect SellerController_Roo_Controller {
         populateEditForm(uiModel, new Seller());
         List<String[]> dependencies = new ArrayList<String[]>();
         if (countryStateService.countAllCountryStates() == 0) {
-            dependencies.add(new String[] { "countrystate", "countrystates" });
+            dependencies.add(new String[] { "countrystate", "admin/countrystates" });
         }
         if (sellerStatusService.countAllSellerStatuses() == 0) {
-            dependencies.add(new String[] { "sellerstatus", "sellerstatuses" });
-        }
-        if (regionService.countAllRegions() == 0) {
-            dependencies.add(new String[] { "region", "regions" });
+            dependencies.add(new String[] { "sellerstatus", "admin/sellerstatuses" });
         }
         if (countryStateService.countAllCountryStates() == 0) {
-            dependencies.add(new String[] { "countrystate", "countrystates" });
+            dependencies.add(new String[] { "countrystate", "admin/countrystates" });
         }
         uiModel.addAttribute("dependencies", dependencies);
         return "admin/sellers/create";
@@ -148,7 +140,6 @@ privileged aspect SellerController_Roo_Controller {
         uiModel.addAttribute("products", productService.findAllProducts());
         uiModel.addAttribute("sellerphotourls", sellerPhotoUrlService.findAllSellerPhotoUrls());
         uiModel.addAttribute("countrystates", countryStateService.findAllCountryStates());
-        uiModel.addAttribute("regions", regionService.findAllRegions());
         uiModel.addAttribute("sellerstatuses", sellerStatusService.findAllSellerStatuses());
     }
     

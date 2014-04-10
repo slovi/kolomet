@@ -6,7 +6,7 @@ import cz.kolomet.domain.Category;
 import cz.kolomet.domain.Producer;
 import cz.kolomet.domain.codelist.Region;
 
-public class ProductFilter {
+public class ProductFilterDto {
 	
 	private BigDecimal priceFrom;
 	private BigDecimal priceTo;

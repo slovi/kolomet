@@ -213,3 +213,13 @@ field date --class ~.domain.DomainEntity --fieldName test --type org.joda.time.D
 // Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2014-04-09 02:21:53
 // Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2014-04-09 09:04:37
 // Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2014-04-09 20:39:41
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2014-04-10 11:13:44
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2014-04-10 22:11:20
+class --class ~.dto.ApplicationUserPasswordDto --path SRC_MAIN_JAVA --rooAnnotations 1
+controller class --class ~.web.ApplicationUserPasswordController --preferredMapping /admin/password
+// [failed] controller scaffold --class ~.web.admin.ApplicationPermissionControllerTest --entity ~.dto.ApplicationUserPasswordDto --path private/password
+// [failed] controller scaffold --class ~.web.admin.ApplicationPermissionControllerTest --entity ~.dto.ApplicationUserPasswordDto --path private/password
+controller scaffold --class ~.web.admin.ApplicationPermissionControllerTest --entity ~.dto.ApplicationUserPasswordDto --path private/password
+controller scaffold --class ~.web.admin.ApplicationUserPasswordController --entity ~.dto.ApplicationUserPasswordDto --path private/password
+controller scaffold --class ~.web.admin.ApplicationUserPasswordController --entity ~.dto.ApplicationUserPasswordDto --path private/password
+controller class --class ~.web.ApplicationUserPasswordController --preferredMapping /private/password

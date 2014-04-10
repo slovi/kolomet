@@ -20,7 +20,7 @@
         <field:input field="businessName" id="c_cz_kolomet_domain_Seller_businessName" max="30" z="wMff26/IKdgvlIGrTVyOW3Z1j48="/>
         <field:textarea field="businessEmail" id="c_cz_kolomet_domain_Seller_businessEmail" z="AJoA26ZCBhcR3XKpvQWOcq34Xso="/>
         <field:input field="businessPhoneNumber" id="c_cz_kolomet_domain_Seller_businessPhoneNumber" max="30" z="xPi0a02wQAR9AEEEZZQTflBLDyY="/>
-        <field:select field="region" id="c_cz_kolomet_domain_Seller_region" itemValue="id" items="${regions}" path="/regions" required="true" z="X1tFfSYqrkWRD/69kGzvUnaA90o="/>
+        <field:input field="region" id="c_cz_kolomet_domain_Seller_region" required="true" z="cTS+jtuwrgOQL1R/KPUxi9d6kCM="/>
         <field:textarea field="web" id="c_cz_kolomet_domain_Seller_web" z="myu210fXlXUPBcI53jRe4Vneb38="/>
         <field:textarea field="saleType" id="c_cz_kolomet_domain_Seller_saleType" z="T4Cb+TKo2Kp3HWWlNRJJ1K2aKf8="/>
         <field:select field="addressCountry" id="c_cz_kolomet_domain_Seller_addressCountry" itemValue="id" items="${countrystates}" path="/admin/countrystates" required="true" z="user-managed"/>

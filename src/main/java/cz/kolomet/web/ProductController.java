@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import cz.kolomet.domain.Category;
 import cz.kolomet.domain.Producer;
-import cz.kolomet.dto.ProductFilter;
+import cz.kolomet.dto.ProductFilterDto;
 import cz.kolomet.repository.CategoryRepository;
 import cz.kolomet.repository.ProducerRepository;
 import cz.kolomet.repository.ProductRepository;
@@ -49,7 +49,7 @@ public class ProductController extends AbstractController implements Initializin
 	}
 	
 	@RequestMapping("/filter")
-	public String filterByProductFilter(@Valid ProductFilter productFilter, BindingResult result, Model model, Pageable pageable) {	
+	public String filterByProductFilter(@Valid ProductFilterDto productFilter, BindingResult result, Model model, Pageable pageable) {	
 		populateFilterForm(productFilter, null, null, model);
 		
 		Pageable orderedPageable = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(), ProductSpecifications.getDefaultSort());
@@ -61,7 +61,7 @@ public class ProductController extends AbstractController implements Initializin
 	@RequestMapping("/category/{categoryId}")
 	public String listByCategory(@PathVariable("categoryId") Long categoryId, Model model) {
 		Category category = categoryRepository.findOne(categoryId);
-		populateFilterForm(new ProductFilter(), category, null, model);
+		populateFilterForm(new ProductFilterDto(), category, null, model);
 		model.addAttribute("products", productRepository.findByCategory(category, pageRequest));
 		return "products/list_category";
 	}
@@ -69,19 +69,19 @@ public class ProductController extends AbstractController implements Initializin
 	@RequestMapping("/producer/{producerId}")
 	public String listByProducer(@PathVariable("producerId") Long producerId, Model model) {
 		Producer producer = producerRepository.findOne(producerId);
-		populateFilterForm(new ProductFilter(), null, producer, model);
+		populateFilterForm(new ProductFilterDto(), null, producer, model);
 		model.addAttribute("products", productRepository.findByProducerOrderByCreatedDateDesc(producer, pageRequest));
 		return "products/list_category";
 	}
 	
 	@RequestMapping("/categorytype/{categoryTypeCodeKey}")
 	public String listByCategoryType(@PathVariable("categoryTypeCodeKey") String categoryTypeCodeKey, Model model) {
-		populateFilterForm(new ProductFilter(), null, null, model);
+		populateFilterForm(new ProductFilterDto(), null, null, model);
 		model.addAttribute("products", productRepository.findByCategoryType(categoryTypeCodeKey, pageRequest));		
 		return "products/list_category";
 	}
 	
-	private void populateFilterForm(ProductFilter productFilter, Category category, Producer producer, Model model) {		
+	private void populateFilterForm(ProductFilterDto productFilter, Category category, Producer producer, Model model) {		
 		if (category != null) {
 			productFilter.setCategory(category);
 		}

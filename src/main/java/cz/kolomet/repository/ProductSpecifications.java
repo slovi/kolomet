@@ -23,7 +23,7 @@ import cz.kolomet.domain.Producer;
 import cz.kolomet.domain.Product;
 import cz.kolomet.domain.Seller;
 import cz.kolomet.domain.codelist.Region;
-import cz.kolomet.dto.ProductFilter;
+import cz.kolomet.dto.ProductFilterDto;
 
 public class ProductSpecifications {
 	
@@ -33,7 +33,7 @@ public class ProductSpecifications {
     	return new Sort(priorityOrder, createdOrder);
 	}
 	
-	public static Specification<Product> forProductFilter(final ProductFilter productFilter) {
+	public static Specification<Product> forProductFilter(final ProductFilterDto productFilter) {
 		return new Specification<Product>() {
 
 			@Override

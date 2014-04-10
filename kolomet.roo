@@ -20,6 +20,8 @@ entity jpa --class ~.domain.codelist.CountryState --extends ~.domain.codelist.Co
 entity jpa --class ~.domain.codelist.Region --extends ~.domain.codelist.Codelist --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 entity jpa --class ~.domain.codelist.ProductAttributeType --extends ~.domain.codelist.Codelist --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 
+class --class ~.dto.ApplicationUserPasswordDto --equals true --serializable true --activeRecord false
+
 repository jpa --interface ~.repository.ProductRepository --entity ~.domain.Product
 repository jpa --interface ~.repository.SellerRepository --entity ~.domain.Seller
 repository jpa --interface ~.repository.ProductAttributeRepository --entity ~.domain.ProductAttribute
