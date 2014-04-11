@@ -94,6 +94,26 @@ div#news div#news_content div#news_header {
 	clear: none;
 }
 
+div.filter_input {
+	width: 15em;
+	margin: 8px 22px;
+	float: left;
+}
+
+div.filter_input_checkbox div {
+	float: right;
+}
+
+div.button_filter {
+	text-align: right;
+}
+
+div.slider input {
+	border: none;
+	background: #f9f9f9;
+	text-align: center;
+}
+
 div#news div#news_content div.news_item {
 	margin: 10px 0;
 }
@@ -336,7 +356,7 @@ div.detail_description p {
 
 div#content_container div.filters {
 	width: 902px;
-	height: 60px;
+	height: 120px;
 	margin: 0px 6px 6px 6px;
 	padding: 15px;
 }

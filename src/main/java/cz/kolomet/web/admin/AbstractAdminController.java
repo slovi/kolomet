@@ -38,10 +38,7 @@ public class AbstractAdminController {
 	}
 	
 	protected String getUsername() {
-		SecurityContext context = SecurityContextHolder.getContext();
-		Authentication authentication = context.getAuthentication();
-		ApplicationUserDetails details = (ApplicationUserDetails) authentication.getPrincipal();
-		return details.getUsername();
+		return ApplicationUserDetails.getActualApplicationUserDetails().getUsername();
 	}
 	
 	protected void savePhotos(Product product, List<CommonsMultipartFile> files) {

@@ -3,7 +3,7 @@
 
   <jsp:directive.attribute name="id" type="java.lang.String" required="true" rtexprvalue="true" description="The identifier for this tag (do not change!)" />
   <jsp:directive.attribute name="object" type="java.lang.Object" required="true" rtexprvalue="true" description="The form backing object" />
-  <jsp:directive.attribute name="path" type="java.lang.String" required="true" rtexprvalue="true" description="Specify the URL path" />
+  <jsp:directive.attribute name="path" type="java.lang.String" required="false" rtexprvalue="true" description="Specify the URL path" />
   <jsp:directive.attribute name="detailUrl" type="java.lang.String" required="false" rtexprvalue="true" description="detail url" />
   <jsp:directive.attribute name="list" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Include 'list' link into table (default true)" />
   <jsp:directive.attribute name="create" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Include 'create' link into table (default true)" />
@@ -43,7 +43,9 @@
       <c:choose>
         <c:when test="${not empty object}">
           <jsp:doBody />
-          <util:quicklinks update="true" create="true" list="true" itemId="${itemId}" typeName="${typeName}" delete="true" typeNamePlural="${typeNamePlural}" path="${path}" detailUrl="${detailUrl}"/>
+          <c:if test="${not empty path}">
+          	<util:quicklinks update="true" create="true" list="true" itemId="${itemId}" typeName="${typeName}" delete="true" typeNamePlural="${typeNamePlural}" path="${path}" detailUrl="${detailUrl}"/>
+          </c:if>
         </c:when>
         <c:otherwise>
           <spring:message arguments="${label}" code="entity_not_found_single" />

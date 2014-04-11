@@ -3,6 +3,8 @@
 
   <jsp:directive.attribute name="id" type="java.lang.String" required="true" rtexprvalue="true" description="The identifier for this tag (do not change!)" />
   <jsp:directive.attribute name="field" type="java.lang.String" required="true" rtexprvalue="true" description="The field exposed from the form backing object" />
+  <jsp:directive.attribute name="cssClass" type="java.lang.String" required="false" rtexprvalue="true" description="Css class" />
+  <jsp:directive.attribute name="inline" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Render br in the end of the tag" />
   <jsp:directive.attribute name="path" type="java.lang.String" required="true" rtexprvalue="true" description="The relative path to the referenced resource" />
   <jsp:directive.attribute name="items" type="java.util.Collection" required="true" rtexprvalue="true" description="The name of the collection displayed in the select box" />
   <jsp:directive.attribute name="label" type="java.lang.String" required="false" rtexprvalue="true" description="The label used for this field, will default to a message bundle if not supplied" />
@@ -47,7 +49,7 @@
       <spring:escapeBody htmlEscape="true" >${itemLabel}</spring:escapeBody>
     </c:set>
 
-    <div id="_${fn:escapeXml(id)}_id">
+    <div id="_${fn:escapeXml(id)}_id" class="${cssClass}">
       <c:choose>
         <c:when test="${not empty items}">
           <c:if test="${renderLabel}">
@@ -242,6 +244,8 @@
         </c:otherwise>
       </c:choose>
     </div>
-    <br />
+    <c:if test="${not empty inline and not inline}">
+    	<br />
+    </c:if>
   </c:if>
 </jsp:root>

@@ -28,7 +28,6 @@ public class ApplicationUser extends DomainEntity {
 
 	/**
 	 */
-	@Column(updatable=false)
 	private String password;
 	
 	/**

@@ -1,5 +1,6 @@
 package cz.kolomet.web;
 
+import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import cz.kolomet.dto.ApplicationUserPasswordDto;
-import cz.kolomet.repository.ApplicationUserRepository;
 import cz.kolomet.service.ApplicationUserService;
 import cz.kolomet.web.admin.AbstractAdminController;
 
@@ -23,25 +23,30 @@ public class ApplicationUserPasswordController extends AbstractAdminController {
 	@Autowired
 	private ApplicationUserService applicationUserService;
 	
+	@RequestMapping("show")
+	public String show(RedirectAttributes redirectAttributes) {
+		return "private/password/show";
+	}
+	
     @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
     public String update(@Valid ApplicationUserPasswordDto password, BindingResult bindingResult, RedirectAttributes redirectAttributes, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
             populateEditForm(redirectAttributes, new ApplicationUserPasswordDto());
-            return "admin/photourls/update";
+            return "private/password/update";
         }
         
         password.setUsername(getUsername());        
         applicationUserService.updatePassword(password);
         
         redirectAttributes.asMap().clear();
-        redirectAttributes.addFlashAttribute("password_ok", "password_ok");
-        return "redirect:/private/password";
+        redirectAttributes.addFlashAttribute("password", password);
+        return "redirect:/private/password/show";
     }
 
     @RequestMapping(params = "form", produces = "text/html")
     public String updateForm(Model uiModel) {
         populateEditForm(uiModel, new ApplicationUserPasswordDto());
-        return "admin/photourls/update";
+        return "private/password/update";
     }
     
     void populateEditForm(Model uiModel, ApplicationUserPasswordDto applicationUserPassword) {

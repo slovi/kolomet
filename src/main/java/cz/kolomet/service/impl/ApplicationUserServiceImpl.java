@@ -18,7 +18,7 @@ public class ApplicationUserServiceImpl implements ApplicationUserService {
 		applicationUser.setPassword(passwordEncoder.encodePassword(applicationUser.getPassword(), null));
         applicationUserRepository.save(applicationUser);
     }
-	
+
 	public void updatePassword(ApplicationUserPasswordDto applicationUserPassword) {
 		ApplicationUser user = applicationUserRepository.findByUsername(applicationUserPassword.getUsername());
 		if (!user.getPassword().equals(passwordEncoder.encodePassword(applicationUserPassword.getPassword(), null))) {
@@ -27,7 +27,7 @@ public class ApplicationUserServiceImpl implements ApplicationUserService {
 		if (!applicationUserPassword.sameNewPassword()) {
 			throw new ApplicationUserPasswordException("Cannot change password - new passwords are not the same.", "exception_new_password_incorrect");
 		}
-		user.setPassword(applicationUserPassword.getNewPassword());
+		user.setPassword(passwordEncoder.encodePassword(applicationUserPassword.getNewPassword(), null));
 		applicationUserRepository.save(user);
 	}
 	

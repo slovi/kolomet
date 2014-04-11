@@ -223,3 +223,5 @@ controller scaffold --class ~.web.admin.ApplicationPermissionControllerTest --en
 controller scaffold --class ~.web.admin.ApplicationUserPasswordController --entity ~.dto.ApplicationUserPasswordDto --path private/password
 controller scaffold --class ~.web.admin.ApplicationUserPasswordController --entity ~.dto.ApplicationUserPasswordDto --path private/password
 controller class --class ~.web.ApplicationUserPasswordController --preferredMapping /private/password
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2014-04-11 00:55:11
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2014-04-12 01:27:21

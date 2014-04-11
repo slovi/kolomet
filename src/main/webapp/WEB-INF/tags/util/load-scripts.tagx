@@ -2,6 +2,9 @@
 
   <jsp:output omit-xml-declaration="yes" />
   
+  <spring:url value="/resources/css/ui-lightness/jquery-ui-1.10.4.custom.min.css" var="jquery_ui_css" />
+  <link rel="stylesheet" type="text/css" href="${jquery_ui_css}" />
+  
   <spring:url value="/resources/css/style.css" var="default_css_url" />
   <link rel="stylesheet" type="text/css" href="${default_css_url}" />
 
@@ -10,12 +13,6 @@
   
   <spring:url value="/resources/dijit/themes/tundra/tundra.css" var="tundra_url" />
   <link rel="stylesheet" type="text/css" href="${tundra_url}" />
-
-  <spring:url value="/resources/css/jquery.fileupload.css" var="fileUploadCssUrl" />
-  <link rel="stylesheet" type="text/css" href="${fileUploadCssUrl}" />
-  
-  <spring:url value="/resources/css/jquery.fileupload-ui.css" var="fileUploadUiCssUrl" />
-  <link rel="stylesheet" type="text/css" href="${fileUploadUiCssUrl}" />
 
   <spring:url value="/resources/images/favicon.ico" var="favicon" />
   <link rel="SHORTCUT ICON" href="${favicon}" />

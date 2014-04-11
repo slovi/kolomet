@@ -6,29 +6,48 @@
    	<spring:url value="/public/products/filter" var="filterActionUrl" />
    	<form:form id="filterForm" action="${filterActionUrl}" method="get" modelAttribute="productFilter">
 	    <div class="filters">
+    
       		<form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
-      		<spring:message code="products_list_filter_price_from" />: <form:input path="priceFrom" size="3" /> <spring:message code="products_list_filter_price_to" />: <form:input path="priceTo" size="3" />
-      		<spring:message code="products_list_filter_discount_from" />: <form:input path="discountFrom" size="3" /> <spring:message code="products_list_filter_discount_to" />: <form:input path="discountTo" size="3" />
-      		<form:select path="category" title="category" >
-      			<form:option value="" label="Všechny kategorie">&#32;</form:option>
-      			<form:options items="${categories}" itemLabel="codeDescription" itemValue="id" />
-      		</form:select>
-      		<form:select path="producer" title="producer">
-     			<form:option value="" label="Všechny značky">&#32;</form:option>
-     			<form:options items="${producers}" itemLabel="codeDescription" itemValue="id" />
-			</form:select>
-			<form:select path="region" title="region">
-     			<form:option value="" label="Všechny regiony">&#32;</form:option>
-     			<form:options items="${regions}" itemLabel="codeDescription" itemValue="id" />
-			</form:select>
-			<br />
-			<spring:message code="label_cz_kolomet_domain_product_cansendtoallcountry" />
-			<form:checkbox path="canSendToAllCountry" />
-      		<spring:message code="button_filter" var="save_filter" htmlEscape="false" />
-      		<input type="hidden" name="page.page" value="${products.number}" />
-      		<input type="hidden" name="page.size" value="${products.size}" />
-          	<input type="submit" value="${fn:escapeXml(save_filter)}"/>            
+    
+    		<div id="price_slider" class="slider filter_input">
+		      	<spring:message code="products_list_filter_price" />: 
+	      		<form:input cssClass="amountFromInput" path="priceFrom" size="3" /><form:input cssClass="amountToInput" path="priceTo" size="3" />
+	      		<div><!--  --></div>
+      		</div>
+     		
+      		<div id="discount_slider" class="slider filter_input">
+      			<spring:message code="products_list_filter_discount" />: 
+      			<form:input cssClass="amountFromInput" path="discountFrom" size="3" /><form:input cssClass="amountToInput" path="discountTo" size="3" />
+	      		<div><!--  --></div>
+      		</div>
+      		
+      		<field:select id="c_cz_kolomet_domain_Product_category" cssClass="filter_input" items="${categories}" field="category" path="/categorys" emptyLabel="Všechny kategorie" renderLabel="true" itemValue="id" itemLabel="codeDescription" inline="true" required="false" />
+      		<field:select id="c_cz_kolomet_domain_Product_producer" cssClass="filter_input" items="${producers}" field="producer" path="/producers" emptyLabel="Všechny značky" renderLabel="true" itemValue="id" itemLabel="codeDescription" inline="true" required="false" />
+			<field:select id="c_cz_kolomet_domain_Seller_region" cssClass="filter_input" items="${regions}" field="region" path="/regions" emptyLabel="Všechny regiony" renderLabel="true" itemValue="id" itemLabel="codeDescription" inline="true" required="false" />
+
+			<field:checkbox id="c_cz_kolomet_domain_Product_canSendToAllCountry" cssClass="filter_input filter_input_checkbox" field="canSendToAllCountry" />
+
+			<div id="weight_slider" class="slider filter_input">
+      			<spring:message code="products_list_filter_weight" />: 
+      			<form:input cssClass="amountFromInput" path="discountFrom" size="3" /><form:input cssClass="amountToInput" path="discountTo" size="3" />
+	      		<div><!--  --></div>
+      		</div>
+
+			<div class="clear button_filter">
+	      		<spring:message code="button_filter" var="save_filter" htmlEscape="false" />
+	      		<input type="hidden" name="page.page" value="${products.number}" />
+	      		<input type="hidden" name="page.size" value="${products.size}" />
+	          	<input type="submit" value="${fn:escapeXml(save_filter)}"/>
+          	</div>            
 	    </div>
+	    
+	    <script>
+	    	require(['slider'], function(slider) {
+	    		slider.slider('price_slider', 0, 100000, 5000, 20000, 500);
+	    		slider.slider('discount_slider', 0, 10000, 1000, 5000, 500);
+	    		slider.slider('weight_slider', 0, 30, 5, 15, 1);
+	    	});
+	    </script>
 	    
 	  	<div class="sorting">Řadit podle: <a href="#" onclick="document.getElementById('filterForm').submit(); return false;">cena</a></div>
 			        	

@@ -4,8 +4,11 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import cz.kolomet.domain.ApplicationPermission;
@@ -22,6 +25,12 @@ public class ApplicationUserDetails implements UserDetails {
 		this.user = user;
 		this.sellerId = user.getSeller().getId();
 		this.authorities = resolveAuthorities();
+	}
+	
+	public static ApplicationUserDetails getActualApplicationUserDetails() {
+		SecurityContext context = SecurityContextHolder.getContext();
+		Authentication authentication = context.getAuthentication();
+		return (ApplicationUserDetails) authentication.getPrincipal();
 	}
 
 	private Collection<? extends GrantedAuthority> resolveAuthorities() {
