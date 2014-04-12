@@ -53,7 +53,7 @@ privileged aspect CategoryController_Roo_Controller {
         populateEditForm(uiModel, new Category());
         List<String[]> dependencies = new ArrayList<String[]>();
         if (categoryTypeService.countAllCategoryTypes() == 0) {
-            dependencies.add(new String[] { "categorytype", "categorytypes" });
+            dependencies.add(new String[] { "categorytype", "admin/categorytypes" });
         }
         uiModel.addAttribute("dependencies", dependencies);
         return "admin/categorys/create";

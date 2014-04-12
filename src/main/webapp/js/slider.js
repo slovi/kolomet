@@ -1,9 +1,27 @@
 define(['jquery', 'jquery_ui'], function($) {
 	
 	return {
-		slider: function(divId, minValue, maxValue, valueFrom, valueTo, step) {
+		slider: function(divId, minValue, maxValue, defaultValueFrom, defaultValueTo, step) {
+			
 			var parentDiv = $("#" + divId); 
 			var slider = $("div", parentDiv); 
+			var amountFromInput = $(".amountFromInput", parentDiv); 
+			var amountToInput = $(".amountToInput", parentDiv);
+			
+			var valueFrom;
+			if (amountFromInput.val() == '') {
+				valueFrom = defaultValueFrom;
+			} else {
+				valueFrom = amountFromInput.val();
+			}
+			
+			var valueTo;
+			if (amountToInput.val() == '') {
+				valueTo = defaultValueTo;
+			} else {
+				valueTo = amountToInput.val();
+			}
+			
 			slider.slider({
 				range: true,
 				min: minValue,
@@ -15,8 +33,13 @@ define(['jquery', 'jquery_ui'], function($) {
 					$(".amountToInput", parentDiv).val(ui.values[1]);
 				}
 			});
-			$(".amountFromInput", parentDiv).val(slider.slider("values", 0));
-			$(".amountToInput", parentDiv).val(slider.slider("values", 1));
+			
+			if (amountFromInput.val() == '') {
+				amountFromInput.val(slider.slider("values", 0));
+			}
+			if (amountToInput.val() == '') {
+				amountToInput.val(slider.slider("values", 1));
+			}
 		}
 	};
 	

@@ -29,7 +29,7 @@
 
 			<div id="weight_slider" class="slider filter_input">
       			<spring:message code="products_list_filter_weight" />: 
-      			<form:input cssClass="amountFromInput" path="discountFrom" size="3" /><form:input cssClass="amountToInput" path="discountTo" size="3" />
+      			<form:input cssClass="amountFromInput" path="weightFrom" size="3" /><form:input cssClass="amountToInput" path="weightTo" size="3" />
 	      		<div><!--  --></div>
       		</div>
 

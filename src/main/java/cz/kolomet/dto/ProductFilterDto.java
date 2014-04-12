@@ -12,10 +12,21 @@ public class ProductFilterDto {
 	private BigDecimal priceTo;
 	private BigDecimal discountFrom;
 	private BigDecimal discountTo;
+	private BigDecimal weightFrom;
+	private BigDecimal weightTo;
 	private Category category;
 	private Producer producer;
 	private Region region;
 	private Boolean canSendToAllCountry;
+	
+	public ProductFilterDto() {
+		this.category = new Category();
+		this.category.setId(0l);
+		this.region = new Region();
+		this.region.setId(0l);
+		this.producer = new Producer();
+		this.producer.setId(0l);
+	}
 	
 	public BigDecimal getPriceFrom() {
 		return priceFrom;
@@ -47,6 +58,22 @@ public class ProductFilterDto {
 
 	public void setDiscountTo(BigDecimal discountTo) {
 		this.discountTo = discountTo;
+	}
+
+	public BigDecimal getWeightFrom() {
+		return weightFrom;
+	}
+
+	public void setWeightFrom(BigDecimal weightFrom) {
+		this.weightFrom = weightFrom;
+	}
+
+	public BigDecimal getWeightTo() {
+		return weightTo;
+	}
+
+	public void setWeightTo(BigDecimal weightTo) {
+		this.weightTo = weightTo;
 	}
 
 	public Category getCategory() {
