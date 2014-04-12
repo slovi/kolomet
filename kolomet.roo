@@ -10,11 +10,13 @@ entity jpa --class ~.domain.PhotoUrl --extends ~.domain.DomainEntity --inheritan
 entity jpa --class ~.domain.SellerPhotoUrl --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 entity jpa --class ~.domain.Product --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 entity jpa --class ~.domain.ApplicationUser --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
+entity jpa --class ~.domain.RegistrationRequest --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 entity jpa --class ~.domain.ApplicationRole --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 entity jpa --class ~.domain.ApplicationPermission --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 entity jpa --class ~.domain.NewsItem --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 entity jpa --class ~.domain.codelist.Codelist --abstract true --equals true --serializable true --activeRecord false --extends ~.domain.Entity --inheritanceType TABLE_PER_CLASS
 entity jpa --class ~.domain.codelist.CategoryType --extends ~.domain.codelist.Codelist --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
+entity jpa --class ~.domain.codelist.ProductUsage --extends ~.domain.codelist.Codelist --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 entity jpa --class ~.domain.codelist.SellerStatus --extends ~.domain.codelist.Codelist --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 entity jpa --class ~.domain.codelist.CountryState --extends ~.domain.codelist.Codelist --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 entity jpa --class ~.domain.codelist.Region --extends ~.domain.codelist.Codelist --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
@@ -33,8 +35,10 @@ repository jpa --interface ~.repository.ProducerRepository --entity ~.domain.cod
 repository jpa --interface ~.repository.SellerStatusRepository --entity ~.domain.codelist.SellerStatus
 repository jpa --interface ~.repository.CountryStateRepository --entity ~.domain.codelist.CountryState
 repository jpa --interface ~.repository.RegionRepository --entity ~.domain.codelist.Region
+repository jpa --interface ~.repository.ProductUsageRepository --entity ~.domain.codelist.ProductUsage
 repository jpa --interface ~.repository.ProductAttributeTypeRepository --entity ~.domain.codelist.ProductAttributeType
 repository jpa --interface ~.repository.ApplicationUserRepository --entity ~.domain.ApplicationUser
+repository jpa --interface ~.repository.RegistrationRequestRepository --entity ~.domain.RegistrationRequest
 repository jpa --interface ~.repository.ApplicationRoleRepository --entity ~.domain.ApplicationRole
 repository jpa --interface ~.repository.ApplicationPermissionRepository --entity ~.domain.ApplicationPermission
 repository jpa --interface ~.repository.NewsItemRepository --entity ~.domain.NewsItem
@@ -50,8 +54,10 @@ service type --interface ~.service.ProducerService --entity ~.domain.codelist.Pr
 service type --interface ~.service.SellerStatusService --entity ~.domain.codelist.SellerSatus --class ~.service.impl.SellerStatusServiceImpl
 service type --interface ~.service.CountryStateService --entity ~.domain.codelist.CountryState --class ~.service.impl.CountryStateServiceImpl
 service type --interface ~.service.RegionService --entity ~.domain.codelist.Region --class ~.service.impl.RegionServiceImpl
+service type --interface ~.service.ProductUsageService --entity ~.domain.codelist.ProductUsage --class ~.service.impl.ProductUsageServiceImpl
 service type --interface ~.service.ProductAttributeTypeService --entity ~.domain.codelist.ProductAttributeType --class ~.service.impl.ProductAttributeTypeServiceImpl
 service type --interface ~.service.ApplicationUserService --entity ~.domain.ApplicationUser --class ~.service.impl.ApplicationUserServiceImpl
+service type --interface ~.service.RegistrationRequestService --entity ~.domain.RegistrationRequest --class ~.service.impl.RegistrationRequestServiceImpl
 service type --interface ~.service.ApplicationRoleService --entity ~.domain.ApplicationRole --class ~.service.impl.ApplicationRoleServiceImpl
 service type --interface ~.service.ApplicationPermissionService --entity ~.domain.ApplicationPermission --class ~.service.impl.ApplicationPermissionServiceImpl
 service type --interface ~.service.NewsItemService --entity ~.domain.NewsItem --class ~.service.impl.NewsItemServiceImpl
@@ -67,8 +73,10 @@ web mvc scaffold --class ~.web.ProducerController --backingType ~.domain.codelis
 web mvc scaffold --class ~.web.SellerStatusController --backingType ~.domain.codelist.SellerStatus
 web mvc scaffold --class ~.web.CountryStateController --backingType ~.domain.codelist.CountryState
 web mvc scaffold --class ~.web.RegionController --backingType ~.domain.codelist.RegionState
+web mvc scaffold --class ~.web.ProductUsageController --backingType ~.domain.codelist.ProductUsage
 web mvc scaffold --class ~.web.ProductAttributeTypeController --backingType ~.domain.codelist.ProductAttributeType
 web mvc scaffold --class ~.web.ApplicationUserController --backingType ~.domain.ApplicationUser
+web mvc scaffold --class ~.web.RegistrationRequestController --backingType ~.domain.RegistrationRequest
 web mvc scaffold --class ~.web.ApplicationRoleController --backingType ~.domain.ApplicationRole
 web mvc scaffold --class ~.web.ApplicationPermissionController --backingType ~.domain.ApplicationPermission
 web mvc scaffold --class ~.web.NewsItemController --backingType ~.domain.NewsItem

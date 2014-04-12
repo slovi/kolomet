@@ -33,4 +33,12 @@ privileged aspect ProductAttribute_Roo_JavaBean {
         this.attributeValue = attributeValue;
     }
     
+    public String ProductAttribute.getUnit() {
+        return this.unit;
+    }
+    
+    public void ProductAttribute.setUnit(String unit) {
+        this.unit = unit;
+    }
+    
 }

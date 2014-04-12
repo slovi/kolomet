@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_cz_kolomet_domain_codelist_ProductUsage" modelAttribute="productUsage" path="/admin/productusages" versionField="Version" z="wuQIY1XeAuPC7333oUF9EeF8oAw=">
+        <field:select field="createdBy" id="c_cz_kolomet_domain_codelist_ProductUsage_createdBy" itemValue="id" items="${applicationusers}" path="/admin/applicationusers" z="twnD8rmPP2zzf41tQ4oOTCugpYM="/>
+        <field:select field="lastModifiedBy" id="c_cz_kolomet_domain_codelist_ProductUsage_lastModifiedBy" itemValue="id" items="${applicationusers}" path="/admin/applicationusers" z="ctNyLjJwYE+BgoTwm+gr1AfxyfU="/>
+        <field:datetime dateTimePattern="${productUsage_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_codelist_ProductUsage_lastModified" z="JsiFbnl1WfVw/dkh6y3PaH2abUk="/>
+        <field:input field="codeKey" id="c_cz_kolomet_domain_codelist_ProductUsage_codeKey" max="20" required="true" z="8PZ3uzQHT7Q2AQkLbHRjlPy6Xok="/>
+        <field:textarea field="codeDescription" id="c_cz_kolomet_domain_codelist_ProductUsage_codeDescription" required="true" z="mMNvXhgVaf0o5e5zVNFsHCE+mrk="/>
+    </form:update>
+</div>

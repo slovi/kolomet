@@ -104,5 +104,13 @@
                 <menu:item id="i_newsitem_list" messageCode="global_menu_list" url="/admin/newsitems?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
             </menu:category>
         </security:authorize>
+        <menu:category id="c_productusage" z="csdFwHhcipzZvJWa5G/+JIBlMjI=">
+            <menu:item id="i_productusage_new" messageCode="global_menu_new" url="/productusages?form" z="MMRmw7HE4defcQ6+T1GW3Hg2Sbw="/>
+            <menu:item id="i_productusage_list" messageCode="global_menu_list" url="/productusages?page=1&amp;size=${empty param.size ? 10 : param.size}" z="0rfzvnDwEpwZIuODm3lagwadOTE="/>
+        </menu:category>
+        <menu:category id="c_registrationrequest" z="PDzU1TaG7YzAaW4bD8pFTvAsa9Y=">
+            <menu:item id="i_registrationrequest_new" messageCode="global_menu_new" url="/registrationrequests?form" z="a2LWR47BK0irGzZ15pVcmqEsznU="/>
+            <menu:item id="i_registrationrequest_list" messageCode="global_menu_list" url="/registrationrequests?page=1&amp;size=${empty param.size ? 10 : param.size}" z="5/4CYvFvATEj4Y6NBgrUYZFpj7E="/>
+        </menu:category>
     </menu:menu>
 </jsp:root>

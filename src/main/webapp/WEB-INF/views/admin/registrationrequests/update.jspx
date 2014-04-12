@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_cz_kolomet_domain_RegistrationRequest" modelAttribute="registrationRequest" path="/admin/registrationrequests" versionField="Version" z="EgviRE/eAt6pNvxnMhz3Ydg+GWk=">
+        <field:select field="createdBy" id="c_cz_kolomet_domain_RegistrationRequest_createdBy" itemValue="id" items="${applicationusers}" path="/admin/applicationusers" z="DE/Q3aW7ox+ntTzrLXmv4/hsK1k="/>
+        <field:select field="lastModifiedBy" id="c_cz_kolomet_domain_RegistrationRequest_lastModifiedBy" itemValue="id" items="${applicationusers}" path="/admin/applicationusers" z="M7R5eblGADAj4oo5kSfdEZ2B064="/>
+        <field:datetime dateTimePattern="${registrationRequest_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_RegistrationRequest_lastModified" z="/U6dJw2AeZuwIIgayrc6ISO6XKA="/>
+        <field:input field="email" id="c_cz_kolomet_domain_RegistrationRequest_email" validationMessageCode="field_invalid_email" z="mt139RqH1KyDqefAXxS95aj25HM="/>
+        <field:input field="phone" id="c_cz_kolomet_domain_RegistrationRequest_phone" z="O5avqXW5PVtSIp5OeJp4gH38Xgw="/>
+    </form:update>
+</div>

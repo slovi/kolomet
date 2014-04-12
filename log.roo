@@ -225,3 +225,13 @@ controller scaffold --class ~.web.admin.ApplicationUserPasswordController --enti
 controller class --class ~.web.ApplicationUserPasswordController --preferredMapping /private/password
 // Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2014-04-11 00:55:11
 // Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2014-04-12 01:27:21
+entity jpa --class ~.domain.codelist.ProductUsage --extends ~.domain.codelist.Codelist --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
+repository jpa --interface ~.repository.ProductUsageRepository --entity ~.domain.codelist.ProductUsage
+service --interface ~.service.ProductUsageService --entity ~.domain.codelist.ProductUsage --class ~.service.impl.ProductUsageServiceImpl
+web mvc scaffold --class ~.web.ProductUsageController --backingType ~.domain.codelist.ProductUsage
+entity jpa --class ~.domain.RegistrationRequest --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
+repository jpa --interface ~.repository.RegistrationRequestRepository --entity ~.domain.RegistrationRequest
+service --interface ~.service.RegistrationRequestService --entity ~.domain.RegistrationRequest --class ~.service.impl.RegistrationRequestServiceImpl
+web mvc scaffold --class ~.web.RegistrationRequestController --backingType ~.domain.RegistrationRequest
+web mvc scaffold --class ~.web.RegistrationRequestController --backingType ~.domain.RegistrationRequest --path /admin/registrationrequests
+web mvc scaffold --class ~.web.ProductUsageController --backingType ~.domain.codelist.ProductUsage --path /admin/productusages
