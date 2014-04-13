@@ -57,6 +57,9 @@ public class ProductSpecifications {
 					Join<Seller, Region> region = seller.join("region");
 					predicates.add(cb.equal(region, productFilter.getRegion()));
 				}
+				if (productFilter.getProductUsage() != null) {
+					predicates.add(cb.equal(root.get("productUsage"), productFilter.getProductUsage()));
+				}
 				predicates.add(cb.equal(seller.get("enabled"), true));
 				return cb.and(predicates.toArray(new Predicate[predicates.size()]));
 			}

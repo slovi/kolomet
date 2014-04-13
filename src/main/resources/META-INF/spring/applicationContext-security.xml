@@ -12,6 +12,8 @@
 	<http auto-config="true" use-expressions="true">
 		<intercept-url pattern="/public/**" access="permitAll" />
 		<intercept-url pattern="/private/**" access="isAuthenticated()"/>
+		<intercept-url pattern="/admin/registrationrequests*" access="hasAnyRole('ROLE_per_registrationrequests')" />
+		<intercept-url pattern="/admin/registrationrequests/*" access="hasAnyRole('ROLE_per_registrationrequests')" />
 		<intercept-url pattern="/admin/applicationusers*" access="hasAnyRole('ROLE_per_applicationusers')" />
 		<intercept-url pattern="/admin/applicationusers/*" access="hasAnyRole('ROLE_per_applicationusers')" />
 		<intercept-url pattern="/admin/applicationpermissions*" access="hasAnyRole('ROLE_per_applicationusers')" />
@@ -37,6 +39,8 @@
 		<intercept-url pattern="/admin/productattributes*" access="hasAnyRole('ROLE_per_products')" />
 		<intercept-url pattern="/admin/productattributes/*" access="hasAnyRole('ROLE_per_products')" />
 		<intercept-url pattern="/admin/productattributetypes*" access="hasAnyRole('ROLE_per_productattributetypes')" />
+		<intercept-url pattern="/admin/productusages*" access="hasAnyRole('ROLE_per_productusages')" />
+		<intercept-url pattern="/admin/productusages/*" access="hasAnyRole('ROLE_per_productusages')" />
 		<intercept-url pattern="/admin/productattributetypes/*" access="hasAnyRole('ROLE_per_productattributetypes')" />
 		<intercept-url pattern="/admin/producers*" access="hasAnyRole('ROLE_per_producers')" />
 		<intercept-url pattern="/admin/producers/*" access="hasAnyRole('ROLE_per_producers')" />

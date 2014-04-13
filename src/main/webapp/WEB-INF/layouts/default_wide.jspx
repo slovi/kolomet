@@ -23,8 +23,8 @@
 		    	<tiles:insertAttribute name="menu_side"/>
 		    	<div id="content_container">
 	    			<tiles:insertAttribute name="body"/>
+			    	<tiles:insertAttribute name="footer"/>
 	    		</div> 
-		    	<tiles:insertAttribute name="footer"/>
 		    </div>
 		    <tiles:insertAttribute name="login" />
 		</div>

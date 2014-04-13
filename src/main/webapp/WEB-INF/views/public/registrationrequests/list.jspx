@@ -3,11 +3,11 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_cz_kolomet_domain_RegistrationRequest" items="${registrationrequests}" z="a+6/XD9uxirv9V4apclzJK6m82k=">
-        <table:table data="${registrationrequests}" id="l_cz_kolomet_domain_RegistrationRequest" path="/admin/registrationrequests" z="tHH9ytnOs3YBWdn2w/VUmFlF3bQ=">
-            <table:column id="c_cz_kolomet_domain_RegistrationRequest_createdBy" property="createdBy" z="SFtSRzWq7P3j2jF4ljBmptSSqGg=" render="false"/>
-            <table:column id="c_cz_kolomet_domain_RegistrationRequest_lastModifiedBy" property="lastModifiedBy" z="Tnjvz5ufaGp+HITeLA+eQMVrIYQ=" render="false"/>
+        <table:table data="${registrationrequests}" delete="false" id="l_cz_kolomet_domain_RegistrationRequest" path="/public/registrationrequests" update="false" z="K9Nqyu6h9H6GQVJwY5eLhV0qydU=">
+            <table:column id="c_cz_kolomet_domain_RegistrationRequest_createdBy" property="createdBy" z="SFtSRzWq7P3j2jF4ljBmptSSqGg="/>
+            <table:column id="c_cz_kolomet_domain_RegistrationRequest_lastModifiedBy" property="lastModifiedBy" z="Tnjvz5ufaGp+HITeLA+eQMVrIYQ="/>
             <table:column date="true" dateTimePattern="${registrationRequest_created_date_format}" id="c_cz_kolomet_domain_RegistrationRequest_created" property="created" z="IHFimlFBahWRGGZNH6EE8j8QyOM="/>
-            <table:column date="true" dateTimePattern="${registrationRequest_lastmodified_date_format}" id="c_cz_kolomet_domain_RegistrationRequest_lastModified" property="lastModified" z="Ol3Ti94W1fcr74o5dhDOrckQAVg=" render="false"/>
+            <table:column date="true" dateTimePattern="${registrationRequest_lastmodified_date_format}" id="c_cz_kolomet_domain_RegistrationRequest_lastModified" property="lastModified" z="Ol3Ti94W1fcr74o5dhDOrckQAVg="/>
             <table:column id="c_cz_kolomet_domain_RegistrationRequest_email" property="email" z="9/wwvt9O5T1dc5TVl7ypRr6EnSU="/>
             <table:column id="c_cz_kolomet_domain_RegistrationRequest_phone" property="phone" z="7fk5tJLSS1OccR1D4w0xPhWsNAo="/>
         </table:table>

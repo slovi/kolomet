@@ -71,8 +71,8 @@ div#content_container {
 }
 
 div#content_container_short {
+	width: 944px;
 	margin-left: 260px;
-	margin-right: 225px;
 }
 
 div#news {
@@ -81,7 +81,7 @@ div#news {
 }
 
 div#news div#news_content {
-	margin: 10px 0 0 6px;
+	margin: 0 0 0 6px;
 	height: 500px;
 	padding: 15px;
 }
@@ -268,8 +268,8 @@ div#footer p {
 /* homepage */
 div#content_container_short div.homepage_unit {
 	width: 224px;
-	float: left;
-	margin: 0px 6px 10px 6px;
+	display: inline-block;
+	margin: 0px 11px 10px 6px;
 }
 
 div.homepage_unit div.home_description {
@@ -409,6 +409,7 @@ div#content_container div.general_unit {
 /* generic */
 div#content_container_short div.general_unit {
 	padding: 10px 10px;
+	margin-right: 225px;
 }
 
 /* samostatné prvky */

@@ -24,8 +24,8 @@
 		    		<div class="general_unit">
 	    				<tiles:insertAttribute name="body"/>
 	    			</div>
+			    	<tiles:insertAttribute name="footer"/>
 	    		</div> 
-		    	<tiles:insertAttribute name="footer"/>
 		    </div>
 		    <tiles:insertAttribute name="login" />
 		</div>

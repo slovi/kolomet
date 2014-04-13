@@ -1,7 +1,6 @@
 package cz.kolomet.web;
 import javax.validation.Valid;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -19,6 +18,7 @@ import cz.kolomet.repository.CategoryRepository;
 import cz.kolomet.repository.ProducerRepository;
 import cz.kolomet.repository.ProductRepository;
 import cz.kolomet.repository.ProductSpecifications;
+import cz.kolomet.repository.ProductUsageRepository;
 import cz.kolomet.repository.RegionRepository;
 
 @RequestMapping("/public/products")
@@ -36,6 +36,9 @@ public class ProductController extends AbstractController implements Initializin
 	
 	@Autowired
 	private RegionRepository regionRepository;
+	
+	@Autowired
+	private ProductUsageRepository productUsageRepository;
 	
 	private Integer maxPageItems = 6;
 	
@@ -90,6 +93,7 @@ public class ProductController extends AbstractController implements Initializin
 		}
 		model.addAttribute("producers", producerRepository.findAll());
 		model.addAttribute("regions", regionRepository.findAll());
+		model.addAttribute("productusages", productUsageRepository.findAll());
 		model.addAttribute("productFilter", productFilter);
 	}
 	

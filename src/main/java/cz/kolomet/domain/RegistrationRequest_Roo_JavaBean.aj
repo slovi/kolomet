@@ -23,4 +23,12 @@ privileged aspect RegistrationRequest_Roo_JavaBean {
         this.phone = phone;
     }
     
+    public String RegistrationRequest.getText() {
+        return this.text;
+    }
+    
+    public void RegistrationRequest.setText(String text) {
+        this.text = text;
+    }
+    
 }

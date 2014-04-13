@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import cz.kolomet.domain.Category;
 import cz.kolomet.domain.Producer;
+import cz.kolomet.domain.codelist.ProductUsage;
 import cz.kolomet.domain.codelist.Region;
 
 public class ProductFilterDto {
@@ -17,6 +18,7 @@ public class ProductFilterDto {
 	private Category category;
 	private Producer producer;
 	private Region region;
+	private ProductUsage productUsage;
 	private Boolean canSendToAllCountry;
 	
 	public ProductFilterDto() {
@@ -26,6 +28,8 @@ public class ProductFilterDto {
 		this.region.setId(0l);
 		this.producer = new Producer();
 		this.producer.setId(0l);
+		this.productUsage = new ProductUsage();
+		this.productUsage.setId(0l);
 	}
 	
 	public BigDecimal getPriceFrom() {
@@ -98,6 +102,14 @@ public class ProductFilterDto {
 
 	public void setRegion(Region region) {
 		this.region = region;
+	}
+
+	public ProductUsage getProductUsage() {
+		return productUsage;
+	}
+
+	public void setProductUsage(ProductUsage productUsage) {
+		this.productUsage = productUsage;
 	}
 
 	public Boolean getCanSendToAllCountry() {

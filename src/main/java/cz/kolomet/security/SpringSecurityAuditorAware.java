@@ -14,9 +14,13 @@ public class SpringSecurityAuditorAware implements AuditorAware<ApplicationUser>
 	@Override
 	public ApplicationUser getCurrentAuditor() {
 		
-	    ApplicationUser applicationUser = ApplicationUserDetails.getActualApplicationUserDetails().getUser();
-	    
-	    return applicationUserRepository.findOne(applicationUser.getId());
+		ApplicationUserDetails details = ApplicationUserDetails.getActualApplicationUserDetails();
+		if (details != null) {
+			ApplicationUser applicationUser = details.getUser();
+			return applicationUserRepository.findOne(applicationUser.getId());
+		} else {
+			return null;
+		}
 	}
 
 }

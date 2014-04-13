@@ -28,6 +28,8 @@ import org.springframework.roo.addon.serializable.RooSerializable;
 import org.springframework.roo.addon.tostring.RooToString;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import cz.kolomet.domain.codelist.ProductUsage;
+
 @RooJavaBean
 @RooToString(excludeFields = {"createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate", "seller", "category", "producer", "photoUrls", "productAttributes"})
 @RooJpaEntity(inheritanceType = "TABLE_PER_CLASS")
@@ -79,6 +81,11 @@ public class Product extends DomainEntity {
      */
     @ManyToOne
     private Producer producer;
+    
+    /**
+     */
+    @ManyToOne
+    private ProductUsage productUsage;
     
     /**
      */

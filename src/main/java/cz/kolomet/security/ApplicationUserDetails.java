@@ -17,6 +17,7 @@ import cz.kolomet.domain.ApplicationUser;
 
 public class ApplicationUserDetails implements UserDetails {
 	
+	private static final String ROLE_VOTER_PREFIX = "ROLE_";
 	private final ApplicationUser user;
 	private final Long sellerId;
 	private final Collection<? extends GrantedAuthority> authorities;
@@ -30,17 +31,22 @@ public class ApplicationUserDetails implements UserDetails {
 	public static ApplicationUserDetails getActualApplicationUserDetails() {
 		SecurityContext context = SecurityContextHolder.getContext();
 		Authentication authentication = context.getAuthentication();
-		return (ApplicationUserDetails) authentication.getPrincipal();
+		Object principal = authentication.getPrincipal();
+		return principal instanceof ApplicationUserDetails ? (ApplicationUserDetails) principal : null;
 	}
 
 	private Collection<? extends GrantedAuthority> resolveAuthorities() {
 		Set<GrantedAuthority> permissions = new HashSet<GrantedAuthority>();
 		for (ApplicationRole role: this.user.getRoles()) {
 			for (ApplicationPermission permission: role.getPermissions()) {
-				permissions.add(new SimpleGrantedAuthority("ROLE_" + permission.getPermissionName()));
+				permissions.add(new SimpleGrantedAuthority(ROLE_VOTER_PREFIX + permission.getPermissionName()));
 			}
 		}
 		return permissions;
+	}
+	
+	public boolean hasAuthority(String authorityName) {
+		return this.authorities.contains(ROLE_VOTER_PREFIX + authorityName); 
 	}
 
 	@Override

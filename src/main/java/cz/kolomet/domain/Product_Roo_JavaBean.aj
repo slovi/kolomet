@@ -9,6 +9,7 @@ import cz.kolomet.domain.Producer;
 import cz.kolomet.domain.Product;
 import cz.kolomet.domain.ProductAttribute;
 import cz.kolomet.domain.Seller;
+import cz.kolomet.domain.codelist.ProductUsage;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -70,6 +71,14 @@ privileged aspect Product_Roo_JavaBean {
     
     public void Product.setProducer(Producer producer) {
         this.producer = producer;
+    }
+    
+    public ProductUsage Product.getProductUsage() {
+        return this.productUsage;
+    }
+    
+    public void Product.setProductUsage(ProductUsage productUsage) {
+        this.productUsage = productUsage;
     }
     
     public Boolean Product.getEnabled() {

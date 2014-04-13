@@ -26,5 +26,6 @@
         <h2>Photo urls</h2>
         <c:set scope="request" value="${product.photoUrls}" var="photourls"/>
         <jsp:include flush="true" page="../photourls/list.jspx"/>
+        <field:display field="productUsage" id="s_cz_kolomet_domain_Product_productUsage" object="${product}" z="JI+MfFfKQkLleGQoDQIP6o0YWLw="/>
     </page:show>
 </div>

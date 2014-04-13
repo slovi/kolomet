@@ -32,6 +32,8 @@
       			<form:input cssClass="amountFromInput" path="weightFrom" size="3" /><form:input cssClass="amountToInput" path="weightTo" size="3" />
 	      		<div><!--  --></div>
       		</div>
+      		
+      		<field:select field="productUsage" id="c_cz_kolomet_domain_Product_productUsage" cssClass="filter_input" itemValue="id" items="${productusages}" emptyLabel="Všechna použití" renderLabel="true" itemLabel="codeDescription" path="/productusages" z="E5n2YmAp4hexrA+VnCnD/HiTRH0=" inline="true" required="false"/>
 
 			<div class="clear button_filter">
 	      		<spring:message code="button_filter" var="save_filter" htmlEscape="false" />

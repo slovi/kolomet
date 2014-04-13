@@ -16,9 +16,6 @@ import org.hibernate.Filter;
 import org.hibernate.Session;
 import org.springframework.orm.jpa.EntityManagerHolder;
 import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import cz.kolomet.security.ApplicationUserDetails;
@@ -117,9 +114,7 @@ public class HibernateFilterActivatorFilter extends OpenEntityManagerInViewFilte
 
 		@Override
 		public Boolean apply() {
-			SecurityContext holder = SecurityContextHolder.getContext();
-			ApplicationUserDetails details = (ApplicationUserDetails) holder.getAuthentication().getPrincipal();
-			return details.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_per_products_own"));
+			return ApplicationUserDetails.getActualApplicationUserDetails().hasAuthority("per_products_own");
 		}
 		
 		@Override
@@ -129,9 +124,7 @@ public class HibernateFilterActivatorFilter extends OpenEntityManagerInViewFilte
 
 		@Override
 		public Long paramValue() {
-			SecurityContext holder = SecurityContextHolder.getContext();
-			ApplicationUserDetails details = (ApplicationUserDetails) holder.getAuthentication().getPrincipal();			
-			return details.getSellerId();
+			return ApplicationUserDetails.getActualApplicationUserDetails().getSellerId();
 		}
 		
 	}

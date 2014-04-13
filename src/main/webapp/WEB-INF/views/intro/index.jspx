@@ -24,7 +24,7 @@
 	     	</div>
 	     </div>
 	</c:forEach>
-
-    <div class="clear" />		           	         
+	
+	<div class="clear"><!--  --></div>	           	         
 
 </div>

@@ -27,7 +27,7 @@
 			</div>
 			<div class="login_button_field">
 				<button id="login_form_button" type="submit" name="login">Přihlásit se</button>
-				<spring:url value="/public/registration/index" var="registrationUrl" />
+				<spring:url value="/public/registrationrequests?form" var="registrationUrl" />
 				<a id="register_form_button" class="action_button_dark" href="${registrationUrl}">Registrovat</a>
 			</div>
 		</form>

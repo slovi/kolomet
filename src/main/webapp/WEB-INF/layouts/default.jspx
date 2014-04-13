@@ -21,12 +21,12 @@
 		    <tiles:insertAttribute name="menu_main"/>   
 		    <div id="center_container">
 		    	<tiles:insertAttribute name="menu_side"/>
-		    	<tiles:insertAttribute name="news"/>
 		    	<div id="content_container_short">
+			    	<tiles:insertAttribute name="news"/>
 	    			<tiles:insertAttribute name="body"/>
+			    	<tiles:insertAttribute name="footer"/>
 	    		</div> 
 		    </div>
-	    	<tiles:insertAttribute name="footer"/>
 		    <tiles:insertAttribute name="login" />
 		</div>
 	</body>

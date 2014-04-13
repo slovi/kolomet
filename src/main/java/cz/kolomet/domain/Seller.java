@@ -52,7 +52,7 @@ public class Seller extends DomainEntity {
     
     private String sellerTitle;
     
-    private Boolean enabled;
+    private Boolean enabled = true;
     
     // zodpovedna osoba
     @Size(max = 20)

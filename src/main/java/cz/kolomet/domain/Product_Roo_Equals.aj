@@ -17,11 +17,11 @@ privileged aspect Product_Roo_Equals {
             return true;
         }
         Product rhs = (Product) obj;
-        return new EqualsBuilder().append(canSendToAllCountry, rhs.canSendToAllCountry).append(created, rhs.created).append(description, rhs.description).append(discount, rhs.discount).append(enabled, rhs.enabled).append(id, rhs.id).append(lastModified, rhs.lastModified).append(price, rhs.price).append(productName, rhs.productName).append(validTo, rhs.validTo).isEquals();
+        return new EqualsBuilder().append(canSendToAllCountry, rhs.canSendToAllCountry).append(created, rhs.created).append(description, rhs.description).append(discount, rhs.discount).append(enabled, rhs.enabled).append(id, rhs.id).append(lastModified, rhs.lastModified).append(price, rhs.price).append(productName, rhs.productName).append(productUsage, rhs.productUsage).append(validTo, rhs.validTo).isEquals();
     }
     
     public int Product.hashCode() {
-        return new HashCodeBuilder().append(canSendToAllCountry).append(created).append(description).append(discount).append(enabled).append(id).append(lastModified).append(price).append(productName).append(validTo).toHashCode();
+        return new HashCodeBuilder().append(canSendToAllCountry).append(created).append(description).append(discount).append(enabled).append(id).append(lastModified).append(price).append(productName).append(productUsage).append(validTo).toHashCode();
     }
     
 }

@@ -235,3 +235,5 @@ service --interface ~.service.RegistrationRequestService --entity ~.domain.Regis
 web mvc scaffold --class ~.web.RegistrationRequestController --backingType ~.domain.RegistrationRequest
 web mvc scaffold --class ~.web.RegistrationRequestController --backingType ~.domain.RegistrationRequest --path /admin/registrationrequests
 web mvc scaffold --class ~.web.ProductUsageController --backingType ~.domain.codelist.ProductUsage --path /admin/productusages
+controller class --class ~.web.RegistrationController --preferredMapping /public/registration
+controller scaffold --class ~.web.pub.RegistrationRequestController --path /public/registrationrequests --disallowedOperations update,delete --entity ~.domain.RegistrationRequest

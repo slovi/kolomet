@@ -7,10 +7,7 @@
 	<definition extends="default_admin" name="admin/registrationrequests/show">
         <put-attribute name="body" value="/WEB-INF/views/admin/registrationrequests/show.jspx"/>
     </definition>
-	<definition extends="default_admin" name="admin/registrationrequests/create">
-        <put-attribute name="body" value="/WEB-INF/views/admin/registrationrequests/create.jspx"/>
-    </definition>
 	<definition extends="default_admin" name="admin/registrationrequests/update">
         <put-attribute name="body" value="/WEB-INF/views/admin/registrationrequests/update.jspx"/>
     </definition>
-</tiles-definitions>
+</tiles-definitions> 

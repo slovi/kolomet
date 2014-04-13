@@ -1,4 +1,4 @@
-package cz.kolomet.web;
+package cz.kolomet.web.admin;
 
 import cz.kolomet.domain.codelist.ProductUsage;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
