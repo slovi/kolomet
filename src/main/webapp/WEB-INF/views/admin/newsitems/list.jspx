@@ -5,7 +5,7 @@
     <page:list id="pl_cz_kolomet_domain_NewsItem" items="${newsitems}" z="EdonLnudWq22eyfrC6cVJF06bN8=">
         <table:table data="${newsitems}" id="l_cz_kolomet_domain_NewsItem" path="/admin/newsitems" z="user-managed">
             <table:column date="true" dateTimePattern="${newsItem_newsitemdate_date_format}" id="c_cz_kolomet_domain_NewsItem_newsItemDate" property="newsItemDate" z="hpbItkUpEgI3kl4eBPgz6mjtY9s="/>
-            <table:column id="c_cz_kolomet_domain_NewsItem_enabled" property="enabled" z="nf3mqWLZLYHog6DTvBNMwOVNjLA=" bool="true" />
+            <table:column bool="true" id="c_cz_kolomet_domain_NewsItem_enabled" property="enabled" z="user-managed"/>
             <table:column id="c_cz_kolomet_domain_NewsItem_createdBy" property="createdBy" z="KGeow2wdw22ebF0+/XMBuld8EaI="/>
             <table:column id="c_cz_kolomet_domain_NewsItem_lastModifiedBy" property="lastModifiedBy" z="CHpgyBXG4rgatw8GyKRU5o6a31U="/>
             <table:column date="true" dateTimePattern="${newsItem_created_date_format}" id="c_cz_kolomet_domain_NewsItem_created" property="created" z="AEC+2crl1x2+x7jXMR9nH7SqxZg="/>

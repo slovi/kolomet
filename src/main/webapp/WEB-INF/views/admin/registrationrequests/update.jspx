@@ -9,5 +9,6 @@
         <field:input field="email" id="c_cz_kolomet_domain_RegistrationRequest_email" required="true" validationMessageCode="field_invalid_email" z="3tdY7pKqaACR3BvclB5bKSdao3U="/>
         <field:input field="phone" id="c_cz_kolomet_domain_RegistrationRequest_phone" required="true" z="1f5AqJYIcUKfbou0NXbBxcHra9g="/>
         <field:input field="text" id="c_cz_kolomet_domain_RegistrationRequest_text" z="W5MBM7kYqd+yCqT/Vs00Lj5YoA8="/>
+        <field:input field="captchaText" id="c_cz_kolomet_domain_RegistrationRequest_captchaText" z="U3oUtCmGe6VdYh468OBWnzOCvK0="/>
     </form:update>
 </div>

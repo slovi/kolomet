@@ -7,7 +7,7 @@
             <spring:message code="registration_success"/>
         </p>
     </util:panel>
-    <page:show delete="false" id="ps_cz_kolomet_domain_RegistrationRequest" object="${registrationrequest}" path="/public/registrationrequests" update="false" z="kPFsGsAJfK+mXWDAnbrJtLpo5RA=" render="false">
+    <page:show delete="false" id="ps_cz_kolomet_domain_RegistrationRequest" object="${registrationrequest}" path="/public/registrationrequests" render="false" update="false" z="user-managed">
         <field:display field="createdBy" id="s_cz_kolomet_domain_RegistrationRequest_createdBy" object="${registrationrequest}" z="nF0WPFNUYxYx/enQnS/AsOBQazE="/>
         <field:display field="lastModifiedBy" id="s_cz_kolomet_domain_RegistrationRequest_lastModifiedBy" object="${registrationrequest}" z="AKq7gqdmcrmKiIUV0JibY8/3tuI="/>
         <field:display date="true" dateTimePattern="${registrationRequest_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_RegistrationRequest_lastModified" object="${registrationrequest}" z="rm0up47v72C06J4/JKn6suiQwO8="/>

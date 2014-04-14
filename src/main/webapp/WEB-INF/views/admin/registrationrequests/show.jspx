@@ -10,5 +10,6 @@
         <field:display field="email" id="s_cz_kolomet_domain_RegistrationRequest_email" object="${registrationrequest}" z="qTnr6swCU5cMWjIb6BzDzyIkY8s="/>
         <field:display field="phone" id="s_cz_kolomet_domain_RegistrationRequest_phone" object="${registrationrequest}" z="pF+Mz9gZZ5WGLFkfkCVfw2dmGEM="/>
         <field:display field="text" id="s_cz_kolomet_domain_RegistrationRequest_text" object="${registrationrequest}" z="user-managed"/>
+        <field:display field="captchaText" id="s_cz_kolomet_domain_RegistrationRequest_captchaText" object="${registrationrequest}" z="ohOVRSmfxjAkqLggkhtzoapbyHc="/>
     </page:show>
 </div>

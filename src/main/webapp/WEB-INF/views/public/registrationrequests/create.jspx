@@ -9,11 +9,9 @@
         <field:input field="email" id="c_cz_kolomet_domain_RegistrationRequest_email" required="true" validationMessageCode="field_invalid_email" z="3tdY7pKqaACR3BvclB5bKSdao3U="/>
         <field:input field="phone" id="c_cz_kolomet_domain_RegistrationRequest_phone" required="true" z="1f5AqJYIcUKfbou0NXbBxcHra9g="/>
         <field:editor field="text" id="c_cz_kolomet_domain_RegistrationRequest_text" z="user-managed"/>
-        
-        <spring:url value="/captcha" var="captchaImgUrl" />
-        <img src="${captchaImgUrl}" />
-        
-        <field:input field="captchaText" id="c_cz_kolomet_domain_RegistrationRequest_captchaText" required="true" z="j+Mn0sVuILa2CsEIR0KXBVqNfw8="/>
+        <spring:url value="/captcha" var="captchaImgUrl"/>
+        <img src="${captchaImgUrl}"/>
+        <field:input field="captchaText" id="c_cz_kolomet_domain_RegistrationRequest_captchaText" z="U3oUtCmGe6VdYh468OBWnzOCvK0="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_cz_kolomet_domain_RegistrationRequest" render="${not empty dependencies}" z="oFNFDgAeVRZivlbGYERSXA19isw="/>
 </div>

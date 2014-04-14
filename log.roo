@@ -243,3 +243,4 @@ controller scaffold --class ~.web.pub.RegistrationRequestController --path /publ
 // Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2014-04-14 02:48:09
 controller class --class ~.web.UserProfileController --preferredMapping /private/userprofile
 // Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2014-04-14 09:00:25
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2014-04-14 23:26:23
