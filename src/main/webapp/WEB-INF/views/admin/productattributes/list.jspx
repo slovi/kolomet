@@ -7,6 +7,7 @@
             <table:column id="c_cz_kolomet_domain_ProductAttribute_attributeType" property="attributeType.codeDescription" z="user-managed"/>
             <table:column id="c_cz_kolomet_domain_ProductAttribute_product" property="product" render="false" z="user-managed"/>
             <table:column id="c_cz_kolomet_domain_ProductAttribute_attributeValue" property="attributeValue" z="cd6lKc69qSnLK6Du4l90AqD77+c="/>
+            <table:column id="c_cz_kolomet_domain_codelist_ProductAttributeType_units" property="attributeType.units" z="user-managed"/>
             <table:column id="c_cz_kolomet_domain_ProductAttribute_createdBy" property="createdBy" z="lPrLzTg4fNX0NL5AIFKpOfWGXuM="/>
             <table:column id="c_cz_kolomet_domain_ProductAttribute_lastModifiedBy" property="lastModifiedBy" z="Ks5TLOEf2zI0ABjaryLvH37i6Lg="/>
             <table:column date="true" dateTimePattern="${productAttribute_created_date_format}" id="c_cz_kolomet_domain_ProductAttribute_created" property="created" z="VG0YUSHsPRcTawMCKG2d1gBBtyI="/>

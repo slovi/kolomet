@@ -67,21 +67,6 @@ privileged aspect CategoryController_Roo_Controller {
         return "admin/categorys/show";
     }
     
-    @RequestMapping(produces = "text/html")
-    public String CategoryController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        if (page != null || size != null) {
-            int sizeNo = size == null ? 10 : size.intValue();
-            final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
-            uiModel.addAttribute("categorys", categoryService.findCategoryEntries(firstResult, sizeNo));
-            float nrOfPages = (float) categoryService.countAllCategorys() / sizeNo;
-            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
-        } else {
-            uiModel.addAttribute("categorys", categoryService.findAllCategorys());
-        }
-        addDateTimeFormatPatterns(uiModel);
-        return "admin/categorys/list";
-    }
-    
     @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
     public String CategoryController.update(@Valid Category category, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {

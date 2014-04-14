@@ -12,4 +12,5 @@ import org.springframework.roo.addon.tostring.RooToString;
 @RooEquals
 @RooSerializable
 public class ProductUsage extends Codelist {
+	
 }

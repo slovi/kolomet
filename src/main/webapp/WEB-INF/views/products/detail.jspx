@@ -26,11 +26,12 @@
 	           		<spring:message code="label_cz_kolomet_domain_product_discount" />: <span class="discount"><spring:eval expression="product.discount" /></span><spring:message code="currency" />
            		</c:if>
            	</p>
-           	<spring:url value="/public/sellers/detail/${product.seller.id}" var="sellerUrl" />
-       		<p class="detail_seller right"><a href="${sellerUrl}"><c:out value="${product.seller.sellerName}" /></a>, <c:out value="${product.seller.addressCity}" /><br/>
-           		<c:out value="${product.seller.addressStreet}" />, <c:out value="${product.seller.addressPostCode}" /><a href="">mapa</a><br/>
-            	<c:out value="${product.seller.businessPhoneNumber}" />
-            </p>
+      		<p class="detail_seller right">
+           		<spring:url value="/public/sellers/detail/${product.seller.id}" var="sellerIdUrl" />
+	            <a href="${sellerIdUrl}"><c:out value="${product.seller.sellerName}" /></a><br/>
+	            <c:out value="${product.seller.addressStreet}" />, <c:out value="${product.seller.addressPostCode}" />, <c:out value="${product.seller.addressCity}" /><br/>
+	            <spring:message code="label_cz_kolomet_domain_seller_businessphonenumber_short" />: <c:out value="${product.seller.businessPhoneNumber}" />, <a href="${mapUrl}">mapa</a>
+           </p>
        	</div>
 	</div>
      
@@ -45,10 +46,20 @@
        				<td><b><spring:message code="label_cz_kolomet_domain_category_categorytype" /></b></td>
        				<td><c:out value="${product.category.categoryType.codeDescription}" /></td>
        			</tr>
+       			<c:if test="${product.deliveryForFree}">
+	       			<tr>
+	       				<td><b><spring:message code="label_cz_kolomet_domain_product_deliveryforfree" /></b></td>
+	       				<td><spring:eval expression="${product.deliveryForFree}" /></td>
+	       			</tr>
+       			</c:if>
+       			<tr>
+       				<td><b><spring:message code="label_cz_kolomet_domain_product_weight" /></b></td>
+       				<td><c:out value="${product.weight}" /><c:out value="Kg" /></td>
+       			</tr>
         		<c:forEach items="${product.productAttributes}" var="attribute">
         			<tr>
         				<td><b><c:out value="${attribute.attributeType.codeDescription}" /></b></td>
-        				<td><c:out value="${attribute.attributeValue}" /></td>
+        				<td><c:out value="${attribute.attributeValue}" /><c:out value="${attribute.attributeType.units}" /></td>
         			</tr>
         		</c:forEach>
        		</table>        		          

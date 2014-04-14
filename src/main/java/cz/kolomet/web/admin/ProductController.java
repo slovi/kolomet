@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,17 +19,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import cz.kolomet.domain.Product;
 import cz.kolomet.domain.ProductAttribute;
 import cz.kolomet.domain.codelist.ProductAttributeType;
+import cz.kolomet.security.ApplicationUserDetails;
 import cz.kolomet.service.ApplicationUserService;
 import cz.kolomet.service.CategoryService;
 import cz.kolomet.service.ProducerService;
 import cz.kolomet.service.ProductAttributeService;
 import cz.kolomet.service.ProductAttributeTypeService;
+import cz.kolomet.service.ProductService;
+import cz.kolomet.service.ProductUsageService;
 import cz.kolomet.service.SellerService;
 
 @RequestMapping("/admin/products")
 @Controller
 @RooWebScaffold(path = "admin/products", formBackingObject = Product.class)
 public class ProductController extends AbstractAdminController {
+	
+	@Autowired
+	ProductService productService;
 	
     @Autowired
     ApplicationUserService applicationUserService;
@@ -46,6 +54,9 @@ public class ProductController extends AbstractAdminController {
     
     @Autowired
     SellerService sellerService;
+    
+    @Autowired
+    ProductUsageService productUsageService;
     
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String create(@Valid Product product, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) throws IOException {
@@ -81,6 +92,19 @@ public class ProductController extends AbstractAdminController {
         productService.updateProduct(product);
         return "redirect:/admin/products/" + encodeUrlPathSegment(product.getId().toString(), httpServletRequest);
     }
+    
+    @RequestMapping(produces = "text/html")
+    public String list(Pageable pageable, Model uiModel) {
+        if (pageable != null) {
+        	Page<Product> page = productService.findProductEntries(pageable, ApplicationUserDetails.getActualApplicationUserDetails().getSellerId());
+            uiModel.addAttribute("products", page.getContent());
+            uiModel.addAttribute("maxPages", page.getTotalPages());
+        } else {
+            uiModel.addAttribute("products", productService.findAllProducts());
+        }
+        addDateTimeFormatPatterns(uiModel);
+        return "admin/products/list";
+    }
 	
     void populateEditForm(Model uiModel, Product product) {
         uiModel.addAttribute("product", product);
@@ -90,6 +114,7 @@ public class ProductController extends AbstractAdminController {
         uiModel.addAttribute("photourls", photoUrlService.findAllPhotoUrls());
         uiModel.addAttribute("producers", producerService.findAllProducers());
         uiModel.addAttribute("productattributes", productAttributeService.findAllProductAttributes());
+        uiModel.addAttribute("productusages", productUsageService.findAllProductUsages());
         uiModel.addAttribute("sellers", sellerService.findAllSellers());
         
         if (product.isNew()) {

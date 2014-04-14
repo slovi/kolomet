@@ -18,6 +18,8 @@ public class ProductAttributeType extends Codelist {
 	@ManyToOne
 	private CategoryType categoryType;
 	
+	private String units;
+	
 	private Boolean required = true;
 	
 }

@@ -37,6 +37,4 @@ public class ProductAttribute extends DomainEntity {
     @Size(max = 100)
     private String attributeValue;
     
-    private String unit;
-    
 }

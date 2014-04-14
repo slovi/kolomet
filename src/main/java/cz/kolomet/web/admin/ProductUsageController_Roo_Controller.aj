@@ -55,21 +55,6 @@ privileged aspect ProductUsageController_Roo_Controller {
         return "admin/productusages/show";
     }
     
-    @RequestMapping(produces = "text/html")
-    public String ProductUsageController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        if (page != null || size != null) {
-            int sizeNo = size == null ? 10 : size.intValue();
-            final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
-            uiModel.addAttribute("productusages", productUsageService.findProductUsageEntries(firstResult, sizeNo));
-            float nrOfPages = (float) productUsageService.countAllProductUsages() / sizeNo;
-            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
-        } else {
-            uiModel.addAttribute("productusages", productUsageService.findAllProductUsages());
-        }
-        addDateTimeFormatPatterns(uiModel);
-        return "admin/productusages/list";
-    }
-    
     @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
     public String ProductUsageController.update(@Valid ProductUsage productUsage, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {

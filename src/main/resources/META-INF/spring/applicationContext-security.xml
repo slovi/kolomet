@@ -9,6 +9,7 @@
 	<http pattern="/background/**" security="none" />
 	<http pattern="/img/**" security="none" />
 	<http pattern="/file/**" security="none" />
+	<http pattern="/captcha" security="none" />
 	<http auto-config="true" use-expressions="true">
 		<intercept-url pattern="/public/**" access="permitAll" />
 		<intercept-url pattern="/private/**" access="isAuthenticated()"/>

@@ -1,6 +1,8 @@
 package cz.kolomet.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
 
 import cz.kolomet.domain.ApplicationUser;
@@ -18,6 +20,10 @@ public class ApplicationUserServiceImpl implements ApplicationUserService {
 		applicationUser.setPassword(passwordEncoder.encodePassword(applicationUser.getPassword(), null));
         applicationUserRepository.save(applicationUser);
     }
+	
+	public Page<ApplicationUser> findApplicationUserEntries(Pageable pageable) {
+		return applicationUserRepository.findAll(pageable);
+	}
 
 	public void updatePassword(ApplicationUserPasswordDto applicationUserPassword) {
 		ApplicationUser user = applicationUserRepository.findByUsername(applicationUserPassword.getUsername());

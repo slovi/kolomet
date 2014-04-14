@@ -16,6 +16,14 @@ privileged aspect ProductAttributeType_Roo_JavaBean {
         this.categoryType = categoryType;
     }
     
+    public String ProductAttributeType.getUnits() {
+        return this.units;
+    }
+    
+    public void ProductAttributeType.setUnits(String units) {
+        this.units = units;
+    }
+    
     public Boolean ProductAttributeType.getRequired() {
         return this.required;
     }

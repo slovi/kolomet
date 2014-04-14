@@ -33,6 +33,13 @@ public class ProductSpecifications {
     	return new Sort(priorityOrder, createdOrder);
 	}
 	
+	public static Sort getDefaultSort(Sort addSort) {
+    	Order priorityOrder = new Order(Direction.DESC, "seller.sellerStatus.priority");
+    	Order createdOrder = new Order(Direction.DESC, "created");
+    	Sort defaultSort = new Sort(priorityOrder, createdOrder);
+    	return addSort.and(defaultSort);
+	}
+	
 	public static Specification<Product> forProductFilter(final ProductFilterDto productFilter) {
 		return new Specification<Product>() {
 
@@ -42,6 +49,8 @@ public class ProductSpecifications {
 				List<Predicate> predicates = new ArrayList<Predicate>();
 				addBetweenNumberPredicate(predicates, cb, root.<BigDecimal> get("price"), productFilter.getPriceFrom(), productFilter.getPriceTo());
 				addBetweenNumberPredicate(predicates, cb, root.<BigDecimal> get("discount"), productFilter.getDiscountFrom(), productFilter.getDiscountTo());
+				addBetweenNumberPredicate(predicates, cb, root.<Integer> get("weight"), productFilter.getWeightFrom(), productFilter.getWeightTo());
+				
 				if (productFilter.getCategory() != null && !productFilter.getCategory().getCodeKey().equals(Category.ALL_CATEGORY_CODE_KEY)) {
 					predicates.add(cb.equal(root.get("category"), productFilter.getCategory()));
 				}

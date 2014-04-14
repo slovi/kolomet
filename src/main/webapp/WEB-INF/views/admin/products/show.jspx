@@ -13,11 +13,14 @@
         <field:display field="seller" id="s_cz_kolomet_domain_Product_seller" object="${product}" z="l9aQBxj/TdL+b5fuw0y3j8Sq9kE="/>
         <field:display field="enabled" id="s_cz_kolomet_domain_Product_enabled" object="${product}" z="G0IkR8nTGchiaDDiIzk06toa8tY="/>
         <field:display field="canSendToAllCountry" id="s_cz_kolomet_domain_Product_canSendToAllCountry" object="${product}" z="O9nFMtTV8x+xjzRoJ3W5IeBEVgs="/>
+        <field:display field="deliveryForFree" id="s_cz_kolomet_domain_Product_deliveryForFree" object="${product}" z="2NTiE7Q9G6FQgcCvsP7+ka/T3lc="/>
         <field:display field="createdBy" id="s_cz_kolomet_domain_Product_createdBy" object="${product}" z="5Vg+fbN/d0tcEic+hEw/+JsTKlw="/>
         <field:display field="lastModifiedBy" id="s_cz_kolomet_domain_Product_lastModifiedBy" object="${product}" z="s65qNTiKmGg5ABoB0x59wClx/hc="/>
         <field:display date="true" dateTimePattern="${product_created_date_format}" field="created" id="s_cz_kolomet_domain_Product_created" object="${product}" z="ZCK6v15HOwhsvMXPFw5ks6hRW6s="/>
         <field:display date="true" dateTimePattern="${product_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_Product_lastModified" object="${product}" z="ZCK6v15HOwhsvMXPFw5ks6hRW6s="/>
         <field:display field="contents" id="s_cz_kolomet_domain_Product_contents" object="${product}" render="false" z="user-managed"/>
+        <field:display field="productUsage" id="s_cz_kolomet_domain_Product_productUsage" object="${product}" z="JI+MfFfKQkLleGQoDQIP6o0YWLw="/>
+        <field:display field="weight" id="s_cz_kolomet_domain_Product_weight" object="${product}" z="DKM+lI+uhSvkiF1NABV/HF0/p+8="/>
         <c:set scope="request" value="${product.id}" var="parentEntityId"/>
         <h2>Product attributes</h2>
         <c:set scope="request" value="${product.productAttributes}" var="productattributes"/>
@@ -26,6 +29,5 @@
         <h2>Photo urls</h2>
         <c:set scope="request" value="${product.photoUrls}" var="photourls"/>
         <jsp:include flush="true" page="../photourls/list.jspx"/>
-        <field:display field="productUsage" id="s_cz_kolomet_domain_Product_productUsage" object="${product}" z="JI+MfFfKQkLleGQoDQIP6o0YWLw="/>
     </page:show>
 </div>

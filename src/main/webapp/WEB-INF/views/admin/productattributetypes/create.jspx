@@ -10,6 +10,7 @@
         <field:datetime dateTimePattern="${productAttributeType_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_codelist_ProductAttributeType_lastModified" render="false" z="user-managed"/>
         <field:select field="categoryType" id="c_cz_kolomet_domain_codelist_ProductAttributeType_categoryType" itemValue="id" items="${categorytypes}" path="/admin/categorytypes" z="user-managed"/>
         <field:checkbox field="required" id="c_cz_kolomet_domain_codelist_ProductAttributeType_required" z="ByC/H2giCVScrtU2QoPFW/W2xvk="/>
+        <field:input field="units" id="c_cz_kolomet_domain_codelist_ProductAttributeType_units" z="VV8bT8/3q/M+rGXDqlCN0PFu5u0="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_cz_kolomet_domain_codelist_ProductAttributeType" render="${not empty dependencies}" z="AFkrxMAl6lF9W6vdIrK74UrLwS0="/>
 </div>

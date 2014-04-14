@@ -18,10 +18,10 @@ public interface ProductRepository {
 	@Query("select p from Product p inner join p.seller s where s.id = :sellerId")
 	Page<Product> findBySellerId(@Param("sellerId") Long sellerId, Pageable pageable);
 	
-	@Query("select p from Product p inner join p.seller s inner join p.producer pr where pr.id = :producerId")
+	@Query("select p from Product p inner join p.seller s inner join p.producer pr where pr = :producer")
 	Page<Product> findByProducerOrderByCreatedDateDesc(@Param("producer") Producer producer, Pageable pageable);
 	
-	@Query("select p from Product p inner join p.category c inner join p.seller s where c.id = :categoryId")
+	@Query("select p from Product p inner join p.category c inner join p.seller s where c = :category")
 	Page<Product> findByCategory(@Param("category") Category category, Pageable pageable);
 	
 	@Query("select p from Product p inner join p.seller s inner join p.category c inner join c.categoryType ct where ct.codeKey = :categoryTypeCodeKey")

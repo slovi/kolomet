@@ -181,7 +181,6 @@ public class Seller extends DomainEntity {
     	}
     	if (StringUtils.isNotEmpty(addressPostCode)) {
     		builder.append(addressPostCode);
-    		builder.append(addressPostCode);
     	}
     	return builder.toString();
     }

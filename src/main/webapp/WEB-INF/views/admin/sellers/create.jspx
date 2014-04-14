@@ -36,8 +36,8 @@
         <field:input field="createdBy" id="c_cz_kolomet_domain_Seller_createdBy" render="false" z="user-managed"/>
         <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_Seller_lastModifiedBy" render="false" z="user-managed"/>
         <field:datetime dateTimePattern="${seller_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_Seller_lastModified" render="false" z="user-managed"/>
-        <field:simple field="products" id="c_cz_kolomet_domain_Seller_products" messageCode="entity_reference_not_managed" messageCodeAttribute="Product" z="AZCEE9YJtU0xKL2/6KEiz1JBwQE=" render="false" />
-        <field:simple field="sellerPhotoUrls" id="c_cz_kolomet_domain_Seller_sellerPhotoUrls" messageCode="entity_reference_not_managed" messageCodeAttribute="Seller Photo Url" z="S65AtaxIF1oprs2bs+Kghp7r5XQ=" render="false"/>
+        <field:simple field="products" id="c_cz_kolomet_domain_Seller_products" messageCode="entity_reference_not_managed" messageCodeAttribute="Product" render="false" z="user-managed"/>
+        <field:simple field="sellerPhotoUrls" id="c_cz_kolomet_domain_Seller_sellerPhotoUrls" messageCode="entity_reference_not_managed" messageCodeAttribute="Seller Photo Url" render="false" z="user-managed"/>
     </form:create>
-    <form:dependency dependencies="${dependencies}" id="d_cz_kolomet_domain_Seller" render="${not empty dependencies}" z="wOb4nwhLxol+WOVpFAt/d7koDnE=" />
+    <form:dependency dependencies="${dependencies}" id="d_cz_kolomet_domain_Seller" render="${not empty dependencies}" z="wOb4nwhLxol+WOVpFAt/d7koDnE="/>
 </div>

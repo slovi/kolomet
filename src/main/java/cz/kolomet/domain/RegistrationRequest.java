@@ -1,5 +1,6 @@
 package cz.kolomet.domain;
 
+import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.roo.addon.equals.RooEquals;
@@ -22,5 +23,9 @@ public class RegistrationRequest extends DomainEntity {
 	private String phone;
 	
 	private String text;
+	
+	@NotNull
+	@Column(insertable = false, updatable = false)
+	private String captchaText;
 	
 }

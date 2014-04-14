@@ -25,7 +25,7 @@
       		<field:select id="c_cz_kolomet_domain_Product_producer" cssClass="filter_input" items="${producers}" field="producer" path="/producers" emptyLabel="Všechny značky" renderLabel="true" itemValue="id" itemLabel="codeDescription" inline="true" required="false" />
 			<field:select id="c_cz_kolomet_domain_Seller_region" cssClass="filter_input" items="${regions}" field="region" path="/regions" emptyLabel="Všechny regiony" renderLabel="true" itemValue="id" itemLabel="codeDescription" inline="true" required="false" />
 
-			<field:checkbox id="c_cz_kolomet_domain_Product_canSendToAllCountry" cssClass="filter_input filter_input_checkbox" field="canSendToAllCountry" />
+			<field:checkbox id="c_cz_kolomet_domain_Product_canSendToAllCountry" cssClass="filter_input" field="canSendToAllCountry" />
 
 			<div id="weight_slider" class="slider filter_input">
       			<spring:message code="products_list_filter_weight" />: 
@@ -33,25 +33,71 @@
 	      		<div><!--  --></div>
       		</div>
       		
-      		<field:select field="productUsage" id="c_cz_kolomet_domain_Product_productUsage" cssClass="filter_input" itemValue="id" items="${productusages}" emptyLabel="Všechna použití" renderLabel="true" itemLabel="codeDescription" path="/productusages" z="E5n2YmAp4hexrA+VnCnD/HiTRH0=" inline="true" required="false"/>
+      		<field:select id="c_cz_kolomet_domain_Product_productUsage" cssClass="filter_input" itemValue="id" items="${productusages}" field="productUsage" emptyLabel="Všechna použití" renderLabel="true" itemLabel="codeDescription" path="/productusages" z="E5n2YmAp4hexrA+VnCnD/HiTRH0=" inline="true" required="false"/>
 
 			<div class="clear button_filter">
 	      		<spring:message code="button_filter" var="save_filter" htmlEscape="false" />
 	      		<input type="hidden" name="page.page" value="${products.number}" />
 	      		<input type="hidden" name="page.size" value="${products.size}" />
+	      		<input type="hidden" name="page.sort" value="${param['page.sort']}" />
+	      		<input type="hidden" name="page.sort.dir" value="${param['page.sort.dir']}" />
 	          	<input type="submit" value="${fn:escapeXml(save_filter)}"/>
           	</div>            
 	    </div>
 	    
 	    <script>
 	    	require(['slider'], function(slider) {
-	    		slider.slider('price_slider', 0, 100000, 5000, 20000, 500);
-	    		slider.slider('discount_slider', 0, 10000, 1000, 5000, 500);
-	    		slider.slider('weight_slider', 0, 30, 5, 15, 1);
+	    		slider.slider('price_slider', 0, 100000, 0, 100000, 500);
+	    		slider.slider('discount_slider', 0, 10000, 0, 10000, 500);
+	    		slider.slider('weight_slider', 0, 50, 0, 50, 1);
 	    	});
 	    </script>
 	    
-	  	<div class="sorting">Řadit podle: <a href="#" onclick="document.getElementById('filterForm').submit(); return false;">cena</a></div>
+	    <spring:url value="/public/products/filter" var="sortPriceUrl">
+			<c:forEach items="${paramValues}" var="p">
+				<c:if test="${p.key ne 'page.sort' and p.key ne 'page.sort.dir'}">
+					<c:forEach items="${p.value}" var="value">
+						<spring:param name="${p.key}" value="${value}" />
+					</c:forEach>
+				</c:if>
+				<c:if test="${p.key eq 'page.sort.dir'}">
+					<c:set value="true" var="sortOrderSet" />
+					<c:if test="${p.value[0] eq 'asc'}">
+						<spring:param name="page.sort.dir" value="desc" />
+					</c:if>
+					<c:if test="${p.value[0] eq 'desc'}">
+						<spring:param name="page.sort.dir" value="asc" />
+					</c:if>
+				</c:if>
+			</c:forEach>
+			<spring:param name="page.sort" value="price" />
+			<c:if test="${not sortOrderSet}">                    	
+                <spring:param name="page.sort.dir" value="asc" />
+            </c:if>
+		</spring:url>
+		<spring:url value="/public/products/filter" var="sortDiscountUrl">
+			<c:forEach items="${paramValues}" var="p">
+				<c:if test="${p.key ne 'page.sort' and p.key ne 'page.sort.dir'}">
+					<c:forEach items="${p.value}" var="value">
+						<spring:param name="${p.key}" value="${value}" />
+					</c:forEach>
+				</c:if>
+				<c:if test="${p.key eq 'page.sort.dir'}">
+					<c:set value="true" var="sortOrderSet" />
+					<c:if test="${p.value[0] eq 'asc'}">
+						<spring:param name="page.sort.dir" value="desc" />
+					</c:if>
+					<c:if test="${p.value[0] eq 'desc'}">
+						<spring:param name="page.sort.dir" value="asc" />
+					</c:if>
+				</c:if>
+			</c:forEach>
+			<spring:param name="page.sort" value="discount" />
+			<c:if test="${not sortOrderSet}">                    	
+                <spring:param name="page.sort.dir" value="asc" />
+            </c:if>
+		</spring:url>
+	  	<div class="sorting">Řadit podle: <a href="${sortPriceUrl}">cena</a>, <a href="${sortDiscountUrl}">sleva</a></div>
 			        	
 		<div class="pages">Strana: 
 			<c:if test="${products.totalPages gt 0}">
@@ -64,13 +110,13 @@
 			<c:choose>
 				<c:when test="${products.number + 1 gt 1}">
 					<spring:url value="/public/products/filter" var="firstPageUrl">
-						<spring:param name="priceFrom" value="${productFilter.priceFrom}" />
-						<spring:param name="priceTo" value="${productFilter.priceTo}" />
-						<spring:param name="discountFrom" value="${discountFrom.discountFrom}" />
-						<spring:param name="discountTo" value="${discountTo.discountTo}" />
-						<spring:param name="category" value="${productFilter.category.id}" />
-						<spring:param name="producer" value="${productFilter.producer.id}" />
-						<spring:param name="region" value="${productFilter.region.id}" />
+						<c:forEach items="${paramValues}" var="p">
+							<c:if test="${p.key ne 'page.size' and p.key ne 'page.page'}">
+								<c:forEach items="${p.value}" var="value">
+									<spring:param name="${p.key}" value="${value}" />
+								</c:forEach>
+							</c:if>
+						</c:forEach>
 						<spring:param name="page.page" value="1" />
 						<spring:param name="page.size" value="${products.size}" />
 					</spring:url>
@@ -84,13 +130,13 @@
 			<c:choose>
 				<c:when test="${products.number + 1 gt 1}">
 					<spring:url value="/public/products/filter" var="previousPageUrl">
-						<spring:param name="priceFrom" value="${productFilter.priceFrom}" />
-						<spring:param name="priceTo" value="${productFilter.priceTo}" />
-						<spring:param name="discountFrom" value="${discountFrom.discountFrom}" />
-						<spring:param name="discountTo" value="${discountTo.discountTo}" />
-						<spring:param name="category" value="${productFilter.category.id}" />
-						<spring:param name="producer" value="${productFilter.producer.id}" />
-						<spring:param name="region" value="${productFilter.region.id}" />
+						<c:forEach items="${paramValues}" var="p">
+							<c:if test="${p.key ne 'page.size' and p.key ne 'page.page'}">
+								<c:forEach items="${p.value}" var="value">
+									<spring:param name="${p.key}" value="${value}" />
+								</c:forEach>
+							</c:if>
+						</c:forEach>
 						<spring:param name="page.page" value="${products.number}" />
 						<spring:param name="page.size" value="${products.size}" />
 					</spring:url>
@@ -104,13 +150,13 @@
 			<c:forEach begin="0" end="${totalPages}" varStatus="status" step="1">
 				<c:if test="${status.index != products.number}">
 					<spring:url value="/public/products/filter" var="pageUrl">
-						<spring:param name="priceFrom" value="${productFilter.priceFrom}" />
-						<spring:param name="priceTo" value="${productFilter.priceTo}" />
-						<spring:param name="discountFrom" value="${discountFrom.discountFrom}" />
-						<spring:param name="discountTo" value="${discountTo.discountTo}" />
-						<spring:param name="category" value="${productFilter.category.id}" />
-						<spring:param name="producer" value="${productFilter.producer.id}" />
-						<spring:param name="region" value="${productFilter.region.id}" />
+						<c:forEach items="${paramValues}" var="p">
+							<c:if test="${p.key ne 'page.size' and p.key ne 'page.page'}">
+								<c:forEach items="${p.value}" var="value">
+									<spring:param name="${p.key}" value="${value}" />
+								</c:forEach>
+							</c:if>
+						</c:forEach>
 						<spring:param name="page.page" value="${status.index + 1}" />
 						<spring:param name="page.size" value="${products.size}" />
 					</spring:url>
@@ -123,18 +169,18 @@
 			
 			<c:choose>
 				<c:when test="${products.number + 1 lt products.totalPages}">
-					<spring:url value="/public/products/filter" var="previousPageUrl">
-						<spring:param name="priceFrom" value="${productFilter.priceFrom}" />
-						<spring:param name="priceTo" value="${productFilter.priceTo}" />
-						<spring:param name="discountFrom" value="${discountFrom.discountFrom}" />
-						<spring:param name="discountTo" value="${discountTo.discountTo}" />
-						<spring:param name="category" value="${productFilter.category.id}" />
-						<spring:param name="producer" value="${productFilter.producer.id}" />
-						<spring:param name="region" value="${productFilter.region.id}" />
-						<spring:param name="page.page" value="${products.totalPages}" />
+					<spring:url value="/public/products/filter" var="nextPageUrl">
+						<c:forEach items="${paramValues}" var="p">
+							<c:if test="${p.key ne 'page.size' and p.key ne 'page.page'}">
+								<c:forEach items="${p.value}" var="value">
+									<spring:param name="${p.key}" value="${value}" />
+								</c:forEach>
+							</c:if>
+						</c:forEach>
+						<spring:param name="page.page" value="${products.number + 2}" />
 						<spring:param name="page.size" value="${products.size}" />
 					</spring:url>
-					<a href="${previousPageUrl}">&#8250;</a>&#160;
+					<a href="${nextPageUrl}">&#8250;</a>&#160;
 				</c:when>
 				<c:otherwise>
 					&#8250;&#160;
@@ -143,18 +189,18 @@
 			
 			<c:choose>
 				<c:when test="${products.number + 1 lt products.totalPages}">
-					<spring:url value="/public/products/filter" var="firstPageUrl">
-						<spring:param name="priceFrom" value="${productFilter.priceFrom}" />
-						<spring:param name="priceTo" value="${productFilter.priceTo}" />
-						<spring:param name="discountFrom" value="${discountFrom.discountFrom}" />
-						<spring:param name="discountTo" value="${discountTo.discountTo}" />
-						<spring:param name="category" value="${productFilter.category.id}" />
-						<spring:param name="producer" value="${productFilter.producer.id}" />
-						<spring:param name="region" value="${productFilter.region.id}" />
-						<spring:param name="page.page" value="${products.number + 2}" />
+					<spring:url value="/public/products/filter" var="lastPageUrl">
+						<c:forEach items="${paramValues}" var="p">
+							<c:if test="${p.key ne 'page.size' and p.key ne 'page.page'}">
+								<c:forEach items="${p.value}" var="value">
+									<spring:param name="${p.key}" value="${value}" />
+								</c:forEach>
+							</c:if>
+						</c:forEach>						
+						<spring:param name="page.page" value="${products.totalPages}" />
 						<spring:param name="page.size" value="${products.size}" />
 					</spring:url>
-					<a href="${firstPageUrl}">&#187;</a>&#160;
+					<a href="${lastPageUrl}">&#187;</a>&#160;
 				</c:when>
 				<c:otherwise>
 					&#187;&#160;
@@ -175,7 +221,12 @@
 	    	</a>
 	    	<div class="cat_description"> 
 	    		<a href="${productIdUrl}" class="label"><c:out value="${product.productName}" /></a>
-	    		<p class="price"><spring:eval expression="product.price" /><spring:message code="currency" /></p>
+	    		<p class="price">
+	    			<spring:eval expression="product.price" /><spring:message code="currency" />
+	    			<c:if test="${not empty product.discount}">
+	    				(sleva: <spring:eval expression="product.discount" /><spring:message code="currency" />)
+	    			</c:if>
+	    		</p>
 	    		<p><spring:message code="label_cz_kolomet_domain_product_producer" />: <spring:eval expression="product.producer.codeDescription" /></p>
 	        	<p><c:out value="${fn:substring(product.description, 0, 250)}" />...</p>
 	        	<p><spring:eval expression="product.created" /></p>
@@ -183,9 +234,9 @@
 	        <div class="cat_seller"> 
 	        	<p>
 	        		<spring:url value="/public/sellers/detail/${product.seller.id}" var="sellerIdUrl" />
-	                <a href="${sellerIdUrl}"><c:out value="${product.seller.sellerName}" /></a>, ${product.seller.addressCity}<br/>
-	            	<c:out value="${product.seller.addressStreet}" />, <c:out value="${product.seller.addressPostCode}" />, <c:out value="${product.seller.addressCity}" /><a href="${mapUrl}">mapa</a><br/>
-	                <c:out value="${product.seller.businessPhoneNumber}" />
+	                <a href="${sellerIdUrl}"><c:out value="${product.seller.sellerName}" /></a><br/>
+	            	<c:out value="${product.seller.addressStreet}" />, <c:out value="${product.seller.addressPostCode}" />, <c:out value="${product.seller.addressCity}" /><br/>
+	                <spring:message code="label_cz_kolomet_domain_seller_businessphonenumber_short" />: <c:out value="${product.seller.businessPhoneNumber}" />, <a href="${mapUrl}">mapa</a>
 	            </p>
 	        	<div>
 	                <a class="action_button_dark" target="_blank" href="${buyUrl}">Objednat</a>

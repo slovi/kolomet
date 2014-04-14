@@ -105,6 +105,22 @@ privileged aspect Product_Roo_JavaBean {
         this.canSendToAllCountry = canSendToAllCountry;
     }
     
+    public Boolean Product.getDeliveryForFree() {
+        return this.deliveryForFree;
+    }
+    
+    public void Product.setDeliveryForFree(Boolean deliveryForFree) {
+        this.deliveryForFree = deliveryForFree;
+    }
+    
+    public Integer Product.getWeight() {
+        return this.weight;
+    }
+    
+    public void Product.setWeight(Integer weight) {
+        this.weight = weight;
+    }
+    
     public List<PhotoUrl> Product.getPhotoUrls() {
         return this.photoUrls;
     }

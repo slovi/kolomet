@@ -237,3 +237,8 @@ web mvc scaffold --class ~.web.RegistrationRequestController --backingType ~.dom
 web mvc scaffold --class ~.web.ProductUsageController --backingType ~.domain.codelist.ProductUsage --path /admin/productusages
 controller class --class ~.web.RegistrationController --preferredMapping /public/registration
 controller scaffold --class ~.web.pub.RegistrationRequestController --path /public/registrationrequests --disallowedOperations update,delete --entity ~.domain.RegistrationRequest
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2014-04-13 16:53:55
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2014-04-14 02:43:22
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2014-04-14 02:48:02
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2014-04-14 02:48:09
+controller class --class ~.web.UserProfileController --preferredMapping /private/userprofile

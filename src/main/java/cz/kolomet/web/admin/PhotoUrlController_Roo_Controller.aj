@@ -59,7 +59,6 @@ privileged aspect PhotoUrlController_Roo_Controller {
         uiModel.addAttribute("photoUrl", photoUrl);
         addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("applicationusers", applicationUserService.findAllApplicationUsers());
-        uiModel.addAttribute("products", productService.findAllProducts());
     }
     
     String PhotoUrlController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

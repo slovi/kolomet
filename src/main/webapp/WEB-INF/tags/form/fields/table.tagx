@@ -61,26 +61,26 @@
                     <c:set var="sortOrderClass" value="sorting" />
                     <spring:url value="" var="querySortUrl">
                         <c:forEach items="${paramValues}" var="p">
-                            <c:if test="${p.key ne 'sortFieldName' and p.key ne 'sortOrder'}">
+                            <c:if test="${p.key ne 'page.sort' and p.key ne 'page.sort.dir'}">
                                 <c:forEach var='value' items='${p.value}'>
                                     <spring:param name="${p.key}" value="${value}" />
                                 </c:forEach>
                             </c:if>
-                            <c:if test="${p.key eq 'sortOrder' and paramValues['sortFieldName'][0] eq columnProperty}">
+                            <c:if test="${p.key eq 'page.sort.dir' and paramValues['page.sort'][0] eq columnProperty}">
                                 <c:set var="sortOrderSet" value="true" />
                                 <c:if test="${p.value[0] eq 'asc'}">
-                                    <spring:param name="sortOrder" value="desc" />
+                                    <spring:param name="page.sort.dir" value="desc" />
                                     <c:set var="sortOrderClass" value="sorting_desc" />
                                 </c:if>
                                 <c:if test="${p.value[0] eq 'desc'}">
-                                    <spring:param name="sortOrder" value="asc" />
+                                    <spring:param name="page.sort.dir" value="asc" />
                                     <c:set var="sortOrderClass" value="sorting_asc" />
                                 </c:if>
                             </c:if>
                         </c:forEach>
-                        <spring:param name="sortFieldName" value="${columnProperty}" />
-                        <c:if test="${not sortOrderSet}">
-                            <spring:param name="sortOrder" value="asc" />
+                        <spring:param name="page.sort" value="${columnProperty}" />
+                        <c:if test="${not sortOrderSet}">                    	
+                            <spring:param name="page.sort.dir" value="asc" />
                         </c:if>
                     </spring:url>
                     <th><a href="${querySortUrl}" class="${sortOrderClass}"><c:out value="${columnHeading}" /> <spring:eval var="colCounter" expression="colCounter  + 1" /></a></th>
@@ -202,7 +202,7 @@
             <c:out value=" " />
           </c:if>
           <c:if test="${not empty maxPages}">
-            <util:pagination maxPages="${maxPages}" page="${param.page}" size="${param.size}" />
+            <util:pagination maxPages="${maxPages}" page="${param['page.page']}" size="${param['page.size']}" />
           </c:if>
         </td>
       </tr>

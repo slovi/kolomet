@@ -4,12 +4,10 @@
 package cz.kolomet.web.admin;
 
 import cz.kolomet.domain.Product;
-import cz.kolomet.service.ProductService;
 import cz.kolomet.web.admin.ProductController;
 import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
 import org.joda.time.format.DateTimeFormat;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,9 +18,6 @@ import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
 privileged aspect ProductController_Roo_Controller {
-    
-    @Autowired
-    ProductService ProductController.productService;
     
     @RequestMapping(params = "form", produces = "text/html")
     public String ProductController.createForm(Model uiModel) {
@@ -36,21 +31,6 @@ privileged aspect ProductController_Roo_Controller {
         uiModel.addAttribute("product", productService.findProduct(id));
         uiModel.addAttribute("itemId", id);
         return "admin/products/show";
-    }
-    
-    @RequestMapping(produces = "text/html")
-    public String ProductController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        if (page != null || size != null) {
-            int sizeNo = size == null ? 10 : size.intValue();
-            final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
-            uiModel.addAttribute("products", productService.findProductEntries(firstResult, sizeNo));
-            float nrOfPages = (float) productService.countAllProducts() / sizeNo;
-            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
-        } else {
-            uiModel.addAttribute("products", productService.findAllProducts());
-        }
-        addDateTimeFormatPatterns(uiModel);
-        return "admin/products/list";
     }
     
     @RequestMapping(value = "/{id}", params = "form", produces = "text/html")

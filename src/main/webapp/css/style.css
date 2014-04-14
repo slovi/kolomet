@@ -100,10 +100,6 @@ div.filter_input {
 	float: left;
 }
 
-div.filter_input_checkbox div {
-	float: right;
-}
-
 div.button_filter {
 	text-align: right;
 }

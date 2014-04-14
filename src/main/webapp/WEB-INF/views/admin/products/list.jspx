@@ -5,9 +5,7 @@
     <page:list id="pl_cz_kolomet_domain_Product" items="${products}" z="D491Ou5vw8qd0bAckgvUgtO0+QE=">
         <table:table data="${products}" id="l_cz_kolomet_domain_Product" path="/admin/products" z="user-managed">
             <table:column id="c_cz_kolomet_domain_Product_productName" property="productName" sort="true" z="user-managed"/>
-            <security:authorize access="hasAnyRole('ROLE_per_products_all')">
-                <table:column id="c_cz_kolomet_domain_Product_seller" property="seller.sellerName" sort="true" z="a0TMwRPIIK+uZVPOhkqtLmfD/D8="/>
-            </security:authorize>
+			<table:column id="c_cz_kolomet_domain_Product_seller" property="seller.sellerName" sort="true" z="a0TMwRPIIK+uZVPOhkqtLmfD/D8="/>
             <table:column id="c_cz_kolomet_domain_Product_createdBy" property="createdBy" sort="true" z="user-managed"/>
             <table:column id="c_cz_kolomet_domain_Product_lastModifiedBy" property="lastModifiedBy" sort="true" z="user-managed"/>
             <table:column date="true" dateTimePattern="${product_created_date_format}" id="c_cz_kolomet_domain_Product_created" property="created" sort="true" z="user-managed"/>

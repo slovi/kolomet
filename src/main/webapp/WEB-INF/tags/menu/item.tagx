@@ -3,6 +3,8 @@
 
   <jsp:directive.attribute name="id" type="java.lang.String" required="true" rtexprvalue="true" description="The identifier for this tag (do not change!)" />
   <jsp:directive.attribute name="url" type="java.lang.String" required="true" rtexprvalue="true" description="The link URL" />
+  <jsp:directive.attribute name="defaultPageSize" type="java.lang.Integer" required="false" rtexprvalue="true" description="Default page size" />
+  <jsp:directive.attribute name="renderPageParams" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Render page params" />
   <jsp:directive.attribute name="label" type="java.lang.String" required="false" rtexprvalue="true" description="The label used for this menu item" />
   <jsp:directive.attribute name="messageCode" type="java.lang.String" required="false" rtexprvalue="true" description="The global message code to be used (works in conjunction with label)" />
   <jsp:directive.attribute name="render" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Indicate if the contents of this tag and all enclosed tags should be rendered (default 'true')" />
@@ -17,9 +19,20 @@
     <c:if test="${not empty messageCode}">
       <spring:message code="${messageCode}" var="label" arguments="${label}" htmlEscape="false" />
     </c:if>
+    
+    <c:if test="${empty defaultPageSize}">
+      <c:set value="10" var="defaultPageSize" />
+    </c:if>
 
-    <li id="${fn:escapeXml(id)}">
-      <spring:url value="${url}" var="menu_item_url"/>
+    <li id="${fn:escapeXml(id)}">      
+      <spring:url value="${url}" var="menu_item_url">
+	      	<c:if test="${empty renderPageParams or renderPageParams}">
+	      	<spring:param name="page.size" value="${empty param['page.size'] ? defaultPageSize : param['page.size']}" />
+	      	<spring:param name="page.page" value="1" />
+	      	<spring:param name="page.sort" value="created" />
+	      	<spring:param name="page.sort.dir" value="desc" />
+      	</c:if>
+      </spring:url>
       <a href="${menu_item_url}" title="${fn:escapeXml(label)}">
         <c:out value="${label}"/>
       </a>

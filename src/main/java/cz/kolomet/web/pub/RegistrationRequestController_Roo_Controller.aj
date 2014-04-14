@@ -9,14 +9,11 @@ import cz.kolomet.service.RegistrationRequestService;
 import cz.kolomet.web.pub.RegistrationRequestController;
 import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
@@ -27,17 +24,6 @@ privileged aspect RegistrationRequestController_Roo_Controller {
     
     @Autowired
     ApplicationUserService RegistrationRequestController.applicationUserService;
-    
-    @RequestMapping(method = RequestMethod.POST, produces = "text/html")
-    public String RegistrationRequestController.create(@Valid RegistrationRequest registrationRequest, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
-            populateEditForm(uiModel, registrationRequest);
-            return "public/registrationrequests/create";
-        }
-        uiModel.asMap().clear();
-        registrationRequestService.saveRegistrationRequest(registrationRequest);
-        return "redirect:/public/registrationrequests/" + encodeUrlPathSegment(registrationRequest.getId().toString(), httpServletRequest);
-    }
     
     @RequestMapping(params = "form", produces = "text/html")
     public String RegistrationRequestController.createForm(Model uiModel) {

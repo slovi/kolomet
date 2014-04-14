@@ -37,7 +37,6 @@
         <field:display field="lastModifiedBy" id="s_cz_kolomet_domain_Seller_lastModifiedBy" object="${seller}" z="user-managed"/>
         <field:display date="true" dateTimePattern="${seller_created_date_format}" field="created" id="s_cz_kolomet_domain_Seller_created" object="${seller}" z="48dU29Z1V3aNxnXqlKa9LAmsrG4="/>
         <field:display date="true" dateTimePattern="${seller_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_Seller_lastModified" object="${seller}" z="user-managed"/>
-        
         <c:set scope="request" value="${seller.id}" var="parentEntityId"/>
         <h2>Seller photos</h2>
         <c:set scope="request" value="${seller.sellerPhotoUrls}" var="sellerphotourls"/>

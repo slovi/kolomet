@@ -59,8 +59,6 @@ privileged aspect ProductAttributeController_Roo_Controller {
         uiModel.addAttribute("productAttribute", productAttribute);
         addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("applicationusers", applicationUserService.findAllApplicationUsers());
-        uiModel.addAttribute("products", productService.findAllProducts());
-        uiModel.addAttribute("productattributetypes", productAttributeTypeService.findAllProductAttributeTypes());
     }
     
     String ProductAttributeController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

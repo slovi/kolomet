@@ -14,6 +14,11 @@ public class JpaUtils {
 		addBetweenPredicate(predicates, cb, expression, valueFrom, valueTo);
 	}
 	
+	public static void addBetweenNumberPredicate(List<Predicate> predicates, final CriteriaBuilder cb,
+			final Expression<Integer> expression, Integer valueFrom, Integer valueTo) {
+		addBetweenPredicate(predicates, cb, expression, valueFrom, valueTo);
+	}
+	
 	public static <T extends Comparable<? super T>> void addBetweenPredicate(List<Predicate> predicates,
 			final CriteriaBuilder cb, final Expression<T> expression, T valueFrom, T valueTo) {
 		if (valueFrom != null && valueTo == null) {

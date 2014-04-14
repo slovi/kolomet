@@ -19,7 +19,7 @@
 
 		<div class="detail_tag right"> 
     		<p class="detail_seller left">${seller.personString}<br/>
-           	${seller.addressString}<a target="_blank" href="">mapa</a><br />
+           	<c:out value="${seller.addressString}" />&#160;&#160;<a target="_blank" href="">mapa</a><br />
             <spring:message code="seller_detail_contact" />: <c:out value="${seller.contactString}" /></p>
             <div>
             	<a class="action_button_dark right" href="${seller.web}" target="_blank"><spring:message code="seller_detail_visit" /></a>
@@ -87,7 +87,7 @@
     	
     	<div style="clear: both; padding: 5px;">
     		<security:authorize access="hasAnyRole('ROLE_per_sellers')">
-    		<util:quicklinks update="true" create="false" list="false" itemId="${seller.id}" typeName="seller" delete="true" typeNamePlural="sellers" path="/sellers" />
+    		<util:quicklinks update="true" create="false" list="false" itemId="${seller.id}" typeName="seller" delete="true" typeNamePlural="sellers" path="/admin/sellers" largeIcons="true" />
     		</security:authorize>
     	</div>
 

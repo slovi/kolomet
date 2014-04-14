@@ -59,21 +59,6 @@ privileged aspect ApplicationPermissionController_Roo_Controller {
         return "admin/applicationpermissions/show";
     }
     
-    @RequestMapping(produces = "text/html")
-    public String ApplicationPermissionController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        if (page != null || size != null) {
-            int sizeNo = size == null ? 10 : size.intValue();
-            final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
-            uiModel.addAttribute("applicationpermissions", applicationPermissionService.findApplicationPermissionEntries(firstResult, sizeNo));
-            float nrOfPages = (float) applicationPermissionService.countAllApplicationPermissions() / sizeNo;
-            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
-        } else {
-            uiModel.addAttribute("applicationpermissions", applicationPermissionService.findAllApplicationPermissions());
-        }
-        addDateTimeFormatPatterns(uiModel);
-        return "admin/applicationpermissions/list";
-    }
-    
     @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
     public String ApplicationPermissionController.update(@Valid ApplicationPermission applicationPermission, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {

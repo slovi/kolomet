@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import cz.kolomet.domain.Category;
 import cz.kolomet.domain.Producer;
@@ -55,25 +56,8 @@ public class ProductController extends AbstractController implements Initializin
 	public String filterByProductFilter(@Valid ProductFilterDto productFilter, BindingResult result, Model model, Pageable pageable) {	
 		populateFilterForm(productFilter, null, null, model);
 		
-		Pageable orderedPageable = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(), ProductSpecifications.getDefaultSort());
+		Pageable orderedPageable = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(), ProductSpecifications.getDefaultSort(pageable.getSort()));
 		model.addAttribute("products", productRepository.findAll(ProductSpecifications.forProductFilter(productFilter), orderedPageable));
-		return "products/list_category";
-	}
-	
-	// TODO: predelat category na long
-	@RequestMapping("/category/{categoryId}")
-	public String listByCategory(@PathVariable("categoryId") Long categoryId, Model model) {
-		Category category = categoryRepository.findOne(categoryId);
-		populateFilterForm(new ProductFilterDto(), category, null, model);
-		model.addAttribute("products", productRepository.findByCategory(category, pageRequest));
-		return "products/list_category";
-	}
-	
-	@RequestMapping("/producer/{producerId}")
-	public String listByProducer(@PathVariable("producerId") Long producerId, Model model) {
-		Producer producer = producerRepository.findOne(producerId);
-		populateFilterForm(new ProductFilterDto(), null, producer, model);
-		model.addAttribute("products", productRepository.findByProducerOrderByCreatedDateDesc(producer, pageRequest));
 		return "products/list_category";
 	}
 	

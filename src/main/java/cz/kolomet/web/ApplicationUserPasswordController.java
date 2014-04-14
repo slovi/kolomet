@@ -1,6 +1,5 @@
 package cz.kolomet.web;
 
-import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 

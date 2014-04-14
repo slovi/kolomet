@@ -3,12 +3,12 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:show create="false" id="ps_cz_kolomet_domain_RegistrationRequest" object="${registrationrequest}" path="/admin/registrationrequests" z="Z7XU46MnhMwb0zMB4/JG+85jeYM=">
-        <field:display field="createdBy" id="s_cz_kolomet_domain_RegistrationRequest_createdBy" object="${registrationrequest}" z="nF0WPFNUYxYx/enQnS/AsOBQazE=" render="false"/>
-        <field:display field="lastModifiedBy" id="s_cz_kolomet_domain_RegistrationRequest_lastModifiedBy" object="${registrationrequest}" z="AKq7gqdmcrmKiIUV0JibY8/3tuI=" render="false"/>
-        <field:display date="true" dateTimePattern="${registrationRequest_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_RegistrationRequest_lastModified" object="${registrationrequest}" z="rm0up47v72C06J4/JKn6suiQwO8=" render="false"/>
+        <field:display field="createdBy" id="s_cz_kolomet_domain_RegistrationRequest_createdBy" object="${registrationrequest}" render="false" z="user-managed"/>
+        <field:display field="lastModifiedBy" id="s_cz_kolomet_domain_RegistrationRequest_lastModifiedBy" object="${registrationrequest}" render="false" z="user-managed"/>
+        <field:display date="true" dateTimePattern="${registrationRequest_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_RegistrationRequest_lastModified" object="${registrationrequest}" render="false" z="user-managed"/>
         <field:display date="true" dateTimePattern="${registrationRequest_lastmodified_date_format}" field="created" id="s_cz_kolomet_domain_RegistrationRequest_created" object="${registrationrequest}" z="rm0up47v72C06J4/JKn6suiQwO8="/>
         <field:display field="email" id="s_cz_kolomet_domain_RegistrationRequest_email" object="${registrationrequest}" z="qTnr6swCU5cMWjIb6BzDzyIkY8s="/>
         <field:display field="phone" id="s_cz_kolomet_domain_RegistrationRequest_phone" object="${registrationrequest}" z="pF+Mz9gZZ5WGLFkfkCVfw2dmGEM="/>
-        <field:display field="text" id="s_cz_kolomet_domain_RegistrationRequest_text" object="${registrationrequest}" z="pF+Mz9gZZ5WGLFkfkCVfw2dmGEM="/>
+        <field:display field="text" id="s_cz_kolomet_domain_RegistrationRequest_text" object="${registrationrequest}" z="user-managed"/>
     </page:show>
 </div>

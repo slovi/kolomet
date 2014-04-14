@@ -38,6 +38,7 @@ import cz.kolomet.domain.codelist.ProductUsage;
 @FilterDefs({
 	@FilterDef(name = "productEnabledFilter", parameters = @ParamDef(type = "boolean", name = "enabled")),
 	@FilterDef(name = "productValidToFilter", parameters = @ParamDef(type = "date", name = "actualDate")),
+	@FilterDef(name = "sellerOwnFilter", parameters = @ParamDef(type = "long", name= "sellerId"))
 })
 @Filters({
 	@Filter(name = "productValidToFilter", condition = "validto > :actualDate"),
@@ -69,7 +70,7 @@ public class Product extends DomainEntity {
     /**
      */
     @ManyToOne
-    @FilterJoinTable(name = "sellerEnabledFilter", condition = "enabled = :enabled")
+    @Filter(name = "sellerEnabledFilter", condition = "enabled = :enabled")
     private Seller seller;
 
     /**
@@ -97,6 +98,10 @@ public class Product extends DomainEntity {
     private Date validTo;
     
     private Boolean canSendToAllCountry;
+    
+    private Boolean deliveryForFree;
+    
+    private Integer weight;
 
     /**
      */

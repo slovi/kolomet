@@ -246,7 +246,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<ProductAttribute, String> ApplicationConversionServiceFactoryBean.getProductAttributeToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<cz.kolomet.domain.ProductAttribute, java.lang.String>() {
             public String convert(ProductAttribute productAttribute) {
-                return new StringBuilder().append(productAttribute.getCreated()).append(' ').append(productAttribute.getLastModified()).append(' ').append(productAttribute.getAttributeValue()).append(' ').append(productAttribute.getUnit()).toString();
+                return new StringBuilder().append(productAttribute.getCreated()).append(' ').append(productAttribute.getLastModified()).append(' ').append(productAttribute.getAttributeValue()).toString();
             }
         };
     }
