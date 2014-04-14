@@ -21,7 +21,9 @@ import cz.kolomet.domain.ProductAttribute;
 import cz.kolomet.domain.codelist.ProductAttributeType;
 import cz.kolomet.security.ApplicationUserDetails;
 import cz.kolomet.service.ApplicationUserService;
+import cz.kolomet.service.BicycleSizeService;
 import cz.kolomet.service.CategoryService;
+import cz.kolomet.service.FigureHeightService;
 import cz.kolomet.service.ProducerService;
 import cz.kolomet.service.ProductAttributeService;
 import cz.kolomet.service.ProductAttributeTypeService;
@@ -51,6 +53,12 @@ public class ProductController extends AbstractAdminController {
     
     @Autowired
     ProductAttributeTypeService productAttributeTypeService;
+    
+    @Autowired
+    BicycleSizeService bicycleSizeService;
+    
+    @Autowired
+    FigureHeightService figureHeightsService;
     
     @Autowired
     SellerService sellerService;
@@ -101,7 +109,7 @@ public class ProductController extends AbstractAdminController {
         	if (details.isProductsOwn()) {
         		page = productService.findProductEntries(pageable, ApplicationUserDetails.getActualApplicationUserDetails().getSellerId());
         	} else {
-        		page = productService.findProductEntries(pageable, sellerId); 
+        		page = productService.findProductEntries(pageable); 
         	}
             uiModel.addAttribute("products", page.getContent());
             uiModel.addAttribute("maxPages", page.getTotalPages());
@@ -121,6 +129,8 @@ public class ProductController extends AbstractAdminController {
         uiModel.addAttribute("producers", producerService.findAllProducers());
         uiModel.addAttribute("productattributes", productAttributeService.findAllProductAttributes());
         uiModel.addAttribute("productusages", productUsageService.findAllProductUsages());
+        uiModel.addAttribute("figureheights", figureHeightsService.findAllFigureHeights());
+        uiModel.addAttribute("bicyclesizes", bicycleSizeService.findAllBicycleSizes());
         uiModel.addAttribute("sellers", sellerService.findAllSellers());
         
         if (product.isNew()) {

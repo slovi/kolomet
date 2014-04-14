@@ -24,8 +24,8 @@
 	      		<div><!--  --></div>
       		</div>
       		<field:select id="c_cz_kolomet_domain_Product_productUsage" cssClass="filter_input" itemValue="id" items="${productusages}" field="productUsage" emptyLabel="Všechna použití" renderLabel="true" itemLabel="codeDescription" path="/productusages" z="E5n2YmAp4hexrA+VnCnD/HiTRH0=" inline="true" required="false"/>
-      		<field:select id="c_cz_kolomet_domain_Product_producer_" cssClass="filter_input" items="${producers}" field="producer" path="/producers" emptyLabel="Všechny značky" renderLabel="true" itemValue="id" itemLabel="codeDescription" inline="true" required="false" />
-			<field:select id="c_cz_kolomet_domain_Seller_region__" cssClass="filter_input" items="${regions}" field="region" path="/regions" emptyLabel="Všechny regiony" renderLabel="true" itemValue="id" itemLabel="codeDescription" inline="true" required="false" />
+      		<field:select id="c_cz_kolomet_domain_Product_bicycleSize" cssClass="filter_input" items="${bicyclesizes}" field="bicycleSize" path="/bicyclesizes" emptyLabel="Všechny velikosti" renderLabel="true" itemValue="id" itemLabel="codeDescription" inline="true" required="false" />
+			<field:select id="c_cz_kolomet_domain_Product_figureHeight" cssClass="filter_input" items="${figureheights}" field="figureHeight" path="/figureheights" emptyLabel="Všechny velikosti" renderLabel="true" itemValue="id" itemLabel="codeDescription" inline="true" required="false" />
 
 			<div id="weight_slider" class="slider filter_input">
       			<spring:message code="products_list_filter_weight" />: 

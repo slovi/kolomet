@@ -9,6 +9,8 @@ import cz.kolomet.domain.Producer;
 import cz.kolomet.domain.Product;
 import cz.kolomet.domain.ProductAttribute;
 import cz.kolomet.domain.Seller;
+import cz.kolomet.domain.codelist.BicycleSize;
+import cz.kolomet.domain.codelist.FigureHeight;
 import cz.kolomet.domain.codelist.ProductUsage;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -79,6 +81,22 @@ privileged aspect Product_Roo_JavaBean {
     
     public void Product.setProductUsage(ProductUsage productUsage) {
         this.productUsage = productUsage;
+    }
+    
+    public BicycleSize Product.getBicycleSize() {
+        return this.bicycleSize;
+    }
+    
+    public void Product.setBicycleSize(BicycleSize bicycleSize) {
+        this.bicycleSize = bicycleSize;
+    }
+    
+    public FigureHeight Product.getFigureHeight() {
+        return this.figureHeight;
+    }
+    
+    public void Product.setFigureHeight(FigureHeight figureHeight) {
+        this.figureHeight = figureHeight;
     }
     
     public Boolean Product.getEnabled() {

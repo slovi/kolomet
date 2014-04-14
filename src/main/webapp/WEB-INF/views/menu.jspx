@@ -68,6 +68,14 @@
                     <menu:item id="i_productusage_new" messageCode="global_menu_new" renderPageParams="false" url="/admin/productusages?form" z="user-managed"/>
                     <menu:item id="i_productusage_list" messageCode="global_menu_list" url="/admin/productusages" z="user-managed"/>
                 </security:authorize>
+                <security:authorize access="hasAnyRole('ROLE_per_bicyclesizes')">
+                    <menu:item id="i_bicyclesize_new" messageCode="global_menu_new" renderPageParams="false" url="/admin/bicyclesizes?form" z="user-managed"/>
+                    <menu:item id="i_bicyclesize_list" messageCode="global_menu_list" url="/admin/bicyclesizes" z="user-managed"/>
+                </security:authorize>
+                <security:authorize access="hasAnyRole('ROLE_per_figureheights')">
+                    <menu:item id="i_figureheight_new" messageCode="global_menu_new" renderPageParams="false" url="/admin/figureheights?form" z="user-managed"/>
+                    <menu:item id="i_figureheight_list" messageCode="global_menu_list" url="/admin/figureheights" z="user-managed"/>
+                </security:authorize>
             </menu:category>
         </security:authorize>
         <security:authorize access="hasAnyRole('ROLE_per_newsitems')">
@@ -93,5 +101,7 @@
         <menu:category id="c_controller" render="false" z="user-managed">
             <menu:item id="i_controller__private_userprofileindex_id" messageCode="global_generic" url="/private/userprofile/index" z="K9O8eY+T7eM3NNq7RhuIDaOx/xY="/>
         </menu:category>
+        <menu:category id="c_bicyclesize" render="false" z="user-managed"/>
+        <menu:category id="c_figureheight" render="false" z="user-managed"/>
     </menu:menu>
 </jsp:root>

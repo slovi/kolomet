@@ -27,7 +27,7 @@
     <li id="${fn:escapeXml(id)}">      
       <spring:url value="${url}" var="menu_item_url">
 	      	<c:if test="${empty renderPageParams or renderPageParams}">
-	      	<spring:param name="page.size" value="${empty param['page.size'] ? defaultPageSize : param['page.size']}" />
+	      	<spring:param name="page.size" value="${not empty defaultPageSize ? defaultPageSize : param['page.size']}" />
 	      	<spring:param name="page.page" value="1" />
 	      	<spring:param name="page.sort" value="created" />
 	      	<spring:param name="page.sort.dir" value="desc" />

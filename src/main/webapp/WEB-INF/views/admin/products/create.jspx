@@ -7,8 +7,8 @@
         <field:editor field="description" id="c_cz_kolomet_domain_Product_description" z="user-managed"/>
         <field:input field="price" id="c_cz_kolomet_domain_Product_price" required="true" validationMessageCode="field_invalid_number" z="8WBt5dfoVCIiZbaItCV+D0Ny6fc="/>
         <field:input field="discount" id="c_cz_kolomet_domain_Product_discount" validationMessageCode="field_invalid_number" z="uv6z4+8sEz83BAFjjftyHYknDNY="/>
-        <field:select field="category" id="c_cz_kolomet_domain_Product_category" itemValue="id" items="${categorys}" path="/admin/categorys" z="user-managed"/>
-        <field:select field="producer" id="c_cz_kolomet_domain_Product_producer" itemValue="id" items="${producers}" path="/admin/producers" z="user-managed"/>
+        <field:select field="category" id="c_cz_kolomet_domain_Product_category" itemValue="id" itemLabel="codeDescription" items="${categorys}" path="/admin/categorys" z="user-managed"/>
+        <field:select field="producer" id="c_cz_kolomet_domain_Product_producer" itemValue="id" itemLabel="codeDescription" items="${producers}" path="/admin/producers" z="user-managed"/>
         <field:datetime dateTimePattern="${product_validto_date_format}" field="validTo" id="c_cz_kolomet_domain_Product_validTo" z="2UFsBNvdW5vSrMA8Vstjhd9fDys="/>
         <field:select field="seller" id="c_cz_kolomet_domain_Product_seller" itemValue="id" items="${sellers}" path="/admin/sellers" z="user-managed"/>
         <field:simple field="photoUrls" id="c_cz_kolomet_domain_Product_photoUrls" messageCode="entity_reference_not_managed" messageCodeAttribute="Photo Url" render="false" z="user-managed"/>
@@ -20,7 +20,9 @@
         <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_Product_lastModifiedBy" render="false" z="user-managed"/>
         <field:datetime dateTimePattern="${product_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_Product_lastModified" render="false" z="user-managed"/>
         <field:input field="contents" id="c_cz_kolomet_domain_Product_contents" render="false" z="user-managed"/>
-        <field:input field="productUsage" id="c_cz_kolomet_domain_Product_productUsage" z="vqBRoOyjmlMQfsVhunjf/P2yTSU="/>
+        <field:select field="productUsage" id="c_cz_kolomet_domain_Product_productUsage" itemValue="id" itemLabel="codeDescription" items="${productusages}" path="/admin/productusages" z="vYCuUIYhfZ4Bn0eYyYnACN2+CLg="/>
+        <field:select field="bicycleSize" id="c_cz_kolomet_domain_Product_bicycleSize" itemValue="id" itemLabel="codeDescription" items="${bicyclesizes}" path="/admin/bicyclesizes" z="cKcY7uINnAHVPSjmgjAVh8/caFg="/>
+        <field:select field="figureHeight" id="c_cz_kolomet_domain_Product_figureHeight" itemValue="id" itemLabel="codeDescription" items="${figureheights}" path="/admin/figureheights" z="bgMDuaocv9GZ3/stJQ/FB5O3UcU="/>
         <field:input field="weight" id="c_cz_kolomet_domain_Product_weight" validationMessageCode="field_invalid_integer" z="X1qpuDZwvR/wVrUbExDo3xbASLc="/>
         <util:panel id="fc_cz_kolomet_domain_Product_productAttributes" title="ProductAttributes">
             <c:forEach items="${product.productAttributes}" var="productAttribute" varStatus="status">

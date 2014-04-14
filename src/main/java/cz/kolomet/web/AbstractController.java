@@ -3,7 +3,6 @@ package cz.kolomet.web;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -11,10 +10,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import cz.kolomet.domain.Category;
 import cz.kolomet.domain.NewsItem;
 import cz.kolomet.domain.Producer;
+import cz.kolomet.domain.codelist.FigureHeight;
 import cz.kolomet.repository.CategoryRepository;
 import cz.kolomet.repository.NewsItemRepository;
 import cz.kolomet.repository.NewsItemSpecifications;
 import cz.kolomet.repository.ProducerRepository;
+import cz.kolomet.service.FigureHeightService;
 
 public class AbstractController {
 	
@@ -30,6 +31,9 @@ public class AbstractController {
 	@Autowired
 	private NewsItemRepository newsItemRepository;
 	
+	@Autowired
+	private FigureHeightService figureHeightsService;
+	
 	@ModelAttribute("categories")
 	public List<Category> loadCategories() {
 		return categoryRepository.find(defaultCategoryCodeKey);
@@ -38,6 +42,11 @@ public class AbstractController {
 	@ModelAttribute("producers")
 	public List<Producer> loadProducers() {
 		return producerRepository.findAll();
+	}
+	
+	@ModelAttribute("figureheights")
+	public List<FigureHeight> loadFigureHeights() {
+		return figureHeightsService.findAllFigureHeights();
 	}
 	
 	@ModelAttribute("newsItems")

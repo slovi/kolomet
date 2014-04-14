@@ -56,6 +56,12 @@
 			            <security:authorize access="hasAnyRole('ROLE_per_productusages')">
                 			<menu:item id="i_productusage_list" messageCode="global_menu_list" url="/admin/productusages" z="user-managed"/>
 		               	</security:authorize>
+		               	<security:authorize access="hasAnyRole('ROLE_per_bicyclesizes')">
+		                    <menu:item id="i_bicyclesize_list" messageCode="global_menu_list" url="/admin/bicyclesizes" z="user-managed"/>
+		                </security:authorize>
+		                <security:authorize access="hasAnyRole('ROLE_per_figureheights')">
+		                    <menu:item id="i_figureheight_list" messageCode="global_menu_list" url="/admin/figureheights" z="user-managed"/>
+		                </security:authorize>
 		            </security:authorize>
 		            <security:authorize access="hasAnyRole('ROLE_per_newsitems')"> 
 			            <hr color="#f9f9f9" width="85%" align="center" size="1" />

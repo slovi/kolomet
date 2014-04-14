@@ -15,7 +15,6 @@ import javax.validation.constraints.Size;
 import org.hibernate.annotations.Filter;
 import org.hibernate.annotations.FilterDef;
 import org.hibernate.annotations.FilterDefs;
-import org.hibernate.annotations.FilterJoinTable;
 import org.hibernate.annotations.Filters;
 import org.hibernate.annotations.ParamDef;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -28,6 +27,8 @@ import org.springframework.roo.addon.serializable.RooSerializable;
 import org.springframework.roo.addon.tostring.RooToString;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import cz.kolomet.domain.codelist.BicycleSize;
+import cz.kolomet.domain.codelist.FigureHeight;
 import cz.kolomet.domain.codelist.ProductUsage;
 
 @RooJavaBean
@@ -87,6 +88,12 @@ public class Product extends DomainEntity {
      */
     @ManyToOne
     private ProductUsage productUsage;
+    
+    @ManyToOne
+    private BicycleSize bicycleSize;
+    
+    @ManyToOne
+    private FigureHeight figureHeight;
     
     /**
      */

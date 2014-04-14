@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_cz_kolomet_domain_codelist_BicycleSize" items="${bicyclesizes}" z="xxQeEG0YUTt9PiP7Iln2xqLNMZE=">
+        <table:table data="${bicyclesizes}" id="l_cz_kolomet_domain_codelist_BicycleSize" path="/admin/bicyclesizes" z="e7JTYJhxJ5aw6p+EcNddq6xtzg8=">
+            <table:column id="c_cz_kolomet_domain_codelist_BicycleSize_createdBy" property="createdBy" z="lLcs7V7kH21zpfFE2hDtF0utBiU="/>
+            <table:column id="c_cz_kolomet_domain_codelist_BicycleSize_lastModifiedBy" property="lastModifiedBy" z="GEzhR4YdliK4w4xVD+W0W3LJvJM="/>
+            <table:column date="true" dateTimePattern="${bicycleSize_created_date_format}" id="c_cz_kolomet_domain_codelist_BicycleSize_created" property="created" z="Ain9fw0cYsc2RE4hJAuMBS9FAX0="/>
+            <table:column date="true" dateTimePattern="${bicycleSize_lastmodified_date_format}" id="c_cz_kolomet_domain_codelist_BicycleSize_lastModified" property="lastModified" z="iUc/mfIWc+/U2sAQey5CdNkujTU="/>
+            <table:column id="c_cz_kolomet_domain_codelist_BicycleSize_codeKey" property="codeKey" z="5fDTR1quNGulSWM2cCwJJIncJW4="/>
+            <table:column id="c_cz_kolomet_domain_codelist_BicycleSize_codeDescription" property="codeDescription" z="8r/bht4wfyZJfQGuNufaW2F2NpI="/>
+        </table:table>
+    </page:list>
+</div>

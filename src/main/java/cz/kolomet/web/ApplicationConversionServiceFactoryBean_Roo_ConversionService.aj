@@ -15,8 +15,10 @@ import cz.kolomet.domain.ProductAttribute;
 import cz.kolomet.domain.RegistrationRequest;
 import cz.kolomet.domain.Seller;
 import cz.kolomet.domain.SellerPhotoUrl;
+import cz.kolomet.domain.codelist.BicycleSize;
 import cz.kolomet.domain.codelist.CategoryType;
 import cz.kolomet.domain.codelist.CountryState;
+import cz.kolomet.domain.codelist.FigureHeight;
 import cz.kolomet.domain.codelist.ProductAttributeType;
 import cz.kolomet.domain.codelist.ProductUsage;
 import cz.kolomet.domain.codelist.Region;
@@ -24,9 +26,11 @@ import cz.kolomet.domain.codelist.SellerStatus;
 import cz.kolomet.service.ApplicationPermissionService;
 import cz.kolomet.service.ApplicationRoleService;
 import cz.kolomet.service.ApplicationUserService;
+import cz.kolomet.service.BicycleSizeService;
 import cz.kolomet.service.CategoryService;
 import cz.kolomet.service.CategoryTypeService;
 import cz.kolomet.service.CountryStateService;
+import cz.kolomet.service.FigureHeightService;
 import cz.kolomet.service.NewsItemService;
 import cz.kolomet.service.PhotoUrlService;
 import cz.kolomet.service.ProducerService;
@@ -85,10 +89,16 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     SellerPhotoUrlService ApplicationConversionServiceFactoryBean.sellerPhotoUrlService;
     
     @Autowired
+    BicycleSizeService ApplicationConversionServiceFactoryBean.bicycleSizeService;
+    
+    @Autowired
     CategoryTypeService ApplicationConversionServiceFactoryBean.categoryTypeService;
     
     @Autowired
     CountryStateService ApplicationConversionServiceFactoryBean.countryStateService;
+    
+    @Autowired
+    FigureHeightService ApplicationConversionServiceFactoryBean.figureHeightService;
     
     @Autowired
     ProductAttributeTypeService ApplicationConversionServiceFactoryBean.productAttributeTypeService;
@@ -331,6 +341,30 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         };
     }
     
+    public Converter<BicycleSize, String> ApplicationConversionServiceFactoryBean.getBicycleSizeToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<cz.kolomet.domain.codelist.BicycleSize, java.lang.String>() {
+            public String convert(BicycleSize bicycleSize) {
+                return new StringBuilder().append(bicycleSize.getCreated()).append(' ').append(bicycleSize.getLastModified()).append(' ').append(bicycleSize.getCodeKey()).append(' ').append(bicycleSize.getCodeDescription()).toString();
+            }
+        };
+    }
+    
+    public Converter<Long, BicycleSize> ApplicationConversionServiceFactoryBean.getIdToBicycleSizeConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, cz.kolomet.domain.codelist.BicycleSize>() {
+            public cz.kolomet.domain.codelist.BicycleSize convert(java.lang.Long id) {
+                return bicycleSizeService.findBicycleSize(id);
+            }
+        };
+    }
+    
+    public Converter<String, BicycleSize> ApplicationConversionServiceFactoryBean.getStringToBicycleSizeConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, cz.kolomet.domain.codelist.BicycleSize>() {
+            public cz.kolomet.domain.codelist.BicycleSize convert(String id) {
+                return getObject().convert(getObject().convert(id, Long.class), BicycleSize.class);
+            }
+        };
+    }
+    
     public Converter<Long, CategoryType> ApplicationConversionServiceFactoryBean.getIdToCategoryTypeConverter() {
         return new org.springframework.core.convert.converter.Converter<java.lang.Long, cz.kolomet.domain.codelist.CategoryType>() {
             public cz.kolomet.domain.codelist.CategoryType convert(java.lang.Long id) {
@@ -359,6 +393,30 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         return new org.springframework.core.convert.converter.Converter<java.lang.String, cz.kolomet.domain.codelist.CountryState>() {
             public cz.kolomet.domain.codelist.CountryState convert(String id) {
                 return getObject().convert(getObject().convert(id, Long.class), CountryState.class);
+            }
+        };
+    }
+    
+    public Converter<FigureHeight, String> ApplicationConversionServiceFactoryBean.getFigureHeightToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<cz.kolomet.domain.codelist.FigureHeight, java.lang.String>() {
+            public String convert(FigureHeight figureHeight) {
+                return new StringBuilder().append(figureHeight.getCreated()).append(' ').append(figureHeight.getLastModified()).append(' ').append(figureHeight.getCodeKey()).append(' ').append(figureHeight.getCodeDescription()).toString();
+            }
+        };
+    }
+    
+    public Converter<Long, FigureHeight> ApplicationConversionServiceFactoryBean.getIdToFigureHeightConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, cz.kolomet.domain.codelist.FigureHeight>() {
+            public cz.kolomet.domain.codelist.FigureHeight convert(java.lang.Long id) {
+                return figureHeightService.findFigureHeight(id);
+            }
+        };
+    }
+    
+    public Converter<String, FigureHeight> ApplicationConversionServiceFactoryBean.getStringToFigureHeightConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, cz.kolomet.domain.codelist.FigureHeight>() {
+            public cz.kolomet.domain.codelist.FigureHeight convert(String id) {
+                return getObject().convert(getObject().convert(id, Long.class), FigureHeight.class);
             }
         };
     }
@@ -464,12 +522,18 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         registry.addConverter(getSellerPhotoUrlToStringConverter());
         registry.addConverter(getIdToSellerPhotoUrlConverter());
         registry.addConverter(getStringToSellerPhotoUrlConverter());
+        registry.addConverter(getBicycleSizeToStringConverter());
+        registry.addConverter(getIdToBicycleSizeConverter());
+        registry.addConverter(getStringToBicycleSizeConverter());
         registry.addConverter(getCategoryTypeToStringConverter());
         registry.addConverter(getIdToCategoryTypeConverter());
         registry.addConverter(getStringToCategoryTypeConverter());
         registry.addConverter(getCountryStateToStringConverter());
         registry.addConverter(getIdToCountryStateConverter());
         registry.addConverter(getStringToCountryStateConverter());
+        registry.addConverter(getFigureHeightToStringConverter());
+        registry.addConverter(getIdToFigureHeightConverter());
+        registry.addConverter(getStringToFigureHeightConverter());
         registry.addConverter(getProductAttributeTypeToStringConverter());
         registry.addConverter(getIdToProductAttributeTypeConverter());
         registry.addConverter(getStringToProductAttributeTypeConverter());

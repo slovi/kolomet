@@ -10,17 +10,15 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import cz.kolomet.domain.Category;
 import cz.kolomet.domain.Producer;
 import cz.kolomet.dto.ProductFilterDto;
-import cz.kolomet.repository.CategoryRepository;
-import cz.kolomet.repository.ProducerRepository;
 import cz.kolomet.repository.ProductRepository;
 import cz.kolomet.repository.ProductSpecifications;
 import cz.kolomet.repository.ProductUsageRepository;
 import cz.kolomet.repository.RegionRepository;
+import cz.kolomet.service.BicycleSizeService;
 
 @RequestMapping("/public/products")
 @Controller("publicProductController")
@@ -30,16 +28,13 @@ public class ProductController extends AbstractController implements Initializin
 	private ProductRepository productRepository;
 	
 	@Autowired
-	private CategoryRepository categoryRepository;
-	
-	@Autowired
-	private ProducerRepository producerRepository;
-	
-	@Autowired
 	private RegionRepository regionRepository;
 	
 	@Autowired
 	private ProductUsageRepository productUsageRepository;
+	
+	@Autowired
+	private BicycleSizeService bicycleSizeService;
 	
 	private Integer maxPageItems = 6;
 	
@@ -75,9 +70,9 @@ public class ProductController extends AbstractController implements Initializin
 		if (producer != null) {			
 			productFilter.setProducer(producer);
 		}
-		model.addAttribute("producers", producerRepository.findAll());
 		model.addAttribute("regions", regionRepository.findAll());
 		model.addAttribute("productusages", productUsageRepository.findAll());
+		model.addAttribute("bicyclesizes", bicycleSizeService.findAllBicycleSizes());
 		model.addAttribute("productFilter", productFilter);
 	}
 	

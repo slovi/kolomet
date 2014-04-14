@@ -90,12 +90,11 @@
     	</property>
   	</bean>
 
-	<bean class="cz.kolomet.web.ApplicationConversionServiceFactoryBean" id="applicationConversionService"/>
 
-<!-- 	<bean id="applicationConversionService" class="cz.kolomet.util.OrmConversionServiceAdapter"> -->
-<!-- 		<property name="conversionService"> -->
-			
-<!-- 		</property> -->
-<!-- 	</bean> -->
+	<bean id="applicationConversionService" class="cz.kolomet.util.OrmConversionServiceAdapter">
+		<property name="conversionService">
+			<bean class="cz.kolomet.web.ApplicationConversionServiceFactoryBean" />
+		</property>
+	</bean>
 		
 </beans>

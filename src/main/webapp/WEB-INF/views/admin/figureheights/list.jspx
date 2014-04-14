@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_cz_kolomet_domain_codelist_FigureHeight" items="${figureheights}" z="4dSxSDjwbUb2zH7h9IyhmkDjY6c=">
+        <table:table data="${figureheights}" id="l_cz_kolomet_domain_codelist_FigureHeight" path="/admin/figureheights" z="u6cANZEGecuM59aVPwf1bbgu2lE=">
+            <table:column id="c_cz_kolomet_domain_codelist_FigureHeight_createdBy" property="createdBy" z="AvqOR0UneME4jvYp+Mp8jA+NDtw="/>
+            <table:column id="c_cz_kolomet_domain_codelist_FigureHeight_lastModifiedBy" property="lastModifiedBy" z="YYnNNvmug6gDBum6YPmDUh5APJk="/>
+            <table:column date="true" dateTimePattern="${figureHeight_created_date_format}" id="c_cz_kolomet_domain_codelist_FigureHeight_created" property="created" z="LCUs1PFhTSTaLRolo3n5fld61YA="/>
+            <table:column date="true" dateTimePattern="${figureHeight_lastmodified_date_format}" id="c_cz_kolomet_domain_codelist_FigureHeight_lastModified" property="lastModified" z="a2LreKMvJ8Bh0okTN6U8opMvchM="/>
+            <table:column id="c_cz_kolomet_domain_codelist_FigureHeight_codeKey" property="codeKey" z="xWAdsd63moUUDmFYutGC3t4UqIQ="/>
+            <table:column id="c_cz_kolomet_domain_codelist_FigureHeight_codeDescription" property="codeDescription" z="QhcpuBq0eD5Utz2Lg1uuIbykuTM="/>
+        </table:table>
+    </page:list>
+</div>

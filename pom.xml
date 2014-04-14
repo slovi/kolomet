@@ -248,7 +248,12 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-
+		<dependency>
+  			<groupId>c3p0</groupId>
+  			<artifactId>c3p0</artifactId>
+  			<version>0.9.1.2</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework.webflow</groupId>
 			<artifactId>spring-js-resources</artifactId>
@@ -437,8 +442,8 @@
 				<version>3.0</version>
 				<configuration>
 					<hibernatetool>
-						<jpaconfiguration />
-						<hbm2ddl export="false" outputfilename="sql.ddl" />
+						<jpaconfiguration/>
+						<hbm2ddl export="false" outputfilename="sql.ddl"/>
 					</hibernatetool>
 				</configuration>
 			</plugin>

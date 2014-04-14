@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_cz_kolomet_domain_codelist_FigureHeight" object="${figureheight}" path="/admin/figureheights" z="v4ed6EQ7ipU//XW7BAcRNO3qNRo=">
+        <field:display field="createdBy" id="s_cz_kolomet_domain_codelist_FigureHeight_createdBy" object="${figureheight}" z="pFix4/l7HCPVGICTdhcwJ2nR2xA="/>
+        <field:display field="lastModifiedBy" id="s_cz_kolomet_domain_codelist_FigureHeight_lastModifiedBy" object="${figureheight}" z="UdjzOKYPXwVbZ0j4bhMk06B3Tq0="/>
+        <field:display date="true" dateTimePattern="${figureHeight_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_codelist_FigureHeight_lastModified" object="${figureheight}" z="BJHhQXw2aBnjTj7Ukvdh5zVIUZE="/>
+        <field:display field="codeKey" id="s_cz_kolomet_domain_codelist_FigureHeight_codeKey" object="${figureheight}" z="Slqjm/ge5xQYsLf7I5mKXtgQe3o="/>
+        <field:display field="codeDescription" id="s_cz_kolomet_domain_codelist_FigureHeight_codeDescription" object="${figureheight}" z="ynmAFxmTy+T6tbDm1k+cVuilse0="/>
+    </page:show>
+</div>

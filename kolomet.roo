@@ -21,6 +21,8 @@ entity jpa --class ~.domain.codelist.SellerStatus --extends ~.domain.codelist.Co
 entity jpa --class ~.domain.codelist.CountryState --extends ~.domain.codelist.Codelist --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 entity jpa --class ~.domain.codelist.Region --extends ~.domain.codelist.Codelist --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 entity jpa --class ~.domain.codelist.ProductAttributeType --extends ~.domain.codelist.Codelist --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
+entity jpa --class ~.domain.codelist.BicycleSize --extends ~.domain.codelist.Codelist --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
+entity jpa --class ~.domain.codelist.FigureHeight --extends ~.domain.codelist.Codelist --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 
 class --class ~.dto.ApplicationUserPasswordDto --equals true --serializable true --activeRecord false
 
@@ -42,6 +44,8 @@ repository jpa --interface ~.repository.RegistrationRequestRepository --entity ~
 repository jpa --interface ~.repository.ApplicationRoleRepository --entity ~.domain.ApplicationRole
 repository jpa --interface ~.repository.ApplicationPermissionRepository --entity ~.domain.ApplicationPermission
 repository jpa --interface ~.repository.NewsItemRepository --entity ~.domain.NewsItem
+repository jpa --interface ~.repository.BicycleSizeRepository --entity ~.domain.codelist.BicycleSize
+repository jpa --interface ~.repository.FigureHeightRepository --entity ~.domain.codelist.FigureHeight
 
 service type --interface ~.service.ProductService --entity ~.domain.Product --class ~.service.impl.ProductServiceImpl
 service type --interface ~.service.SellerService --entity ~.domain.Seller --class ~.service.impl.SellerServiceImpl
@@ -61,6 +65,8 @@ service type --interface ~.service.RegistrationRequestService --entity ~.domain.
 service type --interface ~.service.ApplicationRoleService --entity ~.domain.ApplicationRole --class ~.service.impl.ApplicationRoleServiceImpl
 service type --interface ~.service.ApplicationPermissionService --entity ~.domain.ApplicationPermission --class ~.service.impl.ApplicationPermissionServiceImpl
 service type --interface ~.service.NewsItemService --entity ~.domain.NewsItem --class ~.service.impl.NewsItemServiceImpl
+service type --interface ~.service.BicycleService --entity ~.domain.codelist.BicycleSize --class ~.service.impl.BicycleSizeServiceImpl
+service type --interface ~.service.FigureHeightService --entity ~.domain.codelist.FigureHeight --class ~.service.impl.FigureHeightServiceImpl
 
 web mvc setup
 web mvc scaffold --class ~.web.SellerController --backingType ~.domain.Seller
@@ -80,3 +86,5 @@ web mvc scaffold --class ~.web.RegistrationRequestController --backingType ~.dom
 web mvc scaffold --class ~.web.ApplicationRoleController --backingType ~.domain.ApplicationRole
 web mvc scaffold --class ~.web.ApplicationPermissionController --backingType ~.domain.ApplicationPermission
 web mvc scaffold --class ~.web.NewsItemController --backingType ~.domain.NewsItem
+web mvc scaffold --class ~.web.BicycleController --backingType ~.domain.codelist.BicycleSize --path /admin/bicyclesizes
+web mvc scaffold --class ~.web.FigureHeightController --backingType ~.domain.codelist.FigureHeight --path /admin/figureheights

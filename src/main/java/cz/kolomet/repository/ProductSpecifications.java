@@ -69,6 +69,12 @@ public class ProductSpecifications {
 				if (productFilter.getProductUsage() != null) {
 					predicates.add(cb.equal(root.get("productUsage"), productFilter.getProductUsage()));
 				}
+				if (productFilter.getFigureHeight() != null) {
+					predicates.add(cb.equal(root.get("figureHeight"), productFilter.getFigureHeight()));
+				}
+				if (productFilter.getBicycleSize() != null) {
+					predicates.add(cb.equal(root.get("bicycleSize"), productFilter.getBicycleSize()));
+				}
 				predicates.add(cb.equal(seller.get("enabled"), true));
 				return cb.and(predicates.toArray(new Predicate[predicates.size()]));
 			}

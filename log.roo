@@ -244,3 +244,11 @@ controller scaffold --class ~.web.pub.RegistrationRequestController --path /publ
 controller class --class ~.web.UserProfileController --preferredMapping /private/userprofile
 // Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2014-04-14 09:00:25
 // Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2014-04-14 23:26:23
+entity jpa --class ~.domain.codelist.BicycleSize --extends ~.domain.codelist.Codelist --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
+repository jpa --interface ~.repository.BicycleSizeRepository --entity ~.domain.codelist.BicycleSize
+service --interface ~.service.BicycleService --entity ~.domain.codelist.BicycleSize --class ~.service.impl.BicycleSizeServiceImpl
+web mvc scaffold --class ~.web.BicycleSizeController --backingType ~.domain.codelist.BicycleSize --path /admin/bicyclesizes
+entity jpa --class ~.domain.codelist.FigureHeight --extends ~.domain.codelist.Codelist --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
+repository jpa --interface ~.repository.FigureHeightRepository --entity ~.domain.codelist.FigureHeight
+service --interface ~.service.FigureHeightService --entity ~.domain.codelist.FigureHeight --class ~.service.impl.FigureHeightServiceImpl
+web mvc scaffold --class ~.web.FigureHeightController --backingType ~.domain.codelist.FigureHeight --path /admin/figureheights

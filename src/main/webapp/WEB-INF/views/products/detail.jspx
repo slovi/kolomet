@@ -56,6 +56,18 @@
        				<td><b><spring:message code="label_cz_kolomet_domain_product_weight" /></b></td>
        				<td><c:out value="${product.weight}" /><c:out value="Kg" /></td>
        			</tr>
+       			<tr>
+       				<td><b><spring:message code="label_cz_kolomet_domain_product_figureheight" /></b></td>
+       				<td><c:out value="${product.figureHeight.codeDescription}" /></td>
+       			</tr>
+       			<tr>
+       				<td><b><spring:message code="label_cz_kolomet_domain_product_bicyclesize" /></b></td>
+       				<td><c:out value="${product.bicycleSize.codeDescription}" /></td>
+       			</tr>
+       			<tr>
+       				<td><b><spring:message code="label_cz_kolomet_domain_product_productusage" /></b></td>
+       				<td><c:out value="${product.productUsage.codeDescription}" /></td>
+       			</tr>
         		<c:forEach items="${product.productAttributes}" var="attribute">
         			<tr>
         				<td><b><c:out value="${attribute.attributeType.codeDescription}" /></b></td>
@@ -74,7 +86,7 @@
        			</tr>
        			<tr>
        				<td><b><spring:message code="label_cz_kolomet_domain_product_cansendtoallcountry" /></b></td>
-       				<td><spring:eval expression="product.canSendToAllCountry" /></td>
+       				<td><util:boolean value="${product.canSendToAllCountry}" /></td>
        			</tr>
             </table>
        	</div>

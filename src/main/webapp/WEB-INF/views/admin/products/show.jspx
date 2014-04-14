@@ -20,6 +20,8 @@
         <field:display date="true" dateTimePattern="${product_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_Product_lastModified" object="${product}" z="ZCK6v15HOwhsvMXPFw5ks6hRW6s="/>
         <field:display field="contents" id="s_cz_kolomet_domain_Product_contents" object="${product}" render="false" z="user-managed"/>
         <field:display field="productUsage" id="s_cz_kolomet_domain_Product_productUsage" object="${product}" z="JI+MfFfKQkLleGQoDQIP6o0YWLw="/>
+        <field:display field="bicycleSize" id="s_cz_kolomet_domain_Product_bicycleSize" object="${product}" z="6sppvMgMgCo0g2sYopJlk9yy87s="/>
+        <field:display field="figureHeight" id="s_cz_kolomet_domain_Product_figureHeight" object="${product}" z="F90g6avqF4qQ38PSYPze0k9YAvQ="/>
         <field:display field="weight" id="s_cz_kolomet_domain_Product_weight" object="${product}" z="DKM+lI+uhSvkiF1NABV/HF0/p+8="/>
         <c:set scope="request" value="${product.id}" var="parentEntityId"/>
         <h2>Product attributes</h2>

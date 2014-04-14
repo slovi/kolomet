@@ -94,12 +94,19 @@
 
 	<beans profile="prod-openshift">
 
-		<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
-			<property name="url"
-				value="#{ 'jdbc:mysql://' + systemEnvironment['OPENSHIFT_MYSQL_DB_HOST'] + ':' + systemEnvironment['OPENSHIFT_MYSQL_DB_PORT'] + '/kolomet?useUnicode=yes&amp;characterEncoding=utf8' }" />
-			<property name="username" value="adminH32h99S" />
-			<property name="password" value="pUsGtTcszG9N" />
-			<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+			<property name="jdbcUrl" value="${database.url}" />
+			<property name="driverClass" value="${database.driverClass}" />
+			<property name="user" value="${database.user}" />
+			<property name="password" value="${database.password}" />
+			<property name="acquireIncrement" value="${database.pool.acquireIncrement}" />
+			<property name="maxIdleTime" value="${database.pool.maxIdleTime}" /> 
+			<property name="minPoolSize" value="${database.pool.minPoolSize}" /> 
+			<property name="maxPoolSize" value="${database.pool.maxPoolSize}" /> 
+		 	<property name="idleConnectionTestPeriod" value="${database.pool.idleConnectionTestPeriod}" /> 
+			<property name="unreturnedConnectionTimeout" value="${database.pool.unreturnedConnectionTimeout}" /> 
+			<property name="debugUnreturnedConnectionStackTraces" value="${database.pool.debugUnreturnedConnectionStackTraces}" /> 
+			<property name="maxIdleTimeExcessConnections" value="${database.pool.maxIdleTimeExcessConnections}" />
 		</bean>
 
 		<bean id="entityManagerFactory"

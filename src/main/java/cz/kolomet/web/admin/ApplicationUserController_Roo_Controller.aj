@@ -6,6 +6,7 @@ package cz.kolomet.web.admin;
 import cz.kolomet.domain.ApplicationUser;
 import cz.kolomet.service.ApplicationRoleService;
 import cz.kolomet.service.ApplicationUserService;
+import cz.kolomet.service.SellerService;
 import cz.kolomet.web.admin.ApplicationUserController;
 import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +30,9 @@ privileged aspect ApplicationUserController_Roo_Controller {
     
     @Autowired
     ApplicationRoleService ApplicationUserController.applicationRoleService;
+    
+    @Autowired
+    SellerService ApplicationUserController.sellerService;
     
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String ApplicationUserController.create(@Valid ApplicationUser applicationUser, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
@@ -92,6 +96,7 @@ privileged aspect ApplicationUserController_Roo_Controller {
         addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("applicationroles", applicationRoleService.findAllApplicationRoles());
         uiModel.addAttribute("applicationusers", applicationUserService.findAllApplicationUsers());
+        uiModel.addAttribute("sellers", sellerService.findAllSellers());
     }
     
     String ApplicationUserController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

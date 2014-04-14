@@ -6,11 +6,14 @@ package cz.kolomet.web.admin;
 import cz.kolomet.domain.Seller;
 import cz.kolomet.domain.codelist.CountryState;
 import cz.kolomet.domain.codelist.Region;
+import cz.kolomet.domain.codelist.SellerStatus;
 import cz.kolomet.service.ApplicationUserService;
 import cz.kolomet.service.CountryStateService;
 import cz.kolomet.service.ProductService;
 import cz.kolomet.service.RegionService;
+import cz.kolomet.service.SellerPhotoUrlService;
 import cz.kolomet.service.SellerService;
+import cz.kolomet.service.SellerStatusService;
 import cz.kolomet.web.admin.SellerController;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -41,10 +44,16 @@ privileged aspect SellerController_Roo_Controller {
     ProductService SellerController.productService;
     
     @Autowired
+    SellerPhotoUrlService SellerController.sellerPhotoUrlService;
+    
+    @Autowired
     CountryStateService SellerController.countryStateService;
     
     @Autowired
     RegionService SellerController.regionService;
+    
+    @Autowired
+    SellerStatusService SellerController.sellerStatusService;
     
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String SellerController.create(@Valid Seller seller, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
@@ -63,6 +72,9 @@ privileged aspect SellerController_Roo_Controller {
         List<String[]> dependencies = new ArrayList<String[]>();
         if (countryStateService.countAllCountryStates() == 0) {
             dependencies.add(new String[] { "countrystate", "admin/countrystates" });
+        }
+        if (sellerStatusService.countAllSellerStatuses() == 0) {
+            dependencies.add(new String[] { "sellerstatus", "admin/sellerstatuses" });
         }
         if (regionService.countAllRegions() == 0) {
             dependencies.add(new String[] { "region", "admin/regions" });
@@ -119,8 +131,10 @@ privileged aspect SellerController_Roo_Controller {
         addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("applicationusers", applicationUserService.findAllApplicationUsers());
         uiModel.addAttribute("products", productService.findAllProducts());
+        uiModel.addAttribute("sellerphotourls", sellerPhotoUrlService.findAllSellerPhotoUrls());
         uiModel.addAttribute("countrystates", countryStateService.findAllCountryStates());
         uiModel.addAttribute("regions", regionService.findAllRegions());
+        uiModel.addAttribute("sellerstatuses", sellerStatusService.findAllSellerStatuses());
     }
     
     String SellerController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

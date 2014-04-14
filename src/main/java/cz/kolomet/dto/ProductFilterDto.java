@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 
 import cz.kolomet.domain.Category;
 import cz.kolomet.domain.Producer;
+import cz.kolomet.domain.codelist.BicycleSize;
+import cz.kolomet.domain.codelist.FigureHeight;
 import cz.kolomet.domain.codelist.ProductUsage;
 import cz.kolomet.domain.codelist.Region;
 
@@ -19,6 +21,8 @@ public class ProductFilterDto {
 	private Producer producer;
 	private Region region;
 	private ProductUsage productUsage;
+	private BicycleSize bicycleSize;
+	private FigureHeight figureHeight;
 	private Boolean canSendToAllCountry;
 	
 	public ProductFilterDto() {
@@ -34,6 +38,10 @@ public class ProductFilterDto {
 			this.producer.setId(0l);
 			this.productUsage = new ProductUsage();
 			this.productUsage.setId(0l);
+			this.bicycleSize = new BicycleSize();
+			this.bicycleSize.setId(0l);
+			this.figureHeight = new FigureHeight();
+			this.figureHeight.setId(0l);
 		}
 	}
 	
@@ -115,6 +123,22 @@ public class ProductFilterDto {
 
 	public void setProductUsage(ProductUsage productUsage) {
 		this.productUsage = productUsage;
+	}
+
+	public BicycleSize getBicycleSize() {
+		return bicycleSize;
+	}
+
+	public void setBicycleSize(BicycleSize bicycleSize) {
+		this.bicycleSize = bicycleSize;
+	}
+
+	public FigureHeight getFigureHeight() {
+		return figureHeight;
+	}
+
+	public void setFigureHeight(FigureHeight figureHeight) {
+		this.figureHeight = figureHeight;
 	}
 
 	public Boolean getCanSendToAllCountry() {
