@@ -96,7 +96,13 @@ public class ProductController extends AbstractAdminController {
     @RequestMapping(produces = "text/html")
     public String list(Pageable pageable, Model uiModel) {
         if (pageable != null) {
-        	Page<Product> page = productService.findProductEntries(pageable, ApplicationUserDetails.getActualApplicationUserDetails().getSellerId());
+        	ApplicationUserDetails details = ApplicationUserDetails.getActualApplicationUserDetails();
+        	Page<Product> page = null;
+        	if (details.isProductsOwn()) {
+        		page = productService.findProductEntries(pageable, ApplicationUserDetails.getActualApplicationUserDetails().getSellerId());
+        	} else {
+        		page = productService.findProductEntries(pageable, sellerId); 
+        	}
             uiModel.addAttribute("products", page.getContent());
             uiModel.addAttribute("maxPages", page.getTotalPages());
         } else {

@@ -24,7 +24,6 @@ public class RegistrationRequest extends DomainEntity {
 	
 	private String text;
 	
-	@NotNull
 	@Column(insertable = false, updatable = false)
 	private String captchaText;
 	

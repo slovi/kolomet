@@ -8,6 +8,8 @@ import cz.kolomet.domain.Product;
 @RooService(domainTypes = { cz.kolomet.domain.Product.class })
 public interface ProductService {
 	
-	public Page<Product> findProductEntries(Pageable pageable, Long sellerId);   
+	public Page<Product> findProductEntries(Pageable pageable);
+	
+	public Page<Product> findProductEntries(Pageable pageable, Long sellerId);
 	
 }

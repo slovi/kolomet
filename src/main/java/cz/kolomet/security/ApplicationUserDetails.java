@@ -34,6 +34,14 @@ public class ApplicationUserDetails implements UserDetails {
 		Object principal = authentication.getPrincipal();
 		return principal instanceof ApplicationUserDetails ? (ApplicationUserDetails) principal : null;
 	}
+	
+	public boolean isProductsOwn() {
+		return hasAuthority("per_products_own");
+	}
+	
+	public boolean isProductsAll() {
+		return hasAuthority("per_products_all");
+	}
 
 	private Collection<? extends GrantedAuthority> resolveAuthorities() {
 		Set<GrantedAuthority> permissions = new HashSet<GrantedAuthority>();

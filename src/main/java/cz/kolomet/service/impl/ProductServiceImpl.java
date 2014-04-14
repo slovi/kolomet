@@ -30,6 +30,11 @@ public class ProductServiceImpl implements ProductService {
     }
 	
 	@Override
+	public Page<Product> findProductEntries(Pageable pageable) {
+		return productRepository.findAll(pageable);
+	}
+	
+	@Override
 	public Page<Product> findProductEntries(Pageable pageable, Long sellerId) {
 		return productRepository.findBySellerId(sellerId, pageable);
 	}

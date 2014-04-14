@@ -14,18 +14,18 @@
 	      		<form:input cssClass="amountFromInput" path="priceFrom" size="3" /><form:input cssClass="amountToInput" path="priceTo" size="3" />
 	      		<div><!--  --></div>
       		</div>
+      		<field:select id="c_cz_kolomet_domain_Product_category" cssClass="filter_input" items="${categories}" field="category" path="/categorys" emptyLabel="Všechny kategorie" renderLabel="true" itemValue="id" itemLabel="codeDescription" inline="true" required="false" />
+      		<field:select id="c_cz_kolomet_domain_Product_producer" cssClass="filter_input" items="${producers}" field="producer" path="/producers" emptyLabel="Všechny značky" renderLabel="true" itemValue="id" itemLabel="codeDescription" inline="true" required="false" />
+			<field:select id="c_cz_kolomet_domain_Seller_region" cssClass="filter_input" items="${regions}" field="region" path="/regions" emptyLabel="Všechny regiony" renderLabel="true" itemValue="id" itemLabel="codeDescription" inline="true" required="false" />
      		
       		<div id="discount_slider" class="slider filter_input">
       			<spring:message code="products_list_filter_discount" />: 
       			<form:input cssClass="amountFromInput" path="discountFrom" size="3" /><form:input cssClass="amountToInput" path="discountTo" size="3" />
 	      		<div><!--  --></div>
       		</div>
-      		
-      		<field:select id="c_cz_kolomet_domain_Product_category" cssClass="filter_input" items="${categories}" field="category" path="/categorys" emptyLabel="Všechny kategorie" renderLabel="true" itemValue="id" itemLabel="codeDescription" inline="true" required="false" />
-      		<field:select id="c_cz_kolomet_domain_Product_producer" cssClass="filter_input" items="${producers}" field="producer" path="/producers" emptyLabel="Všechny značky" renderLabel="true" itemValue="id" itemLabel="codeDescription" inline="true" required="false" />
-			<field:select id="c_cz_kolomet_domain_Seller_region" cssClass="filter_input" items="${regions}" field="region" path="/regions" emptyLabel="Všechny regiony" renderLabel="true" itemValue="id" itemLabel="codeDescription" inline="true" required="false" />
-
-			<field:checkbox id="c_cz_kolomet_domain_Product_canSendToAllCountry" cssClass="filter_input" field="canSendToAllCountry" />
+      		<field:select id="c_cz_kolomet_domain_Product_productUsage" cssClass="filter_input" itemValue="id" items="${productusages}" field="productUsage" emptyLabel="Všechna použití" renderLabel="true" itemLabel="codeDescription" path="/productusages" z="E5n2YmAp4hexrA+VnCnD/HiTRH0=" inline="true" required="false"/>
+      		<field:select id="c_cz_kolomet_domain_Product_producer_" cssClass="filter_input" items="${producers}" field="producer" path="/producers" emptyLabel="Všechny značky" renderLabel="true" itemValue="id" itemLabel="codeDescription" inline="true" required="false" />
+			<field:select id="c_cz_kolomet_domain_Seller_region__" cssClass="filter_input" items="${regions}" field="region" path="/regions" emptyLabel="Všechny regiony" renderLabel="true" itemValue="id" itemLabel="codeDescription" inline="true" required="false" />
 
 			<div id="weight_slider" class="slider filter_input">
       			<spring:message code="products_list_filter_weight" />: 
@@ -33,7 +33,7 @@
 	      		<div><!--  --></div>
       		</div>
       		
-      		<field:select id="c_cz_kolomet_domain_Product_productUsage" cssClass="filter_input" itemValue="id" items="${productusages}" field="productUsage" emptyLabel="Všechna použití" renderLabel="true" itemLabel="codeDescription" path="/productusages" z="E5n2YmAp4hexrA+VnCnD/HiTRH0=" inline="true" required="false"/>
+			<field:checkbox id="c_cz_kolomet_domain_Product_canSendToAllCountry" cssClass="filter_input" field="canSendToAllCountry" />
 
 			<div class="clear button_filter">
 	      		<spring:message code="button_filter" var="save_filter" htmlEscape="false" />

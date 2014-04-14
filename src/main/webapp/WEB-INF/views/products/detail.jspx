@@ -49,7 +49,7 @@
        			<c:if test="${product.deliveryForFree}">
 	       			<tr>
 	       				<td><b><spring:message code="label_cz_kolomet_domain_product_deliveryforfree" /></b></td>
-	       				<td><spring:eval expression="${product.deliveryForFree}" /></td>
+	       				<td><util:boolean value="${product.deliveryForFree}" /></td>
 	       			</tr>
        			</c:if>
        			<tr>

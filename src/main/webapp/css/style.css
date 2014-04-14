@@ -141,6 +141,7 @@ nav ul {
 nav ul ul {
 	display: none;
 	position: absolute;
+	z-index: 1000;
 	top: 100%;
 	right: 0;
 	width: 230px;
@@ -352,7 +353,7 @@ div.detail_description p {
 
 div#content_container div.filters {
 	width: 902px;
-	height: 120px;
+	height: 180px;
 	margin: 0px 6px 6px 6px;
 	padding: 15px;
 }

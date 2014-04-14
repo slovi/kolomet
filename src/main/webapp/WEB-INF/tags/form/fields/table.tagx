@@ -117,17 +117,22 @@
               <c:choose>
                 <c:when test="${columnType eq 'date'}">
                   <spring:escapeBody>
-                    <fmt:formatDate value="${item[column]}" pattern="${fn:escapeXml(columnDatePattern)}" var="colTxt" />
+                    <fmt:formatDate value="${prop}" pattern="${fn:escapeXml(columnDatePattern)}" var="colTxt" />
                   </spring:escapeBody>
                 </c:when>
                 <c:when test="${columnType eq 'calendar'}">
                   <spring:escapeBody>
-                    <fmt:formatDate value="${item[column].time}" pattern="${fn:escapeXml(columnDatePattern)}" var="colTxt"/>
+                    <fmt:formatDate value="${prop}" pattern="${fn:escapeXml(columnDatePattern)}" var="colTxt"/>
                   </spring:escapeBody>
+                </c:when>
+                <c:when test="${columnType eq 'boolean'}">
+                  <c:set var="colTxt">
+                  	<util:boolean value="${prop}" />
+                  </c:set>
                 </c:when>
                 <c:otherwise>
                   <c:set var="colTxt">
-                  	<c:if test="${not empty prop}">
+                  	<c:if test="${not empty prop}">                  	
                     	<spring:eval expression="prop" htmlEscape="false" />
                     </c:if>
                   </c:set>
