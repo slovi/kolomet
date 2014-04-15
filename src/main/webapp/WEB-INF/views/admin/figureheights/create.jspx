@@ -3,9 +3,9 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <form:create id="fc_cz_kolomet_domain_codelist_FigureHeight" modelAttribute="figureHeight" path="/admin/figureheights" render="${empty dependencies}" z="1+PXxe/ToEZk7GeF6g5ljG97RvI=">
-        <field:select field="createdBy" id="c_cz_kolomet_domain_codelist_FigureHeight_createdBy" itemValue="id" items="${applicationusers}" path="/admin/applicationusers" z="vYnfGN73qi3tJet4muRv2DoqgUI=" render="false"/>
-        <field:select field="lastModifiedBy" id="c_cz_kolomet_domain_codelist_FigureHeight_lastModifiedBy" itemValue="id" items="${applicationusers}" path="/admin/applicationusers" z="Ez17rpPTcIWVM273lLIJf75bnrI=" render="false"/>
-        <field:datetime dateTimePattern="${figureHeight_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_codelist_FigureHeight_lastModified" z="Lc8s4+mCCFUX3T89krWd0IMAafU=" render="false"/>
+        <field:select field="createdBy" id="c_cz_kolomet_domain_codelist_FigureHeight_createdBy" itemValue="id" items="${applicationusers}" path="/admin/applicationusers" render="false" z="user-managed"/>
+        <field:select field="lastModifiedBy" id="c_cz_kolomet_domain_codelist_FigureHeight_lastModifiedBy" itemValue="id" items="${applicationusers}" path="/admin/applicationusers" render="false" z="user-managed"/>
+        <field:datetime dateTimePattern="${figureHeight_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_codelist_FigureHeight_lastModified" render="false" z="user-managed"/>
         <field:input field="codeKey" id="c_cz_kolomet_domain_codelist_FigureHeight_codeKey" max="20" required="true" z="Du7l1BsoZN0MvT8n3SJD7Oeu3bM="/>
         <field:textarea field="codeDescription" id="c_cz_kolomet_domain_codelist_FigureHeight_codeDescription" required="true" z="zn8DOvTCShr6+0X1oycV2oyCowA="/>
     </form:create>

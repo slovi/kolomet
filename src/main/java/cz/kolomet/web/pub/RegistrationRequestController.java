@@ -35,7 +35,10 @@ public class RegistrationRequestController extends AbstractController {
             return "public/registrationrequests/create";
         }
         
-        if (!captchaService.validateResponseForID(httpServletRequest.getSession().getId(), registrationRequest.getCaptchaText()));
+        if (!captchaService.validateResponseForID(httpServletRequest.getSession().getId(), registrationRequest.getCaptchaText())) {
+        	bindingResult.rejectValue("captchaText", "Opsal jste spatne kod z obrazku");
+        	return "public/registrationrequests/create";
+        }
         
         uiModel.asMap().clear();
         registrationRequestService.saveRegistrationRequest(registrationRequest);

@@ -4,14 +4,10 @@
 package cz.kolomet.web.admin;
 
 import cz.kolomet.domain.Category;
-import cz.kolomet.domain.codelist.CategoryType;
 import cz.kolomet.service.ApplicationUserService;
 import cz.kolomet.service.CategoryService;
-import cz.kolomet.service.CategoryTypeService;
 import cz.kolomet.web.admin.CategoryController;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.joda.time.format.DateTimeFormat;
@@ -34,9 +30,6 @@ privileged aspect CategoryController_Roo_Controller {
     @Autowired
     ApplicationUserService CategoryController.applicationUserService;
     
-    @Autowired
-    CategoryTypeService CategoryController.categoryTypeService;
-    
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String CategoryController.create(@Valid Category category, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
@@ -51,11 +44,6 @@ privileged aspect CategoryController_Roo_Controller {
     @RequestMapping(params = "form", produces = "text/html")
     public String CategoryController.createForm(Model uiModel) {
         populateEditForm(uiModel, new Category());
-        List<String[]> dependencies = new ArrayList<String[]>();
-        if (categoryTypeService.countAllCategoryTypes() == 0) {
-            dependencies.add(new String[] { "categorytype", "admin/categorytypes" });
-        }
-        uiModel.addAttribute("dependencies", dependencies);
         return "admin/categorys/create";
     }
     
@@ -103,7 +91,6 @@ privileged aspect CategoryController_Roo_Controller {
         uiModel.addAttribute("category", category);
         addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("applicationusers", applicationUserService.findAllApplicationUsers());
-        uiModel.addAttribute("categorytypes", categoryTypeService.findAllCategoryTypes());
     }
     
     String CategoryController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {
