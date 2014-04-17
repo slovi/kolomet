@@ -1,5 +1,7 @@
 define(['jquery', 'jquery_ui'], function($) {
 	
+	console.log('entering slider function');
+	
 	return {
 		slider: function(divId, minValue, maxValue, defaultValueFrom, defaultValueTo, step) {
 			

@@ -25,18 +25,7 @@
 
   <spring:url value="/resources/js/main" var="main_js_url" />
   <spring:url value="/resources/js/lib/require.js" var="require_js_url" />
-  <script data-main="${main_js_url}" src="${require_js_url}"><!-- --></script>
-
-  <script type="text/javascript">
-  	
-  	require(['login', 'side_menu'], function(login, sideMenu) {
-  		$(document).ready(function() {
-	  		login.prepare();
-  			sideMenu.prepare();
-  		});
-  	});
-  	
-  </script>
+  <script data-main="${main_js_url}" src="${require_js_url}"><!-- --></script>  
 
   <spring:url value="/resources/dojo/dojo.js" var="dojo_url" />
   <script src="${dojo_url}" type="text/javascript"><!-- required for FF3 and Opera --></script>

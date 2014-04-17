@@ -1,3 +1,6 @@
+
+console.log('starting require config');
+
 require.config({
 	
 	paths: {
@@ -15,3 +18,14 @@ require.config({
 	}	
 	
 });
+
+require(['login', 'side_menu', 'slider'], function(login, sideMenu, slider) {
+	login.prepare();
+	sideMenu.prepare();
+	slider.slider('price_slider', 0, 100000, 0, 100000, 500);
+	slider.slider('discount_slider', 0, 10000, 0, 10000, 500);
+	slider.slider('weight_slider', 0, 50, 0, 50, 1);
+});
+	
+
+console.log('finishing require config');

@@ -45,14 +45,6 @@
           	</div>            
 	    </div>
 	    
-	    <script>
-	    	require(['slider'], function(slider) {
-	    		slider.slider('price_slider', 0, 100000, 0, 100000, 500);
-	    		slider.slider('discount_slider', 0, 10000, 0, 10000, 500);
-	    		slider.slider('weight_slider', 0, 50, 0, 50, 1);
-	    	});
-	    </script>
-	    
 	    <spring:url value="/public/products/filter" var="sortPriceUrl">
 			<c:forEach items="${paramValues}" var="p">
 				<c:if test="${p.key ne 'page.sort' and p.key ne 'page.sort.dir'}">

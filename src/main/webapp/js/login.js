@@ -1,5 +1,7 @@
 define(['jquery', 'jquery_lean'], function($) {
 	
+	console.log('entering login module');
+	
 	return {
 		prepare: function() {
 			$("#login_button").click(function(event) {
