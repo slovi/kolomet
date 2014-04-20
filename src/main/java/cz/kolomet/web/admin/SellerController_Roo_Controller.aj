@@ -3,13 +3,23 @@
 
 package cz.kolomet.web.admin;
 
+import cz.kolomet.domain.Seller;
+import cz.kolomet.domain.codelist.CountryState;
+import cz.kolomet.domain.codelist.Region;
+import cz.kolomet.domain.codelist.SellerStatus;
+import cz.kolomet.service.ApplicationUserService;
+import cz.kolomet.service.CountryStateService;
+import cz.kolomet.service.ProductService;
+import cz.kolomet.service.RegionService;
+import cz.kolomet.service.SellerPhotoUrlService;
+import cz.kolomet.service.SellerService;
+import cz.kolomet.service.SellerStatusService;
+import cz.kolomet.web.admin.SellerController;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -21,15 +31,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
-
-import cz.kolomet.domain.Seller;
-import cz.kolomet.service.ApplicationUserService;
-import cz.kolomet.service.CountryStateService;
-import cz.kolomet.service.ProductService;
-import cz.kolomet.service.RegionService;
-import cz.kolomet.service.SellerPhotoUrlService;
-import cz.kolomet.service.SellerService;
-import cz.kolomet.service.SellerStatusService;
 
 privileged aspect SellerController_Roo_Controller {
     
