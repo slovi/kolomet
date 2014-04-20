@@ -477,6 +477,14 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         };
     }
     
+    public Converter<Long, SellerStatus> ApplicationConversionServiceFactoryBean.getIdToSellerStatusConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, cz.kolomet.domain.codelist.SellerStatus>() {
+            public cz.kolomet.domain.codelist.SellerStatus convert(java.lang.Long id) {
+                return sellerStatusService.findSellerStatus(id);
+            }
+        };
+    }
+    
     public Converter<String, SellerStatus> ApplicationConversionServiceFactoryBean.getStringToSellerStatusConverter() {
         return new org.springframework.core.convert.converter.Converter<java.lang.String, cz.kolomet.domain.codelist.SellerStatus>() {
             public cz.kolomet.domain.codelist.SellerStatus convert(String id) {

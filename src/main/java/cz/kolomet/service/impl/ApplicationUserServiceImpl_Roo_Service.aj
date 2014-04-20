@@ -4,10 +4,8 @@
 package cz.kolomet.service.impl;
 
 import cz.kolomet.domain.ApplicationUser;
-import cz.kolomet.repository.ApplicationUserRepository;
 import cz.kolomet.service.impl.ApplicationUserServiceImpl;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,9 +14,6 @@ privileged aspect ApplicationUserServiceImpl_Roo_Service {
     declare @type: ApplicationUserServiceImpl: @Service;
     
     declare @type: ApplicationUserServiceImpl: @Transactional;
-    
-    @Autowired
-    ApplicationUserRepository ApplicationUserServiceImpl.applicationUserRepository;
     
     public long ApplicationUserServiceImpl.countAllApplicationUsers() {
         return applicationUserRepository.count();

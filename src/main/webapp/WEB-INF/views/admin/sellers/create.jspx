@@ -6,12 +6,12 @@
         <field:input field="sellerName" id="c_cz_kolomet_domain_Seller_sellerName" label="nazev" max="20" required="true" z="user-managed"/>
         <field:editor field="sellerDescription" id="c_cz_kolomet_domain_Seller_sellerDescription" label="popis" required="true" z="user-managed"/>
         <field:textarea field="mapUrl" id="c_cz_kolomet_domain_Seller_mapUrl" z="l4+of1NGD4kA6p7robYOfSeBf5c="/>
-        <field:select field="sellerStatus" id="c_cz_kolomet_domain_Seller_sellerStatus" itemValue="id" items="${sellerstatuses}" path="/admin/sellerstatuses" required="true" z="user-managed"/>
+        <field:select field="sellerStatus" id="c_cz_kolomet_domain_Seller_sellerStatus" itemValue="id" items="${sellerstatuses}" itemLabel="codeDescription" path="/admin/sellerstatuses" required="true" z="user-managed"/>
         <field:input field="personSalutation" id="c_cz_kolomet_domain_Seller_personSalutation" max="20" z="dnwzisYNI0tikfWCGZUYMTTS6FM="/>
         <field:input field="personDegree" id="c_cz_kolomet_domain_Seller_personDegree" max="20" z="E4WTBYQ4lqh1s4hOAJY7D6XkDrs="/>
         <field:input field="personName" id="c_cz_kolomet_domain_Seller_personName" max="20" z="jzxeTLWGrdFhvBxUikyixzbaycI="/>
         <field:input field="personSurname" id="c_cz_kolomet_domain_Seller_personSurname" max="20" z="O+lfZcagV0avUATCvy/fgN944Lc="/>
-        <field:select field="businessCountry" id="c_cz_kolomet_domain_Seller_businessCountry" itemValue="id" items="${countrystates}" path="/admin/countrystates" required="true" z="user-managed"/>
+        <field:select field="businessCountry" id="c_cz_kolomet_domain_Seller_businessCountry" itemValue="id" items="${countrystates}" itemLabel="codeDescription" path="/admin/countrystates" required="true" z="user-managed"/>
         <field:input field="businessCity" id="c_cz_kolomet_domain_Seller_businessCity" max="30" z="yldkXsZKWqg6Rzco3XspHTUvY1A="/>
         <field:input field="businessStreet" id="c_cz_kolomet_domain_Seller_businessStreet" max="30" z="IQGrMR85yrspgYpMPeR89kDvmCM="/>
         <field:input field="businessPostCode" id="c_cz_kolomet_domain_Seller_businessPostCode" max="30" z="Ai6UvMpAbh1EtV/Xa1gg9Oogpkw="/>
@@ -20,10 +20,10 @@
         <field:input field="businessName" id="c_cz_kolomet_domain_Seller_businessName" max="30" z="wMff26/IKdgvlIGrTVyOW3Z1j48="/>
         <field:textarea field="businessEmail" id="c_cz_kolomet_domain_Seller_businessEmail" z="AJoA26ZCBhcR3XKpvQWOcq34Xso="/>
         <field:input field="businessPhoneNumber" id="c_cz_kolomet_domain_Seller_businessPhoneNumber" max="30" z="xPi0a02wQAR9AEEEZZQTflBLDyY="/>
-        <field:select field="region" id="c_cz_kolomet_domain_Seller_region" itemValue="id" items="${regions}" path="/admin/regions" required="true" z="sIzZ9XBpsjJRmZbrZZ5pO16S93M="/>
+        <field:select field="region" id="c_cz_kolomet_domain_Seller_region" itemLabel="codeDescription" itemValue="id" items="${regions}" path="/admin/regions" required="true" z="user-managed"/>
         <field:textarea field="web" id="c_cz_kolomet_domain_Seller_web" z="myu210fXlXUPBcI53jRe4Vneb38="/>
         <field:textarea field="saleType" id="c_cz_kolomet_domain_Seller_saleType" z="T4Cb+TKo2Kp3HWWlNRJJ1K2aKf8="/>
-        <field:select field="addressCountry" id="c_cz_kolomet_domain_Seller_addressCountry" itemValue="id" items="${countrystates}" path="/admin/countrystates" required="true" z="user-managed"/>
+        <field:select field="addressCountry" id="c_cz_kolomet_domain_Seller_addressCountry" itemValue="id" items="${countrystates}" itemLabel="codeDescription" path="/admin/countrystates" required="true" z="user-managed"/>
         <field:input field="addressCity" id="c_cz_kolomet_domain_Seller_addressCity" max="30" z="ZWd3o2WyzWRTIGCFNgQhY3kkFsw="/>
         <field:textarea field="addressStreet" id="c_cz_kolomet_domain_Seller_addressStreet" z="2HYFkRw9+Ha209l1ivQAxbAq0zk="/>
         <field:input field="addressPostCode" id="c_cz_kolomet_domain_Seller_addressPostCode" max="5" z="QcE6/V1teYe69NOj68xVdM+Bgyo="/>

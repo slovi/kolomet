@@ -1,20 +1,30 @@
 package cz.kolomet.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PostFilter;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
 
 import cz.kolomet.domain.ApplicationUser;
 import cz.kolomet.dto.ApplicationUserPasswordDto;
+import cz.kolomet.repository.ApplicationUserRepository;
 import cz.kolomet.service.ApplicationUserService;
 import cz.kolomet.service.exception.ApplicationUserPasswordException;
 
 public class ApplicationUserServiceImpl implements ApplicationUserService {
+	
+	@Autowired
+	ApplicationUserRepository applicationUserRepository;
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
+	@PreAuthorize("hasRole('ROLE_per_applicationusers_all') or #applicationUser.id == principal.userId")
 	public void saveApplicationUser(ApplicationUser applicationUser) {
 
 		applicationUser.setPassword(passwordEncoder.encodePassword(applicationUser.getPassword(), null));

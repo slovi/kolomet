@@ -252,3 +252,5 @@ entity jpa --class ~.domain.codelist.FigureHeight --extends ~.domain.codelist.Co
 repository jpa --interface ~.repository.FigureHeightRepository --entity ~.domain.codelist.FigureHeight
 service --interface ~.service.FigureHeightService --entity ~.domain.codelist.FigureHeight --class ~.service.impl.FigureHeightServiceImpl
 web mvc scaffold --class ~.web.FigureHeightController --backingType ~.domain.codelist.FigureHeight --path /admin/figureheights
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2014-04-20 17:39:17
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2014-04-20 19:42:43

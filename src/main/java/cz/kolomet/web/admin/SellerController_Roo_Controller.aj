@@ -6,7 +6,6 @@ package cz.kolomet.web.admin;
 import cz.kolomet.domain.Seller;
 import cz.kolomet.domain.codelist.CountryState;
 import cz.kolomet.domain.codelist.Region;
-import cz.kolomet.domain.codelist.SellerStatus;
 import cz.kolomet.service.ApplicationUserService;
 import cz.kolomet.service.CountryStateService;
 import cz.kolomet.service.ProductService;
@@ -73,9 +72,6 @@ privileged aspect SellerController_Roo_Controller {
         if (countryStateService.countAllCountryStates() == 0) {
             dependencies.add(new String[] { "countrystate", "admin/countrystates" });
         }
-        if (sellerStatusService.countAllSellerStatuses() == 0) {
-            dependencies.add(new String[] { "sellerstatus", "admin/sellerstatuses" });
-        }
         if (regionService.countAllRegions() == 0) {
             dependencies.add(new String[] { "region", "admin/regions" });
         }
@@ -92,17 +88,6 @@ privileged aspect SellerController_Roo_Controller {
         uiModel.addAttribute("seller", sellerService.findSeller(id));
         uiModel.addAttribute("itemId", id);
         return "admin/sellers/show";
-    }
-    
-    @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
-    public String SellerController.update(@Valid Seller seller, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
-            populateEditForm(uiModel, seller);
-            return "admin/sellers/update";
-        }
-        uiModel.asMap().clear();
-        sellerService.updateSeller(seller);
-        return "redirect:/admin/sellers/" + encodeUrlPathSegment(seller.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(value = "/{id}", params = "form", produces = "text/html")

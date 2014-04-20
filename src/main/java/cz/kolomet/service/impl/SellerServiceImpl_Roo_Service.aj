@@ -3,11 +3,7 @@
 
 package cz.kolomet.service.impl;
 
-import cz.kolomet.domain.Seller;
-import cz.kolomet.repository.SellerRepository;
 import cz.kolomet.service.impl.SellerServiceImpl;
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,36 +12,5 @@ privileged aspect SellerServiceImpl_Roo_Service {
     declare @type: SellerServiceImpl: @Service;
     
     declare @type: SellerServiceImpl: @Transactional;
-    
-    @Autowired
-    SellerRepository SellerServiceImpl.sellerRepository;
-    
-    public long SellerServiceImpl.countAllSellers() {
-        return sellerRepository.count();
-    }
-    
-    public void SellerServiceImpl.deleteSeller(Seller seller) {
-        sellerRepository.delete(seller);
-    }
-    
-    public Seller SellerServiceImpl.findSeller(Long id) {
-        return sellerRepository.findOne(id);
-    }
-    
-    public List<Seller> SellerServiceImpl.findAllSellers() {
-        return sellerRepository.findAll();
-    }
-    
-    public List<Seller> SellerServiceImpl.findSellerEntries(int firstResult, int maxResults) {
-        return sellerRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / maxResults, maxResults)).getContent();
-    }
-    
-    public void SellerServiceImpl.saveSeller(Seller seller) {
-        sellerRepository.save(seller);
-    }
-    
-    public Seller SellerServiceImpl.updateSeller(Seller seller) {
-        return sellerRepository.save(seller);
-    }
     
 }

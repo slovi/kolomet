@@ -14,18 +14,19 @@
     			<menu:item url="/public/about" messageCode="menu_main_about" id="about" renderPageParams="false" />
     			
     			<security:authorize access="isFullyAuthenticated()">
-    			<menu:category id="admin" messageCode="menu_main_our_kolomet" url="/sellers">
+    			<menu:category id="admin" messageCode="menu_main_our_kolomet" url="#">
     				<security:authorize access="hasAnyRole('ROLE_per_registrationrequests')">    					
 	            		<menu:item id="i_registrationrequest_list" messageCode="global_menu_list" url="/admin/registrationrequests" z="user-managed"/>
 	        		</security:authorize>
-	        		<menu:item id="i_controller__private_profile_id" label="Upravit profil" messageCode="global_generic" renderPageParams="false" url="/private/userprofile?form" z="user-managed"/>
+	        		<security:authentication property="principal.sellerId" var="sellerId" />
+                	<menu:item id="i_controller__private_profileseller_id" label="Upravit profil prodejce" messageCode="global_generic" renderPageParams="false" url="/admin/sellers/${sellerId}?form" z="user-managed"/>
                		<menu:item id="i_controller__private_passwordindex_id" messageCode="global_generic" url="/private/password?form" z="user-managed"/>
     				<security:authorize access="hasAnyRole('ROLE_per_applicationusers')">
     					<menu:item id="i_applicationuser_list" messageCode="global_menu_list" url="/admin/applicationusers" z="18oGQE63MUIZ2YAKBPnDk0gNcZA="/>
     					<menu:item id="i_applicationrole_list" messageCode="global_menu_list" url="/admin/applicationroles" z="5BKruYLjsrCLDE9itOj1TlqWcRk="/>
     					<menu:item id="i_applicationpermission_list" messageCode="global_menu_list" url="/admin/applicationpermissions" z="Wl97kcGOo9MYPdeFlSYOwi7lAZs="/>
     				</security:authorize>
-    				<security:authorize access="hasAnyRole('ROLE_per_sellers')"> 
+    				<security:authorize access="hasRole('ROLE_per_sellers') and hasRole('ROLE_per_sellers_all')"> 
 	    				<hr color="#f9f9f9" width="85%" align="center" size="1" />
 						<menu:item id="i_seller_list" messageCode="global_menu_list" url="/admin/sellers" z="57f7mMa6rXXGgX7UBUaUGHmBSqg="/>
 						<security:authorize access="hasAnyRole('ROLE_per_sellerstatuses')">

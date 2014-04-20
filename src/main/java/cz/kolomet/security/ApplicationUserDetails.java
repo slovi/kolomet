@@ -42,7 +42,23 @@ public class ApplicationUserDetails implements UserDetails {
 	public boolean isProductsAll() {
 		return hasAuthority("per_products_all");
 	}
+	
+	public boolean isApplicationUsersAll() {
+		return hasAuthority("per_applicationusers_all");
+	}
+	
+	public boolean isApplicationUsersOwn() {
+		return hasAuthority("per_applicationusers_own");
+	}
+	
+	public boolean isSellersAll() {
+		return hasAuthority("per_sellers_all");
+	}
 
+	public boolean isSellersOwn() {
+		return hasAuthority("per_sellers_own");
+	}
+	
 	private Collection<? extends GrantedAuthority> resolveAuthorities() {
 		Set<GrantedAuthority> permissions = new HashSet<GrantedAuthority>();
 		for (ApplicationRole role: this.user.getRoles()) {
@@ -54,7 +70,12 @@ public class ApplicationUserDetails implements UserDetails {
 	}
 	
 	public boolean hasAuthority(String authorityName) {
-		return this.authorities.contains(ROLE_VOTER_PREFIX + authorityName); 
+		for (GrantedAuthority auth: this.authorities) {
+			if (auth.getAuthority().equals(ROLE_VOTER_PREFIX + authorityName)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Override
@@ -98,6 +119,10 @@ public class ApplicationUserDetails implements UserDetails {
 
 	public Long getSellerId() {
 		return sellerId;
+	}
+	
+	public Long getUserId() {
+		return user.getId();
 	}
 
 }
