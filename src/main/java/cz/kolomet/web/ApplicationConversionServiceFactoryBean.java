@@ -44,7 +44,7 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 	public Converter<Seller, String> getSellerToStringConverter() {
         return new Converter<Seller, String>() {
             public String convert(Seller seller) {
-                return new StringBuilder().append(seller.getSellerName()).toString();
+                return new StringBuilder().append(seller.getId()).toString();
             }
         };
     }
@@ -52,7 +52,7 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 	public Converter<Category, String> getCategoryToStringConverter() {
         return new Converter<Category, String>() {
             public String convert(Category category) {
-                return new StringBuilder().append(category.getCodeDescription()).toString();
+                return new StringBuilder().append(category.getId()).toString();
             }
         };
     }
@@ -60,7 +60,7 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 	public Converter<Producer, String> getProducerToStringConverter() {
         return new Converter<Producer, String>() {
             public String convert(Producer producer) {
-                return new StringBuilder().append(producer.getCodeDescription()).toString();
+                return new StringBuilder().append(producer.getId()).toString();
             }
         };
     }
@@ -92,7 +92,7 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 	public Converter<SellerStatus, String> getSellerStatusToStringConverter() {
         return new Converter<SellerStatus, String>() {
             public String convert(SellerStatus sellerStatus) {
-                return new StringBuilder().append(sellerStatus.getCodeKey()).append(' ').append(sellerStatus.getCodeDescription()).toString();
+                return new StringBuilder().append(sellerStatus.getId()).toString();
             }
         };
     }
@@ -100,7 +100,7 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 	public Converter<CountryState, String> getCountryStateToStringConverter() {
         return new Converter<cz.kolomet.domain.codelist.CountryState, java.lang.String>() {
             public String convert(CountryState countryState) {
-                return new StringBuilder().append(countryState.getCodeKey()).append(' ').append(countryState.getCodeDescription()).toString();
+                return new StringBuilder().append(countryState.getId()).toString();
             }
         };
     }
@@ -108,7 +108,7 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 	public Converter<Region, String> getRegionToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<cz.kolomet.domain.codelist.Region, java.lang.String>() {
             public String convert(Region region) {
-                return new StringBuilder().append(region.getCodeKey()).append(' ').append(region.getCodeDescription()).toString();
+                return new StringBuilder().append(region.getId()).toString();
             }
         };
     }
@@ -116,7 +116,7 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
     public Converter<ApplicationRole, String> getApplicationRoleToStringConverter() {
         return new Converter<ApplicationRole, String>() {
             public String convert(ApplicationRole applicationRole) {
-                return new StringBuilder().append(applicationRole.getRoleName()).toString();
+                return new StringBuilder().append(applicationRole.getId()).toString();
             }
         };
     }

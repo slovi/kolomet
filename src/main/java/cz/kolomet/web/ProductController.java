@@ -1,7 +1,8 @@
 package cz.kolomet.web;
+import java.math.BigDecimal;
+
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -54,13 +55,28 @@ public class ProductController extends AbstractController {
 	private void populateFilterForm(ProductFilterDto productFilter, Model model) {	
 		
 		if (productFilter.getPriceTo() == null) {
-			productFilter.setPriceTo(productRepository.findMaxPrice());
+			BigDecimal maxPrice = productRepository.findMaxPrice();
+			productFilter.setPriceTo(maxPrice);
+			productFilter.setMaxPriceTo(maxPrice);
 		}
 		if (productFilter.getDiscountTo() == null) {
-			productFilter.setDiscountTo(productRepository.findMaxDiscount());
+			BigDecimal maxDiscount = productRepository.findMaxDiscount();
+			productFilter.setDiscountTo(maxDiscount);
+			productFilter.setMaxDiscountTo(maxDiscount);
 		}
 		if (productFilter.getWeightTo() == null) {
-			productFilter.setWeightTo(productRepository.findMaxWeight());
+			Integer maxWeight = productRepository.findMaxWeight();
+			productFilter.setWeightTo(maxWeight);
+			productFilter.setMaxWeightTo(maxWeight);
+		}
+		if (productFilter.getPriceFrom() == null) {
+			productFilter.setPriceFrom(BigDecimal.ZERO);
+		}
+		if (productFilter.getDiscountFrom() == null) {
+			productFilter.setDiscountFrom(BigDecimal.ZERO);
+		}
+		if (productFilter.getWeightFrom() == null) {
+			productFilter.setWeightFrom(0);
 		}
 		
 		model.addAttribute("regions", regionRepository.findAll());

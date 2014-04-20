@@ -38,6 +38,7 @@ public class IntroController extends AbstractController implements InitializingB
     
     @Override
     public void afterPropertiesSet() throws Exception {
+    	super.afterPropertiesSet();
     	this.pageRequest = new PageRequest(0, productsSize, ProductSpecifications.getDefaultSort());
     }
     
