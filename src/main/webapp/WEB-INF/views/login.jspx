@@ -33,5 +33,11 @@
 		</form>
 	</div>
 	<div id="lean_overlay"></div>
+	
+	<script type="text/javascript">
+		require(['login'], function(login) {
+			login.prepare();
+		});
+	</script>
 
 </div>

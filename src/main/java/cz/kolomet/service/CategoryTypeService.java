@@ -11,4 +11,6 @@ public interface CategoryTypeService {
 	
 	public Page<CategoryType> findCategoryTypeEntries(Pageable pageable);
 	
+	public CategoryType findByCategoryCodeKey(String categoryCodeKey);
+	
 }

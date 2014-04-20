@@ -3,7 +3,6 @@ package cz.kolomet.web;
 import java.text.ParseException;
 import java.util.Locale;
 
-import org.apache.commons.lang3.BooleanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.Formatter;
@@ -69,7 +68,7 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 	public Converter<CategoryType, String> getCategoryTypeToStringConverter() {
         return new Converter<CategoryType, String>() {
             public String convert(CategoryType categoryType) {
-                return new StringBuilder().append(categoryType.getCodeDescription()).toString();
+                return new StringBuilder().append(categoryType.getId()).toString();
             }
         };
     }
@@ -102,14 +101,6 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
         return new Converter<cz.kolomet.domain.codelist.CountryState, java.lang.String>() {
             public String convert(CountryState countryState) {
                 return new StringBuilder().append(countryState.getCodeKey()).append(' ').append(countryState.getCodeDescription()).toString();
-            }
-        };
-    }
-	
-	public Converter<Long, SellerStatus> getIdToSellerStatusConverter() {
-        return new Converter<Long, SellerStatus>() {
-            public SellerStatus convert(Long id) {
-                return sellerStatusService.findSellerStatus(id);
             }
         };
     }

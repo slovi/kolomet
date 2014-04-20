@@ -1,7 +1,5 @@
 define(['jquery'], function($) {
 	
-	console.log('entering side menu module');
-	
 	return {
 		prepare: function() {
 			$(".side-menu").each(function(index, element) {

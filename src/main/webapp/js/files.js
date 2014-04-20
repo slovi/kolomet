@@ -1,7 +1,5 @@
 define(['jquery'], function($) {
 
-	console.log("entering files functions");
-	
 	var actualIndex = 1;
 	
 	return {

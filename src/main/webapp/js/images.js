@@ -1,7 +1,5 @@
 define(['jquery'], function($) {
 
-	console.log("entering images functions");
-	
 	return {
 		preloadImages: function (detailImgId) {
 			$("img.preloaded").each(function(index, element) {		

@@ -2,47 +2,92 @@ package cz.kolomet.dto;
 
 import java.math.BigDecimal;
 
+import org.springframework.format.annotation.NumberFormat;
+import org.springframework.format.annotation.NumberFormat.Style;
+
 import cz.kolomet.domain.Category;
 import cz.kolomet.domain.Producer;
 import cz.kolomet.domain.codelist.BicycleSize;
+import cz.kolomet.domain.codelist.CategoryType;
 import cz.kolomet.domain.codelist.FigureHeight;
 import cz.kolomet.domain.codelist.ProductUsage;
 import cz.kolomet.domain.codelist.Region;
 
 public class ProductFilterDto {
 	
+	@NumberFormat(style = Style.NUMBER)
 	private BigDecimal priceFrom;
+	
+	@NumberFormat(style = Style.NUMBER)
 	private BigDecimal priceTo;
+	
+	private BigDecimal maxPriceTo;
+	
+	@NumberFormat(style = Style.NUMBER)
 	private BigDecimal discountFrom;
+	
+	@NumberFormat(style = Style.NUMBER)
 	private BigDecimal discountTo;
+	
+	private BigDecimal maxDiscountTo;
+	
+	@NumberFormat(style = Style.NUMBER)
 	private Integer weightFrom;
+	
+	@NumberFormat(style = Style.NUMBER)
 	private Integer weightTo;
+	
+	private Integer maxWeightTo;
+	
 	private Category category;
+	
+	private CategoryType categoryType;
+	
 	private Producer producer;
+	
 	private Region region;
+	
 	private ProductUsage productUsage;
+	
 	private BicycleSize bicycleSize;
+	
 	private FigureHeight figureHeight;
+	
 	private Boolean canSendToAllCountry;
 	
 	public ProductFilterDto() {
 	}
 	
-	public ProductFilterDto(boolean initEmpty) {
-		if (initEmpty) {
-			this.category = new Category();
-			this.category.setId(0l);
-			this.region = new Region();
-			this.region.setId(0l);
-			this.producer = new Producer();
-			this.producer.setId(0l);
-			this.productUsage = new ProductUsage();
-			this.productUsage.setId(0l);
-			this.bicycleSize = new BicycleSize();
-			this.bicycleSize.setId(0l);
-			this.figureHeight = new FigureHeight();
-			this.figureHeight.setId(0l);
-		}
+	public static ProductFilterDto initEmpty() {
+		return initEmpty(new BigDecimal(100000l), new BigDecimal(10000l), 50);
+	}
+	
+	public static ProductFilterDto initEmpty(BigDecimal maxPriceTo, BigDecimal maxDiscountTo, Integer maxWeightTo) {
+		ProductFilterDto productFilter = new ProductFilterDto();
+		productFilter.category = new Category();
+		productFilter.category.setId(0l);
+		productFilter.categoryType = new CategoryType();
+		productFilter.categoryType.setId(0l);
+		productFilter.region = new Region();
+		productFilter.region.setId(0l);
+		productFilter.producer = new Producer();
+		productFilter.producer.setId(0l);
+		productFilter.productUsage = new ProductUsage();
+		productFilter.productUsage.setId(0l);
+		productFilter.bicycleSize = new BicycleSize();
+		productFilter.bicycleSize.setId(0l);
+		productFilter.figureHeight = new FigureHeight();
+		productFilter.figureHeight.setId(0l);
+		productFilter.priceFrom = new BigDecimal(0l);
+		productFilter.priceTo = maxPriceTo;
+		productFilter.maxPriceTo = maxPriceTo;
+		productFilter.discountFrom = new BigDecimal(0l);
+		productFilter.discountTo = maxDiscountTo;
+		productFilter.maxDiscountTo = maxDiscountTo;
+		productFilter.weightFrom = 0;
+		productFilter.weightTo = maxWeightTo;
+		productFilter.maxWeightTo = maxWeightTo;
+		return productFilter;
 	}
 	
 	public BigDecimal getPriceFrom() {
@@ -101,6 +146,14 @@ public class ProductFilterDto {
 		this.category = category;
 	}
 
+	public CategoryType getCategoryType() {
+		return categoryType;
+	}
+
+	public void setCategoryType(CategoryType categoryType) {
+		this.categoryType = categoryType;
+	}
+
 	public Producer getProducer() {
 		return producer;
 	}
@@ -147,6 +200,30 @@ public class ProductFilterDto {
 
 	public void setCanSendToAllCountry(Boolean canSendToAllCountry) {
 		this.canSendToAllCountry = canSendToAllCountry;
+	}
+
+	public BigDecimal getMaxPriceTo() {
+		return maxPriceTo;
+	}
+
+	public void setMaxPriceTo(BigDecimal maxPriceTo) {
+		this.maxPriceTo = maxPriceTo;
+	}
+
+	public BigDecimal getMaxDiscountTo() {
+		return maxDiscountTo;
+	}
+
+	public void setMaxDiscountTo(BigDecimal maxDiscountTo) {
+		this.maxDiscountTo = maxDiscountTo;
+	}
+
+	public Integer getMaxWeightTo() {
+		return maxWeightTo;
+	}
+
+	public void setMaxWeightTo(Integer maxWeightTo) {
+		this.maxWeightTo = maxWeightTo;
 	}
 
 }

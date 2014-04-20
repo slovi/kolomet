@@ -75,6 +75,10 @@ public class ProductSpecifications {
 				if (productFilter.getBicycleSize() != null) {
 					predicates.add(cb.equal(root.get("bicycleSize"), productFilter.getBicycleSize()));
 				}
+				if (productFilter.getCategoryType() != null) {
+					Join<Product, Category> category = root.join("category");
+					predicates.add(cb.equal(category.get("categoryType"), productFilter.getCategoryType()));
+				}
 				predicates.add(cb.equal(seller.get("enabled"), true));
 				return cb.and(predicates.toArray(new Predicate[predicates.size()]));
 			}

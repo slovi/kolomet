@@ -1,4 +1,6 @@
 package cz.kolomet.repository;
+import java.math.BigDecimal;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
@@ -11,6 +13,15 @@ import cz.kolomet.domain.Product;
 
 @RooJpaRepository(domainType = Product.class)
 public interface ProductRepository {
+	
+	@Query("select max(p.price) from Product p")
+	BigDecimal findMaxPrice();
+	
+	@Query("select max(p.discount) from Product p")
+	BigDecimal findMaxDiscount();
+	
+	@Query("select max(p.weight) from Product p")
+	Integer findMaxWeight();
 	
 	@Query("select p from Product p inner join p.seller s inner join s.sellerStatus ss")
 	Page<Product> findByPriority(Pageable pageable);

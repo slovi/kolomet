@@ -1,48 +1,32 @@
-define(['jquery', 'jquery_ui'], function($) {
-	
-	console.log('entering slider function');
+define(['jquery', 'jquery_ui', 'jquery_number'], function($) {
 	
 	return {
-		slider: function(divId, minValue, maxValue, defaultValueFrom, defaultValueTo, step) {
-			
+		slider: function(divId, valueFrom, valueTo, maxValueFrom, maxValueTo, step) {
+						
 			var parentDiv = $("#" + divId); 
 			var slider = $("div", parentDiv); 
 			var amountFromInput = $(".amountFromInput", parentDiv); 
 			var amountToInput = $(".amountToInput", parentDiv);
 			
-			var valueFrom;
-			if (amountFromInput.val() == '') {
-				valueFrom = defaultValueFrom;
-			} else {
-				valueFrom = amountFromInput.val();
-			}
-			
-			var valueTo;
-			if (amountToInput.val() == '') {
-				valueTo = defaultValueTo;
-			} else {
-				valueTo = amountToInput.val();
-			}
-			
 			slider.slider({
 				range: true,
-				min: minValue,
-				max: maxValue,
+				min: maxValueFrom,
+				max: maxValueTo,
 				values: [valueFrom, valueTo],
 				step: step,
 				slide: function(event, ui) {
-					$(".amountFromInput", parentDiv).val(ui.values[0]);
-					$(".amountToInput", parentDiv).val(ui.values[1]);
+					amountFromInput.val(ui.values[0]);
+					formatCurrency(amountFromInput);
+					amountToInput.val(ui.values[1]);
+					formatCurrency(amountToInput);
 				}
 			});
-			
-			if (amountFromInput.val() == '') {
-				amountFromInput.val(slider.slider("values", 0));
-			}
-			if (amountToInput.val() == '') {
-				amountToInput.val(slider.slider("values", 1));
-			}
 		}
 	};
+	
+	function formatCurrency(element) {
+		var format = "#,##0";
+		element.formatNumber({format: format, locale: "cz"});
+	}
 	
 });

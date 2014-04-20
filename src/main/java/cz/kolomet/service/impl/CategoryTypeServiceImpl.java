@@ -12,4 +12,8 @@ public class CategoryTypeServiceImpl implements CategoryTypeService {
 		return categoryTypeRepository.findAll(pageable);
 	}
 	
+	public CategoryType findByCategoryCodeKey(String categoryCodeKey) {
+		return categoryTypeRepository.findByCodeKey(categoryCodeKey);
+	}
+	
 }

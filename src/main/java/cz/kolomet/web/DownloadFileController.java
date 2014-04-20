@@ -31,7 +31,10 @@ public class DownloadFileController {
 	@RequestMapping(value = "/file/**", method = RequestMethod.GET)
 	public void download(ModelMap modelMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		String pathInfo = request.getRequestURI().substring(request.getContextPath().length() + "/file".length());
+		String requestUri = request.getRequestURI();
+		int lastSemicolonIndex = requestUri.lastIndexOf(';');
+		int filePathIndex = request.getContextPath().length() + "/file".length();
+		String pathInfo = requestUri.substring(filePathIndex, lastSemicolonIndex > 0 ? lastSemicolonIndex : requestUri.length());
 
 		response.setContentType("image/jpeg");
 
