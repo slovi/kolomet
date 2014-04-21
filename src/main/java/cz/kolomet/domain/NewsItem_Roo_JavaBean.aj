@@ -4,7 +4,10 @@
 package cz.kolomet.domain;
 
 import cz.kolomet.domain.NewsItem;
+import cz.kolomet.domain.NewsItemPhotoUrl;
 import java.util.Date;
+import java.util.List;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 privileged aspect NewsItem_Roo_JavaBean {
     
@@ -30,6 +33,22 @@ privileged aspect NewsItem_Roo_JavaBean {
     
     public void NewsItem.setText(String text) {
         this.text = text;
+    }
+    
+    public List<NewsItemPhotoUrl> NewsItem.getNewsItemPhotoUrls() {
+        return this.newsItemPhotoUrls;
+    }
+    
+    public void NewsItem.setNewsItemPhotoUrls(List<NewsItemPhotoUrl> newsItemPhotoUrls) {
+        this.newsItemPhotoUrls = newsItemPhotoUrls;
+    }
+    
+    public List<CommonsMultipartFile> NewsItem.getContents() {
+        return this.contents;
+    }
+    
+    public void NewsItem.setContents(List<CommonsMultipartFile> contents) {
+        this.contents = contents;
     }
     
 }

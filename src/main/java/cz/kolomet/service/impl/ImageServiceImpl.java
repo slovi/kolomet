@@ -15,6 +15,7 @@ import java.io.OutputStream;
 
 import javax.imageio.ImageIO;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,26 @@ import cz.kolomet.service.ImageService;
 
 @Service
 public class ImageServiceImpl implements ImageService {
+	
+	@Async
+	@Override
+	public void save(File sourceFile, File targetFile) {
+		try {
+			save(new FileInputStream(sourceFile), new FileOutputStream(targetFile));
+		} catch (FileNotFoundException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	@Async
+	@Override
+	public void save(InputStream inputStream, OutputStream outputStream) {
+		try {
+			IOUtils.copy(inputStream, outputStream);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
 
 	@Async
 	@Override

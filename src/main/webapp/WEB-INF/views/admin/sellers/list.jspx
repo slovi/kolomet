@@ -4,12 +4,12 @@
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_cz_kolomet_domain_Seller" items="${sellers}" z="j9ifeCdeyF2uVnrzON+WGO1/Ks8=">
         <table:table data="${sellers}" id="l_cz_kolomet_domain_Seller" path="/admin/sellers" z="user-managed">
-            <table:column id="c_cz_kolomet_domain_Seller_sellerName" property="sellerName" z="EjbVTlfNxS4U7LqshAe5pL5U0aA="/>
-            <table:column id="c_cz_kolomet_domain_Seller_createdBy" property="createdBy" z="fd0p4ZJDDeHWShbOgtq6CdposhQ="/>
-            <table:column id="c_cz_kolomet_domain_Seller_lastModifiedBy" property="lastModifiedBy" z="51b658XBjx8q2VaQmxm1DfJxPnc="/>
-            <table:column date="true" dateTimePattern="${seller_created_date_format}" id="c_cz_kolomet_domain_Seller_created" property="created" z="qqGpZf5w5zQx79OPE2pLiKgLQtk="/>
-            <table:column date="true" dateTimePattern="${seller_lastmodified_date_format}" id="c_cz_kolomet_domain_Seller_lastModified" property="lastModified" z="5on/oVkMBdeHhtKZ/iwQ2hnr3Pg="/>
-            <table:column id="c_cz_kolomet_domain_Seller_sellerDescription" property="sellerDescription" z="N9t3v32uHkEUuvTDWq8FygHw5NY="/>
+            <table:column id="c_cz_kolomet_domain_Seller_sellerName" sort="true" property="sellerName" z="EjbVTlfNxS4U7LqshAe5pL5U0aA="/>
+            <table:column id="c_cz_kolomet_domain_Seller_createdBy" sort="true" property="createdBy" z="fd0p4ZJDDeHWShbOgtq6CdposhQ="/>
+            <table:column id="c_cz_kolomet_domain_Seller_lastModifiedBy" sort="true" property="lastModifiedBy" z="51b658XBjx8q2VaQmxm1DfJxPnc="/>
+            <table:column date="true" dateTimePattern="${seller_created_date_format}" id="c_cz_kolomet_domain_Seller_created" sort="true" property="created" z="qqGpZf5w5zQx79OPE2pLiKgLQtk="/>
+            <table:column date="true" dateTimePattern="${seller_lastmodified_date_format}" id="c_cz_kolomet_domain_Seller_lastModified" sort="true" property="lastModified" z="5on/oVkMBdeHhtKZ/iwQ2hnr3Pg="/>
+            <table:column id="c_cz_kolomet_domain_Seller_sellerDescription" sort="true" property="sellerDescription" z="N9t3v32uHkEUuvTDWq8FygHw5NY="/>
         </table:table>
     </page:list>
 </div>

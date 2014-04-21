@@ -1,8 +1,13 @@
 package cz.kolomet.domain;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Filter;
@@ -15,6 +20,7 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.entity.RooJpaEntity;
 import org.springframework.roo.addon.serializable.RooSerializable;
 import org.springframework.roo.addon.tostring.RooToString;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 @RooJavaBean
 @RooToString(excludeFields = {"createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate"})
@@ -37,4 +43,11 @@ public class NewsItem extends DomainEntity {
 	@NotNull
 	private String text;
 	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "newsItem", cascade = CascadeType.ALL)
+    private List<NewsItemPhotoUrl> newsItemPhotoUrls;
+
+	@Transient
+    private List<CommonsMultipartFile> contents;
+	
 }
+

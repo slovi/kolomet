@@ -76,7 +76,12 @@
     <!-- Enable this for integration of file upload functionality -->
     <bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver"/>
 
+  	<bean class="org.springframework.js.ajax.AjaxUrlBasedViewResolver">
+  		<property name="order" value="1" />
+		<property name="viewClass" value="org.springframework.js.ajax.tiles2.AjaxTilesView" />  	
+  	</bean>
 	<bean class="org.springframework.web.servlet.view.UrlBasedViewResolver" id="tilesViewResolver">
+		<property name="order" value="2" />
     	<property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView"/>
   	</bean>
     
@@ -90,11 +95,11 @@
     	</property>
   	</bean>
 
+			<bean id="applicationConversionService" class="cz.kolomet.web.ApplicationConversionServiceFactoryBean" />
 
-	<bean id="applicationConversionService" class="cz.kolomet.util.OrmConversionServiceAdapter">
-		<property name="conversionService">
-			<bean class="cz.kolomet.web.ApplicationConversionServiceFactoryBean" />
-		</property>
-	</bean>
+<!-- 	<bean id="applicationConversionService" class="cz.kolomet.util.OrmConversionServiceAdapter"> -->
+<!-- 		<property name="conversionService"> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
 		
 </beans>

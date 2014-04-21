@@ -30,6 +30,14 @@
     <put-attribute name="footer" value="/WEB-INF/views/footer.jspx" />
     <put-attribute name="login" value="/WEB-INF/views/login.jspx" />
   </definition>
+  
+  <definition name="default_wide_extendedcontent" template="/WEB-INF/layouts/default_wide_extendedcontent.jspx">
+    <put-attribute name="header" value="/WEB-INF/views/header.jspx" />
+    <put-attribute name="menu_main" value="/WEB-INF/views/menu_main.jspx" />
+    <put-attribute name="menu_side" value="/WEB-INF/views/menu_side.jspx" />
+    <put-attribute name="footer" value="/WEB-INF/views/footer.jspx" />
+    <put-attribute name="login" value="/WEB-INF/views/login.jspx" />
+  </definition>
 
   <definition name="public" template="/WEB-INF/layouts/default.jspx">
     <put-attribute name="header" value="/WEB-INF/views/header.jspx" />

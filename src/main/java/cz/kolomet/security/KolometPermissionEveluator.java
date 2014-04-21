@@ -17,7 +17,11 @@ public class KolometPermissionEveluator implements PermissionEvaluator {
 			return ((ApplicationUser) targetDomainObject).getId().equals(details.getUserId());
 		}
 		if (targetDomainObject instanceof Seller) {
-			return ((Seller) targetDomainObject).getId().equals(details.getSellerId());
+			if (details.isSellersAll()) {
+				return true;
+			} else {
+				return ((Seller) targetDomainObject).getId().equals(details.getSellerId());
+			}
 		}
 		return false;
 	}

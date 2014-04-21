@@ -4,12 +4,13 @@
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_cz_kolomet_domain_ApplicationUser" items="${applicationusers}" z="mi4PrRwzQHaRhGkDUtz6NejR2iE=">
         <table:table data="${applicationusers}" id="l_cz_kolomet_domain_ApplicationUser" path="/admin/applicationusers" z="user-managed">
-            <table:column id="c_cz_kolomet_domain_ApplicationUser_username" property="username" z="6U69JD/tExS8r2JoNNcUzG8rXo8="/>
-            <table:column id="c_cz_kolomet_domain_ApplicationUser_password" property="password" z="4Ajukah9Q1FGjKngV8/miqE/FUQ="/>
-            <table:column id="c_cz_kolomet_domain_ApplicationUser_createdBy" property="createdBy" z="m//O/9HkshqWDDWpM1qU8NZVBvY="/>
-            <table:column id="c_cz_kolomet_domain_ApplicationUser_lastModifiedBy" property="lastModifiedBy" z="cK4czi3WHjRGZrw+erY7kPqXPkU="/>
-            <table:column date="true" dateTimePattern="${applicationUser_created_date_format}" id="c_cz_kolomet_domain_ApplicationUser_created" property="created" z="LNz06XVosb7PUDNkmbOcj2d+fVw="/>
-            <table:column date="true" dateTimePattern="${applicationUser_lastmodified_date_format}" id="c_cz_kolomet_domain_ApplicationUser_lastModified" property="lastModified" z="Q2NmDcZcFK76fc0tt14zUvRwGXs="/>
+            <table:column id="c_cz_kolomet_domain_ApplicationUser_username" property="username" sort="true" z="user-managed"/>
+            <table:column id="c_cz_kolomet_domain_ApplicationUser_password" property="password" sort="true" z="user-managed"/>
+            <table:column id="c_cz_kolomet_domain_ApplicationUser_seller" property="seller.sellerName" sort="true" z="user-managed"/>
+            <table:column id="c_cz_kolomet_domain_ApplicationUser_createdBy" property="createdBy" sort="true" z="user-managed"/>
+            <table:column id="c_cz_kolomet_domain_ApplicationUser_lastModifiedBy" property="lastModifiedBy" sort="true" z="user-managed"/>
+            <table:column date="true" dateTimePattern="${applicationUser_created_date_format}" id="c_cz_kolomet_domain_ApplicationUser_created" property="created" sort="true" z="user-managed"/>
+            <table:column date="true" dateTimePattern="${applicationUser_lastmodified_date_format}" id="c_cz_kolomet_domain_ApplicationUser_lastModified" property="lastModified" sort="true" z="user-managed"/>
         </table:table>
     </page:list>
 </div>

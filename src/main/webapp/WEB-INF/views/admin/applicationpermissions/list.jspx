@@ -4,12 +4,12 @@
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_cz_kolomet_domain_ApplicationPermission" items="${applicationpermissions}" z="SHc1CpaXSc6CFf7xeblUv6YYXIw=">
         <table:table data="${applicationpermissions}" id="l_cz_kolomet_domain_ApplicationPermission" path="/admin/applicationpermissions" z="user-managed">
-            <table:column id="c_cz_kolomet_domain_ApplicationPermission_permissionName" property="permissionName" z="idbciYnyHGhtfwiZh5lWNzJ7zUM="/>
-            <table:column id="c_cz_kolomet_domain_ApplicationPermission_roles" property="roles" z="ePT/lBxu8RSaqkEFBXAoxAlfIaA="/>
-            <table:column id="c_cz_kolomet_domain_ApplicationPermission_createdBy" property="createdBy" z="umynPfgu9sbWGMfk+Aug8xZKrOg="/>
-            <table:column id="c_cz_kolomet_domain_ApplicationPermission_lastModifiedBy" property="lastModifiedBy" z="YdFOD3Fln7trGwOUfsdIISYX7MM="/>
-            <table:column date="true" dateTimePattern="${applicationPermission_created_date_format}" id="c_cz_kolomet_domain_ApplicationPermission_created" property="created" z="iVeFEubW7+/Pk6mkFp92UAmJJP0="/>
-            <table:column date="true" dateTimePattern="${applicationPermission_lastmodified_date_format}" id="c_cz_kolomet_domain_ApplicationPermission_lastModified" property="lastModified" z="2EuNcvbyb4Ubp+GybLFUPWpF8Cc="/>
+            <table:column id="c_cz_kolomet_domain_ApplicationPermission_permissionName" property="permissionName" sort="true" z="user-managed"/>
+            <table:column id="c_cz_kolomet_domain_ApplicationPermission_roles" property="roles" sort="true" z="user-managed"/>
+            <table:column id="c_cz_kolomet_domain_ApplicationPermission_createdBy" property="createdBy" sort="true" z="user-managed"/>
+            <table:column id="c_cz_kolomet_domain_ApplicationPermission_lastModifiedBy" property="lastModifiedBy" sort="true" z="user-managed"/>
+            <table:column date="true" dateTimePattern="${applicationPermission_created_date_format}" id="c_cz_kolomet_domain_ApplicationPermission_created" property="created" sort="true" z="user-managed"/>
+            <table:column date="true" dateTimePattern="${applicationPermission_lastmodified_date_format}" id="c_cz_kolomet_domain_ApplicationPermission_lastModified" property="lastModified" sort="true" z="user-managed"/>
         </table:table>
     </page:list>
 </div>

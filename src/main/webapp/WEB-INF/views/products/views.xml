@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 <tiles-definitions>
-    <definition extends="default_wide" name="products/list_category">
-        <put-attribute name="body" value="/WEB-INF/views/products/list_category.jspx"/>
+    <definition extends="default_wide_extendedcontent" name="products/list_category">
+    	<put-attribute name="body_header" value="/WEB-INF/views/products/list_category_filter.jspx"/>
+        <put-attribute name="body_content" value="/WEB-INF/views/products/list_category.jspx"/>
     </definition>
     <definition extends="default_wide" name="products/detail">
         <put-attribute name="body" value="/WEB-INF/views/products/detail.jspx"/>

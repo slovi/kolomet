@@ -9,6 +9,7 @@
 
 	<properties>
 		<org.springframework.version>3.1.1.RELEASE</org.springframework.version>
+		<org.springframework.js.version>2.3.2.RELEASE</org.springframework.js.version>
 		<org.aspectj.version>1.7.4</org.aspectj.version>
 		<org.springframework.roo.version>1.2.5.RELEASE</org.springframework.roo.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -257,7 +258,12 @@
 		<dependency>
 			<groupId>org.springframework.webflow</groupId>
 			<artifactId>spring-js-resources</artifactId>
-			<version>2.2.1.RELEASE</version>
+			<version>2.3.2.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.webflow</groupId>
+			<artifactId>spring-js</artifactId>
+			<version>2.3.2.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>

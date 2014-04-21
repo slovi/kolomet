@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:spring="http://www.springframework.org/tags" xmlns:form="http://www.springframework.org/tags/form" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    
+   	<spring:url value="/public/products/filter" var="filterActionUrl" />
+   	<form:form id="filterForm" action="${filterActionUrl}" method="get" modelAttribute="productFilter">
+	    <div class="filters">
+    
+      		<form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
+    
+      		<field:slider id="price" valueFrom="${productFilter.priceFrom}" valueTo="${productFilter.priceTo}" maxValueFrom="0" maxValueTo="${productFilter.maxPriceTo}" units="currency_short" size="4" step="1000" />
+      		<field:select id="c_cz_kolomet_domain_Product_category" cssClass="filter_input" items="${categories}" field="category" path="/categorys" emptyLabel="Všechny kategorie" renderLabel="true" itemValue="id" itemLabel="codeDescription" inline="true" required="false" />
+      		<field:select id="c_cz_kolomet_domain_Product_producer" cssClass="filter_input" items="${producers}" field="producer" path="/producers" emptyLabel="Všechny značky" renderLabel="true" itemValue="id" itemLabel="codeDescription" inline="true" required="false" />
+			<field:select id="c_cz_kolomet_domain_Seller_region" cssClass="filter_input" items="${regions}" field="region" path="/regions" emptyLabel="Všechny regiony" renderLabel="true" itemValue="id" itemLabel="codeDescription" inline="true" required="false" />
+     		
+      		<field:slider id="discount" valueFrom="${productFilter.discountFrom}" valueTo="${productFilter.discountTo}" maxValueFrom="0" maxValueTo="${productFilter.maxDiscountTo}" units="currency_short" step="1000" />
+      		<field:select id="c_cz_kolomet_domain_Product_productUsage" cssClass="filter_input" itemValue="id" items="${productusages}" field="productUsage" emptyLabel="Všechna použití" renderLabel="true" itemLabel="codeDescription" path="/productusages" z="E5n2YmAp4hexrA+VnCnD/HiTRH0=" inline="true" required="false"/>
+      		<field:select id="c_cz_kolomet_domain_Product_bicycleSize" cssClass="filter_input" items="${bicyclesizes}" field="bicycleSize" path="/bicyclesizes" emptyLabel="Všechny velikosti" renderLabel="true" itemValue="id" itemLabel="codeDescription" inline="true" required="false" />
+			<field:select id="c_cz_kolomet_domain_Product_figureHeight" cssClass="filter_input" items="${figureheights}" field="figureHeight" path="/figureheights" emptyLabel="Všechny velikosti" renderLabel="true" itemValue="id" itemLabel="codeDescription" inline="true" required="false" />
+
+			<field:slider id="weight" units="weight_units" valueFrom="${productFilter.weightFrom}" valueTo="${productFilter.weightTo}" maxValueFrom="0" maxValueTo="${productFilter.maxWeightTo}" size="1" />      		
+			<field:checkbox id="c_cz_kolomet_domain_Product_canSendToAllCountry" cssClass="filter_input" field="canSendToAllCountry" />
+
+			<form:hidden path="categoryType" />
+
+			<div class="clear button_filter">
+	      		<spring:message code="button_filter" var="save_filter" htmlEscape="false" />
+	      		<input type="hidden" name="page.page" value="${products.number}" />
+	      		<input type="hidden" name="page.size" value="${products.size}" />
+	      		<input type="hidden" name="page.sort" value="${param['page.sort']}" />
+	      		<input type="hidden" name="page.sort.dir" value="${param['page.sort.dir']}" />
+	          	<field:ajaxSubmit id="button_filter" event="onclick" formId="filterForm" rerender="body_content" value="${save_filter}" />      	
+          	</div>            
+	    </div>
+	    
+    </form:form>
+    
+</jsp:root>

@@ -30,13 +30,19 @@
   <spring:url value="/resources/dojo/dojo.js" var="dojo_url" />
   <script src="${dojo_url}" type="text/javascript"><!-- required for FF3 and Opera --></script>
 
-  <spring:url value="/resources/spring/Spring.js" var="spring_url" />
+  <spring:url value="/resources/spring/Spring.js.uncompressed.js" var="spring_url" />
   <script src="${spring_url}" type="text/javascript"><!-- /required for FF3 and Opera --></script>
   
-  <spring:url value="/resources/spring/Spring-Dojo.js" var="spring_dojo_url" />
+  <spring:url value="/resources/spring/Spring-Dojo.js.uncompressed.js" var="spring_dojo_url" />
   <script src="${spring_dojo_url}" type="text/javascript"><!-- required for FF3 and Opera --></script>
   <script language="JavaScript" type="text/javascript">dojo.require("dojo.parser");</script>
 
   <script type="text/javascript">var djConfig = {parseOnLoad: false, isDebug: false, locale: '${fn:toLowerCase(userLocale)}'};</script>
+  
+  <style type="text/css">
+  	.dijitTextBox[type=file] {
+  		width: 25em;
+  	}
+  </style>
 
 </jsp:root>

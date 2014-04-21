@@ -67,7 +67,7 @@
       </label>
       <c:choose>
         <c:when test="${disableFormBinding}">
-          <input id="_${sec_field}_id" name="${sec_field}" type="${fn:escapeXml(type)}" />
+          <input id="_${sec_field}_id" name="${sec_field}" size="100" type="${fn:escapeXml(type)}" />
         </c:when>
         <c:otherwise>
           <c:choose>

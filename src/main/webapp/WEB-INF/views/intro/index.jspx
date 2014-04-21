@@ -18,7 +18,7 @@
 	     		<p>
 	     			<spring:url value="/public/sellers/detail/${product.seller.id}" var="sellerIdUrl" />
 	                <a href="${sellerIdUrl}"><c:out value="${product.seller.sellerName}" /></a>, ${product.seller.addressCity}<br/>
-	            	<c:out value="${product.seller.addressStreet}" />, <c:out value="${product.seller.addressPostCode}" />, <c:out value="${product.seller.addressCity}" /><a href="${mapUrl}">mapa</a><br/>
+	            	<c:out value="${product.seller.addressStreet}" />, <c:out value="${product.seller.addressPostCode}" />, <c:out value="${product.seller.addressCity}" />, <a href="${mapUrl}">mapa</a><br/>
 	                <c:out value="${product.seller.businessPhoneNumber}" />
 	            </p>
 	     	</div>

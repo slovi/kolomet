@@ -55,6 +55,8 @@
 		<intercept-url pattern="/admin/categorytypes/*" access="hasAnyRole('ROLE_per_categorytypes')" />
 		<intercept-url pattern="/admin/newsitems" access="hasAnyRole('ROLE_per_newsitems')" />
 		<intercept-url pattern="/admin/newsitems/*" access="hasAnyRole('ROLE_per_newsitems')" />
+		<intercept-url pattern="/admin/newsitemphotourls" access="hasAnyRole('ROLE_per_newsitems')" />
+		<intercept-url pattern="/admin/newsitemphotourls/*" access="hasAnyRole('ROLE_per_newsitems')" />
 		<intercept-url pattern="/**" access="denyAll" />
 		<form-login login-page="/public/intro/index" authentication-failure-handler-ref="authenticationFailureHandler" authentication-success-handler-ref="authenticationSuccessHandler" />
 		<logout logout-success-url="/public/intro/index" />

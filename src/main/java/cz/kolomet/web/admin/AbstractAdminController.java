@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import cz.kolomet.domain.NewsItem;
+import cz.kolomet.domain.NewsItemPhotoUrl;
 import cz.kolomet.domain.PhotoUrl;
 import cz.kolomet.domain.Product;
 import cz.kolomet.repository.NewsItemRepository;
 import cz.kolomet.security.ApplicationUserDetails;
+import cz.kolomet.service.NewsItemPhotoUrlService;
 import cz.kolomet.service.PhotoUrlService;
 
 public class AbstractAdminController {
@@ -25,6 +27,9 @@ public class AbstractAdminController {
 	
 	@Autowired
     protected PhotoUrlService photoUrlService;
+	
+	@Autowired
+	protected NewsItemPhotoUrlService newsItemPhotoUrlService;
 	
 	@Autowired
 	private NewsItemRepository newsItemRepository;
@@ -53,6 +58,26 @@ public class AbstractAdminController {
 					photoUrl.setContentType(content.getContentType());
 					photoUrl.setProduct(product);
 		        	photoUrlService.savePhotoUrl(photoUrl, dest);
+	        	}
+	        }
+		}
+	}
+	
+	protected void saveNewsItemPhotos(NewsItem newsItem, List<CommonsMultipartFile> files) {
+		if (files != null) {
+			for (CommonsMultipartFile content: files) {
+	        	if (StringUtils.isNotEmpty(content.getOriginalFilename())) {
+		        	File dest = getDestFile(newsItem.getId(), content);
+		        	try {
+						content.transferTo(dest);
+					} catch (Exception e) {
+						throw new RuntimeException(e);
+					}
+		        	NewsItemPhotoUrl photoUrl = new NewsItemPhotoUrl();
+		        	photoUrl.setFileName(dest.getName());
+					photoUrl.setContentType(content.getContentType());
+					photoUrl.setNewsItem(newsItem);
+		        	newsItemPhotoUrlService.saveNewsItemPhotoUrl(photoUrl, dest);
 	        	}
 	        }
 		}

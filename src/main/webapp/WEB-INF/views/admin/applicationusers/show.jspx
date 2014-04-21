@@ -11,6 +11,6 @@
         <field:display date="true" dateTimePattern="${applicationUser_created_date_format}" field="created" id="s_cz_kolomet_domain_ApplicationUser_created" object="${applicationuser}" z="5W2iGix117sX1SxqsTenJXiMoAA="/>
         <field:display date="true" dateTimePattern="${applicationUser_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_ApplicationUser_lastModified" object="${applicationuser}" z="5W2iGix117sX1SxqsTenJXiMoAA="/>
         <field:display field="enabled" id="s_cz_kolomet_domain_ApplicationUser_enabled" object="${applicationuser}" z="/pt0Pwgdamgfr/fTVjx6mdt94FI="/>
-        <field:display field="roles" id="s_cz_kolomet_domain_ApplicationUser_roles" object="${applicationuser}" z="ZOx9tub686+4MDbO4COZ+yhSh9I="/>
+        <field:display collectionItemProperty="roleName" field="roles" id="s_cz_kolomet_domain_ApplicationUser_roles" object="${applicationuser}" z="user-managed"/>
     </page:show>
 </div>

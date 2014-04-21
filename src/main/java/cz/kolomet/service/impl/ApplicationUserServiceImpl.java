@@ -1,12 +1,9 @@
 package cz.kolomet.service.impl;
 
-import java.util.List;
-
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.access.prepost.PostAuthorize;
-import org.springframework.security.access.prepost.PostFilter;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
 
@@ -24,7 +21,7 @@ public class ApplicationUserServiceImpl implements ApplicationUserService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
-	@PreAuthorize("hasRole('ROLE_per_applicationusers_all') or #applicationUser.id == principal.userId")
+	@PreAuthorize("hasRole('ROLE_per_applicationusers') or #applicationUser.id == principal.userId")
 	public void saveApplicationUser(ApplicationUser applicationUser) {
 
 		applicationUser.setPassword(passwordEncoder.encodePassword(applicationUser.getPassword(), null));
@@ -34,6 +31,14 @@ public class ApplicationUserServiceImpl implements ApplicationUserService {
 	public Page<ApplicationUser> findApplicationUserEntries(Pageable pageable) {
 		return applicationUserRepository.findAll(pageable);
 	}
+	
+    public ApplicationUser updateApplicationUser(ApplicationUser applicationUser) {
+    	String password = applicationUser.getPassword();
+    	if (StringUtils.isNotEmpty(password)) {
+    		applicationUser.setPassword(this.passwordEncoder.encodePassword(password, null));
+    	}
+        return applicationUserRepository.save(applicationUser);
+    }
 
 	public void updatePassword(ApplicationUserPasswordDto applicationUserPassword) {
 		ApplicationUser user = applicationUserRepository.findByUsername(applicationUserPassword.getUsername());

@@ -14,6 +14,7 @@ entity jpa --class ~.domain.RegistrationRequest --extends ~.domain.DomainEntity 
 entity jpa --class ~.domain.ApplicationRole --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 entity jpa --class ~.domain.ApplicationPermission --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 entity jpa --class ~.domain.NewsItem --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
+entity jpa --class ~.domain.NewsItemPhotoUrl --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 entity jpa --class ~.domain.codelist.Codelist --abstract true --equals true --serializable true --activeRecord false --extends ~.domain.Entity --inheritanceType TABLE_PER_CLASS
 entity jpa --class ~.domain.codelist.CategoryType --extends ~.domain.codelist.Codelist --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 entity jpa --class ~.domain.codelist.ProductUsage --extends ~.domain.codelist.Codelist --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
@@ -44,6 +45,7 @@ repository jpa --interface ~.repository.RegistrationRequestRepository --entity ~
 repository jpa --interface ~.repository.ApplicationRoleRepository --entity ~.domain.ApplicationRole
 repository jpa --interface ~.repository.ApplicationPermissionRepository --entity ~.domain.ApplicationPermission
 repository jpa --interface ~.repository.NewsItemRepository --entity ~.domain.NewsItem
+repository jpa --interface ~.repository.NewsItemPhotoUrlRepository --entity ~.domain.NewsItemPhotoUrl
 repository jpa --interface ~.repository.BicycleSizeRepository --entity ~.domain.codelist.BicycleSize
 repository jpa --interface ~.repository.FigureHeightRepository --entity ~.domain.codelist.FigureHeight
 
@@ -65,6 +67,7 @@ service type --interface ~.service.RegistrationRequestService --entity ~.domain.
 service type --interface ~.service.ApplicationRoleService --entity ~.domain.ApplicationRole --class ~.service.impl.ApplicationRoleServiceImpl
 service type --interface ~.service.ApplicationPermissionService --entity ~.domain.ApplicationPermission --class ~.service.impl.ApplicationPermissionServiceImpl
 service type --interface ~.service.NewsItemService --entity ~.domain.NewsItem --class ~.service.impl.NewsItemServiceImpl
+service type --interface ~.service.NewsItemPhotoUrlService --entity ~.domain.NewsItemPhotoUrl --class ~.service.impl.NewsItemPhotoUrlServiceImpl
 service type --interface ~.service.BicycleService --entity ~.domain.codelist.BicycleSize --class ~.service.impl.BicycleSizeServiceImpl
 service type --interface ~.service.FigureHeightService --entity ~.domain.codelist.FigureHeight --class ~.service.impl.FigureHeightServiceImpl
 
@@ -86,5 +89,6 @@ web mvc scaffold --class ~.web.RegistrationRequestController --backingType ~.dom
 web mvc scaffold --class ~.web.ApplicationRoleController --backingType ~.domain.ApplicationRole
 web mvc scaffold --class ~.web.ApplicationPermissionController --backingType ~.domain.ApplicationPermission
 web mvc scaffold --class ~.web.NewsItemController --backingType ~.domain.NewsItem
+web mvc scaffold --class ~.web.NewsItemPhotoUrlController --backingType ~.domain.NewsItemPhotoUrl --path /admin/newsitemphotourls
 web mvc scaffold --class ~.web.BicycleController --backingType ~.domain.codelist.BicycleSize --path /admin/bicyclesizes
 web mvc scaffold --class ~.web.FigureHeightController --backingType ~.domain.codelist.FigureHeight --path /admin/figureheights

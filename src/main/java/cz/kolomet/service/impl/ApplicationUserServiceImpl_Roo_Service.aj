@@ -35,8 +35,4 @@ privileged aspect ApplicationUserServiceImpl_Roo_Service {
         return applicationUserRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / maxResults, maxResults)).getContent();
     }
     
-    public ApplicationUser ApplicationUserServiceImpl.updateApplicationUser(ApplicationUser applicationUser) {
-        return applicationUserRepository.save(applicationUser);
-    }
-    
 }

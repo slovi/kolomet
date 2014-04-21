@@ -39,7 +39,7 @@
       	</div>
       </div>
       <div style="text-align: right; margin: 0 500px 0 0">
-	  	<a class="multiple_input_add" href="#">add</a> | <a class="multiple_input_remove" href="#">remove</a>
+	  	<a class="multiple_input_add" href="#"><spring:message code="button_add" /></a> | <a class="multiple_input_remove" href="#"><spring:message code="button_remove" /></a>
 	  </div>
 	  
       <c:set var="sec_field_validation">

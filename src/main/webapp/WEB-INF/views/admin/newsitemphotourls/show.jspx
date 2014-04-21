@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_cz_kolomet_domain_NewsItemPhotoUrl" object="${newsitemphotourl}" path="/admin/newsitemphotourls" z="bKTH5OF1ZXSrspI5k955c7sMMRs=">
+        <field:display field="createdBy" id="s_cz_kolomet_domain_NewsItemPhotoUrl_createdBy" object="${newsitemphotourl}" z="FJAUCuX/4XevUnIhag7vcHQFfKc="/>
+        <field:display field="lastModifiedBy" id="s_cz_kolomet_domain_NewsItemPhotoUrl_lastModifiedBy" object="${newsitemphotourl}" z="S2sZH+ETierXfwH1qc2A5qi9qWY="/>
+        <field:display date="true" dateTimePattern="${newsItemPhotoUrl_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_NewsItemPhotoUrl_lastModified" object="${newsitemphotourl}" z="/Y8h3Aes6kG3XWirMsWAUkGA304="/>
+        <field:display field="fileName" id="s_cz_kolomet_domain_NewsItemPhotoUrl_fileName" object="${newsitemphotourl}" z="KtrF0SBbwAWsrjvZJbO4Inoa9Ms="/>
+        <field:display field="contentType" id="s_cz_kolomet_domain_NewsItemPhotoUrl_contentType" object="${newsitemphotourl}" z="QSdxetWvJDQ/22uKyARp8AsJb4I="/>
+        <field:display field="newsItem" id="s_cz_kolomet_domain_NewsItemPhotoUrl_newsItem" object="${newsitemphotourl}" z="kHqlSqYW5QKYipsfYAyaS9W3ito="/>
+        <field:display field="contents" id="s_cz_kolomet_domain_NewsItemPhotoUrl_contents" object="${newsitemphotourl}" z="+LAKl66Ap9bnaSup0HgqJLlsYtM="/>
+    </page:show>
+</div>

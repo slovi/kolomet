@@ -24,7 +24,7 @@ public class ApplicationUserDetails implements UserDetails {
 	
 	public ApplicationUserDetails(ApplicationUser user) {
 		this.user = user;
-		this.sellerId = user.getSeller().getId();
+		this.sellerId = user.getSeller() != null ? user.getSeller().getId() : null;
 		this.authorities = resolveAuthorities();
 	}
 	
