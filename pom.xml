@@ -176,6 +176,11 @@
 			<version>4.3.4.Final</version>
 		</dependency>
 		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-c3p0</artifactId>
+			<version>4.3.4.Final</version>
+		</dependency>
+		<dependency>
 			<groupId>com.github.jsimone</groupId>
 			<artifactId>webapp-runner</artifactId>
 			<version>7.0.34.0</version>
@@ -248,11 +253,6 @@
 					<artifactId>xml-apis</artifactId>
 				</exclusion>
 			</exclusions>
-		</dependency>
-		<dependency>
-  			<groupId>c3p0</groupId>
-  			<artifactId>c3p0</artifactId>
-  			<version>0.9.1.2</version>
 		</dependency>
 		
 		<dependency>
