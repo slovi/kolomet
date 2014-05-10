@@ -9,6 +9,10 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -19,7 +23,6 @@ import org.hibernate.annotations.Filters;
 import org.hibernate.annotations.ParamDef;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
-import org.springframework.format.annotation.NumberFormat.Style;
 import org.springframework.roo.addon.equals.RooEquals;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.entity.RooJpaEntity;
@@ -27,7 +30,7 @@ import org.springframework.roo.addon.serializable.RooSerializable;
 import org.springframework.roo.addon.tostring.RooToString;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-import cz.kolomet.domain.codelist.BicycleSize;
+import cz.kolomet.domain.codelist.BicycleCategory;
 import cz.kolomet.domain.codelist.FigureHeight;
 import cz.kolomet.domain.codelist.ProductUsage;
 
@@ -57,12 +60,16 @@ public class Product extends DomainEntity {
     /**
      */
     @NotNull
-    @NumberFormat(style = Style.NUMBER)
+    @DecimalMin("1")
+    @DecimalMax("1000000")
+    @NumberFormat(pattern = "###")
     private BigDecimal price;
 
     /**
      */
-    @NumberFormat(style = Style.NUMBER)
+    @DecimalMin("1")
+    @DecimalMax("1000000")
+    @NumberFormat(pattern = "###")
     private BigDecimal discount;
     
     @Lob
@@ -90,7 +97,7 @@ public class Product extends DomainEntity {
     private ProductUsage productUsage;
     
     @ManyToOne
-    private BicycleSize bicycleSize;
+    private BicycleCategory bicycleCategory;
     
     @ManyToOne
     private FigureHeight figureHeight;
@@ -108,7 +115,15 @@ public class Product extends DomainEntity {
     
     private Boolean deliveryForFree;
     
+    @NotNull
+    @Min(1)
+    @Max(1000)
+    @NumberFormat(pattern = "###")
     private Integer weight;
+    
+    @NotNull
+    @Size(max = 255)
+    private String buyUrl;
 
     /**
      */

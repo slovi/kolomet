@@ -1,36 +1,43 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:spring="http://www.springframework.org/tags" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:show detailUrl="/public/products/detail/${product.id}" id="ps_cz_kolomet_domain_Product" object="${product}" path="/admin/products" z="user-managed">
         <field:display field="productName" id="s_cz_kolomet_domain_Product_productName" object="${product}" z="OgwKo7O8FnRzdsLDlOxiF4TPR1w="/>
         <field:display field="price" id="s_cz_kolomet_domain_Product_price" object="${product}" z="xpno0xgzkr6bWjdNoFutCzBaIyE="/>
         <field:display field="discount" id="s_cz_kolomet_domain_Product_discount" object="${product}" z="ZF2WJwqsIZuPwQRx4YSssq69Id8="/>
-        <field:display field="category" id="s_cz_kolomet_domain_Product_category" object="${product}" z="GSlGUvpxnFGPqFGZ+QjVEHYzeEs="/>
-        <field:display field="producer" id="s_cz_kolomet_domain_Product_producer" object="${product}" z="dW/X2YRgPextf24hN2wxAugtvw0="/>
+        <field:display field="category.codeDescription" id="s_cz_kolomet_domain_Product_category" object="${product}" z="user-managed"/>
+        <field:display field="producer.codeDescription" id="s_cz_kolomet_domain_Product_producer" object="${product}" z="user-managed"/>
         <field:display field="description" id="s_cz_kolomet_domain_Product_description" object="${product}" z="LPSKMJTVZ2Ovji3LmzZm6NI/M1s="/>
         <field:display date="true" dateTimePattern="${product_validto_date_format}" field="validTo" id="s_cz_kolomet_domain_Product_validTo" object="${product}" z="1B16372FTICFbxZCes59kEITbMw="/>
-        <field:display field="seller" id="s_cz_kolomet_domain_Product_seller" object="${product}" z="l9aQBxj/TdL+b5fuw0y3j8Sq9kE="/>
-        <field:display field="enabled" id="s_cz_kolomet_domain_Product_enabled" object="${product}" z="G0IkR8nTGchiaDDiIzk06toa8tY="/>
-        <field:display field="canSendToAllCountry" id="s_cz_kolomet_domain_Product_canSendToAllCountry" object="${product}" z="O9nFMtTV8x+xjzRoJ3W5IeBEVgs="/>
-        <field:display field="deliveryForFree" id="s_cz_kolomet_domain_Product_deliveryForFree" object="${product}" z="2NTiE7Q9G6FQgcCvsP7+ka/T3lc="/>
+        <field:display field="seller.sellerName" id="s_cz_kolomet_domain_Product_seller" object="${product}" z="user-managed"/>
+        <field:display bool="true" field="enabled" id="s_cz_kolomet_domain_Product_enabled" object="${product}" z="user-managed"/>
+        <field:display bool="true" field="canSendToAllCountry" id="s_cz_kolomet_domain_Product_canSendToAllCountry" object="${product}" z="user-managed"/>
+        <field:display bool="true" field="deliveryForFree" id="s_cz_kolomet_domain_Product_deliveryForFree" object="${product}" z="user-managed"/>
         <field:display field="createdBy" id="s_cz_kolomet_domain_Product_createdBy" object="${product}" z="5Vg+fbN/d0tcEic+hEw/+JsTKlw="/>
         <field:display field="lastModifiedBy" id="s_cz_kolomet_domain_Product_lastModifiedBy" object="${product}" z="s65qNTiKmGg5ABoB0x59wClx/hc="/>
         <field:display date="true" dateTimePattern="${product_created_date_format}" field="created" id="s_cz_kolomet_domain_Product_created" object="${product}" z="ZCK6v15HOwhsvMXPFw5ks6hRW6s="/>
         <field:display date="true" dateTimePattern="${product_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_Product_lastModified" object="${product}" z="ZCK6v15HOwhsvMXPFw5ks6hRW6s="/>
         <field:display field="contents" id="s_cz_kolomet_domain_Product_contents" object="${product}" render="false" z="user-managed"/>
-        <field:display field="productUsage" id="s_cz_kolomet_domain_Product_productUsage" object="${product}" z="JI+MfFfKQkLleGQoDQIP6o0YWLw="/>
-        <field:display field="bicycleSize" id="s_cz_kolomet_domain_Product_bicycleSize" object="${product}" z="6sppvMgMgCo0g2sYopJlk9yy87s="/>
-        <field:display field="figureHeight" id="s_cz_kolomet_domain_Product_figureHeight" object="${product}" z="F90g6avqF4qQ38PSYPze0k9YAvQ="/>
+        <field:display field="productUsage.codeDescription" id="s_cz_kolomet_domain_Product_productUsage" object="${product}" z="user-managed"/>
+        <field:display field="bicycleCategory.codeDescription" id="s_cz_kolomet_domain_Product_bicycleCategory" object="${product}" z="user-managed"/>
+        <field:display field="figureHeight.codeDescription" id="s_cz_kolomet_domain_Product_figureHeight" object="${product}" z="user-managed"/>
         <field:display field="weight" id="s_cz_kolomet_domain_Product_weight" object="${product}" z="DKM+lI+uhSvkiF1NABV/HF0/p+8="/>
+        <field:display field="buyUrl" id="s_cz_kolomet_domain_Product_buyUrl" object="${product}" z="PTwkiPRRbFEXm43/qaVYKSPQ3Dw="/>
+        <br/>
+        <br/>
         <c:set scope="request" value="${product.id}" var="parentEntityId"/>
-        <h2><spring:message code="label_cz_kolomet_domain_product_productattributes" /></h2>
-        <br />
+        <h2>
+            <spring:message code="label_cz_kolomet_domain_product_productattributes"/>
+        </h2>
+        <br/>
         <c:set scope="request" value="${product.productAttributes}" var="productattributes"/>
         <jsp:include flush="true" page="../productattributes/list.jspx"/>
         <br/>
-        <h2><spring:message code="label_cz_kolomet_domain_product_photourls" /></h2>
-        <br />
+        <h2>
+            <spring:message code="label_cz_kolomet_domain_product_photourls"/>
+        </h2>
+        <br/>
         <c:set scope="request" value="${product.photoUrls}" var="photourls"/>
         <jsp:include flush="true" page="../photourls/list.jspx"/>
     </page:show>

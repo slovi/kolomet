@@ -25,3 +25,11 @@ Pristupy:
 	jenkins (https://jenkins-slovi.rhcloud.com/job/kolomet-build/: system_builder/xhS1_DZZTeNp), 
 	mysql (adminH32h99S/pUsGtTcszG9N)
 	phpadmin (https://kolomet-slovi.rhcloud.com/phpmyadmin/: adminH32h99S/pUsGtTcszG9N)
+	
+Pristupy buk02:
+
+	mysql http://buk02.vas-server.cz/phpmyadmin/ (root/GjNNErRfMlMZ4y2i2oYC)
+	ssh buk02.vas-server.cz (root/hPvp4.:CFI?LBNWF1Y1L)
+	ftp http://webftp.vas-hosting.cz (ftpuser/slovik)
+	
+	

@@ -6,9 +6,15 @@
   <jsp:directive.attribute name="value" type="java.lang.String" required="false" rtexprvalue="true" description="Button value" />
   <jsp:directive.attribute name="formId" type="java.lang.String" required="false" rtexprvalue="true" description="Form to submit" />
   <jsp:directive.attribute name="event" type="java.lang.String" required="false" rtexprvalue="true" description="Event type" />
+  <jsp:directive.attribute name="styleClass" type="java.lang.String" required="false" rtexprvalue="true" description="Css class" />
   
   <c:if test="${empty render or render}">
-	<input id="${id}" type="submit" value="${fn:escapeXml(value)}" name="${value}" />
+  	<c:if test="${not empty styleClass}">
+		<input id="${id}" type="submit" class="${styleClass}" value="${fn:escapeXml(value)}" name="${value}" />
+	</c:if>
+	<c:if test="${empty styleClass}">
+		<input id="${id}" type="submit" value="${fn:escapeXml(value)}" name="${value}" />
+	</c:if>
 	
 	<script type="text/javascript">
 		Spring.addDecoration(new Spring.AjaxEventDecoration({

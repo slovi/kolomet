@@ -1,5 +1,8 @@
 package cz.kolomet.web.admin;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -19,6 +22,27 @@ import cz.kolomet.security.ApplicationUserDetails;
 @Controller
 @RooWebScaffold(path = "admin/sellers", formBackingObject = Seller.class)
 public class SellerController extends AbstractAdminController {
+	
+    @RequestMapping(params = "form", produces = "text/html")
+    public String createForm(Model uiModel) {
+    	
+    	Seller seller = new Seller();
+    	seller.setSellerStatus(sellerStatusService.findSellerStatus("sellst_ord"));
+    	
+        populateEditForm(uiModel, seller);
+        List<String[]> dependencies = new ArrayList<String[]>();
+        if (countryStateService.countAllCountryStates() == 0) {
+            dependencies.add(new String[] { "countrystate", "admin/countrystates" });
+        }
+        if (regionService.countAllRegions() == 0) {
+            dependencies.add(new String[] { "region", "admin/regions" });
+        }
+        if (countryStateService.countAllCountryStates() == 0) {
+            dependencies.add(new String[] { "countrystate", "admin/countrystates" });
+        }
+        uiModel.addAttribute("dependencies", dependencies);
+        return "admin/sellers/create";
+    }
 	
     @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
     public String update(@Valid Seller seller, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {

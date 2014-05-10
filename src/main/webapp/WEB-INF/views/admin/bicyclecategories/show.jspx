@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_cz_kolomet_domain_codelist_BicycleCategory" object="${bicycleCategory}" path="/admin/bicyclecategories" z="fXppJBypeucSHMmLycJ5hN59SYQ=">
+        <field:display field="createdBy" id="s_cz_kolomet_domain_codelist_BicycleCategory_createdBy" object="${bicycleCategory}" z="z0pD9I0yKhV/wI/DecQjP3c5r2c="/>
+        <field:display field="lastModifiedBy" id="s_cz_kolomet_domain_codelist_BicycleCategory_lastModifiedBy" object="${bicycleCategory}" z="lUbAIoGdpKldVxENlmx4JkMvXKM="/>
+        <field:display date="true" dateTimePattern="${bicycleCategory_created_date_format}" field="created" id="s_cz_kolomet_domain_codelist_BicycleCategory_created" object="${bicycleCategory}" z="cOIh9xC6XpaEdN1iwNOXsuswVxY="/>
+        <field:display date="true" dateTimePattern="${bicycleCategory_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_codelist_BicycleCategory_lastModified" object="${bicycleCategory}" z="cOIh9xC6XpaEdN1iwNOXsuswVxY="/>
+        <field:display field="codeKey" id="s_cz_kolomet_domain_codelist_BicycleCategory_codeKey" object="${bicycleCategory}" z="h/SWKbIx1pNiARRWGIpZIRauRk8="/>
+        <field:display field="codeDescription" id="s_cz_kolomet_domain_codelist_BicycleCategory_codeDescription" object="${bicycleCategory}" z="Hwntjfk4jpNSo9vuDqV+llD5B64="/>
+    </page:show>
+</div>

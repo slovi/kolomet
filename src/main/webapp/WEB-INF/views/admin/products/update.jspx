@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <form:update id="fu_cz_kolomet_domain_Product" modelAttribute="product" path="/admin/products" versionField="Version" z="user-managed">
         <field:textarea field="productName" id="c_cz_kolomet_domain_Product_productName" required="true" z="9VRS4DrGEb9AJgsJiZnH90xhO8Q="/>
         <field:editor field="description" id="c_cz_kolomet_domain_Product_description" z="user-managed"/>
-        <field:input field="price" id="c_cz_kolomet_domain_Product_price" required="true" validationMessageCode="field_invalid_number" z="8WBt5dfoVCIiZbaItCV+D0Ny6fc="/>
-        <field:input field="discount" id="c_cz_kolomet_domain_Product_discount" validationMessageCode="field_invalid_number" z="uv6z4+8sEz83BAFjjftyHYknDNY="/>
+        <field:input field="price" id="c_cz_kolomet_domain_Product_price" required="true" validationMessageCode="typeMismatch.product.price" validationRegex="([1-9][0-9]{0,5}|1000000)" z="user-managed"/>
+        <field:input field="discount" id="c_cz_kolomet_domain_Product_discount" validationMessageCode="typeMismatch.product.discount" validationRegex="([1-9][0-9]{0,5}|1000000)" z="user-managed"/>
         <field:select field="category" id="c_cz_kolomet_domain_Product_category" itemLabel="codeDescription" itemValue="id" items="${categorys}" path="/admin/categorys" z="user-managed"/>
         <field:select field="producer" id="c_cz_kolomet_domain_Product_producer" itemLabel="codeDescription" itemValue="id" items="${producers}" path="/admin/producers" z="user-managed"/>
         <field:datetime dateTimePattern="${product_validto_date_format}" field="validTo" id="c_cz_kolomet_domain_Product_validTo" z="2UFsBNvdW5vSrMA8Vstjhd9fDys="/>
-        <field:select field="seller" id="c_cz_kolomet_domain_Product_seller" itemValue="id" items="${sellers}" path="/admin/sellers" z="user-managed"/>
+        <field:select field="seller" id="c_cz_kolomet_domain_Product_seller" itemLabel="sellerName" itemValue="id" items="${sellers}" path="/admin/sellers" z="user-managed"/>
         <field:simple field="photoUrls" id="c_cz_kolomet_domain_Product_photoUrls" messageCode="entity_reference_not_managed" messageCodeAttribute="Photo Url" render="false" z="user-managed"/>
         <field:simple field="productAttributes" id="c_cz_kolomet_domain_Product_productAttributes" messageCode="entity_reference_not_managed" messageCodeAttribute="Product Attribute" render="false" z="user-managed"/>
         <field:checkbox field="enabled" id="c_cz_kolomet_domain_Product_enabled" z="TQuxy01gHsypW2/Tbt4RWNqp11k="/>
@@ -21,21 +21,61 @@
         <field:datetime dateTimePattern="${product_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_Product_lastModified" render="false" z="user-managed"/>
         <field:input field="contents" id="c_cz_kolomet_domain_Product_contents" render="false" z="user-managed"/>
         <field:select field="productUsage" id="c_cz_kolomet_domain_Product_productUsage" itemLabel="codeDescription" itemValue="id" items="${productusages}" path="/admin/productusages" z="user-managed"/>
-        <field:select field="bicycleSize" id="c_cz_kolomet_domain_Product_bicycleSize" itemLabel="codeDescription" itemValue="id" items="${bicyclesizes}" path="/admin/bicyclesizes" z="user-managed"/>
+        <field:select field="bicycleCategory" id="c_cz_kolomet_domain_Product_bicycleCategory" itemLabel="codeDescription" itemValue="id" items="${bicyclecategories}" path="/admin/bicyclecategories" z="user-managed"/>
         <field:select field="figureHeight" id="c_cz_kolomet_domain_Product_figureHeight" itemLabel="codeDescription" itemValue="id" items="${figureheights}" path="/admin/figureheights" z="user-managed"/>
-        <field:input field="weight" id="c_cz_kolomet_domain_Product_weight" validationMessageCode="field_invalid_integer" z="X1qpuDZwvR/wVrUbExDo3xbASLc="/>
+        <field:input field="weight" id="c_cz_kolomet_domain_Product_weight" validationMessageCode="typeMismatch.product.weight" validationRegex="([1-9][0-9]{0,2}|1000)" required="true" z="user-managed"/>
+        <field:textarea field="buyUrl" id="c_cz_kolomet_domain_Product_buyUrl" z="h3XFbeW432ThLIWt3XDlCxlctpY="/>
+        <br />
+        <br />
         <c:set scope="request" value="${product.id}" var="parentEntityId"/>
+        <c:set scope="request" value="update" var="source"/>
+        <h2>
+            <spring:message code="label_cz_kolomet_domain_product_productattributes"/>
+        </h2>
+        <br/>
         <util:panel id="fc_cz_kolomet_domain_Product_productAttributes" title="ProductAttributes">
             <c:forEach items="${product.productAttributes}" var="productAttribute" varStatus="status">
                 <field:hidden field="productAttributes[${status.index}].id" id="fc_cz_kolomet_domain_Product_productAttribute_id_${status.index}"/>
                 <field:hidden field="productAttributes[${status.index}].version" id="fc_cz_kolomet_domain_Product_productAttribute_version_${status.index}"/>
                 <field:hidden field="productAttributes[${status.index}].attributeType" id="fc_cz_kolomet_domain_Product_productAttribute_type_${status.index}"/>
-                <field:input field="productAttributes[${status.index}].attributeValue" id="fc_cz_kolomet_domain_Product_productAttribute_value_${status.index}" label="${productAttribute.attributeType.codeDescription}" required="${productAttribute.attributeType.required}"/>
+                <field:input field="productAttributes[${status.index}].attributeValue" id="fc_cz_kolomet_domain_Product_productAttribute_value_${status.index}" inline="true" label="${productAttribute.attributeType.codeDescription}" required="${productAttribute.attributeType.required}"/>
+                <spring:url value="/admin/productattributes/${productAttribute.id}" var="delete_form_url"/>
+                <spring:url value="/resources/images/delete.png" var="delete_image_url"/>
+                <form style="display: inline;">
+                    <input name="placeholder" type="hidden" value="placeholder"/>
+                </form>
+                <form action="${delete_form_url}" id="command_${status.index}" method="post" style="margin-left: 430px; margin-top: -20px;">
+                    <input name="updateMode" type="hidden" value="true"/>
+                    <input name="_method" type="hidden" value="delete"/>
+                    <spring:message arguments="${typeName}" code="entity_delete" htmlEscape="false" var="delete_label"/>
+                    <c:set var="delete_confirm_msg">
+                        <spring:escapeBody javaScriptEscape="true">
+                            <spring:message code="entity_delete_confirm"/>
+                        </spring:escapeBody>
+                    </c:set>
+                    <input alt="${fn:escapeXml(delete_label)}" class="image" onclick="return confirm('${delete_confirm_msg}');" src="${delete_image_url}" title="${fn:escapeXml(delete_label)}" type="image" value="${fn:escapeXml(delete_label)}"/>
+                </form>
+                <br/>
             </c:forEach>
+            <span class="new">
+	          <spring:url value="/admin/productattributes" var="create_url">
+	            <spring:param name="form" />
+	            <c:if test="${not empty parentEntityId}">
+	          	  <spring:param name="parentEntityId" value="${parentEntityId}" />
+	            </c:if>
+	          </spring:url>              
+	          <a href="${create_url}">
+	            <spring:url value="/resources/images/add.png" var="create_img_url" />
+	            <spring:message arguments="${typeName}" code="global_menu_new" var="add_message" htmlEscape="false" />
+	            <img alt="${fn:escapeXml(add_message)}" src="${create_img_url}" title="${fn:escapeXml(add_message)}" />
+	          </a>
+	        </span>
         </util:panel>
         <br/>
-        <h2><spring:message code="label_cz_kolomet_domain_product_photourls" /></h2>
-        <br />
+        <h2>
+            <spring:message code="label_cz_kolomet_domain_product_photourls"/>
+        </h2>
+        <br/>
         <c:set scope="request" value="${product.photoUrls}" var="photourls"/>
         <jsp:include flush="true" page="../photourls/list.jspx"/>
         <br/>

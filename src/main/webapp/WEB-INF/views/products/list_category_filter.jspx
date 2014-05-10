@@ -10,14 +10,14 @@
       		<form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
     
       		<field:slider id="price" valueFrom="${productFilter.priceFrom}" valueTo="${productFilter.priceTo}" maxValueFrom="0" maxValueTo="${productFilter.maxPriceTo}" units="currency_short" size="4" step="1000" />
-      		<field:select id="c_cz_kolomet_domain_Product_category" cssClass="filter_input" items="${categories}" field="category" path="/categorys" emptyLabel="Všechny kategorie" renderLabel="true" itemValue="id" itemLabel="codeDescription" inline="true" required="false" />
-      		<field:select id="c_cz_kolomet_domain_Product_producer" cssClass="filter_input" items="${producers}" field="producer" path="/producers" emptyLabel="Všechny značky" renderLabel="true" itemValue="id" itemLabel="codeDescription" inline="true" required="false" />
-			<field:select id="c_cz_kolomet_domain_Seller_region" cssClass="filter_input" items="${regions}" field="region" path="/regions" emptyLabel="Všechny regiony" renderLabel="true" itemValue="id" itemLabel="codeDescription" inline="true" required="false" />
+      		<field:select id="c_cz_kolomet_domain_Product_category" width="15" cssClass="filter_input" items="${categorys}" field="category" path="/categorys" emptyLabel="Všechny typy kol" renderLabel="true" itemValue="id" itemLabel="codeDescription" inline="true" required="false" />
+      		<field:select id="c_cz_kolomet_domain_Product_producer" width="15" cssClass="filter_input" items="${producers}" field="producer" path="/producers" emptyLabel="Všechny značky" renderLabel="true" itemValue="id" itemLabel="codeDescription" inline="true" required="false" />
+			<field:select id="c_cz_kolomet_domain_Seller_region" width="15" cssClass="filter_input" items="${regions}" field="region" path="/regions" emptyLabel="Všechny regiony" renderLabel="true" itemValue="id" itemLabel="codeDescription" inline="true" required="false" />
      		
       		<field:slider id="discount" valueFrom="${productFilter.discountFrom}" valueTo="${productFilter.discountTo}" maxValueFrom="0" maxValueTo="${productFilter.maxDiscountTo}" units="currency_short" step="1000" />
-      		<field:select id="c_cz_kolomet_domain_Product_productUsage" cssClass="filter_input" itemValue="id" items="${productusages}" field="productUsage" emptyLabel="Všechna použití" renderLabel="true" itemLabel="codeDescription" path="/productusages" z="E5n2YmAp4hexrA+VnCnD/HiTRH0=" inline="true" required="false"/>
-      		<field:select id="c_cz_kolomet_domain_Product_bicycleSize" cssClass="filter_input" items="${bicyclesizes}" field="bicycleSize" path="/bicyclesizes" emptyLabel="Všechny velikosti" renderLabel="true" itemValue="id" itemLabel="codeDescription" inline="true" required="false" />
-			<field:select id="c_cz_kolomet_domain_Product_figureHeight" cssClass="filter_input" items="${figureheights}" field="figureHeight" path="/figureheights" emptyLabel="Všechny velikosti" renderLabel="true" itemValue="id" itemLabel="codeDescription" inline="true" required="false" />
+      		<field:select id="c_cz_kolomet_domain_Product_productUsage" width="15" cssClass="filter_input" itemValue="id" items="${productusages}" field="productUsage" emptyLabel="Všechna použití" renderLabel="true" itemLabel="codeDescription" path="/productusages" z="E5n2YmAp4hexrA+VnCnD/HiTRH0=" inline="true" required="false"/>
+      		<field:select id="c_cz_kolomet_domain_Product_bicycleCategory" width="15" cssClass="filter_input" items="${bicyclecategories}" field="bicycleCategory" path="/bicyclecategories" emptyLabel="Všechny kategorie" renderLabel="true" itemValue="id" itemLabel="codeDescription" inline="true" required="false" />
+			<field:select id="c_cz_kolomet_domain_Product_figureHeight" width="15" cssClass="filter_input" items="${figureheights}" field="figureHeight" path="/figureheights" emptyLabel="Všechny velikosti" renderLabel="true" itemValue="id" itemLabel="codeDescription" inline="true" required="false" />
 
 			<field:slider id="weight" units="weight_units" valueFrom="${productFilter.weightFrom}" valueTo="${productFilter.weightTo}" maxValueFrom="0" maxValueTo="${productFilter.maxWeightTo}" size="1" />      		
 			<field:checkbox id="c_cz_kolomet_domain_Product_canSendToAllCountry" cssClass="filter_input" field="canSendToAllCountry" />
@@ -31,8 +31,34 @@
 	      		<input type="hidden" name="page.sort" value="${param['page.sort']}" />
 	      		<input type="hidden" name="page.sort.dir" value="${param['page.sort.dir']}" />
 	          	<field:ajaxSubmit id="button_filter" event="onclick" formId="filterForm" rerender="body_content" value="${save_filter}" />      	
+	      		<input type="reset" name="reset" value="Resetovat" />
           	</div>            
 	    </div>
+	    
+	    <script type="text/javascript">
+			require(['form', 'slider'], function(form, slider) {
+				
+				functions = [
+					function(resetedForm) {
+
+						$("input:radio").removeAttr("selected");
+						$("input:checkbox").removeAttr("checked");
+						
+						dojo.query("input:checkbox").map(dijit.byNode).forEach(function(cb) { 
+							cb.set('checked', false);
+						}); 
+						
+						$(".slider", resetedForm).each(function(index) {
+							slider.resetSlider($(this).attr("id"));
+						});
+						
+					}
+				];
+				
+				form.resetForm("filterForm", functions);
+				
+			});
+		</script>
 	    
     </form:form>
     

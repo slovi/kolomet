@@ -5,4 +5,7 @@ import org.springframework.roo.addon.layers.repository.jpa.RooJpaRepository;
 
 @RooJpaRepository(domainType = SellerStatus.class)
 public interface SellerStatusRepository {
+	
+	public SellerStatus findByCodeKey(String codeKey);
+	
 }

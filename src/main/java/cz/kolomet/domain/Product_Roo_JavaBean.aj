@@ -9,7 +9,7 @@ import cz.kolomet.domain.Producer;
 import cz.kolomet.domain.Product;
 import cz.kolomet.domain.ProductAttribute;
 import cz.kolomet.domain.Seller;
-import cz.kolomet.domain.codelist.BicycleSize;
+import cz.kolomet.domain.codelist.BicycleCategory;
 import cz.kolomet.domain.codelist.FigureHeight;
 import cz.kolomet.domain.codelist.ProductUsage;
 import java.math.BigDecimal;
@@ -83,12 +83,12 @@ privileged aspect Product_Roo_JavaBean {
         this.productUsage = productUsage;
     }
     
-    public BicycleSize Product.getBicycleSize() {
-        return this.bicycleSize;
+    public BicycleCategory Product.getBicycleCategory() {
+        return this.bicycleCategory;
     }
     
-    public void Product.setBicycleSize(BicycleSize bicycleSize) {
-        this.bicycleSize = bicycleSize;
+    public void Product.setBicycleCategory(BicycleCategory bicycleCategory) {
+        this.bicycleCategory = bicycleCategory;
     }
     
     public FigureHeight Product.getFigureHeight() {
@@ -137,6 +137,14 @@ privileged aspect Product_Roo_JavaBean {
     
     public void Product.setWeight(Integer weight) {
         this.weight = weight;
+    }
+    
+    public String Product.getBuyUrl() {
+        return this.buyUrl;
+    }
+    
+    public void Product.setBuyUrl(String buyUrl) {
+        this.buyUrl = buyUrl;
     }
     
     public List<PhotoUrl> Product.getPhotoUrls() {

@@ -13,12 +13,12 @@
 	<c:if test="${not empty products.content}">
 		<c:forEach items="${products.content}" var="product">           
 			<spring:url value="/public/maps" var="mapUrl" />
-			<spring:url value="http://www.cyklocentrum.cz/kola/horska-kola/celoodpruzena-kola/agang-cult-2-0-2012_p333.htm" var="buyUrl" />
+			<spring:url value="${product.buyUrl}" var="buyUrl" />
 			<spring:url value="/resources/img/bike_02.jpg" var="productImgUrl" />
 		    <div class="category_unit"> 
 		    	<spring:url value="/public/products/detail/${product.id}" var="productIdUrl" />
 		    	<a href="${productIdUrl}">
-		    		<util:product-image photos="${product.photoUrls}" entity="product" height="146" width="224" />
+		    		<util:photo-image photos="${product.photoUrls}" height="146" width="224" />
 		    	</a>
 		    	<div class="cat_description"> 
 		    		<a href="${productIdUrl}" class="label"><c:out value="${product.productName}" /></a>
@@ -29,7 +29,7 @@
 		    			</c:if>
 		    		</p>
 		    		<p><spring:message code="label_cz_kolomet_domain_product_producer" />: <spring:eval expression="product.producer.codeDescription" /></p>
-		        	<p><c:out value="${fn:substring(product.description, 0, 250)}" />...</p>
+		        	<p><c:out escapeXml="false" value="${fn:substring(product.description, 0, 250)}" />...</p>
 		        	<p><spring:eval expression="product.created" /></p>
 		        </div>
 		        <div class="cat_seller"> 
@@ -39,9 +39,11 @@
 		            	<c:out value="${product.seller.addressStreet}" />, <c:out value="${product.seller.addressPostCode}" />, <c:out value="${product.seller.addressCity}" /><br/>
 		                <spring:message code="label_cz_kolomet_domain_seller_businessphonenumber_short" />: <c:out value="${product.seller.businessPhoneNumber}" />, <a href="${mapUrl}">mapa</a>
 		            </p>
-		        	<div>
-		                <a class="action_button_dark" target="_blank" href="${buyUrl}">Objednat</a>
-		            </div>
+		            <c:if test="${not empty buyUrl}">
+			        	<div>
+			                <a class="action_button_dark" target="_blank" href="${buyUrl}"><spring:message code="${button_buy}" /></a>
+			            </div>
+		            </c:if>
 		    	</div>
 			</div>
 		</c:forEach>

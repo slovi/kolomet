@@ -285,8 +285,8 @@ div.homepage_unit div.home_description {
 }
 
 div.homepage_unit div.home_seller {
-	width: 194px;
-	padding: 15px;
+	width: 169px;
+	padding: 15px 40px 10px 15px;
 	margin: 0;
 	position: relative;
 }
@@ -531,6 +531,12 @@ div.seller_ads {
 	float: right;
 	padding: 15px;
 	width: 394px;
+}
+
+div.seller_ads_wide {
+	margin: 0;
+	padding: 15px;
+	width: 902px;
 }
 
 table.ad_list {
@@ -917,4 +923,9 @@ p.price,p.detail_price {
 .no-opacity       .wrapper-dropdown-2.active .dropdown,.no-pointerevents .wrapper-dropdown-2.active .dropdown
 	{
 	display: block;
+}
+
+.errors {
+	font-weight: bold;
+	color: red;
 }

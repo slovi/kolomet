@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,9 +34,10 @@ public class ProductAttributeController extends AbstractAdminController {
 	private ProductAttributeTypeService productAttributeTypeService;
 	
     @RequestMapping(params = "form", produces = "text/html")
-    public String createForm(Model uiModel, @RequestParam(value = "parentEntityId", required = false) Long parentEntityId) {
+    public String createForm(Model uiModel, @RequestParam(value = "parentEntityId", required = false) Long parentEntityId, @RequestParam(value = "source", required = false) String source) {
     	Product product = parentEntityId != null ? productService.findProduct(parentEntityId) : null;
         populateEditForm(uiModel, new ProductAttribute(), product);
+        uiModel.addAttribute("source", source);
         List<String[]> dependencies = new ArrayList<String[]>();
         if (productAttributeTypeService.countAllProductAttributeTypes() == 0) {
             dependencies.add(new String[] { "productattributetype", "productattributetypes" });
@@ -50,7 +52,6 @@ public class ProductAttributeController extends AbstractAdminController {
     @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String updateForm(@PathVariable("id") Long id, Model uiModel) {
     	ProductAttribute productAttribute = productAttributeService.findProductAttribute(id); 
-    	productAttribute.setProduct(OrmUtils.deproxy(productAttribute.getProduct())); // TODO vyresit cistsim zpusobem
         populateEditForm(uiModel, productAttribute, null);
         return "admin/productattributes/update";
     }
@@ -78,13 +79,17 @@ public class ProductAttributeController extends AbstractAdminController {
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
-    public String delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
+    public String delete(@PathVariable("id") Long id, Pageable pageable, @RequestParam(value = "updateMode", required = false) Boolean updateMode, Model uiModel) {
         ProductAttribute productAttribute = productAttributeService.findProductAttribute(id);
         productAttributeService.deleteProductAttribute(productAttribute);
         uiModel.asMap().clear();
-        uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
-        uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
-        return "redirect:/admin/products/" + productAttribute.getProduct().getId();
+        uiModel.addAttribute("page", pageable.getPageNumber());
+        uiModel.addAttribute("size", pageable.getPageSize());
+        if (updateMode) {
+        	return "redirect:/admin/products/" + productAttribute.getProduct().getId() + "?form";
+        } else {
+        	return "redirect:/admin/products/" + productAttribute.getProduct().getId();
+        }
     }
     
     void populateEditForm(Model uiModel, ProductAttribute productAttribute, Product product) {

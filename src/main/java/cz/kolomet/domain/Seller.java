@@ -1,4 +1,5 @@
 package cz.kolomet.domain;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -141,10 +142,10 @@ public class Seller extends DomainEntity {
     private String addressEmail;
     
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "seller", cascade = CascadeType.ALL)
-    private List<SellerPhotoUrl> sellerPhotoUrls;
+    private List<SellerPhotoUrl> sellerPhotoUrls = new ArrayList<SellerPhotoUrl>();
     
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "seller", cascade = CascadeType.ALL)
-    private List<Product> products;
+    private List<Product> products = new ArrayList<Product>();
     
     public String getPersonString() {
     	

@@ -17,6 +17,7 @@
   <jsp:directive.attribute name="disableFormBinding" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Set to true to disable Spring form binding" />
   <jsp:directive.attribute name="render" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Indicate if the contents of this tag and all enclosed tags should be rendered (default 'true')" />
   <jsp:directive.attribute name="renderLabel" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Indicate if the label of this field should be rendered" />
+  <jsp:directive.attribute name="width" type="java.lang.Integer" required="false" rtexprvalue="true" description="Element width (em)" />
   <jsp:directive.attribute name="z" type="java.lang.String" required="false" description="Used for checking if element has been modified (to recalculate simply provide empty string value)" />
 
   <c:if test="${empty render or render}">
@@ -48,6 +49,10 @@
     <c:set var="sec_itemLabel">
       <spring:escapeBody htmlEscape="true" >${itemLabel}</spring:escapeBody>
     </c:set>
+    
+    <c:if test="${empty width}">
+    	<c:set value="20" var="width" />
+    </c:if>
 
     <div id="_${fn:escapeXml(id)}_id" class="${cssClass}">
       <c:choose>
@@ -102,7 +107,7 @@
                     <c:when test="${empty itemLabel}">
                       <c:choose>
                         <c:when test="${multiple}">
-                          <form:select id="_${sec_field}_id" path="${sec_field}" disabled="${disabled}" multiple="${multiple}">
+                          <form:select id="_${sec_field}_id" style="width: ${width}em;" path="${sec_field}" disabled="${disabled}" multiple="${multiple}">
                           	<c:if test="${not empty emptyLabel}">
                           		<form:option value="" label="${emptyLabel}" disabled="${disabled}">&#32;</form:option>
                           	</c:if>
@@ -110,7 +115,7 @@
                           </form:select>
                         </c:when>
                         <c:otherwise>
-                          <form:select id="_${sec_field}_id" path="${sec_field}" disabled="${disabled}">
+                          <form:select id="_${sec_field}_id" style="width: ${width}em;" path="${sec_field}" disabled="${disabled}">
                           	<c:if test="${not empty emptyLabel}">
                           		<form:option value="" label="${emptyLabel}" disabled="${disabled}">&#32;</form:option>
                           	</c:if>
@@ -122,7 +127,7 @@
                     <c:otherwise>
                       <c:choose>
                         <c:when test="${multiple}">
-                          <form:select id="_${sec_field}_id" path="${sec_field}" disabled="${disabled}" multiple="${multiple}">
+                          <form:select id="_${sec_field}_id" style="width: ${width}em;" path="${sec_field}" disabled="${disabled}" multiple="${multiple}">
                           	<c:if test="${not empty emptyLabel}">
                           		<form:option value="" label="${emptyLabel}">&#32;</form:option>
                           	</c:if>
@@ -130,7 +135,7 @@
                           </form:select>
                         </c:when>
                         <c:otherwise>
-                          <form:select id="_${sec_field}_id" path="${sec_field}" disabled="${disabled}">
+                          <form:select id="_${sec_field}_id" style="width: ${width}em;" path="${sec_field}" disabled="${disabled}">
                           	<c:if test="${not empty emptyLabel}">
                           		<form:option value="" label="${emptyLabel}" disabled="${disabled}">&#32;</form:option>
                           	</c:if>
@@ -150,7 +155,7 @@
                 <c:when test="${disableFormBinding}">
                   <c:choose>
                     <c:when test="${multiple}">
-                      <select id="_${sec_field}_id" name="${sec_field}" multiple="${multiple}">
+                      <select id="_${sec_field}_id" style="width: ${width}em;" name="${sec_field}" multiple="${multiple}">
                         <c:forEach items="${items}" var="item">
                           <option value="${item[fn:escapeXml(itemValue)]}">
                             <c:choose>
@@ -166,7 +171,7 @@
                       </select>
                     </c:when>
                     <c:otherwise>
-                      <select id="_${sec_field}_id" name="${sec_field}" multiple="${multiple}">
+                      <select id="_${sec_field}_id" style="width: ${width}em;" name="${sec_field}" multiple="${multiple}">
                         <c:forEach items="${items}" var="item">
                           <option value="${item[fn:escapeXml(itemValue)]}">
                             <c:choose>
@@ -188,7 +193,7 @@
                     <c:when test="${empty itemLabel}">
                       <c:choose>
                         <c:when test="${multiple}">
-                          <form:select id="_${sec_field}_id" path="${sec_field}" disabled="${disabled}" multiple="${multiple}" itemValue="${fn:escapeXml(itemValue)}">
+                          <form:select id="_${sec_field}_id" style="width: ${width}em;" path="${sec_field}" disabled="${disabled}" multiple="${multiple}" itemValue="${fn:escapeXml(itemValue)}">
                           	<c:if test="${not empty emptyLabel}">
                           		<form:option value="" label="${emptyLabel}" disabled="${disabled}"></form:option>
                           	</c:if>
@@ -196,7 +201,7 @@
                           </form:select>
                         </c:when>
                         <c:otherwise>
-                          <form:select id="_${sec_field}_id" path="${sec_field}" disabled="${disabled}" itemValue="${fn:escapeXml(itemValue)}">
+                          <form:select id="_${sec_field}_id" style="width: ${width}em;" path="${sec_field}" disabled="${disabled}" itemValue="${fn:escapeXml(itemValue)}">
                           	<c:if test="${not empty emptyLabel}">
                           		<form:option value="" label="${emptyLabel}" disabled="${disabled}"></form:option>
                           	</c:if>
@@ -208,7 +213,7 @@
                     <c:otherwise>
                       <c:choose>
                         <c:when test="${multiple}">
-                          <form:select id="_${sec_field}_id" path="${sec_field}" disabled="${disabled}" multiple="${multiple}">
+                          <form:select id="_${sec_field}_id" style="width: ${width}em;" path="${sec_field}" disabled="${disabled}" multiple="${multiple}">
                           	<c:if test="${not empty emptyLabel}">
                           		<form:option value="" label="${emptyLabel}" disabled="${disabled}">&#32;</form:option>
                           	</c:if>
@@ -216,7 +221,7 @@
                           </form:select>
                         </c:when>
                         <c:otherwise>
-                          <form:select id="_${sec_field}_id" path="${sec_field}" disabled="${disabled}">
+                          <form:select id="_${sec_field}_id" style="width: ${width}em;" path="${sec_field}" disabled="${disabled}">
                           	<c:if test="${not empty emptyLabel}">
                           		<form:option value="0" label="${emptyLabel}" disabled="${disabled}"></form:option>
                           	</c:if>

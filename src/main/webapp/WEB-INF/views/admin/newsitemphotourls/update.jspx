@@ -9,6 +9,6 @@
         <field:input field="fileName" id="c_cz_kolomet_domain_NewsItemPhotoUrl_fileName" max="20" z="aMrxChaqwdIHLgVwRqGXqCZih3k="/>
         <field:input field="contentType" id="c_cz_kolomet_domain_NewsItemPhotoUrl_contentType" max="20" z="m0HjMx9b0Op5Viy3HY3GsEPG6EQ="/>
         <field:select field="newsItem" id="c_cz_kolomet_domain_NewsItemPhotoUrl_newsItem" itemValue="id" items="${newsitems}" path="/admin/newsitems" required="true" z="SRkll5LALPqYhMGaoqgIdoUDRdg="/>
-        <field:input field="contents" id="c_cz_kolomet_domain_NewsItemPhotoUrl_contents" z="6F2hcP5BZIoU9D8Qdoi4l34AGEM="/>
+        <field:input field="contents" id="c_cz_kolomet_domain_NewsItemPhotoUrl_contents" z="6F2hcP5BZIoU9D8Qdoi4l34AGEM=" render="false" />
     </form:update>
 </div>

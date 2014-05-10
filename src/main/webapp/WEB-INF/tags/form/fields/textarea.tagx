@@ -14,6 +14,14 @@
 
   <c:if test="${empty render or render}">
 
+	<c:if test="${empty width}">
+    	<c:set value="80" var="width" />
+    </c:if>
+    
+    <c:if test="${empty cols}">
+    	<c:set value="50" var="cols" />
+    </c:if>
+
     <c:if test="${empty disabled}">
       <c:set value="false" var="disabled" />
     </c:if>
@@ -36,10 +44,10 @@
         <c:out value="${fn:escapeXml(label)}" />
         :
       </label>
-      <form:textarea id="_${sec_field}_id" path="${sec_field}" disabled="${disabled}" />
+      <form:textarea id="_${sec_field}_id" path="${sec_field}" rows="5" cols="${cols}" style="max-width: 1000px;" disabled="${disabled}" />
       <br />
       <form:errors cssClass="errors" id="_${sec_field}_error_id" path="${sec_field}" />
-      <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_${sec_field}_id', widgetType : 'dijit.form.SimpleTextarea', widgetAttrs : {disabled : ${disabled}}})); </script>
+      <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_${sec_field}_id', widgetType : 'dijit.form.SimpleTextarea', widgetAttrs : {disabled : ${disabled}, cols : ${cols}}})); </script>
     </div>
     <br />
 

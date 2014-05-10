@@ -6,8 +6,11 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.task.TaskExecutor;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
@@ -15,14 +18,19 @@ import cz.kolomet.domain.NewsItem;
 import cz.kolomet.domain.NewsItemPhotoUrl;
 import cz.kolomet.domain.PhotoUrl;
 import cz.kolomet.domain.Product;
+import cz.kolomet.domain.Seller;
+import cz.kolomet.domain.SellerPhotoUrl;
 import cz.kolomet.repository.NewsItemRepository;
 import cz.kolomet.security.ApplicationUserDetails;
 import cz.kolomet.service.NewsItemPhotoUrlService;
 import cz.kolomet.service.PhotoUrlService;
+import cz.kolomet.service.SellerPhotoUrlService;
 
 public class AbstractAdminController {
 	
-	@Value("${product.img.rootdir}")
+	protected final Log logger = LogFactory.getLog(getClass());
+	
+	@Value("${img.rootdir}")
 	protected String rootDir;
 	
 	@Autowired
@@ -30,6 +38,9 @@ public class AbstractAdminController {
 	
 	@Autowired
 	protected NewsItemPhotoUrlService newsItemPhotoUrlService;
+	
+	@Autowired
+	protected SellerPhotoUrlService sellerPhotoUrlService;
 	
 	@Autowired
 	private NewsItemRepository newsItemRepository;
@@ -43,48 +54,73 @@ public class AbstractAdminController {
 		return ApplicationUserDetails.getActualApplicationUserDetails().getUsername();
 	}
 	
-	protected void savePhotos(Product product, List<CommonsMultipartFile> files) {
+	protected void savePhotos(final Product product, List<CommonsMultipartFile> files) {
 		if (files != null) {
-			for (CommonsMultipartFile content: files) {
+			for (final CommonsMultipartFile content: files) {
 	        	if (StringUtils.isNotEmpty(content.getOriginalFilename())) {
-		        	File dest = getDestFile(product.getId(), content);
+		        	final File dest = getDestFile(product.getId(), PhotoUrl.PHOTO_URL_PREFIX, content);
 		        	try {
+		        		logger.info("Saving uploaded file to dest: " + dest);
 						content.transferTo(dest);
+						logger.info("Successfully save file: " + dest + " " + dest.exists());
 					} catch (Exception e) {
 						throw new RuntimeException(e);
 					}
-		        	PhotoUrl photoUrl = new PhotoUrl();
+		        	final PhotoUrl photoUrl = new PhotoUrl();
 		        	photoUrl.setFileName(dest.getName());
-					photoUrl.setContentType(content.getContentType());
-					photoUrl.setProduct(product);
+		        	photoUrl.setContentType(content.getContentType());
+		        	photoUrl.setProduct(product);
+		        	product.getPhotoUrls().add(photoUrl);
 		        	photoUrlService.savePhotoUrl(photoUrl, dest);
 	        	}
 	        }
 		}
 	}
 	
-	protected void saveNewsItemPhotos(NewsItem newsItem, List<CommonsMultipartFile> files) {
+	protected void saveNewsItemPhotos(final NewsItem newsItem, List<CommonsMultipartFile> files) {
 		if (files != null) {
-			for (CommonsMultipartFile content: files) {
+			for (final CommonsMultipartFile content: files) {
 	        	if (StringUtils.isNotEmpty(content.getOriginalFilename())) {
-		        	File dest = getDestFile(newsItem.getId(), content);
+		        	final File dest = getDestFile(newsItem.getId(), NewsItemPhotoUrl.PHOTO_URL_PREFIX, content);
 		        	try {
 						content.transferTo(dest);
 					} catch (Exception e) {
 						throw new RuntimeException(e);
 					}
-		        	NewsItemPhotoUrl photoUrl = new NewsItemPhotoUrl();
-		        	photoUrl.setFileName(dest.getName());
-					photoUrl.setContentType(content.getContentType());
-					photoUrl.setNewsItem(newsItem);
-		        	newsItemPhotoUrlService.saveNewsItemPhotoUrl(photoUrl, dest);
+		        	final NewsItemPhotoUrl newsItemPhotoUrl = new NewsItemPhotoUrl();
+		        	newsItemPhotoUrl.setFileName(dest.getName());
+		        	newsItemPhotoUrl.setContentType(content.getContentType());
+		        	newsItemPhotoUrl.setNewsItem(newsItem);
+		        	newsItem.getNewsItemPhotoUrls().add(newsItemPhotoUrl);
+		        	newsItemPhotoUrlService.saveNewsItemPhotoUrl(newsItemPhotoUrl, dest);
 	        	}
 	        }
 		}
 	}
 	
-	protected File getDestFile(Long id, CommonsMultipartFile content) {
-		File parent = new File(rootDir + "/" + id);
+	protected void saveSellerPhotos(final Seller seller, List<CommonsMultipartFile> files) {
+		if (files != null) {
+			for (final CommonsMultipartFile content: files) {
+	        	if (StringUtils.isNotEmpty(content.getOriginalFilename())) {
+		        	final File dest = getDestFile(seller.getId(), SellerPhotoUrl.PHOTO_URL_PREFIX, content);
+		        	try {
+						content.transferTo(dest);
+					} catch (Exception e) {
+						throw new RuntimeException(e);
+					}
+		        	final SellerPhotoUrl sellerPhotoUrl = new SellerPhotoUrl();
+		        	sellerPhotoUrl.setFileName(dest.getName());
+		        	sellerPhotoUrl.setContentType(content.getContentType());
+		        	sellerPhotoUrl.setSeller(seller);
+		        	seller.getSellerPhotoUrls().add(sellerPhotoUrl);
+		        	sellerPhotoUrlService.saveSellerPhotoUrl(sellerPhotoUrl, dest);		        	
+	        	}
+	        }
+		}
+	}
+	
+	protected File getDestFile(Long id, String photoType, CommonsMultipartFile content) {
+		File parent = new File(rootDir + "/" + photoType + "/"+ id);
 		try {
 			FileUtils.forceMkdir(parent);
 		} catch (IOException e) {

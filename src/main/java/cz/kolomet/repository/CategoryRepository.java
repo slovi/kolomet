@@ -12,7 +12,7 @@ public interface CategoryRepository {
 	
 	List<Category> findByCodeKey(String codeKey);
 	
-	@Query("select c from Category c inner join c.categoryType ct where ct.id = :categoryTypeId")
+	@Query("select c from Category c inner join c.categoryType ct where ct.id = :categoryTypeId order by c.codeDescription asc")
 	List<Category> find(@Param("categoryTypeId") Long categoryTypeId);
 	
 }

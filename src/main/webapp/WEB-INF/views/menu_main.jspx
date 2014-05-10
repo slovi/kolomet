@@ -8,7 +8,9 @@
     		<menu:menu id="main_menu">
     			<menu:item url="/public/intro/index" messageCode="menu_main_intro" id="intro" renderPageParams="false" />
     			<menu:item url="/public/products/filter?categoryType=${bikeCategoryTypeId}" messageCode="menu_main_products_bikes" id="products_bikes" defaultPageSize="6" />
+    			<!-- 
     			<menu:item url="/public/products/filter?categoryType=${otherCategoryTypeId}" messageCode="menu_main_products_other" id="products_other" defaultPageSize="6" />
+    			 -->
     			<menu:item url="/public/sellers/map" messageCode="menu_main_sellers" id="sellers" renderPageParams="false" />
     			<menu:item url="#" messageCode="menu_main_search" id="search" renderPageParams="false" />
     			<menu:item url="/public/about" messageCode="menu_main_about" id="about" renderPageParams="false" />
@@ -59,8 +61,8 @@
 			            <security:authorize access="hasAnyRole('ROLE_per_productusages')">
                 			<menu:item id="i_productusage_list" messageCode="global_menu_list" url="/admin/productusages" z="user-managed"/>
 		               	</security:authorize>
-		               	<security:authorize access="hasAnyRole('ROLE_per_bicyclesizes')">
-		                    <menu:item id="i_bicyclesize_list" messageCode="global_menu_list" url="/admin/bicyclesizes" z="user-managed"/>
+		               	<security:authorize access="hasAnyRole('ROLE_per_bicyclecategories')">
+		                    <menu:item id="i_bicyclecategory_list" messageCode="global_menu_list" url="/admin/bicyclecategories" z="user-managed"/>
 		                </security:authorize>
 		                <security:authorize access="hasAnyRole('ROLE_per_figureheights')">
 		                    <menu:item id="i_figureheight_list" messageCode="global_menu_list" url="/admin/figureheights" z="user-managed"/>

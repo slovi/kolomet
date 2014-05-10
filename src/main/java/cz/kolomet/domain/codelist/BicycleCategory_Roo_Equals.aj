@@ -3,24 +3,24 @@
 
 package cz.kolomet.domain.codelist;
 
-import cz.kolomet.domain.codelist.BicycleSize;
+import cz.kolomet.domain.codelist.BicycleCategory;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-privileged aspect BicycleSize_Roo_Equals {
+privileged aspect BicycleCategory_Roo_Equals {
     
-    public boolean BicycleSize.equals(Object obj) {
-        if (!(obj instanceof BicycleSize)) {
+    public boolean BicycleCategory.equals(Object obj) {
+        if (!(obj instanceof BicycleCategory)) {
             return false;
         }
         if (this == obj) {
             return true;
         }
-        BicycleSize rhs = (BicycleSize) obj;
+        BicycleCategory rhs = (BicycleCategory) obj;
         return new EqualsBuilder().append(codeDescription, rhs.codeDescription).append(codeKey, rhs.codeKey).append(created, rhs.created).append(id, rhs.id).append(lastModified, rhs.lastModified).isEquals();
     }
     
-    public int BicycleSize.hashCode() {
+    public int BicycleCategory.hashCode() {
         return new HashCodeBuilder().append(codeDescription).append(codeKey).append(created).append(id).append(lastModified).toHashCode();
     }
     

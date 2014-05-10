@@ -3,15 +3,15 @@
 
 package cz.kolomet.domain.codelist;
 
-import cz.kolomet.domain.codelist.BicycleSize;
+import cz.kolomet.domain.codelist.BicycleCategory;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
-privileged aspect BicycleSize_Roo_Jpa_Entity {
+privileged aspect BicycleCategory_Roo_Jpa_Entity {
     
-    declare @type: BicycleSize: @Entity;
+    declare @type: BicycleCategory: @Entity;
     
-    declare @type: BicycleSize: @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS);
+    declare @type: BicycleCategory: @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS);
     
 }

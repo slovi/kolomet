@@ -4,16 +4,24 @@
     <jsp:output omit-xml-declaration="yes"/>
     <form:update id="fu_cz_kolomet_domain_NewsItem" modelAttribute="newsItem" path="/admin/newsitems" versionField="Version" z="user-managed">
         <field:datetime dateTimePattern="${newsItem_newsitemdate_date_format}" field="newsItemDate" id="c_cz_kolomet_domain_NewsItem_newsItemDate" z="FB5WVicWURlynFC/lm03NXQZr5Y="/>
+        <br />
+        <spring:url value="/" var="context_path" />
+        <spring:message code="newsitem_help" arguments="${context_path}" />
+        <br />
+        <br />
         <field:editor field="text" id="c_cz_kolomet_domain_NewsItem_text" required="true" z="user-managed"/>
         <field:checkbox field="enabled" id="c_cz_kolomet_domain_NewsItem_enabled" z="4dW1KYPDc1uE1qbCHNRQWsxtRwQ="/>
         <field:input field="createdBy" id="c_cz_kolomet_domain_NewsItem_createdBy" render="false" z="user-managed"/>
         <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_NewsItem_lastModifiedBy" render="false" z="user-managed"/>
         <field:datetime dateTimePattern="${newsItem_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_NewsItem_lastModified" render="false" z="user-managed"/>
-        <field:simple field="newsItemPhotoUrls" id="c_cz_kolomet_domain_NewsItem_newsItemPhotoUrls" messageCode="entity_reference_not_managed" messageCodeAttribute="News Item Photo Url" z="3hsoZvVzGE3wNYoRKhAwffTti+E="/>
+        <field:input field="contents" id="c_cz_kolomet_domain_NewsItem_contents" z="g+KA7quO04NUcLvqkQFa4Fue+WU=" render="false"/>
+        <field:simple field="newsItemPhotoUrls" id="c_cz_kolomet_domain_NewsItem_newsItemPhotoUrls" messageCode="entity_reference_not_managed" messageCodeAttribute="News Item Photo Url" z="3hsoZvVzGE3wNYoRKhAwffTti+E=" render="false"/>
         <br/>
         <c:set scope="request" value="${newsItem.id}" var="parentEntityId"/>
-        <h2><spring:message code="label_cz_kolomet_domain_newsitem_newsitemphotourl" /></h2>
-        <br />
+        <h2>
+            <spring:message code="label_cz_kolomet_domain_newsitem_newsitemphotourl"/>
+        </h2>
+        <br/>
         <c:set scope="request" value="${newsItem.newsItemPhotoUrls}" var="newsitemphotourls"/>
         <jsp:include flush="true" page="../newsitemphotourls/list.jspx"/>
         <br/>

@@ -101,7 +101,7 @@
           </c:if>
         </tr>
       </thead>
-      <c:forEach items="${data}" var="item">
+      <c:forEach items="${data}" var="item" varStatus="status">
         <tr>
           <c:forTokens items="${columnProperties}" delims="${'&#9999;'}" var="column" varStatus="num">
             <c:set var="columnMaxLength" value="${lengths[num.count-1]}" />
@@ -169,7 +169,7 @@
             <td class="utilbox">
               <spring:url value="${path}/${itemId}" var="delete_form_url" />
               <spring:url value="/resources/images/delete.png" var="delete_image_url" />
-              <form:form action="${delete_form_url}" method="DELETE">
+              <form:form id="${id}_delete_form_${status.index}" action="${delete_form_url}" method="DELETE">
                 <spring:message arguments="${typeName}" code="entity_delete" var="delete_label" htmlEscape="false" />
                 <c:set var="delete_confirm_msg">
                   <spring:escapeBody javaScriptEscape="true">
@@ -194,9 +194,9 @@
             <span class="new">
               <spring:url value="${path}" var="create_url">
                 <spring:param name="form" />
-                <c:if test="${not empty parentEntityId}">
-              	  <spring:param name="parentEntityId" value="${parentEntityId}" />
-                </c:if>
+             	<c:if test="${not empty parentEntityId}">
+	            	<spring:param name="parentEntityId" value="${parentEntityId}" />
+	          	</c:if>
               </spring:url>              
               <a href="${create_url}">
                 <spring:url value="/resources/images/add.png" var="create_img_url" />

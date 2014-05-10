@@ -7,7 +7,7 @@ import org.springframework.format.annotation.NumberFormat.Style;
 
 import cz.kolomet.domain.Category;
 import cz.kolomet.domain.Producer;
-import cz.kolomet.domain.codelist.BicycleSize;
+import cz.kolomet.domain.codelist.BicycleCategory;
 import cz.kolomet.domain.codelist.CategoryType;
 import cz.kolomet.domain.codelist.FigureHeight;
 import cz.kolomet.domain.codelist.ProductUsage;
@@ -49,7 +49,7 @@ public class ProductFilterDto {
 	
 	private ProductUsage productUsage;
 	
-	private BicycleSize bicycleSize;
+	private BicycleCategory bicycleCategory;
 	
 	private FigureHeight figureHeight;
 	
@@ -74,8 +74,8 @@ public class ProductFilterDto {
 		productFilter.producer.setId(0l);
 		productFilter.productUsage = new ProductUsage();
 		productFilter.productUsage.setId(0l);
-		productFilter.bicycleSize = new BicycleSize();
-		productFilter.bicycleSize.setId(0l);
+		productFilter.bicycleCategory = new BicycleCategory();
+		productFilter.bicycleCategory.setId(0l);
 		productFilter.figureHeight = new FigureHeight();
 		productFilter.figureHeight.setId(0l);
 		productFilter.priceFrom = new BigDecimal(0l);
@@ -178,12 +178,12 @@ public class ProductFilterDto {
 		this.productUsage = productUsage;
 	}
 
-	public BicycleSize getBicycleSize() {
-		return bicycleSize;
+	public BicycleCategory getBicycleCategory() {
+		return bicycleCategory;
 	}
 
-	public void setBicycleSize(BicycleSize bicycleSize) {
-		this.bicycleSize = bicycleSize;
+	public void setBicycleCategory(BicycleCategory bicycleCategory) {
+		this.bicycleCategory = bicycleCategory;
 	}
 
 	public FigureHeight getFigureHeight() {

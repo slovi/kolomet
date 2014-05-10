@@ -16,7 +16,7 @@ import cz.kolomet.domain.ProductAttribute;
 import cz.kolomet.domain.RegistrationRequest;
 import cz.kolomet.domain.Seller;
 import cz.kolomet.domain.SellerPhotoUrl;
-import cz.kolomet.domain.codelist.BicycleSize;
+import cz.kolomet.domain.codelist.BicycleCategory;
 import cz.kolomet.domain.codelist.CategoryType;
 import cz.kolomet.domain.codelist.CountryState;
 import cz.kolomet.domain.codelist.FigureHeight;
@@ -27,7 +27,7 @@ import cz.kolomet.domain.codelist.SellerStatus;
 import cz.kolomet.service.ApplicationPermissionService;
 import cz.kolomet.service.ApplicationRoleService;
 import cz.kolomet.service.ApplicationUserService;
-import cz.kolomet.service.BicycleSizeService;
+import cz.kolomet.service.BicycleCategoryService;
 import cz.kolomet.service.CategoryService;
 import cz.kolomet.service.CategoryTypeService;
 import cz.kolomet.service.CountryStateService;
@@ -94,7 +94,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     SellerPhotoUrlService ApplicationConversionServiceFactoryBean.sellerPhotoUrlService;
     
     @Autowired
-    BicycleSizeService ApplicationConversionServiceFactoryBean.bicycleSizeService;
+    BicycleCategoryService ApplicationConversionServiceFactoryBean.bicycleCategoryService;
     
     @Autowired
     CategoryTypeService ApplicationConversionServiceFactoryBean.categoryTypeService;
@@ -370,26 +370,26 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         };
     }
     
-    public Converter<BicycleSize, String> ApplicationConversionServiceFactoryBean.getBicycleSizeToStringConverter() {
-        return new org.springframework.core.convert.converter.Converter<cz.kolomet.domain.codelist.BicycleSize, java.lang.String>() {
-            public String convert(BicycleSize bicycleSize) {
-                return new StringBuilder().append(bicycleSize.getCreated()).append(' ').append(bicycleSize.getLastModified()).append(' ').append(bicycleSize.getCodeKey()).append(' ').append(bicycleSize.getCodeDescription()).toString();
+    public Converter<BicycleCategory, String> ApplicationConversionServiceFactoryBean.getBicycleCategoryToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<cz.kolomet.domain.codelist.BicycleCategory, java.lang.String>() {
+            public String convert(BicycleCategory bicycleCategory) {
+                return new StringBuilder().append(bicycleCategory.getCreated()).append(' ').append(bicycleCategory.getLastModified()).append(' ').append(bicycleCategory.getCodeKey()).append(' ').append(bicycleCategory.getCodeDescription()).toString();
             }
         };
     }
     
-    public Converter<Long, BicycleSize> ApplicationConversionServiceFactoryBean.getIdToBicycleSizeConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.Long, cz.kolomet.domain.codelist.BicycleSize>() {
-            public cz.kolomet.domain.codelist.BicycleSize convert(java.lang.Long id) {
-                return bicycleSizeService.findBicycleSize(id);
+    public Converter<Long, BicycleCategory> ApplicationConversionServiceFactoryBean.getIdToBicycleCategoryConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, cz.kolomet.domain.codelist.BicycleCategory>() {
+            public cz.kolomet.domain.codelist.BicycleCategory convert(java.lang.Long id) {
+                return bicycleCategoryService.findBicycleCategory(id);
             }
         };
     }
     
-    public Converter<String, BicycleSize> ApplicationConversionServiceFactoryBean.getStringToBicycleSizeConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.String, cz.kolomet.domain.codelist.BicycleSize>() {
-            public cz.kolomet.domain.codelist.BicycleSize convert(String id) {
-                return getObject().convert(getObject().convert(id, Long.class), BicycleSize.class);
+    public Converter<String, BicycleCategory> ApplicationConversionServiceFactoryBean.getStringToBicycleCategoryConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, cz.kolomet.domain.codelist.BicycleCategory>() {
+            public cz.kolomet.domain.codelist.BicycleCategory convert(String id) {
+                return getObject().convert(getObject().convert(id, Long.class), BicycleCategory.class);
             }
         };
     }
@@ -562,9 +562,9 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         registry.addConverter(getSellerPhotoUrlToStringConverter());
         registry.addConverter(getIdToSellerPhotoUrlConverter());
         registry.addConverter(getStringToSellerPhotoUrlConverter());
-        registry.addConverter(getBicycleSizeToStringConverter());
-        registry.addConverter(getIdToBicycleSizeConverter());
-        registry.addConverter(getStringToBicycleSizeConverter());
+        registry.addConverter(getBicycleCategoryToStringConverter());
+        registry.addConverter(getIdToBicycleCategoryConverter());
+        registry.addConverter(getStringToBicycleCategoryConverter());
         registry.addConverter(getCategoryTypeToStringConverter());
         registry.addConverter(getIdToCategoryTypeConverter());
         registry.addConverter(getStringToCategoryTypeConverter());

@@ -1,6 +1,7 @@
 package cz.kolomet.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -9,6 +10,10 @@ import cz.kolomet.domain.ApplicationUser;
 import cz.kolomet.repository.ApplicationUserRepository;
 
 public class ApplicationUserDetailsService implements UserDetailsService {
+	
+	static {
+		SecurityContextHolder.setStrategyName(SecurityContextHolder.MODE_INHERITABLETHREADLOCAL);
+	}
 	
 	@Autowired
 	private ApplicationUserRepository applicationUserRepository;

@@ -4,8 +4,6 @@
 package cz.kolomet.web.admin;
 
 import cz.kolomet.domain.Seller;
-import cz.kolomet.domain.codelist.CountryState;
-import cz.kolomet.domain.codelist.Region;
 import cz.kolomet.service.ApplicationUserService;
 import cz.kolomet.service.CountryStateService;
 import cz.kolomet.service.ProductService;
@@ -15,8 +13,6 @@ import cz.kolomet.service.SellerService;
 import cz.kolomet.service.SellerStatusService;
 import cz.kolomet.web.admin.SellerController;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.joda.time.format.DateTimeFormat;
@@ -63,23 +59,6 @@ privileged aspect SellerController_Roo_Controller {
         uiModel.asMap().clear();
         sellerService.saveSeller(seller);
         return "redirect:/admin/sellers/" + encodeUrlPathSegment(seller.getId().toString(), httpServletRequest);
-    }
-    
-    @RequestMapping(params = "form", produces = "text/html")
-    public String SellerController.createForm(Model uiModel) {
-        populateEditForm(uiModel, new Seller());
-        List<String[]> dependencies = new ArrayList<String[]>();
-        if (countryStateService.countAllCountryStates() == 0) {
-            dependencies.add(new String[] { "countrystate", "admin/countrystates" });
-        }
-        if (regionService.countAllRegions() == 0) {
-            dependencies.add(new String[] { "region", "admin/regions" });
-        }
-        if (countryStateService.countAllCountryStates() == 0) {
-            dependencies.add(new String[] { "countrystate", "admin/countrystates" });
-        }
-        uiModel.addAttribute("dependencies", dependencies);
-        return "admin/sellers/create";
     }
     
     @RequestMapping(value = "/{id}", produces = "text/html")

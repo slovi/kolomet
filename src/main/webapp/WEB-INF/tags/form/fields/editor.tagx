@@ -27,10 +27,15 @@
     </c:if>
     
     <c:set var="sec_field">
-      <spring:escapeBody javaScriptEscape="true" >${field}</spring:escapeBody>
+      <spring:escapeBody javaScriptEscape="true">${field}</spring:escapeBody>
     </c:set>
 
-    <script type="text/javascript">dojo.require("dijit.Editor");</script>
+    <script type="text/javascript">
+    	dojo.require("dijit.Editor");
+       	dojo.require('dijit._editor.plugins.FontChoice');
+       	dojo.require('dijit._editor.plugins.TextColor');
+       	dojo.require('dijit._editor.plugins.LinkDialog');
+    </script>
     <div id="_${fn:escapeXml(id)}_id">
       <label for="_${sec_field}_id">
         <c:out value="${fn:escapeXml(label)}" />
@@ -40,15 +45,17 @@
       <div>
         <div id="_${sec_field}_id_"></div>
         <script type="text/javascript">
-           Spring.addDecoration(new Spring.ElementDecoration({elementId : '_${sec_field}_id_', widgetType : 'dijit.Editor', widgetAttrs : {disabled: ${disabled}}}));
-           dojo.addOnLoad(function () {
-              var src = dojo.byId('_${sec_field}_id');
-              var rte = dijit.byId('_${sec_field}_id_');
-              rte.disabled = ${disabled};
-              rte.onLoadDeferred.addCallback(function(){
-                rte.setValue(src.value);
-                dojo.connect(rte, 'onBlur', function(){src.value = rte.getValue();});
-              });
+           	Spring.addDecoration(new Spring.ElementDecoration({elementId : '_${sec_field}_id_', 
+        	   	widgetType : 'dijit.Editor', 
+        	   	widgetAttrs : {disabled: ${disabled}, extraPlugins:['createLink', 'unlink', 'insertImage']}}));
+           	dojo.addOnLoad(function () {
+              	var src = dojo.byId('_${sec_field}_id');
+              	var rte = dijit.byId('_${sec_field}_id_');
+              	rte.disabled = ${disabled};
+              	rte.onLoadDeferred.addCallback(function(){
+                	rte.setValue(src.value);
+                	dojo.connect(rte, 'onBlur', function(){src.value = rte.getValue();});
+              	});
             });
         </script>
       </div>

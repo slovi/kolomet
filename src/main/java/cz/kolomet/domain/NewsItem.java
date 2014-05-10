@@ -1,5 +1,6 @@
 package cz.kolomet.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -44,7 +45,7 @@ public class NewsItem extends DomainEntity {
 	private String text;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "newsItem", cascade = CascadeType.ALL)
-    private List<NewsItemPhotoUrl> newsItemPhotoUrls;
+    private List<NewsItemPhotoUrl> newsItemPhotoUrls = new ArrayList<NewsItemPhotoUrl>();
 
 	@Transient
     private List<CommonsMultipartFile> contents;

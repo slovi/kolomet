@@ -10,12 +10,14 @@
     </script>
     
    	<div class="detail_header"> 
-   		<util:product-image photos="${product.photoUrls}" entity="product" width="508" height="338" />    
+   		<util:photo-image photos="${product.photoUrls}" width="508" height="338" />    
        	<div class="detail_description right"> 
         	<a href="" class="label"><c:out value="${product.productName}" /></a>
         	<p><c:out value="${product.description}" /></p>
         	<div>        
-        		<a class="action_button_dark" href=""><spring:message code="product_detail_order" /></a>
+        		<c:if test="${not empty product.buyUrl}">
+        			<a class="action_button_dark" href=""><spring:message code="product_detail_order" /></a>
+        		</c:if>
             </div>
        	</div>
         <div class="detail_tag right"> 
@@ -61,8 +63,8 @@
        				<td><c:out value="${product.figureHeight.codeDescription}" /></td>
        			</tr>
        			<tr>
-       				<td><b><spring:message code="label_cz_kolomet_domain_product_bicyclesize" /></b></td>
-       				<td><c:out value="${product.bicycleSize.codeDescription}" /></td>
+       				<td><b><spring:message code="label_cz_kolomet_domain_product_bicyclecategory" /></b></td>
+       				<td><c:out value="${product.bicycleCategory.codeDescription}" /></td>
        			</tr>
        			<tr>
        				<td><b><spring:message code="label_cz_kolomet_domain_product_productusage" /></b></td>
@@ -95,17 +97,13 @@
 			<c:forEach begin="0" end="3" varStatus="status">
 				<c:choose>
 					<c:when test="${photoSize gt status.index}">
-						<spring:url value="/file/product/${product.photoUrls[status.index].thumbPhotoUrl}" var="thumbPhotoUrl" />
-						<spring:url value="/file/product/${product.photoUrls[status.index].photoUrl}" var="photoUrl" />
+						<spring:url value="/file/${product.photoUrls[status.index].thumbPhotoUrl}" var="thumbPhotoUrl" />
+						<spring:url value="/file/${product.photoUrls[status.index].photoUrl}" var="photoUrl" />
 						<a href="#">
 			    			<img class="preloaded" width="80" height="80" src="${thumbPhotoUrl}" />
 			    			<span style="display: none;"><c:out value="${photoUrl}" /></span>
 			    		</a>
 					</c:when>
-					<c:otherwise>
-						<spring:url value="/img/no_photo_thumb.jpg" var="photoUrl" />
-						<img width="80" height="80" src="${photoUrl}" />		
-					</c:otherwise>
 				</c:choose>
 			</c:forEach>
     	</div>
@@ -113,7 +111,7 @@
     
     <div style="clear: both; padding: 5px;">
     	<security:authorize access="hasAnyRole('ROLE_per_products')">
-    	<util:quicklinks update="true" create="false" list="false" itemId="${product.id}" typeName="product" delete="true" typeNamePlural="products" path="/admin/products" largeIcons="true" />
+    	<util:quicklinks update="true" create="false" list="true" itemId="${product.id}" typeName="product" delete="true" typeNamePlural="products" path="/admin/products" largeIcons="true" />
     	</security:authorize>
     </div>
 </div>

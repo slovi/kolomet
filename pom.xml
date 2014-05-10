@@ -6,6 +6,13 @@
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>kolomet</name>
+	
+	<distributionManagement>
+		<snapshotRepository>
+			<id>kolomet-snapshot-repository</id>
+			<url>${snapshot.distribution.url}</url>
+		</snapshotRepository>
+	</distributionManagement>
 
 	<properties>
 		<org.springframework.version>3.1.1.RELEASE</org.springframework.version>
@@ -15,6 +22,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.6</maven.compiler.source>
 		<maven.compiler.target>1.6</maven.compiler.target>
+		<snapshot.distribution.url>sftp://buk02.vas-server.cz/www/hosting/vas-server.cz/www/java/</snapshot.distribution.url>
 	</properties>
 
 	<repositories>
@@ -358,9 +366,21 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-	</dependencies>
+		<dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>1.0.0.GA</version>
+        </dependency>
+    </dependencies>
 
 	<build>
+		<extensions>
+			<extension>
+        		<groupId>org.apache.maven.wagon</groupId>
+        		<artifactId>wagon-ssh</artifactId>
+        		<version>1.0</version>
+      		</extension>
+		</extensions>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -458,13 +478,6 @@
 
 	<profiles>
 		<profile>
-			<!-- When built in OpenShift the 'openshift' profile will be used when 
-				invoking mvn. -->
-			<!-- Use this profile for any OpenShift specific customization your app 
-				will need. -->
-			<!-- By default that is to put the resulting archive into the 'webapps' 
-				folder. -->
-			<!-- http://maven.apache.org/guides/mini/guide-building-for-different-environments.html -->
 			<id>openshift</id>
 			<build>
 				<finalName>kolomet</finalName>
@@ -476,6 +489,41 @@
 							<outputDirectory>webapps</outputDirectory>
 							<warName>ROOT</warName>
 						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>production</id>
+			<build>
+				<finalName>kolomet</finalName>
+				<resources>
+					<resource>
+						<directory>src/main/resources</directory>
+						<excludes>
+							<exclude>*.properties</exclude>
+						</excludes>
+					</resource>
+				</resources>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+      					<artifactId>wagon-maven-plugin</artifactId>
+      					<version>1.0-beta-5</version>
+      					<executions>
+        					<execution>
+          						<id>deploy-app</id>
+          						<phase>deploy</phase>
+          						<goals>
+            						<goal>upload-single</goal>
+          						</goals>
+          						<configuration>
+            						<fromFile>${project.basedir}/target/${project.build.finalName}.war</fromFile>
+            						<url>${snapshot.distribution.url}</url>
+            						<serverId>kolomet-snapshot-repository</serverId>
+          						</configuration>
+          					</execution>
+        				</executions>
 					</plugin>
 				</plugins>
 			</build>

@@ -25,14 +25,6 @@ privileged aspect ProductController_Roo_Controller {
         return "admin/products/create";
     }
     
-    @RequestMapping(value = "/{id}", produces = "text/html")
-    public String ProductController.show(@PathVariable("id") Long id, Model uiModel) {
-        addDateTimeFormatPatterns(uiModel);
-        uiModel.addAttribute("product", productService.findProduct(id));
-        uiModel.addAttribute("itemId", id);
-        return "admin/products/show";
-    }
-    
     @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String ProductController.updateForm(@PathVariable("id") Long id, Model uiModel) {
         populateEditForm(uiModel, productService.findProduct(id));

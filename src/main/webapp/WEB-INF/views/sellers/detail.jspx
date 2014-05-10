@@ -6,7 +6,7 @@
     <div class="detail_header"> 
    		
    		<div class="detail_img left">
-           	<util:product-image photos="${seller.sellerPhotoUrls}" entity="seller" height="338" width="508" />
+           	<util:photo-image photos="${seller.sellerPhotoUrls}" height="338" width="508" />
         </div>
         
        	<div class="detail_description right"> 
@@ -26,69 +26,73 @@
             </div>
     	</div>
 	</div>
-       
-    <div class="detail_info_seller"> 
-       	<div class="seller_specifications"> 
-           	<p class="left_column left">
-               	<strong><spring:message code="seller_detail_person" /></strong><br />
-				<spring:message code="label_cz_kolomet_domain_seller_personsalutation" />: <spring:eval expression="seller.personSalutation" /><br />
-				<spring:message code="label_cz_kolomet_domain_seller_persondegree" />: <spring:eval expression="seller.personDegree" /><br />
-				<spring:message code="label_cz_kolomet_domain_seller_personname" />: <spring:eval expression="seller.personName" /><br />
-				<spring:message code="label_cz_kolomet_domain_seller_personsurname" />: <spring:eval expression="seller.personSurname" /><br />
-				<br />			
-				<strong><spring:message code="seller_detail_business" /></strong><br />
-				<spring:message code="label_cz_kolomet_domain_seller_businesscountry" />: <spring:eval expression="seller.businessCountry.codeDescription" /><br />
-				<spring:message code="label_cz_kolomet_domain_seller_businesscity" />: <spring:eval expression="seller.businessCity" /><br />
-				<spring:message code="label_cz_kolomet_domain_seller_businessstreet" />: <spring:eval expression="seller.businessStreet" /><br />
-				<spring:message code="label_cz_kolomet_domain_seller_businesspostcode" />: <spring:eval expression="seller.businessPostCode" /><br />
-				<spring:message code="label_cz_kolomet_domain_seller_businesssalutation" />: <spring:eval expression="seller.businessSalutation" /><br />
-				<spring:message code="label_cz_kolomet_domain_seller_businessdegree" />: <spring:eval expression="seller.businessDegree" /><br />
-				<spring:message code="label_cz_kolomet_domain_seller_businessname" />: <spring:eval expression="seller.businessName" /><br />
-				<spring:message code="label_cz_kolomet_domain_seller_businessemail" />: <spring:eval expression="seller.businessEmail" />
-			</p>
-			<p class="right_column right">
-				<strong><spring:message code="seller_detail_other" /></strong><br />
-				<spring:message code="label_cz_kolomet_domain_seller_sellerstatus" />: <spring:eval expression="seller.sellerStatus.codeDescription" /><br />
-				<spring:message code="label_cz_kolomet_domain_seller_region" />: <spring:eval expression="seller.region.codeDescription" /><br />
-				<spring:message code="label_cz_kolomet_domain_seller_web" />: <spring:eval expression="seller.web" /><br />
-				<spring:message code="label_cz_kolomet_domain_seller_saletype" />: <spring:eval expression="seller.saleType" /><br />
-				<br/>
-				<strong><spring:message code="seller_detail_address" /></strong><br />
-				<spring:message code="label_cz_kolomet_domain_seller_addresscountry" />: <spring:eval expression="seller.addressCountry.codeDescription" /><br />
-				<spring:message code="label_cz_kolomet_domain_seller_addresscity" />: <spring:eval expression="seller.addressCity" /><br />
-				<spring:message code="label_cz_kolomet_domain_seller_addressstreet" />: <spring:eval expression="seller.addressStreet" /><br />
-				<spring:message code="label_cz_kolomet_domain_seller_addresspostcode" />: <spring:eval expression="seller.addressPostCode" /><br />
-				<spring:message code="label_cz_kolomet_domain_seller_addresssalutation" />: <spring:eval expression="seller.addressSalutation" /><br />
-				<spring:message code="label_cz_kolomet_domain_seller_addressdegree" />: <spring:eval expression="seller.addressDegree" /><br />
-				<spring:message code="label_cz_kolomet_domain_seller_addressname" />: <spring:eval expression="seller.addressName" /><br />
-				<spring:message code="label_cz_kolomet_domain_seller_addressemail" />: <spring:eval expression="seller.addressEmail" /><br />
-            </p>
-       		</div>
+    
+    <div class="detail_info_seller">
+    	<c:set value="seller_ads_wide" var="ads_css_class" />
+    	<security:authorize access="hasAnyRole('ROLE_per_sellers')"> 
+	    	<c:set value="seller_ads" var="ads_css_class" />
+	       	<div class="seller_specifications"> 
+	           	<p class="left_column left">
+	               	<strong><spring:message code="seller_detail_person" /></strong><br />
+					<spring:message code="label_cz_kolomet_domain_seller_personsalutation" />: <spring:eval expression="seller.personSalutation" /><br />
+					<spring:message code="label_cz_kolomet_domain_seller_persondegree" />: <spring:eval expression="seller.personDegree" /><br />
+					<spring:message code="label_cz_kolomet_domain_seller_personname" />: <spring:eval expression="seller.personName" /><br />
+					<spring:message code="label_cz_kolomet_domain_seller_personsurname" />: <spring:eval expression="seller.personSurname" /><br />
+					<br />			
+					<strong><spring:message code="seller_detail_business" /></strong><br />
+					<spring:message code="label_cz_kolomet_domain_seller_businesscountry" />: <spring:eval expression="seller.businessCountry.codeDescription" /><br />
+					<spring:message code="label_cz_kolomet_domain_seller_businesscity" />: <spring:eval expression="seller.businessCity" /><br />
+					<spring:message code="label_cz_kolomet_domain_seller_businessstreet" />: <spring:eval expression="seller.businessStreet" /><br />
+					<spring:message code="label_cz_kolomet_domain_seller_businesspostcode" />: <spring:eval expression="seller.businessPostCode" /><br />
+					<spring:message code="label_cz_kolomet_domain_seller_businesssalutation" />: <spring:eval expression="seller.businessSalutation" /><br />
+					<spring:message code="label_cz_kolomet_domain_seller_businessdegree" />: <spring:eval expression="seller.businessDegree" /><br />
+					<spring:message code="label_cz_kolomet_domain_seller_businessname" />: <spring:eval expression="seller.businessName" /><br />
+					<spring:message code="label_cz_kolomet_domain_seller_businessemail" />: <spring:eval expression="seller.businessEmail" />
+				</p>
+				<p class="right_column right">
+					<strong><spring:message code="seller_detail_other" /></strong><br />
+					<spring:message code="label_cz_kolomet_domain_seller_sellerstatus" />: <spring:eval expression="seller.sellerStatus.codeDescription" /><br />
+					<spring:message code="label_cz_kolomet_domain_seller_region" />: <spring:eval expression="seller.region.codeDescription" /><br />
+					<spring:message code="label_cz_kolomet_domain_seller_web" />: <spring:eval expression="seller.web" /><br />
+					<spring:message code="label_cz_kolomet_domain_seller_saletype" />: <spring:eval expression="seller.saleType" /><br />
+					<br/>
+					<strong><spring:message code="seller_detail_address" /></strong><br />
+					<spring:message code="label_cz_kolomet_domain_seller_addresscountry" />: <spring:eval expression="seller.addressCountry.codeDescription" /><br />
+					<spring:message code="label_cz_kolomet_domain_seller_addresscity" />: <spring:eval expression="seller.addressCity" /><br />
+					<spring:message code="label_cz_kolomet_domain_seller_addressstreet" />: <spring:eval expression="seller.addressStreet" /><br />
+					<spring:message code="label_cz_kolomet_domain_seller_addresspostcode" />: <spring:eval expression="seller.addressPostCode" /><br />
+					<spring:message code="label_cz_kolomet_domain_seller_addresssalutation" />: <spring:eval expression="seller.addressSalutation" /><br />
+					<spring:message code="label_cz_kolomet_domain_seller_addressdegree" />: <spring:eval expression="seller.addressDegree" /><br />
+					<spring:message code="label_cz_kolomet_domain_seller_addressname" />: <spring:eval expression="seller.addressName" /><br />
+					<spring:message code="label_cz_kolomet_domain_seller_addressemail" />: <spring:eval expression="seller.addressEmail" /><br />
+	            </p>
+	       	</div>
+       	</security:authorize>
            
-           	<div class="seller_ads"> 
-           		<h3><spring:message code="seller_detail_last_adds" /></h3>
-               	<table class="ad_list">
-               		<thead>               		
+        <div class="${ads_css_class}"> 
+        	<h3><spring:message code="seller_detail_last_adds" /></h3>
+            <table class="ad_list">
+            	<thead>               		
+                  	<tr>
+                  		<td><spring:message code="seller_detail_product_name" /></td>
+                      	<td><spring:message code="seller_detail_product_price" /></td>
+                  	</tr>
+                </thead>
+                <c:forEach items="${products.content}" var="product">
                    	<tr>
-                   		<td><spring:message code="seller_detail_product_name" /></td>
-                       	<td><spring:message code="seller_detail_product_price" /></td>
+                   		<spring:url value="/public/products/detail" var="productDetailUrl" />
+                   		<td><a href="${productDetailUrl}/${product.id}">${product.productName}</a></td>
+                       	<td>${product.price }</td>
                    	</tr>
-                   	</thead>
-                   	<c:forEach items="${products.content}" var="product">
-	                   	<tr>
-	                   		<spring:url value="/public/products/detail" var="productDetailUrl" />
-	                   		<td><a href="${productDetailUrl}/${product.id}">${product.productName}</a></td>
-	                       	<td>${product.price }</td>
-	                   	</tr>
-               		</c:forEach>
-               </table>
-       		</div>
-    	</div>
+            	</c:forEach>
+            </table>
+      	</div>
+   	</div>
     	
-    	<div style="clear: both; padding: 5px;">
-    		<security:authorize access="hasAnyRole('ROLE_per_sellers')">
+    <div style="clear: both; padding: 5px;">
+    	<security:authorize access="hasAnyRole('ROLE_per_sellers')">
     		<util:quicklinks update="true" create="false" list="false" itemId="${seller.id}" typeName="seller" delete="true" typeNamePlural="sellers" path="/admin/sellers" largeIcons="true" />
-    		</security:authorize>
-    	</div>
+    	</security:authorize>
+    </div>
 
 </div>

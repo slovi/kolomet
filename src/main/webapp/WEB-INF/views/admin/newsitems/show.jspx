@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:spring="http://www.springframework.org/tags" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:spring="http://www.springframework.org/tags" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:show id="ps_cz_kolomet_domain_NewsItem" object="${newsitem}" path="/admin/newsitems" z="user-managed">
         <field:display date="true" dateTimePattern="${newsItem_newsitemdate_date_format}" field="newsItemDate" id="s_cz_kolomet_domain_NewsItem_newsItemDate" object="${newsitem}" z="WvUoKBJa3/eh80tAtu1QKYWcPag="/>
         <field:display field="text" id="s_cz_kolomet_domain_NewsItem_text" object="${newsitem}" z="HFJFPDfqDM2yxLZBaNesLBpdA60="/>
-        <field:display field="enabled" id="s_cz_kolomet_domain_NewsItem_enabled" object="${newsitem}" z="28YIQvX/doH4pFwH3sm3qLRNXKU="/>
+        <field:display field="enabled" bool="true" id="s_cz_kolomet_domain_NewsItem_enabled" object="${newsitem}" z="28YIQvX/doH4pFwH3sm3qLRNXKU="/>
         <field:display field="createdBy" id="s_cz_kolomet_domain_NewsItem_createdBy" object="${newsitem}" z="ex1aZ5Kgjm6G5x1r4zScv0D6hcg="/>
         <field:display field="lastModifiedBy" id="s_cz_kolomet_domain_NewsItem_lastModifiedBy" object="${newsitem}" z="5upWll7zUOdOC1M1Us5SfMOgL4c="/>
         <field:display date="true" dateTimePattern="${newsItem_created_date_format}" field="created" id="s_cz_kolomet_domain_NewsItem_created" object="${newsitem}" z="ANB/ArDQRzIJIhVJyq6HJoAobqE="/>
         <field:display date="true" dateTimePattern="${newsItem_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_NewsItem_lastModified" object="${newsitem}" z="ANB/ArDQRzIJIhVJyq6HJoAobqE="/>
+        <field:display field="contents" id="s_cz_kolomet_domain_NewsItem_contents" object="${newsitem}" z="UHkuQpiG431sElUc8Tw738Zmy0g=" render="false"/>
         <br/>
-        <c:set scope="request" value="${newsItem.id}" var="parentEntityId"/>
-        <h2><spring:message code="label_cz_kolomet_domain_newsitem_newsitemphotourl" /></h2>
-        <br />
-        <c:set scope="request" value="${newsItem.newsItemPhotoUrls}" var="newsitemphotourls"/>
+        <c:set scope="request" value="${newsitem.id}" var="parentEntityId"/>
+        <h2>
+            <spring:message code="label_cz_kolomet_domain_newsitem_newsitemphotourls"/>
+        </h2>
+        <br/>
+        <c:set scope="request" value="${newsitem.newsItemPhotoUrls}" var="newsitemphotourls"/>
         <jsp:include flush="true" page="../newsitemphotourls/list.jspx"/>
         <br/>
     </page:show>

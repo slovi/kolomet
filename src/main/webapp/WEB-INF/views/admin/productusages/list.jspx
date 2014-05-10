@@ -4,12 +4,12 @@
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_cz_kolomet_domain_codelist_ProductUsage" items="${productusages}" z="6LTZwGddUY7L83buvNfkxN3Y8ng=">
         <table:table data="${productusages}" id="l_cz_kolomet_domain_codelist_ProductUsage" path="/admin/productusages" z="fJOOLkgcWbzPDdJOA6DcLCrgHIA=">
-            <table:column id="c_cz_kolomet_domain_codelist_ProductUsage_createdBy" sort="true" property="createdBy" z="oeZ/plmj2W03Fh/3ie1Ol9bkeJ8="/>
-            <table:column id="c_cz_kolomet_domain_codelist_ProductUsage_lastModifiedBy" sort="true" property="lastModifiedBy" z="+OltWQnToyXJsYYxKVnIM16IAGc="/>
-            <table:column date="true" dateTimePattern="${productUsage_created_date_format}" id="c_cz_kolomet_domain_codelist_ProductUsage_created" sort="true" property="created" z="BfSKGB/MR5MQF1aoYa+RRWYJaDc="/>
-            <table:column date="true" dateTimePattern="${productUsage_lastmodified_date_format}" id="c_cz_kolomet_domain_codelist_ProductUsage_lastModified" sort="true" property="lastModified" z="Fa91vb+cpeebxHgrsHc9y1PUgNU="/>
-            <table:column id="c_cz_kolomet_domain_codelist_ProductUsage_codeKey" sort="true" property="codeKey" z="tKv5JXRrDtNGXa7haXFUvpR90QY="/>
-            <table:column id="c_cz_kolomet_domain_codelist_ProductUsage_codeDescription" sort="true" property="codeDescription" z="BThP/Xm6YCv1Ao143T6SUnpVl4w="/>
+            <table:column id="c_cz_kolomet_domain_codelist_ProductUsage_createdBy" property="createdBy" sort="true" z="user-managed"/>
+            <table:column id="c_cz_kolomet_domain_codelist_ProductUsage_lastModifiedBy" property="lastModifiedBy" sort="true" z="user-managed"/>
+            <table:column date="true" dateTimePattern="${productUsage_created_date_format}" id="c_cz_kolomet_domain_codelist_ProductUsage_created" property="created" sort="true" z="user-managed"/>
+            <table:column date="true" dateTimePattern="${productUsage_lastmodified_date_format}" id="c_cz_kolomet_domain_codelist_ProductUsage_lastModified" property="lastModified" sort="true" z="user-managed"/>
+            <table:column id="c_cz_kolomet_domain_codelist_ProductUsage_codeKey" property="codeKey" sort="true" z="user-managed"/>
+            <table:column id="c_cz_kolomet_domain_codelist_ProductUsage_codeDescription" property="codeDescription" sort="true" z="user-managed"/>
         </table:table>
     </page:list>
 </div>

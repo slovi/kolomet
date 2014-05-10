@@ -1,16 +1,11 @@
 package cz.kolomet.web;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 
-import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,9 +27,6 @@ import cz.kolomet.web.admin.AbstractAdminController;
 @RooWebScaffold(path = "admin/newsitemphotourls", formBackingObject = NewsItemPhotoUrl.class)
 public class NewsItemPhotoUrlController extends AbstractAdminController {
 	
-	@Value("${seller.img.rootdir}")
-	private String rootDir;
-	
 	@Autowired
 	private NewsItemService newsItemService;
 	
@@ -52,14 +44,7 @@ public class NewsItemPhotoUrlController extends AbstractAdminController {
         uiModel.addAttribute("dependencies", dependencies);        
         return "admin/newsitemphotourls/create";
 	}
-	
-    @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
-    public String updateForm(@PathVariable("id") Long id, Model uiModel, @RequestParam(value = "parentEntityId", required = false) Long parentEntityId) {
-    	NewsItem newsItem = parentEntityId != null ? newsItemService.findNewsItem(parentEntityId) : null;
-        populateEditForm(uiModel, newsItemPhotoUrlService.findNewsItemPhotoUrl(id), newsItem);
-        return "admin/newsitemphotourls/update";
-    }
-    
+
 	@RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String create(NewsItemPhotoUrl newsItemPhotoUrl, BindingResult bindingResult, Model uiModel, @RequestParam("content") CommonsMultipartFile content, HttpServletRequest httpServletRequest) {
         
@@ -69,18 +54,7 @@ public class NewsItemPhotoUrlController extends AbstractAdminController {
 		}
 		
 		saveNewsItemPhotos(newsItemPhotoUrl.getNewsItem(), newsItemPhotoUrl.getContents());
-		return "redirect:/admin/products/" + newsItemPhotoUrl.getNewsItem().getId();
-    }
-	
-    @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
-    public String update(@Valid NewsItemPhotoUrl newsItemPhotoUrl, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
-            populateEditForm(uiModel, newsItemPhotoUrl, null);
-            return "admin/sellerphotourls/update";
-        }
-        uiModel.asMap().clear();
-        newsItemPhotoUrlService.updateNewsItemPhotoUrl(newsItemPhotoUrl);
-        return "redirect:/admin/sellers/" + newsItemPhotoUrl.getNewsItem().getId();
+		return "redirect:/admin/newsitemphotourls/" + newsItemPhotoUrl.getNewsItem().getId();
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
@@ -90,7 +64,7 @@ public class NewsItemPhotoUrlController extends AbstractAdminController {
         uiModel.asMap().clear();
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
-        return "redirect:/admin/sellers/" + newsItemPhotoUrl.getNewsItem().getId();
+        return "redirect:/admin/newsitemphotourls/" + newsItemPhotoUrl.getNewsItem().getId();
     }
     
     void populateEditForm(Model uiModel, NewsItemPhotoUrl newsItemPhotoUrl, NewsItem newsItem) {
@@ -100,16 +74,5 @@ public class NewsItemPhotoUrlController extends AbstractAdminController {
         uiModel.addAttribute("newsItemPhotoUrl", newsItemPhotoUrl);
         uiModel.addAttribute("newsItems", newsItemService.findAllNewsItems());
     }
-    
-    private File getDestFile(NewsItemPhotoUrl newsItemPhotoUrl, CommonsMultipartFile content) {
-		File parent = new File(rootDir + "/" + newsItemPhotoUrl.getNewsItem().getId());
-		try {
-			FileUtils.forceMkdir(parent);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-		File dest = new File(parent, content.getOriginalFilename());
-		return dest;
-	}
 	
 }

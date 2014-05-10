@@ -72,8 +72,8 @@ public class ProductSpecifications {
 				if (productFilter.getFigureHeight() != null) {
 					predicates.add(cb.equal(root.get("figureHeight"), productFilter.getFigureHeight()));
 				}
-				if (productFilter.getBicycleSize() != null) {
-					predicates.add(cb.equal(root.get("bicycleSize"), productFilter.getBicycleSize()));
+				if (productFilter.getBicycleCategory() != null) {
+					predicates.add(cb.equal(root.get("bicycleCategory"), productFilter.getBicycleCategory()));
 				}
 				if (productFilter.getCategoryType() != null) {
 					Join<Product, Category> category = root.join("category");

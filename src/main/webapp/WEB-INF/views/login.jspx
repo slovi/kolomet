@@ -14,11 +14,11 @@
 				<br /> 
 				<label for="j_username">Přihlasovací jméno</label>
 				<br /> 
-				<input id="j_username" name="j_username" type="text" />
+				<input id="j_username" name="j_username" type="text" autocomplete="on" />
 				<br /> 
 				<label for="j_password">Heslo</label>
 				<br /> 
-				<input id="j_password" name="j_password" type="password" />
+				<input id="j_password" name="j_password" type="password" autocomplete="on" />
 				<br /> 
 				<a href="#">Zapomenuté heslo</a>
 				<br />

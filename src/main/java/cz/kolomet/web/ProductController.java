@@ -18,7 +18,7 @@ import cz.kolomet.repository.ProductRepository;
 import cz.kolomet.repository.ProductSpecifications;
 import cz.kolomet.repository.ProductUsageRepository;
 import cz.kolomet.repository.RegionRepository;
-import cz.kolomet.service.BicycleSizeService;
+import cz.kolomet.service.BicycleCategoryService;
 
 @RequestMapping("/public/products")
 @Controller("publicProductController")
@@ -34,7 +34,7 @@ public class ProductController extends AbstractController {
 	private ProductUsageRepository productUsageRepository;
 	
 	@Autowired
-	private BicycleSizeService bicycleSizeService;
+	private BicycleCategoryService bicycleCategoryService;
 	
 	@RequestMapping("/detail/{id}")
 	public String detail(@PathVariable("id") Long id, Model model) {
@@ -81,7 +81,7 @@ public class ProductController extends AbstractController {
 		
 		model.addAttribute("regions", regionRepository.findAll());
 		model.addAttribute("productusages", productUsageRepository.findAll());
-		model.addAttribute("bicyclesizes", bicycleSizeService.findAllBicycleSizes());
+		model.addAttribute("bicyclecategories", bicycleCategoryService.findAllBicycleCategories());
 		model.addAttribute("productFilter", productFilter);
 	}
 	

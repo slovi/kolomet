@@ -1,5 +1,7 @@
 define(['jquery', 'jquery_ui', 'jquery_number'], function($) {
 	
+	var sliders = [];
+	
 	return {
 		slider: function(divId, valueFrom, valueTo, maxValueFrom, maxValueTo, step) {
 						
@@ -21,6 +23,14 @@ define(['jquery', 'jquery_ui', 'jquery_number'], function($) {
 					formatCurrency(amountToInput);
 				}
 			});
+			sliders[divId] = slider;
+		},
+		resetSlider: function(divId) {
+			var slider = sliders[divId]; 
+			var min = slider.slider("option", "min");
+			var max = slider.slider("option", "max");
+			slider.slider("values", 0, min);
+			slider.slider("values", 1, max);
 		}
 	};
 	

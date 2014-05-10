@@ -13,7 +13,8 @@
 	    	<img class="side-menu-arrow-off hidden" src="${arrowRightImageUrl}" />
 	    </h1>
 	    <menu:menu id="side_menu_body_categories" styleClass="side-menu-body">
-	    	<c:forEach items="${categories}" var="category">
+		    <menu:item url="/public/products/filter" id="menuitem_category_all" label="Všechny typy kol" defaultPageSize="6" />
+	    	<c:forEach items="${categorys}" var="category">
 				<menu:item url="/public/products/filter?category=${category.id}" id="menuitem_${category.codeKey}" label="${category.codeDescription}" defaultPageSize="6" />
 			</c:forEach>
 	     </menu:menu>
@@ -26,7 +27,7 @@
         </h1>
 		<menu:menu id="side_menu_body_producers" styleClass="side-menu-body hidden">
 			<c:forEach items="${producers}" var="producer" varStatus="status">
-				<menu:item url="/public/products/filter?producer=${producer.id}" id="menuitem_${producer.codeKey}" label="${producer.name}" defaultPageSize="6" />
+				<menu:item url="/public/products/filter?producer=${producer.id}" id="menuitem_${producer.codeKey}" label="${producer.codeDescription}" defaultPageSize="6" />
 			</c:forEach>
 		</menu:menu>
 	</div>

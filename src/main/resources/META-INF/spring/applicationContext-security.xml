@@ -42,8 +42,8 @@
 		<intercept-url pattern="/admin/productattributetypes*" access="hasAnyRole('ROLE_per_productattributetypes')" />
 		<intercept-url pattern="/admin/productusages*" access="hasAnyRole('ROLE_per_productusages')" />
 		<intercept-url pattern="/admin/productusages/*" access="hasAnyRole('ROLE_per_productusages')" />
-		<intercept-url pattern="/admin/bicyclesizes*" access="hasAnyRole('ROLE_per_bicyclesizes')" />
-		<intercept-url pattern="/admin/bicyclesizes/*" access="hasAnyRole('ROLE_per_bicyclesizes')" />
+		<intercept-url pattern="/admin/bicyclecategories*" access="hasAnyRole('ROLE_per_bicyclecategories')" />
+		<intercept-url pattern="/admin/bicyclecategories/*" access="hasAnyRole('ROLE_per_bicyclecategories')" />
 		<intercept-url pattern="/admin/figureheights*" access="hasAnyRole('ROLE_per_figureheights')" />
 		<intercept-url pattern="/admin/figureheights/*" access="hasAnyRole('ROLE_per_figureheights')" />
 		<intercept-url pattern="/admin/productattributetypes/*" access="hasAnyRole('ROLE_per_productattributetypes')" />

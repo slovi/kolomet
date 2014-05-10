@@ -9,6 +9,6 @@ import cz.kolomet.domain.SellerPhotoUrl;
 @RooService(domainTypes = { cz.kolomet.domain.SellerPhotoUrl.class })
 public interface SellerPhotoUrlService {
 	
-	public void saveSellerPhotoUrl(SellerPhotoUrl photoUrl, File file, File targetRootDir);
+	public void saveSellerPhotoUrl(SellerPhotoUrl photoUrl, File file);
 	
 }

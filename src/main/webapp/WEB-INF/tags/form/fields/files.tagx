@@ -6,58 +6,45 @@
   <jsp:directive.attribute name="validationMessageCode" type="java.lang.String" required="false" rtexprvalue="true" description="Specify the message (message property code) to be displayed if the regular expression validation fails" />
   <jsp:directive.attribute name="validationMessage" type="java.lang.String" required="false" rtexprvalue="true" description="Specify the message to be displayed if the regular expression validation fails" />
   <jsp:directive.attribute name="render" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Indicate if the contents of this tag and all enclosed tags should be rendered (default 'true')" />
+  <jsp:directive.attribute name="filesCount" type="java.lang.Integer" required="false" rtexprvalue="true" description="Indicate number of files input" />
   <jsp:directive.attribute name="z" type="java.lang.String" required="false" description="Used for checking if element has been modified (to recalculate simply provide empty string value)" />
   
   <c:if test="${empty render or render}">
-    
-    <c:if test="${empty validationMessage}">
-      <c:choose>
-        <c:when test="${empty validationMessageCode}">
-          <spring:message arguments="${fn:escapeXml(label)}" code="field_invalid" var="field_invalid" htmlEscape="false" />
-        </c:when>
-        <c:otherwise>
-          <spring:message arguments="${fn:escapeXml(label)}" code="${validationMessageCode}" var="field_invalid" htmlEscape="false" />
-        </c:otherwise>
-      </c:choose>
-    </c:if>
-    
-    
+  
+  	<c:if test="${empty filesCount}">
+  		<c:set var="filesCount" value="4" />
+  	</c:if>
+   
     <div id="_${fn:escapeXml(id)}_id">
+      <spring:url value="/resources/images/delete.png" var="delete_image_url"/>
+      
+      <c:set var="margin_left" value="550" />
+      <c:set var="margin_top" value="-40" />
       
       <div class="multiple_input_box">
-      	<div id="_${fn:escapeXml(id)}_id_0" class="multiple_input_item">
-      		<field:input disableFormBinding="true" field="contents[0]" label="Obrazek 1" id="_${fn:escapeXml(id)}_id_0_input" type="file"/>
-      	</div>
-      	<div id="_${fn:escapeXml(id)}_id_1" class="multiple_input_item" style="display: none;">
-      		<field:input disableFormBinding="true" field="contents[1]" label="Obrazek 2" id="_${fn:escapeXml(id)}_id_1_input" type="file"/>
-      	</div>
-      	<div id="_${fn:escapeXml(id)}_id_2" class="multiple_input_item" style="display: none;">
-      		<field:input disableFormBinding="true" field="contents[2]" label="Obrazek 3" id="_${fn:escapeXml(id)}_id_2_input" type="file"/>
-      	</div>
-      	<div id="_${fn:escapeXml(id)}_id_3" class="multiple_input_item" style="display: none;">
-      		<field:input disableFormBinding="true" field="contents[3]" label="Obrazek 4" id="_${fn:escapeXml(id)}_id_3_input" type="file"/>
-      	</div>
+      
+      	<c:if test="${filesCount gt 1}">
+      		<spring:message code="" arguments="${filesCount}" />
+      	</c:if>
+      	<c:forEach begin="1" end="${filesCount}" varStatus="status">
+      		<div id="_${fn:escapeXml(id)}_id_${status.index}" class="multiple_input_item">
+	      		<field:input disableFormBinding="true" width="30" field="contents[${status.index - 1}]" label="Obrazek ${status.index}" id="_${fn:escapeXml(id)}_id_${status.index - 1}_input" type="file" inline="true"/>
+	      		<c:if test="${filesCount gt 1}"> 
+	      			<input alt="${fn:escapeXml(delete_label)}" src="${delete_image_url}" class="image multiple_input_remove" title="${fn:escapeXml(delete_label)}" type="image" value="${fn:escapeXml(delete_label)}" style="margin-left: ${margin_left}px; margin-top: ${margin_top}px;" data-index="${status.index - 1}"/>
+	      		</c:if>
+	      	</div>
+      	</c:forEach>
       </div>
-      <div style="text-align: right; margin: 0 500px 0 0">
-	  	<a class="multiple_input_add" href="#"><spring:message code="button_add" /></a> | <a class="multiple_input_remove" href="#"><spring:message code="button_remove" /></a>
-	  </div>
-	  
-      <c:set var="sec_field_validation">
-        <spring:escapeBody javaScriptEscape="true">${field_validation}</spring:escapeBody>
-      </c:set>
-      <c:set var="sec_field_invalid">
-        <spring:escapeBody javaScriptEscape="true" htmlEscape="true">${field_invalid}</spring:escapeBody>
-      </c:set>
-      <c:set var="sec_field_required">
-        <spring:escapeBody javaScriptEscape="true">${field_required}</spring:escapeBody>
-      </c:set>
-      <c:set var="sec_validation_regex" value="" />
-      <c:if test="${!empty validationRegex}">
-        <c:set var="sec_validation_regex" value="regExp : '${validationRegex}', " />
-      </c:if>
+
+	  <c:if test="${filesCount gt 1}">		
+	      <div style="text-align: right; margin: 0 500px 0 0">
+		  	<a class="multiple_input_add" href="#"><spring:message code="button_add_photo" /></a>
+		  </div>
+	  </c:if>
+
       <script type="text/javascript">
     	require(['files'], function(files) {
-      		files.files('_${fn:escapeXml(id)}_id_', 4);
+      		files.files('_${fn:escapeXml(id)}_id_', ${filesCount});
       	});
       </script>
       

@@ -21,7 +21,7 @@ import cz.kolomet.service.ProductService;
 
 @RequestMapping("/admin/photourls")
 @Controller
-@RooWebScaffold(path = "admin/photourls", formBackingObject = PhotoUrl.class)
+@RooWebScaffold(path = "admin/photourls", formBackingObject = PhotoUrl.class, update = false)
 public class PhotoUrlController extends AbstractAdminController {
 	
 	@Autowired
@@ -38,13 +38,6 @@ public class PhotoUrlController extends AbstractAdminController {
         uiModel.addAttribute("dependencies", dependencies);
         return "admin/photourls/create";
     }
-
-    @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
-    public String updateForm(@PathVariable("id") Long id, @RequestParam(value = "parentEntityId", required = false) Long parentEntityId, Model uiModel) {
-    	Product product = parentEntityId != null ? productService.findProduct(parentEntityId) : null;
-        populateEditForm(uiModel, photoUrlService.findPhotoUrl(id), product);
-        return "admin/photourls/update";
-    }
 	
 	@RequestMapping(method = RequestMethod.POST, produces = "text/html")
 	public String create(@Valid PhotoUrl photoUrl, BindingResult bindingResult, Model model, HttpServletRequest httpServletRequest) {
@@ -54,20 +47,10 @@ public class PhotoUrlController extends AbstractAdminController {
 	        return "admin/photourls/update";
 		}
 		
+		model.asMap().clear();
 		savePhotos(photoUrl.getProduct(), photoUrl.getContents());
 		return "redirect:/admin/products/" + encodeUrlPathSegment(photoUrl.getProduct().getId().toString(), httpServletRequest);
 	}
-	
-	@RequestMapping(method = RequestMethod.PUT, produces = "text/html")
-    public String update(@Valid PhotoUrl photoUrl, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
-            populateEditForm(uiModel, photoUrl, null);
-            return "admin/photourls/update";
-        }
-        uiModel.asMap().clear();
-        photoUrlService.updatePhotoUrl(photoUrl);
-        return "redirect:/admin/products/" + encodeUrlPathSegment(photoUrl.getProduct().getId().toString(), httpServletRequest);
-    }
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
     public String delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {

@@ -16,7 +16,8 @@ import java.io.OutputStream;
 import javax.imageio.ImageIO;
 
 import org.apache.commons.io.IOUtils;
-import org.springframework.scheduling.annotation.Async;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Service;
 
 import cz.kolomet.service.ImageService;
@@ -24,27 +25,30 @@ import cz.kolomet.service.ImageService;
 @Service
 public class ImageServiceImpl implements ImageService {
 	
-	@Async
+	protected final Log logger = LogFactory.getLog(getClass());
+	
 	@Override
 	public void save(File sourceFile, File targetFile) {
 		try {
+			logger.debug("Try to save image: " + sourceFile + " " + targetFile);
 			save(new FileInputStream(sourceFile), new FileOutputStream(targetFile));
 		} catch (FileNotFoundException e) {
+			logger.error(e, e);
 			throw new RuntimeException(e);
 		}
 	}
 	
-	@Async
 	@Override
 	public void save(InputStream inputStream, OutputStream outputStream) {
-		try {
+		try {			
+			logger.debug("Writing data to stream " + outputStream);
 			IOUtils.copy(inputStream, outputStream);
 		} catch (IOException e) {
+			logger.error(e, e);
 			throw new RuntimeException(e);
 		}
 	}
 
-	@Async
 	@Override
 	public void resizeAndSave(InputStream inputStream, OutputStream outputStream, Dimension toDimension) {
 		BufferedImage image = read(inputStream);
@@ -54,24 +58,28 @@ public class ImageServiceImpl implements ImageService {
 			inputStream.close();
 			outputStream.close();
 		} catch (IOException e) {
+			logger.error(e, e);
 			throw new RuntimeException(e);
 		}
 	}
 	
-	@Async
 	@Override
 	public void resizeAndSave(File sourceFile, File targetFile, Dimension toDimension) {
 		try {
+			logger.debug("Trying resize and save image: " + sourceFile + " " + targetFile);
 			resizeAndSave(new FileInputStream(sourceFile), new FileOutputStream(targetFile), toDimension);
 		} catch (FileNotFoundException e) {
+			logger.error(e, e);
 			throw new RuntimeException(e);
 		}
 	}
 	
 	private BufferedImage read(InputStream inputStream) {
 		try {
+			logger.debug("Reading image from stream: " + inputStream);
 			return ImageIO.read(inputStream);
 		} catch (IOException e) {
+			logger.error(e, e);
 			throw new RuntimeException(e);
 		}
 	}
@@ -89,8 +97,10 @@ public class ImageServiceImpl implements ImageService {
 	
 	private void save(BufferedImage image, OutputStream out) {
 		try {
+			logger.debug("Writing image to stream: " + out);
 			ImageIO.write(image, "jpg", out);
 		} catch (IOException e) {
+			logger.error(e, e);
 			throw new RuntimeException(e);
 		}
 	}

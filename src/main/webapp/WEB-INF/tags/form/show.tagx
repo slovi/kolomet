@@ -44,7 +44,7 @@
         <c:when test="${not empty object}">
           <jsp:doBody />
           <c:if test="${not empty path}">
-          	<util:quicklinks update="true" create="true" list="true" itemId="${itemId}" typeName="${typeName}" delete="true" typeNamePlural="${typeNamePlural}" path="${path}" detailUrl="${detailUrl}"/>
+          	<util:quicklinks update="${update}" create="${create}" list="${list}" itemId="${itemId}" typeName="${typeName}" delete="${delete}" typeNamePlural="${typeNamePlural}" path="${path}" detailUrl="${detailUrl}"/>
           </c:if>
         </c:when>
         <c:otherwise>

@@ -25,6 +25,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 @RooSerializable
 public class NewsItemPhotoUrl extends DomainEntity {
 	
+	public static final String PHOTO_URL_PREFIX = "newsitem";
 	public static String ORIGINAL_IMG_SUFFIX = "_orig.jpg";
 
 	/**
@@ -47,7 +48,7 @@ public class NewsItemPhotoUrl extends DomainEntity {
     private List<CommonsMultipartFile> contents;
     
     public String getPhotoUrl() {
-    	return newsItem.getId() + "/" + FilenameUtils.getBaseName(fileName) + ORIGINAL_IMG_SUFFIX;
+    	return PHOTO_URL_PREFIX + "/" + newsItem.getId() + "/" + FilenameUtils.getBaseName(fileName) + ORIGINAL_IMG_SUFFIX;
     }
 	
 }

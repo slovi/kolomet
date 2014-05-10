@@ -10,7 +10,5 @@
 	<definition extends="default_admin" name="admin/sellerphotourls/create">
         <put-attribute name="body" value="/WEB-INF/views/admin/sellerphotourls/create.jspx"/>
     </definition>
-	<definition extends="default_admin" name="admin/sellerphotourls/update">
-        <put-attribute name="body" value="/WEB-INF/views/admin/sellerphotourls/update.jspx"/>
-    </definition>
+	
 </tiles-definitions>

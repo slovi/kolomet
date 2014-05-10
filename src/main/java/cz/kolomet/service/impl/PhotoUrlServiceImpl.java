@@ -6,6 +6,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.task.TaskExecutor;
 
 import cz.kolomet.domain.PhotoUrl;
 import cz.kolomet.service.ImageService;
@@ -31,21 +32,31 @@ public class PhotoUrlServiceImpl implements PhotoUrlService {
 	@Value("${product.img.thumbnail.height}")
 	private Integer thumbnailHeight;
 	
-    public void savePhotoUrl(PhotoUrl photoUrl, File file) {
+	@Autowired
+	private TaskExecutor executor;
+	
+    public void savePhotoUrl(PhotoUrl photoUrl, final File file) {
         
     	photoUrlRepository.save(photoUrl);
+    	
+    	executor.execute(new Runnable() {
+			
+			@Override
+			public void run() {
+				// save original image
+				String targetFileName = FilenameUtils.getBaseName(file.getName()) + PhotoUrl.ORIGINAL_IMG_SUFFIX;
+				imageService.resizeAndSave(file, new File(file.getParent(), targetFileName), new Dimension(width, height));
+				
+				String targetOverviewFileName = FilenameUtils.getBaseName(file.getName()) + PhotoUrl.OVERVIEW_IMG_SUFFIX;
+				imageService.resizeAndSave(file, new File(file.getParent(), targetOverviewFileName), new Dimension(overviewWidth, overviewHeight));
+				
+				// save thumb image
+				String targetThumbFileName = FilenameUtils.getBaseName(file.getName()) + PhotoUrl.THUMBNAIL_IMG_SUFFIX;
+				imageService.resizeAndSave(file, new File(file.getParent(), targetThumbFileName), new Dimension(thumbnailWidth, thumbnailHeight));
+				FileUtils.deleteQuietly(file);
+			}
+		});
         
-    	// save original image
-        String targetFileName = FilenameUtils.getBaseName(file.getName()) + PhotoUrl.ORIGINAL_IMG_SUFFIX;
-        imageService.resizeAndSave(file, new File(file.getParent(), targetFileName), new Dimension(width, height));
-        
-        String targetOverviewFileName = FilenameUtils.getBaseName(file.getName()) + PhotoUrl.OVERVIEW_IMG_SUFFIX;
-        imageService.resizeAndSave(file, new File(file.getParent(), targetOverviewFileName), new Dimension(overviewWidth, overviewHeight));
-        
-        // save thumb image
-        String targetThumbFileName = FilenameUtils.getBaseName(file.getName()) + PhotoUrl.THUMBNAIL_IMG_SUFFIX;
-        imageService.resizeAndSave(file, new File(file.getParent(), targetThumbFileName), new Dimension(thumbnailWidth, thumbnailHeight));
-        FileUtils.deleteQuietly(file);
     }
    
 }

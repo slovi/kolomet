@@ -4,12 +4,12 @@
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_cz_kolomet_domain_codelist_CategoryType" items="${categorytypes}" z="JSnP08BSyFhTbWPEB11G/HbyEPE=">
         <table:table data="${categorytypes}" id="l_cz_kolomet_domain_codelist_CategoryType" path="/admin/categorytypes" z="user-managed">
-            <table:column id="c_cz_kolomet_domain_codelist_CategoryType_codeKey" sort="true" property="codeKey" z="3PplwHpNJE1yMlbP5QcHQuPDw6Y="/>
-            <table:column id="c_cz_kolomet_domain_codelist_CategoryType_codeDescription" sort="true" property="codeDescription" z="3ByPA7ZVDtQfcGU4j1sFb/MQIPc="/>
-            <table:column id="c_cz_kolomet_domain_codelist_CategoryType_createdBy" sort="true" property="createdBy" z="hDwTKASp75MyWkQykO9qGQEF1xc="/>
-            <table:column id="c_cz_kolomet_domain_codelist_CategoryType_lastModifiedBy" sort="true" property="lastModifiedBy" z="q86s8j/89Sj8q3qp8RRv9yT6H3k="/>
-            <table:column date="true" dateTimePattern="${categoryType_created_date_format}" id="c_cz_kolomet_domain_codelist_CategoryType_created" sort="true" property="created" z="qKaV5/kcMwIl6XdJFKFMWCLHTak="/>
-            <table:column date="true" dateTimePattern="${categoryType_lastmodified_date_format}" id="c_cz_kolomet_domain_codelist_CategoryType_lastModified" sort="true" property="lastModified" z="L83cZ5FncGj9FNlFG0hSn12+CMA="/>
+            <table:column id="c_cz_kolomet_domain_codelist_CategoryType_codeKey" property="codeKey" sort="true" z="user-managed"/>
+            <table:column id="c_cz_kolomet_domain_codelist_CategoryType_codeDescription" property="codeDescription" sort="true" z="user-managed"/>
+            <table:column id="c_cz_kolomet_domain_codelist_CategoryType_createdBy" property="createdBy" sort="true" z="user-managed"/>
+            <table:column id="c_cz_kolomet_domain_codelist_CategoryType_lastModifiedBy" property="lastModifiedBy" sort="true" z="user-managed"/>
+            <table:column date="true" dateTimePattern="${categoryType_created_date_format}" id="c_cz_kolomet_domain_codelist_CategoryType_created" property="created" sort="true" z="user-managed"/>
+            <table:column date="true" dateTimePattern="${categoryType_lastmodified_date_format}" id="c_cz_kolomet_domain_codelist_CategoryType_lastModified" property="lastModified" sort="true" z="user-managed"/>
         </table:table>
     </page:list>
 </div>

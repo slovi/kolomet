@@ -3,13 +3,13 @@
 
 package cz.kolomet.domain.codelist;
 
-import cz.kolomet.domain.codelist.BicycleSize;
+import cz.kolomet.domain.codelist.BicycleCategory;
 import java.io.Serializable;
 
-privileged aspect BicycleSize_Roo_Serializable {
+privileged aspect BicycleCategory_Roo_Serializable {
     
-    declare parents: BicycleSize implements Serializable;
+    declare parents: BicycleCategory implements Serializable;
     
-    private static final long BicycleSize.serialVersionUID = 1L;
+    private static final long BicycleCategory.serialVersionUID = 1L;
     
 }

@@ -37,15 +37,14 @@ public class NewsItemController extends AbstractAdminController {
         
     	if (bindingResult.hasErrors()) {
             populateEditForm(uiModel, newsItem);
-            return "admin/newsteims/create";
+            return "admin/newsitems/create";
         }
         
     	uiModel.asMap().clear();              
-        
-        newsItemService.saveNewsItem(newsItem);
-        
-        saveNewsItemPhotos(newsItem, newsItem.getContents());
-        
+
+    	newsItemService.saveNewsItem(newsItem);
+    	saveNewsItemPhotos(newsItem, newsItem.getContents());
+    	
         return "redirect:/admin/newsitems/" + newsItem.getId().toString();
     }
     

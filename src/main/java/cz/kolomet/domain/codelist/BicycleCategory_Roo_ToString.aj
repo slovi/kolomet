@@ -3,13 +3,13 @@
 
 package cz.kolomet.domain.codelist;
 
-import cz.kolomet.domain.codelist.BicycleSize;
+import cz.kolomet.domain.codelist.BicycleCategory;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-privileged aspect BicycleSize_Roo_ToString {
+privileged aspect BicycleCategory_Roo_ToString {
     
-    public String BicycleSize.toString() {
+    public String BicycleCategory.toString() {
         return new ReflectionToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).setExcludeFieldNames("createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate").toString();
     }
     

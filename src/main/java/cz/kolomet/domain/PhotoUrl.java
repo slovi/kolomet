@@ -24,6 +24,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 @RooSerializable
 public class PhotoUrl extends DomainEntity {
 	
+	public static final String PHOTO_URL_PREFIX = "product";
 	public static String ORIGINAL_IMG_SUFFIX = "_orig.jpg";
 	public static String OVERVIEW_IMG_SUFFIX = "_over.jpg";
 	public static String THUMBNAIL_IMG_SUFFIX = "_thumb.jpg";
@@ -45,15 +46,15 @@ public class PhotoUrl extends DomainEntity {
     private Product product;
     
     public String getPhotoUrl() {
-    	return product.getId() + "/" + FilenameUtils.getBaseName(fileName) + ORIGINAL_IMG_SUFFIX;
+    	return PHOTO_URL_PREFIX + "/" + product.getId() + "/" + FilenameUtils.getBaseName(fileName) + ORIGINAL_IMG_SUFFIX;
     }
     
     public String getThumbPhotoUrl() {
-    	return product.getId() + "/" + FilenameUtils.getBaseName(fileName) + THUMBNAIL_IMG_SUFFIX;
+    	return PHOTO_URL_PREFIX + "/" + product.getId() + "/" + FilenameUtils.getBaseName(fileName) + THUMBNAIL_IMG_SUFFIX;
     }
     
     public String getOverPhotoUrl() {
-    	return product.getId() + "/" + FilenameUtils.getBaseName(fileName) + OVERVIEW_IMG_SUFFIX;
+    	return PHOTO_URL_PREFIX + "/" + product.getId() + "/" + FilenameUtils.getBaseName(fileName) + OVERVIEW_IMG_SUFFIX;
     }
     
     @Transient

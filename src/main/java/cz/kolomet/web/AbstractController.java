@@ -42,7 +42,7 @@ public class AbstractController implements InitializingBean {
 	@Autowired
 	private FigureHeightService figureHeightsService;
 	
-	@ModelAttribute("categories")
+	@ModelAttribute("categorys")
 	public List<Category> loadCategories() {
 		return categoryRepository.find(bikeCategoryTypeId);
 	}

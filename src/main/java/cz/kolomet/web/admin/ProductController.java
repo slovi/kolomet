@@ -13,6 +13,7 @@ import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -21,7 +22,7 @@ import cz.kolomet.domain.ProductAttribute;
 import cz.kolomet.domain.codelist.ProductAttributeType;
 import cz.kolomet.security.ApplicationUserDetails;
 import cz.kolomet.service.ApplicationUserService;
-import cz.kolomet.service.BicycleSizeService;
+import cz.kolomet.service.BicycleCategoryService;
 import cz.kolomet.service.CategoryService;
 import cz.kolomet.service.FigureHeightService;
 import cz.kolomet.service.ProducerService;
@@ -55,7 +56,7 @@ public class ProductController extends AbstractAdminController {
     ProductAttributeTypeService productAttributeTypeService;
     
     @Autowired
-    BicycleSizeService bicycleSizeService;
+    BicycleCategoryService bicycleCategoryService;
     
     @Autowired
     FigureHeightService figureHeightsService;
@@ -65,6 +66,11 @@ public class ProductController extends AbstractAdminController {
     
     @Autowired
     ProductUsageService productUsageService;
+    
+    @RequestMapping(value = "/{id}", produces = "text/html")
+    public String show(@PathVariable("id") Long id, Model uiModel) {
+        return "redirect:/public/products/detail/" + id;
+    }
     
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String create(@Valid Product product, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) throws IOException {
@@ -78,18 +84,17 @@ public class ProductController extends AbstractAdminController {
         for (ProductAttribute productAttribute: product.getProductAttributes()) {
         	productAttribute.setProduct(product);
         }                
-        
+
         productService.saveProduct(product);
-        
         savePhotos(product, product.getContents());
         
-        return "redirect:/admin/products/" + product.getId().toString();
+        return "redirect:/public/products/detail/" + product.getId();
     }
     
     @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
     public String update(@Valid Product product, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
-            populateEditForm(uiModel, product);
+            populateEditForm(uiModel, productService.findProduct(product.getId()));
             return "admin/products/update";
         }
         uiModel.asMap().clear();
@@ -98,7 +103,7 @@ public class ProductController extends AbstractAdminController {
         }
         
         productService.updateProduct(product);
-        return "redirect:/admin/products/" + encodeUrlPathSegment(product.getId().toString(), httpServletRequest);
+        return "redirect:/public/products/detail/" + product.getId();
     }
     
     @RequestMapping(produces = "text/html")
@@ -123,17 +128,14 @@ public class ProductController extends AbstractAdminController {
     void populateEditForm(Model uiModel, Product product) {
         uiModel.addAttribute("product", product);
         addDateTimeFormatPatterns(uiModel);
-        uiModel.addAttribute("applicationusers", applicationUserService.findAllApplicationUsers());
         uiModel.addAttribute("categorys", categoryService.findAllCategorys());
-        uiModel.addAttribute("photourls", photoUrlService.findAllPhotoUrls());
         uiModel.addAttribute("producers", producerService.findAllProducers());
-        uiModel.addAttribute("productattributes", productAttributeService.findAllProductAttributes());
         uiModel.addAttribute("productusages", productUsageService.findAllProductUsages());
         uiModel.addAttribute("figureheights", figureHeightsService.findAllFigureHeights());
-        uiModel.addAttribute("bicyclesizes", bicycleSizeService.findAllBicycleSizes());
+        uiModel.addAttribute("bicyclecategories", bicycleCategoryService.findAllBicycleCategories());
         uiModel.addAttribute("sellers", sellerService.findAllSellers());
         
-        if (product.isNew()) {
+        if (product.isNew() && product.getProductAttributes().isEmpty()) {
         	List<ProductAttribute> productAttributes = new ArrayList<ProductAttribute>();
         	for (ProductAttributeType type: productAttributeTypeService.findAllProductAttributeTypes()) {
         		ProductAttribute productAttribute = new ProductAttribute();
