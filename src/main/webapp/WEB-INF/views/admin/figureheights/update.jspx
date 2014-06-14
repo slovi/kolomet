@@ -8,5 +8,6 @@
         <field:datetime dateTimePattern="${figureHeight_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_codelist_FigureHeight_lastModified" render="false" z="user-managed"/>
         <field:input field="codeKey" id="c_cz_kolomet_domain_codelist_FigureHeight_codeKey" max="20" required="true" z="Du7l1BsoZN0MvT8n3SJD7Oeu3bM="/>
         <field:textarea field="codeDescription" id="c_cz_kolomet_domain_codelist_FigureHeight_codeDescription" required="true" z="zn8DOvTCShr6+0X1oycV2oyCowA="/>
+        <field:input field="sequenceNr" id="c_cz_kolomet_domain_codelist_FigureHeight_sequenceNr" validationMessageCode="field_invalid_integer" z="99lrXk6cMi1h8Q9GtRu7ieLsAkM="/>
     </form:update>
 </div>

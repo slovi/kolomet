@@ -5,7 +5,8 @@
     <page:list id="pl_cz_kolomet_domain_Producer" items="${producers}" z="QcQvYyH+p3QZRfiD7hvaA9CGANw=">
         <table:table data="${producers}" id="l_cz_kolomet_domain_Producer" path="/admin/producers" z="user-managed">
             <table:column id="c_cz_kolomet_domain_Producer_codeKey" property="codeKey" sort="true" z="user-managed"/>
-            <table:column id="c_cz_kolomet_domain_Producer_name" property="name" sort="true" z="user-managed"/>
+            <table:column id="c_cz_kolomet_domain_Producer_codeDescription" property="codeDescription" sort="true" z="user-managed"/>
+            <table:column id="c_cz_kolomet_domain_codelist_ProductAttributeType_sequenceNr" property="sequenceNr" sort="true" z="zhpzNps0RzWs/kykityS93TScwI="/>
             <table:column id="c_cz_kolomet_domain_Producer_createdBy" property="createdBy" sort="true" z="user-managed"/>
             <table:column id="c_cz_kolomet_domain_Producer_lastModifiedBy" property="lastModifiedBy" sort="true" z="user-managed"/>
             <table:column date="true" dateTimePattern="${producer_created_date_format}" id="c_cz_kolomet_domain_Producer_created" property="created" sort="true" z="user-managed"/>

@@ -14,6 +14,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import cz.kolomet.domain.ApplicationPermission;
 import cz.kolomet.domain.ApplicationRole;
 import cz.kolomet.domain.ApplicationUser;
+import cz.kolomet.domain.Product;
+import cz.kolomet.domain.Seller;
 
 public class ApplicationUserDetails implements UserDetails {
 	
@@ -57,6 +59,54 @@ public class ApplicationUserDetails implements UserDetails {
 
 	public boolean isSellersOwn() {
 		return hasAuthority("per_sellers_own");
+	}
+	
+	public boolean isSellerOwner(Seller seller) {
+		return isSellersAll() || (isSellersOwn() && seller.getId().equals(getSellerId()));
+	}
+	
+	public boolean isCapableToSaveSeller(Seller seller) {
+		return isSellersAll();
+	}
+	
+	public boolean isCapableToUpdateSeller(Seller seller) {
+		return isSellerOwner(seller);
+	}
+	
+	public boolean isCapableToDeleteSeller(Seller seller) {
+		return isSellersAll();
+	}
+	
+	public boolean isCapableToDisplaySeller(Seller seller) {
+		return isSellerOwner(seller);
+	}
+	
+	public boolean isProductOwner(Product product) {
+		return isProductsAll() || (isProductsOwn() && isSellerOwner(product.getSeller()));
+	}
+	
+	public boolean isCapableToEditValidDates(Product product) {
+		return isProductsAll() || product.isValidDateChangeable() || product.isCopyState();
+	}
+	
+	public boolean isCapableToSaveProduct(Product product) {
+		return isProductOwner(product);
+	}
+	
+	public boolean isCapableToUpdateProduct(Product product) {
+		return isProductsAll() || (isProductOwner(product) && (product.isValid() || product.isWaitingForValid()));
+	}
+	
+	public boolean isCapableToCopyProduct(Product product) {
+		return isProductsAll() || (isProductOwner(product));
+	}
+	
+	public boolean isCapableToDeleteProduct(Product product) {
+		return isProductsAll() || (isProductOwner(product) && product.isValid() );
+	}
+	
+	public boolean isCapableToDisplayProduct(Product product) {
+		return true;
 	}
 	
 	private Collection<? extends GrantedAuthority> resolveAuthorities() {

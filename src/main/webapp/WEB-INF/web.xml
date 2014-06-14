@@ -36,15 +36,6 @@
 	</filter-mapping>
 
 	<filter>
-		<filter-name>HttpMethodFilter</filter-name>
-		<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>HttpMethodFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-
-	<filter>
 		<filter-name>Spring OpenEntityManagerInViewFilter</filter-name>
 		<filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
 	</filter>
@@ -68,6 +59,15 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>multipartFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<filter>
+		<filter-name>HttpMethodFilter</filter-name>
+		<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>HttpMethodFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
@@ -119,7 +119,7 @@
 	</servlet-mapping>
 
 	<session-config>
-		<session-timeout>10</session-timeout>
+		<session-timeout>30</session-timeout>
 	</session-config>
 
 	<error-page>
@@ -131,5 +131,12 @@
 		<error-code>404</error-code>
 		<location>/resourceNotFound</location>
 	</error-page>
+	
+	<jsp-config>
+		<taglib>
+			<taglib-uri>http://www.kolomet.cz/tags/util</taglib-uri>
+			<taglib-location>/WEB-INF/tld/kolomet-util.tld</taglib-location>
+		</taglib>
+	</jsp-config>
 
 </web-app>

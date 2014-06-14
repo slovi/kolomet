@@ -31,6 +31,14 @@ privileged aspect RegistrationRequest_Roo_JavaBean {
         this.text = text;
     }
     
+    public Boolean RegistrationRequest.getProcessed() {
+        return this.processed;
+    }
+    
+    public void RegistrationRequest.setProcessed(Boolean processed) {
+        this.processed = processed;
+    }
+    
     public String RegistrationRequest.getCaptchaText() {
         return this.captchaText;
     }

@@ -10,6 +10,7 @@ import cz.kolomet.domain.Producer;
 import cz.kolomet.domain.codelist.BicycleCategory;
 import cz.kolomet.domain.codelist.CategoryType;
 import cz.kolomet.domain.codelist.FigureHeight;
+import cz.kolomet.domain.codelist.ProductColor;
 import cz.kolomet.domain.codelist.ProductUsage;
 import cz.kolomet.domain.codelist.Region;
 
@@ -32,12 +33,12 @@ public class ProductFilterDto {
 	private BigDecimal maxDiscountTo;
 	
 	@NumberFormat(style = Style.NUMBER)
-	private Integer weightFrom;
+	private Double weightFrom;
 	
 	@NumberFormat(style = Style.NUMBER)
-	private Integer weightTo;
+	private Double weightTo;
 	
-	private Integer maxWeightTo;
+	private Double maxWeightTo;
 	
 	private Category category;
 	
@@ -52,6 +53,8 @@ public class ProductFilterDto {
 	private BicycleCategory bicycleCategory;
 	
 	private FigureHeight figureHeight;
+	
+	private ProductColor productColor;
 	
 	private Boolean canSendToAllCountry;
 	
@@ -78,15 +81,17 @@ public class ProductFilterDto {
 		productFilter.bicycleCategory.setId(0l);
 		productFilter.figureHeight = new FigureHeight();
 		productFilter.figureHeight.setId(0l);
+		productFilter.productColor = new ProductColor();
+		productFilter.productColor.setId(0l);
 		productFilter.priceFrom = new BigDecimal(0l);
 		productFilter.priceTo = maxPriceTo;
 		productFilter.maxPriceTo = maxPriceTo;
 		productFilter.discountFrom = new BigDecimal(0l);
 		productFilter.discountTo = maxDiscountTo;
 		productFilter.maxDiscountTo = maxDiscountTo;
-		productFilter.weightFrom = 0;
-		productFilter.weightTo = maxWeightTo;
-		productFilter.maxWeightTo = maxWeightTo;
+		productFilter.weightFrom = 0d;
+		productFilter.weightTo = maxWeightTo.doubleValue();
+		productFilter.maxWeightTo = maxWeightTo.doubleValue();
 		return productFilter;
 	}
 	
@@ -122,19 +127,19 @@ public class ProductFilterDto {
 		this.discountTo = discountTo;
 	}
 
-	public Integer getWeightFrom() {
+	public Double getWeightFrom() {
 		return weightFrom;
 	}
 
-	public void setWeightFrom(Integer weightFrom) {
+	public void setWeightFrom(Double weightFrom) {
 		this.weightFrom = weightFrom;
 	}
 
-	public Integer getWeightTo() {
+	public Double getWeightTo() {
 		return weightTo;
 	}
 
-	public void setWeightTo(Integer weightTo) {
+	public void setWeightTo(Double weightTo) {
 		this.weightTo = weightTo;
 	}
 
@@ -194,6 +199,14 @@ public class ProductFilterDto {
 		this.figureHeight = figureHeight;
 	}
 
+	public ProductColor getProductColor() {
+		return productColor;
+	}
+
+	public void setProductColor(ProductColor productColor) {
+		this.productColor = productColor;
+	}
+
 	public Boolean getCanSendToAllCountry() {
 		return canSendToAllCountry;
 	}
@@ -218,11 +231,11 @@ public class ProductFilterDto {
 		this.maxDiscountTo = maxDiscountTo;
 	}
 
-	public Integer getMaxWeightTo() {
+	public Double getMaxWeightTo() {
 		return maxWeightTo;
 	}
 
-	public void setMaxWeightTo(Integer maxWeightTo) {
+	public void setMaxWeightTo(Double maxWeightTo) {
 		this.maxWeightTo = maxWeightTo;
 	}
 

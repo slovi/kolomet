@@ -4,18 +4,14 @@
 package cz.kolomet.web.admin;
 
 import cz.kolomet.domain.ApplicationUser;
-import cz.kolomet.service.ApplicationRoleService;
 import cz.kolomet.service.ApplicationUserService;
-import cz.kolomet.service.SellerService;
 import cz.kolomet.web.admin.ApplicationUserController;
 import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,23 +23,6 @@ privileged aspect ApplicationUserController_Roo_Controller {
     
     @Autowired
     ApplicationUserService ApplicationUserController.applicationUserService;
-    
-    @Autowired
-    ApplicationRoleService ApplicationUserController.applicationRoleService;
-    
-    @Autowired
-    SellerService ApplicationUserController.sellerService;
-    
-    @RequestMapping(method = RequestMethod.POST, produces = "text/html")
-    public String ApplicationUserController.create(@Valid ApplicationUser applicationUser, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
-            populateEditForm(uiModel, applicationUser);
-            return "admin/applicationusers/create";
-        }
-        uiModel.asMap().clear();
-        applicationUserService.saveApplicationUser(applicationUser);
-        return "redirect:/admin/applicationusers/" + encodeUrlPathSegment(applicationUser.getId().toString(), httpServletRequest);
-    }
     
     @RequestMapping(params = "form", produces = "text/html")
     public String ApplicationUserController.createForm(Model uiModel) {
@@ -57,17 +36,6 @@ privileged aspect ApplicationUserController_Roo_Controller {
         uiModel.addAttribute("applicationuser", applicationUserService.findApplicationUser(id));
         uiModel.addAttribute("itemId", id);
         return "admin/applicationusers/show";
-    }
-    
-    @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
-    public String ApplicationUserController.update(@Valid ApplicationUser applicationUser, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
-            populateEditForm(uiModel, applicationUser);
-            return "admin/applicationusers/update";
-        }
-        uiModel.asMap().clear();
-        applicationUserService.updateApplicationUser(applicationUser);
-        return "redirect:/admin/applicationusers/" + encodeUrlPathSegment(applicationUser.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(value = "/{id}", params = "form", produces = "text/html")

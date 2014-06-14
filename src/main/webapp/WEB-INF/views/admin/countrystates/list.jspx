@@ -6,6 +6,7 @@
         <table:table data="${countrystates}" id="l_cz_kolomet_domain_codelist_CountryState" path="/admin/countrystates" z="user-managed">
             <table:column id="c_cz_kolomet_domain_codelist_CountryState_codeKey" property="codeKey" z="UvPRyVKt4qJ2NOMxc7oyv/yaQBU="/>
             <table:column id="c_cz_kolomet_domain_codelist_CountryState_codeDescription" property="codeDescription" z="0iXsk+bBnxmumQJIqH5skTcC1Ys="/>
+            <table:column id="c_cz_kolomet_domain_codelist_CountryState_sequenceNr" property="sequenceNr" sort="true" z="zhpzNps0RzWs/kykityS93TScwI="/>
             <table:column id="c_cz_kolomet_domain_codelist_CountryState_createdBy" property="createdBy" z="WJ1BHCC7GzWlQDFKF/pEmI4C/tw="/>
             <table:column id="c_cz_kolomet_domain_codelist_CountryState_lastModifiedBy" property="lastModifiedBy" z="CE/cN/kkZEZuwGjzAlkD4EXTQYo="/>
             <table:column date="true" dateTimePattern="${countryState_created_date_format}" id="c_cz_kolomet_domain_codelist_CountryState_created" property="created" z="4GYGkaE9htK1Oi6a/uRp1rXzJ1Y="/>

@@ -13,19 +13,26 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import cz.kolomet.domain.Product;
 import cz.kolomet.dto.ProductFilterDto;
+import cz.kolomet.repository.ProductAttributeRepository;
 import cz.kolomet.repository.ProductRepository;
 import cz.kolomet.repository.ProductSpecifications;
 import cz.kolomet.repository.ProductUsageRepository;
 import cz.kolomet.repository.RegionRepository;
 import cz.kolomet.service.BicycleCategoryService;
+import cz.kolomet.service.ProductColorService;
+import cz.kolomet.web.pub.AbstractPublicController;
 
 @RequestMapping("/public/products")
 @Controller("publicProductController")
-public class ProductController extends AbstractController {
+public class ProductController extends AbstractPublicController {
 	
 	@Autowired
 	private ProductRepository productRepository;
+	
+	@Autowired
+	private ProductAttributeRepository productAttributeRepository;
 	
 	@Autowired
 	private RegionRepository regionRepository;
@@ -36,15 +43,20 @@ public class ProductController extends AbstractController {
 	@Autowired
 	private BicycleCategoryService bicycleCategoryService;
 	
+	@Autowired
+	private ProductColorService productColorService;	
+	
 	@RequestMapping("/detail/{id}")
 	public String detail(@PathVariable("id") Long id, Model model) {
 		
-		model.addAttribute("product", productRepository.findOne(id));
+		Product product = productRepository.findOne(id);
+		model.addAttribute("product", product);
+		model.addAttribute("productAttributes", productAttributeRepository.findByProductOrderByAttributeType_SequenceNr(product));
 		return "products/detail";
 	}
 	
 	@RequestMapping("/filter")
-	public String filterByProductFilter(@Valid ProductFilterDto productFilter, BindingResult result, Model model, @PageableDefaults(pageNumber = 0, value = 6) Pageable pageable) {	
+	public String filterByProductFilter(@Valid ProductFilterDto productFilter, BindingResult result, Model model, @PageableDefaults(pageNumber = 0, value = DEFAULT_PAGE_SIZE) Pageable pageable) {	
 		populateFilterForm(productFilter, model);
 		
 		Pageable orderedPageable = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(), ProductSpecifications.getDefaultSort(pageable.getSort()));
@@ -65,9 +77,11 @@ public class ProductController extends AbstractController {
 			productFilter.setMaxDiscountTo(maxDiscount);
 		}
 		if (productFilter.getWeightTo() == null) {
-			Integer maxWeight = productRepository.findMaxWeight();
-			productFilter.setWeightTo(maxWeight);
-			productFilter.setMaxWeightTo(maxWeight);
+			Double maxWeight = productRepository.findMaxWeight();
+			if (maxWeight != null) {
+				productFilter.setWeightTo(maxWeight);
+				productFilter.setMaxWeightTo(maxWeight);
+			}
 		}
 		if (productFilter.getPriceFrom() == null) {
 			productFilter.setPriceFrom(BigDecimal.ZERO);
@@ -76,12 +90,13 @@ public class ProductController extends AbstractController {
 			productFilter.setDiscountFrom(BigDecimal.ZERO);
 		}
 		if (productFilter.getWeightFrom() == null) {
-			productFilter.setWeightFrom(0);
+			productFilter.setWeightFrom(0d);
 		}
 		
 		model.addAttribute("regions", regionRepository.findAll());
 		model.addAttribute("productusages", productUsageRepository.findAll());
-		model.addAttribute("bicyclecategories", bicycleCategoryService.findAllBicycleCategories());
+		model.addAttribute("productcolors", productColorService.findAllProductColors());
+		model.addAttribute("bicyclecategories", bicycleCategoryService.findAllBicycleCategorys());
 		model.addAttribute("productFilter", productFilter);
 	}
 	

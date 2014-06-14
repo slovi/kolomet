@@ -5,7 +5,7 @@
     <page:list id="pl_cz_kolomet_domain_ApplicationUser" items="${applicationusers}" z="mi4PrRwzQHaRhGkDUtz6NejR2iE=">
         <table:table data="${applicationusers}" id="l_cz_kolomet_domain_ApplicationUser" path="/admin/applicationusers" z="user-managed">
             <table:column id="c_cz_kolomet_domain_ApplicationUser_username" property="username" sort="true" z="user-managed"/>
-            <table:column id="c_cz_kolomet_domain_ApplicationUser_password" property="password" sort="true" z="user-managed"/>
+            <table:column id="c_cz_kolomet_domain_ApplicationUser_password" property="password" sort="true" z="user-managed" render="false"/>
             <table:column id="c_cz_kolomet_domain_ApplicationUser_seller" property="seller.sellerName" sort="true" z="user-managed"/>
             <table:column id="c_cz_kolomet_domain_ApplicationUser_createdBy" property="createdBy" sort="true" z="user-managed"/>
             <table:column id="c_cz_kolomet_domain_ApplicationUser_lastModifiedBy" property="lastModifiedBy" sort="true" z="user-managed"/>

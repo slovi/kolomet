@@ -80,13 +80,17 @@ div#news {
 	float: right;
 }
 
-div#news div#news_content {
+div#news_left {
+	margin-top: 30px;
+	width: 250px;
+}
+
+div.news_content {
 	margin: 0 0 0 6px;
-	height: 500px;
 	padding: 15px;
 }
 
-div#news div#news_content div#news_header {
+div.news_content div.news_header {
 	font-family: Helvetica, "Trebuchet MS", Arial, sans-serif;
 	font-size: 1.1em;
 	font-weight: 700;
@@ -94,14 +98,29 @@ div#news div#news_content div#news_header {
 	clear: none;
 }
 
+div.news_content div.news_item {
+	margin: 10px 0;
+}
+
+div.news_content div.news_item {
+	margin: 10px 0;
+}
+
+div.news_content div.news_item span.news_item_date {
+	font-style: italic;
+}
+
 div.filter_input {
 	width: 15em;
-	margin: 8px 22px;
-	float: left;
+	margin: 8px 18px;
 }
 
 div.button_filter {
 	text-align: right;
+}
+
+input#button_filter {
+	display: none;
 }
 
 div.slider input {
@@ -117,22 +136,10 @@ div.slider input.amountFromInput {
 	text-align: right;
 }
 
-div#news div#news_content div.news_item {
-	margin: 10px 0;
-}
-
-div#news div#news_content div.news_item {
-	margin: 10px 0;
-}
-
-div#news div#news_content div.news_item span.news_item_date {
-	font-style: italic;
-}
-
 div#footer {
 	width: 932px;
 	float: right;
-	margin: 10px 6px 70px 0;
+	margin: 10px 6px 10px 0;
 }
 
 /* hlavní menu */
@@ -155,11 +162,11 @@ div.menu_inline ul ul {
 	padding: 15px 0 20px 0;
 }
 
-div.menu_inline ul li#admin:hover>ul {
+div.menu_inline ul li.admin:hover>ul {
 	display: block;
 }
 
-div.menu_inline ul li#admin {
+div.menu_inline ul li.admin {
 	float: right;
 }
 
@@ -190,7 +197,7 @@ div.menu_inline ul ul li a {
 }
 
 /* vedlejší menu */
-div#side_menu div {
+div#side_menu div.side-menu {
 	width: 214px;
 	margin: 10px 0 0 6px;
 	padding: 15px;
@@ -272,20 +279,28 @@ div#footer p {
 /* homepage */
 div#content_container_short div.homepage_unit {
 	width: 224px;
-	display: inline-block;
+	display: block;
 	margin: 0px 11px 10px 6px;
+	float: left;
 }
 
 div.homepage_unit div.home_description {
 	width: 194px;
-	height: 90px;
+	height: 60px;
 	overflow: hidden;
 	padding: 15px;
 	margin: 0;
 }
 
+div.homepage_unit div.home_description div.description {
+	width: 100%;
+	height: 60px;
+	overflow: hidden;
+}
+
 div.homepage_unit div.home_seller {
 	width: 169px;
+	min-height: 75px;
 	padding: 15px 40px 10px 15px;
 	margin: 0;
 	position: relative;
@@ -304,17 +319,18 @@ div#content_container div.category_unit {
 	margin: 10px 6px 6px 6px;
 }
 
-div#content_container div.category_unit img,p.detail_price,div#content_container div.detail_header img
-	{
-	float: left;
-}
-
 div.category_unit div.cat_description {
 	width: 454px;
 	height: 116px;
 	float: left;
-	padding: 15px;
+	padding: 10px;
 	margin: 0;
+}
+
+div.category_unit div.cat_description div.description {
+	width: 100%;
+	height: 75px;
+	overflow: hidden;
 }
 
 div.cat_prodejce {
@@ -348,30 +364,58 @@ div.category_unit div.cat_prodejce_popis div {
 	margin: 34px auto 0 auto !important;
 }
 
-div.detail_description div {
+div.detail_description div.order_button {
 	float: right;
-	margin: 15px 0;
+	margin: 25px 0;
 }
 
-div.detail_description p {
+div.detail_description div.description {
+	width: 100%;
+	overflow-y: scroll; 
 	height: 160px;
-	overflow: auto;
 }
 
-div#content_container div.filters {
+div.detail_description div.description_short {
+	width: 100%;
+	overflow-y: scroll; 
+	height: 120px;
+}
+
+div.filters {
 	width: 902px;
-	height: 180px;
+	height: 200px;
 	margin: 0px 6px 6px 6px;
 	padding: 15px;
 }
 
-div#content_container div.filters form input,div.filters form select {
+div.filter_left {
+	width: 200px;
+	float: left;
+}
+
+div.filter_right {
+	width: 700px;
+	margin-left: 230px;
+}
+
+div.filter_right .filter_input {
+	float: left;
+}
+
+div.inner_filters {
+	width: 894px;
+	height: 125px;
+	margin: 0px 0px 6px 0px;
+	padding: 15px;
+}
+
+div#content_container div.filters form input,div.filters,div.inner_filters form select {
 	border-collapse: collapse;
 	border: 1px solid silver;
 	background: none;
 }
 
-div#content_container div.filters form button {
+div.filters form button, div.inner_filters form button {
 	border-collapse: collapse;
 	border: 0px;
 	background: #58585a;
@@ -381,7 +425,7 @@ div#content_container div.filters form button {
 	transition: all 0.3s ease-out;
 }
 
-div#content_container div.filters form button:hover {
+div.filters form button:hover, div.inner_filters form button:hover {
 	background: #f1941c;
 }
 
@@ -392,6 +436,7 @@ div#content_container div.sorting {
 
 div#content_container div.pages {
 	float: right;
+	font-size: 1.3em;
 	margin: 2px 21px 0 21px;
 }
 
@@ -443,13 +488,18 @@ div#content_container div.detail_header {
 	margin: 0px 6px 6px 6px;
 }
 
-div#content_container div.detail_header div.detail_img {
-	display: table-cell;
-	width: 508px;
-	height: 338px;
+div.img_border {
 	vertical-align: middle;
 	text-align: center;
-	line-height: 338px;
+	float: left;
+}
+
+div#content_container div.detail_header div.img_border {
+	display: table-cell;
+}
+
+div#content_container div.detail_header div.img_border a {
+	display: inline;
 }
 
 div#content_container div.detail_header div.detail_img img.detail_img_content {
@@ -556,7 +606,7 @@ body,div.menu_inline ul ul a {
 	font-weight: 400;
 }
 
-div.menu_inline ul a,a.action_button,div#side_menu h1,a.action_button_dark,a.label {
+div.menu_inline ul a,a.action_button,div#side_menu h1,a.action_button_dark,.label {
 	font-family: Helvetica, "Trebuchet MS", Arial, sans-serif;
 	font-size: 1.1em;
 	font-weight: 700;
@@ -564,9 +614,9 @@ div.menu_inline ul a,a.action_button,div#side_menu h1,a.action_button_dark,a.lab
 	clear: none;
 }
 
-a.label,p.detail_price {
+.label,p.detail_price {
 	font-family: Helvetica, "Trebuchet MS", Arial, sans-serif;
-	font-size: 1.3em;
+	font-size: 1.6em;
 	font-weight: 700;
 	margin: 0;
 	clear: none;
@@ -576,25 +626,52 @@ div.menu_inline ul a {
 	text-decoration: none;
 }
 
-a {
+a, .label {
 	text-decoration: underline;
+}
+
+.valid {
+	font-weight: bold;
+	color: green;
+}
+
+.invalid {
+	font-weight: bold;
+	color: red;
+}
+
+.waiting_for_valid {
+	font-weight: bold;
+	color: blue;
 }
 
 div.homepage_unit a {
 	font-weight: 700;
 }
 
-p.price {
+.price_final {
+	font-weight: bold;
+	font-size: 1.3em;
+	color: #f1941c;
+}
+
+.price_discount {
 	font-style: italic;
 	font-weight: bold;
-	font-size: 1.2em;
+	font-size: 1.1em;
+	color: #f1941c;
+}
+
+.price {
+	font-style: italic;
+	font-size: 0.9em;
+	color: #f1941c;
 }
 
 p {
 	margin: 0;
 	padding: 0;
 	border: 0;
-	text-align: justify;
 	nobreak;
 }
 
@@ -651,7 +728,7 @@ div#menu_background {
 	box-shadow: 0px 6px 6px #f9f9f9;
 }
 
-a {
+a, .label {
 	color: #497f96;
 }
 
@@ -673,18 +750,18 @@ div.menu_inline a,div.menu_inline a:hover,div.menu_inline ul ul li a,a.action_bu
 	color: #f9f9f9;
 }
 
-div.menu_inline ul li#admin ul {
+div.menu_inline ul li.admin ul {
 	background: #497f96;
 	background: linear-gradient(top, #497f96 0%, #3e6576 90%);
 	background: -moz-linear-gradient(top, #497f96 0%, #3e6576 90%);
 	background: -webkit-linear-gradient(top, #497f96 0%, #3e6576 90%);
 }
 
-div.menu_inline ul li#admin ul li {
+div.menu_inline ul li.admin ul li {
 	background: none;
 }
 
-div.menu_inline ul li#admin ul li:hover {
+div.menu_inline ul li.admin ul li:hover {
 	background: none;
 }
 
@@ -695,7 +772,7 @@ div.menu_inline ul li:hover {
 	background: -webkit-linear-gradient(top, #e08d21 0%, #f1941c 90%);
 }
 
-div.menu_inline ul li#admin:hover {
+div.menu_inline ul li.admin:hover {
 	background: #497f96;
 	background: linear-gradient(top, #3e6576 0%, #497f96 90%);
 	background: -moz-linear-gradient(top, #3e6576 0%, #497f96 90%);
@@ -726,13 +803,13 @@ div#footer {
 }
 
 /* Barvy - vedlejší menu a další */
-div#side_menu div,div#content_container_short div.homepage_unit {
+div#side_menu div.side-menu,div#content_container_short div.homepage_unit {
 	background: #f9f9f9;
 	border-bottom: 4px solid #58585a;
 	box-shadow: 0px 0px 6px #C0C0C0;
 }
 
-div#content_container div.category_unit,div#content_container div.filters,div#content_container div.detail_header, div#news div#news_content, div.detail_specifications,div.detail_pictures img,div.general_unit
+div#content_container div.category_unit,div.filters,div.inner_filters,div#content_container div.detail_header, div.news_content, div.detail_specifications,div.detail_pictures img,div.general_unit
 	{
 	background: #f9f9f9;
 	box-shadow: 0px 0px 6px #C0C0C0;

@@ -1,42 +1,80 @@
 package cz.kolomet.service.impl;
+import java.io.File;
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 
 import cz.kolomet.domain.Product;
+import cz.kolomet.domain.ProductState;
 import cz.kolomet.service.ProductService;
 
 public class ProductServiceImpl implements ProductService {
 	
-	@PreAuthorize("hasRole('ROLE_per_products_all') or #product.seller.id == principal.sellerId")
+	@Value("${img.rootdir}")
+	protected String rootDir;
+	
+	@PreAuthorize("principal.isCapableToDeleteProduct(#product)")
     public void deleteProduct(Product product) {
-        productRepository.delete(product);
+        product.setEnabled(false);
+        product.setValidTo(new Date());
+        product.setProductState(ProductState.DELETED);
     }
     
-	@PostAuthorize("isAnonymous() or hasRole('ROLE_per_products_all') or returnObject.seller.id == principal.sellerId")
+	@PostAuthorize("isAnonymous() or principal.isCapableToDisplayProduct(returnObject)")
     public Product findProduct(Long id) {
         return productRepository.findOne(id);
     }
     
-	@PreAuthorize("hasRole('ROLE_per_products_all') or #product.seller.id == principal.sellerId")
+	@PreAuthorize("principal.isCapableToSaveProduct(#product)")
     public void saveProduct(Product product) {
+		if (product.getProductState() == null) {
+			product.setProductState(ProductState.ACTIVE);
+		}
+		product.computeAndSetDiscount();
         productRepository.save(product);
     }
     
-	@PreAuthorize("hasRole('ROLE_per_products_all') or #product.seller.id == principal.sellerId")
+	@PreAuthorize("principal.isCapableToUpdateProduct(#product)")
     public Product updateProduct(Product product) {
+		product.computeAndSetDiscount();
+		product.setProductState(ProductState.ACTIVE);
         return productRepository.save(product);
     }
 	
 	@Override
-	public Page<Product> findProductEntries(Pageable pageable) {
-		return productRepository.findAll(pageable);
+	public List<Product> findProductEntries(Specification<Product> specification) {
+		return productRepository.findAll(specification);
 	}
 	
 	@Override
-	public Page<Product> findProductEntries(Pageable pageable, Long sellerId) {
-		return productRepository.findBySellerId(sellerId, pageable);
+	public Page<Product> findProductEntries(Specification<Product> specification, Pageable pageable) {
+		return productRepository.findAll(specification, pageable);
+	}
+
+	@Override
+	public Product copyProduct(Long id) {
+		return copyProduct(findProduct(id));
+	}
+	
+	@Override
+	@PreAuthorize("principal.isCapableToCopyProduct(#product)")
+	public Product copyProduct(Product product) {
+		Product newProduct = product.createCopy();
+		newProduct.setValidFrom(new Date());
+		if (newProduct.getValidTo() != null && newProduct.getValidTo().before(new Date())) {
+			newProduct.setValidTo(Product.DEFAULT_VALID_TO_DATE);
+		}
+    	newProduct.setProductState(ProductState.COPY);
+		productRepository.save(newProduct);
+		newProduct.copyPhotoUrlFiles(new File(rootDir), product);
+		productRepository.save(newProduct);
+		return newProduct;
 	}
 	
 }

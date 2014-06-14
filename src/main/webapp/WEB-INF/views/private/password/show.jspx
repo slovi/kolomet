@@ -4,8 +4,9 @@
     <jsp:output omit-xml-declaration="yes"/>
     
     <c:if test="${not empty password}">
-	    <page:show id="ps_cz_kolomet_dto_ApplicationUserPassword" object="${password}" z="user-managed">
-	    	<spring:message code="password.success" />
+    	<spring:message code="label_cz_kolomet_dto_applicationuserpassword" var="password" />
+	    <page:show id="ps_cz_kolomet_dto_ApplicationUserPassword" label="${password}" object="${password}" z="user-managed">
+	    	<spring:message code="changepassword_success" />
 	    </page:show>
     </c:if>
 </div>

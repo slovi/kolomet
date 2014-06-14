@@ -24,10 +24,6 @@ privileged aspect PhotoUrlServiceImpl_Roo_Service {
         return photoUrlRepository.count();
     }
     
-    public void PhotoUrlServiceImpl.deletePhotoUrl(PhotoUrl photoUrl) {
-        photoUrlRepository.delete(photoUrl);
-    }
-    
     public PhotoUrl PhotoUrlServiceImpl.findPhotoUrl(Long id) {
         return photoUrlRepository.findOne(id);
     }

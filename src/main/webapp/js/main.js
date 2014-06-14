@@ -6,7 +6,8 @@ require.config({
 		jquery_ui: 'lib/jquery-ui-1.10.4.custom.min',
 		jquery_lean: 'lib/jquery.leanModal.min',
 		jquery_number: 'lib/jquery.numberformatter-1.2.4.min',
-		jshashtable: 'lib/jshashtable-3.0'
+		jshashtable: 'lib/jshashtable-3.0',
+		async: 'lib/async',
 	},
 	shim: {
 		'jquery_ui': {
@@ -17,8 +18,11 @@ require.config({
 		},
 		'jquery_number': {
 			deps: ['jquery', 'jshashtable']
-		}
+		},
+		'main':{
+            deps: ['jquery']   
+        }
 	}	
 	
-});	
+});
 	

@@ -6,6 +6,7 @@
         <table:table data="${sellerstatuses}" id="l_cz_kolomet_domain_codelist_SellerStatus" path="/admin/sellerstatuses" z="user-managed">
             <table:column id="c_cz_kolomet_domain_codelist_SellerStatus_codeKey" property="codeKey" sort="true" z="user-managed"/>
             <table:column id="c_cz_kolomet_domain_codelist_SellerStatus_codeDescription" property="codeDescription" sort="true" z="user-managed"/>
+            <table:column id="c_cz_kolomet_domain_codelist_SellerStatus_sequenceNr" property="sequenceNr" sort="true" z="zhpzNps0RzWs/kykityS93TScwI="/>
             <table:column id="c_cz_kolomet_domain_codelist_SellerStatus_createdBy" property="createdBy" sort="true" z="user-managed"/>
             <table:column id="c_cz_kolomet_domain_codelist_SellerStatus_lastModifiedBy" property="lastModifiedBy" sort="true" z="user-managed"/>
             <table:column date="true" dateTimePattern="${sellerStatus_created_date_format}" id="c_cz_kolomet_domain_codelist_SellerStatus_created" property="created" sort="true" z="user-managed"/>

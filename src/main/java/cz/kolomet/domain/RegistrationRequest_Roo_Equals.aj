@@ -17,11 +17,11 @@ privileged aspect RegistrationRequest_Roo_Equals {
             return true;
         }
         RegistrationRequest rhs = (RegistrationRequest) obj;
-        return new EqualsBuilder().append(captchaText, rhs.captchaText).append(created, rhs.created).append(createdBy, rhs.createdBy).append(email, rhs.email).append(id, rhs.id).append(lastModified, rhs.lastModified).append(lastModifiedBy, rhs.lastModifiedBy).append(phone, rhs.phone).append(text, rhs.text).isEquals();
+        return new EqualsBuilder().append(captchaText, rhs.captchaText).append(created, rhs.created).append(createdBy, rhs.createdBy).append(email, rhs.email).append(id, rhs.id).append(lastModified, rhs.lastModified).append(lastModifiedBy, rhs.lastModifiedBy).append(phone, rhs.phone).append(processed, rhs.processed).append(text, rhs.text).isEquals();
     }
     
     public int RegistrationRequest.hashCode() {
-        return new HashCodeBuilder().append(captchaText).append(created).append(createdBy).append(email).append(id).append(lastModified).append(lastModifiedBy).append(phone).append(text).toHashCode();
+        return new HashCodeBuilder().append(captchaText).append(created).append(createdBy).append(email).append(id).append(lastModified).append(lastModifiedBy).append(phone).append(processed).append(text).toHashCode();
     }
     
 }

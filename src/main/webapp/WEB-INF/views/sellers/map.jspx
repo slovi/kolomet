@@ -166,13 +166,17 @@
 		<div class="category_unit cat_prodejce"> 
 	    	<div class="cat_description cat_prodejce_popis"> 
 	    		<a href="${sellersDetailUrl}/${seller.id}" class="label"><spring:eval expression="seller.sellerName" /></a>
-	        	<p>${seller.sellerTitle}<a href="${seller.web}" target="_blank"><spring:eval expression="seller.web" /></a></p>
-	        	<br/>
+	        	<p>${seller.sellerTitle}
+	        	<br />
+	        	<a href="${seller.web}" target="_blank"><spring:eval expression="seller.web" /></a></p>
 	            <p>
-	            <spring:eval expression="seller.personString" /> - <spring:eval expression="seller.sellerName" /> - <spring:eval expression="seller.addressString" /><a target="_blank" href="">mapa</a>
+	            <c:if test="${not empty seller.addressString}">
+	            	<spring:eval expression="seller.addressString" />
+	            	<c:if test="${not empty seller.web}">, </c:if>
+	            </c:if><a target="_blank" href="${seller.web}">mapa</a>
 	            </p>
 	            <p>
-	           	<spring:message code="seller.map.contacts" /><spring:eval expression="seller.contactString" />							
+	           	<spring:message code="seller_detail_contact" />: <spring:eval expression="seller.contactString" />							
 	            </p>		                    
 	    	</div>
 	    	<div class="cat_seller cat_prodejce_popis"> 

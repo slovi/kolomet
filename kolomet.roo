@@ -3,6 +3,7 @@ project --topLevelPackage cz.kolomet --projectName kolomet
 jpa setup --database HYPERSONIC_IN_MEMORY --provider HIBERNATE
 
 entity jpa --class ~.domain.Category --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
+entity jpa --class ~.domain.Place --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 entity jpa --class ~.domain.Seller --activeRecord false --equals true --extends ~.domain.DomainEntity --serializable true --abstract true
 entity jpa --class ~.domain.Producer --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 entity jpa --class ~.domain.ProductAttribute --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --testAutomatically true --activeRecord false
@@ -24,10 +25,12 @@ entity jpa --class ~.domain.codelist.Region --extends ~.domain.codelist.Codelist
 entity jpa --class ~.domain.codelist.ProductAttributeType --extends ~.domain.codelist.Codelist --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 entity jpa --class ~.domain.codelist.BicycleSize --extends ~.domain.codelist.Codelist --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 entity jpa --class ~.domain.codelist.FigureHeight --extends ~.domain.codelist.Codelist --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
+entity jpa --class ~.domain.codelist.ProductColor --extends ~.domain.codelist.Codelist --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 
 class --class ~.dto.ApplicationUserPasswordDto --equals true --serializable true --activeRecord false
 
 repository jpa --interface ~.repository.ProductRepository --entity ~.domain.Product
+repository jpa --interface ~.repository.PlaceRepository --entity ~.domain.Place
 repository jpa --interface ~.repository.SellerRepository --entity ~.domain.Seller
 repository jpa --interface ~.repository.ProductAttributeRepository --entity ~.domain.ProductAttribute
 repository jpa --interface ~.repository.PhotoUrlRepository --entity ~.domain.PhotoUrl
@@ -48,8 +51,10 @@ repository jpa --interface ~.repository.NewsItemRepository --entity ~.domain.New
 repository jpa --interface ~.repository.NewsItemPhotoUrlRepository --entity ~.domain.NewsItemPhotoUrl
 repository jpa --interface ~.repository.BicycleSizeRepository --entity ~.domain.codelist.BicycleSize
 repository jpa --interface ~.repository.FigureHeightRepository --entity ~.domain.codelist.FigureHeight
+repository jpa --interface ~.repository.ProductColorRepository --entity ~.domain.codelist.ProductColor
 
 service type --interface ~.service.ProductService --entity ~.domain.Product --class ~.service.impl.ProductServiceImpl
+service type --interface ~.service.PlaceService --entity ~.domain.Place --class ~.service.impl.PlaceServiceImpl
 service type --interface ~.service.SellerService --entity ~.domain.Seller --class ~.service.impl.SellerServiceImpl
 service type --interface ~.service.ProductAttributeService --entity ~.domain.ProductAttribute --class ~.service.impl.ProductAttributeServiceImpl
 service type --interface ~.service.PhotoUrlService --entity ~.domain.PhotoUrl --class ~.service.impl.PhotoUrlServiceImpl
@@ -70,10 +75,13 @@ service type --interface ~.service.NewsItemService --entity ~.domain.NewsItem --
 service type --interface ~.service.NewsItemPhotoUrlService --entity ~.domain.NewsItemPhotoUrl --class ~.service.impl.NewsItemPhotoUrlServiceImpl
 service type --interface ~.service.BicycleService --entity ~.domain.codelist.BicycleSize --class ~.service.impl.BicycleSizeServiceImpl
 service type --interface ~.service.FigureHeightService --entity ~.domain.codelist.FigureHeight --class ~.service.impl.FigureHeightServiceImpl
+service type --interface ~.service.ProductColorService --entity ~.domain.codelist.ProductColor --class ~.service.impl.ProductColorServiceImpl
 
 web mvc setup
 web mvc scaffold --class ~.web.SellerController --backingType ~.domain.Seller
 web mvc scaffold --class ~.web.ProductController --backingType ~.domain.Product
+web mvc scaffold --class ~.web.PlaceController --backingType ~.domain.Place
+web mvc scaffold --class ~.web.PlaceController
 web mvc scaffold --class ~.web.ProductAttributeController --backingType ~.domain.ProductAttribute
 web mvc scaffold --class ~.web.PhotoUrlController --backingType ~.domain.PhotoUrl
 web mvc scaffold --class ~.web.SellerPhotoUrlController --backingType ~.domain.SellerPhotoUrl

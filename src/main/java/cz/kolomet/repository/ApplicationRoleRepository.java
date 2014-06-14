@@ -5,4 +5,7 @@ import org.springframework.roo.addon.layers.repository.jpa.RooJpaRepository;
 
 @RooJpaRepository(domainType = ApplicationRole.class)
 public interface ApplicationRoleRepository {
+	
+	public ApplicationRole findByRoleName(String roleName);
+	
 }

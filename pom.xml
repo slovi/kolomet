@@ -6,7 +6,7 @@
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>kolomet</name>
-	
+
 	<distributionManagement>
 		<snapshotRepository>
 			<id>kolomet-snapshot-repository</id>
@@ -262,7 +262,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.webflow</groupId>
 			<artifactId>spring-js-resources</artifactId>
@@ -367,19 +367,37 @@
 			</exclusions>
 		</dependency>
 		<dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-            <version>1.0.0.GA</version>
-        </dependency>
-    </dependencies>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>1.0.0.GA</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.7</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity</artifactId>
+			<version>1.7</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.easymock</groupId>
+			<artifactId>easymock</artifactId>
+			<version>3.1</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 
 	<build>
 		<extensions>
 			<extension>
-        		<groupId>org.apache.maven.wagon</groupId>
-        		<artifactId>wagon-ssh</artifactId>
-        		<version>1.0</version>
-      		</extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-ssh</artifactId>
+				<version>1.0</version>
+			</extension>
 		</extensions>
 		<plugins>
 			<plugin>
@@ -508,22 +526,22 @@
 				<plugins>
 					<plugin>
 						<groupId>org.codehaus.mojo</groupId>
-      					<artifactId>wagon-maven-plugin</artifactId>
-      					<version>1.0-beta-5</version>
-      					<executions>
-        					<execution>
-          						<id>deploy-app</id>
-          						<phase>deploy</phase>
-          						<goals>
-            						<goal>upload-single</goal>
-          						</goals>
-          						<configuration>
-            						<fromFile>${project.basedir}/target/${project.build.finalName}.war</fromFile>
-            						<url>${snapshot.distribution.url}</url>
-            						<serverId>kolomet-snapshot-repository</serverId>
-          						</configuration>
-          					</execution>
-        				</executions>
+						<artifactId>wagon-maven-plugin</artifactId>
+						<version>1.0-beta-5</version>
+						<executions>
+							<execution>
+								<id>deploy-app</id>
+								<phase>deploy</phase>
+								<goals>
+									<goal>upload-single</goal>
+								</goals>
+								<configuration>
+									<fromFile>${project.basedir}/target/${project.build.finalName}.war</fromFile>
+									<url>${snapshot.distribution.url}</url>
+									<serverId>kolomet-snapshot-repository</serverId>
+								</configuration>
+							</execution>
+						</executions>
 					</plugin>
 				</plugins>
 			</build>

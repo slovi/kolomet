@@ -4,15 +4,13 @@
     <jsp:output omit-xml-declaration="yes"/>
     
     <div id="news">
-       	<div id="news_content">
-       		<div id="news_header">
-	    		<spring:message code="news_header" />
+       	<div class="news_content">
+       		<div class="news_header">
+	    		<spring:message code="news_banners_header" />
        		</div>
-       		<c:forEach items="${newsItems}" var="newsItem">
+       		<c:forEach items="${newsBanners}" var="newsItem">
 	       		<div class="news_item">
 	       			<p>
-	       				<span class="news_item_date"><spring:eval expression="newsItem.newsItemDate"/></span>
-	       				<br />
 	       				<span class="news_item_content"><c:out value="${newsItem.text}" escapeXml="false" /></span>		        			
 	       			</p>
 	       		</div>

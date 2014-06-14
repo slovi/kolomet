@@ -9,10 +9,10 @@ import java.util.List;
 
 privileged aspect BicycleCategoryService_Roo_Service {
     
-    public abstract long BicycleCategoryService.countAllBicycleCategories();    
+    public abstract long BicycleCategoryService.countAllBicycleCategorys();    
     public abstract void BicycleCategoryService.deleteBicycleCategory(BicycleCategory bicycleCategory);    
     public abstract BicycleCategory BicycleCategoryService.findBicycleCategory(Long id);    
-    public abstract List<BicycleCategory> BicycleCategoryService.findAllBicycleCategories();    
+    public abstract List<BicycleCategory> BicycleCategoryService.findAllBicycleCategorys();    
     public abstract List<BicycleCategory> BicycleCategoryService.findBicycleCategoryEntries(int firstResult, int maxResults);    
     public abstract void BicycleCategoryService.saveBicycleCategory(BicycleCategory bicycleCategory);    
     public abstract BicycleCategory BicycleCategoryService.updateBicycleCategory(BicycleCategory bicycleCategory);    

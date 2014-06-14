@@ -8,5 +8,6 @@
         <field:display date="true" dateTimePattern="${figureHeight_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_codelist_FigureHeight_lastModified" object="${figureheight}" z="BJHhQXw2aBnjTj7Ukvdh5zVIUZE="/>
         <field:display field="codeKey" id="s_cz_kolomet_domain_codelist_FigureHeight_codeKey" object="${figureheight}" z="Slqjm/ge5xQYsLf7I5mKXtgQe3o="/>
         <field:display field="codeDescription" id="s_cz_kolomet_domain_codelist_FigureHeight_codeDescription" object="${figureheight}" z="ynmAFxmTy+T6tbDm1k+cVuilse0="/>
+        <field:display field="sequenceNr" id="s_cz_kolomet_domain_codelist_FigureHeight_sequenceNr" object="${figureheight}" z="ikLlLKaxGZ13uIAzP7tito1F8Gk="/>
     </page:show>
 </div>

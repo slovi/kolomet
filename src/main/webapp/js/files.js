@@ -1,14 +1,15 @@
-define(['jquery'], function($) {
+define(['jquery', 'main'], function($) {
 
-	var actualIndex = 1;
-	
 	return {
 		files: function (id, max) {								
+			
+			var actualIndex = 1;
 			
 			$("a.multiple_input_add").click(function(e) {
 				e.preventDefault();
 				if (actualIndex < max) {
-					$("#" + id + actualIndex++).show();
+					$("#" + id + actualIndex).show();
+					actualIndex++;
 				}
 			});
 			$("input.multiple_input_remove").click(function(e) {

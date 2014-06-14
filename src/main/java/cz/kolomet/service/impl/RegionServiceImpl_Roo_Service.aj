@@ -32,10 +32,6 @@ privileged aspect RegionServiceImpl_Roo_Service {
         return regionRepository.findOne(id);
     }
     
-    public List<Region> RegionServiceImpl.findAllRegions() {
-        return regionRepository.findAll();
-    }
-    
     public List<Region> RegionServiceImpl.findRegionEntries(int firstResult, int maxResults) {
         return regionRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / maxResults, maxResults)).getContent();
     }

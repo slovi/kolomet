@@ -5,12 +5,18 @@
   <jsp:directive.attribute name="field" type="java.lang.String" required="true" rtexprvalue="true" description="The field exposed from the form backing object" />
   <jsp:directive.attribute name="cssClass" type="java.lang.String" required="false" rtexprvalue="true" description="Css class" />
   <jsp:directive.attribute name="label" type="java.lang.String" required="false" rtexprvalue="true" description="The label used for this field, will default to a message bundle if not supplied" />
+  <jsp:directive.attribute name="decorated" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Render dojo select" />
   <jsp:directive.attribute name="disableFormBinding" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Set to true to disable Spring form binding" />
   <jsp:directive.attribute name="render" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Indicate if the contents of this tag and all enclosed tags should be rendered (default 'true')" />
   <jsp:directive.attribute name="inline" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Indicate whether render tag as inline - do not render br in the end of the tag" />
   <jsp:directive.attribute name="z" type="java.lang.String" required="false" description="Used for checking if element has been modified (to recalculate simply provide empty string value)" />
 
   <c:if test="${empty render or render}">
+  
+  	<c:if test="${empty decorated}">
+		<c:set value="true" var="decorated" />
+	</c:if>
+  
     <c:if test="${empty label}">
       <spring:message code="label_${fn:toLowerCase(fn:substringAfter(id,'_'))}" var="label" htmlEscape="false" />
     </c:if>
@@ -31,9 +37,11 @@
           <form:checkbox id="_${sec_field}_id" path="${sec_field}" value="${sec_field}"/>
         </c:otherwise>
       </c:choose>
-      <script type="text/javascript">
-      	Spring.addDecoration(new Spring.ElementDecoration({elementId : '_${sec_field}_id', widgetType : 'dijit.form.CheckBox', widgetAttrs : {}}));
-      </script>
+      <c:if test="${decorated}">
+	      <script type="text/javascript">
+	      	Spring.addDecoration(new Spring.ElementDecoration({elementId : '_${sec_field}_id', widgetType : 'dijit.form.CheckBox', widgetAttrs : {}}));
+	      </script>
+	  </c:if>
     </div>
     <c:if test="${empty inline or not inline}">
     	<br />

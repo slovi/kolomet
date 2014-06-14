@@ -10,10 +10,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import cz.kolomet.repository.ProductRepository;
 import cz.kolomet.repository.ProductSpecifications;
+import cz.kolomet.web.pub.AbstractPublicController;
 
 @RequestMapping("/public")
 @Controller
-public class IntroController extends AbstractController implements InitializingBean {
+public class IntroController extends AbstractPublicController implements InitializingBean {
 	
 	private Integer productsSize = 9;
 	

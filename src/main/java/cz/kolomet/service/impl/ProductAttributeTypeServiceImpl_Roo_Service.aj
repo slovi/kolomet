@@ -32,10 +32,6 @@ privileged aspect ProductAttributeTypeServiceImpl_Roo_Service {
         return productAttributeTypeRepository.findOne(id);
     }
     
-    public List<ProductAttributeType> ProductAttributeTypeServiceImpl.findAllProductAttributeTypes() {
-        return productAttributeTypeRepository.findAll();
-    }
-    
     public List<ProductAttributeType> ProductAttributeTypeServiceImpl.findProductAttributeTypeEntries(int firstResult, int maxResults) {
         return productAttributeTypeRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / maxResults, maxResults)).getContent();
     }

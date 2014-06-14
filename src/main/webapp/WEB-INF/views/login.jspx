@@ -20,7 +20,8 @@
 				<br /> 
 				<input id="j_password" name="j_password" type="password" autocomplete="on" />
 				<br /> 
-				<a href="#">Zapomenuté heslo</a>
+				<spring:url value="/public/resetpasswords?form" var="resetPasswordUrl" />
+				<a href="${resetPasswordUrl}">Zapomenuté heslo</a>
 				<br />
 				<br />
 				<span class="error"></span>
@@ -32,7 +33,7 @@
 			</div>
 		</form>
 	</div>
-	<div id="lean_overlay"></div>
+	<div id="lean_overlay"><!--  --></div>
 	
 	<script type="text/javascript">
 		require(['login'], function(login) {

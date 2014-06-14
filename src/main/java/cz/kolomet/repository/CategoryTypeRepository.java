@@ -7,6 +7,6 @@ import cz.kolomet.domain.codelist.CategoryType;
 @RooJpaRepository(domainType = CategoryType.class)
 public interface CategoryTypeRepository {
 	
-	public CategoryType findByCodeKey(String codeKey);
+	public CategoryType findByCodeKeyOrderBySequenceNrDesc(String codeKey);
 	
 }

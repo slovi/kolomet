@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_cz_kolomet_domain_codelist_ProductColor" items="${productcolors}" z="LKgDxwi2nbgQyHwcGJ8XC03OtYU=">
+        <table:table data="${productcolors}" id="l_cz_kolomet_domain_codelist_ProductColor" path="/admin/productcolors" z="kC6oX+ZI6fuhGdTHaCOeUs3lv8M=">
+            <table:column id="c_cz_kolomet_domain_codelist_ProductColor_codeKey" property="codeKey" sort="true" z="user-managed"/>
+            <table:column id="c_cz_kolomet_domain_codelist_ProductColor_codeDescription" property="codeDescription" sort="true" z="user-managed"/>
+            <table:column id="c_cz_kolomet_domain_codelist_ProductColor_sequenceNr" property="sequenceNr" sort="true" z="zhpzNps0RzWs/kykityS93TScwI="/>
+            <table:column id="c_cz_kolomet_domain_codelist_ProductColor_createdBy" property="createdBy" sort="true" z="user-managed"/>
+            <table:column id="c_cz_kolomet_domain_codelist_ProductColor_lastModifiedBy" property="lastModifiedBy" sort="true" z="user-managed"/>
+            <table:column date="true" dateTimePattern="${productColor_created_date_format}" id="c_cz_kolomet_domain_codelist_ProductColor_created" property="created" sort="true" z="user-managed"/>
+            <table:column date="true" dateTimePattern="${productColor_lastmodified_date_format}" id="c_cz_kolomet_domain_codelist_ProductColor_lastModified" property="lastModified" sort="true" z="user-managed"/>
+        </table:table>
+    </page:list>
+</div>

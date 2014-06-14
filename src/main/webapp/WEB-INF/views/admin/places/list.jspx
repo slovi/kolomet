@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_cz_kolomet_domain_Place" items="${places}" z="udMH8JHtvSv+1wC/XxvoeM0NJCM=">
+        <table:table data="${places}" id="l_cz_kolomet_domain_Place" path="/admin/places" z="q0cTbAixXn14pImEgN+lEZVL17A=">
+            <table:column id="c_cz_kolomet_domain_Place_createdBy" property="createdBy" z="6UvVycOpN3hGCqKgoESdnYA4nzQ="/>
+            <table:column id="c_cz_kolomet_domain_Place_lastModifiedBy" property="lastModifiedBy" z="DYqZTz35VLWG+dMM9uqHsPSKh7U="/>
+            <table:column date="true" dateTimePattern="${place_created_date_format}" id="c_cz_kolomet_domain_Place_created" property="created" z="6ntIE1D567krPy/7+gg0znarR+I="/>
+            <table:column date="true" dateTimePattern="${place_lastmodified_date_format}" id="c_cz_kolomet_domain_Place_lastModified" property="lastModified" z="neMypIHLHbMOcaJZhkD2HaOd1xI="/>
+        </table:table>
+    </page:list>
+</div>

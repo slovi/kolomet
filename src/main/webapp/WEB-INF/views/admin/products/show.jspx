@@ -9,6 +9,7 @@
         <field:display field="category.codeDescription" id="s_cz_kolomet_domain_Product_category" object="${product}" z="user-managed"/>
         <field:display field="producer.codeDescription" id="s_cz_kolomet_domain_Product_producer" object="${product}" z="user-managed"/>
         <field:display field="description" id="s_cz_kolomet_domain_Product_description" object="${product}" z="LPSKMJTVZ2Ovji3LmzZm6NI/M1s="/>
+        <field:display date="true" dateTimePattern="${product_validfrom_date_format}" field="validFrom" id="s_cz_kolomet_domain_Product_validFrom" object="${product}" z="TXm2kItz/tFWvqEZAgR5kE7Pld8="/>
         <field:display date="true" dateTimePattern="${product_validto_date_format}" field="validTo" id="s_cz_kolomet_domain_Product_validTo" object="${product}" z="1B16372FTICFbxZCes59kEITbMw="/>
         <field:display field="seller.sellerName" id="s_cz_kolomet_domain_Product_seller" object="${product}" z="user-managed"/>
         <field:display bool="true" field="enabled" id="s_cz_kolomet_domain_Product_enabled" object="${product}" z="user-managed"/>
@@ -40,5 +41,9 @@
         <br/>
         <c:set scope="request" value="${product.photoUrls}" var="photourls"/>
         <jsp:include flush="true" page="../photourls/list.jspx"/>
+        <field:display field="productColor" id="s_cz_kolomet_domain_Product_productColor" object="${product}" z="VRH2pOag5P+ugICiJKKGk723/xo="/>
+        <field:display field="finalPrice" id="s_cz_kolomet_domain_Product_finalPrice" object="${product}" z="FC9382OaPgkl6bfu4zroYxYIkn4="/>
+        <field:display field="copiedFrom" id="s_cz_kolomet_domain_Product_copiedFrom" object="${product}" z="hb8xlub3VDr/HGt44Gy4/Qk71F4="/>
+        <field:display field="productState" id="s_cz_kolomet_domain_Product_productState" object="${product}" z="e8xGRBZYozrv3LjJCve1txTEMJ4="/>
     </page:show>
 </div>

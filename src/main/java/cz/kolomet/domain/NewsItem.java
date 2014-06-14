@@ -50,5 +50,7 @@ public class NewsItem extends DomainEntity {
 	@Transient
     private List<CommonsMultipartFile> contents;
 	
+	private NewsItemType newsItemType;
+	
 }
 

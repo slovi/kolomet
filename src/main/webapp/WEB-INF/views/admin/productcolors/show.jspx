@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_cz_kolomet_domain_codelist_ProductColor" object="${productcolor}" path="/admin/productcolors" z="/kC6xFQy6GFgxXgZfvYml6Ew858=">
+        <field:display field="createdBy" id="s_cz_kolomet_domain_codelist_ProductColor_createdBy" object="${productcolor}" z="AxrIVGErBatjvNFU7v5pKRk43Mk="/>
+        <field:display field="lastModifiedBy" id="s_cz_kolomet_domain_codelist_ProductColor_lastModifiedBy" object="${productcolor}" z="ymKSpJbJ6I+7dYUOlHB7S5j4q/w="/>
+        <field:display date="true" dateTimePattern="${productColor_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_codelist_ProductColor_lastModified" object="${productcolor}" z="NH5IYLIjs9yx1BeGSxcz2NN0KGI="/>
+        <field:display field="codeKey" id="s_cz_kolomet_domain_codelist_ProductColor_codeKey" object="${productcolor}" z="kgxGs2/3l7wEf4vcTJLVXatjPYg="/>
+        <field:display field="codeDescription" id="s_cz_kolomet_domain_codelist_ProductColor_codeDescription" object="${productcolor}" z="U5+nu1zF/mmBHUlG1A4K/Xjfxi4="/>
+        <field:display field="sequenceNr" id="s_cz_kolomet_domain_codelist_ProductColor_sequenceNr" object="${productcolor}" z="9I7dQ4PcNW1pdFkDHCh0gSK4MqY="/>
+    </page:show>
+</div>

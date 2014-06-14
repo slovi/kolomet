@@ -50,7 +50,7 @@ privileged aspect BicycleCategoryController_Roo_Controller {
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String BicycleCategoryController.show(@PathVariable("id") Long id, Model uiModel) {
         addDateTimeFormatPatterns(uiModel);
-        uiModel.addAttribute("bicycleCategory", bicycleCategoryService.findBicycleCategory(id));
+        uiModel.addAttribute("bicyclecategory", bicycleCategoryService.findBicycleCategory(id));
         uiModel.addAttribute("itemId", id);
         return "admin/bicyclecategories/show";
     }

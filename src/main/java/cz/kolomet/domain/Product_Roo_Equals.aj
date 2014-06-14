@@ -17,11 +17,11 @@ privileged aspect Product_Roo_Equals {
             return true;
         }
         Product rhs = (Product) obj;
-        return new EqualsBuilder().append(bicycleCategory, rhs.bicycleCategory).append(buyUrl, rhs.buyUrl).append(canSendToAllCountry, rhs.canSendToAllCountry).append(created, rhs.created).append(deliveryForFree, rhs.deliveryForFree).append(description, rhs.description).append(discount, rhs.discount).append(enabled, rhs.enabled).append(figureHeight, rhs.figureHeight).append(id, rhs.id).append(lastModified, rhs.lastModified).append(price, rhs.price).append(productName, rhs.productName).append(productUsage, rhs.productUsage).append(validTo, rhs.validTo).append(weight, rhs.weight).isEquals();
+        return new EqualsBuilder().append(bicycleCategory, rhs.bicycleCategory).append(buyUrl, rhs.buyUrl).append(canSendToAllCountry, rhs.canSendToAllCountry).append(copiedFrom, rhs.copiedFrom).append(created, rhs.created).append(deliveryForFree, rhs.deliveryForFree).append(description, rhs.description).append(discount, rhs.discount).append(enabled, rhs.enabled).append(figureHeight, rhs.figureHeight).append(finalPrice, rhs.finalPrice).append(id, rhs.id).append(lastModified, rhs.lastModified).append(price, rhs.price).append(productColor, rhs.productColor).append(productName, rhs.productName).append(productState, rhs.productState).append(productUsage, rhs.productUsage).append(validFrom, rhs.validFrom).append(validTo, rhs.validTo).append(weight, rhs.weight).isEquals();
     }
     
     public int Product.hashCode() {
-        return new HashCodeBuilder().append(bicycleCategory).append(buyUrl).append(canSendToAllCountry).append(created).append(deliveryForFree).append(description).append(discount).append(enabled).append(figureHeight).append(id).append(lastModified).append(price).append(productName).append(productUsage).append(validTo).append(weight).toHashCode();
+        return new HashCodeBuilder().append(bicycleCategory).append(buyUrl).append(canSendToAllCountry).append(copiedFrom).append(created).append(deliveryForFree).append(description).append(discount).append(enabled).append(figureHeight).append(finalPrice).append(id).append(lastModified).append(price).append(productColor).append(productName).append(productState).append(productUsage).append(validFrom).append(validTo).append(weight).toHashCode();
     }
     
 }

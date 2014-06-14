@@ -1,0 +1,36 @@
+<?xml  version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<bean class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="defaultEncoding" value="${mail.sender.encoding}" />
+		<property name="host" value="${mail.sender.host}" />
+		<property name="username" value="${mail.sender.username}" />
+		<property name="password" value="${mail.sender.password}" />
+		<property name="port" value="${mail.sender.port}" />
+		<property name="protocol" value="${mail.sender.protocol}" />
+		<property name="javaMailProperties">
+			<value>
+				mail.smtp.auth=${mail.sender.auth}
+				mail.smtp.starttls.enable=${mail.sender.tls}
+				mail.smtp.EnableSSL.enable=${mail.sender.ssl}
+			</value>
+		</property>
+	</bean>
+	
+	<bean class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+		<property name="resourceLoaderPath" value="file://${mail.template.location},classpath:email" />
+		<property name="preferFileSystemAccess" value="true" />
+		<property name="velocityProperties">
+			<value>
+				input.encoding=UTF-8
+				output.encoding=UTF-8
+			</value>
+		</property>
+	</bean>
+
+</beans>

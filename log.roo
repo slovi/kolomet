@@ -268,3 +268,68 @@ field number --class ~.domain.Product --fieldName test --type java.lang.Integer 
 // Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2014-05-09 09:09:05
 // Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2014-05-10 17:17:52
 // Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2014-05-10 23:27:00
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2014-05-17 21:34:15
+help 
+help
+! 
+version 
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2014-05-17 21:43:58
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2014-05-17 21:44:11
+development mode --enabled true
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2014-05-17 21:46:22
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2014-05-17 21:47:57
+quit
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log closed at 2014-05-17 21:48:03
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2014-05-17 21:48:13
+quit
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log closed at 2014-05-17 21:48:19
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2014-05-17 21:50:47
+exit
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log closed at 2014-05-17 21:53:22
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2014-05-17 21:53:27
+exit
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log closed at 2014-05-17 21:54:24
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2014-05-17 21:54:30
+exit
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log closed at 2014-05-17 22:01:51
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2014-05-17 22:02:05
+entity jpa --class ~.domain.codelist.ProductColor --extends ~.domain.codelist.Codelist --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
+entity jpa --class ~.domain.codelist.ProductUsage --extends ~.domain.codelist.Codelist --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
+repository jpa --interface ~.repository.ProductColorRepository --entity ~.domain.codelist.ProductColor
+service --interface ~.service.ProductColorService --entity ~.domain.codelist.ProductColor --class ~.service.impl.ProductColorServiceImpl
+web mvc scaffold --class ~.web.ProductColorController --backingType ~.domain.codelist.ProductColor --path /admin/productcolors
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2014-05-19 09:35:11
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2014-05-28 20:21:46
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2014-05-29 09:08:56
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2014-05-29 23:45:42
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2014-05-30 07:43:31
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2014-05-31 23:28:40
+entity jpa --class ~.domain.Place --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
+repository jpa --interface ~.repository.PlaceRepository --entity ~.domain.Place
+service --interface ~.service.PlaceService --entity ~.domain.Place --class ~.service.impl.PlaceServiceImpl
+web mvc scaffold --class ~.web.PlaceController --backingType ~.domain.Place --path /admin/places
+web mvc scaffold --class ~.web.PlaceController --path /public/places
+web mvc scaffold --class ~.web.pub.PlaceController
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2014-06-02 01:32:41
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2014-06-09 22:05:42
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2014-06-10 07:49:37
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2014-06-12 21:55:14
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2014-06-12 21:55:45
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2014-06-12 23:28:12
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2014-06-12 23:38:56
+exit
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log closed at 2014-06-12 23:41:54
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2014-06-12 23:42:03
+exit
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log closed at 2014-06-12 23:45:48
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2014-06-12 23:45:56
+exit
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log closed at 2014-06-12 23:47:17
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2014-06-12 23:47:25
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2014-06-12 23:52:34
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2014-06-13 16:14:10
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2014-06-13 16:15:32
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2014-06-13 16:15:33
+exit
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log closed at 2014-06-13 16:18:22
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2014-06-13 16:18:29

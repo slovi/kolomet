@@ -1,6 +1,5 @@
 package cz.kolomet.web.admin;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,18 +15,24 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import cz.kolomet.domain.PhotoUrl;
 import cz.kolomet.domain.Product;
 import cz.kolomet.domain.ProductAttribute;
 import cz.kolomet.domain.codelist.ProductAttributeType;
+import cz.kolomet.dto.AdminProductFilterDto;
+import cz.kolomet.repository.ProductSpecifications;
 import cz.kolomet.security.ApplicationUserDetails;
 import cz.kolomet.service.ApplicationUserService;
 import cz.kolomet.service.BicycleCategoryService;
 import cz.kolomet.service.CategoryService;
 import cz.kolomet.service.FigureHeightService;
+import cz.kolomet.service.PhotoUrlService;
 import cz.kolomet.service.ProducerService;
 import cz.kolomet.service.ProductAttributeService;
 import cz.kolomet.service.ProductAttributeTypeService;
+import cz.kolomet.service.ProductColorService;
 import cz.kolomet.service.ProductService;
 import cz.kolomet.service.ProductUsageService;
 import cz.kolomet.service.SellerService;
@@ -67,8 +72,35 @@ public class ProductController extends AbstractAdminController {
     @Autowired
     ProductUsageService productUsageService;
     
+    @Autowired
+    ProductColorService productColorService;
+    
+    @Autowired
+    PhotoUrlService photoUrlService;
+    
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String show(@PathVariable("id") Long id, Model uiModel) {
+        return "redirect:/public/products/detail/" + id;
+    }
+    
+    @RequestMapping(value = "/{id}", params = "copy", produces = "text/html")
+    public String copyForm(@PathVariable("id") Long id, Model uiModel) {
+        populateEditForm(uiModel, productService.copyProduct(id));
+        return "admin/products/update";
+    }
+    
+    @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
+    public String updateForm(@PathVariable("id") Long id, Model uiModel) {
+    	
+    	Product product = productService.findProduct(id);
+    	populateEditForm(uiModel, product);    	
+        return "admin/products/update";
+    }
+    
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
+    public String delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
+        Product product = productService.findProduct(id);
+        productService.deleteProduct(product);
         return "redirect:/public/products/detail/" + id;
     }
     
@@ -83,8 +115,8 @@ public class ProductController extends AbstractAdminController {
     	uiModel.asMap().clear();              
         for (ProductAttribute productAttribute: product.getProductAttributes()) {
         	productAttribute.setProduct(product);
-        }                
-
+        }
+        
         productService.saveProduct(product);
         savePhotos(product, product.getContents());
         
@@ -94,33 +126,45 @@ public class ProductController extends AbstractAdminController {
     @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
     public String update(@Valid Product product, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
-            populateEditForm(uiModel, productService.findProduct(product.getId()));
+            populateEditForm(uiModel, product);
             return "admin/products/update";
         }
+        
+        if (!ApplicationUserDetails.getActualApplicationUserDetails().isCapableToEditValidDates(product)) {
+    		Product actualProduct = productService.findProduct(product.getId());
+    		product.setValidFrom(actualProduct.getValidFrom());
+    		product.setValidTo(actualProduct.getValidTo());
+        }
+        
         uiModel.asMap().clear();
         for (ProductAttribute productAttribute: product.getProductAttributes()) {
         	productAttribute.setProduct(product);
         }
         
         productService.updateProduct(product);
+        savePhotos(product, product.getContents());
+        
         return "redirect:/public/products/detail/" + product.getId();
     }
     
     @RequestMapping(produces = "text/html")
-    public String list(Pageable pageable, Model uiModel) {
+    public String list(Pageable pageable, Model uiModel, AdminProductFilterDto productFilter) {
         if (pageable != null) {
         	ApplicationUserDetails details = ApplicationUserDetails.getActualApplicationUserDetails();
         	Page<Product> page = null;
         	if (details.isProductsOwn()) {
-        		page = productService.findProductEntries(pageable, ApplicationUserDetails.getActualApplicationUserDetails().getSellerId());
+        		Long sellerId = ApplicationUserDetails.getActualApplicationUserDetails().getSellerId();
+        		page = productService.findProductEntries(ProductSpecifications.forAdminProductFiter(productFilter, sellerId), pageable);
         	} else {
-        		page = productService.findProductEntries(pageable); 
+        		page = productService.findProductEntries(ProductSpecifications.forAdminProductFiter(productFilter, null), pageable); 
         	}
-            uiModel.addAttribute("products", page.getContent());
+        	uiModel.addAttribute("productsPage", page);
+        	uiModel.addAttribute("products", page.getContent());
             uiModel.addAttribute("maxPages", page.getTotalPages());
         } else {
-            uiModel.addAttribute("products", productService.findAllProducts());
+            uiModel.addAttribute("products", productService.findProductEntries(ProductSpecifications.forAdminProductFiter(productFilter, null)));
         }
+        uiModel.addAttribute("productFilter", productFilter);
         addDateTimeFormatPatterns(uiModel);
         return "admin/products/list";
     }
@@ -132,20 +176,26 @@ public class ProductController extends AbstractAdminController {
         uiModel.addAttribute("producers", producerService.findAllProducers());
         uiModel.addAttribute("productusages", productUsageService.findAllProductUsages());
         uiModel.addAttribute("figureheights", figureHeightsService.findAllFigureHeights());
-        uiModel.addAttribute("bicyclecategories", bicycleCategoryService.findAllBicycleCategories());
+        uiModel.addAttribute("productcolors", productColorService.findAllProductColors());
+        uiModel.addAttribute("bicyclecategories", bicycleCategoryService.findAllBicycleCategorys());
         uiModel.addAttribute("sellers", sellerService.findAllSellers());
         
-        if (product.isNew() && product.getProductAttributes().isEmpty()) {
-        	List<ProductAttribute> productAttributes = new ArrayList<ProductAttribute>();
-        	for (ProductAttributeType type: productAttributeTypeService.findAllProductAttributeTypes()) {
-        		ProductAttribute productAttribute = new ProductAttribute();
-        		productAttribute.setProduct(product);
-        		productAttribute.setAttributeValue("");
-        		productAttribute.setAttributeType(type);
-        		productAttributes.add(productAttribute);
+        if (product.getId() != null && product.getPhotoUrls().isEmpty()) {
+        	for (PhotoUrl photoUrl: photoUrlService.findByProduct(product)) {
+        		product.addPhotoUrl(photoUrl);
         	}
-        	product.setProductAttributes(productAttributes);        	
         }
+        
+    	for (ProductAttributeType type: productAttributeTypeService.findAllProductAttributeTypes()) {
+    		if (!product.containsProductAttributeType(type)) {
+	    		ProductAttribute productAttribute = new ProductAttribute();
+	    		productAttribute.setProduct(product);
+	    		productAttribute.setAttributeValue("");
+	    		productAttribute.setAttributeType(type);
+	    		product.addProductAttribute(productAttribute);
+    		}
+    	}     	
+    	uiModel.addAttribute("capableToEditValidDates", ApplicationUserDetails.getActualApplicationUserDetails().isCapableToEditValidDates(product));
     }
 	
 }

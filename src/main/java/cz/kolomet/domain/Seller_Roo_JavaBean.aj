@@ -10,6 +10,7 @@ import cz.kolomet.domain.codelist.CountryState;
 import cz.kolomet.domain.codelist.Region;
 import cz.kolomet.domain.codelist.SellerStatus;
 import java.util.List;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 privileged aspect Seller_Roo_JavaBean {
     
@@ -267,6 +268,14 @@ privileged aspect Seller_Roo_JavaBean {
     
     public void Seller.setProducts(List<Product> products) {
         this.products = products;
+    }
+    
+    public List<CommonsMultipartFile> Seller.getContents() {
+        return this.contents;
+    }
+    
+    public void Seller.setContents(List<CommonsMultipartFile> contents) {
+        this.contents = contents;
     }
     
 }

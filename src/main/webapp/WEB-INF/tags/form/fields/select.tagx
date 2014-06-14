@@ -5,11 +5,13 @@
   <jsp:directive.attribute name="field" type="java.lang.String" required="true" rtexprvalue="true" description="The field exposed from the form backing object" />
   <jsp:directive.attribute name="cssClass" type="java.lang.String" required="false" rtexprvalue="true" description="Css class" />
   <jsp:directive.attribute name="inline" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Render br in the end of the tag" />
+  <jsp:directive.attribute name="decorated" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Render dojo select" />
   <jsp:directive.attribute name="path" type="java.lang.String" required="true" rtexprvalue="true" description="The relative path to the referenced resource" />
   <jsp:directive.attribute name="items" type="java.util.Collection" required="true" rtexprvalue="true" description="The name of the collection displayed in the select box" />
   <jsp:directive.attribute name="label" type="java.lang.String" required="false" rtexprvalue="true" description="The label used for this field, will default to a message bundle if not supplied" />
   <jsp:directive.attribute name="emptyLabel" type="java.lang.String" required="false" rtexprvalue="true" description="The label used for this field, will default to a message bundle if not supplied" />
   <jsp:directive.attribute name="itemLabel" type="java.lang.String" required="false" rtexprvalue="true" description="Name of the property mapped to the inner text of the 'option' tag (will override the configured converter)" />
+  <jsp:directive.attribute name="itemLabelCode" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Item label will be resolved from messagesource" />
   <jsp:directive.attribute name="itemValue" type="java.lang.String" required="false" rtexprvalue="true" description="The identifier used as value in the select box (defaults to 'id' for non enum types)" />
   <jsp:directive.attribute name="required" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Indicates if this field is required (default false)" />
   <jsp:directive.attribute name="disabled" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Specify if this field should be enabled" />
@@ -21,6 +23,10 @@
   <jsp:directive.attribute name="z" type="java.lang.String" required="false" description="Used for checking if element has been modified (to recalculate simply provide empty string value)" />
 
   <c:if test="${empty render or render}">
+
+	<c:if test="${empty decorated}">
+		<c:set value="true" var="decorated" />
+	</c:if>
 
 	<c:if test="${empty renderLabel}">
 		<c:set value="true" var="renderLabel" />
@@ -77,7 +83,15 @@
                             <spring:eval expression="item" />
                           </c:when>
                           <c:otherwise>
-                            <spring:eval expression="item[sec_itemLabel]"/>
+                          	<c:choose>
+                          		<c:when test="${itemLabelCode}">
+                            		<spring:eval expression="item[sec_itemLabel]" var="itemLabelCode"/>
+                            		<spring:message code="${itemLabelCode}" />
+                            	</c:when>
+                            	<c:otherwise>
+                            		<spring:eval expression="item[sec_itemLabel]"/>
+                            	</c:otherwise>
+                            </c:choose>
                           </c:otherwise>
                         </c:choose>
                         </option>
@@ -93,7 +107,15 @@
                             <spring:eval expression="item" />
                           </c:when>
                           <c:otherwise>
-                            <spring:eval expression="item[sec_itemLabel]"/>
+                            <c:choose>
+                          		<c:when test="${itemLabelCode}">
+                            		<spring:eval expression="item[sec_itemLabel]" var="itemLabelCode"/>
+                            		<spring:message code="${itemLabelCode}" />
+                            	</c:when>
+                            	<c:otherwise>
+                            		<spring:eval expression="item[sec_itemLabel]"/>
+                            	</c:otherwise>
+                            </c:choose>
                           </c:otherwise>
                         </c:choose>
                         </option>
@@ -163,7 +185,15 @@
                                 <spring:eval expression="item" />
                               </c:when>
                               <c:otherwise>
-                                <spring:eval expression="item[sec_itemLabel]"/>
+                                <c:choose>
+	                          		<c:when test="${itemLabelCode}">
+	                            		<spring:eval expression="item[sec_itemLabel]" var="itemLabelCode"/>
+	                            		<spring:message code="${itemLabelCode}" />
+	                            	</c:when>
+	                            	<c:otherwise>
+	                            		<spring:eval expression="item[sec_itemLabel]"/>
+	                            	</c:otherwise>
+	                            </c:choose>
                               </c:otherwise>
                             </c:choose>
                           </option>
@@ -179,7 +209,15 @@
                                 <spring:eval expression="item" />
                               </c:when>
                               <c:otherwise>
-                                <spring:eval expression="item[sec_itemLabel]"/>
+                                <c:choose>
+	                          		<c:when test="${itemLabelCode}">
+	                            		<spring:eval expression="item[sec_itemLabel]" var="itemLabelCode"/>
+	                            		<spring:message code="${itemLabelCode}" />
+	                            	</c:when>
+	                            	<c:otherwise>
+	                            		<spring:eval expression="item[sec_itemLabel]"/>
+	                            	</c:otherwise>
+	                            </c:choose>
                               </c:otherwise>
                             </c:choose>
                           </option>
@@ -239,9 +277,9 @@
           </c:choose>
           <c:choose>
             <c:when test="${multiple == false}">
-            	 
-              <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_${sec_field}_id', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
-               
+            	<c:if test="${decorated}">
+	              <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_${sec_field}_id', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
+            	</c:if>
             </c:when>
             <!-- disabled due to http://jira.springframework.org/browse/ROO-909 <c:otherwise> <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_${field}_id', widgetType: 'dijit.form.MultiSelect', widgetAttrs : {}})); </script> </c:otherwise> -->
           </c:choose>

@@ -22,7 +22,7 @@ public class BicycleCategoryController extends AbstractAdminController {
             uiModel.addAttribute("bicyclecategories", page.getContent());
             uiModel.addAttribute("maxPages", page.getTotalPages());
         } else {
-            uiModel.addAttribute("bicyclecategories", bicycleCategoryService.findAllBicycleCategories());
+            uiModel.addAttribute("bicyclecategories", bicycleCategoryService.findAllBicycleCategorys());
         }
         addDateTimeFormatPatterns(uiModel);
         return "admin/bicyclecategories/list";

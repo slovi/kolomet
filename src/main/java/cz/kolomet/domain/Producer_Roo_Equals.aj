@@ -17,11 +17,11 @@ privileged aspect Producer_Roo_Equals {
             return true;
         }
         Producer rhs = (Producer) obj;
-        return new EqualsBuilder().append(codeDescription, rhs.codeDescription).append(codeKey, rhs.codeKey).append(created, rhs.created).append(id, rhs.id).append(lastModified, rhs.lastModified).append(name, rhs.name).isEquals();
+        return new EqualsBuilder().append(codeDescription, rhs.codeDescription).append(codeKey, rhs.codeKey).append(created, rhs.created).append(id, rhs.id).append(lastModified, rhs.lastModified).append(sequenceNr, rhs.sequenceNr).isEquals();
     }
     
     public int Producer.hashCode() {
-        return new HashCodeBuilder().append(codeDescription).append(codeKey).append(created).append(id).append(lastModified).append(name).toHashCode();
+        return new HashCodeBuilder().append(codeDescription).append(codeKey).append(created).append(id).append(lastModified).append(sequenceNr).toHashCode();
     }
     
 }

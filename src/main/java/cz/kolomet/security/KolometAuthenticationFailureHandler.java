@@ -1,6 +1,7 @@
 package cz.kolomet.security;
 
 import java.io.IOException;
+import java.util.Locale;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.web.servlet.LocaleResolver;
 
 public class KolometAuthenticationFailureHandler implements AuthenticationFailureHandler, MessageSourceAware {
 
@@ -24,26 +26,30 @@ public class KolometAuthenticationFailureHandler implements AuthenticationFailur
 	
 	private MessageSourceAccessor messages;
 	
+	private LocaleResolver localeResolver;
+	
 	@Override
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException exception) throws IOException, ServletException {
 		
 		String text = null;
 		
+		Locale locale = localeResolver.resolveLocale(request);
+		
 		if (exception instanceof BadCredentialsException) {
-			text = this.messages.getMessage("security_login_fail_badcredentials");
+			text = this.messages.getMessage("security_login_fail_badcredentials", locale);
 		}
 		
 		if (exception instanceof UsernameNotFoundException) {
-			text = this.messages.getMessage("security_login_fail_usernamenotfound");
+			text = this.messages.getMessage("security_login_fail_usernamenotfound", locale);
 		}
 		
 		if (exception instanceof AccountStatusException) {
-			text = this.messages.getMessage("security_login_fail_accountstatus");
+			text = this.messages.getMessage("security_login_fail_accountstatus", locale);
 		}
 		
 		if (StringUtils.isEmpty(text)) {
-			text = this.messages.getMessage("security_login_fail_unexpected");
+			text = this.messages.getMessage("security_login_fail_unexpected", locale);
 			logger.error(exception, exception);
 		}
 		response.getOutputStream().write(text.getBytes());
@@ -52,6 +58,14 @@ public class KolometAuthenticationFailureHandler implements AuthenticationFailur
 	@Override
 	public void setMessageSource(MessageSource messageSource) {
 		this.messages = new MessageSourceAccessor(messageSource);
+	}
+
+	public LocaleResolver getLocaleResolver() {
+		return localeResolver;
+	}
+
+	public void setLocaleResolver(LocaleResolver localeResolver) {
+		this.localeResolver = localeResolver;
 	}
 
 }

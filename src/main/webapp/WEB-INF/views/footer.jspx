@@ -4,14 +4,12 @@
   	<jsp:directive.page contentType="text/html;charset=UTF-8"/>
   	<jsp:output omit-xml-declaration="yes"/>
 
-  	<div id="footer"> 
-		<p>2014 Kolomet &#169; &#32; &#32; |
-		<spring:url value="/public/about" var="aboutUrl" />
-    	<a href="${aboutUrl}"><spring:message code="footer_about" /></a> |
-    	<a href="#"><spring:message code="footer_conditions" /></a> |
-    	<a href="${aboutUrl}"><spring:message code="footer_contact" /></a></p>
-    	<spring:url value="/public/registrationrequests?form" var="registrationUrl" />
-    	<a href="${registrationUrl}" class="action_button_dark"><spring:message code="footer_add" /></a>
-	</div>
+	<p>2014 Kolomet &#169; &#32; &#32; |
+	<spring:url value="/public/about" var="aboutUrl" />
+   	<a href="${aboutUrl}"><spring:message code="footer_about" /></a> |
+   	<a href="#"><spring:message code="footer_conditions" /></a> |
+   	<a href="${aboutUrl}"><spring:message code="footer_contact" /></a></p>
+   	<spring:url value="/public/registrationrequests?form" var="registrationUrl" />
+   	<a href="${registrationUrl}" class="action_button_dark"><spring:message code="footer_add" /></a>
 	
 </div>

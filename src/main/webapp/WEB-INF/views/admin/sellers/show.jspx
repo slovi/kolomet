@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:spring="http://www.springframework.org/tags" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:show detailUrl="/public/sellers/detail/${seller.id}" id="ps_cz_kolomet_domain_Seller" object="${seller}" path="/admin/sellers" z="user-managed">
@@ -37,11 +37,14 @@
         <field:display field="lastModifiedBy" id="s_cz_kolomet_domain_Seller_lastModifiedBy" object="${seller}" z="user-managed"/>
         <field:display date="true" dateTimePattern="${seller_created_date_format}" field="created" id="s_cz_kolomet_domain_Seller_created" object="${seller}" z="48dU29Z1V3aNxnXqlKa9LAmsrG4="/>
         <field:display date="true" dateTimePattern="${seller_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_Seller_lastModified" object="${seller}" z="user-managed"/>
-        <br />
+        <br/>
         <c:set scope="request" value="${seller.id}" var="parentEntityId"/>
-        <h2><spring:message code="label_cz_kolomet_domain_seller_sellerphotourl" /></h2>
-        <br />
+        <h2>
+            <spring:message code="label_cz_kolomet_domain_seller_sellerphotourl"/>
+        </h2>
+        <br/>
         <c:set scope="request" value="${seller.sellerPhotoUrls}" var="sellerphotourls"/>
         <jsp:include flush="true" page="../sellerphotourls/list.jspx"/>
+        <field:display field="contents" id="s_cz_kolomet_domain_Seller_contents" object="${seller}" z="I7bQBBhqSJaGG1iS1flZjTjkUpo="/>
     </page:show>
 </div>

@@ -21,7 +21,7 @@ public interface ProductRepository {
 	BigDecimal findMaxDiscount();
 	
 	@Query("select max(p.weight) from Product p")
-	Integer findMaxWeight();
+	Double findMaxWeight();
 	
 	@Query("select p from Product p inner join p.seller s inner join s.sellerStatus ss")
 	Page<Product> findByPriority(Pageable pageable);

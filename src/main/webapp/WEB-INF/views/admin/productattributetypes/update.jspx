@@ -11,5 +11,6 @@
         <field:select field="categoryType" id="c_cz_kolomet_domain_codelist_ProductAttributeType_categoryType" itemLabel="codeDescription" itemValue="id" items="${categorytypes}" path="/admin/categorytypes" z="user-managed"/>
         <field:checkbox field="required" id="c_cz_kolomet_domain_codelist_ProductAttributeType_required" z="ByC/H2giCVScrtU2QoPFW/W2xvk="/>
         <field:input field="units" id="c_cz_kolomet_domain_codelist_ProductAttributeType_units" z="VV8bT8/3q/M+rGXDqlCN0PFu5u0="/>
+        <field:input field="sequenceNr" id="c_cz_kolomet_domain_codelist_ProductAttributeType_sequenceNr" validationMessageCode="field_invalid_integer" z="G4jsIwCwJ8BvMHOO48XJ4IlqjiA="/>
     </form:update>
 </div>

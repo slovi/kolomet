@@ -1,7 +1,9 @@
 package cz.kolomet.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -44,6 +46,10 @@ public class ApplicationUser extends DomainEntity {
 	      name="APPLICATION_USER_ROLE",
 	      joinColumns={@JoinColumn(name="USER_ID", referencedColumnName="ID")},
 	      inverseJoinColumns={@JoinColumn(name="ROLE_ID", referencedColumnName="ID")})
-	private List<ApplicationRole> roles;
+	private List<ApplicationRole> roles = new ArrayList<ApplicationRole>();
+	
+	public void addRole(ApplicationRole applicationRole) {
+		this.roles.add(applicationRole);
+	}
 	
 }

@@ -32,10 +32,6 @@ privileged aspect SellerStatusServiceImpl_Roo_Service {
         return sellerStatusRepository.findOne(id);
     }
     
-    public List<SellerStatus> SellerStatusServiceImpl.findAllSellerStatuses() {
-        return sellerStatusRepository.findAll();
-    }
-    
     public List<SellerStatus> SellerStatusServiceImpl.findSellerStatusEntries(int firstResult, int maxResults) {
         return sellerStatusRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / maxResults, maxResults)).getContent();
     }

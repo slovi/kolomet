@@ -6,9 +6,9 @@
         <field:select field="createdBy" id="c_cz_kolomet_domain_NewsItemPhotoUrl_createdBy" itemValue="id" items="${applicationusers}" path="/admin/applicationusers" z="WEJHYnBBvj7K3o1JCgwst6+eIZE="/>
         <field:select field="lastModifiedBy" id="c_cz_kolomet_domain_NewsItemPhotoUrl_lastModifiedBy" itemValue="id" items="${applicationusers}" path="/admin/applicationusers" z="0D2YiUny9kzihETPULEZg6ug6oQ="/>
         <field:datetime dateTimePattern="${newsItemPhotoUrl_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_NewsItemPhotoUrl_lastModified" z="abx7UDHRH9Kn8QVcBvqydvfF5ls="/>
-        <field:input field="fileName" id="c_cz_kolomet_domain_NewsItemPhotoUrl_fileName" max="20" z="aMrxChaqwdIHLgVwRqGXqCZih3k="/>
-        <field:input field="contentType" id="c_cz_kolomet_domain_NewsItemPhotoUrl_contentType" max="20" z="m0HjMx9b0Op5Viy3HY3GsEPG6EQ="/>
+        <field:textarea field="fileName" id="c_cz_kolomet_domain_NewsItemPhotoUrl_fileName" z="s2+MEpgsuO2M48/WZTR+zWq3nN4="/>
+        <field:input field="contentType" id="c_cz_kolomet_domain_NewsItemPhotoUrl_contentType" max="30" z="jih1uVaSvChAhsf+Vo9t6/4H7Vw="/>
         <field:select field="newsItem" id="c_cz_kolomet_domain_NewsItemPhotoUrl_newsItem" itemValue="id" items="${newsitems}" path="/admin/newsitems" required="true" z="SRkll5LALPqYhMGaoqgIdoUDRdg="/>
-        <field:input field="contents" id="c_cz_kolomet_domain_NewsItemPhotoUrl_contents" z="6F2hcP5BZIoU9D8Qdoi4l34AGEM=" render="false" />
+        <field:input field="contents" id="c_cz_kolomet_domain_NewsItemPhotoUrl_contents" render="false" z="user-managed"/>
     </form:update>
 </div>

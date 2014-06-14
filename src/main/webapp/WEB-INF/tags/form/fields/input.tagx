@@ -85,6 +85,7 @@
             </c:otherwise>
           </c:choose>
           <br />
+          <br />
           <form:errors cssClass="errors" id="_${sec_field}_error_id" path="${sec_field}" />
         </c:otherwise>
       </c:choose>
@@ -112,7 +113,7 @@
       </c:if>
       <script type="text/javascript">
         Spring.addDecoration(new Spring.ElementDecoration({elementId : '_${sec_field}_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {invalidMessage: '${sec_field_invalid}', required : ${required}, ${sec_validation_regex} missingMessage : '${sec_field_validation}' }})); 
-      </script>
+      </script>    
     </div>
     <c:if test="${empty inline or not inline}">
     	<br />

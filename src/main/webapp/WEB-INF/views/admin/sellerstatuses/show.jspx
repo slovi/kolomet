@@ -10,5 +10,6 @@
         <field:display field="lastModifiedBy" id="s_cz_kolomet_domain_codelist_SellerStatus_lastModifiedBy" object="${sellerstatus}" z="GmFKf98VYV8jmTmNCUIfqsGN2eQ="/>
         <field:display date="true" dateTimePattern="${sellerStatus_created_date_format}" field="created" id="s_cz_kolomet_domain_codelist_SellerStatus_created" object="${sellerstatus}" z="FkDGFL9A13GFtxZL+xB3CNuDMXc="/>
         <field:display date="true" dateTimePattern="${sellerStatus_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_codelist_SellerStatus_lastModified" object="${sellerstatus}" z="FkDGFL9A13GFtxZL+xB3CNuDMXc="/>
+        <field:display field="sequenceNr" id="s_cz_kolomet_domain_codelist_SellerStatus_sequenceNr" object="${sellerstatus}" z="QdWkQFPSYlTe6L65lX+OaPn3nNk="/>
     </page:show>
 </div>

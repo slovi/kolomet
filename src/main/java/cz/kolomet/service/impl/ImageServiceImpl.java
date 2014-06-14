@@ -2,7 +2,7 @@ package cz.kolomet.service.impl;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -15,6 +15,8 @@ import java.io.OutputStream;
 
 import javax.imageio.ImageIO;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -51,9 +53,10 @@ public class ImageServiceImpl implements ImageService {
 
 	@Override
 	public void resizeAndSave(InputStream inputStream, OutputStream outputStream, Dimension toDimension) {
-		BufferedImage image = read(inputStream);
+		
+		BufferedImage image = readImage(inputStream);
 		BufferedImage scaledImage = resize(image, toDimension);
-		save(scaledImage, outputStream);
+		saveImage(scaledImage, outputStream);
 		try {
 			inputStream.close();
 			outputStream.close();
@@ -67,14 +70,20 @@ public class ImageServiceImpl implements ImageService {
 	public void resizeAndSave(File sourceFile, File targetFile, Dimension toDimension) {
 		try {
 			logger.debug("Trying resize and save image: " + sourceFile + " " + targetFile);
-			resizeAndSave(new FileInputStream(sourceFile), new FileOutputStream(targetFile), toDimension);
+			File tempTargetFile = new File(targetFile.getParent(), FilenameUtils.getBaseName(targetFile.getName()));
+			resizeAndSave(new FileInputStream(sourceFile), new FileOutputStream(tempTargetFile), toDimension);
+			FileUtils.deleteQuietly(targetFile);
+			FileUtils.moveFile(tempTargetFile, targetFile);
 		} catch (FileNotFoundException e) {
+			logger.error(e, e);
+			throw new RuntimeException(e);
+		} catch (IOException e) {
 			logger.error(e, e);
 			throw new RuntimeException(e);
 		}
 	}
 	
-	private BufferedImage read(InputStream inputStream) {
+	private BufferedImage readImage(InputStream inputStream) {
 		try {
 			logger.debug("Reading image from stream: " + inputStream);
 			return ImageIO.read(inputStream);
@@ -88,14 +97,18 @@ public class ImageServiceImpl implements ImageService {
 		Dimension actualDimension = new Dimension(image.getWidth(), image.getHeight());
 		Dimension newDimension = calculateDimension(actualDimension, toDimension);
 		Image scaledImage = image.getScaledInstance(newDimension.width, newDimension.height, Image.SCALE_SMOOTH);
-		BufferedImage newImage = new BufferedImage(newDimension.width, newDimension.height, BufferedImage.TYPE_INT_RGB);
-		Graphics g = newImage.createGraphics();
-		g.drawImage(scaledImage, 0, 0, new Color(0, 0, 0), null);
+		BufferedImage newImage = new BufferedImage(toDimension.width, toDimension.height, BufferedImage.TYPE_INT_RGB);
+		Graphics2D g = newImage.createGraphics();
+		int x = (toDimension.width - newDimension.width) / 2;
+		int y = (toDimension.height - newDimension.height) / 2;
+		g.setColor(Color.WHITE);
+		g.fillRect(0, 0, toDimension.width, toDimension.height);
+		g.drawImage(scaledImage, x, y, Color.WHITE, null);
 		g.dispose();
 		return newImage;
 	}
 	
-	private void save(BufferedImage image, OutputStream out) {
+	private void saveImage(BufferedImage image, OutputStream out) {
 		try {
 			logger.debug("Writing image to stream: " + out);
 			ImageIO.write(image, "jpg", out);

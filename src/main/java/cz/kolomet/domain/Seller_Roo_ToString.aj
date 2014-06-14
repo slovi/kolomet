@@ -10,7 +10,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 privileged aspect Seller_Roo_ToString {
     
     public String Seller.toString() {
-        return new ReflectionToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).setExcludeFieldNames("createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate", "products", "sellersPhotoUrls").toString();
+        return new ReflectionToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).setExcludeFieldNames("createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate", "products", "sellerPhotoUrls").toString();
     }
     
 }

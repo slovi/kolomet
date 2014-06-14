@@ -6,22 +6,40 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.MessageSourceAware;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import cz.kolomet.domain.Seller;
 import cz.kolomet.security.ApplicationUserDetails;
+import cz.kolomet.service.SellerStatusService;
+import cz.kolomet.service.exception.ExistingUserException;
 
 @RequestMapping("/admin/sellers")
 @Controller
 @RooWebScaffold(path = "admin/sellers", formBackingObject = Seller.class)
-public class SellerController extends AbstractAdminController {
+public class SellerController extends AbstractAdminController implements MessageSourceAware {
+	
+	private MessageSourceAccessor messages;
+	
+	@Autowired
+	private SellerStatusService sellerStatusService;
+	
+    @RequestMapping(value = "/{id}", produces = "text/html")
+    public String show(@PathVariable("id") Long id, Model uiModel) {
+        return "redirect:/public/sellers/detail/" + id;
+    }
 	
     @RequestMapping(params = "form", produces = "text/html")
     public String createForm(Model uiModel) {
@@ -43,14 +61,32 @@ public class SellerController extends AbstractAdminController {
         uiModel.addAttribute("dependencies", dependencies);
         return "admin/sellers/create";
     }
+    
+    @RequestMapping(method = RequestMethod.POST, produces = "text/html")
+    public String create(@Valid Seller seller, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
+        if (bindingResult.hasErrors()) {
+            populateEditForm(uiModel, seller);
+            return "admin/sellers/create";
+        }
+        try {
+        	sellerService.saveSeller(seller);
+        } catch (ExistingUserException e) {
+        	bindingResult.addError(new ObjectError("seller", messages.getMessage(e.getCode(), new Object[]{e.getApplicationUser().getUsername()})));
+        	populateEditForm(uiModel, seller);
+        	return "admin/sellers/create";
+        }
+        saveSellerPhotos(seller, seller.getContents());
+        uiModel.asMap().clear();
+        return "redirect:/public/sellers/detail/" + seller.getId();
+    }
 	
     @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
     public String update(@Valid Seller seller, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
+
+    	if (bindingResult.hasErrors()) {
             populateEditForm(uiModel, seller);
             return "admin/sellers/update";
-        }
-        uiModel.asMap().clear();
+        }                     
         
         if (ApplicationUserDetails.getActualApplicationUserDetails().isSellersOwn()) {
         	// reset values which seller cannot override
@@ -59,8 +95,16 @@ public class SellerController extends AbstractAdminController {
         	seller.setEnabled(actualSeller.getEnabled());
         }
         
-        sellerService.updateSeller(seller);
-        return "redirect:/admin/sellers/" + encodeUrlPathSegment(seller.getId().toString(), httpServletRequest);
+        try {
+        	sellerService.updateSeller(seller);
+        } catch (ExistingUserException e) {
+        	bindingResult.addError(new ObjectError("seller", messages.getMessage(e.getCode(), new Object[]{e.getApplicationUser().getUsername()})));
+        	populateEditForm(uiModel, seller);
+        	return "admin/sellers/update";
+        }
+        uiModel.asMap().clear();
+        saveSellerPhotos(seller, seller.getContents());
+        return "redirect:/public/sellers/detail/" + seller.getId();
     }
 	
     @RequestMapping(produces = "text/html")
@@ -76,4 +120,9 @@ public class SellerController extends AbstractAdminController {
         return "admin/sellers/list";
     }
 	
+    @Override
+    public void setMessageSource(MessageSource messageSource) {
+    	this.messages = new MessageSourceAccessor(messageSource);
+    }
+    
 }

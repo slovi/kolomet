@@ -9,5 +9,6 @@
         <field:display field="lastModifiedBy" id="s_cz_kolomet_domain_codelist_CountryState_lastModifiedBy" object="${countrystate}" z="qYopWBnqYbAGV1wCH8kGM3we6Hw="/>
         <field:display date="true" dateTimePattern="${countryState_created_date_format}" field="created" id="s_cz_kolomet_domain_codelist_CountryState_created" object="${countrystate}" z="GPUpPkS1jtsiSgUOf5ecVmkkpBA="/>
         <field:display date="true" dateTimePattern="${countryState_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_codelist_CountryState_lastModified" object="${countrystate}" z="GPUpPkS1jtsiSgUOf5ecVmkkpBA="/>
+        <field:display field="sequenceNr" id="s_cz_kolomet_domain_codelist_CountryState_sequenceNr" object="${countrystate}" z="ZEQaqU4DK7C1L96SXJ9sGJg5n/U="/>
     </page:show>
 </div>

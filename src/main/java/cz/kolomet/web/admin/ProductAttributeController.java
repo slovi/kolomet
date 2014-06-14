@@ -20,7 +20,6 @@ import cz.kolomet.domain.Product;
 import cz.kolomet.domain.ProductAttribute;
 import cz.kolomet.service.ProductAttributeTypeService;
 import cz.kolomet.service.ProductService;
-import cz.kolomet.util.db.OrmUtils;
 
 @RequestMapping("/admin/productattributes")
 @Controller
@@ -64,7 +63,7 @@ public class ProductAttributeController extends AbstractAdminController {
         }
         uiModel.asMap().clear();
         productAttributeService.saveProductAttribute(productAttribute);
-        return "redirect:/admin/products/" + encodeUrlPathSegment(productAttribute.getProduct().getId().toString(), httpServletRequest);
+        return "redirect:/admin/products/" + productAttribute.getProduct().getId() + "?form";
     }
     
     @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
@@ -75,21 +74,17 @@ public class ProductAttributeController extends AbstractAdminController {
         }
         uiModel.asMap().clear();
         productAttributeService.updateProductAttribute(productAttribute);
-        return "redirect:/admin/products/" + encodeUrlPathSegment(productAttribute.getProduct().getId().toString(), httpServletRequest);
+        return "redirect:/admin/products/" + productAttribute.getProduct().getId() + "?form";
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
-    public String delete(@PathVariable("id") Long id, Pageable pageable, @RequestParam(value = "updateMode", required = false) Boolean updateMode, Model uiModel) {
+    public String delete(@PathVariable("id") Long id, Pageable pageable, Boolean updateMode, Model uiModel) {
         ProductAttribute productAttribute = productAttributeService.findProductAttribute(id);
         productAttributeService.deleteProductAttribute(productAttribute);
         uiModel.asMap().clear();
         uiModel.addAttribute("page", pageable.getPageNumber());
         uiModel.addAttribute("size", pageable.getPageSize());
-        if (updateMode) {
-        	return "redirect:/admin/products/" + productAttribute.getProduct().getId() + "?form";
-        } else {
-        	return "redirect:/admin/products/" + productAttribute.getProduct().getId();
-        }
+       	return "redirect:/admin/products/" + productAttribute.getProduct().getId() + "?form";
     }
     
     void populateEditForm(Model uiModel, ProductAttribute productAttribute, Product product) {

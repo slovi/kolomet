@@ -9,6 +9,7 @@
             <table:column date="true" dateTimePattern="${registrationRequest_created_date_format}" id="c_cz_kolomet_domain_RegistrationRequest_created" property="created" sort="true" z="user-managed"/>
             <table:column date="true" dateTimePattern="${registrationRequest_lastmodified_date_format}" id="c_cz_kolomet_domain_RegistrationRequest_lastModified" property="lastModified" render="false" sort="true" z="user-managed"/>
             <table:column id="c_cz_kolomet_domain_RegistrationRequest_email" property="email" sort="true" z="user-managed"/>
+            <table:column id="c_cz_kolomet_domain_RegistrationRequest_processed" property="processed" bool="true" sort="true" z="user-managed"/>
             <table:column id="c_cz_kolomet_domain_RegistrationRequest_phone" property="phone" sort="true" z="user-managed"/>
         </table:table>
     </page:list>

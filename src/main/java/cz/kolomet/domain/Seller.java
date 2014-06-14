@@ -7,6 +7,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -21,15 +22,16 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.entity.RooJpaEntity;
 import org.springframework.roo.addon.serializable.RooSerializable;
 import org.springframework.roo.addon.tostring.RooToString;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import cz.kolomet.domain.codelist.CountryState;
 import cz.kolomet.domain.codelist.Region;
 import cz.kolomet.domain.codelist.SellerStatus;
 
 @RooJavaBean
-@RooToString(excludeFields = {"createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate", "products", "sellersPhotoUrls"})
+@RooToString(excludeFields = {"createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate", "products", "sellerPhotoUrls"})
 @RooJpaEntity
-@RooEquals(excludeFields = {"createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate", "products", "sellersPhotoUrls"})
+@RooEquals(excludeFields = {"createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate", "products", "sellerPhotoUrls"})
 @RooSerializable
 @FilterDefs({
 	@FilterDef(name = "sellerEnabledFilter", parameters = @ParamDef(type = "boolean", name = "enabled")),
@@ -76,7 +78,7 @@ public class Seller extends DomainEntity {
     @Size(max = 30)
     private String businessCity;
     
-    @Size(max = 30)
+    @Size(max = 50)
     private String businessStreet;
     
     @Size(max = 30)
@@ -107,6 +109,7 @@ public class Seller extends DomainEntity {
     private Region region;
     
     @Size(max = 255)
+    @NotNull
     private String web;
     
     @Size(max = 255)
@@ -147,6 +150,9 @@ public class Seller extends DomainEntity {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "seller", cascade = CascadeType.ALL)
     private List<Product> products = new ArrayList<Product>();
     
+    @Transient
+    private List<CommonsMultipartFile> contents;
+    
     public String getPersonString() {
     	
     	StringBuilder builder = new StringBuilder();
@@ -185,6 +191,23 @@ public class Seller extends DomainEntity {
     	return builder.toString();
     }
     
+    public String getBusinessAddressString() {
+    	StringBuilder builder = new StringBuilder();
+    	if (StringUtils.isNotEmpty(businessStreet)) {
+    		builder.append(businessStreet);
+    		builder.append(", ");
+    	}
+    	if (StringUtils.isNotEmpty(businessCity)) {
+    		builder.append(businessCity);
+    		builder.append(", ");
+    	}
+    	if (StringUtils.isNotEmpty(businessPostCode)) {
+    		builder.append(businessPostCode);
+    	}
+    	return builder.toString();
+    }
+
+    
     public String getContactString() {
     	StringBuilder builder = new StringBuilder();
     	if (StringUtils.isNotEmpty(businessEmail)) {
@@ -195,6 +218,12 @@ public class Seller extends DomainEntity {
     		builder.append(businessPhoneNumber);
     	}
     	return builder.toString();
+    }
+    
+    public void normalizeWebUrl() {
+    	if (StringUtils.isNotEmpty(web) && !web.startsWith("http://")) {
+    		this.web = "http://" + web; 
+    	}
     }
     
 }

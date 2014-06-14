@@ -9,6 +9,6 @@
         <field:display field="lastModifiedBy" id="s_cz_kolomet_domain_ApplicationRole_lastModifiedBy" object="${applicationrole}" z="r2qBR83j/ArC88zLNNiUyHaEI0Y="/>
         <field:display date="true" dateTimePattern="${applicationRole_created_date_format}" field="created" id="s_cz_kolomet_domain_ApplicationRole_created" object="${applicationrole}" z="bkro+wnkB6+CsAKpEJnq6rgD6Nc="/>
         <field:display date="true" dateTimePattern="${applicationRole_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_ApplicationRole_lastModified" object="${applicationrole}" z="bkro+wnkB6+CsAKpEJnq6rgD6Nc="/>
-        <field:display field="users" id="s_cz_kolomet_domain_ApplicationRole_users" object="${applicationrole}" z="XKBsCyAGPZF3Z5dhCjNNCb2hlsU="/>
+        <field:display collectionItemProperty="username" field="users" id="s_cz_kolomet_domain_ApplicationRole_users" object="${applicationrole}" z="user-managed"/>
     </page:show>
 </div>

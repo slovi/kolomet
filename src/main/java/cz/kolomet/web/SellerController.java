@@ -15,10 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import cz.kolomet.domain.Seller;
 import cz.kolomet.repository.ProductRepository;
 import cz.kolomet.repository.SellerRepository;
+import cz.kolomet.web.pub.AbstractPublicController;
 
 @RequestMapping("/public/sellers")
 @Controller("publicSellerController")
-public class SellerController extends AbstractController {
+public class SellerController extends AbstractPublicController {
 
 	@Autowired
 	private SellerRepository sellerRepository;

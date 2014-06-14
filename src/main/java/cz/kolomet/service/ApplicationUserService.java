@@ -12,6 +12,8 @@ public interface ApplicationUserService {
 	
 	public void updatePassword(ApplicationUserPasswordDto applicationUserPassword);
 	
+	public void resetPassword(String username);
+	
 	public Page<ApplicationUser> findApplicationUserEntries(Pageable pageable);
 	
 }

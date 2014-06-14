@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/admin/productusages")
 @Controller
 @RooWebScaffold(path = "admin/productusages", formBackingObject = ProductUsage.class)
-public class ProductUsageController {
+public class ProductUsageController extends AbstractAdminController {
 	
     @RequestMapping(produces = "text/html")
     public String list(Pageable pageable, Model uiModel) {

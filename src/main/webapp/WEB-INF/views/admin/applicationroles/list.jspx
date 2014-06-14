@@ -9,7 +9,7 @@
             <table:column id="c_cz_kolomet_domain_ApplicationRole_lastModifiedBy" property="lastModifiedBy" sort="true" z="user-managed"/>
             <table:column date="true" dateTimePattern="${applicationRole_created_date_format}" id="c_cz_kolomet_domain_ApplicationRole_created" property="created" sort="true" z="user-managed"/>
             <table:column date="true" dateTimePattern="${applicationRole_lastmodified_date_format}" id="c_cz_kolomet_domain_ApplicationRole_lastModified" property="lastModified" sort="true" z="user-managed"/>
-            <table:column id="c_cz_kolomet_domain_ApplicationRole_users" property="users" sort="true" z="user-managed"/>
+            <table:column id="c_cz_kolomet_domain_ApplicationRole_users" property="users" sort="true" z="user-managed" render="false"/>
         </table:table>
     </page:list>
 </div>

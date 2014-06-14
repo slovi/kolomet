@@ -32,10 +32,6 @@ privileged aspect CategoryTypeServiceImpl_Roo_Service {
         return categoryTypeRepository.findOne(id);
     }
     
-    public List<CategoryType> CategoryTypeServiceImpl.findAllCategoryTypes() {
-        return categoryTypeRepository.findAll();
-    }
-    
     public List<CategoryType> CategoryTypeServiceImpl.findCategoryTypeEntries(int firstResult, int maxResults) {
         return categoryTypeRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / maxResults, maxResults)).getContent();
     }

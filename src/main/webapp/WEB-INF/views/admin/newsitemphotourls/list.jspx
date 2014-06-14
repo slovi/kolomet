@@ -3,13 +3,13 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_cz_kolomet_domain_NewsItemPhotoUrl" items="${newsitemphotourls}" z="6McNj5oKhoEg1To+gH7uCjNAiHc=">
-        <table:table data="${newsitemphotourls}" id="l_cz_kolomet_domain_NewsItemPhotoUrl" path="/admin/newsitemphotourls" update="false" z="user-managed">
+        <table:table data="${newsitemphotourls}" id="l_cz_kolomet_domain_NewsItemPhotoUrl" path="/admin/newsitemphotourls" create="false" update="false" z="user-managed">
+            <table:column id="c_cz_kolomet_domain_NewsItemPhotoUrl" property="photoUrl" url="true" z="user-managed"/>
             <table:column id="c_cz_kolomet_domain_NewsItemPhotoUrl_createdBy" property="createdBy" z="yxf/LX8tBZ38RKK8n0nLwsQ0fEg="/>
-            <table:column id="c_cz_kolomet_domain_NewsItemPhotoUrl_photoUrl" property="photoUrl" z="user-managed"/>
             <table:column id="c_cz_kolomet_domain_NewsItemPhotoUrl_lastModifiedBy" property="lastModifiedBy" z="4Wm40OBkVPhDcaKG8BSKCXRW35w="/>
             <table:column date="true" dateTimePattern="${newsItemPhotoUrl_created_date_format}" id="c_cz_kolomet_domain_NewsItemPhotoUrl_created" property="created" z="iltw2bR5qU7WhPDslZWTBSkMYjo="/>
             <table:column date="true" dateTimePattern="${newsItemPhotoUrl_lastmodified_date_format}" id="c_cz_kolomet_domain_NewsItemPhotoUrl_lastModified" property="lastModified" z="qhqaw4KvDowPjKCrpgSeKtkkt00="/>
-            <table:column id="c_cz_kolomet_domain_NewsItemPhotoUrl_fileName" property="fileName" z="R+olqMLT/8GNn08y/vr1F25EeUk="/>
+            <table:column id="c_cz_kolomet_domain_NewsItemPhotoUrl_fileName" property="fileName" render="false" z="user-managed"/>
             <table:column id="c_cz_kolomet_domain_NewsItemPhotoUrl_contentType" property="contentType" z="mfsCz1l5QIYY8GjIRmZz/QblGt4="/>
         </table:table>
     </page:list>

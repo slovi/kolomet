@@ -7,15 +7,15 @@
   <jsp:directive.attribute name="maxValueFrom" type="java.lang.Integer" required="true" rtexprvalue="true" description="Max value from" />
   <jsp:directive.attribute name="maxValueTo" type="java.lang.Integer" required="true" rtexprvalue="true" description="Max value from" />
   <jsp:directive.attribute name="step" type="java.lang.Integer" required="false" rtexprvalue="true" description="Step" />
-  <jsp:directive.attribute name="size" type="java.lang.Integer" required="false" rtexprvalue="true" description="Size" />
+  <jsp:directive.attribute name="width" type="java.lang.Integer" required="false" rtexprvalue="true" description="Width" />
   <jsp:directive.attribute name="units" type="java.lang.String" required="false" rtexprvalue="true" description="Units" />
   <jsp:directive.attribute name="render" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Indicate if the contents of this tag and all enclosed tags should be rendered (default 'true')" />
   <jsp:directive.attribute name="z" type="java.lang.String" required="false" description="Used for checking if element has been modified (to recalculate simply provide empty string value)" />
   
   <c:if test="${empty render or render}">
     
-    <c:if test="${empty size}">
-    	<c:set value="3" var="size" />
+    <c:if test="${empty width}">
+    	<c:set value="45" var="width" />
     </c:if>
     
     <c:if test="${empty step}">
@@ -24,7 +24,7 @@
     
   	<div id="${id}_slider" class="slider filter_input">
      	<spring:message code="products_list_filter_${id}" /> (<spring:message code="${units}" />):
-    	<form:input cssClass="amountFromInput" path="${id}From" size="${size}" />-<form:input cssClass="amountToInput" path="${id}To" size="${size}" />
+    	<form:input cssClass="amountFromInput" path="${id}From" cssStyle="width: ${width}px;" />-<form:input cssClass="amountToInput" path="${id}To" cssStyle="width: ${width}px;" />
     	<div><!--  --></div>
    	</div>
    	
@@ -32,7 +32,9 @@
 
 	<script type="text/javascript">
 		require(['slider'], function(slider) {
-			slider.slider('${id}_slider', ${valueFrom}, ${valueTo}, ${maxValueFrom}, ${maxValueTo}, ${step});
+			slider.slider('${id}_slider', ${valueFrom}, ${valueTo}, ${maxValueFrom}, ${maxValueTo}, ${step}, function(slider) {
+				slider.closest("form").find("#button_filter").click();
+			});
 		});
 	</script>
 

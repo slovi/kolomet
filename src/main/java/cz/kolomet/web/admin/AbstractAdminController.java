@@ -10,7 +10,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.task.TaskExecutor;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
@@ -25,8 +24,9 @@ import cz.kolomet.security.ApplicationUserDetails;
 import cz.kolomet.service.NewsItemPhotoUrlService;
 import cz.kolomet.service.PhotoUrlService;
 import cz.kolomet.service.SellerPhotoUrlService;
+import cz.kolomet.web.AbstractController;
 
-public class AbstractAdminController {
+public class AbstractAdminController extends AbstractController {
 	
 	protected final Log logger = LogFactory.getLog(getClass());
 	
@@ -52,6 +52,15 @@ public class AbstractAdminController {
 	
 	protected String getUsername() {
 		return ApplicationUserDetails.getActualApplicationUserDetails().getUsername();
+	}
+	
+	protected String normalizeDescription(String description) {
+		if (StringUtils.isNotEmpty(description)) {
+			if (description.charAt(description.length() - 1) == '<') {
+				return description.substring(0, description.length() - 2);
+			}
+		}
+		return description;
 	}
 	
 	protected void savePhotos(final Product product, List<CommonsMultipartFile> files) {

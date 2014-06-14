@@ -17,11 +17,11 @@ privileged aspect SellerStatus_Roo_Equals {
             return true;
         }
         SellerStatus rhs = (SellerStatus) obj;
-        return new EqualsBuilder().append(codeDescription, rhs.codeDescription).append(codeKey, rhs.codeKey).append(created, rhs.created).append(id, rhs.id).append(lastModified, rhs.lastModified).append(priority, rhs.priority).isEquals();
+        return new EqualsBuilder().append(codeDescription, rhs.codeDescription).append(codeKey, rhs.codeKey).append(created, rhs.created).append(id, rhs.id).append(lastModified, rhs.lastModified).append(priority, rhs.priority).append(sequenceNr, rhs.sequenceNr).isEquals();
     }
     
     public int SellerStatus.hashCode() {
-        return new HashCodeBuilder().append(codeDescription).append(codeKey).append(created).append(id).append(lastModified).append(priority).toHashCode();
+        return new HashCodeBuilder().append(codeDescription).append(codeKey).append(created).append(id).append(lastModified).append(priority).append(sequenceNr).toHashCode();
     }
     
 }

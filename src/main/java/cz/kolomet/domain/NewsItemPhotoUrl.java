@@ -30,12 +30,12 @@ public class NewsItemPhotoUrl extends DomainEntity {
 
 	/**
      */
-    @Size(max = 20)
+    @Size(max = 255)
     private String fileName;
     
     /**
      */
-    @Size(max = 20)
+    @Size(max = 30)
     @Column(updatable = false)
     private String contentType;
     

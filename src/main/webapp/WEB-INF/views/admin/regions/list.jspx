@@ -6,6 +6,7 @@
         <table:table data="${regions}" id="l_cz_kolomet_domain_codelist_Region" path="/admin/regions" z="user-managed">
             <table:column id="c_cz_kolomet_domain_codelist_Region_codeKey" property="codeKey" z="XVItV/N3pjs8LHz+/O+HvETHirs="/>
             <table:column id="c_cz_kolomet_domain_codelist_Region_codeDescription" property="codeDescription" z="QW2Ei03EsV3DaEBUWg/8rEAn/kw="/>
+            <table:column id="c_cz_kolomet_domain_codelist_Region_sequenceNr" property="sequenceNr" sort="true" z="zhpzNps0RzWs/kykityS93TScwI="/>
             <table:column id="c_cz_kolomet_domain_codelist_Region_createdBy" property="createdBy" z="6EMX84DPuKM//VjQQEZ4peFt0tM="/>
             <table:column id="c_cz_kolomet_domain_codelist_Region_lastModifiedBy" property="lastModifiedBy" z="Z4Evbnp7QG3dn+RbvNWU2h/1NQM="/>
             <table:column date="true" dateTimePattern="${region_created_date_format}" id="c_cz_kolomet_domain_codelist_Region_created" property="created" z="xZw8J1OoRDQ+zepIdHdQj1VvJ8Y="/>

@@ -10,16 +10,13 @@ import cz.kolomet.service.ProductService;
 import cz.kolomet.service.RegionService;
 import cz.kolomet.service.SellerPhotoUrlService;
 import cz.kolomet.service.SellerService;
-import cz.kolomet.service.SellerStatusService;
 import cz.kolomet.web.admin.SellerController;
 import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -46,28 +43,6 @@ privileged aspect SellerController_Roo_Controller {
     
     @Autowired
     RegionService SellerController.regionService;
-    
-    @Autowired
-    SellerStatusService SellerController.sellerStatusService;
-    
-    @RequestMapping(method = RequestMethod.POST, produces = "text/html")
-    public String SellerController.create(@Valid Seller seller, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
-            populateEditForm(uiModel, seller);
-            return "admin/sellers/create";
-        }
-        uiModel.asMap().clear();
-        sellerService.saveSeller(seller);
-        return "redirect:/admin/sellers/" + encodeUrlPathSegment(seller.getId().toString(), httpServletRequest);
-    }
-    
-    @RequestMapping(value = "/{id}", produces = "text/html")
-    public String SellerController.show(@PathVariable("id") Long id, Model uiModel) {
-        addDateTimeFormatPatterns(uiModel);
-        uiModel.addAttribute("seller", sellerService.findSeller(id));
-        uiModel.addAttribute("itemId", id);
-        return "admin/sellers/show";
-    }
     
     @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String SellerController.updateForm(@PathVariable("id") Long id, Model uiModel) {

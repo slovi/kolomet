@@ -12,4 +12,5 @@ import org.springframework.roo.addon.tostring.RooToString;
 @RooEquals(excludeFields = {"createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate"})
 @RooSerializable
 public class BicycleCategory extends Codelist {
+	
 }

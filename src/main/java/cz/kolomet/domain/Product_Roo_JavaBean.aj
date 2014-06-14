@@ -8,9 +8,11 @@ import cz.kolomet.domain.PhotoUrl;
 import cz.kolomet.domain.Producer;
 import cz.kolomet.domain.Product;
 import cz.kolomet.domain.ProductAttribute;
+import cz.kolomet.domain.ProductState;
 import cz.kolomet.domain.Seller;
 import cz.kolomet.domain.codelist.BicycleCategory;
 import cz.kolomet.domain.codelist.FigureHeight;
+import cz.kolomet.domain.codelist.ProductColor;
 import cz.kolomet.domain.codelist.ProductUsage;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -33,6 +35,14 @@ privileged aspect Product_Roo_JavaBean {
     
     public void Product.setPrice(BigDecimal price) {
         this.price = price;
+    }
+    
+    public BigDecimal Product.getFinalPrice() {
+        return this.finalPrice;
+    }
+    
+    public void Product.setFinalPrice(BigDecimal finalPrice) {
+        this.finalPrice = finalPrice;
     }
     
     public BigDecimal Product.getDiscount() {
@@ -99,12 +109,36 @@ privileged aspect Product_Roo_JavaBean {
         this.figureHeight = figureHeight;
     }
     
+    public ProductColor Product.getProductColor() {
+        return this.productColor;
+    }
+    
+    public void Product.setProductColor(ProductColor productColor) {
+        this.productColor = productColor;
+    }
+    
+    public Product Product.getCopiedFrom() {
+        return this.copiedFrom;
+    }
+    
+    public void Product.setCopiedFrom(Product copiedFrom) {
+        this.copiedFrom = copiedFrom;
+    }
+    
     public Boolean Product.getEnabled() {
         return this.enabled;
     }
     
     public void Product.setEnabled(Boolean enabled) {
         this.enabled = enabled;
+    }
+    
+    public Date Product.getValidFrom() {
+        return this.validFrom;
+    }
+    
+    public void Product.setValidFrom(Date validFrom) {
+        this.validFrom = validFrom;
     }
     
     public Date Product.getValidTo() {
@@ -131,11 +165,11 @@ privileged aspect Product_Roo_JavaBean {
         this.deliveryForFree = deliveryForFree;
     }
     
-    public Integer Product.getWeight() {
+    public Double Product.getWeight() {
         return this.weight;
     }
     
-    public void Product.setWeight(Integer weight) {
+    public void Product.setWeight(Double weight) {
         this.weight = weight;
     }
     
@@ -145,6 +179,14 @@ privileged aspect Product_Roo_JavaBean {
     
     public void Product.setBuyUrl(String buyUrl) {
         this.buyUrl = buyUrl;
+    }
+    
+    public ProductState Product.getProductState() {
+        return this.productState;
+    }
+    
+    public void Product.setProductState(ProductState productState) {
+        this.productState = productState;
     }
     
     public List<PhotoUrl> Product.getPhotoUrls() {

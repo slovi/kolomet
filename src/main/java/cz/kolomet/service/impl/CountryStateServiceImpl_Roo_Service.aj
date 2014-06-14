@@ -32,10 +32,6 @@ privileged aspect CountryStateServiceImpl_Roo_Service {
         return countryStateRepository.findOne(id);
     }
     
-    public List<CountryState> CountryStateServiceImpl.findAllCountryStates() {
-        return countryStateRepository.findAll();
-    }
-    
     public List<CountryState> CountryStateServiceImpl.findCountryStateEntries(int firstResult, int maxResults) {
         return countryStateRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / maxResults, maxResults)).getContent();
     }

@@ -1,4 +1,4 @@
-<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"  xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
   	<jsp:directive.page contentType="text/html;charset=UTF-8" />
   	<jsp:output omit-xml-declaration="yes" />
 
@@ -6,19 +6,23 @@
 		<div class="homepage_unit"> 
 			<spring:url value="/public/products/detail/${product.id}" var="productIdUrl" />
 	     	<a href="${productIdUrl}">
-	     		<util:photo-image photos="${product.photoUrls}" height="146" width="224" />
+	     		<util:photo-image photos="${product.photoUrls}" imgType="over" height="146" width="224" />
 	     	</a>
 	     	<div class="home_description"> 
 	     		<a href="${productIdUrl}" class="label"><c:out value="${product.productName}" /></a>
-	         	<p class="price"><spring:eval expression="product.price" /><spring:message code="currency" /></p>
-	         	<p><c:out escapeXml="false" value="${fn:substring(product.description, 0, 80)}" />...</p>
-	         	<p><spring:eval expression="product.created" /></p>
+	         	<p class="price_final"><fmt:formatNumber groupingUsed="true" value="${product.finalPrice}" /><spring:message code="currency" /></p>
+	         	<p><spring:message code="label_cz_kolomet_domain_product_producer" />: <c:out value="${product.producer.codeDescription}" /></p>
+	         	<p><spring:message code="label_cz_kolomet_domain_product_category" />: <c:out value="${product.category.codeDescription}" /></p>
 	     	</div>
 	     	<div class="home_seller"> 
 	     		<p>
 	     			<spring:url value="/public/sellers/detail/${product.seller.id}" var="sellerIdUrl" />
-	                <a href="${sellerIdUrl}"><c:out value="${product.seller.sellerName}" /></a>, ${product.seller.addressCity}<br/>
-	            	<c:out value="${product.seller.addressStreet}" />, <c:out value="${product.seller.addressPostCode}" />, <c:out value="${product.seller.addressCity}" />, <a href="${mapUrl}">mapa</a><br/>
+	                <a href="${sellerIdUrl}"><c:out value="${product.seller.sellerName}" /></a><br /><br />
+	            	<c:out value="${product.seller.businessAddressString}" /><br />
+	            	<c:if test="${not empty product.seller.mapUrl}">
+           				<a target="_blank" href="${product.seller.mapUrl}">mapa</a>
+           				<c:if test="${not empty product.seller.businessPhoneNumber}">, Tel.: </c:if>	
+           			</c:if> 
 	                <c:out value="${product.seller.businessPhoneNumber}" />
 	            </p>
 	     	</div>

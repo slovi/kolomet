@@ -8,5 +8,6 @@
         <field:display date="true" dateTimePattern="${productUsage_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_codelist_ProductUsage_lastModified" object="${productusage}" z="iG/fX3NUiTLVaTbPC+y8Z0h01UA="/>
         <field:display field="codeKey" id="s_cz_kolomet_domain_codelist_ProductUsage_codeKey" object="${productusage}" z="9sb+Mwns9ZlRLMItj6U6aKvjQas="/>
         <field:display field="codeDescription" id="s_cz_kolomet_domain_codelist_ProductUsage_codeDescription" object="${productusage}" z="xsyBETNH26EgnLEeQIn3g2t/4Z8="/>
+        <field:display field="sequenceNr" id="s_cz_kolomet_domain_codelist_ProductUsage_sequenceNr" object="${productusage}" z="rapw4nM+9ZwU96UAmsmoF8MzV8k="/>
     </page:show>
 </div>

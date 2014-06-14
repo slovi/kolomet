@@ -5,6 +5,7 @@ import java.io.File;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.task.TaskExecutor;
 
 import cz.kolomet.domain.NewsItemPhotoUrl;
@@ -19,6 +20,15 @@ public class NewsItemPhotoUrlServiceImpl implements NewsItemPhotoUrlService {
 	
 	@Autowired
 	private TaskExecutor executor;
+	
+	@Value("${img.rootdir}")
+	protected String rootDir;
+    
+    public void deleteNewsItemPhotoUrl(NewsItemPhotoUrl newsItemPhotoUrl) {
+        newsItemPhotoUrlRepository.delete(newsItemPhotoUrl);
+        
+        FileUtils.deleteQuietly(new File(rootDir + "/" + newsItemPhotoUrl.getPhotoUrl()));
+    }
 	
 	public void saveNewsItemPhotoUrl(NewsItemPhotoUrl photoUrl, final File file) {
 		

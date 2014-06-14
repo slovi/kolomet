@@ -9,7 +9,8 @@
         <field:display date="true" dateTimePattern="${registrationRequest_lastmodified_date_format}" field="created" id="s_cz_kolomet_domain_RegistrationRequest_created" object="${registrationrequest}" z="rm0up47v72C06J4/JKn6suiQwO8="/>
         <field:display field="email" id="s_cz_kolomet_domain_RegistrationRequest_email" object="${registrationrequest}" z="qTnr6swCU5cMWjIb6BzDzyIkY8s="/>
         <field:display field="phone" id="s_cz_kolomet_domain_RegistrationRequest_phone" object="${registrationrequest}" z="pF+Mz9gZZ5WGLFkfkCVfw2dmGEM="/>
-        <field:display field="text" id="s_cz_kolomet_domain_RegistrationRequest_text" object="${registrationrequest}" z="user-managed"/>
-        <field:display field="captchaText" id="s_cz_kolomet_domain_RegistrationRequest_captchaText" object="${registrationrequest}" z="ohOVRSmfxjAkqLggkhtzoapbyHc="/>
+        <field:display field="text" id="s_cz_kolomet_domain_RegistrationRequest_text" object="${registrationrequest}" htmlEscape="false" z="user-managed"/>
+        <field:display field="captchaText" id="s_cz_kolomet_domain_RegistrationRequest_captchaText" object="${registrationrequest}" render="false" z="user-managed"/>
+        <field:display bool="true" field="processed" id="s_cz_kolomet_domain_RegistrationRequest_processed" object="${registrationrequest}" z="user-managed"/>
     </page:show>
 </div>

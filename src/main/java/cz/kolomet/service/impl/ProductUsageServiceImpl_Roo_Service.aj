@@ -32,10 +32,6 @@ privileged aspect ProductUsageServiceImpl_Roo_Service {
         return productUsageRepository.findOne(id);
     }
     
-    public List<ProductUsage> ProductUsageServiceImpl.findAllProductUsages() {
-        return productUsageRepository.findAll();
-    }
-    
     public List<ProductUsage> ProductUsageServiceImpl.findProductUsageEntries(int firstResult, int maxResults) {
         return productUsageRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / maxResults, maxResults)).getContent();
     }

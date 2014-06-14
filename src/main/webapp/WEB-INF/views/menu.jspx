@@ -5,7 +5,7 @@
     <menu:menu id="_menu" z="nZaf43BjUg1iM0v70HJVEsXDopc=">
         <menu:category id="c_applicationuser" z="v79aQ/QkMH7PCPKfrV5dAc2kaIs=">
             <security:authorize access="hasAnyRole('ROLE_per_registrationrequests')">
-                <menu:item id="i_registrationrequest_list" messageCode="global_menu_list" url="/admin/registrationrequests" z="user-managed"/>
+                <menu:item id="i_registrationrequest_list" messageCode="global_menu_list" sort="processed" sortDesc="false" url="/admin/registrationrequests" z="user-managed"/>
             </security:authorize>
             <security:authorize access="isAuthenticated()">
                 <security:authorize access="hasRole('ROLE_per_sellers_own')">
@@ -67,6 +67,10 @@
                     <menu:item id="i_categorytype_new" messageCode="global_menu_new" renderPageParams="false" url="/admin/categorytypes?form" z="user-managed"/>
                     <menu:item id="i_categorytype_list" messageCode="global_menu_list" url="/admin/categorytypes" z="user-managed"/>
                 </security:authorize>
+                <security:authorize access="hasAnyRole('ROLE_per_productcolors')">
+                    <menu:item id="i_productcolor_new" messageCode="global_menu_new" url="/admin/productcolors?form" z="QLOU2vDJbHboxXdDF8CKLklt9Vs="/>
+                    <menu:item id="i_productcolor_list" messageCode="global_menu_list" url="/admin/productcolors" z="user-managed"/>
+                </security:authorize>
                 <security:authorize access="hasAnyRole('ROLE_per_productusages')">
                     <menu:item id="i_productusage_new" messageCode="global_menu_new" renderPageParams="false" url="/admin/productusages?form" z="user-managed"/>
                     <menu:item id="i_productusage_list" messageCode="global_menu_list" url="/admin/productusages" z="user-managed"/>
@@ -110,5 +114,9 @@
         <menu:category id="c_bicyclecategory" render="false" z="user-managed"/>
         <menu:category id="c_figureheight" render="false" z="user-managed"/>
         <menu:category id="c_newsitemphotourl" render="false" z="user-managed"/>
+        <menu:category id="c_productcolor" render="false" z="user-managed"/>
+        <menu:category id="c_place" z="ehQx2hJboGCApd1gLkBWIirIY8o=">
+            <menu:item id="i_place_list" messageCode="global_menu_list" url="/admin/places?page=1&amp;size=${empty param.size ? 10 : param.size}" z="/DMIeN4AJVoQZM6zEYjQeHs/hQw="/>
+        </menu:category>
     </menu:menu>
 </jsp:root>

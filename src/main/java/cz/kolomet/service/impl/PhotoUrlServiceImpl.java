@@ -1,6 +1,7 @@
 package cz.kolomet.service.impl;
 import java.awt.Dimension;
 import java.io.File;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
@@ -11,6 +12,7 @@ import org.springframework.core.task.TaskExecutor;
 import cz.kolomet.domain.PhotoUrl;
 import cz.kolomet.service.ImageService;
 import cz.kolomet.service.PhotoUrlService;
+import cz.kolomet.domain.Product;
 
 public class PhotoUrlServiceImpl implements PhotoUrlService {
 	
@@ -32,8 +34,19 @@ public class PhotoUrlServiceImpl implements PhotoUrlService {
 	@Value("${product.img.thumbnail.height}")
 	private Integer thumbnailHeight;
 	
+	@Value("${img.rootdir}")
+	protected String rootDir;
+		
 	@Autowired
 	private TaskExecutor executor;
+	
+    public void deletePhotoUrl(PhotoUrl photoUrl) {
+        photoUrlRepository.delete(photoUrl);
+        
+        FileUtils.deleteQuietly(new File(rootDir + "/" + photoUrl.getPhotoUrl()));
+        FileUtils.deleteQuietly(new File(rootDir + "/" + photoUrl.getOverPhotoUrl()));
+        FileUtils.deleteQuietly(new File(rootDir + "/" + photoUrl.getThumbPhotoUrl()));
+    }
 	
     public void savePhotoUrl(PhotoUrl photoUrl, final File file) {
         
@@ -57,6 +70,11 @@ public class PhotoUrlServiceImpl implements PhotoUrlService {
 			}
 		});
         
+    }
+    
+    @Override
+    public List<PhotoUrl> findByProduct(Product product) {
+    	return photoUrlRepository.findByProduct(product);
     }
    
 }

@@ -4,12 +4,13 @@
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_cz_kolomet_domain_codelist_ProductUsage" items="${productusages}" z="6LTZwGddUY7L83buvNfkxN3Y8ng=">
         <table:table data="${productusages}" id="l_cz_kolomet_domain_codelist_ProductUsage" path="/admin/productusages" z="fJOOLkgcWbzPDdJOA6DcLCrgHIA=">
+            <table:column id="c_cz_kolomet_domain_codelist_ProductUsage_codeKey" property="codeKey" sort="true" z="user-managed"/>
+            <table:column id="c_cz_kolomet_domain_codelist_ProductUsage_codeDescription" property="codeDescription" sort="true" z="user-managed"/>
+            <table:column id="c_cz_kolomet_domain_codelist_ProductUsage_sequenceNr" property="sequenceNr" sort="true" z="zhpzNps0RzWs/kykityS93TScwI="/>
             <table:column id="c_cz_kolomet_domain_codelist_ProductUsage_createdBy" property="createdBy" sort="true" z="user-managed"/>
             <table:column id="c_cz_kolomet_domain_codelist_ProductUsage_lastModifiedBy" property="lastModifiedBy" sort="true" z="user-managed"/>
             <table:column date="true" dateTimePattern="${productUsage_created_date_format}" id="c_cz_kolomet_domain_codelist_ProductUsage_created" property="created" sort="true" z="user-managed"/>
             <table:column date="true" dateTimePattern="${productUsage_lastmodified_date_format}" id="c_cz_kolomet_domain_codelist_ProductUsage_lastModified" property="lastModified" sort="true" z="user-managed"/>
-            <table:column id="c_cz_kolomet_domain_codelist_ProductUsage_codeKey" property="codeKey" sort="true" z="user-managed"/>
-            <table:column id="c_cz_kolomet_domain_codelist_ProductUsage_codeDescription" property="codeDescription" sort="true" z="user-managed"/>
         </table:table>
     </page:list>
 </div>

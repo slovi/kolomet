@@ -32,10 +32,6 @@ privileged aspect ProducerServiceImpl_Roo_Service {
         return producerRepository.findOne(id);
     }
     
-    public List<Producer> ProducerServiceImpl.findAllProducers() {
-        return producerRepository.findAll();
-    }
-    
     public List<Producer> ProducerServiceImpl.findProducerEntries(int firstResult, int maxResults) {
         return producerRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / maxResults, maxResults)).getContent();
     }

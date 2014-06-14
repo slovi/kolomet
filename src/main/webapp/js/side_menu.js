@@ -1,4 +1,4 @@
-define(['jquery'], function($) {
+define(['jquery', 'main'], function($) {
 	
 	return {
 		prepare: function() {

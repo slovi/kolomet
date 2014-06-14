@@ -2,16 +2,16 @@
 <div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <form:create id="fc_cz_kolomet_domain_NewsItemPhotoUrl" modelAttribute="newsItemPhotoUrl" path="/admin/newsitemphotourls" render="${empty dependencies}" z="vmxoxzrAqxby5OyPbOctp9ue0/U=">
-    	<field:files id="newsItemFiles" />
-        <field:select field="createdBy" id="c_cz_kolomet_domain_NewsItemPhotoUrl_createdBy" itemValue="id" items="${applicationusers}" path="/admin/applicationusers" z="WEJHYnBBvj7K3o1JCgwst6+eIZE=" render="false"/>
-        <field:select field="lastModifiedBy" id="c_cz_kolomet_domain_NewsItemPhotoUrl_lastModifiedBy" itemValue="id" items="${applicationusers}" path="/admin/applicationusers" z="0D2YiUny9kzihETPULEZg6ug6oQ=" render="false"/>
-        <field:datetime dateTimePattern="${newsItemPhotoUrl_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_NewsItemPhotoUrl_lastModified" z="abx7UDHRH9Kn8QVcBvqydvfF5ls=" render="false"/>
-        <field:input field="fileName" id="c_cz_kolomet_domain_NewsItemPhotoUrl_fileName" max="20" z="aMrxChaqwdIHLgVwRqGXqCZih3k=" render="false"/>
-        <field:input field="contentType" id="c_cz_kolomet_domain_NewsItemPhotoUrl_contentType" max="20" z="m0HjMx9b0Op5Viy3HY3GsEPG6EQ=" render="false"/>
-        <field:select field="newsItem" id="c_cz_kolomet_domain_NewsItemPhotoUrl_newsItem" itemValue="id" items="${newsitems}" path="/admin/newsitems" required="true" z="SRkll5LALPqYhMGaoqgIdoUDRdg=" render="false"/>        
-        <input name="newsItem" type="hidden" value="${param.parentEntityId}" />
-        <field:input field="contents" id="c_cz_kolomet_domain_NewsItemPhotoUrl_contents" z="6F2hcP5BZIoU9D8Qdoi4l34AGEM=" render="false" />
+    <form:create buttonCode="button_commit" id="fc_cz_kolomet_domain_NewsItemPhotoUrl" modelAttribute="newsItemPhotoUrl" path="/admin/newsitemphotourls" render="${empty dependencies}" z="user-managed">
+        <field:files id="newsItemFiles"/>
+        <field:select field="createdBy" id="c_cz_kolomet_domain_NewsItemPhotoUrl_createdBy" itemValue="id" items="${applicationusers}" path="/admin/applicationusers" render="false" z="user-managed"/>
+        <field:select field="lastModifiedBy" id="c_cz_kolomet_domain_NewsItemPhotoUrl_lastModifiedBy" itemValue="id" items="${applicationusers}" path="/admin/applicationusers" render="false" z="user-managed"/>
+        <field:datetime dateTimePattern="${newsItemPhotoUrl_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_NewsItemPhotoUrl_lastModified" render="false" z="user-managed"/>
+        <field:input field="fileName" id="c_cz_kolomet_domain_NewsItemPhotoUrl_fileName" max="20" render="false" z="user-managed"/>
+        <field:input field="contentType" id="c_cz_kolomet_domain_NewsItemPhotoUrl_contentType" max="20" render="false" z="user-managed"/>
+        <field:select field="newsItem" id="c_cz_kolomet_domain_NewsItemPhotoUrl_newsItem" itemValue="id" items="${newsitems}" path="/admin/newsitems" render="false" required="true" z="user-managed"/>
+        <input name="newsItem" type="hidden" value="${param.parentEntityId}"/>
+        <field:input field="contents" id="c_cz_kolomet_domain_NewsItemPhotoUrl_contents" render="false" z="user-managed"/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_cz_kolomet_domain_NewsItemPhotoUrl" render="${not empty dependencies}" z="V3+l2Xzsqg3b9wbad/9udGfafDo="/>
 </div>

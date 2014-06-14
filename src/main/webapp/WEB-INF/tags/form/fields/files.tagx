@@ -18,7 +18,7 @@
     <div id="_${fn:escapeXml(id)}_id">
       <spring:url value="/resources/images/delete.png" var="delete_image_url"/>
       
-      <c:set var="margin_left" value="550" />
+      <c:set var="margin_left" value="560" />
       <c:set var="margin_top" value="-40" />
       
       <div class="multiple_input_box">
@@ -27,7 +27,11 @@
       		<spring:message code="" arguments="${filesCount}" />
       	</c:if>
       	<c:forEach begin="1" end="${filesCount}" varStatus="status">
-      		<div id="_${fn:escapeXml(id)}_id_${status.index}" class="multiple_input_item">
+      		<c:set var="display" value="block" />
+      		<c:if test="${status.index > 1}">
+      			<c:set var="display" value="none" />
+      		</c:if>
+      		<div id="_${fn:escapeXml(id)}_id_${status.index - 1}" class="multiple_input_item" style="display: ${display}">
 	      		<field:input disableFormBinding="true" width="30" field="contents[${status.index - 1}]" label="Obrazek ${status.index}" id="_${fn:escapeXml(id)}_id_${status.index - 1}_input" type="file" inline="true"/>
 	      		<c:if test="${filesCount gt 1}"> 
 	      			<input alt="${fn:escapeXml(delete_label)}" src="${delete_image_url}" class="image multiple_input_remove" title="${fn:escapeXml(delete_label)}" type="image" value="${fn:escapeXml(delete_label)}" style="margin-left: ${margin_left}px; margin-top: ${margin_top}px;" data-index="${status.index - 1}"/>

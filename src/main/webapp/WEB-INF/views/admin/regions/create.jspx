@@ -9,6 +9,7 @@
         <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_codelist_Region_lastModifiedBy" render="false" z="user-managed"/>
         <field:datetime dateTimePattern="${region_created_date_format}" field="c" id="c_cz_kolomet_domain_codelist_Region_created" render="false" z="LhCBMbZahvV38kkdkrW7JPp7HKI="/>
         <field:datetime dateTimePattern="${region_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_codelist_Region_lastModified" render="false" z="user-managed"/>
+        <field:input field="sequenceNr" id="c_cz_kolomet_domain_codelist_Region_sequenceNr" validationMessageCode="field_invalid_integer" z="qPYL3B6by18Pq42j1l2W45e14Ko="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_cz_kolomet_domain_codelist_Region" render="${not empty dependencies}" z="8Qkgvcr6xkMl3Q8bwZG+53n2hNQ="/>
 </div>

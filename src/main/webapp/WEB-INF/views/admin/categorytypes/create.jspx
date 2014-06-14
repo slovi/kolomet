@@ -8,6 +8,7 @@
         <field:input field="createdBy" id="c_cz_kolomet_domain_codelist_CategoryType_createdBy" render="false" z="user-managed"/>
         <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_codelist_CategoryType_lastModifiedBy" render="false" z="user-managed"/>
         <field:datetime dateTimePattern="${categoryType_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_codelist_CategoryType_lastModified" render="false" z="user-managed"/>
+        <field:input field="sequenceNr" id="c_cz_kolomet_domain_codelist_CategoryType_sequenceNr" validationMessageCode="field_invalid_integer" z="frP1XRGnWvaMcnZqTTxPFX7ogBU="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_cz_kolomet_domain_codelist_CategoryType" render="${not empty dependencies}" z="RRcrjHQ2HlK3evivpwTCkJWCgCY="/>
 </div>

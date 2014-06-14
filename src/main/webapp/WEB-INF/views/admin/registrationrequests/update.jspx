@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <form:update id="fu_cz_kolomet_domain_RegistrationRequest" modelAttribute="registrationRequest" path="/admin/registrationrequests" versionField="Version" z="EgviRE/eAt6pNvxnMhz3Ydg+GWk=">
@@ -7,8 +7,15 @@
         <field:select field="lastModifiedBy" id="c_cz_kolomet_domain_RegistrationRequest_lastModifiedBy" itemValue="id" items="${applicationusers}" path="/admin/applicationusers" render="false" z="user-managed"/>
         <field:datetime dateTimePattern="${registrationRequest_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_RegistrationRequest_lastModified" render="false" z="user-managed"/>
         <field:input field="email" id="c_cz_kolomet_domain_RegistrationRequest_email" required="true" validationMessageCode="field_invalid_email" z="3tdY7pKqaACR3BvclB5bKSdao3U="/>
-        <field:input field="phone" id="c_cz_kolomet_domain_RegistrationRequest_phone" required="true" z="1f5AqJYIcUKfbou0NXbBxcHra9g="/>
-        <field:input field="text" id="c_cz_kolomet_domain_RegistrationRequest_text" z="W5MBM7kYqd+yCqT/Vs00Lj5YoA8="/>
-        <field:input field="captchaText" id="c_cz_kolomet_domain_RegistrationRequest_captchaText" z="U3oUtCmGe6VdYh468OBWnzOCvK0="/>
+        <p>
+            <spring:message code="phonenr_format"/>:</p>
+        <br/>
+        <field:input field="phone" id="c_cz_kolomet_domain_RegistrationRequest_phone" required="true" validationRegex="(([0-9]{9})|(\\+420[0-9]{9}))" z="user-managed"/>
+        <spring:message code="registrationrequest_text_entry"/>:
+        <br/>
+        <br/>
+        <field:editor field="text" id="c_cz_kolomet_domain_RegistrationRequest_text" label="empty" z="user-managed"/>
+        <field:checkbox field="processed" id="c_cz_kolomet_domain_RegistrationRequest_processed" z="8lq7TfuunzHeWrzhZMDMOXXwVYY="/>
+        <field:input field="captchaText" id="c_cz_kolomet_domain_RegistrationRequest_captchaText" render="false" z="user-managed"/>
     </form:update>
 </div>

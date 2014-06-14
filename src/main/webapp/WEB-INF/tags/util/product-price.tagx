@@ -1,0 +1,23 @@
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" xmlns:spring="http://www.springframework.org/tags" xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0">
+  <jsp:output omit-xml-declaration="yes" />
+  
+  <jsp:directive.attribute name="product" type="cz.kolomet.domain.Product" required="true" rtexprvalue="true" description="The product" />
+  <jsp:directive.attribute name="render" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Indicate if the contents of this tag and all enclosed tags should be rendered (default 'true')" />
+  
+  <c:if test="${empty render or render}">
+    <c:if test="${empty openPane}">
+      <c:set value="true" var="openPane" />
+    </c:if>
+
+	<c:if test="${not empty product.finalPrice and (product.price - product.finalPrice ne 0)}">
+		<span class="price_final"><spring:message code="label_cz_kolomet_domain_product_finalprice" />: <fmt:formatNumber value="${product.finalPrice}" groupingUsed="true" /><spring:message code="currency" /><br /></span>
+		<span class="price_discount"><spring:message code="label_cz_kolomet_domain_product_discount" />: <fmt:formatNumber value="${product.discount}" groupingUsed="true" /><spring:message code="currency" /><br /></span>
+		<span class="price"><spring:message code="label_cz_kolomet_domain_product_price" />: <fmt:formatNumber value="${product.price}" groupingUsed="true" /><spring:message code="currency" /><br /></span>
+	</c:if>
+	
+	<c:if test="${empty product.finalPrice}">
+		<span><spring:message code="price" />: <fmt:formatNumber groupingUsed="true" value="${product.price}" /><spring:message code="currency" /></span><br/>
+	</c:if>
+  
+  </c:if>
+</jsp:root>

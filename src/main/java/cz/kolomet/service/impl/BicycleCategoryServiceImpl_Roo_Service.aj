@@ -20,20 +20,16 @@ privileged aspect BicycleCategoryServiceImpl_Roo_Service {
     @Autowired
     BicycleCategoryRepository BicycleCategoryServiceImpl.bicycleCategoryRepository;
     
-    public long BicycleCategoryServiceImpl.countAllBicycleCategories() {
+    public long BicycleCategoryServiceImpl.countAllBicycleCategorys() {
         return bicycleCategoryRepository.count();
     }
     
     public void BicycleCategoryServiceImpl.deleteBicycleCategory(BicycleCategory bicycleCategory) {
-    	bicycleCategoryRepository.delete(bicycleCategory);
+        bicycleCategoryRepository.delete(bicycleCategory);
     }
     
     public BicycleCategory BicycleCategoryServiceImpl.findBicycleCategory(Long id) {
         return bicycleCategoryRepository.findOne(id);
-    }
-    
-    public List<BicycleCategory> BicycleCategoryServiceImpl.findAllBicycleCategories() {
-        return bicycleCategoryRepository.findAll();
     }
     
     public List<BicycleCategory> BicycleCategoryServiceImpl.findBicycleCategoryEntries(int firstResult, int maxResults) {
@@ -41,7 +37,7 @@ privileged aspect BicycleCategoryServiceImpl_Roo_Service {
     }
     
     public void BicycleCategoryServiceImpl.saveBicycleCategory(BicycleCategory bicycleCategory) {
-    	bicycleCategoryRepository.save(bicycleCategory);
+        bicycleCategoryRepository.save(bicycleCategory);
     }
     
     public BicycleCategory BicycleCategoryServiceImpl.updateBicycleCategory(BicycleCategory bicycleCategory) {

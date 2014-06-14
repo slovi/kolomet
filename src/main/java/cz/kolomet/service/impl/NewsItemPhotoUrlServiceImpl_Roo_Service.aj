@@ -24,10 +24,6 @@ privileged aspect NewsItemPhotoUrlServiceImpl_Roo_Service {
         return newsItemPhotoUrlRepository.count();
     }
     
-    public void NewsItemPhotoUrlServiceImpl.deleteNewsItemPhotoUrl(NewsItemPhotoUrl newsItemPhotoUrl) {
-        newsItemPhotoUrlRepository.delete(newsItemPhotoUrl);
-    }
-    
     public NewsItemPhotoUrl NewsItemPhotoUrlServiceImpl.findNewsItemPhotoUrl(Long id) {
         return newsItemPhotoUrlRepository.findOne(id);
     }

@@ -40,10 +40,6 @@ privileged aspect RegistrationRequestServiceImpl_Roo_Service {
         return registrationRequestRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / maxResults, maxResults)).getContent();
     }
     
-    public void RegistrationRequestServiceImpl.saveRegistrationRequest(RegistrationRequest registrationRequest) {
-        registrationRequestRepository.save(registrationRequest);
-    }
-    
     public RegistrationRequest RegistrationRequestServiceImpl.updateRegistrationRequest(RegistrationRequest registrationRequest) {
         return registrationRequestRepository.save(registrationRequest);
     }

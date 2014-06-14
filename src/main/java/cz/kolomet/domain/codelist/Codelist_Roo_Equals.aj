@@ -17,11 +17,11 @@ privileged aspect Codelist_Roo_Equals {
             return true;
         }
         Codelist rhs = (Codelist) obj;
-        return new EqualsBuilder().append(codeDescription, rhs.codeDescription).append(codeKey, rhs.codeKey).append(created, rhs.created).append(id, rhs.id).append(lastModified, rhs.lastModified).isEquals();
+        return new EqualsBuilder().append(codeDescription, rhs.codeDescription).append(codeKey, rhs.codeKey).append(created, rhs.created).append(id, rhs.id).append(lastModified, rhs.lastModified).append(sequenceNr, rhs.sequenceNr).isEquals();
     }
     
     public int Codelist.hashCode() {
-        return new HashCodeBuilder().append(codeDescription).append(codeKey).append(created).append(id).append(lastModified).toHashCode();
+        return new HashCodeBuilder().append(codeDescription).append(codeKey).append(created).append(id).append(lastModified).append(sequenceNr).toHashCode();
     }
     
 }

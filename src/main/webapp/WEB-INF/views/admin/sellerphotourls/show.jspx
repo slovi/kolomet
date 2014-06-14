@@ -2,7 +2,7 @@
 <div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:spring="http://www.springframework.org/tags" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <page:show id="ps_cz_kolomet_domain_SellerPhotoUrl" object="${sellerphotourl}" path="/admin/sellerphotourls" z="user-managed" create="false" update="false" delete="false" list="false">
+    <page:show create="false" delete="false" id="ps_cz_kolomet_domain_SellerPhotoUrl" list="false" object="${sellerphotourl}" path="/admin/sellerphotourls" update="false" z="user-managed">
         <field:display field="fileName" id="s_cz_kolomet_domain_SellerPhotoUrl_fileName" object="${sellerphotourl}" z="heCSgLuZikljbURldUuiYaZyJUU="/>
         <field:display field="contentType" id="s_cz_kolomet_domain_SellerPhotoUrl_contentType" object="${sellerphotourl}" z="gr6uvnSFP1cAnS6Ay4vvofPzBhg="/>
         <field:display field="seller" id="s_cz_kolomet_domain_SellerPhotoUrl_seller" object="${sellerphotourl}" z="U/Ez7NXencX8MPdvkuBhM2lM1bk="/>
@@ -10,7 +10,8 @@
         <field:display field="lastModifiedBy" id="s_cz_kolomet_domain_SellerPhotoUrl_lastModifiedBy" object="${sellerphotourl}" z="d7YXDsodsDG9WLr+JS3dyjt/lSQ="/>
         <field:display date="true" dateTimePattern="${sellerPhotoUrl_created_date_format}" field="created" id="s_cz_kolomet_domain_SellerPhotoUrl_created" object="${sellerphotourl}" z="v7aHGg8zfB5ulYm4E7ea1MY6k6c="/>
         <field:display date="true" dateTimePattern="${sellerPhotoUrl_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_SellerPhotoUrl_lastModified" object="${sellerphotourl}" z="v7aHGg8zfB5ulYm4E7ea1MY6k6c="/>
-        <spring:url value="/file/seller/${sellerphotourl.photoUrl}" var="sellerPhotoUrlImg"/>
+        <spring:url value="/file/${sellerphotourl.photoUrl}" var="sellerPhotoUrlImg"/>
         <img src="${sellerPhotoUrlImg}"/>
+        <field:display field="contents" id="s_cz_kolomet_domain_SellerPhotoUrl_contents" object="${sellerphotourl}" render="false" z="user-managed"/>
     </page:show>
 </div>

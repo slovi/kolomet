@@ -1,47 +1,115 @@
 package cz.kolomet.service.impl;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PostFilter;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.encoding.PasswordEncoder;
 
+import cz.kolomet.domain.ApplicationRole;
+import cz.kolomet.domain.ApplicationUser;
 import cz.kolomet.domain.Seller;
+import cz.kolomet.repository.ApplicationRoleRepository;
+import cz.kolomet.repository.ApplicationUserRepository;
 import cz.kolomet.repository.SellerRepository;
+import cz.kolomet.security.PasswordGenerator;
+import cz.kolomet.service.MailService;
 import cz.kolomet.service.SellerService;
+import cz.kolomet.service.exception.ExistingUserException;
 
 public class SellerServiceImpl implements SellerService {
 	
 	@Autowired
 	private SellerRepository sellerRepository;
 	
+	@Autowired
+	private ApplicationUserRepository applicationUserRepository;
+	
+	@Autowired
+	private MailService mailService;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	private PasswordGenerator passwordGenerator;
+	
+	@Autowired
+	private ApplicationRoleRepository applicationRoleRepository;
+	
+	@Value("${seller.roleName}")
+	private String sellerRoleName;
+	
+	@Value("${seller.mail.new.subject}")
+	private String newSellerEmailSubject;
+	
+	@Value("${seller.mail.new.template}")
+	private String newSellerEmailTemplate;
+	
 	public Page<Seller> findSellerEntries(Pageable pageable) {
 		return sellerRepository.findAll(pageable);
 	}
     
-	@PreAuthorize("hasRole('ROLE_per_sellers_all')")
+	@PreAuthorize("principal.isSellerAll()")
     public void deleteSeller(Seller seller) {
         sellerRepository.delete(seller);
     }
     
-	@PostAuthorize("isAnonymous() or hasRole('ROLE_per_sellers_all') or returnObject.id == principal.sellerId")
+	@PostAuthorize("isAnonymous() or principal.isSellerOwner(returnObject)")
     public Seller findSeller(Long id) {
         return sellerRepository.findOne(id);
     }
     
-    @PreAuthorize("hasRole('ROLE_per_sellers_all') or #seller.id == principal.sellerId")
+    @PreAuthorize("principal.isCapableToSaveSeller(#seller)")
     public void saveSeller(Seller seller) {
-        sellerRepository.save(seller);
+    	
+    	ApplicationUser user = applicationUserRepository.findByUsername(seller.getAddressEmail()); 
+    	if (user == null) {
+    		
+    		String password = passwordGenerator.generatePassword(user);
+        	
+        	ApplicationRole applicationRole = applicationRoleRepository.findByRoleName(sellerRoleName);
+        	
+        	ApplicationUser applicationUser = new ApplicationUser();
+        	applicationUser.setEnabled(true);
+        	applicationUser.setPassword(passwordEncoder.encodePassword(password, null));
+        	applicationUser.setSeller(seller);
+        	applicationUser.addRole(applicationRole);
+        	applicationUser.setUsername(seller.getBusinessEmail());
+        	
+        	applicationUserRepository.save(applicationUser);
+            sellerRepository.save(seller);
+            
+            Map<String, Object> params = new HashMap<String, Object>();
+            params.put("username", seller.getBusinessEmail());
+            params.put("password", password);
+            params.put("seller", seller);
+            
+            seller.normalizeWebUrl();
+            
+            mailService.send(seller.getBusinessEmail(), newSellerEmailSubject, newSellerEmailTemplate, params);
+            
+    	} else {
+    		throw new ExistingUserException(user);
+    	}
+    	    	
     }
     
-    @PreAuthorize("hasRole('ROLE_per_sellers_all') or #seller.id == principal.sellerId")
+    @PreAuthorize("principal.isCapableToUpdateSeller(#seller)")
     public Seller updateSeller(Seller seller) {
-        return sellerRepository.save(seller);
+    	
+    	seller.normalizeWebUrl();
+    	
+   		return sellerRepository.save(seller);
     }
     
-    @PreAuthorize("hasRole('ROLE_per_sellers_all')")
+    @PreAuthorize("principal.isSellersAll()")
     public long countAllSellers() {
         return sellerRepository.count();
     }
@@ -51,7 +119,7 @@ public class SellerServiceImpl implements SellerService {
         return sellerRepository.findAll();
     }
     
-    @PreAuthorize("hasRole('ROLE_per_sellers_all')")
+    @PreAuthorize("principal.isSellersAll()")
     public List<Seller> findSellerEntries(int firstResult, int maxResults) {
         return sellerRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / maxResults, maxResults)).getContent();
     }

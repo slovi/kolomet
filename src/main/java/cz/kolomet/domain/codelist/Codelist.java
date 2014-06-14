@@ -1,5 +1,8 @@
 package cz.kolomet.domain.codelist;
 import cz.kolomet.domain.DomainEntity;
+
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.roo.addon.equals.RooEquals;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.entity.RooJpaEntity;
@@ -26,4 +29,11 @@ public abstract class Codelist extends DomainEntity {
     @NotNull
     @Size(max = 100)
     private String codeDescription;
+    
+    private Integer sequenceNr = 0;
+    
+    public static Sort defaultSort() {
+    	return new Sort(Direction.DESC, "sequenceNr");
+    }
+    
 }

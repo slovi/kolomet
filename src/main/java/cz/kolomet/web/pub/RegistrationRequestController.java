@@ -17,16 +17,27 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.octo.captcha.service.image.ImageCaptchaService;
 
 import cz.kolomet.domain.RegistrationRequest;
-import cz.kolomet.web.AbstractController;
+import cz.kolomet.service.exception.DefaultObjectDataReadException;
 
 @RequestMapping("/public/registrationrequests")
 @Controller("publicRegistrationRequestController")
 @RooWebScaffold(path = "public/registrationrequests", formBackingObject = RegistrationRequest.class, update = false, delete = false)
-public class RegistrationRequestController extends AbstractController {
+public class RegistrationRequestController extends AbstractPublicController {
 	
 	@Autowired
 	private ImageCaptchaService captchaService; 
 	
+    @RequestMapping(params = "form", produces = "text/html")
+    public String createForm(Model uiModel) {
+    	RegistrationRequest registrationRequest = new RegistrationRequest();
+    	try {
+    		registrationRequest.setDefaultText();
+    	} catch (DefaultObjectDataReadException e) {
+    		logger.error(e.getLocalizedMessage(), e);
+    	}
+        populateEditForm(uiModel, registrationRequest);
+        return "public/registrationrequests/create";
+    }
 	
 	@RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String create(@Valid RegistrationRequest registrationRequest, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
@@ -35,8 +46,8 @@ public class RegistrationRequestController extends AbstractController {
             return "public/registrationrequests/create";
         }
         
-        if (!captchaService.validateResponseForID(httpServletRequest.getSession().getId(), registrationRequest.getCaptchaText())) {
-        	bindingResult.rejectValue("captchaText", "Opsal jste spatne kod z obrazku");
+        if (!captchaService.validateResponseForID("registration_request_" + httpServletRequest.getSession().getId(), registrationRequest.getCaptchaText())) {
+        	bindingResult.rejectValue("captchaText", "exception_incorrect_captcha");
         	return "public/registrationrequests/create";
         }
         

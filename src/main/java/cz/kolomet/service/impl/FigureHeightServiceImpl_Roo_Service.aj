@@ -32,10 +32,6 @@ privileged aspect FigureHeightServiceImpl_Roo_Service {
         return figureHeightRepository.findOne(id);
     }
     
-    public List<FigureHeight> FigureHeightServiceImpl.findAllFigureHeights() {
-        return figureHeightRepository.findAll();
-    }
-    
     public List<FigureHeight> FigureHeightServiceImpl.findFigureHeightEntries(int firstResult, int maxResults) {
         return figureHeightRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / maxResults, maxResults)).getContent();
     }

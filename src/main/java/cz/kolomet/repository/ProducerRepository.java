@@ -5,4 +5,5 @@ import cz.kolomet.domain.Producer;
 
 @RooJpaRepository(domainType = Producer.class)
 public interface ProducerRepository {
+	
 }

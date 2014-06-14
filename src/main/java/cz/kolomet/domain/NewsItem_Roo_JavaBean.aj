@@ -5,6 +5,7 @@ package cz.kolomet.domain;
 
 import cz.kolomet.domain.NewsItem;
 import cz.kolomet.domain.NewsItemPhotoUrl;
+import cz.kolomet.domain.NewsItemType;
 import java.util.Date;
 import java.util.List;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
@@ -49,6 +50,14 @@ privileged aspect NewsItem_Roo_JavaBean {
     
     public void NewsItem.setContents(List<CommonsMultipartFile> contents) {
         this.contents = contents;
+    }
+    
+    public NewsItemType NewsItem.getNewsItemType() {
+        return this.newsItemType;
+    }
+    
+    public void NewsItem.setNewsItemType(NewsItemType newsItemType) {
+        this.newsItemType = newsItemType;
     }
     
 }

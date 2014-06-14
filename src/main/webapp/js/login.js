@@ -1,11 +1,9 @@
-define(['jquery', 'jquery_lean'], function($) {
+define(['jquery', 'jquery_lean', 'main'], function($) {
 	
 	return {
 		prepare: function() {
-			$("#login_button").click(function(event) {
-				$("#login_button").leanModal({top : 200, overlay : 0.4, closeButton: ".modal_close"});
-				$("#login_form .error").html('');
-			});			
+			
+			$("#login_modal").leanModal({top : 200, overlay : 0.4, closeButton: ".modal_close"});
 			
 			$("#login_form").submit(function(event) {
 				

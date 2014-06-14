@@ -8,6 +8,7 @@
         <field:datetime dateTimePattern="${productUsage_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_codelist_ProductUsage_lastModified" render="false" z="user-managed"/>
         <field:input field="codeKey" id="c_cz_kolomet_domain_codelist_ProductUsage_codeKey" max="20" required="true" z="8PZ3uzQHT7Q2AQkLbHRjlPy6Xok="/>
         <field:textarea field="codeDescription" id="c_cz_kolomet_domain_codelist_ProductUsage_codeDescription" required="true" z="mMNvXhgVaf0o5e5zVNFsHCE+mrk="/>
+        <field:input field="sequenceNr" id="c_cz_kolomet_domain_codelist_ProductUsage_sequenceNr" validationMessageCode="field_invalid_integer" z="qBGWYBXD64tDMSs/ozjKZRtFafc="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_cz_kolomet_domain_codelist_ProductUsage" render="${not empty dependencies}" z="nyprc28q0qbjqmQyeH5BfXP7/x0="/>
 </div>

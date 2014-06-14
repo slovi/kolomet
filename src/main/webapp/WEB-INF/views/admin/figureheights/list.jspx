@@ -4,12 +4,13 @@
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_cz_kolomet_domain_codelist_FigureHeight" items="${figureheights}" z="4dSxSDjwbUb2zH7h9IyhmkDjY6c=">
         <table:table data="${figureheights}" id="l_cz_kolomet_domain_codelist_FigureHeight" path="/admin/figureheights" z="u6cANZEGecuM59aVPwf1bbgu2lE=">
+            <table:column id="c_cz_kolomet_domain_codelist_FigureHeight_codeKey" property="codeKey" sort="true" z="user-managed"/>
+            <table:column id="c_cz_kolomet_domain_codelist_FigureHeight_codeDescription" property="codeDescription" sort="true" z="user-managed"/>
+            <table:column id="c_cz_kolomet_domain_codelist_FigureHeight_sequenceNr" property="sequenceNr" sort="true" z="zhpzNps0RzWs/kykityS93TScwI="/>
             <table:column id="c_cz_kolomet_domain_codelist_FigureHeight_createdBy" property="createdBy" sort="true" z="user-managed"/>
             <table:column id="c_cz_kolomet_domain_codelist_FigureHeight_lastModifiedBy" property="lastModifiedBy" sort="true" z="user-managed"/>
             <table:column date="true" dateTimePattern="${figureHeight_created_date_format}" id="c_cz_kolomet_domain_codelist_FigureHeight_created" property="created" sort="true" z="user-managed"/>
             <table:column date="true" dateTimePattern="${figureHeight_lastmodified_date_format}" id="c_cz_kolomet_domain_codelist_FigureHeight_lastModified" property="lastModified" sort="true" z="user-managed"/>
-            <table:column id="c_cz_kolomet_domain_codelist_FigureHeight_codeKey" property="codeKey" sort="true" z="user-managed"/>
-            <table:column id="c_cz_kolomet_domain_codelist_FigureHeight_codeDescription" property="codeDescription" sort="true" z="user-managed"/>
         </table:table>
     </page:list>
 </div>

@@ -1,4 +1,4 @@
-<jsp:root xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:spring="http://www.springframework.org/tags" xmlns:form="http://www.springframework.org/tags/form" xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+<jsp:root xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:kolomet-util="http://www.kolomet.cz/tags/util" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:spring="http://www.springframework.org/tags" xmlns:form="http://www.springframework.org/tags/form" xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
   <jsp:directive.tag import="java.util.ArrayList" />
   <jsp:output omit-xml-declaration="yes" />
 
@@ -130,6 +130,27 @@
                   	<util:boolean value="${prop}" />
                   </c:set>
                 </c:when>
+                <c:when test="${columnType eq 'url'}">
+                  <c:set var="colTxt">
+                  	<spring:url value="/file/${prop}" />
+                  </c:set>
+                </c:when>
+                <c:when test="${columnType eq 'img'}">
+                  <c:set var="colTxt">                  	
+                  	<spring:url value="/file/${prop}" var="imgUrl" />
+                  	<img src="${imgUrl}" alt="${prop}" />
+                  </c:set>
+                </c:when>
+                <c:when test="${columnType eq 'enumValue'}">
+                  <c:set var="colTxt">                  
+                  	<kolomet-util:displayEnum enumValue="${prop}" />	
+                  </c:set>
+                </c:when>
+                <c:when test="${columnType eq 'number'}">
+                  <c:set var="colTxt">               
+	              	 <fmt:formatNumber groupingUsed="true" value="${prop}" />   
+                  </c:set>
+                </c:when>
                 <c:otherwise>
                   <c:set var="colTxt">
                   	<c:if test="${not empty prop}">                  	
@@ -141,7 +162,7 @@
               <c:if test="${columnMaxLength ge 0}">
                 <c:set value="${fn:substring(colTxt, 0, columnMaxLength)}" var="colTxt" />
               </c:if>
-              <c:out value="${colTxt}" />
+              <c:out value="${colTxt}" escapeXml="false" />
             </td>
           </c:forTokens>
           <c:set var="itemId"><spring:eval expression="item[typeIdFieldName]"/></c:set>
@@ -169,6 +190,7 @@
             <td class="utilbox">
               <spring:url value="${path}/${itemId}" var="delete_form_url" />
               <spring:url value="/resources/images/delete.png" var="delete_image_url" />
+              <form:form></form:form>
               <form:form id="${id}_delete_form_${status.index}" action="${delete_form_url}" method="DELETE">
                 <spring:message arguments="${typeName}" code="entity_delete" var="delete_label" htmlEscape="false" />
                 <c:set var="delete_confirm_msg">
@@ -176,14 +198,14 @@
                     <spring:message code="entity_delete_confirm" />
                   </spring:escapeBody>
                 </c:set>
-                <input alt="${fn:escapeXml(delete_label)}" class="image" src="${delete_image_url}" title="${fn:escapeXml(delete_label)}" type="image" value="${fn:escapeXml(delete_label)}" onclick="return confirm('${delete_confirm_msg}');" />
+                <input alt="${fn:escapeXml(delete_label)}" class="image table_ajax_delete" src="${delete_image_url}" title="${fn:escapeXml(delete_label)}" type="image" value="${fn:escapeXml(delete_label)}" />
                 <c:if test="${not empty param.page}">
                   <input name="page" type="hidden" value="1" />
                 </c:if>
                 <c:if test="${not empty param.size}">
                   <input name="size" type="hidden" value="${fn:escapeXml(param.size)}" />
                 </c:if>
-              </form:form>
+              </form:form>              
             </td>
           </c:if>
         </tr>
@@ -212,7 +234,18 @@
         </td>
       </tr>
     </table>
+    
+    <c:set var="delete_confirm_msg">
+      <spring:escapeBody javaScriptEscape="true">
+        <spring:message code="entity_delete_confirm" />
+      </spring:escapeBody>
+    </c:set>
+    <script type="text/javascript">
+		require(['form'], function(form) {
+  			form.ajaxTableRowDelete('${delete_confirm_msg}');     				
+  		});
+ 	</script>
 
   </c:if>
 
-</jsp:root>
+</jsp:root> 

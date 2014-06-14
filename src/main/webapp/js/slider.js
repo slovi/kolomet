@@ -1,9 +1,9 @@
-define(['jquery', 'jquery_ui', 'jquery_number'], function($) {
+define(['jquery', 'jquery_ui', 'jquery_number', 'main'], function($) {
 	
 	var sliders = [];
 	
 	return {
-		slider: function(divId, valueFrom, valueTo, maxValueFrom, maxValueTo, step) {
+		slider: function(divId, valueFrom, valueTo, maxValueFrom, maxValueTo, step, additionalFunction) {
 						
 			var parentDiv = $("#" + divId); 
 			var slider = $("div", parentDiv); 
@@ -21,7 +21,10 @@ define(['jquery', 'jquery_ui', 'jquery_number'], function($) {
 					formatCurrency(amountFromInput);
 					amountToInput.val(ui.values[1]);
 					formatCurrency(amountToInput);
-				}
+				},
+				change: function(event) {
+					additionalFunction(parentDiv);
+				}		
 			});
 			sliders[divId] = slider;
 		},

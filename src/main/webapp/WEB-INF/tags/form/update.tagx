@@ -9,6 +9,7 @@
   <jsp:directive.attribute name="idField" type="java.lang.String" required="false" rtexprvalue="true" description="Specify the field name of the id field (default 'id')" />
   <jsp:directive.attribute name="versionField" type="java.lang.String" required="false" rtexprvalue="true" description="Specify the field name of the version field (default 'version'). If specified 'none' the version field will not be inlcuded (versionField='none')." />
   <jsp:directive.attribute name="render" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Indicate if the contents of this tag and all enclosed tags should be rendered (default 'true')" />
+  <jsp:directive.attribute name="displayStayButton" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Indicate if the stay button should be displayed" />
   <jsp:directive.attribute name="openPane" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Control if the title pane is opened or closed by default (default: true)" />
   <jsp:directive.attribute name="z" type="java.lang.String" required="false" description="Used for checking if element has been modified (to recalculate simply provide empty string value)" />
 
@@ -31,11 +32,17 @@
       <spring:url value="${path}" var="form_url" />
       <form:form action="${form_url}" method="PUT" modelAttribute="${modelAttribute}" enctype="${enctype}">
         <form:errors cssClass="errors" delimiter="&lt;p/&gt;" />
+        <br />
+        <br />
         <jsp:doBody />
         <div class="submit" id="${fn:escapeXml(id)}_submit">
           <spring:message code="button_save" var="save_button" htmlEscape="false" />
           <script type="text/javascript">Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'proceed', event:'onclick'}));</script>
           <input id="proceed" type="submit" value="${fn:escapeXml(save_button)}" />
+          <c:if test="${not empty displayStayButton and displayStayButton}">
+          	<spring:message code="button_save_and_stay" var="save_and_stay_button" htmlEscape="false" />
+          	<input id="proceed_and_stay" type="submit" name="stay" value="${fn:escapeXml(save_and_stay_button)}" />
+          </c:if>
         </div>
         <c:if test="${idField ne 'none'}">
         	<form:hidden id="_${fn:escapeXml(idField)}_id" path="${fn:escapeXml(idField)}" />

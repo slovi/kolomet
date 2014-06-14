@@ -23,4 +23,12 @@ privileged aspect Codelist_Roo_JavaBean {
         this.codeDescription = codeDescription;
     }
     
+    public Integer Codelist.getSequenceNr() {
+        return this.sequenceNr;
+    }
+    
+    public void Codelist.setSequenceNr(Integer sequenceNr) {
+        this.sequenceNr = sequenceNr;
+    }
+    
 }

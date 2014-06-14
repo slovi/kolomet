@@ -6,6 +6,7 @@
         <table:table data="${categorytypes}" id="l_cz_kolomet_domain_codelist_CategoryType" path="/admin/categorytypes" z="user-managed">
             <table:column id="c_cz_kolomet_domain_codelist_CategoryType_codeKey" property="codeKey" sort="true" z="user-managed"/>
             <table:column id="c_cz_kolomet_domain_codelist_CategoryType_codeDescription" property="codeDescription" sort="true" z="user-managed"/>
+            <table:column id="c_cz_kolomet_domain_codelist_CategoryType_sequenceNr" property="sequenceNr" sort="true" z="zhpzNps0RzWs/kykityS93TScwI="/>
             <table:column id="c_cz_kolomet_domain_codelist_CategoryType_createdBy" property="createdBy" sort="true" z="user-managed"/>
             <table:column id="c_cz_kolomet_domain_codelist_CategoryType_lastModifiedBy" property="lastModifiedBy" sort="true" z="user-managed"/>
             <table:column date="true" dateTimePattern="${categoryType_created_date_format}" id="c_cz_kolomet_domain_codelist_CategoryType_created" property="created" sort="true" z="user-managed"/>

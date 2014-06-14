@@ -8,12 +8,17 @@
   <jsp:directive.attribute name="multipart" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Indicate if this is a multipart form (default: false)" />
   <jsp:directive.attribute name="label" type="java.lang.String" required="false" rtexprvalue="true" description="The label used for this object, will default to a message bundle if not supplied"/>
   <jsp:directive.attribute name="render" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Indicate if the contents of this tag and all enclosed tags should be rendered (default 'true')" />
+  <jsp:directive.attribute name="displayStayButton" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Indicate if the stay button should be displayed" />
+  <jsp:directive.attribute name="buttonCode" type="java.lang.String" required="false" rtexprvalue="true" description="Message code of the save button" />
   <jsp:directive.attribute name="openPane" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Control if the title pane is opened or closed by default (default: true)"/>
   <jsp:directive.attribute name="z" type="java.lang.String" required="false" description="Used for checking if element has been modified (to recalculate simply provide empty string value)"/>
 	
   <c:if test="${empty render or render}">
     <c:if test="${empty label}">
       <spring:message code="label_${fn:toLowerCase(fn:substringAfter(id,'_'))}" var="label" htmlEscape="false" />
+    </c:if>
+    <c:if test="${empty buttonCode}">
+    	<c:set var="buttonCode" value="button_save" />
     </c:if>
     <c:set var="enctype" value="application/x-www-form-urlencoded"/>
     <c:if test="${multipart}">
@@ -28,6 +33,8 @@
       </c:if>
       <form:form action="${form_url}" method="POST" modelAttribute="${modelAttribute}" enctype="${enctype}" onsubmit="${jsCall}">
         <form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
+        <br />
+        <br />
         <c:if test="${not empty compositePkField}">
           <form:hidden id="_${fn:escapeXml(compositePkField)}_id" path="${fn:escapeXml(compositePkField)}" />
           <script type="text/javascript">
@@ -51,9 +58,13 @@
         </c:if>
         <jsp:doBody />
         <div class="submit" id="${fn:escapeXml(id)}_submit">
-          <spring:message code="button_save" var="save_button" htmlEscape="false" />
+          <spring:message code="${buttonCode}" var="save_button" htmlEscape="false" />
           <script type="text/javascript">Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'proceed', event:'onclick'}));</script>
           <input id="proceed" type="submit" value="${fn:escapeXml(save_button)}"/>
+          <c:if test="${not empty displayStayButton and displayStayButton}">
+          	<spring:message code="button_save_and_stay" var="save_and_stay_button" htmlEscape="false" />
+          	<input id="proceed_and_stay" type="submit" name="stay" value="${fn:escapeXml(save_and_stay_button)}" />
+          </c:if>
         </div>
       </form:form>
     </util:panel>

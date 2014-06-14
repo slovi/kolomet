@@ -10,6 +10,7 @@ import cz.kolomet.domain.Category;
 import cz.kolomet.domain.NewsItem;
 import cz.kolomet.domain.NewsItemPhotoUrl;
 import cz.kolomet.domain.PhotoUrl;
+import cz.kolomet.domain.Place;
 import cz.kolomet.domain.Producer;
 import cz.kolomet.domain.Product;
 import cz.kolomet.domain.ProductAttribute;
@@ -21,6 +22,7 @@ import cz.kolomet.domain.codelist.CategoryType;
 import cz.kolomet.domain.codelist.CountryState;
 import cz.kolomet.domain.codelist.FigureHeight;
 import cz.kolomet.domain.codelist.ProductAttributeType;
+import cz.kolomet.domain.codelist.ProductColor;
 import cz.kolomet.domain.codelist.ProductUsage;
 import cz.kolomet.domain.codelist.Region;
 import cz.kolomet.domain.codelist.SellerStatus;
@@ -35,9 +37,11 @@ import cz.kolomet.service.FigureHeightService;
 import cz.kolomet.service.NewsItemPhotoUrlService;
 import cz.kolomet.service.NewsItemService;
 import cz.kolomet.service.PhotoUrlService;
+import cz.kolomet.service.PlaceService;
 import cz.kolomet.service.ProducerService;
 import cz.kolomet.service.ProductAttributeService;
 import cz.kolomet.service.ProductAttributeTypeService;
+import cz.kolomet.service.ProductColorService;
 import cz.kolomet.service.ProductService;
 import cz.kolomet.service.ProductUsageService;
 import cz.kolomet.service.RegionService;
@@ -76,6 +80,9 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     PhotoUrlService ApplicationConversionServiceFactoryBean.photoUrlService;
     
     @Autowired
+    PlaceService ApplicationConversionServiceFactoryBean.placeService;
+    
+    @Autowired
     ProducerService ApplicationConversionServiceFactoryBean.producerService;
     
     @Autowired
@@ -107,6 +114,9 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     
     @Autowired
     ProductAttributeTypeService ApplicationConversionServiceFactoryBean.productAttributeTypeService;
+    
+    @Autowired
+    ProductColorService ApplicationConversionServiceFactoryBean.productColorService;
     
     @Autowired
     ProductUsageService ApplicationConversionServiceFactoryBean.productUsageService;
@@ -246,6 +256,30 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         return new org.springframework.core.convert.converter.Converter<java.lang.String, cz.kolomet.domain.PhotoUrl>() {
             public cz.kolomet.domain.PhotoUrl convert(String id) {
                 return getObject().convert(getObject().convert(id, Long.class), PhotoUrl.class);
+            }
+        };
+    }
+    
+    public Converter<Place, String> ApplicationConversionServiceFactoryBean.getPlaceToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<cz.kolomet.domain.Place, java.lang.String>() {
+            public String convert(Place place) {
+                return new StringBuilder().append(place.getCreated()).append(' ').append(place.getLastModified()).toString();
+            }
+        };
+    }
+    
+    public Converter<Long, Place> ApplicationConversionServiceFactoryBean.getIdToPlaceConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, cz.kolomet.domain.Place>() {
+            public cz.kolomet.domain.Place convert(java.lang.Long id) {
+                return placeService.findPlace(id);
+            }
+        };
+    }
+    
+    public Converter<String, Place> ApplicationConversionServiceFactoryBean.getStringToPlaceConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, cz.kolomet.domain.Place>() {
+            public cz.kolomet.domain.Place convert(String id) {
+                return getObject().convert(getObject().convert(id, Long.class), Place.class);
             }
         };
     }
@@ -466,6 +500,30 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         };
     }
     
+    public Converter<ProductColor, String> ApplicationConversionServiceFactoryBean.getProductColorToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<cz.kolomet.domain.codelist.ProductColor, java.lang.String>() {
+            public String convert(ProductColor productColor) {
+                return new StringBuilder().append(productColor.getCreated()).append(' ').append(productColor.getLastModified()).append(' ').append(productColor.getCodeKey()).append(' ').append(productColor.getCodeDescription()).toString();
+            }
+        };
+    }
+    
+    public Converter<Long, ProductColor> ApplicationConversionServiceFactoryBean.getIdToProductColorConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, cz.kolomet.domain.codelist.ProductColor>() {
+            public cz.kolomet.domain.codelist.ProductColor convert(java.lang.Long id) {
+                return productColorService.findProductColor(id);
+            }
+        };
+    }
+    
+    public Converter<String, ProductColor> ApplicationConversionServiceFactoryBean.getStringToProductColorConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, cz.kolomet.domain.codelist.ProductColor>() {
+            public cz.kolomet.domain.codelist.ProductColor convert(String id) {
+                return getObject().convert(getObject().convert(id, Long.class), ProductColor.class);
+            }
+        };
+    }
+    
     public Converter<ProductUsage, String> ApplicationConversionServiceFactoryBean.getProductUsageToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<cz.kolomet.domain.codelist.ProductUsage, java.lang.String>() {
             public String convert(ProductUsage productUsage) {
@@ -544,6 +602,9 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         registry.addConverter(getPhotoUrlToStringConverter());
         registry.addConverter(getIdToPhotoUrlConverter());
         registry.addConverter(getStringToPhotoUrlConverter());
+        registry.addConverter(getPlaceToStringConverter());
+        registry.addConverter(getIdToPlaceConverter());
+        registry.addConverter(getStringToPlaceConverter());
         registry.addConverter(getProducerToStringConverter());
         registry.addConverter(getIdToProducerConverter());
         registry.addConverter(getStringToProducerConverter());
@@ -577,6 +638,9 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         registry.addConverter(getProductAttributeTypeToStringConverter());
         registry.addConverter(getIdToProductAttributeTypeConverter());
         registry.addConverter(getStringToProductAttributeTypeConverter());
+        registry.addConverter(getProductColorToStringConverter());
+        registry.addConverter(getIdToProductColorConverter());
+        registry.addConverter(getStringToProductColorConverter());
         registry.addConverter(getProductUsageToStringConverter());
         registry.addConverter(getIdToProductUsageConverter());
         registry.addConverter(getStringToProductUsageConverter());

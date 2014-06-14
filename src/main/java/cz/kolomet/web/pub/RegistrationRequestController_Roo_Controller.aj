@@ -13,7 +13,6 @@ import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
@@ -24,12 +23,6 @@ privileged aspect RegistrationRequestController_Roo_Controller {
     
     @Autowired
     ApplicationUserService RegistrationRequestController.applicationUserService;
-    
-    @RequestMapping(params = "form", produces = "text/html")
-    public String RegistrationRequestController.createForm(Model uiModel) {
-        populateEditForm(uiModel, new RegistrationRequest());
-        return "public/registrationrequests/create";
-    }
     
     void RegistrationRequestController.addDateTimeFormatPatterns(Model uiModel) {
         uiModel.addAttribute("registrationRequest_created_date_format", DateTimeFormat.patternForStyle("MM", LocaleContextHolder.getLocale()));

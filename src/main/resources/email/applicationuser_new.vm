@@ -1,0 +1,19 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	</head>
+	<body>
+		<h3>Dobrý den, byl Vám založen nový účet v aplikaci Kolomet</h3>
+		<div>
+			<h4>Informace:</h4>
+			<ul>
+				<li><b>Uživatelské jméno:</b> ${applicationuser.username}</li>
+				<li><b>Heslo:</b> ${password}</li>
+			</ul>
+		</div>		
+		<br />
+		Kolomet s.r.o.
+	</body>
+</html>
