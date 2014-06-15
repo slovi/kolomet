@@ -3,18 +3,16 @@
 
 package cz.kolomet.web.admin;
 
+import cz.kolomet.domain.Product;
+import cz.kolomet.web.admin.ProductController;
 import java.io.UnsupportedEncodingException;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
-
-import cz.kolomet.domain.Product;
 
 privileged aspect ProductController_Roo_Controller {
     

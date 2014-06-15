@@ -30,12 +30,16 @@
 		    				<fmt:formatNumber value="${product.finalPrice}" groupingUsed="true" /><br />
 		    			</c:if>
 		    		</p>
-		    		<br/>
 		    		<p><spring:message code="label_cz_kolomet_domain_product_producer" />: <c:out value="${product.producer.codeDescription}" /></p>
 	         		<p><spring:message code="label_cz_kolomet_domain_product_category" />: <c:out value="${product.category.codeDescription}" /></p>
-		    		<div class="description">
-		        		<p style="overflow: hidden;"><c:out escapeXml="false" value="${product.description}" />...</p>
-		        	</div>
+	         		<p>
+	         			<spring:eval expression="product.getProductAttribute('pat.bike.color')" var="colorAttribute" />
+	         			<spring:message code="label_cz_kolomet_domain_product_productcolor" />: <c:out value="${product.productColor.codeDescription}" /><c:if test="${not empty colorAttribute}">, </c:if>
+	         			<c:if test="${not empty colorAttribute}">
+							<c:out value="${colorAttribute.attributeType.codeDescription}" />: <c:out value="${colorAttribute.attributeValue}" />
+	         			</c:if>
+	         		</p>
+	         		<p><spring:message code="label_cz_kolomet_domain_product_figureheight" />: <c:out value="${product.figureHeight.codeDescription}" /></p>
 		        </div>
 		        <div class="cat_seller"> 
 		        	<p>

@@ -4,6 +4,7 @@ jpa setup --database HYPERSONIC_IN_MEMORY --provider HIBERNATE
 
 entity jpa --class ~.domain.Category --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 entity jpa --class ~.domain.Place --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
+entity jpa --class ~.domain.Comment --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 entity jpa --class ~.domain.Seller --activeRecord false --equals true --extends ~.domain.DomainEntity --serializable true --abstract true
 entity jpa --class ~.domain.Producer --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 entity jpa --class ~.domain.ProductAttribute --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --testAutomatically true --activeRecord false
@@ -26,6 +27,7 @@ entity jpa --class ~.domain.codelist.ProductAttributeType --extends ~.domain.cod
 entity jpa --class ~.domain.codelist.BicycleSize --extends ~.domain.codelist.Codelist --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 entity jpa --class ~.domain.codelist.FigureHeight --extends ~.domain.codelist.Codelist --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 entity jpa --class ~.domain.codelist.ProductColor --extends ~.domain.codelist.Codelist --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
+entity jpa --class ~.domain.codelist.PlaceType --extends ~.domain.codelist.Codelist --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 
 class --class ~.dto.ApplicationUserPasswordDto --equals true --serializable true --activeRecord false
 
@@ -52,6 +54,7 @@ repository jpa --interface ~.repository.NewsItemPhotoUrlRepository --entity ~.do
 repository jpa --interface ~.repository.BicycleSizeRepository --entity ~.domain.codelist.BicycleSize
 repository jpa --interface ~.repository.FigureHeightRepository --entity ~.domain.codelist.FigureHeight
 repository jpa --interface ~.repository.ProductColorRepository --entity ~.domain.codelist.ProductColor
+repository jpa --interface ~.repository.PlaceTypeRepository --entity ~.domain.codelist.PlaceType
 
 service type --interface ~.service.ProductService --entity ~.domain.Product --class ~.service.impl.ProductServiceImpl
 service type --interface ~.service.PlaceService --entity ~.domain.Place --class ~.service.impl.PlaceServiceImpl
@@ -76,6 +79,7 @@ service type --interface ~.service.NewsItemPhotoUrlService --entity ~.domain.New
 service type --interface ~.service.BicycleService --entity ~.domain.codelist.BicycleSize --class ~.service.impl.BicycleSizeServiceImpl
 service type --interface ~.service.FigureHeightService --entity ~.domain.codelist.FigureHeight --class ~.service.impl.FigureHeightServiceImpl
 service type --interface ~.service.ProductColorService --entity ~.domain.codelist.ProductColor --class ~.service.impl.ProductColorServiceImpl
+service type --interface ~.service.PlaceTypeService --entity ~.domain.codelist.PlaceType --class ~.service.impl.PlaceTypeServiceImpl
 
 web mvc setup
 web mvc scaffold --class ~.web.SellerController --backingType ~.domain.Seller
@@ -100,3 +104,5 @@ web mvc scaffold --class ~.web.NewsItemController --backingType ~.domain.NewsIte
 web mvc scaffold --class ~.web.NewsItemPhotoUrlController --backingType ~.domain.NewsItemPhotoUrl --path /admin/newsitemphotourls
 web mvc scaffold --class ~.web.BicycleController --backingType ~.domain.codelist.BicycleSize --path /admin/bicyclesizes
 web mvc scaffold --class ~.web.FigureHeightController --backingType ~.domain.codelist.FigureHeight --path /admin/figureheights
+web mvc scaffold --class ~.web.ProductColorController --backingType ~.domain.codelist.ProductColor --path /admin/productcolors
+web mvc scaffold --class ~.web.PlaceTypeController --backingType ~.domain.codelist.PlaceType --path /admin/placetypes

@@ -69,7 +69,8 @@ public class SellerServiceImpl implements SellerService {
     @PreAuthorize("principal.isCapableToSaveSeller(#seller)")
     public void saveSeller(Seller seller) {
     	
-    	ApplicationUser user = applicationUserRepository.findByUsername(seller.getAddressEmail()); 
+    	String email = seller.getAddressEmail();
+    	ApplicationUser user = applicationUserRepository.findByUsername(email); 
     	if (user == null) {
     		
     		String password = passwordGenerator.generatePassword(user);
@@ -81,19 +82,19 @@ public class SellerServiceImpl implements SellerService {
         	applicationUser.setPassword(passwordEncoder.encodePassword(password, null));
         	applicationUser.setSeller(seller);
         	applicationUser.addRole(applicationRole);
-        	applicationUser.setUsername(seller.getBusinessEmail());
+        	applicationUser.setUsername(email);
         	
         	applicationUserRepository.save(applicationUser);
             sellerRepository.save(seller);
             
             Map<String, Object> params = new HashMap<String, Object>();
-            params.put("username", seller.getBusinessEmail());
+            params.put("username", email);
             params.put("password", password);
             params.put("seller", seller);
             
             seller.normalizeWebUrl();
             
-            mailService.send(seller.getBusinessEmail(), newSellerEmailSubject, newSellerEmailTemplate, params);
+            mailService.send(email, newSellerEmailSubject, newSellerEmailTemplate, params);
             
     	} else {
     		throw new ExistingUserException(user);

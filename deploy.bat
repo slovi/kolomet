@@ -1,1 +1,1 @@
-mvn clean deploy -P production
+mvn clean deploy -Dmaven.test.skip=true -P production

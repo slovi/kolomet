@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:create id="fc_cz_kolomet_domain_codelist_PlaceType" modelAttribute="placeType" path="/admin/placetypes" render="${empty dependencies}" z="EluhKV9ow+aLMSoopuiRIgtdy/A=">
+        <field:select field="createdBy" id="c_cz_kolomet_domain_codelist_PlaceType_createdBy" itemValue="id" items="${applicationusers}" path="/admin/applicationusers" z="q64dJ4jb2XTdFP0FHtMyb+Xr3l4="/>
+        <field:select field="lastModifiedBy" id="c_cz_kolomet_domain_codelist_PlaceType_lastModifiedBy" itemValue="id" items="${applicationusers}" path="/admin/applicationusers" z="X1DezGWkPJ4RTJ/N8ITmSZqsfyc="/>
+        <field:datetime dateTimePattern="${placeType_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_codelist_PlaceType_lastModified" z="o3e789gE4ecaWBzoif2nioAdaHM="/>
+        <field:input field="codeKey" id="c_cz_kolomet_domain_codelist_PlaceType_codeKey" max="20" required="true" z="SXzy5XTGSCmIcERpma02UTa1sjg="/>
+        <field:textarea field="codeDescription" id="c_cz_kolomet_domain_codelist_PlaceType_codeDescription" required="true" z="dOsjsnptMwBm+LNMq1KYb+gD498="/>
+        <field:input field="sequenceNr" id="c_cz_kolomet_domain_codelist_PlaceType_sequenceNr" validationMessageCode="field_invalid_integer" z="sOggsLlpcdvBVlYuqb2CUtaT7F0="/>
+    </form:create>
+    <form:dependency dependencies="${dependencies}" id="d_cz_kolomet_domain_codelist_PlaceType" render="${not empty dependencies}" z="q2yFOCw5lJnVInqqxoimZmnPfLU="/>
+</div>

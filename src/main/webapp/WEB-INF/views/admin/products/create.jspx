@@ -3,6 +3,8 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <form:create id="fc_cz_kolomet_domain_Product" modelAttribute="product" multipart="true" path="/admin/products" render="${empty dependencies}" z="user-managed">
+        <input name="copiedFrom" type="hidden" value="${product.copiedFrom.id}"/>
+        <input name="productState" type="hidden" value="${product.productState}"/>
         <field:textarea field="productName" id="c_cz_kolomet_domain_Product_productName" required="true" z="9VRS4DrGEb9AJgsJiZnH90xhO8Q="/>
         <field:editor field="description" id="c_cz_kolomet_domain_Product_description" z="user-managed"/>
         <c:set var="finalPriceLabel">
@@ -16,9 +18,9 @@
         <c:set var="discountLabel">
             <spring:message code="label_cz_kolomet_domain_product_discount" htmlEscape="false"/> (<spring:message code="currency_short"/>)        	
         </c:set>
-        <field:input field="discount" id="c_cz_kolomet_domain_Product_discount" inline="true" label="${discountLabel}" readonly="true" required="true" validationMessageCode="field_invalid_number" z="AYna6cMjKKHaeR8yMqjwXp7/ojE="/>        
-        <field:select field="copiedFrom" id="c_cz_kolomet_domain_Product_copiedFrom" itemValue="id" items="${products}" render="false" path="/admin/products" z="AVJqoFuDSbcrYbBMxadTL4K+l5c="/>
-        <field:select field="productState" id="c_cz_kolomet_domain_Product_productState" items="${productstates}" render="false" path="productstates" z="OZhdMwInVOS8G5hcFR8+63FzMeY="/>
+        <field:input field="discount" id="c_cz_kolomet_domain_Product_discount" inline="true" label="${discountLabel}" readonly="true" required="true" validationMessageCode="field_invalid_number" z="user-managed"/>
+        <field:select field="copiedFrom" id="c_cz_kolomet_domain_Product_copiedFrom" itemValue="id" items="${products}" path="/admin/products" render="false" z="user-managed"/>
+        <field:select field="productState" id="c_cz_kolomet_domain_Product_productState" items="${productstates}" path="productstates" render="false" z="user-managed"/>
         <field:select field="category" id="c_cz_kolomet_domain_Product_category" itemLabel="codeDescription" itemValue="id" items="${categorys}" path="/admin/categorys" z="user-managed"/>
         <field:select field="producer" id="c_cz_kolomet_domain_Product_producer" itemLabel="codeDescription" itemValue="id" items="${producers}" path="/admin/producers" z="user-managed"/>
         <field:datetime dateTimePattern="${product_validfrom_date_format}" field="validFrom" id="c_cz_kolomet_domain_Product_validFrom" required="true" z="user-managed"/>
@@ -48,11 +50,11 @@
                 <field:hidden field="productAttributes[${status.index}].id" id="fc_cz_kolomet_domain_Product_productAttribute_id_${status.index}"/>
                 <field:hidden field="productAttributes[${status.index}].version" id="fc_cz_kolomet_domain_Product_productAttribute_version_${status.index}"/>
                 <c:set var="attributeLabel">
-	                <c:out value="${productAttribute.attributeType.codeDescription}"/>
-	                <c:if test="${not empty productAttribute.attributeType.units}">
+                    <c:out value="${productAttribute.attributeType.codeDescription}"/>
+                    <c:if test="${not empty productAttribute.attributeType.units}">
 	               		(<c:out value="${productAttribute.attributeType.units}"/>)
 	               	</c:if>
-               	</c:set>
+                </c:set>
                 <field:hidden field="productAttributes[${status.index}].attributeType" id="fc_cz_kolomet_domain_Product_productAttribute_type_${status.index}"/>
                 <field:input field="productAttributes[${status.index}].attributeValue" id="fc_cz_kolomet_domain_Product_productAttribute_value_${status.index}" label="${attributeLabel}" required="${productAttribute.attributeType.required}"/>
             </c:forEach>
@@ -72,7 +74,7 @@
         <spring:message code="button_add_photo" var="photourls_panel_add"/>
         <util:panel id="fc_cz_kolomet_domain_Product_photoUrls" title="${photourls_panel_add}">
             <field:files id="files"/>
-        </util:panel>        
+        </util:panel>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_cz_kolomet_domain_Product" render="${not empty dependencies}" z="JG9sb7H3rDmiMgYvz+ZgFJEQh6g="/>
     <script type="text/javascript">

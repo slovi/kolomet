@@ -83,10 +83,10 @@
             <c:otherwise>
               <form:input id="_${sec_field}_id" style="width: ${width}em;" path="${sec_field}" disabled="${disabled}" readonly="${readonly}" />
             </c:otherwise>
-          </c:choose>
-          <br />
-          <br />
+          </c:choose>          
           <form:errors cssClass="errors" id="_${sec_field}_error_id" path="${sec_field}" />
+          <br />
+          <br />
         </c:otherwise>
       </c:choose>
       <c:choose>

@@ -65,4 +65,13 @@ public abstract class DomainEntity implements Auditable<ApplicationUser, Long> {
     	this.lastModified = lastModifiedDate.toDate();
     }
     
+    protected void setBaseParamsAsNull() {
+    	setId(null);
+    	setCreated(null);
+    	setCreatedBy(null);
+    	setLastModified(null);
+    	setLastModifiedBy(null);
+    	setVersion(null);
+    }
+    
 }

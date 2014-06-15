@@ -73,6 +73,7 @@ public class Product extends DomainEntity implements Cloneable {
     @NumberFormat(pattern="###")
     private BigDecimal price;
 
+    @NotNull
     @DecimalMin("1")
     @DecimalMax("1000000")
     @NumberFormat(pattern="###")
@@ -163,7 +164,16 @@ public class Product extends DomainEntity implements Cloneable {
     @Transient
     private List<CommonsMultipartFile> contents;
     
-    public Product createCopy() {
+    public ProductAttribute getProductAttribute(String productAttributeName) {
+    	for (ProductAttribute productAttribute: productAttributes) {
+    		if (productAttribute.getAttributeType().getCodeKey().equals(productAttributeName)) {
+    			return productAttribute;
+    		}
+    	}
+    	return null;
+    }
+    
+    public Product copy() {
     	try {
 			return clone();
 		} catch (CloneNotSupportedException e) {
@@ -174,19 +184,13 @@ public class Product extends DomainEntity implements Cloneable {
     @Override
     protected Product clone() throws CloneNotSupportedException {
     	Product product = (Product) super.clone();
-    	product.setId(null);
-    	product.setCreated(null);
-    	product.setCreatedBy(null);
-    	product.setLastModified(null);
-    	product.setLastModifiedBy(null);
-    	product.setVersion(null);
+    	product.setBaseParamsAsNull();
     	product.setCopiedFrom(this);
     	List<PhotoUrl> photoUrls = new ArrayList<PhotoUrl>();   
     	for (PhotoUrl photoUrl: this.photoUrls) {
-    		PhotoUrl newPhotoUrl = new PhotoUrl();
-    		newPhotoUrl.setContentType(photoUrl.getContentType());
-    		newPhotoUrl.setFileName(photoUrl.getFileName());
-    		product.addPhotoUrl(newPhotoUrl);
+    		PhotoUrl newPhotoUrl = photoUrl.copy();
+    		newPhotoUrl.setProduct(product);
+    		photoUrls.add(newPhotoUrl);
     	}
     	product.setPhotoUrls(photoUrls);
     	List<ProductAttribute> productAttributes = new ArrayList<ProductAttribute>();
@@ -194,18 +198,27 @@ public class Product extends DomainEntity implements Cloneable {
     		ProductAttribute newProductAttribute = new ProductAttribute();
     		newProductAttribute.setAttributeType(productAttribute.getAttributeType());
     		newProductAttribute.setAttributeValue(productAttribute.getAttributeValue());
+    		newProductAttribute.setProduct(this);
     		productAttributes.add(newProductAttribute);
     	}
     	product.setProductAttributes(productAttributes);
     	return product;
     }
     
+    public void copyPhotoUrls(List<PhotoUrl> photoUrls) {
+    	for (PhotoUrl photoUrl: photoUrls) {
+    		addPhotoUrl(photoUrl.copy());
+    	}
+    }
+    
+    public void copyPhotoUrlFiles(File baseFolder) {
+    	this.copyPhotoUrlFiles(baseFolder, getCopiedFrom());
+    }
+    
     public void copyPhotoUrlFiles(File baseFolder, Product copiedFromProduct) {
     	this.photoUrls.clear();
     	for (PhotoUrl photoUrl: copiedFromProduct.getPhotoUrls()) {
-    		PhotoUrl newPhotoUrl = new PhotoUrl();
-    		newPhotoUrl.setContentType(photoUrl.getContentType());
-    		newPhotoUrl.setFileName(photoUrl.getFileName());
+    		PhotoUrl newPhotoUrl = photoUrl.copy();
     		newPhotoUrl.setProduct(this);
     		try {
     			FileUtils.copyFile(new File(baseFolder, photoUrl.getPhotoUrl()), new File(baseFolder, newPhotoUrl.getPhotoUrl()));
@@ -214,7 +227,7 @@ public class Product extends DomainEntity implements Cloneable {
 			} catch (IOException e) {
 				throw new RuntimeException(e);
 			}
-    		addPhotoUrl(photoUrl);
+    		addPhotoUrl(newPhotoUrl);
     	}
     }
     
@@ -237,8 +250,16 @@ public class Product extends DomainEntity implements Cloneable {
 		this.photoUrls.add(photoUrl);
 	}
 	
+	public boolean isEmptyState() {
+		return productState == null;
+	}
+	
 	public boolean isCopyState() {
 		return productState == ProductState.COPY;
+	}
+	
+	public boolean isActiveState() {
+		return productState == ProductState.ACTIVE;
 	}
 	
 	public boolean isValidDateChangeable() {

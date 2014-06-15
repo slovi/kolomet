@@ -3,8 +3,8 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <form:update id="fu_cz_kolomet_domain_Product" modelAttribute="product" multipart="true" path="/admin/products" versionField="Version" z="user-managed">
-		<input type="hidden" name="copiedFrom" value="${product.copiedFrom.id}" />
-        <input type="hidden" name="productState" value="${product.productState}" />
+        <input name="copiedFrom" type="hidden" value="${product.copiedFrom.id}"/>
+        <input name="productState" type="hidden" value="${product.productState}"/>
         <field:input field="copiedFrom" id="c_cz_kolomet_domain_Product_copiedFrom" render="false" validationMessageCode="field_invalid_integer" z="user-managed"/>
         <field:textarea field="productName" id="c_cz_kolomet_domain_Product_productName" required="true" z="9VRS4DrGEb9AJgsJiZnH90xhO8Q="/>
         <field:editor field="description" id="c_cz_kolomet_domain_Product_description" z="user-managed"/>
@@ -19,10 +19,10 @@
         <c:set var="discountLabel">
             <spring:message code="label_cz_kolomet_domain_product_discount" htmlEscape="false"/> (<spring:message code="currency_short"/>)        	
         </c:set>
-        <field:input field="discount" id="c_cz_kolomet_domain_Product_discount" inline="true" label="${discountLabel}" readonly="true" required="true" validationMessageCode="field_invalid_number" z="AYna6cMjKKHaeR8yMqjwXp7/ojE="/>
-        <field:select field="copiedFrom" id="c_cz_kolomet_domain_Product_copiedFrom" itemValue="id" items="${products}" render="false" path="/admin/products" z="AVJqoFuDSbcrYbBMxadTL4K+l5c="/>
+        <field:input field="discount" id="c_cz_kolomet_domain_Product_discount" inline="true" label="${discountLabel}" readonly="true" required="true" validationMessageCode="field_invalid_number" z="user-managed"/>
+        <field:select field="copiedFrom" id="c_cz_kolomet_domain_Product_copiedFrom" itemValue="id" items="${products}" path="/admin/products" render="false" z="AVJqoFuDSbcrYbBMxadTL4K+l5c="/>
         <field:input decimalMax="1000000" decimalMin="1" field="discount" id="c_cz_kolomet_domain_Product_discount" render="false" required="true" validationMessageCode="field_invalid_number" z="AYna6cMjKKHaeR8yMqjwXp7/ojE="/>
-        <field:select field="productState" id="c_cz_kolomet_domain_Product_productState" items="${productstates}" render="false" path="productstates" z="OZhdMwInVOS8G5hcFR8+63FzMeY="/>
+        <field:select field="productState" id="c_cz_kolomet_domain_Product_productState" items="${productstates}" path="productstates" render="false" z="user-managed"/>
         <field:select field="category" id="c_cz_kolomet_domain_Product_category" itemLabel="codeDescription" itemValue="id" items="${categorys}" path="/admin/categorys" z="user-managed"/>
         <field:select field="producer" id="c_cz_kolomet_domain_Product_producer" itemLabel="codeDescription" itemValue="id" items="${producers}" path="/admin/producers" z="user-managed"/>
         <c:if test="${capableToEditValidDates}">

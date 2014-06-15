@@ -5,29 +5,37 @@
 
    	<div class="detail_header"> 
    		<util:photo-image photos="${product.photoUrls}" imgType="orig" width="508" height="338" />    
-       	<div class="detail_description right"> 
+       	<div class="detail_description right">
        		<c:set var="description_class" value="description" />
        		<c:choose>
 				<c:when test="${not product.enabled}">
-					<fmt:formatDate value="${product.lastModified}" var="lastModified" pattern="dd.MM.yyyy HH:mm" />
-					<c:set var="description_class" value="description_short" />
-					<ul><li class="invalid"><p class="invalid"><spring:message code="product_invalid" arguments="${lastModified}" /></p></li></ul>
+		       		<div class="valid">
+						<fmt:formatDate value="${product.lastModified}" var="lastModified" pattern="dd.MM.yyyy HH:mm" />
+						<c:set var="description_class" value="description_short" />
+						<span class="invalid"><spring:message code="product_invalid" arguments="${lastModified}" /></span>
+					</div>
 				</c:when>
 				<c:when test="${product.valid}">
-					<security:authorize access="isAuthenticated() and principal.productsAll">
-						<c:set var="description_class" value="description_short" />
-						<ul><li class="valid"><p class="valid"><spring:message code="product_valid" /></p></li></ul>
+		 			<security:authorize access="isAuthenticated() and principal.productsAll">
+						<div class="valid">
+							<c:set var="description_class" value="description_short" />
+							<span class="valid"><spring:message code="product_valid" /></span>
+						</div>
 					</security:authorize>
 				</c:when>
-				<c:when test="${product.invalid}">				
-					<fmt:formatDate value="${product.validTo}" var="validTo" pattern="dd.MM.yyyy HH:mm" />
-					<c:set var="description_class" value="description_short" />
-					<ul><li class="invalid"><p class="invalid"><spring:message code="product_invalid" arguments="${validTo}" /></p></li></ul>
+				<c:when test="${product.invalid}">
+					<div class="valid">				
+						<fmt:formatDate value="${product.validTo}" var="validTo" pattern="dd.MM.yyyy HH:mm" />
+						<c:set var="description_class" value="description_short" />
+						<span class="invalid"><spring:message code="product_invalid" arguments="${validTo}" /></span>
+					</div>
 				</c:when>
 				<c:when test="${product.waitingForValid}">
-					<fmt:formatDate value="${product.validFrom}" var="validFrom" pattern="dd.MM.yyyy HH:mm" />
-					<c:set var="description_class" value="description_short" />
-					<ul><li class="waiting_for_valid"><p class="waiting_for_valid"><spring:message code="product_waiting_for_valid" arguments="${validFrom}" /></p></li></ul>
+					<div class="valid">
+						<fmt:formatDate value="${product.validFrom}" var="validFrom" pattern="dd.MM.yyyy HH:mm" />
+						<c:set var="description_class" value="description_short" />
+						<span class="waiting_for_valid"><spring:message code="product_waiting_for_valid" arguments="${validFrom}" /></span>
+					</div>
 				</c:when>
 			</c:choose>
         	<p class="label"><c:out value="${product.productName}" /></p>

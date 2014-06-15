@@ -25,7 +25,7 @@ import org.springframework.util.Assert;
 import cz.kolomet.service.impl.MailServiceImpl;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:META-INF/spring/applicationContext-email-test.xml")
+@ContextConfiguration("mailServiceTest-context.xml")
 public class MailServiceTest {
 	
 	@Autowired

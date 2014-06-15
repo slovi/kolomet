@@ -4,10 +4,14 @@
 package cz.kolomet.web.admin;
 
 import cz.kolomet.domain.Place;
+import cz.kolomet.domain.codelist.PlaceType;
 import cz.kolomet.service.ApplicationUserService;
 import cz.kolomet.service.PlaceService;
+import cz.kolomet.service.PlaceTypeService;
 import cz.kolomet.web.admin.PlaceController;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.joda.time.format.DateTimeFormat;
@@ -30,6 +34,9 @@ privileged aspect PlaceController_Roo_Controller {
     @Autowired
     ApplicationUserService PlaceController.applicationUserService;
     
+    @Autowired
+    PlaceTypeService PlaceController.placeTypeService;
+    
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String PlaceController.create(@Valid Place place, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
@@ -44,6 +51,11 @@ privileged aspect PlaceController_Roo_Controller {
     @RequestMapping(params = "form", produces = "text/html")
     public String PlaceController.createForm(Model uiModel) {
         populateEditForm(uiModel, new Place());
+        List<String[]> dependencies = new ArrayList<String[]>();
+        if (placeTypeService.countAllPlaceTypes() == 0) {
+            dependencies.add(new String[] { "placetype", "admin/placetypes" });
+        }
+        uiModel.addAttribute("dependencies", dependencies);
         return "admin/places/create";
     }
     
@@ -106,6 +118,7 @@ privileged aspect PlaceController_Roo_Controller {
         uiModel.addAttribute("place", place);
         addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("applicationusers", applicationUserService.findAllApplicationUsers());
+        uiModel.addAttribute("placetypes", placeTypeService.findAllPlaceTypes());
     }
     
     String PlaceController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

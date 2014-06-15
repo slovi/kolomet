@@ -1,6 +1,5 @@
 package cz.kolomet.web.admin;
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import cz.kolomet.domain.PhotoUrl;
 import cz.kolomet.domain.Product;
 import cz.kolomet.domain.ProductAttribute;
 import cz.kolomet.domain.codelist.ProductAttributeType;
@@ -86,7 +84,7 @@ public class ProductController extends AbstractAdminController {
     @RequestMapping(value = "/{id}", params = "copy", produces = "text/html")
     public String copyForm(@PathVariable("id") Long id, Model uiModel) {
         populateEditForm(uiModel, productService.copyProduct(id));
-        return "admin/products/update";
+        return "admin/products/create";
     }
     
     @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
@@ -180,9 +178,14 @@ public class ProductController extends AbstractAdminController {
         uiModel.addAttribute("bicyclecategories", bicycleCategoryService.findAllBicycleCategorys());
         uiModel.addAttribute("sellers", sellerService.findAllSellers());
         
-        if (product.getId() != null && product.getPhotoUrls().isEmpty()) {
-        	for (PhotoUrl photoUrl: photoUrlService.findByProduct(product)) {
-        		product.addPhotoUrl(photoUrl);
+        if (product.isActiveState()) {
+	        if (product.getId() != null && product.getPhotoUrls().isEmpty()) {
+	        	product.copyPhotoUrls(photoUrlService.findByProduct(product));
+	        }
+        }
+        if (product.isCopyState()) {
+        	if (product.getCopiedFrom() != null && product.getPhotoUrls().isEmpty()) {
+        		product.copyPhotoUrls(photoUrlService.findByProduct(product.getCopiedFrom()));
         	}
         }
         

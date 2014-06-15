@@ -5,10 +5,9 @@
         <form:form action="${filterActionUrl}" id="filterForm" method="get" modelAttribute="productFilter">
             <div>
                 <form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
-                <field:input id="c_cz_kolomet_domain_Product_productName" inline="true" field="name" required="false" />
-	      		<field:datetime dateTimePattern="${product_validfrom_date_format}" field="validFrom" id="c_cz_kolomet_domain_Product_validFrom" z="+YeVslfpGXGC9/egUPQmtmgE5OA="/>
-    	    	<field:datetime dateTimePattern="${product_validto_date_format}" field="validTo" id="c_cz_kolomet_domain_Product_validTo" z="2UFsBNvdW5vSrMA8Vstjhd9fDys="/>
-    	    	
+                <field:input field="name" id="c_cz_kolomet_domain_Product_productName" inline="true" required="false"/>
+                <field:datetime dateTimePattern="${product_validfrom_date_format}" field="validFrom" id="c_cz_kolomet_domain_Product_validFrom" />
+    	    	<field:datetime dateTimePattern="${product_validto_date_format}" field="validTo" id="c_cz_kolomet_domain_Product_validTo" />
                 <div class="clear button_filter">
                     <spring:message code="button_filter" htmlEscape="false" var="save_filter"/>
                     <input name="page.page" type="hidden" value="${productsPage.number}"/>

@@ -33,16 +33,26 @@ public class ProductServiceImpl implements ProductService {
     
 	@PreAuthorize("principal.isCapableToSaveProduct(#product)")
     public void saveProduct(Product product) {
-		if (product.getProductState() == null) {
+		
+		// prepocitame cenu a ulozime (pokud se jedna o novy produkt, tak nastavime na activni)
+		product.computeAndSetDiscount();
+		if (product.isEmptyState()) {
 			product.setProductState(ProductState.ACTIVE);
 		}
-		product.computeAndSetDiscount();
         productRepository.save(product);
+        
+        // nejdrive musi byt produkt ulozen, pak bude mit ID a az pak muzeme kopirovat slozky
+        if (product.isCopyState()) {
+        	product.copyPhotoUrlFiles(new File(rootDir));
+        	// pak nasledne muzeme zmenit stav na aktivni a aktualizovat
+        	product.setProductState(ProductState.ACTIVE);
+        	productRepository.save(product);
+        }
     }
     
 	@PreAuthorize("principal.isCapableToUpdateProduct(#product)")
     public Product updateProduct(Product product) {
-		product.computeAndSetDiscount();
+		product.computeAndSetDiscount();		
 		product.setProductState(ProductState.ACTIVE);
         return productRepository.save(product);
     }
@@ -65,15 +75,12 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	@PreAuthorize("principal.isCapableToCopyProduct(#product)")
 	public Product copyProduct(Product product) {
-		Product newProduct = product.createCopy();
+		Product newProduct = product.copy();
 		newProduct.setValidFrom(new Date());
 		if (newProduct.getValidTo() != null && newProduct.getValidTo().before(new Date())) {
 			newProduct.setValidTo(Product.DEFAULT_VALID_TO_DATE);
 		}
     	newProduct.setProductState(ProductState.COPY);
-		productRepository.save(newProduct);
-		newProduct.copyPhotoUrlFiles(new File(rootDir), product);
-		productRepository.save(newProduct);
 		return newProduct;
 	}
 	

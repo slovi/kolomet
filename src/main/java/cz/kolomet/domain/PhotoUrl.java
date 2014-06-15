@@ -22,7 +22,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 @RooJpaEntity(inheritanceType = "TABLE_PER_CLASS")
 @RooEquals(excludeFields = {"product", "createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate"}, appendSuper = false)
 @RooSerializable
-public class PhotoUrl extends DomainEntity {
+public class PhotoUrl extends DomainEntity implements Cloneable {
 	
 	public static final String PHOTO_URL_PREFIX = "product";
 	public static String ORIGINAL_IMG_SUFFIX = "_orig.jpg";
@@ -46,18 +46,45 @@ public class PhotoUrl extends DomainEntity {
     private Product product;
     
     public String getPhotoUrl() {
-    	return PHOTO_URL_PREFIX + "/" + product.getId() + "/" + FilenameUtils.getBaseName(fileName) + ORIGINAL_IMG_SUFFIX;
+    	return PHOTO_URL_PREFIX + "/" + getPhotoId() + "/" + FilenameUtils.getBaseName(fileName) + ORIGINAL_IMG_SUFFIX;
     }
     
     public String getThumbPhotoUrl() {
-    	return PHOTO_URL_PREFIX + "/" + product.getId() + "/" + FilenameUtils.getBaseName(fileName) + THUMBNAIL_IMG_SUFFIX;
+    	return PHOTO_URL_PREFIX + "/" + getPhotoId() + "/" + FilenameUtils.getBaseName(fileName) + THUMBNAIL_IMG_SUFFIX;
     }
     
     public String getOverPhotoUrl() {
-    	return PHOTO_URL_PREFIX + "/" + product.getId() + "/" + FilenameUtils.getBaseName(fileName) + OVERVIEW_IMG_SUFFIX;
+    	return PHOTO_URL_PREFIX + "/" + getPhotoId() + "/" + FilenameUtils.getBaseName(fileName) + OVERVIEW_IMG_SUFFIX;
+    }
+    
+    private Long getPhotoId() {
+    	Long id = product.getId();
+    	if (id == null && product.getCopiedFrom() != null) {
+    		id = product.getCopiedFrom().getId();
+    	}
+    	if (id == null) {
+    		throw new IllegalStateException("Cannot get any id for photo url link creation (product: " + product + ", photo: " + this + ")");
+    	}
+    	return id;
     }
     
     @Transient
     private List<CommonsMultipartFile> contents;
+    
+    public PhotoUrl copy() {
+    	try {
+			return (PhotoUrl) clone();
+		} catch (CloneNotSupportedException e) {
+			throw new RuntimeException(e);
+		}
+    }
+    
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+    	PhotoUrl photoUrl = (PhotoUrl) super.clone();
+    	photoUrl.setBaseParamsAsNull();
+    	photoUrl.setProduct(null);
+    	return photoUrl;
+    }
     
 }

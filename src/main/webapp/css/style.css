@@ -286,7 +286,7 @@ div#content_container_short div.homepage_unit {
 
 div.homepage_unit div.home_description {
 	width: 194px;
-	height: 60px;
+	height: 85px;
 	overflow: hidden;
 	padding: 15px;
 	margin: 0;
@@ -323,7 +323,7 @@ div.category_unit div.cat_description {
 	width: 454px;
 	height: 116px;
 	float: left;
-	padding: 10px;
+	padding: 5px;
 	margin: 0;
 }
 
@@ -378,12 +378,12 @@ div.detail_description div.description {
 div.detail_description div.description_short {
 	width: 100%;
 	overflow-y: scroll; 
-	height: 120px;
+	height: 145px;
 }
 
 div.filters {
 	width: 902px;
-	height: 200px;
+	height: 180px;
 	margin: 0px 6px 6px 6px;
 	padding: 15px;
 }
@@ -508,10 +508,21 @@ div#content_container div.detail_header div.detail_img img.detail_img_content {
 	float: none;
 }
 
-div#content_container div.detail_tag,div.detail_description {
+div#content_container div.detail_tag {
 	width: 394px;
 	padding: 15px;
 	margin: 0;
+}
+
+div.detail_description {
+	width: 394px;
+	padding: 15px;
+	margin: 0;
+}
+
+div.detail_description div.valid {
+	width: 100%;
+	text-align: center;
 }
 
 div.detail_description {

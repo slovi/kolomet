@@ -333,3 +333,18 @@ exit
 exit
 // Spring Roo 1.2.5.RELEASE [rev 8341dc2] log closed at 2014-06-13 16:18:22
 // Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2014-06-13 16:18:29
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2014-06-15 11:46:54
+entity jpa --class ~.domain.Comment --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
+entity jpa --class ~.domain.codelist.PlaceType --extends ~.domain.codelist.Codelist --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
+repository jpa --interface ~.repository.PlaceTypeRepository --entity ~.domain.codelist.PlaceType
+service type --interface ~.service.PlaceTypeService --entity ~.domain.codelist.PlaceType --class ~.service.impl.PlaceTypeServiceImpl
+web mvc scaffold --class ~.web.PlaceTypeController --backingType ~.domain.codelist.PlaceType --path /admin/placetypes
+test integration --entity ~.domain.Place
+test integration --entity ~.domain.Product
+// [failed] test integration --entity ~.domain.PlaceType
+test integration --entity ~.domain.codelist.PlaceType
+test integration --entity ~.domain.Place
+test integration --entity ~.domain.Place
+test integration --entity ~.domain.ApplicationUser
+test integration --entity ~.domain.ApplicationPermission
+test integration --entity ~.domain.ApplicationRole

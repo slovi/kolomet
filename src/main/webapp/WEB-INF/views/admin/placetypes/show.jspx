@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_cz_kolomet_domain_codelist_PlaceType" object="${placetype}" path="/admin/placetypes" z="LNNaw5DdRI73zWkavgeYKEmiPEo=">
+        <field:display field="createdBy" id="s_cz_kolomet_domain_codelist_PlaceType_createdBy" object="${placetype}" z="vCq8BnIoo+EFkKeWIpndOoiT+4E="/>
+        <field:display field="lastModifiedBy" id="s_cz_kolomet_domain_codelist_PlaceType_lastModifiedBy" object="${placetype}" z="4ZNiJP5F8IPONnjOGu8VnMVS1RQ="/>
+        <field:display date="true" dateTimePattern="${placeType_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_codelist_PlaceType_lastModified" object="${placetype}" z="ldr9huVs8zpNAQ4Sd581LKTSkQI="/>
+        <field:display field="codeKey" id="s_cz_kolomet_domain_codelist_PlaceType_codeKey" object="${placetype}" z="cpyV6ScixQt2UDYxzQIJ8dw+u5k="/>
+        <field:display field="codeDescription" id="s_cz_kolomet_domain_codelist_PlaceType_codeDescription" object="${placetype}" z="bYBCf+Ky2veHxbc0sq2/yZIfGiM="/>
+        <field:display field="sequenceNr" id="s_cz_kolomet_domain_codelist_PlaceType_sequenceNr" object="${placetype}" z="PpoQRAkcpHzueYR9JvQUMfYU3h4="/>
+    </page:show>
+</div>
