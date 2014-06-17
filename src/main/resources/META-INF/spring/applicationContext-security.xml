@@ -34,6 +34,8 @@
 		<intercept-url pattern="/admin/countrystates/*" access="hasAnyRole('ROLE_per_countrystates')" />
 		<intercept-url pattern="/admin/region*" access="hasAnyRole('ROLE_per_regions')" />
 		<intercept-url pattern="/admin/region/*" access="hasAnyRole('ROLE_per_regions')" />
+		<intercept-url pattern="/admin/places*" access="hasAnyRole('ROLE_per_places')" />
+		<intercept-url pattern="/admin/places/*" access="hasAnyRole('ROLE_per_places')" />
 		<intercept-url pattern="/admin/products*" access="hasAnyRole('ROLE_per_products')" />
 		<intercept-url pattern="/admin/products/*" access="hasAnyRole('ROLE_per_products')" />
 		<intercept-url pattern="/admin/photourls*" access="hasAnyRole('ROLE_per_products')" />

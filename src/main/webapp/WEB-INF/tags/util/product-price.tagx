@@ -9,14 +9,14 @@
       <c:set value="true" var="openPane" />
     </c:if>
 
-	<c:if test="${not empty product.finalPrice and (product.price - product.finalPrice ne 0)}">
+	<c:if test="${product.anyDiscount}">
 		<span class="price_final"><spring:message code="label_cz_kolomet_domain_product_finalprice" />: <fmt:formatNumber value="${product.finalPrice}" groupingUsed="true" /><spring:message code="currency" /><br /></span>
 		<span class="price_discount"><spring:message code="label_cz_kolomet_domain_product_discount" />: <fmt:formatNumber value="${product.discount}" groupingUsed="true" /><spring:message code="currency" /><br /></span>
 		<span class="price"><spring:message code="label_cz_kolomet_domain_product_price" />: <fmt:formatNumber value="${product.price}" groupingUsed="true" /><spring:message code="currency" /><br /></span>
 	</c:if>
 	
-	<c:if test="${empty product.finalPrice}">
-		<span><spring:message code="price" />: <fmt:formatNumber groupingUsed="true" value="${product.price}" /><spring:message code="currency" /></span><br/>
+	<c:if test="${not product.anyDiscount}">
+		<span class="price_final"><spring:message code="price" />: <fmt:formatNumber groupingUsed="true" value="${product.price}" /><spring:message code="currency" /></span><br/>
 	</c:if>
   
   </c:if>

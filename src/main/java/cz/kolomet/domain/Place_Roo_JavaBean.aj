@@ -60,6 +60,14 @@ privileged aspect Place_Roo_JavaBean {
         this.bikeRoadNr = bikeRoadNr;
     }
     
+    public Integer Place.getQualityRanking() {
+        return this.qualityRanking;
+    }
+    
+    public void Place.setQualityRanking(Integer qualityRanking) {
+        this.qualityRanking = qualityRanking;
+    }
+    
     public List<ProductComment> Place.getComments() {
         return this.comments;
     }

@@ -54,6 +54,7 @@ privileged aspect PlaceDataOnDemand_Roo_DataOnDemand {
         setLastModified(obj, index);
         setName(obj, index);
         setPlaceType(obj, index);
+        setQualityRanking(obj, index);
         return obj;
     }
     
@@ -126,6 +127,11 @@ privileged aspect PlaceDataOnDemand_Roo_DataOnDemand {
     public void PlaceDataOnDemand.setName(Place obj, int index) {
         String name = "name_" + index;
         obj.setName(name);
+    }
+    
+    public void PlaceDataOnDemand.setQualityRanking(Place obj, int index) {
+        Integer qualityRanking = new Integer(index);
+        obj.setQualityRanking(qualityRanking);
     }
     
     public Place PlaceDataOnDemand.getSpecificPlace(int index) {

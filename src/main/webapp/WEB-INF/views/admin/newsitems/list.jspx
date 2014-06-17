@@ -8,7 +8,7 @@
             <table:column bool="true" id="c_cz_kolomet_domain_NewsItem_enabled" property="enabled" sort="true" z="user-managed"/>
             <table:column id="s_cz_kolomet_domain_NewsItem_newsItemType" enumValue="true" sort="true" property="newsItemType" z="jw0q5xxmILfYb1Ptcv3z5TwbqDY="/>
             <table:column id="c_cz_kolomet_domain_NewsItem_lastModifiedBy" property="lastModifiedBy" render="false" sort="true" z="user-managed"/>
-            <table:column id="c_cz_kolomet_domain_NewsItem_text" property="text" sort="true" z="user-managed"/>
+            <table:column id="c_cz_kolomet_domain_NewsItem_text" property="text" maxLength="-1" sort="true" z="user-managed"/>
             <table:column date="true" dateTimePattern="${newsItem_created_date_format}" id="c_cz_kolomet_domain_NewsItem_created" property="created" sort="true" z="user-managed"/>
             <table:column id="c_cz_kolomet_domain_NewsItem_createdBy" property="createdBy" sort="true" z="user-managed"/>
             <table:column date="true" dateTimePattern="${newsItem_lastmodified_date_format}" render="false" id="c_cz_kolomet_domain_NewsItem_lastModified" property="lastModified" sort="true" z="user-managed"/>

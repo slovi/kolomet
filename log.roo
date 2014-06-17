@@ -348,3 +348,5 @@ test integration --entity ~.domain.Place
 test integration --entity ~.domain.ApplicationUser
 test integration --entity ~.domain.ApplicationPermission
 test integration --entity ~.domain.ApplicationRole
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2014-06-16 21:27:30
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2014-06-17 20:53:38

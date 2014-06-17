@@ -12,5 +12,6 @@
         <field:display field="gpsLocation" id="s_cz_kolomet_domain_Place_gpsLocation" object="${place}" z="fWvfaeR+9yftGUwqYiHLHY4bMGY="/>
         <field:display field="bikeRoadNr" id="s_cz_kolomet_domain_Place_bikeRoadNr" object="${place}" z="CA/KjB9h81tmJTEsSRE4PTbcedQ="/>
         <field:display field="description" id="s_cz_kolomet_domain_Place_description" object="${place}" z="G2xyIm1AqfLVil94aL6QWj9sui0="/>
+        <field:display field="ranking" id="s_cz_kolomet_domain_Place_ranking" object="${place}" z="SCI8ol1/qXJfsz6qA9H1ILI679U="/>
     </page:show>
 </div>

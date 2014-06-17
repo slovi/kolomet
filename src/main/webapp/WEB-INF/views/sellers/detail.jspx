@@ -68,6 +68,7 @@
 						<spring:message code="label_cz_kolomet_domain_seller_region" />: <spring:eval expression="seller.region.codeDescription" /><br />
 						<spring:message code="label_cz_kolomet_domain_seller_web" />: <spring:eval expression="seller.web" /><br />
 						<spring:message code="label_cz_kolomet_domain_seller_saletype" />: <spring:eval expression="seller.saleType" /><br />
+						<spring:message code="label_cz_kolomet_domain_seller_enabled" />: <util:boolean value="${seller.enabled}" /><br />
 						<br/>
 						<strong><spring:message code="seller_detail_address" /></strong><br />
 						<spring:message code="label_cz_kolomet_domain_seller_addresscountry" />: <spring:eval expression="seller.addressCountry.codeDescription" /><br />

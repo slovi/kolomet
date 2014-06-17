@@ -4,9 +4,10 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.roo.addon.equals.RooEquals;
@@ -22,7 +23,7 @@ import cz.kolomet.domain.codelist.PlaceType;
 @RooJpaEntity(inheritanceType = "TABLE_PER_CLASS")
 @RooEquals
 @RooSerializable
-public class Place extends DomainEntity {
+public class Place extends DomainEntity implements Commented {
 	
 	@NotNull
 	private String name;
@@ -40,6 +41,8 @@ public class Place extends DomainEntity {
 	private GpsLocation gpsLocation;
 	
 	private Integer bikeRoadNr;
+	
+	private Integer qualityRanking;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "commented")
 	private List<ProductComment> comments;

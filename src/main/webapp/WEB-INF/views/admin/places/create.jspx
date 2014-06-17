@@ -7,12 +7,13 @@
         <field:select field="lastModifiedBy" id="c_cz_kolomet_domain_Place_lastModifiedBy" itemValue="id" items="${applicationusers}" path="/admin/applicationusers" z="sTxjhremcH8QOBJ9I1xHItM6mbU="/>
         <field:datetime dateTimePattern="${place_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_Place_lastModified" z="1ZKRMBvHQyq51EcSpCWR6I4KICg="/>
         <field:input field="name" id="c_cz_kolomet_domain_Place_name" required="true" z="7wptnLPTNCq8izxDgxSKREIWcIY="/>
-        <field:input field="placeType" id="c_cz_kolomet_domain_Place_placeType" required="true" z="2iLowiTGOTVy3MLaFIXKOL7j92k="/>
+        <field:select field="placeType" id="c_cz_kolomet_domain_Place_placeType" itemValue="id" items="${placetypes}" path="/admin/placetypes" required="true" z="vZUo7bQ93+iwpxPhWdJTfcawYsg="/>
         <field:input field="address" id="c_cz_kolomet_domain_Place_address" z="9mNJF+/QmefeQOfR2mhIlHMeOSk="/>
         <field:input field="gpsLocation" id="c_cz_kolomet_domain_Place_gpsLocation" z="aaMqdkjjPg0UQLxvnIUsUnHctTY="/>
         <field:input field="bikeRoadNr" id="c_cz_kolomet_domain_Place_bikeRoadNr" validationMessageCode="field_invalid_integer" z="o8IvhxS6bfSP2wk9SogdBQ7T7s8="/>
         <field:input field="description" id="c_cz_kolomet_domain_Place_description" z="R5yx6gMCum2U4dhvR2Aq6ilt6Qg="/>
         <field:simple field="comments" id="c_cz_kolomet_domain_Place_comments" messageCode="entity_reference_not_managed" messageCodeAttribute="Product Comment" z="NXXSA8nfd+Wg3Wr9/PeMN3RsZL8="/>
+        <field:input field="ranking" id="c_cz_kolomet_domain_Place_ranking" max="5" min="1" required="true" validationMessageCode="field_invalid_integer" z="nIN3/5+J9NaDNjgooJTGUr6V9eo="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_cz_kolomet_domain_Place" render="${not empty dependencies}" z="027c97vWNbBkqXvM72D6YRB6F3g="/>
 </div>

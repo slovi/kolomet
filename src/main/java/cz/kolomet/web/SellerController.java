@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import cz.kolomet.domain.Seller;
 import cz.kolomet.repository.ProductRepository;
 import cz.kolomet.repository.SellerRepository;
+import cz.kolomet.security.ApplicationUserDetails;
 import cz.kolomet.web.pub.AbstractPublicController;
 
 @RequestMapping("/public/sellers")
@@ -38,9 +39,6 @@ public class SellerController extends AbstractPublicController {
 	@RequestMapping("/detail/{id}")
 	public String detail(@PathVariable("id") Long id, Model model) {
 		Seller seller = sellerRepository.findOne(id);
-		if (BooleanUtils.isFalse(seller.getEnabled())) {
-			throw new EntityNotFoundException("Cannot find seller");
-		}
 		model.addAttribute("seller", seller);
 		model.addAttribute("products", productRepository.findBySellerId(id, new PageRequest(0, 10)));
 		return "sellers/detail";

@@ -23,12 +23,7 @@
 		    	<div class="cat_description"> 
 		    		<a href="${productIdUrl}" class="label"><c:out value="${product.productName}" /></a>
 		    		<p>
-		    			<c:if test="${product.anyDiscount}">
-		    				<util:product-price product="${product}" />		    				
-		    			</c:if>
-		    			<c:if test="${not product.anyDiscount}">
-		    				<fmt:formatNumber value="${product.finalPrice}" groupingUsed="true" /><br />
-		    			</c:if>
+	    				<util:product-price product="${product}" />
 		    		</p>
 		    		<p><spring:message code="label_cz_kolomet_domain_product_producer" />: <c:out value="${product.producer.codeDescription}" /></p>
 	         		<p><spring:message code="label_cz_kolomet_domain_product_category" />: <c:out value="${product.category.codeDescription}" /></p>
