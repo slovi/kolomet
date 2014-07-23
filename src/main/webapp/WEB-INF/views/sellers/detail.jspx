@@ -109,9 +109,19 @@
 	    	<security:authorize access="principal.isSellerOwner(#seller)">
 	    		<security:authorize access="principal.isCapableToUpdateSeller(#seller)" var="update" />
 	    		<security:authorize access="principal.isCapableToDeleteSeller(#seller)" var="delete" />
-	    		<util:quicklinks update="${update}" create="false" list="true" itemId="${seller.id}" typeName="seller" delete="${delete}" typeNamePlural="sellers" path="/admin/sellers" largeIcons="true" />
+	    		<security:authorize access="principal.isCapableToEraseSeller(#seller)" var="erase" />
+	    		<util:quicklinks update="${update}" create="false" erase="${erase}" list="true" itemId="${seller.id}" typeName="seller" delete="${delete}" typeNamePlural="sellers" path="/admin/sellers" largeIcons="true" />
 	    	</security:authorize>
     	</security:authorize>
     </div>
+    <spring:url value="/resources/images/ajax-loader.gif" var="loader_url" />
+    <spring:url value="/resources/images/error.png" var="loader_error_url" />
+    <script type="text/javascript">
+	    require(['main'], function() {
+	    	require(['images'], function(images) {
+	    		images.waitForLoad('${loader_url}', '${loader_error_url}', 6, 2000);
+	    	});
+	    });
+    </script>
 
 </div>

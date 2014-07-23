@@ -19,4 +19,6 @@ public interface ProductService {
 	
 	public Product copyProduct(Product product);
 	
+	public void eraseProduct(Product product);
+	
 }

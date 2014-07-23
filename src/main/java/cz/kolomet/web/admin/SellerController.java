@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import cz.kolomet.domain.Seller;
 import cz.kolomet.security.ApplicationUserDetails;
+import cz.kolomet.service.SellerPhotoUrlService;
 import cz.kolomet.service.SellerStatusService;
 import cz.kolomet.service.exception.ExistingUserException;
 
@@ -35,6 +36,9 @@ public class SellerController extends AbstractAdminController implements Message
 	
 	@Autowired
 	private SellerStatusService sellerStatusService;
+	
+	@Autowired
+	private SellerPhotoUrlService sellerPhotoUrlService;
 	
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String show(@PathVariable("id") Long id, Model uiModel) {
@@ -75,7 +79,7 @@ public class SellerController extends AbstractAdminController implements Message
         	populateEditForm(uiModel, seller);
         	return "admin/sellers/create";
         }
-        saveSellerPhotos(seller, seller.getContents());
+        savePhotos(seller, sellerPhotoUrlService, seller.getContents());
         uiModel.asMap().clear();
         return "redirect:/public/sellers/detail/" + seller.getId();
     }
@@ -103,7 +107,7 @@ public class SellerController extends AbstractAdminController implements Message
         	return "admin/sellers/update";
         }
         uiModel.asMap().clear();
-        saveSellerPhotos(seller, seller.getContents());
+        savePhotos(seller, sellerPhotoUrlService, seller.getContents());
         return "redirect:/public/sellers/detail/" + seller.getId();
     }
 	
@@ -118,6 +122,13 @@ public class SellerController extends AbstractAdminController implements Message
         }
         addDateTimeFormatPatterns(uiModel);
         return "admin/sellers/list";
+    }
+    
+    @RequestMapping(value = "/{id}", params = {"erase"}, method = RequestMethod.DELETE, produces = "text/html")
+    public String erase(@PathVariable("id") Long id, Model uiModel) {
+        Seller seller = sellerService.findSeller(id);
+        sellerService.eraseSeller(seller);
+        return "redirect:/admin/sellers";
     }
 	
     @Override

@@ -22,4 +22,8 @@ public class ProductAttributeType extends Codelist {
 	
 	private Boolean required = true;
 	
+	public boolean isColorType() {
+		return this.getCodeKey().equals("pat.bike.color");
+	}
+	
 }

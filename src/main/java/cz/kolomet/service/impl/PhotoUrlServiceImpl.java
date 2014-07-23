@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.task.TaskExecutor;
 
+import cz.kolomet.domain.Photo;
 import cz.kolomet.domain.PhotoUrl;
 import cz.kolomet.service.ImageService;
 import cz.kolomet.service.PhotoUrlService;
@@ -76,5 +77,10 @@ public class PhotoUrlServiceImpl implements PhotoUrlService {
     public List<PhotoUrl> findByProduct(Product product) {
     	return photoUrlRepository.findByProduct(product);
     }
+
+	@Override
+	public void savePhoto(Photo photo, File dest) {
+		savePhotoUrl((PhotoUrl) photo, dest);
+	}
    
 }

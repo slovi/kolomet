@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_cz_kolomet_domain_PlaceComment" object="${placecomment}" path="/admin/placecomments" z="M99Kd1yIZi4VIP7f0AydIxByIEE=">
+        <field:display field="createdBy" id="s_cz_kolomet_domain_PlaceComment_createdBy" object="${placecomment}" z="0gxSxKLuzOqnY2ZzlHCrF4k0MYE="/>
+        <field:display field="lastModifiedBy" id="s_cz_kolomet_domain_PlaceComment_lastModifiedBy" object="${placecomment}" z="YJnpSoDXRRxFpGPoeGpgwgasUpM="/>
+        <field:display date="true" dateTimePattern="${placeComment_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_PlaceComment_lastModified" object="${placecomment}" z="SCmdv2WQgT2IMAnTh1APEC5H7CE="/>
+        <field:display field="commented" id="s_cz_kolomet_domain_PlaceComment_commented" object="${placecomment}" z="cNk7svwpwcNVEiag5XT3xFdUZR0="/>
+        <field:display date="true" dateTimePattern="${placeComment_date_date_format}" field="date" id="s_cz_kolomet_domain_PlaceComment_date" object="${placecomment}" z="3M+X8nvH0RsEJsWvxnCTC+PWrPI="/>
+        <field:display field="text" id="s_cz_kolomet_domain_PlaceComment_text" object="${placecomment}" z="c3JpNdXEvDYtF9QjlAiMepiMbXk="/>
+    </page:show>
+</div>

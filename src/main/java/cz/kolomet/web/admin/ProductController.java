@@ -102,6 +102,13 @@ public class ProductController extends AbstractAdminController {
         return "redirect:/public/products/detail/" + id;
     }
     
+    @RequestMapping(value = "/{id}", params = {"erase"}, method = RequestMethod.DELETE, produces = "text/html")
+    public String erase(@PathVariable("id") Long id, Model uiModel) {
+        Product product = productService.findProduct(id);
+        productService.eraseProduct(product);
+        return "redirect:/admin/products";
+    }
+    
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String create(@Valid Product product, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) throws IOException {
         
@@ -116,7 +123,7 @@ public class ProductController extends AbstractAdminController {
         }
         
         productService.saveProduct(product);
-        savePhotos(product, product.getContents());
+        savePhotos(product, photoUrlService, product.getContents());
         
         return "redirect:/public/products/detail/" + product.getId();
     }
@@ -140,7 +147,7 @@ public class ProductController extends AbstractAdminController {
         }
         
         productService.updateProduct(product);
-        savePhotos(product, product.getContents());
+        savePhotos(product, photoUrlService, product.getContents());
         
         return "redirect:/public/products/detail/" + product.getId();
     }

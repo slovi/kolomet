@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 
-<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:spring="http://www.springframework.org/tags" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:spring="http://www.springframework.org/tags" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
 
 	<div class="general_unit">
-    
+	
 		<script type="text/javascript">
 		
 				 var DHTML = (document.getElementById || document.all || document.layers);
@@ -16,50 +16,25 @@
 				 		 mapa = document.getElementById('mapacr');
 		
 				 		 switch(category){
-				 		 		 case('CZ011')		 		 		 :  mapa.style.backgroundPosition = '0px -1500px'; break;
-				 		 		 case('CZ031')		 		 		 :  mapa.style.backgroundPosition = '0px -2000px'; break;
-				 		 		 case('CZ062')		 		 		 :  mapa.style.backgroundPosition = '0px -2750px'; break;
-				 		 		 case('CZ041')		 		 		 :  mapa.style.backgroundPosition = '0px -250px'; break;
-				 		 		 case('CZ052')		 		 		 :  mapa.style.backgroundPosition = '0px -1750px'; break;
-				 		 		 case('CZ051')		 		 		 :  mapa.style.backgroundPosition = '0px -750px'; break;
-				 		 		 case('CZ081')		 		 		 :  mapa.style.backgroundPosition = '0px -3500px'; break;
-				 		 		 case('CZ071')		 		 		 :  mapa.style.backgroundPosition = '0px -3000px'; break;
-				 		 		 case('CZ053')		 		 		 :  mapa.style.backgroundPosition = '0px -2500px'; break;
-				 		 		 case('CZ032')		 		 		 :  mapa.style.backgroundPosition = '0px -1000px'; break;
-				 		 		 case('CZ021')		 		 		 :  mapa.style.backgroundPosition = '0px -1250px'; break;
-				 		 		 case('CZ042')		 		 		 :  mapa.style.backgroundPosition = '0px -500px'; break;
-				 		 		 case('CZ061')		 		 		 :  mapa.style.backgroundPosition = '0px -2250px'; break;
-				 		 		 case('CZ072')		 		 		 :  mapa.style.backgroundPosition = '0px -3250px'; break;
+				 		 		 case('reg_pha')		 		 		 :  mapa.style.backgroundPosition = '0px -1500px'; break;
+				 		 		 case('reg_jhc')		 		 		 :  mapa.style.backgroundPosition = '0px -2000px'; break;
+				 		 		 case('reg_jhm')		 		 		 :  mapa.style.backgroundPosition = '0px -2750px'; break;
+				 		 		 case('reg_klv')		 		 		 :  mapa.style.backgroundPosition = '0px -250px'; break;
+				 		 		 case('reg_khr')		 		 		 :  mapa.style.backgroundPosition = '0px -1750px'; break;
+				 		 		 case('reg_lib')		 		 		 :  mapa.style.backgroundPosition = '0px -750px'; break;
+				 		 		 case('reg_msl')		 		 		 :  mapa.style.backgroundPosition = '0px -3500px'; break;
+				 		 		 case('reg_olo')		 		 		 :  mapa.style.backgroundPosition = '0px -3000px'; break;
+				 		 		 case('reg_par')		 		 		 :  mapa.style.backgroundPosition = '0px -2500px'; break;
+				 		 		 case('reg_plz')		 		 		 :  mapa.style.backgroundPosition = '0px -1000px'; break;
+				 		 		 case('reg_str')		 		 		 :  mapa.style.backgroundPosition = '0px -1250px'; break;
+				 		 		 case('reg_ust')		 		 		 :  mapa.style.backgroundPosition = '0px -500px'; break;
+				 		 		 case('reg_vys')		 		 		 :  mapa.style.backgroundPosition = '0px -2250px'; break;
+				 		 		 case('reg_zln')		 		 		 :  mapa.style.backgroundPosition = '0px -3250px'; break;
 		
 				 		 		 case('none')		 		 		 :  mapa.style.backgroundPosition = '0 0'; break;
 				 		 		 case('')		 		 		 		 :  mapa.style.backgroundPosition = '0 0'; break;
 				 		 }
-				 }		 
-		
-		// Create the tooltips only when document ready
-		$(document).ready(function()
-		{
-		   // Use the each() method to gain access to each elements attributes
-		   $('area').each(function()
-		   {
-		      $(this).qtip(
-		      {
-		        content: $(this).attr('alt'), // Use the ALT attribute of the area map
-				 		 position: { corner: { target: 'rightMiddle', tooltip: 'leftMiddle' } },
-		        style: {
-				 		 		 'font-size': 12,
-				 		 		 background: '#b22c1b',
-				 		 		 color: '#ffffff',
-				 		 		 textAlign: 'center',
-		            tip: false,
-				 		 		 border: {
-				 		 		 		 width: 0,
-				 		 		 		 radius: 0
-				 		 		 }
-		         }
-		      });
-		   });
-		});		 
+				 }	 
 		
 		
 		</script>
@@ -69,93 +44,91 @@
  		 		<map name="map" id="map"> 
  		 			
  		 			<spring:url value="/public/sellers/map" var="sellersMapUrl" />
-					<area shape="poly" id="area1" coords="134,94,153,88,160,99,141,109" href="${sellersMapUrl}?regionCodeKey=reg_pha" 
-							 onmouseover="highlight('CZ011');" 
-							 onmouseout="highlight('');" 
-							 alt="Praha"
-							 />
-					<area shape="poly" id="area2" coords="92,202,106,150,176,144,178,169,218,188,215,207,181,197,180,221,162,234,130,237" href="${sellersMapUrl}?regionCodeKey=reg_jhc" 
-							 onmouseover="highlight('CZ031');" 
+					<area shape="poly" id="area1" coords="136,98,133,92,139,88,143,87,147,84,150,85,152,83,156,86,157,89,160,89,164,91,162,95,159,97,161,99,158,101,153,101,150,103,147,104,145,106,143,108,140,105,138,102,136,99,136,99" href="${sellersMapUrl}?regionCodeKey=reg_pha" 
+							 onmouseover="highlight('reg_pha');" 
 							 onmouseout="highlight('');"
-							 alt="Jihočeský kraj"
-							 />
-					<area shape="poly" id="area3" coords="218,205,259,189,269,144,292,142,315,172,318,194,344,212,314,214,302,235,273,217,268,225," href="${sellersMapUrl}?regionCodeKey=reg_jhm" 
-							 onmouseover="highlight('CZ062');" 
+							 onfocus="blur();"
+							 alt="Praha"/>
+					<area shape="poly" id="area2" coords="109,145,113,148,121,143,123,141,129,145,133,142,139,146,151,145,158,148,160,144,164,138,167,135,173,142,175,149,175,157,173,163,178,169,181,170,182,168,189,174,193,175,200,177,203,184,213,186,216,189,213,194,213,199,215,205,213,206,201,201,194,206,187,198,179,198,178,206,181,211,178,215,180,220,177,224,169,221,166,228,162,234,162,239,155,235,141,235,133,240,130,234,122,231,119,227,115,225,114,219,108,218,98,211,93,205,88,199,90,195,93,192,93,184,100,181,98,174,103,166,106,165,103,156,101,150,101,150,101,150,106,144,106,144" href="${sellersMapUrl}?regionCodeKey=reg_jhc" 
+							 onmouseover="highlight('reg_jhc');" 
+							 onmouseout="highlight('');"
+							 onfocus="blur();"
+							 alt="Jihočeský kraj"/>
+					<area shape="poly" id="area3" coords="216,205,222,209,231,214,235,209,247,220,259,221,265,225,277,219,285,219,294,224,298,221,302,225,306,219,316,216,321,208,334,212,342,211,338,203,321,195,310,189,309,177,311,175,309,165,304,157,297,146,296,159,289,155,286,146,283,136,278,137,267,141,265,158,259,163,259,173,256,176,262,183,251,194,238,191,227,201,222,197,222,197,222,197" href="${sellersMapUrl}?regionCodeKey=reg_jhm" 
+							 onmouseover="highlight('reg_jhm');" 
+							 onmouseout="highlight('');"
+							 onfocus="blur();"
+							 alt="Jihomoravský kraj"/>
+					<area shape="poly" id="area4" coords="29,109,27,105,25,105,24,99,14,92,2,84,4,71,8,76,11,80,15,84,19,79,18,74,20,70,24,66,26,62,29,63,32,58,36,62,39,62,43,58,48,56,51,61,57,63,59,61,62,65,64,66,68,65,71,68,69,74,68,76,69,79,72,81,74,83,74,86,73,88,76,90,72,95,69,98,65,96,62,96,59,98,58,99,55,101,53,104,52,107,46,106,42,105,39,107,38,109,35,107,31,107,31,108,31,108,29,109,29,108,29,106,29,106,29,108,29,107" href="${sellersMapUrl}?regionCodeKey=reg_klv" 
+							 onmouseover="highlight('reg_klv');" 
+							 onmouseout="highlight('');"
+							 onfocus="blur();"
+							 alt="Karlovarský kraj"/>
+					<area shape="poly" id="area5" coords="246,44,251,36,256,38,260,42,266,36,270,46,263,56,255,57,257,62,263,66,265,66,269,73,273,77,276,84,269,82,261,92,254,95,245,87,237,83,232,86,227,80,221,86,215,82,209,91,205,84,203,76,200,69,193,68,189,65,187,56,188,49,197,51,200,50,206,55,210,49,217,52,220,45,215,40,215,31,210,25,216,25,225,30,230,29,236,38,239,34,243,42,243,42" href="${sellersMapUrl}?regionCodeKey=reg_khr" 
+							 onmouseover="highlight('reg_khr');" 
+							 onmouseout="highlight('');"
+							 onfocus="blur();"
+							 alt="Královéhradecký kraj"/>
+					<area shape="poly" id="area6" coords="190,49,194,50,201,48,206,54,210,47,217,51,217,45,213,40,215,34,213,28,209,25,205,33,202,24,202,16,195,11,193,6,181,8,182,13,180,18,172,15,171,22,164,21,160,16,157,13,153,18,153,24,147,23,143,30,141,37,147,48,152,53,159,51,169,47,172,42,177,42,180,44,188,49,188,49" href="${sellersMapUrl}?regionCodeKey=reg_lib" 
+							 onmouseover="highlight('reg_lib');" 
 							 onmouseout="highlight('');" 
-							 alt="Jihomoravský kraj"
-							 />
-					<area shape="poly" id="area4" coords="5,73,16,82,49,58,77,94,31,113,10,94" href="${sellersMapUrl}?regionCodeKey=reg_klv" 
-							 onmouseover="highlight('CZ041');" 
-							 onmouseout="highlight('');" 
-							 alt="Karlovarský kraj"
-							 />
-					<area shape="poly" id="area5" coords="191,55,220,53,216,30,271,46,256,63,278,89,259,99,233,88,208,93,190,70" href="${sellersMapUrl}?regionCodeKey=reg_khr" 
-							 onmouseover="highlight('CZ052');" 
-							 onmouseout="highlight('');" 
-							 alt="Královéhradecký kraj"
-							 />
-					<area shape="poly" id="area6" coords="159,22,182,20,200,11,205,27,215,30,219,53,190,54,178,44,153,55,142,37,149,27" href="${sellersMapUrl}?regionCodeKey=reg_lib" 
-							 onmouseover="highlight('CZ051');" 
-							 onmouseout="highlight('');" 
-							 alt="Liberecký kraj"
-							 />
-					<area shape="poly" id="area7" coords="316,117,332,79,352,75,352,84,343,90,361,106,371,101,402,114,406,131,417,136,419,149,392,160,362,147,344,128" href="${sellersMapUrl}?regionCodeKey=reg_msl" 
-							 onmouseover="highlight('CZ081');" 
-							 onmouseout="highlight('');" 
-							 alt="Moravskoslezský kraj"
-							 />
-					<area shape="poly" id="area8" coords="288,104,300,83,307,75,298,62,332,78,320,91,316,117,347,128,361,148,316,172,301,152,296,162,291,157" href="${sellersMapUrl}?regionCodeKey=reg_olo" 
-							 onmouseover="highlight('CZ071');" 
-							 onmouseout="highlight('');" 
-							 alt="Olomoucký kraj"
-							 />
-					<area shape="poly" id="area9" coords="209,94,240,88,263,98,279,89,286,94,297,85,289,103,291,141,269,142,214,118" href="${sellersMapUrl}?regionCodeKey=reg_par" 
-							 onmouseover="highlight('CZ053');" 
-							 onmouseout="highlight('');" 
-							 alt="Pardubický kraj"
-							 />
-					<area shape="poly" id="area10" coords="31,113,79,96,109,111,102,136,105,168,89,204,57,167,44,165,22,128" href="${sellersMapUrl}?regionCodeKey=reg_plz" 
-							 onmouseover="highlight('CZ032');" 
-							 onmouseout="highlight('');" 
-							 alt="Plzeňský kraj"
-							 />
-					<area shape="poly" id="area11" coords="83,94,180,46,197,76,208,93,213,116,178,145,107,149,101,132,110,112" href="${sellersMapUrl}?regionCodeKey=reg_str" 
-							 onmouseover="highlight('CZ021');" 
-							 onmouseout="highlight('');" 
-							 alt="Středočeský kraj"
-							 />
-					<area shape="poly" id="area12" coords="56,63,144,16,136,4,156,9,158,22,142,40,150,55,139,67,79,94,72,71" href="${sellersMapUrl}?regionCodeKey=reg_ust" 
-							 onmouseover="highlight('CZ042');" 
-							 onmouseout="highlight('');" 
-							 alt="Ústecký kraj"
-							 />
-					<area shape="poly" id="area13" coords="177,145,195,138,195,128,213,117,268,144,257,187,216,204,217,188,180,172" href="${sellersMapUrl}?regionCodeKey=reg_vys" 
-							 onmouseover="highlight('CZ061');" 
-							 onmouseout="highlight('');" 
-							 alt="Vysočina"
-							 />
-					<area shape="poly" id="area14" coords="315,173,362,148,393,162,376,174,372,194,345,211,314,189" href="${sellersMapUrl}?regionCodeKey=reg_zln" 
-							 onmouseover="highlight('CZ072');" 
-							 onmouseout="highlight('');" 
-							 alt="Zlínský kraj"
-							 />
+							 onfocus="blur();"
+							 alt="Liberecký kraj"/>
+					<area shape="poly" id="area7" coords="374,94,377,99,384,101,390,105,399,105,404,107,407,118,408,125,417,129,420,132,421,141,416,146,408,142,402,151,400,157,396,162,390,158,384,151,373,146,363,144,356,140,348,127,344,121,333,123,322,117,315,110,315,102,316,95,318,89,325,82,332,76,332,73,340,71,344,73,350,66,351,72,352,74,350,80,346,87,347,91,354,93,359,100,363,103,364,103" href="${sellersMapUrl}?regionCodeKey=reg_msl" 
+							 onmouseover="highlight('reg_msl');" 
+							 onmouseout="highlight('');"
+							 onfocus="blur();"
+							 alt="Moravskoslezský kraj"/>
+					<area shape="poly" id="area8" coords="293,89,299,82,307,81,308,72,303,69,299,64,301,54,309,62,316,62,324,70,330,75,325,82,316,87,314,98,314,106,314,112,328,122,336,124,344,123,349,130,359,144,353,148,348,153,338,156,333,163,324,155,321,159,322,164,316,167,313,168,307,159,302,151,296,145,296,152,296,157,291,155,289,148,285,139,292,138,295,129,290,118,288,116,292,110,287,103,291,95,291,90,291,90" href="${sellersMapUrl}?regionCodeKey=reg_olo" 
+							 onmouseover="highlight('reg_olo');" 
+							 onmouseout="highlight('');"
+							 onfocus="blur();"
+							 alt="Olomoucký kraj"/>
+					<area shape="poly" id="area9" coords="211,112,212,102,203,92,213,88,217,84,223,88,228,82,234,87,238,84,244,89,249,92,255,95,262,94,271,84,276,86,285,92,289,94,290,98,286,103,290,111,286,115,293,126,292,133,291,140,281,134,275,138,269,139,264,136,242,123,236,124,227,118,210,112,210,112" href="${sellersMapUrl}?regionCodeKey=reg_par" 
+							 onmouseover="highlight('reg_par');" 
+							 onmouseout="highlight('');"
+							 onfocus="blur();"
+							 alt="Pardubický kraj"/>
+					<area shape="poly" id="area10" coords="108,144,103,147,100,151,104,158,105,163,100,167,97,175,94,182,97,180,93,182,93,187,92,192,90,193,88,199,83,202,79,198,77,191,71,186,71,180,66,178,57,171,54,165,42,160,37,156,31,146,27,138,23,130,18,123,24,119,27,112,33,107,37,109,42,105,52,107,58,99,64,96,70,98,76,90,83,93,88,97,95,100,103,106,106,108,108,115,105,125,100,127,99,133,103,140,104,144,104,146,104,146" href="${sellersMapUrl}?regionCodeKey=reg_plz" 
+							 onmouseover="highlight('reg_plz');" 
+							 onmouseout="highlight('');"
+							 onfocus="blur();"
+							 alt="Plzeňský kraj"/>
+					<area shape="poly" id="area11" coords="81,91,84,95,88,96,89,98,94,98,98,101,99,101,102,105,106,107,107,107,134,98,132,94,132,92,133,89,132,86,133,88,136,87,140,87,141,87,143,85,146,83,146,84,151,82,154,83,155,83,155,87,157,87,161,89,161,91,160,94,157,95,160,97,157,100,153,100,150,101,148,102,145,102,142,105,139,105,136,101,134,99,106,108,108,111,108,113,106,118,104,121,105,125,101,125,100,127,100,133,102,138,103,144,108,144,112,145,117,146,119,143,122,142,125,144,130,144,133,142,138,144,142,144,145,143,151,144,155,146,159,146,161,142,164,139,165,137,167,135,171,139,174,143,177,139,179,138,188,137,189,136,192,136,195,134,194,132,191,128,190,125,193,122,198,120,203,118,207,115,210,113,212,109,212,106,212,102,209,99,206,96,203,92,206,87,203,83,201,81,203,78,203,74,202,71,200,70,198,72,195,69,191,67,188,61,188,59,188,56,187,52,190,49,186,47,183,45,180,42,178,41,175,41,171,43,169,45,165,49,160,51,154,53,148,51,145,53,146,57,137,67,136,63,129,67,123,68,121,66,118,72,114,71,107,76,102,78,88,82,88,86,81,91,81,90" href="${sellersMapUrl}?regionCodeKey=reg_str" 
+							 onmouseover="highlight('reg_str');" 
+							 onmouseout="highlight('');"
+							 onfocus="blur();"
+							 alt="Středočeský kraj"/>
+					<area shape="poly" id="area12" coords="77,89,80,89,81,91,86,86,87,85,87,82,91,80,100,79,102,76,105,72,101,78,108,76,111,72,116,69,115,70,118,71,121,66,124,67,128,67,132,65,136,62,138,66,140,63,146,57,146,51,147,51,144,53,147,51,145,46,141,37,140,33,144,28,147,23,148,19,149,19,150,25,153,25,156,19,158,16,160,15,159,11,154,14,153,8,154,6,152,10,157,8,155,3,152,2,147,0,143,-1,137,3,137,7,141,9,144,12,147,15,139,18,134,21,123,24,120,24,117,30,113,33,109,32,106,30,103,33,99,32,92,35,88,38,86,37,85,41,82,43,79,44,79,49,74,43,71,48,66,48,63,52,60,57,62,56,62,57,63,57,61,60,60,61,63,64,65,66,69,66,72,68,71,72,70,77,70,79,73,81,74,82,75,84,75,87,75,89,77,89" href="${sellersMapUrl}?regionCodeKey=reg_ust" 
+							 onmouseover="highlight('reg_ust');" 
+							 onmouseout="highlight('');"
+							 onfocus="blur();"
+							 alt="Ústecký kraj"/>
+					<area shape="poly" id="area13" coords="216,202,222,195,226,200,232,193,236,190,243,190,249,193,255,186,259,183,257,177,253,179,258,171,256,167,257,163,262,160,264,151,265,141,267,136,262,135,255,131,245,125,241,123,235,127,227,120,220,116,206,113,190,124,189,127,194,131,193,136,180,138,174,139,173,145,175,151,172,156,172,160,178,167,184,168,191,174,202,175,203,180,212,184,216,184,214,190,213,196,214,197" href="${sellersMapUrl}?regionCodeKey=reg_vys" 
+							 onmouseover="highlight('reg_vys');" 
+							 onmouseout="highlight('');"
+							 onfocus="blur();"
+							 alt="Vysočina"/>
+					<area shape="poly" id="area14" coords="345,211,339,201,322,196,311,185,313,179,311,170,322,164,324,161,324,155,332,164,339,156,355,148,366,145,385,154,391,159,380,170,379,185,374,193,367,192,364,200,356,203,355,202" href="${sellersMapUrl}?regionCodeKey=reg_zln"
+							 onmouseover="highlight('reg_zln');" 
+							 onmouseout="highlight('');"
+							 onfocus="blur();"
+							 alt="Zlínský kraj"/>
 				</map> 
  		 		
- 		 		<spring:url value="/background/transparent_pixel.gif" var="transparentPixelUrl" />
- 		 		<spring:url value="/img/mapacrtmp_01.gif" var="mapUrl" />
- 		 		<img src="${transparentPixelUrl}" width="430" height="250" alt="" id="mapacr" usemap="#map" />
+ 		 		<spring:url value="/resources/img/mapacrtmp_01.gif" var="mapImgBackgroundUrl" />
+	 			<spring:url value="/resources/img/mapa_cr${param.regionCodeKey}.png" var="mapImgUrl" />
+ 		 		<img src="${mapImgUrl}" width="430" height="250" alt="" hidefocus="true" id="mapacr" usemap="#map" />
  		 		                         
 	            <style>
-					 #mapacr {
-						 display: block;
-						 background: transparent url('${mapUrl}') 0px 0px no-repeat;
-						 width: 430px;
-						 height: 250px;							 
-						 }
-					 #mapa_inner {
-						 margin:15px auto;
-						 width:430px;						 
-						 }
+					#mapacr {
+						background: transparent url('${mapImgBackgroundUrl}') 0px 0px no-repeat;
+						border: 0;
+					}
+					#mapa_inner {
+						margin:15px auto;
+						width:430px;						 
+					}
 				</style>  
         	</div>
        	</div>            	 	
@@ -163,7 +136,11 @@
 
 	<c:forEach items="${sellers}" var="seller">	
 		<spring:url value="/public/sellers/detail" var="sellersDetailUrl" />
-		<div class="category_unit cat_prodejce"> 
+		<div class="category_unit"> 
+			<spring:url value="/public/sellers/detail/${seller.id}" var="sellerIdUrl" />
+	     	<a href="${sellerIdUrl}">
+	     		<util:photo-image photos="${seller.sellerPhotoUrls}" imgType="over" height="146" width="224" />
+	     	</a>
 	    	<div class="cat_description cat_prodejce_popis"> 
 	    		<a href="${sellersDetailUrl}/${seller.id}" class="label"><spring:eval expression="seller.sellerName" /></a>
 	        	<p>${seller.sellerTitle}
@@ -188,5 +165,5 @@
 	</c:forEach>
 	
 	<div class="clear" />
+	
 </jsp:root>
-

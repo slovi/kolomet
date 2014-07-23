@@ -1,17 +1,181 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:security="http://www.springframework.org/security/tags" xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" id="body" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <page:show create="false" delete="false" id="ps_cz_kolomet_domain_Place" object="${place}" path="/public/places" update="false" z="VZqc47mUMqcc9x5FxPvojeGyEko=">
+    <div class="general_unit" style="padding:0;background:#f3f3f3;min-height:323px;">
+        <util:photo-image height="232" imgType="orig" noPhotoUrl="/resources/images/no-photo-orig_places.jpg" photos="${place.photos}" width="348"/>
+        <div class="detail_description">
+            <h2>
+                <c:out value="${place.name}"/>
+            </h2>
+            <p>
+                <c:out escapeXml="false" value="${place.description}"/>
+            </p>
+        </div>
+        <div class="detail_tag">
+            <div class="left" style="height: 30px;">
+                <p>
+                    <spring:message code="place_detail_rating"/>
+                    <br/>
+                    <util:rating entityId="${place.id}" isRated="${isRated}" rateType="PLACE" rating="${place.qualityRanking}"/>
+                </p>
+            </div>
+            <div class="right">
+                <p style="line-height:16px;">
+                    <spring:url value="/public/places" var="placesUrl">
+                        <spring:param name="highlight" value="${place.id}"/>
+                    </spring:url>
+                    <a href="${placesUrl}">
+                        <spring:message code="place_detail_showinmap"/>
+                    </a>
+                    <br/>
+                    <spring:message code="place_detail_rating_nr"/>: <c:out value="${place.nrOfRankings}"/>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="general_unit" style="height: 100px;">
+        <table class="left_column">
+            <tr>
+                <td>
+                    <b>
+                        <spring:message code="label_cz_kolomet_domain_place_name"/>
+                    </b>
+                </td>
+                <td>
+                    <c:out value="${place.name}"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>
+                        <spring:message code="label_cz_kolomet_domain_place_address"/>
+                    </b>
+                </td>
+                <td>
+                    <spring:eval expression="place.address"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>
+                        <spring:message code="label_cz_kolomet_domain_place_gpslocation"/>
+                    </b>
+                </td>
+                <td>
+                    <spring:eval expression="place.gpsLocation"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>
+                        <spring:message code="label_cz_kolomet_domain_place_bikeroadnr"/>
+                    </b>
+                </td>
+                <td>
+                    <c:out value="${place.bikeRoadNr}"/>
+                </td>
+            </tr>
+        </table>
+        <c:set value="${fn:length(place.placePhotoUrls)}" var="photoSize"/>
+        <c:forEach begin="0" end="3" varStatus="status">
+            <c:choose>
+                <c:when test="${photoSize gt status.index}">
+                    <spring:url value="/file/${place.placePhotoUrls[status.index].thumbPhotoUrl}" var="thumbPhotoUrl"/>
+                    <spring:url value="/file/${place.placePhotoUrls[status.index].photoUrl}" var="photoUrl"/>
+                    <a href="#">
+                        <img class="preloaded wait_for_load" src="${thumbPhotoUrl}"/>
+                        <span style="display: none;">
+                            <c:out value="${photoUrl}"/>
+                        </span>
+                    </a>
+                </c:when>
+            </c:choose>
+        </c:forEach>
+    </div>
+    <div style="margin:10px 6px 0px 6px;float:left;width:696px;">
+        <h2 style="padding:0;margin:0;">
+            <spring:message code="place_detail_comments"/>:</h2>
+    </div>
+    <spring:url value="/public/placecomments?form" var="commentsUrl">
+        <spring:param name="parentEntityId" value="${place.id}"/>
+    </spring:url>
+    <spring:url value="/resources/images/profile_pic.png" var="profileUrl"/>
+    <c:choose>
+        <c:when test="${fn:length(place.comments) gt 0}">
+            <c:forEach items="${place.comments}" var="comment">
+                <div class="mista_comment_box">
+                    <img src="${profileUrl}" style="float:left;"/>
+                    <div>
+                        <a style="font-weight:bold;">
+                            <c:out value="${comment.createdBy.username}"/>
+                        </a>
+                        <br/>
+                        <c:out value="${comment.created}"/>
+                    </div>
+                    <div class="comment_text">
+                        <c:out value="${comment.text}"/>
+                    </div>
+                    <div>
+                        <a href="${commentsUrl}">
+                            <spring:message code="place_detail_comments_response"/>
+                        </a>
+                    </div>
+                </div>
+            </c:forEach>
+            <div class="clear">
+                <!--  -->
+            </div>
+            <div style="width: 696px; margin-top: 20px;">
+                <p style="text-align: center;">
+                    <a href="${commentsUrl}">
+                        <spring:message code="place_detail_comments_add_comment"/>
+                    </a>
+                </p>
+            </div>
+        </c:when>
+        <c:otherwise>
+            <div style="width: 696px;">
+                <p style="text-align: center;">
+                    <spring:message code="place_detail_comments_no_comment"/>: <a href="${commentsUrl}">
+                        <spring:message code="place_detail_comments_new_comment"/>
+                    </a>
+                </p>
+            </div>
+        </c:otherwise>
+    </c:choose>
+    <div style="clear: both; padding: 5px;">
+        <security:authorize access="isAuthenticated()">
+            <security:authorize access="principal.isPlaceOwner(#place)">
+                <security:authorize access="principal.isCapableToUpdatePlace(#place)" var="update"/>
+                <security:authorize access="principal.isCapableToDeletePlace(#place)" var="delete"/>
+                <util:quicklinks copy="false" create="false" delete="${delete}" itemId="${place.id}" largeIcons="true" list="true" path="/admin/places" typeName="place" typeNamePlural="places" update="${update}"/>
+            </security:authorize>
+        </security:authorize>
+    </div>
+    <spring:url value="/resources/images/ajax-loader.gif" var="loader_url"/>
+    <spring:url value="/resources/images/error.png" var="loader_error_url"/>
+    <script type="text/javascript">
+	    require(['main'], function() {
+	    	require(['images'], function(images) {
+	    		images.preloadImages('detail_image');
+	    		images.waitForLoad('${loader_url}', '${loader_error_url}', 6, 2000);
+	    	});
+	    });
+    </script>
+    <page:show create="false" delete="false" id="ps_cz_kolomet_domain_Place" object="${place}" path="/public/places" render="false" update="false" z="user-managed">
         <field:display field="createdBy" id="s_cz_kolomet_domain_Place_createdBy" object="${place}" z="wbZvH4cbSMrVMBXPo1u8Q0Gec3E="/>
         <field:display field="lastModifiedBy" id="s_cz_kolomet_domain_Place_lastModifiedBy" object="${place}" z="hYDtLIpzmQMeAycownpgbuq4bss="/>
         <field:display date="true" dateTimePattern="${place_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_Place_lastModified" object="${place}" z="yBdWLrPSB4Ct3wmues54T0f+J1A="/>
         <field:display field="name" id="s_cz_kolomet_domain_Place_name" object="${place}" z="9GSc8z5d+5eKzuEdIV/4oebfN0Y="/>
-        <field:display field="placeType" id="s_cz_kolomet_domain_Place_placeType" object="${place}" z="Kj1o93fBpYRLRaH9g3inbI6tfVg="/>
         <field:display field="description" id="s_cz_kolomet_domain_Place_description" object="${place}" z="G2xyIm1AqfLVil94aL6QWj9sui0="/>
+        <field:display field="placeType" id="s_cz_kolomet_domain_Place_placeType" object="${place}" z="Kj1o93fBpYRLRaH9g3inbI6tfVg="/>
         <field:display field="address" id="s_cz_kolomet_domain_Place_address" object="${place}" z="DYZCcDqSNMWrB+47sLqDQ/4GnXc="/>
         <field:display field="gpsLocation" id="s_cz_kolomet_domain_Place_gpsLocation" object="${place}" z="fWvfaeR+9yftGUwqYiHLHY4bMGY="/>
         <field:display field="bikeRoadNr" id="s_cz_kolomet_domain_Place_bikeRoadNr" object="${place}" z="CA/KjB9h81tmJTEsSRE4PTbcedQ="/>
         <field:display field="qualityRanking" id="s_cz_kolomet_domain_Place_qualityRanking" object="${place}" z="PRVW9rJr7e5cEbXnCF2goZ9nGjY="/>
+        <field:display field="nrOfRankings" id="s_cz_kolomet_domain_Place_nrOfRankings" object="${place}" z="K25+i2YZvZL2YU4f1yoFtt6BdKg="/>
+        <field:display field="region" id="s_cz_kolomet_domain_Place_region" object="${place}" z="x8vII5dEbY/4c3Gsl2hY1IVOvYE="/>
+        <field:display field="contents" id="s_cz_kolomet_domain_Place_contents" object="${place}" z="NuMDxvmoprPuNq6f7fjE6giS/e4="/>
     </page:show>
 </div>

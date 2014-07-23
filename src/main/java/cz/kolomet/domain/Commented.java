@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface Commented {
 	
-	public List<? extends ProductComment> getComments();
+	public List<? extends PlaceComment> getComments();
 
 }

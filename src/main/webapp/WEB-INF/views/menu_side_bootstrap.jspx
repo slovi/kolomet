@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jsp:root xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+
+	<spring:url value="/resources/img/arrow_down.png" var="arrowDownImageUrl"/>
+	<spring:url value="/resources/img/arrow_right.png" var="arrowRightImageUrl" />
+    
+	<div>
+		<c:set var="hiddenClassOn" value="hidden" />
+		<c:set var="hiddenClassOff" value="" />
+    	<c:if test="${not empty param.menu and param.menu eq 'category'}">
+    		<c:set value="" var="hiddenClassOn" />
+    		<c:set value="hidden" var="hiddenClassOff" />
+    	</c:if>
+		<h1 class="side-menu-header">
+	    	<spring:message code="menu_side_categories" />
+	    	<img class="side-menu-arrow-on ${hiddenClassOn}" src="${arrowDownImageUrl}" />
+	    	<img class="side-menu-arrow-off ${hiddenClassOff}" src="${arrowRightImageUrl}" />
+	    </h1>
+	    <div class="list-group">
+	    	<menu:list-item url="/public/products/filter?menu=category" id="menuitem_category_all" defaultPageSize="${categoryPageSize}" />
+	    	<c:forEach items="${categorys}" var="category">
+	    		<menu:list-item url="/public/products/filter?category=${category.id}&amp;menu=category" id="menuitem_${category.codeKey}" label="${category.codeDescription}" defaultPageSize="${categoryPageSize}" />
+			</c:forEach>
+	    </div>
+	</div>
+    <div class="side-menu">
+    	<c:set var="hiddenClassOn" value="hidden" />
+		<c:set var="hiddenClassOff" value="" />
+    	<c:if test="${not empty param.menu and param.menu eq 'producer'}">
+    		<c:set value="" var="hiddenClassOn" />
+    		<c:set value="hidden" var="hiddenClassOff" />
+    	</c:if>
+    	<h1 class="side-menu-header">
+        	<spring:message code="menu_side_producers" />
+        	<img class="side-menu-arrow-on ${hiddenClassOn}" src="${arrowDownImageUrl}" />
+        	<img class="side-menu-arrow-off ${hiddenClassOff}" src="${arrowRightImageUrl}" />
+        </h1>
+		<menu:menu id="side_menu_body_producers" styleClass="side-menu-body ${hiddenClassOn}">
+			<c:forEach items="${producers}" var="producer" varStatus="status">
+				<menu:item url="/public/products/filter?producer=${producer.id}&amp;menu=producer" id="menuitem_${producer.codeKey}" label="${producer.codeDescription}" defaultPageSize="${categoryPageSize}" />
+			</c:forEach>
+		</menu:menu>
+	</div>
+	<div class="side-menu">
+		<c:set var="hiddenClassOn" value="hidden" />
+		<c:set var="hiddenClassOff" value="" />
+    	<c:if test="${not empty param.menu and param.menu eq 'figureHeight'}">
+    		<c:set value="" var="hiddenClassOn" />
+    		<c:set value="hidden" var="hiddenClassOff" />
+    	</c:if>
+    	<h1 class="side-menu-header">
+        	<spring:message code="menu_side_bicycle_weights" />
+	    	<img class="side-menu-arrow-on ${hiddenClassOn}" src="${arrowDownImageUrl}" />
+	    	<img class="side-menu-arrow-off ${hiddenClassOff}" src="${arrowRightImageUrl}" />
+        </h1>
+       <menu:menu id="side_menu_body_figureheights" styleClass="side-menu-body ${hiddenClassOn}">
+	   		<c:forEach items="${figureheights}" var="figureheight">
+				<menu:item url="/public/products/filter?figureHeight=${figureheight.id}&amp;menu=figureHeight" id="menuitem_${figureheight.codeKey}" label="${figureheight.codeDescription}" defaultPageSize="${categoryPageSize}" />
+			</c:forEach>
+	   </menu:menu>
+	</div>	
+	
+	<div id="news_left">
+		<div class="news_content">
+       		<div class="news_header">
+	    		<spring:message code="news_header" />
+       		</div>
+       		<c:forEach items="${newsItems}" var="newsItem">
+	       		<div class="news_item">
+	       			<p>
+	       				<span class="news_item_date"><spring:eval expression="newsItem.newsItemDate"/></span>
+	       				<br />
+	       				<span class="news_item_content"><c:out value="${newsItem.text}" escapeXml="false" /></span>		        			
+	       			</p>
+	       		</div>
+       		</c:forEach>
+    	</div>
+    </div>
+	
+	<script type="text/javascript">
+		require(['main'], function() {
+			require(['side_menu'], function(sideMenu) {
+				sideMenu.prepare();
+			});
+		});
+	</script>
+		
+</jsp:root>

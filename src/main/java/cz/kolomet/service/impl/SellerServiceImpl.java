@@ -62,6 +62,11 @@ public class SellerServiceImpl implements SellerService {
         sellerRepository.save(seller);
     }
     
+	@PreAuthorize("principal.isCapableToEraseSeller(#seller)")
+	public void eraseSeller(Seller seller) {
+		sellerRepository.delete(seller);
+	}
+	
 	@PostAuthorize("isAnonymous() or principal.isSellerOwner(returnObject)")
     public Seller findSeller(Long id) {
         return sellerRepository.findOne(id);

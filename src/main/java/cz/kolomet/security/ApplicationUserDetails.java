@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import cz.kolomet.domain.ApplicationPermission;
 import cz.kolomet.domain.ApplicationRole;
 import cz.kolomet.domain.ApplicationUser;
+import cz.kolomet.domain.Place;
 import cz.kolomet.domain.Product;
 import cz.kolomet.domain.Seller;
 
@@ -35,6 +36,14 @@ public class ApplicationUserDetails implements UserDetails {
 		Authentication authentication = context.getAuthentication();
 		Object principal = authentication.getPrincipal();
 		return principal instanceof ApplicationUserDetails ? (ApplicationUserDetails) principal : null;
+	}
+	
+	public boolean isPlacesOwn() {
+		return hasAuthority("per_places_own");
+	}
+	
+	public boolean isPlacesAll() {
+		return hasAuthority("per_places_all");
 	}
 	
 	public boolean isProductsOwn() {
@@ -73,6 +82,10 @@ public class ApplicationUserDetails implements UserDetails {
 		return isSellerOwner(seller);
 	}
 	
+	public boolean isCapableToEraseSeller(Seller seller) {
+		return isSellersAll();
+	}
+	
 	public boolean isCapableToDeleteSeller(Seller seller) {
 		return isSellersAll();
 	}
@@ -101,11 +114,35 @@ public class ApplicationUserDetails implements UserDetails {
 		return isProductsAll() || (isProductOwner(product));
 	}
 	
+	public boolean isCapableToEraseProduct(Product product) {
+		return isProductsAll();
+	}
+	
 	public boolean isCapableToDeleteProduct(Product product) {
 		return isProductsAll() || (isProductOwner(product) && product.isValid() );
 	}
 	
 	public boolean isCapableToDisplayProduct(Product product) {
+		return true;
+	}
+		
+	public boolean isPlaceOwner(Place place) {
+		return isPlacesAll() || (isPlacesOwn() && getUserId().equals(place.getCreatedBy().getId()));
+	}
+	
+	public boolean isCapableToSavePlace(Place place) {
+		return isPlaceOwner(place);
+	}
+	
+	public boolean isCapableToUpdatePlace(Place place) {
+		return isPlaceOwner(place);
+	}
+	
+	public boolean isCapableToDeletePlace(Place place) {
+		return isPlaceOwner(place);
+	}
+	
+	public boolean isCapableToDisplayPlace(Place place) {
 		return true;
 	}
 	

@@ -28,9 +28,9 @@
 		    		<p><spring:message code="label_cz_kolomet_domain_product_producer" />: <c:out value="${product.producer.codeDescription}" /></p>
 	         		<p><spring:message code="label_cz_kolomet_domain_product_category" />: <c:out value="${product.category.codeDescription}" /></p>
 	         		<p>
-	         			<spring:eval expression="product.getProductAttribute('pat.bike.color')" var="colorAttribute" />
-	         			<spring:message code="label_cz_kolomet_domain_product_productcolor" />: <c:out value="${product.productColor.codeDescription}" /><c:if test="${not empty colorAttribute}">, </c:if>
-	         			<c:if test="${not empty colorAttribute}">
+	         			<spring:eval expression="product.getColorAttribute()" var="colorAttribute" />
+	         			<spring:message code="label_cz_kolomet_domain_product_productcolor" />: <c:out value="${product.productColor.codeDescription}" /><c:if test="${not empty colorAttribute and not empty colorAttribute.attributeValue}">, </c:if>
+	         			<c:if test="${not empty colorAttribute and not empty colorAttribute.attributeValue}">
 							<c:out value="${colorAttribute.attributeType.codeDescription}" />: <c:out value="${colorAttribute.attributeValue}" />
 	         			</c:if>
 	         		</p>

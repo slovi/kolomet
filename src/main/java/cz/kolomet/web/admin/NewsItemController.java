@@ -25,6 +25,7 @@ import cz.kolomet.domain.NewsItem;
 import cz.kolomet.domain.NewsItemType;
 import cz.kolomet.dto.EnumDto;
 import cz.kolomet.service.ApplicationUserService;
+import cz.kolomet.service.NewsItemPhotoUrlService;
 import cz.kolomet.service.NewsItemService;
 
 @RequestMapping("/admin/newsitems")
@@ -34,6 +35,9 @@ public class NewsItemController extends AbstractAdminController implements Messa
 	
 	@Autowired
 	private NewsItemService newsItemService;
+	
+	@Autowired
+	private NewsItemPhotoUrlService newsItemPhotoUrlService;
 	
 	@Autowired
 	private ApplicationUserService applicationUserService;
@@ -52,7 +56,7 @@ public class NewsItemController extends AbstractAdminController implements Messa
     	uiModel.asMap().clear();              
 
     	newsItemService.saveNewsItem(newsItem);
-    	saveNewsItemPhotos(newsItem, newsItem.getContents());
+    	savePhotos(newsItem, newsItemPhotoUrlService, newsItem.getContents());
     	
     	if (StringUtils.isNotEmpty(stay)) {
     		return "redirect:/admin/newsitems/" + newsItem.getId() + "?form";
@@ -70,7 +74,7 @@ public class NewsItemController extends AbstractAdminController implements Messa
         uiModel.asMap().clear();        
         
         newsItemService.updateNewsItem(newsItem);
-        saveNewsItemPhotos(newsItem, newsItem.getContents());
+        savePhotos(newsItem, newsItemPhotoUrlService, newsItem.getContents());
         if (StringUtils.isNotEmpty(stay)) {
         	return "redirect:/admin/newsitems/" + newsItem.getId() + "?form";
         } else {

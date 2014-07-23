@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_cz_kolomet_domain_Rate" items="${rates}" z="k+2AOnzytGn0CGemUbI+MEwo1Zo=">
+        <table:table data="${rates}" delete="false" id="l_cz_kolomet_domain_Rate" path="/public/rates" update="false" z="4358XatNTOXxPnihgh+OaBOgBbI=">
+            <table:column id="c_cz_kolomet_domain_Rate_createdBy" property="createdBy" z="QMmQKiM5C9Ap5U/LI1gai1PuyAw="/>
+            <table:column id="c_cz_kolomet_domain_Rate_lastModifiedBy" property="lastModifiedBy" z="oEZFvYbE8tXQgUi4XE4DDQNNGMk="/>
+            <table:column date="true" dateTimePattern="${rate_created_date_format}" id="c_cz_kolomet_domain_Rate_created" property="created" z="pzB+FwRr1uHneI9n5qDRHbw7pzI="/>
+            <table:column date="true" dateTimePattern="${rate_lastmodified_date_format}" id="c_cz_kolomet_domain_Rate_lastModified" property="lastModified" z="tXRuWEKlTB7OLp5kvSIAAqN5Kqc="/>
+            <table:column id="c_cz_kolomet_domain_Rate_rateType" property="rateType" z="DzdwCiSw6kmY46DtdlEPyfOboGY="/>
+            <table:column id="c_cz_kolomet_domain_Rate_entityId" property="entityId" z="e/C4hNfaUvMIctilz2wQKCSznBk="/>
+        </table:table>
+    </page:list>
+</div>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu" id="side_menu" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+
+	<spring:url value="/resources/img/arrow_down.png" var="arrowDownImageUrl"/>
+	<spring:url value="/resources/img/arrow_right.png" var="arrowRightImageUrl" />
+    
+	<div class="side-menu">
+		<c:set var="hiddenClassOn" value="" />
+		<c:set var="hiddenClassOff" value="hidden" />
+    	<c:if test="${not empty param.menu and param.menu eq 'region'}">
+    		<c:set value="" var="hiddenClassOn" />
+    		<c:set value="hidden" var="hiddenClassOff" />
+    	</c:if>
+		<h1 class="side-menu-header">
+	    	<spring:message code="menu_side_regions" />
+	    	<img class="side-menu-arrow-on ${hiddenClassOn}" src="${arrowDownImageUrl}" />
+	    	<img class="side-menu-arrow-off ${hiddenClassOff}" src="${arrowRightImageUrl}" />
+	    </h1>
+	    <menu:menu id="side_menu_body_regions" styleClass="side-menu-body ${hiddenClassOn}">
+		    <menu:item url="/public/places?menu=region" id="menuitem_category_all" label="Všechny regiony" />
+	    	<c:forEach items="${regions}" var="region">
+				<menu:item url="/public/places?region=${region.id}&amp;menu=region" id="menuitem_${region.codeKey}" label="${region.codeDescription}" />
+			</c:forEach>
+	     </menu:menu>
+	</div>
+    <div class="side-menu">
+    	<c:set var="hiddenClassOn" value="hidden" />
+		<c:set var="hiddenClassOff" value="" />
+    	<c:if test="${not empty param.menu and param.menu eq 'placeType'}">
+    		<c:set value="" var="hiddenClassOn" />
+    		<c:set value="hidden" var="hiddenClassOff" />
+    	</c:if>
+    	<h1 class="side-menu-header">
+        	<spring:message code="menu_side_placetypes" />
+        	<img class="side-menu-arrow-on ${hiddenClassOn}" src="${arrowDownImageUrl}" />
+        	<img class="side-menu-arrow-off ${hiddenClassOff}" src="${arrowRightImageUrl}" />
+        </h1>
+		<menu:menu id="side_menu_body_producers" styleClass="side-menu-body ${hiddenClassOn}">
+			<c:forEach items="${placeTypes}" var="placeType" varStatus="status">
+				<menu:item url="/public/places?placeType=${placeType.id}&amp;menu=placeType" id="menuitem_${placeType.codeKey}" label="${placeType.codeDescription}" />
+			</c:forEach>
+		</menu:menu>
+	</div>
+	
+	<script type="text/javascript">
+		require(['main'], function() {
+			require(['side_menu'], function(sideMenu) {
+				sideMenu.prepare();
+			});
+		});
+	</script>
+		
+</div>

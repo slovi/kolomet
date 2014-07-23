@@ -5,9 +5,9 @@
         <form:form action="${filterActionUrl}" id="filterForm" method="get" modelAttribute="productFilter">
             <div>
                 <form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
-                <field:input field="name" id="c_cz_kolomet_domain_Product_productName" inline="true" required="false"/>
-                <field:datetime dateTimePattern="${product_validfrom_date_format}" field="validFrom" id="c_cz_kolomet_domain_Product_validFrom" />
-    	    	<field:datetime dateTimePattern="${product_validto_date_format}" field="validTo" id="c_cz_kolomet_domain_Product_validTo" />
+                <field:input field="name" id="c_cz_kolomet_domain_Product_productName" required="false"/>
+                <field:datetime dateTimePattern="${product_validfrom_date_format}" field="validFrom" id="c_cz_kolomet_domain_Product_validFrom"/>
+                <field:datetime dateTimePattern="${product_validto_date_format}" field="validTo" id="c_cz_kolomet_domain_Product_validTo"/>
                 <div class="clear button_filter">
                     <spring:message code="button_filter" htmlEscape="false" var="save_filter"/>
                     <input name="page.page" type="hidden" value="${productsPage.number}"/>
@@ -21,16 +21,18 @@
                 </div>
             </div>
             <script type="text/javascript">
-				require(['form'], function(form) {
-					
-					functions = [
-						function(resetedForm) {
-							window.location.assign($("#i_product_list a").attr("href"));
-						}
-					];
-					
-					form.resetForm("filterForm", functions);
-					
+	            require(['main'], function() {
+					require(['form'], function(form) {
+						
+						functions = [
+							function(resetedForm) {
+								window.location.assign($("#i_product_list a").attr("href"));
+							}
+						];
+						
+						form.resetForm("filterForm", functions);
+						
+					});
 				});
 			</script>
         </form:form>
@@ -45,14 +47,14 @@
                 <table:column id="c_cz_kolomet_domain_Product_seller" property="seller.sellerName" sort="true" z="a0TMwRPIIK+uZVPOhkqtLmfD/D8="/>
                 <table:column id="c_cz_kolomet_domain_Product_validFrom" property="validFrom" sort="true" z="user-managed"/>
                 <table:column id="c_cz_kolomet_domain_Product_validTo" property="validTo" sort="true" z="user-managed"/>
-                <table:column id="c_cz_kolomet_domain_Product_createdBy" property="createdBy" sort="true" z="user-managed"/>
-                <table:column id="c_cz_kolomet_domain_Product_lastModifiedBy" property="lastModifiedBy" sort="true" z="user-managed"/>
                 <table:column date="true" dateTimePattern="${product_created_date_format}" id="c_cz_kolomet_domain_Product_created" property="created" sort="true" z="user-managed"/>
                 <table:column date="true" dateTimePattern="${product_lastmodified_date_format}" id="c_cz_kolomet_domain_Product_lastModified" property="lastModified" sort="true" z="user-managed"/>
                 <c:set var="priceLabel">
                     <spring:message code="label_cz_kolomet_domain_product_price" htmlEscape="false"/> (<spring:message code="currency_short"/>)
 	            </c:set>
                 <table:column id="c_cz_kolomet_domain_Product_price" label="${priceLabel}" number="true" property="price" sort="true" z="user-managed"/>
+                <table:column id="c_cz_kolomet_domain_Product_createdBy" property="createdBy" z="OWG6pEX68ZoicbdE070YdkKD6ls="/>
+                <table:column id="c_cz_kolomet_domain_Product_lastModifiedBy" property="lastModifiedBy" z="ZWXEafUJDEz4eI9ifCrb8n0LVAk="/>
             </table:table>
         </page:list>
     </div>

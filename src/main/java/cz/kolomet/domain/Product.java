@@ -20,6 +20,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.apache.commons.io.FileUtils;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Filter;
 import org.hibernate.annotations.FilterDef;
 import org.hibernate.annotations.FilterDefs;
@@ -56,7 +58,7 @@ import cz.kolomet.domain.codelist.ProductUsage;
 	@Filter(name = "productEnabledFilter", condition = "enabled = :enabled"),
 	@Filter(name = "sellerOwnFilter", condition = "seller_id = :sellerId")
 })
-public class Product extends DomainEntity implements Cloneable {
+public class Product extends DomainEntity implements Cloneable, PhotoContainer {
 	
 	public static final Date DEFAULT_VALID_TO_DATE = new DateTime(9999, 12, 31, 0, 0, 0, 0).toDate();
 	
@@ -163,6 +165,20 @@ public class Product extends DomainEntity implements Cloneable {
     
     @Transient
     private List<CommonsMultipartFile> contents;
+    
+    @Override
+    public String getPhotoType() {
+    	return PhotoUrl.PHOTO_URL_PREFIX;
+    }
+    
+    public ProductAttribute getColorAttribute() {
+    	for (ProductAttribute productAttribute: productAttributes) {
+    		if (productAttribute.isColorAttribute()) {
+    			return productAttribute;
+    		}
+    	}
+    	return null;
+    }
     
     public ProductAttribute getProductAttribute(String productAttributeName) {
     	for (ProductAttribute productAttribute: productAttributes) {
@@ -286,7 +302,7 @@ public class Product extends DomainEntity implements Cloneable {
 	}
 	
 	public BigDecimal computeDiscount() {
-		if (price != null) {
+		if (price != null && finalPrice != null) {
 			return price.subtract(finalPrice);
 		} else {
 			return BigDecimal.ZERO;
@@ -295,6 +311,21 @@ public class Product extends DomainEntity implements Cloneable {
 	
 	public boolean isAnyDiscount() {
 		return computeDiscount().compareTo(BigDecimal.ZERO) > 0;
+	}
+
+	@Override
+	public List<? extends Photo> getPhotos() {
+		return photoUrls;
+	}
+
+	@Override
+	public Photo addPhoto(String fileName, String contentType) {
+		final PhotoUrl photoUrl = new PhotoUrl();
+    	photoUrl.setFileName(fileName);
+    	photoUrl.setContentType(contentType);
+    	photoUrl.setProduct(this);
+    	this.getPhotoUrls().add(photoUrl);
+    	return photoUrl;
 	}
     
 }

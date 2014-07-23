@@ -3,12 +3,14 @@ project --topLevelPackage cz.kolomet --projectName kolomet
 jpa setup --database HYPERSONIC_IN_MEMORY --provider HIBERNATE
 
 entity jpa --class ~.domain.Category --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
+entity jpa --class ~.domain.Rate --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 entity jpa --class ~.domain.Place --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 entity jpa --class ~.domain.Comment --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 entity jpa --class ~.domain.Seller --activeRecord false --equals true --extends ~.domain.DomainEntity --serializable true --abstract true
 entity jpa --class ~.domain.Producer --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 entity jpa --class ~.domain.ProductAttribute --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --testAutomatically true --activeRecord false
 entity jpa --class ~.domain.PhotoUrl --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
+entity jpa --class ~.domain.PlacePhotoUrl --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 entity jpa --class ~.domain.SellerPhotoUrl --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 entity jpa --class ~.domain.Product --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
 entity jpa --class ~.domain.ApplicationUser --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
@@ -32,10 +34,13 @@ entity jpa --class ~.domain.codelist.PlaceType --extends ~.domain.codelist.Codel
 class --class ~.dto.ApplicationUserPasswordDto --equals true --serializable true --activeRecord false
 
 repository jpa --interface ~.repository.ProductRepository --entity ~.domain.Product
+repository jpa --interface ~.repository.RateRepository --entity ~.domain.Rate
+repository jpa --interface ~.repository.PlaceCommentRepository --entity ~.domain.PlaceComment
 repository jpa --interface ~.repository.PlaceRepository --entity ~.domain.Place
 repository jpa --interface ~.repository.SellerRepository --entity ~.domain.Seller
 repository jpa --interface ~.repository.ProductAttributeRepository --entity ~.domain.ProductAttribute
 repository jpa --interface ~.repository.PhotoUrlRepository --entity ~.domain.PhotoUrl
+repository jpa --interface ~.repository.PlacePhotoUrlRepository --entity ~.domain.PlacePhotoUrl
 repository jpa --interface ~.repository.SellerPhotoUrlRepository --entity ~.domain.SellerPhotoUrl
 repository jpa --interface ~.repository.CategoryRepository --entity ~.domain.codelist.Category
 repository jpa --interface ~.repository.CategoryTypeRepository --entity ~.domain.codelist.CategoryType
@@ -57,10 +62,13 @@ repository jpa --interface ~.repository.ProductColorRepository --entity ~.domain
 repository jpa --interface ~.repository.PlaceTypeRepository --entity ~.domain.codelist.PlaceType
 
 service type --interface ~.service.ProductService --entity ~.domain.Product --class ~.service.impl.ProductServiceImpl
+service type --interface ~.service.RateService --entity ~.domain.Rate --class ~.service.impl.RateServiceImpl
 service type --interface ~.service.PlaceService --entity ~.domain.Place --class ~.service.impl.PlaceServiceImpl
+service type --interface ~.service.PlaceCommentService --entity ~.domain.PlaceComment --class ~.service.impl.PlaceCommentServiceImpl
 service type --interface ~.service.SellerService --entity ~.domain.Seller --class ~.service.impl.SellerServiceImpl
 service type --interface ~.service.ProductAttributeService --entity ~.domain.ProductAttribute --class ~.service.impl.ProductAttributeServiceImpl
 service type --interface ~.service.PhotoUrlService --entity ~.domain.PhotoUrl --class ~.service.impl.PhotoUrlServiceImpl
+service type --interface ~.service.PlacePhotoUrlService --entity ~.domain.PlacePhotoUrl --class ~.service.impl.PlacePhotoUrlServiceImpl
 service type --interface ~.service.SellerPhotoUrlService --entity ~.domain.SellerPhotoUrl --class ~.service.impl.SellerPhotoUrlServiceImpl
 service type --interface ~.service.CategoryService --entity ~.domain.Category --class ~.service.impl.CategoryServiceImpl
 service type --interface ~.service.CategoryTypeService --entity ~.domain.codelist.CategoryType --class ~.service.impl.CategoryTypeServiceImpl
@@ -88,6 +96,7 @@ web mvc scaffold --class ~.web.PlaceController --backingType ~.domain.Place
 web mvc scaffold --class ~.web.PlaceController
 web mvc scaffold --class ~.web.ProductAttributeController --backingType ~.domain.ProductAttribute
 web mvc scaffold --class ~.web.PhotoUrlController --backingType ~.domain.PhotoUrl
+web mvc scaffold --class ~.web.PlacePhotoUrlController --backingType ~.domain.PlacePhotoUrl
 web mvc scaffold --class ~.web.SellerPhotoUrlController --backingType ~.domain.SellerPhotoUrl
 web mvc scaffold --class ~.web.CategoryController --backingType ~.domain.codelist.Category
 web mvc scaffold --class ~.web.ProducerController --backingType ~.domain.codelist.Producer
@@ -101,8 +110,10 @@ web mvc scaffold --class ~.web.RegistrationRequestController --backingType ~.dom
 web mvc scaffold --class ~.web.ApplicationRoleController --backingType ~.domain.ApplicationRole
 web mvc scaffold --class ~.web.ApplicationPermissionController --backingType ~.domain.ApplicationPermission
 web mvc scaffold --class ~.web.NewsItemController --backingType ~.domain.NewsItem
+web mvc scaffold --class ~.web.RateController --backingType ~.domain.Rate --path /public/rates
 web mvc scaffold --class ~.web.NewsItemPhotoUrlController --backingType ~.domain.NewsItemPhotoUrl --path /admin/newsitemphotourls
 web mvc scaffold --class ~.web.BicycleController --backingType ~.domain.codelist.BicycleSize --path /admin/bicyclesizes
 web mvc scaffold --class ~.web.FigureHeightController --backingType ~.domain.codelist.FigureHeight --path /admin/figureheights
 web mvc scaffold --class ~.web.ProductColorController --backingType ~.domain.codelist.ProductColor --path /admin/productcolors
 web mvc scaffold --class ~.web.PlaceTypeController --backingType ~.domain.codelist.PlaceType --path /admin/placetypes
+web mvc scaffold --class ~.web.admin.PlaceCommentController --backingType ~.domain.PlaceComment --path /admin/placecomments

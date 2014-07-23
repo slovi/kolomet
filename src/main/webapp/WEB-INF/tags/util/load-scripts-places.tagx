@@ -1,0 +1,81 @@
+<jsp:root xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+
+  <jsp:output omit-xml-declaration="yes" />
+  
+  <spring:url value="/resources/dijit/themes/tundra/tundra.css" var="tundra_url" />
+  <link rel="stylesheet" type="text/css" href="${tundra_url}" />
+  
+  <spring:url value="/resources/css/ui-lightness/jquery-ui-1.10.4.custom.min.css" var="jquery_ui_css" />
+  <link rel="stylesheet" type="text/css" href="${jquery_ui_css}" />
+  
+  <spring:url value="/resources/css/style_mista.css" var="default_css_url" />
+  <link rel="stylesheet" type="text/css" href="${default_css_url}" />
+  
+  <spring:url value="/resources/css/jquery.fileupload.css" var="fileupload_css_url" />
+  <link rel="stylesheet" type="text/css" href="${fileupload_css_url}" />
+  
+  <spring:url value="/resources/css/standard.css" var="standard_css_url" />
+  <link rel="stylesheet" type="text/css" href="${standard_css_url}" />
+
+  <spring:url value="/resources/images/favicon.ico" var="favicon" />
+  <link rel="SHORTCUT ICON" href="${favicon}" />
+
+  <!-- Get the user local from the page context (it was set by Spring MVC's locale resolver) -->
+  <c:set var="userLocale">
+    <c:set var="plocale">${pageContext.response.locale}</c:set>
+    <c:out value="${fn:replace(plocale, '_', '-')}" default="en" />
+  </c:set>
+
+  <spring:url value="/resources/js/main" var="main_js_url" />
+  <spring:url value="/resources/js/lib/require.js" var="require_js_url" />
+  <script data-main="${main_js_url}" src="${require_js_url}"><!-- --></script>  
+
+  <spring:url value="/resources/dojo/dojo.js" var="dojo_url" />
+  <script src="${dojo_url}" type="text/javascript"><!-- required for FF3 and Opera --></script>
+
+  <spring:url value="/resources/spring/Spring.js.uncompressed.js" var="spring_url" />
+  <script src="${spring_url}" type="text/javascript"><!-- /required for FF3 and Opera --></script>
+  
+  <spring:url value="/resources/spring/Spring-Dojo.js.uncompressed.js" var="spring_dojo_url" />
+  <script src="${spring_dojo_url}" type="text/javascript"><!-- required for FF3 and Opera --></script>
+  <script language="JavaScript" type="text/javascript">dojo.require("dojo.parser");</script>
+  
+
+  <script type="text/javascript">var djConfig = {parseOnLoad: false, isDebug: false, locale: '${fn:toLowerCase(userLocale)}'};</script>
+  
+  <style type="text/css">
+  	
+  	body {
+  		background: none;
+  	}
+  
+  	.dijitTextBox[type=file] {
+  		width: 25em;
+  	}
+  	.uploadBtn{
+	    border:1px solid #333333;
+	    background:url(buttonEnabled.png) #d0d0d0 repeat-x scroll 0px top;
+	    font-size:14px;
+	    width:201px;
+	    height:30px;
+	    vertical-align:middle;
+	    text-align:center;
+	}
+	.uploadHover{
+	    background-image:url(buttonHover.png);
+	    cursor:pointer;
+	    font-weight:bold;
+	}
+	
+	.uploadPress{
+	    background-image:url(buttonActive.png);
+	}
+	.uploadDisabled{
+	    background-image:none;
+	    background-color:#666;
+	    color:#999;
+	    border:1px solid #999;
+	}
+  </style>
+
+</jsp:root>

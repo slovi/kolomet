@@ -16,7 +16,7 @@
 					</div>
 				</c:when>
 				<c:when test="${product.valid}">
-		 			<security:authorize access="isAuthenticated() and principal.productsAll">
+		 			<security:authorize access="isAuthenticated()">
 						<div class="valid">
 							<c:set var="description_class" value="description_short" />
 							<span class="valid"><spring:message code="product_valid" /></span>
@@ -103,16 +103,19 @@
        				<td><b><spring:message code="label_cz_kolomet_domain_product_productcolor" /></b></td>
        				<td><c:out value="${product.productColor.codeDescription}" /></td>
        			</tr>
-        		<c:forEach items="${productAttributes}" var="attribute">
-        			<tr>
-        				<td><b><c:out value="${attribute.attributeType.codeDescription}" /></b></td>
-        				<td>
-        					<c:out value="${attribute.attributeValue}" />
-        					<c:if test="${not empty attribute.attributeValue}">
-        						<c:out value="&#32;" escapeXml="false" /><c:out value="${attribute.attributeType.units}" />
-        					</c:if>
-        				</td>
-        			</tr>
+       			
+        		<c:forEach items="${productAttributes}" var="attribute">        			
+        			<c:if test="${not attribute.colorAttribute or (attribute.colorAttribute and not empty attribute.attributeValue)}">
+	        			<tr>
+	        				<td><b><c:out value="${attribute.attributeType.codeDescription}" /></b></td>
+	        				<td>
+	        					<c:out value="${attribute.attributeValue}" />
+	        					<c:if test="${not empty attribute.attributeValue}">
+	        						<c:out value="&#32;" escapeXml="false" /><c:out value="${attribute.attributeType.units}" />
+	        					</c:if>
+	        				</td>
+	        			</tr>
+        			</c:if>
         		</c:forEach>
         		<tr>
        				<td><b><spring:message code="label_cz_kolomet_domain_product_validfrom" /></b></td>
@@ -155,6 +158,27 @@
 				</c:choose>
 			</c:forEach>
 			<div class="clear"></div>
+			<security:authorize access="isAuthenticated()">
+	    		<security:authorize access="principal.isProductOwner(#product)">
+					<div style="margin-top: 300px;">
+						<table>
+							<thead>
+								<tr>
+									<td colspan="2">Systémové údaje</td>
+								</tr>
+							</thead>
+			       			<tr>
+			       				<td><b><spring:message code="label_cz_kolomet_domain_product_createdby" /></b></td>
+			       				<td><spring:eval expression="product.createdBy" /></td>
+			       			</tr>
+			       			<tr>
+			       				<td><b><spring:message code="label_cz_kolomet_domain_seller_lastmodifiedby" /></b></td>
+			       				<td><spring:eval expression="product.lastModifiedBy" /></td>
+			       			</tr>
+			            </table>
+					</div>
+				</security:authorize>
+			</security:authorize>
     	</div>
     </div>
     
@@ -164,7 +188,8 @@
 	    		<security:authorize access="principal.isCapableToUpdateProduct(#product)" var="update" />
 	    		<security:authorize access="principal.isCapableToCopyProduct(#product)" var="copy" />
 	    		<security:authorize access="principal.isCapableToDeleteProduct(#product)" var="delete" />
-	    		<util:quicklinks update="${update}" copy="${copy}" create="false" list="true" itemId="${product.id}" typeName="product" delete="${delete}" typeNamePlural="products" path="/admin/products" largeIcons="true" />
+	    		<security:authorize access="principal.isCapableToEraseProduct(#product)" var="erase" />
+	    		<util:quicklinks update="${update}" copy="${copy}" create="false" erase="${erase}" list="true" itemId="${product.id}" typeName="product" delete="${delete}" typeNamePlural="products" path="/admin/products" largeIcons="true" />
 	    	</security:authorize>
     	</security:authorize>
     </div>
@@ -172,10 +197,12 @@
     <spring:url value="/resources/images/ajax-loader.gif" var="loader_url" />
     <spring:url value="/resources/images/error.png" var="loader_error_url" />
     <script type="text/javascript">
-    	require(['images'], function(images) {
-    		images.preloadImages('detail_image');
-    		images.waitForLoad('${loader_url}', '${loader_error_url}', 6, 2000);
-    	});
+	    require(['main'], function() {
+	    	require(['images'], function(images) {
+	    		images.preloadImages('detail_image');
+	    		images.waitForLoad('${loader_url}', '${loader_error_url}', 6, 2000);
+	    	});
+	    });
     </script>
     
 </div>

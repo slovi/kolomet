@@ -12,7 +12,7 @@ public class Address {
 	private String zipCode;
 	
 	private Integer houseNr;
-
+	
 	public String getStreet() {
 		return street;
 	}

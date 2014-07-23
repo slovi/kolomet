@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:security="http://www.springframework.org/security/tags" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu" xmlns:spring="http://www.springframework.org/tags" id="menu_background" version="2.0">
+<div xmlns:security="http://www.springframework.org/security/tags" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu" xmlns:spring="http://www.springframework.org/tags" id="menu_background">
+    
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     
@@ -12,7 +13,6 @@
     			<menu:item url="/public/products/filter?categoryType=${otherCategoryTypeId}" messageCode="menu_main_products_other" id="products_other" defaultPageSize="6" />
     			 -->
     			<menu:item url="/public/sellers/map" messageCode="menu_main_sellers" id="sellers" renderPageParams="false" />
-    			<menu:item url="#" messageCode="menu_main_search" id="search" renderPageParams="false" />
     			<menu:item url="/public/about" messageCode="menu_main_about" id="about" renderPageParams="false" />
     			
     			<security:authorize access="isFullyAuthenticated()">
@@ -71,6 +71,11 @@
 			                    <menu:item id="i_figureheight_list" messageCode="global_menu_list" url="/admin/figureheights" z="user-managed"/>
 			                </security:authorize>
 			            </security:authorize>
+			            <security:authorize access="hasRole('ROLE_per_places')">
+			            	<hr color="#f9f9f9" width="85%" align="center" size="1" />
+				            <menu:item id="i_place_list" messageCode="global_menu_list" url="/admin/places" z="/DMIeN4AJVoQZM6zEYjQeHs/hQw="/>
+				            <menu:item id="i_placetype_list" messageCode="global_menu_list" url="/admin/placetypes" z="7BUDqvzSWihBVxllFovit0Zs3PM="/>
+				        </security:authorize>
 			            <security:authorize access="hasAnyRole('ROLE_per_newsitems')"> 
 				            <hr color="#f9f9f9" width="85%" align="center" size="1" />
 				            <menu:item id="i_newsitem_list" messageCode="global_menu_list" url="/admin/newsitems" z="KOnlcMRbr4BntwwokrnIdkGVvTE="/>
@@ -80,7 +85,9 @@
 						<menu:item id="i_product_new" messageCode="global_menu_new" styleClass="admin" renderPageParams="false" url="/admin/products?form" z="user-managed"/>
 					</security:authorize>
     			</security:authorize>
-				<menu:item id="i_places" messageCode="global_menu_places" styleClass="admin" renderPageParams="false" url="/public/places" z="user-managed"/>
+    			<security:authorize access="isFullyAuthenticated() and principal.isPlacesAll()">
+					<menu:item id="i_places" messageCode="global_menu_places" styleClass="comethere" renderPageParams="false" url="/public/places" z="user-managed"/>
+				</security:authorize>
     		</menu:menu>
 		</div>
 	</div>

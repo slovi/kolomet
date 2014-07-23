@@ -338,7 +338,7 @@ div.cat_prodejce {
 }
 
 div.cat_prodejce_popis {
-	height: 81px !important;
+	padding: 15px !important;
 }
 
 div.category_unit div.cat_seller {
@@ -757,15 +757,30 @@ thead a:hover {
 	color: #f1941c !important;
 }
 
-div.menu_inline a,div.menu_inline a:hover,div.menu_inline ul ul li a,a.action_button_dark {
+ul#main_menu a, ul#main_menu a:hover, div.menu_inline ul ul li a,a.action_button_dark {
 	color: #f9f9f9;
 }
 
-div.menu_inline ul li.admin ul {
+ul#main_menu li.admin ul {
 	background: #497f96;
 	background: linear-gradient(top, #497f96 0%, #3e6576 90%);
 	background: -moz-linear-gradient(top, #497f96 0%, #3e6576 90%);
 	background: -webkit-linear-gradient(top, #497f96 0%, #3e6576 90%);
+}
+
+ul#main_menu li.comethere {
+	background: #497f96;
+	background: linear-gradient(top, #3e6576 0%, #497f96 90%);
+	background: -moz-linear-gradient(top, #3e6576 0%, #497f96 90%);
+	background: -webkit-linear-gradient(top, #3e6576 0%, #497f96 90%);
+	float: right;
+}
+
+ul#main_menu li.comethere:hover {
+	background: #f1941c;
+	background: linear-gradient(top, #e08d21 0%, #f1941c 90%);
+	background: -moz-linear-gradient(top, #e08d21 0%, #f1941c 90%);
+	background: -webkit-linear-gradient(top, #e08d21 0%, #f1941c 90%);
 }
 
 div.menu_inline ul li.admin ul li {

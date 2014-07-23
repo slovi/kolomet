@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_cz_kolomet_domain_PlacePhotoUrl" items="${placephotourls}" z="qj9kkNZjsmwFshGkz1ikWR3O5jE=">
+        <table:table create="false" data="${placephotourls}" id="l_cz_kolomet_domain_PlacePhotoUrl" path="/admin/placephotourls" update="false" z="user-managed">
+            <table:column id="c_cz_kolomet_domain_PlacePhotoUrl_contents" img="true" label="Foto" property="thumbPhotoUrl" z="user-managed"/>
+            <table:column id="c_cz_kolomet_domain_PlacePhotoUrl_createdBy" property="createdBy" z="user-managed"/>
+            <table:column id="c_cz_kolomet_domain_PlacePhotoUrl_lastModifiedBy" property="lastModifiedBy" z="user-managed"/>
+            <table:column date="true" dateTimePattern="${placephotoUrl_created_date_format}" id="c_cz_kolomet_domain_PlacePhotoUrl_created" property="created" z="user-managed"/>
+            <table:column date="true" dateTimePattern="${placephotoUrl_lastmodified_date_format}" id="c_cz_kolomet_domain_PlacePhotoUrl_lastModified" property="lastModified" z="user-managed"/>
+            <table:column id="c_cz_kolomet_domain_PlacePhotoUrl_fileName" property="fileName" z="uQsyIe4lRRKKCG9B56dvcwU8TAI="/>
+            <table:column id="c_cz_kolomet_domain_PlacePhotoUrl_contentType" property="contentType" z="zm3DXO5W0w69rAfPlNHFhvrXkKM="/>
+        </table:table>
+    </page:list>
+</div>

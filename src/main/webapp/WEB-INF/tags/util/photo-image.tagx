@@ -6,6 +6,7 @@
 	<jsp:directive.attribute name="imgType" type="java.lang.String" required="false" rtexprvalue="true" description="no image filename" />
 	<jsp:directive.attribute name="photos" type="java.lang.Object" required="true" rtexprvalue="true" description="size photo" />
   	<jsp:directive.attribute name="render" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Indicate if the contents of this tag and all enclosed tags should be rendered (default 'true')" />
+  	<jsp:directive.attribute name="noPhotoUrl" type="java.lang.String" required="false" rtexprvalue="true" description="Render image if no photo is present" />
 	
 	<c:if test="${empty imgType}">
 		<c:set value="orig" var="imgType" />
@@ -25,7 +26,14 @@
 	 			</c:choose>
 			</c:when>
 			<c:otherwise>
-				<spring:url value="/resources/images/no-photo-${imgType}.jpg" var="detailImgUrl" />
+				<c:choose>
+					<c:when test="${not empty noPhotoUrl}">
+						<spring:url value="${noPhotoUrl}" var="detailImgUrl" />
+					</c:when>
+					<c:otherwise>
+						<spring:url value="/resources/images/no-photo-${imgType}.jpg" var="detailImgUrl" />
+					</c:otherwise>
+				</c:choose>
 			</c:otherwise>
 		</c:choose>
 		<div class="img_border" style="width: ${width}px; height: ${height}px; line-height: ${height + 20}px; overflow: hidden;"> 

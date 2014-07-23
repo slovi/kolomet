@@ -1,6 +1,7 @@
-define(['jquery', 'main'], function($) {
+define(['jquery'], function($) {
 
-	return {
+	return {	
+		
 		files: function (id, max) {								
 			
 			var actualIndex = 1;

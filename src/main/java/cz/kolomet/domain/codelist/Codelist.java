@@ -3,6 +3,7 @@ import cz.kolomet.domain.DomainEntity;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.roo.addon.equals.RooEquals;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.entity.RooJpaEntity;
@@ -33,7 +34,9 @@ public abstract class Codelist extends DomainEntity {
     private Integer sequenceNr = 0;
     
     public static Sort defaultSort() {
-    	return new Sort(Direction.DESC, "sequenceNr");
+    	Order sequenceNrOrder = new Order(Direction.DESC, "sequenceNr");
+    	Order codeDescriptionOrder = new Order(Direction.ASC, "codeDescription");
+    	return new Sort(sequenceNrOrder, codeDescriptionOrder);
     }
     
 }

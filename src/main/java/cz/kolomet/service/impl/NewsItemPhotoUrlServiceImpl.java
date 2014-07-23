@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.task.TaskExecutor;
 
 import cz.kolomet.domain.NewsItemPhotoUrl;
+import cz.kolomet.domain.Photo;
 import cz.kolomet.domain.PhotoUrl;
 import cz.kolomet.service.ImageService;
 import cz.kolomet.service.NewsItemPhotoUrlService;
@@ -46,6 +47,11 @@ public class NewsItemPhotoUrlServiceImpl implements NewsItemPhotoUrlService {
 				FileUtils.deleteQuietly(file);
 			}
 		});
+	}
+
+	@Override
+	public void savePhoto(Photo photo, File dest) {
+		saveNewsItemPhotoUrl((NewsItemPhotoUrl) photo, dest);
 	}
 	
 }

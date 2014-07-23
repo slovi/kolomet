@@ -5,6 +5,7 @@
     <page:list id="pl_cz_kolomet_domain_Seller" items="${sellers}" z="j9ifeCdeyF2uVnrzON+WGO1/Ks8=">
         <table:table data="${sellers}" delete="false" id="l_cz_kolomet_domain_Seller" path="/admin/sellers" update="false" z="user-managed">
             <table:column id="c_cz_kolomet_domain_Seller_sellerName" property="sellerName" sort="true" z="user-managed"/>
+            <table:column id="c_cz_kolomet_domain_Seller_enabled" bool="true" property="enabled" sort="true" z="user-managed"/>
             <table:column id="c_cz_kolomet_domain_Seller_createdBy" property="createdBy" sort="true" z="user-managed"/>
             <table:column id="c_cz_kolomet_domain_Seller_lastModifiedBy" property="lastModifiedBy" sort="true" z="user-managed"/>
             <table:column date="true" dateTimePattern="${seller_created_date_format}" id="c_cz_kolomet_domain_Seller_created" property="created" sort="true" z="user-managed"/>

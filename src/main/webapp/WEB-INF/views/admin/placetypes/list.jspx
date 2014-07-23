@@ -4,12 +4,12 @@
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_cz_kolomet_domain_codelist_PlaceType" items="${placetypes}" z="mjgsumg0MLLJfNcGAWU0jxrkZns=">
         <table:table data="${placetypes}" id="l_cz_kolomet_domain_codelist_PlaceType" path="/admin/placetypes" z="2KER1MdQcXUjEvqU6Nqpk7WAU7g=">
-            <table:column id="c_cz_kolomet_domain_codelist_PlaceType_createdBy" property="createdBy" z="DKw1AfFJBLvbjWwy+O/LEqRRtCU="/>
-            <table:column id="c_cz_kolomet_domain_codelist_PlaceType_lastModifiedBy" property="lastModifiedBy" z="tJFd/KQwbp+DXcIyLKeYFkFZ0aM="/>
-            <table:column date="true" dateTimePattern="${placeType_created_date_format}" id="c_cz_kolomet_domain_codelist_PlaceType_created" property="created" z="VISUQVVoNPAg4bc1ksqcopWZfAk="/>
-            <table:column date="true" dateTimePattern="${placeType_lastmodified_date_format}" id="c_cz_kolomet_domain_codelist_PlaceType_lastModified" property="lastModified" z="Ct8oRn2982RFOiI/y4h3ro0JgAI="/>
-            <table:column id="c_cz_kolomet_domain_codelist_PlaceType_codeKey" property="codeKey" z="nJxS4JFTv5FZ5iFSIS+Em3SuEpc="/>
-            <table:column id="c_cz_kolomet_domain_codelist_PlaceType_codeDescription" property="codeDescription" z="yyHQIGOobaocndYx7AUyuwmE+EM="/>
+            <table:column id="c_cz_kolomet_domain_codelist_PlaceType_createdBy" property="createdBy" sort="true" z="user-managed"/>
+            <table:column id="c_cz_kolomet_domain_codelist_PlaceType_lastModifiedBy" property="lastModifiedBy" sort="true" z="user-managed"/>
+            <table:column date="true" dateTimePattern="${placeType_created_date_format}" id="c_cz_kolomet_domain_codelist_PlaceType_created" property="created" sort="true" z="user-managed"/>
+            <table:column date="true" dateTimePattern="${placeType_lastmodified_date_format}" id="c_cz_kolomet_domain_codelist_PlaceType_lastModified" property="lastModified" sort="true" z="user-managed"/>
+            <table:column id="c_cz_kolomet_domain_codelist_PlaceType_codeKey" property="codeKey" sort="true" z="user-managed"/>
+            <table:column id="c_cz_kolomet_domain_codelist_PlaceType_codeDescription" property="codeDescription" sort="true" z="user-managed"/>
         </table:table>
     </page:list>
 </div>

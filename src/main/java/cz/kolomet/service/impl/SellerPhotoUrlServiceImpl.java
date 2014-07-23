@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.annotation.Async;
 
+import cz.kolomet.domain.Photo;
 import cz.kolomet.domain.PhotoUrl;
 import cz.kolomet.domain.SellerPhotoUrl;
 import cz.kolomet.service.ImageService;
@@ -21,6 +22,17 @@ public class SellerPhotoUrlServiceImpl implements SellerPhotoUrlService {
 	private Integer width;
 	@Value("${seller.img.height}")
 	private Integer height;
+	
+	@Value("${seller.img.overview.width}")
+	private Integer overviewWidth;
+	@Value("${seller.img.overview.height}")
+	private Integer overviewHeight;
+	
+	@Value("${seller.img.thumbnail.width}")
+	private Integer thumbnailWidth;
+	@Value("${seller.img.thumbnail.height}")
+	private Integer thumbnailHeight;
+	
 	
 	@Autowired
 	private ImageService imageService;
@@ -42,9 +54,21 @@ public class SellerPhotoUrlServiceImpl implements SellerPhotoUrlService {
 				String targetFileName = FilenameUtils.getBaseName(file.getName()) + PhotoUrl.ORIGINAL_IMG_SUFFIX;
 				imageService.resizeAndSave(file, new File(file.getParent(), targetFileName), new Dimension(width, height));
 				
+				String targetOverviewFileName = FilenameUtils.getBaseName(file.getName()) + PhotoUrl.OVERVIEW_IMG_SUFFIX;
+				imageService.resizeAndSave(file, new File(file.getParent(), targetOverviewFileName), new Dimension(overviewWidth, overviewHeight));
+				
+				// img thumbnail
+				String targetThumbFileName = FilenameUtils.getBaseName(file.getName()) + PhotoUrl.THUMBNAIL_IMG_SUFFIX;
+				imageService.resizeAndSave(file, new File(file.getParent(), targetThumbFileName), new Dimension(thumbnailWidth, thumbnailHeight));
+				
 				FileUtils.deleteQuietly(file);
 			}
 		});
+	}
+
+	@Override
+	public void savePhoto(Photo photo, File dest) {
+		saveSellerPhotoUrl((SellerPhotoUrl) photo, dest);
 	}
 	
 }

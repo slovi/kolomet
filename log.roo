@@ -350,3 +350,35 @@ test integration --entity ~.domain.ApplicationPermission
 test integration --entity ~.domain.ApplicationRole
 // Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2014-06-16 21:27:30
 // Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2014-06-17 20:53:38
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2014-06-19 19:59:48
+json add --class ~.domain.Place
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2014-06-23 18:17:17
+entity jpa --class ~.domain.PlacePhotoUrl --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
+repository jpa --interface ~.repository.PlacePhotoUrlRepository --entity ~.domain.PlacePhotoUrl
+service type --interface ~.service.PlacePhotoUrlService --entity ~.domain.PlacePhotoUrl --class ~.service.impl.PlacePhotoUrlServiceImpl
+web mvc scaffold --class ~.web.PlacePhotoUrlController --backingType ~.domain.PlacePhotoUrl --path /admin/placephotourls --disallowedOperations create,update,delete
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2014-06-24 21:48:38
+repository jpa --interface ~.repository.PlaceCommentRepository --entity ~.domain.PlaceComment
+service type --interface ~.service.PlaceCommentService --entity ~.domain.PlaceComment --class ~.service.impl.PlaceCommentServiceImpl
+web mvc scaffold --class ~.web.admin.PlaceCommentController --backingType ~.domain.PlaceComment --path /admin/placecomments
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2014-06-24 22:16:47
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2014-06-24 22:17:07
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2014-07-13 15:05:05
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2014-07-14 20:24:53
+entity jpa --class ~.domain.Rate --extends ~.domain.DomainEntity --inheritanceType TABLE_PER_CLASS --equals true --serializable true --activeRecord false
+repository jpa --interface ~.repository.RateRepository --entity ~.domain.Rate
+service type --interface ~.service.RateService --entity ~.domain.Rate --class ~.service.impl.RateServiceImpl
+web mvc scaffold --class ~.web.RateController --backingType ~.domain.Rate --path /public/rates --disallowedOperations create,update,delete
+json add --class ~.domain.Rate 
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2014-07-15 17:50:14
+exit
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log closed at 2014-07-17 10:11:10
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2014-07-17 19:44:00
+exit
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log closed at 2014-07-18 09:18:22
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2014-07-23 07:35:14
+exit
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log closed at 2014-07-23 07:39:08
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2014-07-23 07:44:42
+exit
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log closed at 2014-07-23 07:46:54

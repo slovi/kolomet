@@ -25,7 +25,7 @@
         </c:when>
         <c:otherwise>
           <spring:message arguments="${label}" code="entity_not_found" />
-          <c:if test="${not empty path}">          		
+          <c:if test="${not empty path}">        
 	          <span class="new">
 	            <spring:url value="${path}" var="create_url">
 	              <spring:param name="form" />	              	

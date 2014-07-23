@@ -14,6 +14,15 @@
     <put-attribute name="login" value="/WEB-INF/views/login.jspx" />
   </definition>
   
+  <definition name="default_places" template="/WEB-INF/layouts/default_places.jspx">
+    <put-attribute name="header" value="/WEB-INF/views/header_places.jspx" />
+    <put-attribute name="menu_main" value="/WEB-INF/views/menu_main_places.jspx" />
+    <put-attribute name="menu_side" value="/WEB-INF/views/menu_side_places.jspx" />
+    <put-attribute name="news" value="/WEB-INF/views/news_places.jspx" />
+    <put-attribute name="footer" value="/WEB-INF/views/footer.jspx" />
+    <put-attribute name="login" value="/WEB-INF/views/login.jspx" />
+  </definition>
+  
   <definition name="default_admin" template="/WEB-INF/layouts/default_admin.jspx">
     <put-attribute name="header" value="/WEB-INF/views/header.jspx" />
     <put-attribute name="menu_main" value="/WEB-INF/views/menu_main.jspx" />

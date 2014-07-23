@@ -5,7 +5,6 @@ package cz.kolomet.web;
 
 import cz.kolomet.domain.SellerPhotoUrl;
 import cz.kolomet.service.ApplicationUserService;
-import cz.kolomet.service.SellerPhotoUrlService;
 import cz.kolomet.web.SellerPhotoUrlController;
 import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
@@ -20,9 +19,6 @@ import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
 privileged aspect SellerPhotoUrlController_Roo_Controller {
-    
-    @Autowired
-    SellerPhotoUrlService SellerPhotoUrlController.sellerPhotoUrlService;
     
     @Autowired
     ApplicationUserService SellerPhotoUrlController.applicationUserService;

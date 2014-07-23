@@ -3,6 +3,7 @@ package cz.kolomet.web;
 import java.text.ParseException;
 import java.util.Locale;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.Formatter;
@@ -10,10 +11,12 @@ import org.springframework.format.FormatterRegistry;
 import org.springframework.format.support.FormattingConversionServiceFactoryBean;
 import org.springframework.roo.addon.web.mvc.controller.converter.RooConversionService;
 
+import cz.kolomet.domain.Address;
 import cz.kolomet.domain.ApplicationPermission;
 import cz.kolomet.domain.ApplicationRole;
 import cz.kolomet.domain.ApplicationUser;
 import cz.kolomet.domain.Category;
+import cz.kolomet.domain.GpsLocation;
 import cz.kolomet.domain.Producer;
 import cz.kolomet.domain.Product;
 import cz.kolomet.domain.Seller;
@@ -38,6 +41,8 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 	protected void installFormatters(FormatterRegistry registry) {
 		super.installFormatters(registry);
 		registry.addFormatter(getCountryStateFormatter());
+		registry.addFormatter(getGpsLocationFormatter());
+		registry.addFormatter(getAddressFormatter());
 		registry.addConverter(getSellerStatusToStringConverter());
 	}
 	
@@ -149,6 +154,52 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 	
 			@Override
 			public CountryState parse(String text, Locale locale) throws ParseException {
+				throw new UnsupportedOperationException();
+			}
+		};
+	}
+	
+	public Formatter<GpsLocation> getGpsLocationFormatter() {
+		return new Formatter<GpsLocation>() {
+
+			@Override
+			public String print(GpsLocation object, Locale locale) {
+				return "[" + object.getNorth() + ", " + object.getWest() + "]";
+			}
+
+			@Override
+			public GpsLocation parse(String text, Locale locale) throws ParseException {
+				throw new UnsupportedOperationException();
+			}
+		};
+	}
+	
+	public Formatter<Address> getAddressFormatter() {
+		return new Formatter<Address>() {
+
+			@Override
+			public String print(Address object, Locale locale) {
+				StringBuilder builder = new StringBuilder();
+		    	if (StringUtils.isNotEmpty(object.getStreet())) {
+		    		builder.append(object.getStreet());
+		    		if (object.getHouseNr() != null) {
+		    			builder.append(" ");
+		    			builder.append(object.getStreet());
+		    		}
+		    		builder.append(", ");
+		    	}
+		    	if (StringUtils.isNotEmpty(object.getCity())) {
+		    		builder.append(object.getCity());
+		    		builder.append(", ");
+		    	}
+		    	if (StringUtils.isNotEmpty(object.getZipCode())) {
+		    		builder.append(object.getZipCode());
+		    	}
+		    	return builder.toString();
+			}
+
+			@Override
+			public Address parse(String text, Locale locale) throws ParseException {
 				throw new UnsupportedOperationException();
 			}
 		};

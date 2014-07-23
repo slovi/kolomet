@@ -35,4 +35,8 @@ public class ProductAttribute extends DomainEntity {
     @NotNull
     private String attributeValue;
     
+    public boolean isColorAttribute() {
+    	return this.attributeType.isColorType();
+    }
+    
 }

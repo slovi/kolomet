@@ -8,10 +8,18 @@
         <field:display date="true" dateTimePattern="${place_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_Place_lastModified" object="${place}" z="yBdWLrPSB4Ct3wmues54T0f+J1A="/>
         <field:display field="name" id="s_cz_kolomet_domain_Place_name" object="${place}" z="9GSc8z5d+5eKzuEdIV/4oebfN0Y="/>
         <field:display field="placeType" id="s_cz_kolomet_domain_Place_placeType" object="${place}" z="Kj1o93fBpYRLRaH9g3inbI6tfVg="/>
-        <field:display field="address" id="s_cz_kolomet_domain_Place_address" object="${place}" z="DYZCcDqSNMWrB+47sLqDQ/4GnXc="/>
-        <field:display field="gpsLocation" id="s_cz_kolomet_domain_Place_gpsLocation" object="${place}" z="fWvfaeR+9yftGUwqYiHLHY4bMGY="/>
+        <field:display field="address.city" id="s_cz_kolomet_domain_Place_address" object="${place}" z="user-managed"/>
+        <field:display field="address.street" id="s_cz_kolomet_domain_Place_address" object="${place}" z="DYZCcDqSNMWrB+47sLqDQ/4GnXc="/>
+        <field:display field="address.houseNr" id="s_cz_kolomet_domain_Place_address" object="${place}" z="DYZCcDqSNMWrB+47sLqDQ/4GnXc="/>
+        <field:display field="address.zipCode" id="s_cz_kolomet_domain_Place_address" object="${place}" z="DYZCcDqSNMWrB+47sLqDQ/4GnXc="/>
+        <field:display field="gpsLocation.north" id="s_cz_kolomet_domain_Place_gpsLocation" object="${place}" z="user-managed"/>
+        <field:display field="gpsLocation.west" id="s_cz_kolomet_domain_Place_gpsLocation" object="${place}" z="fWvfaeR+9yftGUwqYiHLHY4bMGY="/>
         <field:display field="bikeRoadNr" id="s_cz_kolomet_domain_Place_bikeRoadNr" object="${place}" z="CA/KjB9h81tmJTEsSRE4PTbcedQ="/>
         <field:display field="description" id="s_cz_kolomet_domain_Place_description" object="${place}" z="G2xyIm1AqfLVil94aL6QWj9sui0="/>
-        <field:display field="ranking" id="s_cz_kolomet_domain_Place_ranking" object="${place}" z="SCI8ol1/qXJfsz6qA9H1ILI679U="/>
+        <field:display field="qualityRanking" id="s_cz_kolomet_domain_Place_ranking" object="${place}" z="SCI8ol1/qXJfsz6qA9H1ILI679U="/>
+        <field:display field="qualityRanking" id="s_cz_kolomet_domain_Place_qualityRanking" object="${place}" z="PRVW9rJr7e5cEbXnCF2goZ9nGjY="/>
+        <field:display field="nrOfRankings" id="s_cz_kolomet_domain_Place_nrOfRankings" object="${place}" z="K25+i2YZvZL2YU4f1yoFtt6BdKg="/>
+        <field:display field="region" id="s_cz_kolomet_domain_Place_region" object="${place}" z="x8vII5dEbY/4c3Gsl2hY1IVOvYE="/>
+        <field:display field="contents" id="s_cz_kolomet_domain_Place_contents" object="${place}" z="NuMDxvmoprPuNq6f7fjE6giS/e4="/>
     </page:show>
 </div>

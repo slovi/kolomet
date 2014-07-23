@@ -32,7 +32,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 @Filters({
 	@Filter(name = "newsItemEnabledFilter", condition = "enabled = :enabled")
 })
-public class NewsItem extends DomainEntity {
+public class NewsItem extends DomainEntity implements PhotoContainer {
 	
 	@NotNull
 	private Boolean enabled = true;
@@ -51,6 +51,26 @@ public class NewsItem extends DomainEntity {
     private List<CommonsMultipartFile> contents;
 	
 	private NewsItemType newsItemType;
+
+	@Override
+	public List<? extends Photo> getPhotos() {
+		return newsItemPhotoUrls;
+	}
+	
+	@Override
+	public String getPhotoType() {
+		return NewsItemPhotoUrl.PHOTO_URL_PREFIX;
+	}
+
+	@Override
+	public Photo addPhoto(String fileName, String contentType) {
+		final NewsItemPhotoUrl newsItemPhotoUrl = new NewsItemPhotoUrl();
+		newsItemPhotoUrl.setFileName(fileName);
+		newsItemPhotoUrl.setContentType(contentType);
+		newsItemPhotoUrl.setNewsItem(this);
+		this.getNewsItemPhotoUrls().add(newsItemPhotoUrl);
+		return newsItemPhotoUrl;
+	}
 	
 }
 

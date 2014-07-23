@@ -1,4 +1,4 @@
-define(['jquery', 'main'], function($) {
+define(['jquery'], function($) {
 
 	return {
 		preloadImages: function (detailImgId) {

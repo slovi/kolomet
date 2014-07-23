@@ -84,4 +84,9 @@ public class ProductServiceImpl implements ProductService {
 		return newProduct;
 	}
 	
+	@Override
+	public void eraseProduct(Product product) {
+		productRepository.delete(product);
+	}
+	
 }

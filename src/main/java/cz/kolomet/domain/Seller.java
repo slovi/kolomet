@@ -12,6 +12,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.StringUtils;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Filter;
 import org.hibernate.annotations.FilterDef;
 import org.hibernate.annotations.FilterDefs;
@@ -41,7 +43,7 @@ import cz.kolomet.domain.codelist.SellerStatus;
 	@Filter(name = "sellerEnabledFilter", condition = "enabled = :enabled"),
 	@Filter(name = "sellerOwnFilter", condition = "id = :sellerId")
 })
-public class Seller extends DomainEntity {
+public class Seller extends DomainEntity implements PhotoContainer {
 	
 	@NotNull
 	@Size(max = 20)
@@ -153,6 +155,11 @@ public class Seller extends DomainEntity {
     @Transient
     private List<CommonsMultipartFile> contents;
     
+    @Override
+    public String getPhotoType() {
+    	return SellerPhotoUrl.PHOTO_URL_PREFIX;
+    }
+    
     public String getPersonString() {
     	
     	StringBuilder builder = new StringBuilder();
@@ -225,5 +232,20 @@ public class Seller extends DomainEntity {
     		this.web = "http://" + web; 
     	}
     }
+
+	@Override
+	public List<? extends Photo> getPhotos() {
+		return sellerPhotoUrls;
+	}
+
+	@Override
+	public Photo addPhoto(String fileName, String contentType) {
+		final SellerPhotoUrl sellerPhotoUrl = new SellerPhotoUrl();
+    	sellerPhotoUrl.setFileName(fileName);
+    	sellerPhotoUrl.setContentType(contentType);
+    	sellerPhotoUrl.setSeller(this);
+    	this.getSellerPhotoUrls().add(sellerPhotoUrl);
+		return sellerPhotoUrl;
+	}
     
 }

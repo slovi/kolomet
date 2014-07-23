@@ -1,0 +1,56 @@
+<jsp:root xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+  <jsp:output omit-xml-declaration="yes" />
+
+  <jsp:directive.attribute name="id" type="java.lang.String" required="true" rtexprvalue="true" description="The identifier for this tag (do not change!)" />
+  <jsp:directive.attribute name="url" type="java.lang.String" required="true" rtexprvalue="true" description="The link URL" />
+  <jsp:directive.attribute name="defaultPageSize" type="java.lang.Integer" required="false" rtexprvalue="true" description="Default page size" />
+  <jsp:directive.attribute name="renderPageParams" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Render page params" />
+  <jsp:directive.attribute name="label" type="java.lang.String" required="false" rtexprvalue="true" description="The label used for this menu item" />
+  <jsp:directive.attribute name="messageCode" type="java.lang.String" required="false" rtexprvalue="true" description="The global message code to be used (works in conjunction with label)" />
+  <jsp:directive.attribute name="sort" type="java.lang.String" required="false" rtexprvalue="true" description="Sort attribute sent to controller as request param" />
+  <jsp:directive.attribute name="sortDesc" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Sort Desc attribute sent to controller as request param" />
+  <jsp:directive.attribute name="render" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Indicate if the contents of this tag and all enclosed tags should be rendered (default 'true')" />
+  <jsp:directive.attribute name="z" type="java.lang.String" required="false" description="Used for checking if element has been modified (to recalculate simply provide empty string value)" />
+
+  <c:if test="${empty render or render}">
+
+    <c:if test="${empty label}">
+      <spring:message code="menu_item_${fn:toLowerCase(fn:substringAfter(id,'_'))}_label" var="label" htmlEscape="false" />      
+    </c:if>    
+
+    <c:if test="${not empty messageCode}">
+      <spring:message code="${messageCode}" var="label" arguments="${label}" htmlEscape="false" />
+    </c:if>
+    
+    <c:if test="${empty defaultPageSize}">
+      <c:set value="10" var="defaultPageSize" />
+    </c:if>
+
+      <spring:url value="${url}" var="menu_item_url">
+	      	<c:if test="${empty renderPageParams or renderPageParams}">
+	      	<spring:param name="page.size" value="${not empty defaultPageSize ? defaultPageSize : param['page.size']}" />
+	      	<spring:param name="page.page" value="1" />
+	      	<c:choose>
+	      		<c:when test="${empty sort}">
+	      			<spring:param name="page.sort" value="created" />
+	      		</c:when>
+	      		<c:otherwise>
+	      			<spring:param name="page.sort" value="${sort}" />	      			
+	      		</c:otherwise>
+	      	</c:choose>
+	      	<c:choose>
+	      		<c:when test="${empty sortDesc or sortDesc}">
+	      			<spring:param name="page.sort.dir" value="desc" />
+	      		</c:when>
+	      		<c:otherwise>
+	      			<spring:param name="page.sort.dir" value="asc" />	      			
+	      		</c:otherwise>
+	      	</c:choose>	      	
+      	</c:if>
+      </spring:url>
+      <a href="${menu_item_url}" title="${fn:escapeXml(label)}" class="list-group-item">
+        <c:out value="${label}"/>
+      </a>
+
+  </c:if>
+</jsp:root>

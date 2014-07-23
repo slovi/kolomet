@@ -53,7 +53,7 @@ public class NewsItemPhotoUrlController extends AbstractAdminController {
 	        return "admin/newsitemphotourls/update";
 		}
 		
-		saveNewsItemPhotos(newsItemPhotoUrl.getNewsItem(), newsItemPhotoUrl.getContents());
+		savePhotos(newsItemPhotoUrl.getNewsItem(), newsItemPhotoUrlService, newsItemPhotoUrl.getContents());
 		return "redirect:/admin/newsitemphotourls/" + newsItemPhotoUrl.getNewsItem().getId();
     }
     

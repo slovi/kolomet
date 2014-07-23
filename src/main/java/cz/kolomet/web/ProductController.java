@@ -6,7 +6,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefaults;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -56,7 +56,7 @@ public class ProductController extends AbstractPublicController {
 	}
 	
 	@RequestMapping("/filter")
-	public String filterByProductFilter(@Valid ProductFilterDto productFilter, BindingResult result, Model model, @PageableDefaults(pageNumber = 0, value = DEFAULT_PAGE_SIZE) Pageable pageable) {	
+	public String filterByProductFilter(@Valid ProductFilterDto productFilter, BindingResult result, Model model, @PageableDefault(DEFAULT_PAGE_SIZE) Pageable pageable) {	
 		populateFilterForm(productFilter, model);
 		
 		Pageable orderedPageable = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(), ProductSpecifications.getDefaultSort(pageable.getSort()));

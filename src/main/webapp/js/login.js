@@ -1,4 +1,4 @@
-define(['jquery', 'jquery_lean', 'main'], function($) {
+define(['jquery', 'jquery.lean'], function($) {
 	
 	return {
 		prepare: function() {

@@ -15,7 +15,6 @@ import cz.kolomet.domain.codelist.FigureHeight;
 import cz.kolomet.repository.CategoryRepository;
 import cz.kolomet.repository.NewsItemRepository;
 import cz.kolomet.repository.NewsItemSpecifications;
-import cz.kolomet.repository.ProducerRepository;
 import cz.kolomet.service.CategoryTypeService;
 import cz.kolomet.service.FigureHeightService;
 import cz.kolomet.service.ProducerService;

@@ -40,10 +40,10 @@ public class ProductValidator implements Validator {
 			}
 		}
 	}
-
+		
 	private void validateValidFrom(Date validFrom, Product product, Errors errors) {
 		
-		if (validFrom.before(new Date())) {
+		if (validFrom.before(new DateTime().withTime(0, 0, 0, 0).toDate())) {
 			errors.rejectValue("validFrom", "product_valid_from_before_now");
 		}
 		

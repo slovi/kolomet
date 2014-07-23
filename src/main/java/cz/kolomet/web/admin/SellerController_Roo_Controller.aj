@@ -8,7 +8,6 @@ import cz.kolomet.service.ApplicationUserService;
 import cz.kolomet.service.CountryStateService;
 import cz.kolomet.service.ProductService;
 import cz.kolomet.service.RegionService;
-import cz.kolomet.service.SellerPhotoUrlService;
 import cz.kolomet.service.SellerService;
 import cz.kolomet.web.admin.SellerController;
 import java.io.UnsupportedEncodingException;
@@ -34,9 +33,6 @@ privileged aspect SellerController_Roo_Controller {
     
     @Autowired
     ProductService SellerController.productService;
-    
-    @Autowired
-    SellerPhotoUrlService SellerController.sellerPhotoUrlService;
     
     @Autowired
     CountryStateService SellerController.countryStateService;
@@ -70,10 +66,8 @@ privileged aspect SellerController_Roo_Controller {
         addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("applicationusers", applicationUserService.findAllApplicationUsers());
         uiModel.addAttribute("products", productService.findAllProducts());
-        uiModel.addAttribute("sellerphotourls", sellerPhotoUrlService.findAllSellerPhotoUrls());
         uiModel.addAttribute("countrystates", countryStateService.findAllCountryStates());
         uiModel.addAttribute("regions", regionService.findAllRegions());
-        uiModel.addAttribute("sellerstatuses", sellerStatusService.findAllSellerStatuses());
     }
     
     String SellerController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

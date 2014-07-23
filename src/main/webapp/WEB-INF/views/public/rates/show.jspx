@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show delete="false" id="ps_cz_kolomet_domain_Rate" object="${rate}" path="/public/rates" update="false" z="nO43aPolHaDgJWILdqJbMC6kEaE=">
+        <field:display field="createdBy" id="s_cz_kolomet_domain_Rate_createdBy" object="${rate}" z="xi/GZA33+R4SQu5A3OzmHsSlgRU="/>
+        <field:display field="lastModifiedBy" id="s_cz_kolomet_domain_Rate_lastModifiedBy" object="${rate}" z="lBXPWGIiSoyj53yvvFQsbCAunl8="/>
+        <field:display date="true" dateTimePattern="${rate_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_Rate_lastModified" object="${rate}" z="Kjb9JJz/xpum3RWOSn+Ymp/DTFg="/>
+        <field:display field="rateType" id="s_cz_kolomet_domain_Rate_rateType" object="${rate}" z="sA40seXHe5yDhWdpeLktoedgpsI="/>
+        <field:display field="entityId" id="s_cz_kolomet_domain_Rate_entityId" object="${rate}" z="0V6d0vcRHodT9Yxi+NdUvGbFyf0="/>
+        <field:display field="ipAddress" id="s_cz_kolomet_domain_Rate_ipAddress" object="${rate}" z="n5bm79W5hTIrfSuPObPhpOoWdwU="/>
+        <field:display field="value" id="s_cz_kolomet_domain_Rate_value" object="${rate}" z="hnWwt1o3QVky8aOZ1mtYDM2yHTk="/>
+    </page:show>
+</div>

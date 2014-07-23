@@ -2,10 +2,8 @@
 <div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:spring="http://www.springframework.org/tags" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <page:show id="ps_cz_kolomet_domain_PhotoUrl" object="${photourl}" path="/admin/photourls" z="user-managed" create="false" delete="false" list="false" update="false">
+    <page:show create="false" delete="false" id="ps_cz_kolomet_domain_PhotoUrl" list="false" object="${photourl}" path="/admin/photourls" update="false" z="user-managed">
         <field:display field="product" id="s_cz_kolomet_domain_PhotoUrl_product" object="${photourl}" z="bQ+7K2DT6O+2NtjX8ZIa+aunEvc="/>
-        <field:display field="fileName" id="s_cz_kolomet_domain_PhotoUrl_fileName" object="${photourl}" z="pqdgJlgyLSj5nNA5yvy4EH7qGxM="/>
-        <field:display field="contentType" id="s_cz_kolomet_domain_PhotoUrl_contentType" object="${photourl}" z="SBKoc3UrjmpKY0XasfHRc3hsQsA="/>
         <field:display field="createdBy" id="s_cz_kolomet_domain_PhotoUrl_createdBy" object="${photourl}" z="Z7NHzG+UOTcBBEOxcA8yQRhY7ww="/>
         <field:display field="lastModifiedBy" id="s_cz_kolomet_domain_PhotoUrl_lastModifiedBy" object="${photourl}" z="kjyiYVV4R7Od1HGkMi/fiSfaw8g="/>
         <field:display date="true" dateTimePattern="${photoUrl_created_date_format}" field="created" id="s_cz_kolomet_domain_PhotoUrl_created" object="${photourl}" z="vBO8S+s+F21O2jgO3GsVZu/4j58="/>
@@ -13,5 +11,7 @@
         <spring:url value="/file/${photourl.photoUrl}" var="photoUrlImg"/>
         <img src="${photoUrlImg}"/>
         <field:display field="contents" id="s_cz_kolomet_domain_PhotoUrl_contents" object="${photourl}" render="false" z="user-managed"/>
+        <field:display field="fileName" id="s_cz_kolomet_domain_PhotoUrl_fileName" object="${photourl}" z="pqdgJlgyLSj5nNA5yvy4EH7qGxM="/>
+        <field:display field="contentType" id="s_cz_kolomet_domain_PhotoUrl_contentType" object="${photourl}" z="SBKoc3UrjmpKY0XasfHRc3hsQsA="/>
     </page:show>
 </div>

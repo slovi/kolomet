@@ -1,4 +1,4 @@
-define(['jquery', 'jquery_ui', 'jquery_number', 'main'], function($) {
+define(['jquery', 'jquery.ui', 'jquery.number'], function($) {
 	
 	var sliders = [];
 	

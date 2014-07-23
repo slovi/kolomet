@@ -11,21 +11,23 @@ import cz.kolomet.domain.NewsItem;
 import cz.kolomet.domain.NewsItemPhotoUrl;
 import cz.kolomet.domain.PhotoUrl;
 import cz.kolomet.domain.Place;
+import cz.kolomet.domain.PlaceComment;
+import cz.kolomet.domain.PlacePhotoUrl;
 import cz.kolomet.domain.Producer;
 import cz.kolomet.domain.Product;
 import cz.kolomet.domain.ProductAttribute;
+import cz.kolomet.domain.Rate;
 import cz.kolomet.domain.RegistrationRequest;
 import cz.kolomet.domain.Seller;
-import cz.kolomet.domain.SellerPhotoUrl;
 import cz.kolomet.domain.codelist.BicycleCategory;
 import cz.kolomet.domain.codelist.CategoryType;
 import cz.kolomet.domain.codelist.CountryState;
 import cz.kolomet.domain.codelist.FigureHeight;
+import cz.kolomet.domain.codelist.PlaceType;
 import cz.kolomet.domain.codelist.ProductAttributeType;
 import cz.kolomet.domain.codelist.ProductColor;
 import cz.kolomet.domain.codelist.ProductUsage;
 import cz.kolomet.domain.codelist.Region;
-import cz.kolomet.domain.codelist.SellerStatus;
 import cz.kolomet.service.ApplicationPermissionService;
 import cz.kolomet.service.ApplicationRoleService;
 import cz.kolomet.service.ApplicationUserService;
@@ -37,16 +39,19 @@ import cz.kolomet.service.FigureHeightService;
 import cz.kolomet.service.NewsItemPhotoUrlService;
 import cz.kolomet.service.NewsItemService;
 import cz.kolomet.service.PhotoUrlService;
+import cz.kolomet.service.PlaceCommentService;
+import cz.kolomet.service.PlacePhotoUrlService;
 import cz.kolomet.service.PlaceService;
+import cz.kolomet.service.PlaceTypeService;
 import cz.kolomet.service.ProducerService;
 import cz.kolomet.service.ProductAttributeService;
 import cz.kolomet.service.ProductAttributeTypeService;
 import cz.kolomet.service.ProductColorService;
 import cz.kolomet.service.ProductService;
 import cz.kolomet.service.ProductUsageService;
+import cz.kolomet.service.RateService;
 import cz.kolomet.service.RegionService;
 import cz.kolomet.service.RegistrationRequestService;
-import cz.kolomet.service.SellerPhotoUrlService;
 import cz.kolomet.service.SellerService;
 import cz.kolomet.web.ApplicationConversionServiceFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,6 +88,12 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     PlaceService ApplicationConversionServiceFactoryBean.placeService;
     
     @Autowired
+    PlaceCommentService ApplicationConversionServiceFactoryBean.placeCommentService;
+    
+    @Autowired
+    PlacePhotoUrlService ApplicationConversionServiceFactoryBean.placePhotoUrlService;
+    
+    @Autowired
     ProducerService ApplicationConversionServiceFactoryBean.producerService;
     
     @Autowired
@@ -92,13 +103,13 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     ProductAttributeService ApplicationConversionServiceFactoryBean.productAttributeService;
     
     @Autowired
+    RateService ApplicationConversionServiceFactoryBean.rateService;
+    
+    @Autowired
     RegistrationRequestService ApplicationConversionServiceFactoryBean.registrationRequestService;
     
     @Autowired
     SellerService ApplicationConversionServiceFactoryBean.sellerService;
-    
-    @Autowired
-    SellerPhotoUrlService ApplicationConversionServiceFactoryBean.sellerPhotoUrlService;
     
     @Autowired
     BicycleCategoryService ApplicationConversionServiceFactoryBean.bicycleCategoryService;
@@ -111,6 +122,9 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     
     @Autowired
     FigureHeightService ApplicationConversionServiceFactoryBean.figureHeightService;
+    
+    @Autowired
+    PlaceTypeService ApplicationConversionServiceFactoryBean.placeTypeService;
     
     @Autowired
     ProductAttributeTypeService ApplicationConversionServiceFactoryBean.productAttributeTypeService;
@@ -263,7 +277,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<Place, String> ApplicationConversionServiceFactoryBean.getPlaceToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<cz.kolomet.domain.Place, java.lang.String>() {
             public String convert(Place place) {
-                return new StringBuilder().append(place.getCreated()).append(' ').append(place.getLastModified()).toString();
+                return new StringBuilder().append(place.getCreated()).append(' ').append(place.getLastModified()).append(' ').append(place.getName()).append(' ').append(place.getDescription()).toString();
             }
         };
     }
@@ -280,6 +294,54 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         return new org.springframework.core.convert.converter.Converter<java.lang.String, cz.kolomet.domain.Place>() {
             public cz.kolomet.domain.Place convert(String id) {
                 return getObject().convert(getObject().convert(id, Long.class), Place.class);
+            }
+        };
+    }
+    
+    public Converter<PlaceComment, String> ApplicationConversionServiceFactoryBean.getPlaceCommentToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<cz.kolomet.domain.PlaceComment, java.lang.String>() {
+            public String convert(PlaceComment placeComment) {
+                return new StringBuilder().append(placeComment.getCreated()).append(' ').append(placeComment.getLastModified()).append(' ').append(placeComment.getText()).toString();
+            }
+        };
+    }
+    
+    public Converter<Long, PlaceComment> ApplicationConversionServiceFactoryBean.getIdToPlaceCommentConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, cz.kolomet.domain.PlaceComment>() {
+            public cz.kolomet.domain.PlaceComment convert(java.lang.Long id) {
+                return placeCommentService.findPlaceComment(id);
+            }
+        };
+    }
+    
+    public Converter<String, PlaceComment> ApplicationConversionServiceFactoryBean.getStringToPlaceCommentConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, cz.kolomet.domain.PlaceComment>() {
+            public cz.kolomet.domain.PlaceComment convert(String id) {
+                return getObject().convert(getObject().convert(id, Long.class), PlaceComment.class);
+            }
+        };
+    }
+    
+    public Converter<PlacePhotoUrl, String> ApplicationConversionServiceFactoryBean.getPlacePhotoUrlToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<cz.kolomet.domain.PlacePhotoUrl, java.lang.String>() {
+            public String convert(PlacePhotoUrl placePhotoUrl) {
+                return new StringBuilder().append(placePhotoUrl.getCreated()).append(' ').append(placePhotoUrl.getLastModified()).append(' ').append(placePhotoUrl.getFileName()).append(' ').append(placePhotoUrl.getContentType()).toString();
+            }
+        };
+    }
+    
+    public Converter<Long, PlacePhotoUrl> ApplicationConversionServiceFactoryBean.getIdToPlacePhotoUrlConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, cz.kolomet.domain.PlacePhotoUrl>() {
+            public cz.kolomet.domain.PlacePhotoUrl convert(java.lang.Long id) {
+                return placePhotoUrlService.findPlacePhotoUrl(id);
+            }
+        };
+    }
+    
+    public Converter<String, PlacePhotoUrl> ApplicationConversionServiceFactoryBean.getStringToPlacePhotoUrlConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, cz.kolomet.domain.PlacePhotoUrl>() {
+            public cz.kolomet.domain.PlacePhotoUrl convert(String id) {
+                return getObject().convert(getObject().convert(id, Long.class), PlacePhotoUrl.class);
             }
         };
     }
@@ -340,6 +402,30 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         };
     }
     
+    public Converter<Rate, String> ApplicationConversionServiceFactoryBean.getRateToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<cz.kolomet.domain.Rate, java.lang.String>() {
+            public String convert(Rate rate) {
+                return new StringBuilder().append(rate.getCreated()).append(' ').append(rate.getLastModified()).append(' ').append(rate.getEntityId()).append(' ').append(rate.getIpAddress()).toString();
+            }
+        };
+    }
+    
+    public Converter<Long, Rate> ApplicationConversionServiceFactoryBean.getIdToRateConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, cz.kolomet.domain.Rate>() {
+            public cz.kolomet.domain.Rate convert(java.lang.Long id) {
+                return rateService.findRate(id);
+            }
+        };
+    }
+    
+    public Converter<String, Rate> ApplicationConversionServiceFactoryBean.getStringToRateConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, cz.kolomet.domain.Rate>() {
+            public cz.kolomet.domain.Rate convert(String id) {
+                return getObject().convert(getObject().convert(id, Long.class), Rate.class);
+            }
+        };
+    }
+    
     public Converter<RegistrationRequest, String> ApplicationConversionServiceFactoryBean.getRegistrationRequestToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<cz.kolomet.domain.RegistrationRequest, java.lang.String>() {
             public String convert(RegistrationRequest registrationRequest) {
@@ -376,30 +462,6 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         return new org.springframework.core.convert.converter.Converter<java.lang.String, cz.kolomet.domain.Seller>() {
             public cz.kolomet.domain.Seller convert(String id) {
                 return getObject().convert(getObject().convert(id, Long.class), Seller.class);
-            }
-        };
-    }
-    
-    public Converter<SellerPhotoUrl, String> ApplicationConversionServiceFactoryBean.getSellerPhotoUrlToStringConverter() {
-        return new org.springframework.core.convert.converter.Converter<cz.kolomet.domain.SellerPhotoUrl, java.lang.String>() {
-            public String convert(SellerPhotoUrl sellerPhotoUrl) {
-                return new StringBuilder().append(sellerPhotoUrl.getCreated()).append(' ').append(sellerPhotoUrl.getLastModified()).append(' ').append(sellerPhotoUrl.getFileName()).append(' ').append(sellerPhotoUrl.getContentType()).toString();
-            }
-        };
-    }
-    
-    public Converter<Long, SellerPhotoUrl> ApplicationConversionServiceFactoryBean.getIdToSellerPhotoUrlConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.Long, cz.kolomet.domain.SellerPhotoUrl>() {
-            public cz.kolomet.domain.SellerPhotoUrl convert(java.lang.Long id) {
-                return sellerPhotoUrlService.findSellerPhotoUrl(id);
-            }
-        };
-    }
-    
-    public Converter<String, SellerPhotoUrl> ApplicationConversionServiceFactoryBean.getStringToSellerPhotoUrlConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.String, cz.kolomet.domain.SellerPhotoUrl>() {
-            public cz.kolomet.domain.SellerPhotoUrl convert(String id) {
-                return getObject().convert(getObject().convert(id, Long.class), SellerPhotoUrl.class);
             }
         };
     }
@@ -484,6 +546,30 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         };
     }
     
+    public Converter<PlaceType, String> ApplicationConversionServiceFactoryBean.getPlaceTypeToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<cz.kolomet.domain.codelist.PlaceType, java.lang.String>() {
+            public String convert(PlaceType placeType) {
+                return new StringBuilder().append(placeType.getCreated()).append(' ').append(placeType.getLastModified()).append(' ').append(placeType.getCodeKey()).append(' ').append(placeType.getCodeDescription()).toString();
+            }
+        };
+    }
+    
+    public Converter<Long, PlaceType> ApplicationConversionServiceFactoryBean.getIdToPlaceTypeConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, cz.kolomet.domain.codelist.PlaceType>() {
+            public cz.kolomet.domain.codelist.PlaceType convert(java.lang.Long id) {
+                return placeTypeService.findPlaceType(id);
+            }
+        };
+    }
+    
+    public Converter<String, PlaceType> ApplicationConversionServiceFactoryBean.getStringToPlaceTypeConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, cz.kolomet.domain.codelist.PlaceType>() {
+            public cz.kolomet.domain.codelist.PlaceType convert(String id) {
+                return getObject().convert(getObject().convert(id, Long.class), PlaceType.class);
+            }
+        };
+    }
+    
     public Converter<Long, ProductAttributeType> ApplicationConversionServiceFactoryBean.getIdToProductAttributeTypeConverter() {
         return new org.springframework.core.convert.converter.Converter<java.lang.Long, cz.kolomet.domain.codelist.ProductAttributeType>() {
             public cz.kolomet.domain.codelist.ProductAttributeType convert(java.lang.Long id) {
@@ -564,22 +650,6 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         };
     }
     
-    public Converter<Long, SellerStatus> ApplicationConversionServiceFactoryBean.getIdToSellerStatusConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.Long, cz.kolomet.domain.codelist.SellerStatus>() {
-            public cz.kolomet.domain.codelist.SellerStatus convert(java.lang.Long id) {
-                return sellerStatusService.findSellerStatus(id);
-            }
-        };
-    }
-    
-    public Converter<String, SellerStatus> ApplicationConversionServiceFactoryBean.getStringToSellerStatusConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.String, cz.kolomet.domain.codelist.SellerStatus>() {
-            public cz.kolomet.domain.codelist.SellerStatus convert(String id) {
-                return getObject().convert(getObject().convert(id, Long.class), SellerStatus.class);
-            }
-        };
-    }
-    
     public void ApplicationConversionServiceFactoryBean.installLabelConverters(FormatterRegistry registry) {
         registry.addConverter(getApplicationPermissionToStringConverter());
         registry.addConverter(getIdToApplicationPermissionConverter());
@@ -605,6 +675,12 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         registry.addConverter(getPlaceToStringConverter());
         registry.addConverter(getIdToPlaceConverter());
         registry.addConverter(getStringToPlaceConverter());
+        registry.addConverter(getPlaceCommentToStringConverter());
+        registry.addConverter(getIdToPlaceCommentConverter());
+        registry.addConverter(getStringToPlaceCommentConverter());
+        registry.addConverter(getPlacePhotoUrlToStringConverter());
+        registry.addConverter(getIdToPlacePhotoUrlConverter());
+        registry.addConverter(getStringToPlacePhotoUrlConverter());
         registry.addConverter(getProducerToStringConverter());
         registry.addConverter(getIdToProducerConverter());
         registry.addConverter(getStringToProducerConverter());
@@ -614,15 +690,15 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         registry.addConverter(getProductAttributeToStringConverter());
         registry.addConverter(getIdToProductAttributeConverter());
         registry.addConverter(getStringToProductAttributeConverter());
+        registry.addConverter(getRateToStringConverter());
+        registry.addConverter(getIdToRateConverter());
+        registry.addConverter(getStringToRateConverter());
         registry.addConverter(getRegistrationRequestToStringConverter());
         registry.addConverter(getIdToRegistrationRequestConverter());
         registry.addConverter(getStringToRegistrationRequestConverter());
         registry.addConverter(getSellerToStringConverter());
         registry.addConverter(getIdToSellerConverter());
         registry.addConverter(getStringToSellerConverter());
-        registry.addConverter(getSellerPhotoUrlToStringConverter());
-        registry.addConverter(getIdToSellerPhotoUrlConverter());
-        registry.addConverter(getStringToSellerPhotoUrlConverter());
         registry.addConverter(getBicycleCategoryToStringConverter());
         registry.addConverter(getIdToBicycleCategoryConverter());
         registry.addConverter(getStringToBicycleCategoryConverter());
@@ -635,6 +711,9 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         registry.addConverter(getFigureHeightToStringConverter());
         registry.addConverter(getIdToFigureHeightConverter());
         registry.addConverter(getStringToFigureHeightConverter());
+        registry.addConverter(getPlaceTypeToStringConverter());
+        registry.addConverter(getIdToPlaceTypeConverter());
+        registry.addConverter(getStringToPlaceTypeConverter());
         registry.addConverter(getProductAttributeTypeToStringConverter());
         registry.addConverter(getIdToProductAttributeTypeConverter());
         registry.addConverter(getStringToProductAttributeTypeConverter());
@@ -647,9 +726,6 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         registry.addConverter(getRegionToStringConverter());
         registry.addConverter(getIdToRegionConverter());
         registry.addConverter(getStringToRegionConverter());
-        registry.addConverter(getSellerStatusToStringConverter());
-        registry.addConverter(getIdToSellerStatusConverter());
-        registry.addConverter(getStringToSellerStatusConverter());
     }
     
     public void ApplicationConversionServiceFactoryBean.afterPropertiesSet() {

@@ -5,7 +5,6 @@ package cz.kolomet.web.admin;
 
 import cz.kolomet.domain.PhotoUrl;
 import cz.kolomet.service.ApplicationUserService;
-import cz.kolomet.service.PhotoUrlService;
 import cz.kolomet.web.admin.PhotoUrlController;
 import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
@@ -20,9 +19,6 @@ import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
 privileged aspect PhotoUrlController_Roo_Controller {
-    
-    @Autowired
-    PhotoUrlService PhotoUrlController.photoUrlService;
     
     @Autowired
     ApplicationUserService PhotoUrlController.applicationUserService;
@@ -59,7 +55,6 @@ privileged aspect PhotoUrlController_Roo_Controller {
         uiModel.addAttribute("photoUrl", photoUrl);
         addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("applicationusers", applicationUserService.findAllApplicationUsers());
-        uiModel.addAttribute("products", productService.findAllProducts());
     }
     
     String PhotoUrlController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

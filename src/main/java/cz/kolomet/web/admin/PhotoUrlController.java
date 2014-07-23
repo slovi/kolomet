@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import cz.kolomet.domain.PhotoUrl;
 import cz.kolomet.domain.Product;
+import cz.kolomet.service.PhotoUrlService;
 import cz.kolomet.service.ProductService;
 
 @RequestMapping("/admin/photourls")
@@ -26,6 +27,9 @@ public class PhotoUrlController extends AbstractAdminController {
 	
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private PhotoUrlService photoUrlService;
 	
     @RequestMapping(params = "form", produces = "text/html")
     public String createForm(Model uiModel, @RequestParam(value = "parentEntityId", required = false) Long parentEntityId) {
@@ -48,7 +52,7 @@ public class PhotoUrlController extends AbstractAdminController {
 		}
 		
 		model.asMap().clear();
-		savePhotos(photoUrl.getProduct(), photoUrl.getContents());
+		savePhotos(photoUrl.getProduct(), photoUrlService, photoUrl.getContents());
 		return "redirect:/admin/products/" + photoUrl.getProduct().getId() + "?form";
 	}
 	

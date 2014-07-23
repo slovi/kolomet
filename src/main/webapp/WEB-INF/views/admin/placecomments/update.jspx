@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_cz_kolomet_domain_PlaceComment" modelAttribute="placeComment" path="/admin/placecomments" versionField="Version" z="+9mbMkcCmDhoijZGWuLwEIDUZYw=">
+        <field:select field="createdBy" id="c_cz_kolomet_domain_PlaceComment_createdBy" itemValue="id" items="${applicationusers}" path="/admin/applicationusers" render="false" z="user-managed"/>
+        <field:select field="lastModifiedBy" id="c_cz_kolomet_domain_PlaceComment_lastModifiedBy" itemValue="id" items="${applicationusers}" path="/admin/applicationusers" render="false" z="user-managed"/>
+        <field:datetime dateTimePattern="${placeComment_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_PlaceComment_lastModified" render="false" z="user-managed"/>
+        <field:input field="commented" id="c_cz_kolomet_domain_PlaceComment_commented" render="false" required="true" z="user-managed"/>
+        <field:editor field="text" id="c_cz_kolomet_domain_PlaceComment_text" required="true" z="user-managed"/>
+        <field:datetime dateTimePattern="${placeComment_date_date_format}" field="date" id="c_cz_kolomet_domain_PlaceComment_date" required="true" z="O9jpQ1B6l3+fTBa9V/D2HDczbig="/>
+    </form:update>
+</div>

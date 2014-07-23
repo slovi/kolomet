@@ -6,9 +6,12 @@ package cz.kolomet.domain;
 import cz.kolomet.domain.Address;
 import cz.kolomet.domain.GpsLocation;
 import cz.kolomet.domain.Place;
-import cz.kolomet.domain.ProductComment;
+import cz.kolomet.domain.PlaceComment;
+import cz.kolomet.domain.PlacePhotoUrl;
 import cz.kolomet.domain.codelist.PlaceType;
+import cz.kolomet.domain.codelist.Region;
 import java.util.List;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 privileged aspect Place_Roo_JavaBean {
     
@@ -44,6 +47,14 @@ privileged aspect Place_Roo_JavaBean {
         this.address = address;
     }
     
+    public Region Place.getRegion() {
+        return this.region;
+    }
+    
+    public void Place.setRegion(Region region) {
+        this.region = region;
+    }
+    
     public GpsLocation Place.getGpsLocation() {
         return this.gpsLocation;
     }
@@ -60,20 +71,44 @@ privileged aspect Place_Roo_JavaBean {
         this.bikeRoadNr = bikeRoadNr;
     }
     
-    public Integer Place.getQualityRanking() {
+    public Double Place.getQualityRanking() {
         return this.qualityRanking;
     }
     
-    public void Place.setQualityRanking(Integer qualityRanking) {
+    public void Place.setQualityRanking(Double qualityRanking) {
         this.qualityRanking = qualityRanking;
     }
     
-    public List<ProductComment> Place.getComments() {
+    public Integer Place.getNrOfRankings() {
+        return this.nrOfRankings;
+    }
+    
+    public void Place.setNrOfRankings(Integer nrOfRankings) {
+        this.nrOfRankings = nrOfRankings;
+    }
+    
+    public List<PlacePhotoUrl> Place.getPlacePhotoUrls() {
+        return this.placePhotoUrls;
+    }
+    
+    public void Place.setPlacePhotoUrls(List<PlacePhotoUrl> placePhotoUrls) {
+        this.placePhotoUrls = placePhotoUrls;
+    }
+    
+    public List<PlaceComment> Place.getComments() {
         return this.comments;
     }
     
-    public void Place.setComments(List<ProductComment> comments) {
+    public void Place.setComments(List<PlaceComment> comments) {
         this.comments = comments;
+    }
+    
+    public List<CommonsMultipartFile> Place.getContents() {
+        return this.contents;
+    }
+    
+    public void Place.setContents(List<CommonsMultipartFile> contents) {
+        this.contents = contents;
     }
     
 }

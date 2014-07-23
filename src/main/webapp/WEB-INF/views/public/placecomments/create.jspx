@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:create id="fc_cz_kolomet_domain_PlaceComment" modelAttribute="placeComment" path="/public/placecomments" render="${empty dependencies}" z="CDmFtUSV1Q5d3g4ssmAJCcAlHzo=">
+        <input name="place" type="hidden" value="${place}"/>
+        <field:select field="createdBy" id="c_cz_kolomet_domain_PlaceComment_createdBy" itemValue="id" items="${applicationusers}" path="/admin/applicationusers" render="false" z="user-managed"/>
+        <field:select field="lastModifiedBy" id="c_cz_kolomet_domain_PlaceComment_lastModifiedBy" itemValue="id" items="${applicationusers}" path="/admin/applicationusers" render="false" z="user-managed"/>
+        <field:datetime dateTimePattern="${placeComment_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_PlaceComment_lastModified" render="false" z="user-managed"/>
+        <field:editor field="text" id="c_cz_kolomet_domain_PlaceComment_text" required="true" z="user-managed"/>
+        <field:input field="place" id="c_cz_kolomet_domain_PlaceComment_place" render="false" required="true" z="user-managed"/>
+        <field:select field="parent" id="c_cz_kolomet_domain_PlaceComment_parent" itemValue="id" items="${placecomments}" path="/public/placecomments" render="false" z="user-managed"/>
+        <field:simple field="children" id="c_cz_kolomet_domain_PlaceComment_children" messageCode="entity_reference_not_managed" messageCodeAttribute="Place Comment" render="false" z="user-managed"/>
+    </form:create>
+    <form:dependency dependencies="${dependencies}" id="d_cz_kolomet_domain_PlaceComment" render="${not empty dependencies}" z="ic6sCUo7lQbuNSvZ0+Ed9MBBUgo="/>
+</div>

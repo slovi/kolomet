@@ -6,20 +6,20 @@
         <input name="copiedFrom" type="hidden" value="${product.copiedFrom.id}"/>
         <input name="productState" type="hidden" value="${product.productState}"/>
         <field:input field="copiedFrom" id="c_cz_kolomet_domain_Product_copiedFrom" render="false" validationMessageCode="field_invalid_integer" z="user-managed"/>
-        <field:textarea field="productName" id="c_cz_kolomet_domain_Product_productName" required="true" z="9VRS4DrGEb9AJgsJiZnH90xhO8Q="/>
+        <field:input field="productName" id="c_cz_kolomet_domain_Product_productName" required="true" z="user-managed"/>
         <field:editor field="description" id="c_cz_kolomet_domain_Product_description" z="user-managed"/>
         <c:set var="finalPriceLabel">
             <spring:message code="label_cz_kolomet_domain_product_finalprice" htmlEscape="false"/> (<spring:message code="currency_short"/>)        	
         </c:set>
-        <field:input decimalMax="1000000" decimalMin="1" field="finalPrice" id="c_cz_kolomet_domain_Product_finalPrice" inline="true" label="${finalPriceLabel}" required="true" validationMessageCode="typeMismatch.product.price" validationRegex="([1-9][0-9]{0,5}|1000000)" z="user-managed"/>
+        <field:input decimalMax="1000000" decimalMin="1" field="finalPrice" id="c_cz_kolomet_domain_Product_finalPrice" label="${finalPriceLabel}" required="true" validationMessageCode="typeMismatch.product.price" validationRegex="([1-9][0-9]{0,5}|1000000)" z="user-managed"/>
         <c:set var="priceLabel">
             <spring:message code="label_cz_kolomet_domain_product_price" htmlEscape="false"/> (<spring:message code="currency_short"/>)        	
         </c:set>
-        <field:input decimalMax="1000000" decimalMin="1" field="price" id="c_cz_kolomet_domain_Product_price" inline="true" label="${priceLabel}" required="false" validationMessageCode="typeMismatch.product.price" validationRegex="([1-9][0-9]{0,5}|1000000)" z="user-managed"/>
+        <field:input decimalMax="1000000" decimalMin="1" field="price" id="c_cz_kolomet_domain_Product_price" label="${priceLabel}" required="false" validationMessageCode="typeMismatch.product.price" validationRegex="([1-9][0-9]{0,5}|1000000)" z="user-managed"/>
         <c:set var="discountLabel">
             <spring:message code="label_cz_kolomet_domain_product_discount" htmlEscape="false"/> (<spring:message code="currency_short"/>)        	
         </c:set>
-        <field:input field="discount" id="c_cz_kolomet_domain_Product_discount" inline="true" label="${discountLabel}" readonly="true" required="true" validationMessageCode="field_invalid_number" z="user-managed"/>
+        <field:input field="discount" id="c_cz_kolomet_domain_Product_discount" label="${discountLabel}" readonly="true" required="true" validationMessageCode="field_invalid_number" z="user-managed"/>
         <field:select field="copiedFrom" id="c_cz_kolomet_domain_Product_copiedFrom" itemValue="id" items="${products}" path="/admin/products" render="false" z="AVJqoFuDSbcrYbBMxadTL4K+l5c="/>
         <field:input decimalMax="1000000" decimalMin="1" field="discount" id="c_cz_kolomet_domain_Product_discount" render="false" required="true" validationMessageCode="field_invalid_number" z="AYna6cMjKKHaeR8yMqjwXp7/ojE="/>
         <field:select field="productState" id="c_cz_kolomet_domain_Product_productState" items="${productstates}" path="productstates" render="false" z="user-managed"/>
@@ -42,7 +42,7 @@
         <field:select field="productUsage" id="c_cz_kolomet_domain_Product_productUsage" itemLabel="codeDescription" itemValue="id" items="${productusages}" path="/admin/productusages" z="user-managed"/>
         <field:select field="bicycleCategory" id="c_cz_kolomet_domain_Product_bicycleCategory" itemLabel="codeDescription" itemValue="id" items="${bicyclecategories}" path="/admin/bicyclecategories" z="user-managed"/>
         <field:select field="figureHeight" id="c_cz_kolomet_domain_Product_figureHeight" itemLabel="codeDescription" itemValue="id" items="${figureheights}" path="/admin/figureheights" z="user-managed"/>
-        <field:select field="productColor" id="c_cz_kolomet_domain_Product_productColor" itemLabel="codeDescription" itemValue="id" items="${productcolors}" path="/admin/productcolors" z="user-managed"/>
+        <field:select emptyLabel="..." field="productColor" id="c_cz_kolomet_domain_Product_productColor" itemLabel="codeDescription" itemValue="id" items="${productcolors}" path="/admin/productcolors" z="user-managed"/>
         <c:set var="weightLabel">
             <spring:message code="label_cz_kolomet_domain_product_weight"/> (<spring:message code="weight_units"/>)        	
         </c:set>
@@ -87,8 +87,10 @@
         <br/>
     </form:update>
     <script type="text/javascript">
-    	require(['form'], function(form) {
-    		form.computeDifferenceOnKeyUp('_price_id', '_finalPrice_id', '_discount_id');
-    	});
+	    require(['main'], function() {
+	    	require(['form'], function(form) {
+	    		form.computeDifferenceOnKeyUp('_price_id', '_finalPrice_id', '_discount_id');
+	    	});
+	    });
     </script>
 </div>

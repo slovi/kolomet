@@ -23,21 +23,9 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 @RooJpaEntity(inheritanceType = "TABLE_PER_CLASS")
 @RooEquals(excludeFields = {"seller", "createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate", "newsItem"})
 @RooSerializable
-public class NewsItemPhotoUrl extends DomainEntity {
+public class NewsItemPhotoUrl extends BasePhotoUrl {
 	
 	public static final String PHOTO_URL_PREFIX = "newsitem";
-	public static String ORIGINAL_IMG_SUFFIX = "_orig.jpg";
-
-	/**
-     */
-    @Size(max = 255)
-    private String fileName;
-    
-    /**
-     */
-    @Size(max = 30)
-    @Column(updatable = false)
-    private String contentType;
     
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
@@ -47,8 +35,29 @@ public class NewsItemPhotoUrl extends DomainEntity {
     @Transient
     private List<CommonsMultipartFile> contents;
     
-    public String getPhotoUrl() {
-    	return PHOTO_URL_PREFIX + "/" + newsItem.getId() + "/" + FilenameUtils.getBaseName(fileName) + ORIGINAL_IMG_SUFFIX;
+    @Override
+    protected String getPhotoUrlPrefix() {
+    	return PHOTO_URL_PREFIX;
     }
+    
+    @Override
+    protected Long getParentContainerId() {
+    	return newsItem.getId();
+    }
+    
+	@Override
+	public PhotoContainer getParentContainer() {
+		return newsItem;
+	}
+
+	@Override
+	public String getThumbPhotoUrl() {
+		return null;
+	}
+
+	@Override
+	public String getOverPhotoUrl() {
+		return null;
+	}
 	
 }

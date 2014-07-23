@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+    <definition extends="default" name="admin/placecomments/list">
+        <put-attribute name="body" value="/WEB-INF/views/admin/placecomments/list.jspx"/>
+    </definition>
+<definition extends="default" name="admin/placecomments/show">
+        <put-attribute name="body" value="/WEB-INF/views/admin/placecomments/show.jspx"/>
+    </definition>
+<definition extends="default" name="admin/placecomments/create">
+        <put-attribute name="body" value="/WEB-INF/views/admin/placecomments/create.jspx"/>
+    </definition>
+<definition extends="default" name="admin/placecomments/update">
+        <put-attribute name="body" value="/WEB-INF/views/admin/placecomments/update.jspx"/>
+    </definition>
+<definition extends="default" name="public/placecomments/list">
+        <put-attribute name="body" value="/WEB-INF/views/public/placecomments/list.jspx"/>
+    </definition>
+<definition extends="default" name="public/placecomments/show">
+        <put-attribute name="body" value="/WEB-INF/views/public/placecomments/show.jspx"/>
+    </definition>
+<definition extends="default" name="public/placecomments/create">
+        <put-attribute name="body" value="/WEB-INF/views/public/placecomments/create.jspx"/>
+    </definition>
+<definition extends="default" name="public/placecomments/update">
+        <put-attribute name="body" value="/WEB-INF/views/public/placecomments/update.jspx"/>
+    </definition>
+</tiles-definitions>
