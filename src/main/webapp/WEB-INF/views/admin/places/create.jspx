@@ -1,19 +1,159 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <form:create id="fc_cz_kolomet_domain_Place" modelAttribute="place" path="/admin/places" render="${empty dependencies}" z="PbaVUB2EISqL1aF23Xkpr+ysCh0=">
-        <field:select field="createdBy" id="c_cz_kolomet_domain_Place_createdBy" itemValue="id" items="${applicationusers}" path="/admin/applicationusers" z="ebeXiT8FmWaXbjbzSe3JLofPEB4="/>
-        <field:select field="lastModifiedBy" id="c_cz_kolomet_domain_Place_lastModifiedBy" itemValue="id" items="${applicationusers}" path="/admin/applicationusers" z="sTxjhremcH8QOBJ9I1xHItM6mbU="/>
-        <field:datetime dateTimePattern="${place_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_Place_lastModified" z="1ZKRMBvHQyq51EcSpCWR6I4KICg="/>
-        <field:input field="name" id="c_cz_kolomet_domain_Place_name" required="true" z="7wptnLPTNCq8izxDgxSKREIWcIY="/>
-        <field:select field="placeType" id="c_cz_kolomet_domain_Place_placeType" itemValue="id" items="${placetypes}" path="/admin/placetypes" required="true" z="vZUo7bQ93+iwpxPhWdJTfcawYsg="/>
-        <field:input field="address" id="c_cz_kolomet_domain_Place_address" z="9mNJF+/QmefeQOfR2mhIlHMeOSk="/>
-        <field:input field="gpsLocation" id="c_cz_kolomet_domain_Place_gpsLocation" z="aaMqdkjjPg0UQLxvnIUsUnHctTY="/>
-        <field:input field="bikeRoadNr" id="c_cz_kolomet_domain_Place_bikeRoadNr" validationMessageCode="field_invalid_integer" z="o8IvhxS6bfSP2wk9SogdBQ7T7s8="/>
-        <field:input field="description" id="c_cz_kolomet_domain_Place_description" z="R5yx6gMCum2U4dhvR2Aq6ilt6Qg="/>
-        <field:simple field="comments" id="c_cz_kolomet_domain_Place_comments" messageCode="entity_reference_not_managed" messageCodeAttribute="Product Comment" z="NXXSA8nfd+Wg3Wr9/PeMN3RsZL8="/>
-        <field:input field="ranking" id="c_cz_kolomet_domain_Place_ranking" max="5" min="1" required="true" validationMessageCode="field_invalid_integer" z="nIN3/5+J9NaDNjgooJTGUr6V9eo="/>
-    </form:create>
-    <form:dependency dependencies="${dependencies}" id="d_cz_kolomet_domain_Place" render="${not empty dependencies}" z="027c97vWNbBkqXvM72D6YRB6F3g="/>
+    <h2 style="padding:0;margin:0 0 10px 6px;"><spring:message code="place_create_title" /></h2>
+    <div class="general_unit">
+        <c:set value="12" var="input_width"/>
+        <form:create id="fc_cz_kolomet_domain_Place" hideButtons="true" modelAttribute="place" multipart="true" path="/admin/places" render="${empty dependencies}" renderInTab="false" z="user-managed">
+            <div>
+                <div class="step">
+                    <div style="width:640px; height: 50px;">
+                        <a class="step-1 navi current" data-step="1" href="#"><spring:message code="place_create_step_1" /></a>
+                        <a class="step-2 navi" data-step="2" href="#"><spring:message code="place_create_step_2" /></a>
+                        <a class="step-3 navi" data-step="3" href="#"><spring:message code="place_create_step_3" /></a>
+                    </div>
+                    <div class="step-1">
+	                    <div style="float:right;">
+	                        <div id="map-canvas-1" style="width: 410px; height: 246px;">
+	                            <!---->
+	                        </div>
+	                    </div>
+	                    <div style="width: 300px;">
+	                        <field:select field="placeType" id="c_cz_kolomet_domain_Place_placeType" itemLabel="codeDescription" itemValue="id" items="${placetypes}" path="/admin/placetypes" required="true" width="${input_width}" z="user-managed"/>
+	                        <field:input field="name" id="c_cz_kolomet_domain_Place_name" required="true" width="${input_width}" z="user-managed"/>
+	                        <field:input field="gpsLocation.north" id="c_cz_kolomet_domain_Place_gpsLocation_north" validationRegex="(([1-9][0-9]{0,2}(,[0-9]{1,20})?)|(1000(,[0-9]{1,20})?))" width="${input_width}" z="user-managed"/>
+	                        <field:input field="gpsLocation.west" id="c_cz_kolomet_domain_Place_gpsLocation_west" validationRegex="(([1-9][0-9]{0,2}(,[0-9]{1,20})?)|(1000(,[0-9]{1,20})?))" width="${input_width}" z="aaMqdkjjPg0UQLxvnIUsUnHctTY="/>
+	                        <field:select field="region" id="c_cz_kolomet_domain_Place_region" itemLabel="codeDescription" itemValue="id" items="${regions}" path="/admin/regions" width="${input_width}" z="user-managed"/>
+	                        <field:input field="bikeRoadNr" id="c_cz_kolomet_domain_Place_bikeRoadNr" validationMessageCode="field_invalid_integer" validationRegex="([1-9][0-9]{0,2}|1000)" width="${input_width}" z="user-managed"/>
+	                        <field:input field="address.street" id="c_cz_kolomet_domain_Place_address_street" render="false" width="${input_width}" z="9mNJF+/QmefeQOfR2mhIlHMeOSk="/>
+	                        <field:input field="address.houseNr" id="c_cz_kolomet_domain_Place_address_houseNr" render="false" validationRegex="([1-9][0-9]{0,2}|1000)" width="${input_width}" z="9mNJF+/QmefeQOfR2mhIlHMeOSk="/>
+	                        <field:input field="address.city" id="c_cz_kolomet_domain_Place_address_city" render="false" width="${input_width}" z="9mNJF+/QmefeQOfR2mhIlHMeOSk="/>
+	                        <field:input field="address.zipCode" id="c_cz_kolomet_domain_Place_address_zipCode" render="false" width="${input_width}" z="9mNJF+/QmefeQOfR2mhIlHMeOSk="/>
+	                        <button type="button" class="step-1" data-step="1"><spring:message code="place_create_step_next" /></button>
+	                    </div>
+                    </div>
+                    <div class="step-2" style="display: none;">
+	                    <div style="float:right;">
+	                        <div id="map-canvas-2" style="width: 410px; height: 246px;">
+	                            <!---->
+	                        </div>
+	                    </div>
+	                    <div style="width: 300px">
+	                        <field:textarea cols="28" field="description" id="c_cz_kolomet_domain_Place_description" rows="14" z="user-managed"/>
+	                    </div>
+	                    <div>
+	                    	<div id="files">
+		                    	<div class="files_add">
+			                    	<span class="fileinput-button">
+								        <i class="glyphicon glyphicon-plus"><!--  --></i>
+								        <span>Nahrát soubor...</span>
+								        <input id="fileupload" type="file" name="contents[]" />
+								    </span>
+							    </div>
+						    </div>
+	                        <br/>	                        
+	                        <button type="button" class="step-2" data-step="2"><spring:message code="place_create_step_next" /></button>
+	                    </div>
+	                </div>
+	                <div class="step-3" style="display: none;">
+	                    <div id="detail_image" style="text-align:center;float:right;width:348px;height:232px;margin-left:15px;border: solid thin;"><!--  --></div>
+	                    <div style="width: 300px; height: 250px;">
+	                        <p class="name"><!--  --></p>
+	                        <p class="place_type"><!--  --></p>
+	                        <p class="region"><!--  --></p>
+	                        <p class="bike_road_nr"><!--  --></p><br />
+	                        <b>Popis:</b><span class="description"><!--  --></span><br /><br />
+	                        <b>GPS:</b><span class="gps"><!--  --></span><br/>
+	                    </div>
+	                </div>	                
+                </div>                                
+            </div>
+            <spring:message code="label_cz_kolomet_domain_place_photourls" var="photourls_panel_label"/>
+            <spring:message code="button_add_photo" var="photourls_panel_add"/>
+            <field:datetime dateTimePattern="${place_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_Place_lastModified" render="false" z="user-managed"/>
+            <field:select field="createdBy" id="c_cz_kolomet_domain_Place_createdBy" itemValue="id" items="${applicationusers}" path="/admin/applicationusers" render="false" z="user-managed"/>
+            <field:input field="address" id="c_cz_kolomet_domain_Place_address" render="false" z="user-managed"/>
+            <field:select field="lastModifiedBy" id="c_cz_kolomet_domain_Place_lastModifiedBy" itemValue="id" items="${applicationusers}" path="/admin/applicationusers" render="false" z="user-managed"/>
+            <field:input field="contents" id="c_cz_kolomet_domain_Place_contents" render="false" z="user-managed"/>
+            <field:simple field="placePhotoUrls" id="c_cz_kolomet_domain_Place_placePhotoUrls" messageCode="entity_reference_not_managed" messageCodeAttribute="Place Photo Url" render="false" z="user-managed"/>
+            <field:simple field="comments" id="c_cz_kolomet_domain_Place_comments" messageCode="entity_reference_not_managed" messageCodeAttribute="Product Comment" render="false" z="user-managed"/>
+            <field:input field="gpsLocation" id="c_cz_kolomet_domain_Place_gpsLocation" render="false" required="true" z="user-managed"/>
+            <field:input field="qualityRanking" id="c_cz_kolomet_domain_Place_qualityRanking" render="false" validationMessageCode="field_invalid_integer" z="user-managed"/>
+            <field:input field="nrOfRankings" id="c_cz_kolomet_domain_Place_nrOfRankings" render="false" validationMessageCode="field_invalid_integer" z="user-managed"/>
+        </form:create>
+        <form:dependency dependencies="${dependencies}" id="d_cz_kolomet_domain_Place" render="${not empty dependencies}" z="027c97vWNbBkqXvM72D6YRB6F3g="/>
+    </div>
+    <spring:url value="/resources/images/no-photo-orig_places.jpg" var="noPhotoUrl" />
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbbZrV_w_DmKzCVuFSxgkBs4pvi1gk1VA&amp;sensor=true&amp;language=cs">
+        <!-- -->
+    </script>    
+    <spring:url value="/resources/js/gmap.js" var="gmapUrl"/>
+    <script src="${gmapUrl}">
+        <!-- -->
+    </script>
+    <script type="text/javascript">
+   		<![CDATA[
+	
+		var markers = [];
+		
+		var mapListeners = [
+			function(map) {
+				google.maps.event.addListener(map, 'click', function(event) {										
+					
+					if (markers.length > 0) {
+						markers[0].setMap(null);
+					}
+					
+					markers = [];
+					
+					$("input[name='gpsLocation.north']").val(event.latLng.lat().toString().replace('.', ','));
+					$("input[name='gpsLocation.west']").val(event.latLng.lng().toString().replace('.', ','));	
+				    map.setCenter(event.latLng);
+					map.setZoom(8);					
+					
+					markers.push(new google.maps.Marker({
+					    position: map.getCenter(),
+					    map: map,
+					    title: 'Click to zoom'
+					}));					
+					
+				});
+			}
+		];
+	
+		init('map-canvas-1', 6, mapListeners, function(initialize) {
+			google.maps.event.addDomListener(window, 'load', initialize);
+		});
+    
+    	require(['main'], function() {
+    		require(['form'], function(form) {
+    			form.multistepForm(3, function(step) {
+    				if (step == 2) {
+    					
+    					mapListener = function(map) {
+    						if (markers.length > 0) {
+	    						var marker = markers[0];
+	    						new google.maps.Marker({
+	    						    position: marker.getPosition(),
+	    						    map: map,
+	    						    title: 'Click to zoom'
+	    						});
+	    						map.setCenter(marker.getPosition());
+	    						map.setZoom(8);
+    						}
+    					};
+    					
+						init('map-canvas-2', 6, [mapListener], function(initialize) {
+							initialize();
+						});
+    				}
+    			});    		    	
+    		});
+    		require(['files-multi'], function(files) {
+    			files.files('fileupload', '${noPhotoUrl}', 4, '${noPhotoUrl}', {maxWidth: 348, maxHeight: 232, minWidth: 348, minHeight: 232});
+    		});
+    	});
+    	]]>
+    </script>
 </div>

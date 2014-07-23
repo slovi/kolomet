@@ -1,18 +1,40 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <form:update id="fu_cz_kolomet_domain_Place" modelAttribute="place" path="/admin/places" versionField="Version" z="2adYpZKCBLSyZONZu0zNlptFTCE=">
-        <field:select field="createdBy" id="c_cz_kolomet_domain_Place_createdBy" itemValue="id" items="${applicationusers}" path="/admin/applicationusers" z="ebeXiT8FmWaXbjbzSe3JLofPEB4="/>
-        <field:select field="lastModifiedBy" id="c_cz_kolomet_domain_Place_lastModifiedBy" itemValue="id" items="${applicationusers}" path="/admin/applicationusers" z="sTxjhremcH8QOBJ9I1xHItM6mbU="/>
-        <field:datetime dateTimePattern="${place_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_Place_lastModified" z="1ZKRMBvHQyq51EcSpCWR6I4KICg="/>
+    <form:update id="fu_cz_kolomet_domain_Place" modelAttribute="place" multipart="true" path="/admin/places" versionField="Version" z="user-managed">
         <field:input field="name" id="c_cz_kolomet_domain_Place_name" required="true" z="7wptnLPTNCq8izxDgxSKREIWcIY="/>
-        <field:select field="placeType" id="c_cz_kolomet_domain_Place_placeType" itemValue="id" items="${placetypes}" path="/admin/placetypes" required="true" z="vZUo7bQ93+iwpxPhWdJTfcawYsg="/>
-        <field:input field="address" id="c_cz_kolomet_domain_Place_address" z="9mNJF+/QmefeQOfR2mhIlHMeOSk="/>
-        <field:input field="gpsLocation" id="c_cz_kolomet_domain_Place_gpsLocation" z="aaMqdkjjPg0UQLxvnIUsUnHctTY="/>
-        <field:input field="bikeRoadNr" id="c_cz_kolomet_domain_Place_bikeRoadNr" validationMessageCode="field_invalid_integer" z="o8IvhxS6bfSP2wk9SogdBQ7T7s8="/>
-        <field:input field="description" id="c_cz_kolomet_domain_Place_description" z="R5yx6gMCum2U4dhvR2Aq6ilt6Qg="/>
-        <field:simple field="comments" id="c_cz_kolomet_domain_Place_comments" messageCode="entity_reference_not_managed" messageCodeAttribute="Product Comment" z="NXXSA8nfd+Wg3Wr9/PeMN3RsZL8="/>
-        <field:input field="ranking" id="c_cz_kolomet_domain_Place_ranking" max="5" min="1" required="true" validationMessageCode="field_invalid_integer" z="nIN3/5+J9NaDNjgooJTGUr6V9eo="/>
+        <field:select field="placeType" id="c_cz_kolomet_domain_Place_placeType" itemLabel="codeDescription" itemValue="id" items="${placetypes}" path="/admin/placetypes" required="true" z="user-managed"/>
+        <field:input field="address.street" id="c_cz_kolomet_domain_Place_address_street" z="9mNJF+/QmefeQOfR2mhIlHMeOSk="/>
+        <field:input field="address.houseNr" id="c_cz_kolomet_domain_Place_address_houseNr" validationRegex="([1-9][0-9]{0,2}|1000)" z="9mNJF+/QmefeQOfR2mhIlHMeOSk="/>
+        <field:input field="address.city" id="c_cz_kolomet_domain_Place_address_city" z="9mNJF+/QmefeQOfR2mhIlHMeOSk="/>
+        <field:input field="address.zipCode" id="c_cz_kolomet_domain_Place_address_zipCode" z="9mNJF+/QmefeQOfR2mhIlHMeOSk="/>
+        <field:select field="region" id="c_cz_kolomet_domain_Place_region" itemLabel="codeDescription" itemValue="id" items="${regions}" path="/admin/regions" z="user-managed"/>
+        <field:input field="gpsLocation.north" id="c_cz_kolomet_domain_Place_gpsLocation_north" validationRegex="(([1-9][0-9]{0,2}(,[0-9]{1,2})?)|(1000(,[0-9]{1,2})?))" z="user-managed"/>
+        <field:input field="gpsLocation.west" id="c_cz_kolomet_domain_Place_gpsLocation_west" validationRegex="(([1-9][0-9]{0,2}(,[0-9]{1,2})?)|(1000(,[0-9]{1,2})?))" z="aaMqdkjjPg0UQLxvnIUsUnHctTY="/>
+        <field:input field="bikeRoadNr" id="c_cz_kolomet_domain_Place_bikeRoadNr" validationMessageCode="field_invalid_integer" validationRegex="([1-9][0-9]{0,2}|1000)" z="user-managed"/>
+        <field:editor field="description" id="c_cz_kolomet_domain_Place_description" z="user-managed"/>
+        <h2>
+            <spring:message code="label_cz_kolomet_domain_place_placephotourls"/>
+        </h2>
+        <br/>
+        <c:set scope="request" value="${place.photos}" var="placephotourls"/>
+        <jsp:include flush="true" page="../placephotourls/list.jspx"/>
+        <br/>
+        <spring:message code="label_cz_kolomet_domain_place_placephotourls" var="photourls_panel_label"/>
+        <spring:message code="button_add_photo" var="photourls_panel_add"/>
+        <util:panel id="fc_cz_kolomet_domain_Place_placephotoUrls" title="${photourls_panel_add}">
+            <field:files filesCount="4" id="files"/>
+        </util:panel>
+        <field:select field="createdBy" id="c_cz_kolomet_domain_Place_createdBy" itemValue="id" items="${applicationusers}" path="/admin/applicationusers" render="false" z="user-managed"/>
+        <field:select field="lastModifiedBy" id="c_cz_kolomet_domain_Place_lastModifiedBy" itemValue="id" items="${applicationusers}" path="/admin/applicationusers" render="false" z="user-managed"/>
+        <field:datetime dateTimePattern="${place_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_Place_lastModified" render="false" z="user-managed"/>
+        <field:simple field="comments" id="c_cz_kolomet_domain_Place_comments" messageCode="entity_reference_not_managed" messageCodeAttribute="Product Comment" render="false" z="user-managed"/>
+        <field:input field="contents" id="c_cz_kolomet_domain_Place_contents" render="false" z="user-managed"/>
+        <field:input field="address" id="c_cz_kolomet_domain_Place_address" render="false" z="user-managed"/>
+        <field:input field="gpsLocation" id="c_cz_kolomet_domain_Place_gpsLocation" render="false" required="true" z="user-managed"/>
+        <field:simple field="placePhotoUrls" id="c_cz_kolomet_domain_Place_placePhotoUrls" messageCode="entity_reference_not_managed" messageCodeAttribute="Place Photo Url" render="false" z="user-managed"/>
+        <field:input field="nrOfRankings" id="c_cz_kolomet_domain_Place_nrOfRankings" render="false" validationMessageCode="field_invalid_integer" z="user-managed"/>
+        <field:input field="qualityRanking" id="c_cz_kolomet_domain_Place_qualityRanking" render="false" validationMessageCode="field_invalid_integer" z="user-managed"/>
     </form:update>
 </div>
