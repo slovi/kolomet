@@ -10,5 +10,7 @@
         <field:display date="true" dateTimePattern="${region_created_date_format}" field="created" id="s_cz_kolomet_domain_codelist_Region_created" object="${region}" z="w0nPnUiqocD5+g+Z4/rJUhxJBcE="/>
         <field:display date="true" dateTimePattern="${region_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_codelist_Region_lastModified" object="${region}" z="w0nPnUiqocD5+g+Z4/rJUhxJBcE="/>
         <field:display field="sequenceNr" id="s_cz_kolomet_domain_codelist_Region_sequenceNr" object="${region}" z="db5ez4Q3IwxYujT76JrzG3CnpuQ="/>
+        <field:display field="gpsLocation" id="s_cz_kolomet_domain_codelist_Region_gpsLocation" object="${region}" z="pIN9FjWiy72EMZj7RhfHj+grZoc="/>
+        <field:display field="googleAlias" id="s_cz_kolomet_domain_codelist_Region_googleAlias" object="${region}" z="4HOrgJ5dJ7XBfFgL+ZbDX5e0EeY="/>
     </page:show>
 </div>

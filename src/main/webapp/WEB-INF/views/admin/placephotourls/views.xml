@@ -7,4 +7,7 @@
 <definition extends="default" name="admin/placephotourls/show">
         <put-attribute name="body" value="/WEB-INF/views/admin/placephotourls/show.jspx"/>
     </definition>
+<definition extends="default" name="admin/placephotourls/create">
+        <put-attribute name="body" value="/WEB-INF/views/admin/placephotourls/create.jspx"/>
+    </definition>
 </tiles-definitions>

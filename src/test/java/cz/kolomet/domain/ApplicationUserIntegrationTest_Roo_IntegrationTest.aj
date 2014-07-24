@@ -7,10 +7,7 @@ import cz.kolomet.domain.ApplicationUserDataOnDemand;
 import cz.kolomet.domain.ApplicationUserIntegrationTest;
 import cz.kolomet.repository.ApplicationUserRepository;
 import cz.kolomet.service.ApplicationUserService;
-import java.util.Iterator;
 import java.util.List;
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,7 +20,7 @@ privileged aspect ApplicationUserIntegrationTest_Roo_IntegrationTest {
     
     declare @type: ApplicationUserIntegrationTest: @RunWith(SpringJUnit4ClassRunner.class);
     
-    declare @type: ApplicationUserIntegrationTest: @ContextConfiguration(locations = "classpath*:/META-INF/spring/applicationContext*.xml");
+    declare @type: ApplicationUserIntegrationTest: @ContextConfiguration(locations = "classpath:/META-INF/spring/applicationContext*.xml");
     
     declare @type: ApplicationUserIntegrationTest: @Transactional;
     
@@ -111,16 +108,7 @@ privileged aspect ApplicationUserIntegrationTest_Roo_IntegrationTest {
         ApplicationUser obj = dod.getNewTransientApplicationUser(Integer.MAX_VALUE);
         Assert.assertNotNull("Data on demand for 'ApplicationUser' failed to provide a new transient entity", obj);
         Assert.assertNull("Expected 'ApplicationUser' identifier to be null", obj.getId());
-        try {
-            applicationUserService.saveApplicationUser(obj);
-        } catch (final ConstraintViolationException e) {
-            final StringBuilder msg = new StringBuilder();
-            for (Iterator<ConstraintViolation<?>> iter = e.getConstraintViolations().iterator(); iter.hasNext();) {
-                final ConstraintViolation<?> cv = iter.next();
-                msg.append("[").append(cv.getRootBean().getClass().getName()).append(".").append(cv.getPropertyPath()).append(": ").append(cv.getMessage()).append(" (invalid value = ").append(cv.getInvalidValue()).append(")").append("]");
-            }
-            throw new IllegalStateException(msg.toString(), e);
-        }
+        applicationUserService.saveApplicationUser(obj);
         applicationUserRepository.flush();
         Assert.assertNotNull("Expected 'ApplicationUser' identifier to no longer be null", obj.getId());
     }

@@ -10,11 +10,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.octo.captcha.service.image.ImageCaptchaService;
 
 import cz.kolomet.dto.ResetPasswordDto;
 import cz.kolomet.service.ApplicationUserService;
+import cz.kolomet.service.exception.UserNotFoundException;
 
 @RequestMapping("/public/resetpasswords")
 @Controller
@@ -33,7 +35,7 @@ public class ResetPasswordController extends AbstractPublicController {
     }
 
 	@RequestMapping(method = RequestMethod.POST, produces = "text/html")
-	public String create(@Valid @ModelAttribute("resetPassword") ResetPasswordDto resetPassword, BindingResult bindingResult, Model uiModel,
+	public String create(@Valid @ModelAttribute("resetPassword") ResetPasswordDto resetPassword, BindingResult bindingResult, RedirectAttributes uiModel,
 			HttpServletRequest httpServletRequest) {
 		if (bindingResult.hasErrors()) {
 			populateEditForm(uiModel, resetPassword);
@@ -48,7 +50,13 @@ public class ResetPasswordController extends AbstractPublicController {
 		}
 
 		uiModel.asMap().clear();
-		applicationUserService.resetPassword(resetPassword.getUsername());
+		try {
+			applicationUserService.resetPassword(resetPassword.getUsername());
+			uiModel.addFlashAttribute("success", true);
+		} catch (UserNotFoundException e) {
+			uiModel.addFlashAttribute("success", false);
+			uiModel.addFlashAttribute("username", e.getUsername());
+		}
 		return "redirect:/public/resetpasswords";
 	}
 

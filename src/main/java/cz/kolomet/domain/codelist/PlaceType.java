@@ -5,10 +5,15 @@ import org.springframework.roo.addon.jpa.entity.RooJpaEntity;
 import org.springframework.roo.addon.serializable.RooSerializable;
 import org.springframework.roo.addon.tostring.RooToString;
 
+import cz.kolomet.domain.PlaceTypeColor;
+
 @RooJavaBean
 @RooToString
 @RooJpaEntity(inheritanceType = "TABLE_PER_CLASS")
 @RooEquals
 @RooSerializable
 public class PlaceType extends Codelist {
+	
+	private PlaceTypeColor placeTypeColor;
+	
 }

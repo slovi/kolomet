@@ -3,43 +3,12 @@
 
 package cz.kolomet.web.pub;
 
-import cz.kolomet.service.PlaceService;
 import cz.kolomet.web.pub.PlaceController;
 import org.joda.time.format.DateTimeFormat;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 privileged aspect PlaceController_Roo_Controller {
-    
-    @Autowired
-    PlaceService PlaceController.placeService;
-    
-    @RequestMapping(value = "/{id}", produces = "text/html")
-    public String PlaceController.show(@PathVariable("id") Long id, Model uiModel) {
-        addDateTimeFormatPatterns(uiModel);
-        uiModel.addAttribute("place", placeService.findPlace(id));
-        uiModel.addAttribute("itemId", id);
-        return "public/places/show";
-    }
-    
-    @RequestMapping(produces = "text/html")
-    public String PlaceController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, @RequestParam(value = "sortFieldName", required = false) String sortFieldName, @RequestParam(value = "sortOrder", required = false) String sortOrder, Model uiModel) {
-        if (page != null || size != null) {
-            int sizeNo = size == null ? 10 : size.intValue();
-            final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
-            uiModel.addAttribute("places", placeService.findPlaceEntries(firstResult, sizeNo));
-            float nrOfPages = (float) placeService.countAllPlaces() / sizeNo;
-            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
-        } else {
-            uiModel.addAttribute("places", placeService.findAllPlaces());
-        }
-        addDateTimeFormatPatterns(uiModel);
-        return "public/places/list";
-    }
     
     void PlaceController.addDateTimeFormatPatterns(Model uiModel) {
         uiModel.addAttribute("place_created_date_format", DateTimeFormat.patternForStyle("MM", LocaleContextHolder.getLocale()));

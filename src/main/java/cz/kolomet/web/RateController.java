@@ -44,7 +44,7 @@ public class RateController {
 		
 		Rate existingRate = rateService.findRate(rate.getRateType(), rate.getEntityId(), request.getRemoteAddr());
 		
-		return new AjaxResponse(existingRate);
+		return AjaxResponse.successful(existingRate);
 	
 	}
 	

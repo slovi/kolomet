@@ -101,13 +101,13 @@ privileged aspect ApplicationRoleDataOnDemand_Roo_DataOnDemand {
             ApplicationRole obj = getNewTransientApplicationRole(i);
             try {
                 applicationRoleService.saveApplicationRole(obj);
-            } catch (final ConstraintViolationException e) {
-                final StringBuilder msg = new StringBuilder();
+            } catch (ConstraintViolationException e) {
+                StringBuilder msg = new StringBuilder();
                 for (Iterator<ConstraintViolation<?>> iter = e.getConstraintViolations().iterator(); iter.hasNext();) {
-                    final ConstraintViolation<?> cv = iter.next();
-                    msg.append("[").append(cv.getRootBean().getClass().getName()).append(".").append(cv.getPropertyPath()).append(": ").append(cv.getMessage()).append(" (invalid value = ").append(cv.getInvalidValue()).append(")").append("]");
+                    ConstraintViolation<?> cv = iter.next();
+                    msg.append("[").append(cv.getConstraintDescriptor()).append(":").append(cv.getMessage()).append("=").append(cv.getInvalidValue()).append("]");
                 }
-                throw new IllegalStateException(msg.toString(), e);
+                throw new RuntimeException(msg.toString(), e);
             }
             applicationRoleRepository.flush();
             data.add(obj);

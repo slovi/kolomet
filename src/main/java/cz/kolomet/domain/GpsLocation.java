@@ -1,17 +1,19 @@
 package cz.kolomet.domain;
 
+import javax.persistence.Embeddable;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.NumberFormat;
 
+@Embeddable
 public class GpsLocation {
 	
 	@NotNull
-	@NumberFormat(pattern = "###")
+	@NumberFormat(pattern = "###.#################")
 	private Double north;
 	
 	@NotNull
-	@NumberFormat(pattern = "###")
+	@NumberFormat(pattern = "###.#################")
 	private Double west;
 
 	public Double getNorth() {

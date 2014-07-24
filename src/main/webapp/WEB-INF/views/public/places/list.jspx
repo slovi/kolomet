@@ -48,6 +48,16 @@
 		<c:set value="0" var="highlight" />
 	</c:if>
 	
+	<c:set value="${param.gps_north}" var="gpsNorth" />
+	<c:set value="${param.gps_west}" var="gpsWest" />
+	
+	<c:if test="${empty gpsNorth}">
+		<c:set value="null" var="gpsNorth" />
+	</c:if>
+	<c:if test="${empty gpsWest}">
+		<c:set value="null" var="gpsWest" />
+	</c:if>
+	
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbbZrV_w_DmKzCVuFSxgkBs4pvi1gk1VA&amp;sensor=true&amp;language=cs"><!-- --></script>
 	<script src="${gmapUrl}"><!-- --></script>
     <script type="text/javascript">  
@@ -57,37 +67,52 @@
     	var placeUrl = "${placeUrl}";
     	var highlightPlaceId = ${highlight};
     	
+    	var gpsLocationNorth = ${gpsNorth};
+    	var gpsLocationWest = ${gpsWest};
+    	
+    	var zoom = 7;
+    	
+    	var latLng;
+    	if (gpsLocationNorth && gpsLocationWest) {
+    		zoom = 9;
+    		latLng = new google.maps.LatLng(gpsLocationNorth, gpsLocationWest);
+    	}
+    	
     	var mapListeners = [
+    	                    
+    	        // listener, ktery nastavi klikatelny marker s napisem
     			function(map) {
     				for (var i = 0; i < places.length; i++) {
     					
     					var place = places[i];
-    					var highlight = place.id == highlightPlaceId;
+    					var highlight = place.id == highlightPlaceId;    					
     					
-    					marker = new google.maps.Marker({
-    					    map: map,
-    					    draggable: false,
-    					    position: new google.maps.LatLng(place.gpsLocation.north, place.gpsLocation.west),
-    					    title: place.name + ' ' + place.id,
-    					    url: placeUrl + "/" + place.id
-    					});
-    					
-    					if (highlight) {
-    						var infowindow = new google.maps.InfoWindow({
-    							content: "<h2>" + place.name + "</h2>"
-    						});
-    						infowindow.open(map, marker);
-    					}
-    					
-    					marker.addListener('click', function(marker) {
-    						window.location.assign(this.url);												
-    					});
+    					if (place.gpsLocation) {
+	    					marker = new google.maps.Marker({
+	    					    map: map,
+	    					    draggable: false,
+	    					    position: new google.maps.LatLng(place.gpsLocation.north, place.gpsLocation.west),
+	    					    title: place.name + ' ' + place.id,
+	    					    url: placeUrl + "/" + place.id
+	    					});
+	    					
+	    					if (highlight) {
+	    						var infowindow = new google.maps.InfoWindow({
+	    							content: "<h2>" + place.name + "</h2>"
+	    						});
+	    						infowindow.open(map, marker);
+	    					}
+	    					
+	    					marker.addListener('click', function(marker) {
+	    						window.location.assign(this.url);    						
+	    					});    					
+    					};	
     				};
     			}];
     	
-    	init('map-canvas', 7, mapListeners, function(initialize) {
+    	init('map-canvas', zoom, mapListeners, function(initialize) {
 			google.maps.event.addDomListener(window, 'load', initialize);
-		});
+		}, latLng);
     	
     	]]>
     </script>

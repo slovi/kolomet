@@ -8,6 +8,11 @@
             <h2>
                 <c:out value="${place.name}"/>
             </h2>
+            <c:if test="${not empty place.descriptionLink}">
+                <p>
+                    <c:out value="${place.descriptionLink}"/>
+                </p>
+            </c:if>
             <p>
                 <c:out escapeXml="false" value="${place.description}"/>
             </p>
@@ -15,7 +20,7 @@
         <div class="detail_tag">
             <div class="left" style="height: 30px;">
                 <p>
-                    <spring:message code="place_detail_rating"/>
+                    <spring:message code="place_detail_rating"/> (<c:out value="${place.qualityRanking}"/>)
                     <br/>
                     <util:rating entityId="${place.id}" isRated="${isRated}" rateType="PLACE" rating="${place.qualityRanking}"/>
                 </p>
@@ -176,6 +181,7 @@
         <field:display field="qualityRanking" id="s_cz_kolomet_domain_Place_qualityRanking" object="${place}" z="PRVW9rJr7e5cEbXnCF2goZ9nGjY="/>
         <field:display field="nrOfRankings" id="s_cz_kolomet_domain_Place_nrOfRankings" object="${place}" z="K25+i2YZvZL2YU4f1yoFtt6BdKg="/>
         <field:display field="region" id="s_cz_kolomet_domain_Place_region" object="${place}" z="x8vII5dEbY/4c3Gsl2hY1IVOvYE="/>
-        <field:display field="contents" id="s_cz_kolomet_domain_Place_contents" object="${place}" z="NuMDxvmoprPuNq6f7fjE6giS/e4="/>
+        <field:display field="descriptionLink" id="s_cz_kolomet_domain_Place_descriptionLink" object="${place}" z="7gCn8zIASokv2D0ufrGJITnziD0="/>
+        <field:display field="fileNames" id="s_cz_kolomet_domain_Place_fileNames" object="${place}" z="F5a7AeCw9J7SRm0JqS578d1DcIE="/>
     </page:show>
 </div>

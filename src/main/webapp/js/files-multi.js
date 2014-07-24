@@ -2,15 +2,7 @@ define([ 'jquery' , 'jquery.fileupload', 'jquery.fileupload-image', 'load-image'
 
 	return {
 
-		files : function(id, url, maxFiles, noImgUrl, options) {
-			
-			$('#proceed').click(function(e) {
-				$('button.cancel').each(function(e) {
-					alert('uploading files');
-					var data = $(this).data();
-					data.submit();
-				});
-			});
+		files : function(id, url, maxFiles, noImgUrl, options) {		
 			
 			var previews = $('.image-preview');
 			if (previews.length == 0) {
@@ -44,7 +36,9 @@ define([ 'jquery' , 'jquery.fileupload', 'jquery.fileupload-image', 'load-image'
 						data.abort();
 						if (data.context.children().length < (maxFiles + 1)) {
 							$("div.files_add").show();
-						}						
+						}
+						var input = $('#files_container input.files-multi-filename').get(data.index);
+						$(input).val('');
 					});
 					
 					var node = $('<div />').addClass('image-preview').prepend($('<span />').addClass('filename').text(file.name).append(button));
@@ -58,10 +52,11 @@ define([ 'jquery' , 'jquery.fileupload', 'jquery.fileupload-image', 'load-image'
 					} else {
 						node.insertBefore(data.context.children()[data.context.children().length - 1]);
 					}
-					
+					var input = $('#files_container input.files-multi-filename').get(data.context.children().length - 2);
+					$(input).val(file.name + '__;__' + file.type);
 					data.formData = {'filename': file.name};
 					
-				});
+				});								
 				
 				data.submit();
 				

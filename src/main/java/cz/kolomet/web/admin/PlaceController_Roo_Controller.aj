@@ -5,20 +5,16 @@ package cz.kolomet.web.admin;
 
 import cz.kolomet.domain.Place;
 import cz.kolomet.domain.codelist.PlaceType;
-import cz.kolomet.service.ApplicationUserService;
 import cz.kolomet.service.PlaceService;
-import cz.kolomet.service.PlaceTypeService;
 import cz.kolomet.web.admin.PlaceController;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,23 +27,6 @@ privileged aspect PlaceController_Roo_Controller {
     @Autowired
     PlaceService PlaceController.placeService;
     
-    @Autowired
-    ApplicationUserService PlaceController.applicationUserService;
-    
-    @Autowired
-    PlaceTypeService PlaceController.placeTypeService;
-    
-    @RequestMapping(method = RequestMethod.POST, produces = "text/html")
-    public String PlaceController.create(@Valid Place place, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
-            populateEditForm(uiModel, place);
-            return "admin/places/create";
-        }
-        uiModel.asMap().clear();
-        placeService.savePlace(place);
-        return "redirect:/admin/places/" + encodeUrlPathSegment(place.getId().toString(), httpServletRequest);
-    }
-    
     @RequestMapping(params = "form", produces = "text/html")
     public String PlaceController.createForm(Model uiModel) {
         populateEditForm(uiModel, new Place());
@@ -59,16 +38,8 @@ privileged aspect PlaceController_Roo_Controller {
         return "admin/places/create";
     }
     
-    @RequestMapping(value = "/{id}", produces = "text/html")
-    public String PlaceController.show(@PathVariable("id") Long id, Model uiModel) {
-        addDateTimeFormatPatterns(uiModel);
-        uiModel.addAttribute("place", placeService.findPlace(id));
-        uiModel.addAttribute("itemId", id);
-        return "admin/places/show";
-    }
-    
     @RequestMapping(produces = "text/html")
-    public String PlaceController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, @RequestParam(value = "sortFieldName", required = false) String sortFieldName, @RequestParam(value = "sortOrder", required = false) String sortOrder, Model uiModel) {
+    public String PlaceController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         if (page != null || size != null) {
             int sizeNo = size == null ? 10 : size.intValue();
             final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
@@ -80,17 +51,6 @@ privileged aspect PlaceController_Roo_Controller {
         }
         addDateTimeFormatPatterns(uiModel);
         return "admin/places/list";
-    }
-    
-    @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
-    public String PlaceController.update(@Valid Place place, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
-            populateEditForm(uiModel, place);
-            return "admin/places/update";
-        }
-        uiModel.asMap().clear();
-        placeService.updatePlace(place);
-        return "redirect:/admin/places/" + encodeUrlPathSegment(place.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
@@ -112,13 +72,6 @@ privileged aspect PlaceController_Roo_Controller {
     void PlaceController.addDateTimeFormatPatterns(Model uiModel) {
         uiModel.addAttribute("place_created_date_format", DateTimeFormat.patternForStyle("MM", LocaleContextHolder.getLocale()));
         uiModel.addAttribute("place_lastmodified_date_format", DateTimeFormat.patternForStyle("MM", LocaleContextHolder.getLocale()));
-    }
-    
-    void PlaceController.populateEditForm(Model uiModel, Place place) {
-        uiModel.addAttribute("place", place);
-        addDateTimeFormatPatterns(uiModel);
-        uiModel.addAttribute("applicationusers", applicationUserService.findAllApplicationUsers());
-        uiModel.addAttribute("placetypes", placeTypeService.findAllPlaceTypes());
     }
     
     String PlaceController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

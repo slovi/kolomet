@@ -32,7 +32,7 @@ privileged aspect PhotoUrlController_Roo_Controller {
     }
     
     @RequestMapping(produces = "text/html")
-    public String PhotoUrlController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, @RequestParam(value = "sortFieldName", required = false) String sortFieldName, @RequestParam(value = "sortOrder", required = false) String sortOrder, Model uiModel) {
+    public String PhotoUrlController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         if (page != null || size != null) {
             int sizeNo = size == null ? 10 : size.intValue();
             final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
@@ -55,6 +55,7 @@ privileged aspect PhotoUrlController_Roo_Controller {
         uiModel.addAttribute("photoUrl", photoUrl);
         addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("applicationusers", applicationUserService.findAllApplicationUsers());
+        uiModel.addAttribute("products", productService.findAllProducts());
     }
     
     String PhotoUrlController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

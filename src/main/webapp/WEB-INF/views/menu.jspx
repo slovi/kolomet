@@ -112,7 +112,9 @@
         <menu:category id="c_photourl" render="false" z="user-managed"/>
         <menu:category id="c_countrystate" render="false" z="user-managed"/>
         <menu:category id="c_productattribute" render="false" z="user-managed"/>
-        <menu:category id="c_registrationrequest" render="false" z="user-managed"/>
+        <menu:category id="c_registrationrequest" render="false" z="user-managed">
+            <menu:item id="i_registrationrequest_new" messageCode="global_menu_new" url="/public/registrationrequests?form" z="RFTPPTV4JEv4OCXcYo9/Aqi0qow="/>
+        </menu:category>
         <menu:category id="c_productusage" render="false" z="user-managed"/>
         <menu:category id="c_sellerstatus" render="false" z="user-managed"/>
         <menu:category id="c_sellerphotourl" render="false" z="user-managed"/>
@@ -126,6 +128,7 @@
         <menu:category id="c_placetype" render="false" z="user-managed"/>
         <menu:category id="c_placephotourl" render="false" z="user-managed">
             <menu:item id="i_placephotourl_list" messageCode="global_menu_list" url="/admin/placephotourls?page=1&amp;size=${empty param.size ? 10 : param.size}" z="JFvNYGbbbSfa/tCbNPMSwEZi0Uo="/>
+            <menu:item id="i_placephotourl_new" messageCode="global_menu_new" url="/admin/placephotourls?form" z="tfAg4yo49FvC5GcEHCcRwo6+rpg="/>
         </menu:category>
         <menu:category id="c_placecomment" render="false" z="user-managed">
             <menu:item id="i_placecomment_new" messageCode="global_menu_new" url="/admin/placecomments?form" z="zjDa/jsMWgS5p/DO2D/DX92pTLI="/>

@@ -382,3 +382,9 @@ exit
 // Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2014-07-23 07:44:42
 exit
 // Spring Roo 1.2.5.RELEASE [rev 8341dc2] log closed at 2014-07-23 07:46:54
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2014-07-23 08:09:41
+service type --interface ~.service.PlaceCommentService --entity ~.domain.PlaceComment --class ~.service.impl.PlaceCommentServiceImpl
+exit
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log closed at 2014-07-24 09:16:20
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2014-07-24 19:50:18
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2014-07-24 19:50:33

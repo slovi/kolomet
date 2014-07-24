@@ -10,22 +10,6 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 privileged aspect PhotoUrl_Roo_JavaBean {
     
-    public String PhotoUrl.getFileName() {
-        return this.fileName;
-    }
-    
-    public void PhotoUrl.setFileName(String fileName) {
-        this.fileName = fileName;
-    }
-    
-    public String PhotoUrl.getContentType() {
-        return this.contentType;
-    }
-    
-    public void PhotoUrl.setContentType(String contentType) {
-        this.contentType = contentType;
-    }
-    
     public Product PhotoUrl.getProduct() {
         return this.product;
     }

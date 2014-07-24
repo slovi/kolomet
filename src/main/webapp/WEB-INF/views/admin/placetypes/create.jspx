@@ -9,6 +9,7 @@
         <field:input field="codeKey" id="c_cz_kolomet_domain_codelist_PlaceType_codeKey" max="20" required="true" z="SXzy5XTGSCmIcERpma02UTa1sjg="/>
         <field:textarea field="codeDescription" id="c_cz_kolomet_domain_codelist_PlaceType_codeDescription" required="true" z="dOsjsnptMwBm+LNMq1KYb+gD498="/>
         <field:input field="sequenceNr" id="c_cz_kolomet_domain_codelist_PlaceType_sequenceNr" validationMessageCode="field_invalid_integer" z="sOggsLlpcdvBVlYuqb2CUtaT7F0="/>
+        <field:select field="placeTypeColor" id="c_cz_kolomet_domain_codelist_PlaceType_placeTypeColor" items="${placetypecolors}" path="placetypecolors" z="xvKJeKVgDR+OPCYEVUwWijGrs/M="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_cz_kolomet_domain_codelist_PlaceType" render="${not empty dependencies}" z="q2yFOCw5lJnVInqqxoimZmnPfLU="/>
 </div>

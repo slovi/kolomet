@@ -2,24 +2,23 @@ package cz.kolomet.util.web.ajax;
 
 public class AjaxError {
 	
-	private int errorCode;
+	public static int ERROR_FILE_UPLOAD_CODE = 1000;
 	
-	private int errorDescription;
+	private final int errorCode;
+	
+	private final String errorDescription;
+
+	public AjaxError(int errorCode, String errorDescription) {
+		this.errorCode = errorCode;
+		this.errorDescription = errorDescription;
+	}
 
 	public int getErrorCode() {
 		return errorCode;
 	}
 
-	public void setErrorCode(int errorCode) {
-		this.errorCode = errorCode;
-	}
-
-	public int getErrorDescription() {
+	public String getErrorDescription() {
 		return errorDescription;
-	}
-
-	public void setErrorDescription(int errorDescription) {
-		this.errorDescription = errorDescription;
 	}
 
 }

@@ -9,6 +9,7 @@ import cz.kolomet.domain.GpsLocation;
 import cz.kolomet.domain.Place;
 import cz.kolomet.domain.PlaceDataOnDemand;
 import cz.kolomet.domain.codelist.PlaceTypeDataOnDemand;
+import cz.kolomet.domain.codelist.Region;
 import cz.kolomet.repository.PlaceRepository;
 import cz.kolomet.service.PlaceService;
 import java.security.SecureRandom;
@@ -51,10 +52,13 @@ privileged aspect PlaceDataOnDemand_Roo_DataOnDemand {
         setBikeRoadNr(obj, index);
         setCreated(obj, index);
         setDescription(obj, index);
+        setDescriptionLink(obj, index);
         setLastModified(obj, index);
         setName(obj, index);
+        setNrOfRankings(obj, index);
         setPlaceType(obj, index);
         setQualityRanking(obj, index);
+        setRegion(obj, index);
         return obj;
     }
     
@@ -105,7 +109,7 @@ privileged aspect PlaceDataOnDemand_Roo_DataOnDemand {
     }
     
     public void PlaceDataOnDemand.setBikeRoadNr(Place obj, int index) {
-        Integer bikeRoadNr = new Integer(index);
+        String bikeRoadNr = "bikeRoadNr_" + index;
         obj.setBikeRoadNr(bikeRoadNr);
     }
     
@@ -119,6 +123,11 @@ privileged aspect PlaceDataOnDemand_Roo_DataOnDemand {
         obj.setDescription(description);
     }
     
+    public void PlaceDataOnDemand.setDescriptionLink(Place obj, int index) {
+        String descriptionLink = "descriptionLink_" + index;
+        obj.setDescriptionLink(descriptionLink);
+    }
+    
     public void PlaceDataOnDemand.setLastModified(Place obj, int index) {
         Date lastModified = new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH), Calendar.getInstance().get(Calendar.HOUR_OF_DAY), Calendar.getInstance().get(Calendar.MINUTE), Calendar.getInstance().get(Calendar.SECOND) + new Double(Math.random() * 1000).intValue()).getTime();
         obj.setLastModified(lastModified);
@@ -129,9 +138,19 @@ privileged aspect PlaceDataOnDemand_Roo_DataOnDemand {
         obj.setName(name);
     }
     
+    public void PlaceDataOnDemand.setNrOfRankings(Place obj, int index) {
+        Integer nrOfRankings = 0;
+        obj.setNrOfRankings(nrOfRankings);
+    }
+    
     public void PlaceDataOnDemand.setQualityRanking(Place obj, int index) {
-        Integer qualityRanking = new Integer(index);
+        Double qualityRanking = 0d;
         obj.setQualityRanking(qualityRanking);
+    }
+    
+    public void PlaceDataOnDemand.setRegion(Place obj, int index) {
+        Region region = null;
+        obj.setRegion(region);
     }
     
     public Place PlaceDataOnDemand.getSpecificPlace(int index) {
@@ -174,13 +193,13 @@ privileged aspect PlaceDataOnDemand_Roo_DataOnDemand {
             Place obj = getNewTransientPlace(i);
             try {
                 placeService.savePlace(obj);
-            } catch (final ConstraintViolationException e) {
-                final StringBuilder msg = new StringBuilder();
+            } catch (ConstraintViolationException e) {
+                StringBuilder msg = new StringBuilder();
                 for (Iterator<ConstraintViolation<?>> iter = e.getConstraintViolations().iterator(); iter.hasNext();) {
-                    final ConstraintViolation<?> cv = iter.next();
-                    msg.append("[").append(cv.getRootBean().getClass().getName()).append(".").append(cv.getPropertyPath()).append(": ").append(cv.getMessage()).append(" (invalid value = ").append(cv.getInvalidValue()).append(")").append("]");
+                    ConstraintViolation<?> cv = iter.next();
+                    msg.append("[").append(cv.getConstraintDescriptor()).append(":").append(cv.getMessage()).append("=").append(cv.getInvalidValue()).append("]");
                 }
-                throw new IllegalStateException(msg.toString(), e);
+                throw new RuntimeException(msg.toString(), e);
             }
             placeRepository.flush();
             data_.add(obj);

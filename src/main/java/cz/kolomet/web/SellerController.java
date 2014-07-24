@@ -1,8 +1,5 @@
 package cz.kolomet.web;
 
-import javax.persistence.EntityNotFoundException;
-
-import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -15,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import cz.kolomet.domain.Seller;
 import cz.kolomet.repository.ProductRepository;
 import cz.kolomet.repository.SellerRepository;
-import cz.kolomet.security.ApplicationUserDetails;
 import cz.kolomet.web.pub.AbstractPublicController;
 
 @RequestMapping("/public/sellers")
@@ -31,7 +27,7 @@ public class SellerController extends AbstractPublicController {
 	@RequestMapping("/map")
 	public String map(Model model, @RequestParam(value = "regionCodeKey", required = false) String regionCodeKey) {
 		if (StringUtils.isNotEmpty(regionCodeKey)) {
-			model.addAttribute("sellers", sellerRepository.findByRegionCodeKeyOrderBySellerNameDesc(regionCodeKey));
+			model.addAttribute("sellers", sellerRepository.findByRegionCodeKeyOrderBySellerNameAsc(regionCodeKey));
 		}		
 		return "sellers/map";
 	}

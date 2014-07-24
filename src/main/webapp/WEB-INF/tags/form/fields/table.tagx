@@ -241,9 +241,11 @@
       </spring:escapeBody>
     </c:set>
     <script type="text/javascript">
-		require(['form'], function(form) {
-  			form.ajaxTableRowDelete('${delete_confirm_msg}');     				
-  		});
+    	require(['main'], function() {
+			require(['form'], function(form) {
+	  			form.ajaxTableRowDelete('${delete_confirm_msg}');     				
+	  		});
+    	});
  	</script>
 
   </c:if>

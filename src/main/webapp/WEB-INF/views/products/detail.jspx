@@ -141,6 +141,7 @@
        			</tr>
             </table>
        	</div>
+       	
 		<div class="seller_ads">
 			<c:set value="${fn:length(product.photoUrls)}" var="photoSize" />
 			<c:forEach begin="0" end="3" varStatus="status">
@@ -172,8 +173,16 @@
 			       				<td><spring:eval expression="product.createdBy" /></td>
 			       			</tr>
 			       			<tr>
+			       				<td><b><spring:message code="label_cz_kolomet_domain_product_created" /></b></td>
+			       				<td><fmt:formatDate value="${product.created}" pattern="${product_created_date_format}" /></td>
+			       			</tr>
+			       			<tr>
 			       				<td><b><spring:message code="label_cz_kolomet_domain_seller_lastmodifiedby" /></b></td>
 			       				<td><spring:eval expression="product.lastModifiedBy" /></td>
+			       			</tr>
+			       			<tr>
+			       				<td><b><spring:message code="kolomet_domain_product_lastmodified" /></b></td>
+			       				<td><fmt:formatDate value="${product.lastModified}" pattern="${product_lastmodified_date_format}" /></td>
 			       			</tr>
 			            </table>
 					</div>

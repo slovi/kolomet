@@ -17,6 +17,7 @@
     	<property name="locations">
     		<list>
     			<value>classpath:config.properties</value>
+    			<value>classpath:META-INF/version.properties</value>
     		</list>
     	</property>
     </bean>

@@ -9,5 +9,9 @@
         <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_codelist_Region_lastModifiedBy" render="false" z="user-managed"/>
         <field:datetime dateTimePattern="${region_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_codelist_Region_lastModified" render="false" z="user-managed"/>
         <field:input field="sequenceNr" id="c_cz_kolomet_domain_codelist_Region_sequenceNr" validationMessageCode="field_invalid_integer" z="qPYL3B6by18Pq42j1l2W45e14Ko="/>
+        <field:input field="gpsLocation" id="c_cz_kolomet_domain_codelist_Region_gpsLocation" render="false" z="user-managed"/>
+        <field:input field="gpsLocation.north" id="c_cz_kolomet_domain_codelist_Region_gpsLocation_north" z="5pi7iVBBOOL+I0EXrvsR/9aoda0="/>
+        <field:input field="gpsLocation.west" id="c_cz_kolomet_domain_codelist_Region_gpsLocation_west" z="5pi7iVBBOOL+I0EXrvsR/9aoda0="/>
+        <field:input field="googleAlias" id="c_cz_kolomet_domain_codelist_Region_googleAlias" z="6n0W8NvICnwvWHxHeP+N8BYc0mU="/>
     </form:update>
 </div>

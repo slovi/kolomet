@@ -29,7 +29,7 @@
 
     <li id="${fn:escapeXml(id)}" class="${styleClass}">      
       <spring:url value="${url}" var="menu_item_url">
-	      	<c:if test="${empty renderPageParams or renderPageParams}">
+	      <c:if test="${empty renderPageParams or renderPageParams}">
 	      	<spring:param name="page.size" value="${not empty defaultPageSize ? defaultPageSize : param['page.size']}" />
 	      	<spring:param name="page.page" value="1" />
 	      	<c:choose>

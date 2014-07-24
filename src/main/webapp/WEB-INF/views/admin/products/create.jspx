@@ -44,6 +44,7 @@
         </c:set>
         <field:input field="weight" id="c_cz_kolomet_domain_Product_weight" label="${weightLabel}" required="true" validationMessageCode="typeMismatch.product.weight" validationRegex="(([1-9][0-9]{0,2}(,[0-9]{1,2})?)|(1000(,[0-9]{1,2})?))" z="user-managed"/>
         <field:input field="buyUrl" id="c_cz_kolomet_domain_Product_buyUrl" required="true" width="50" z="user-managed"/>
+        <br />
         <spring:message code="label_cz_kolomet_domain_product_productattributes" var="productattributes_panel_label"/>
         <util:panel id="fc_cz_kolomet_domain_Product_productAttributes" title="${productattributes_panel_label}">
             <c:forEach items="${product.productAttributes}" var="productAttribute" varStatus="status">

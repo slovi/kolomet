@@ -1,5 +1,6 @@
 require.config({
 	
+	urlArgs: 'v=${project.version}',
 	paths: {
 		'jquery': 'lib/jquery-1.11.0.min',
 		'jquery.ui': 'lib/jquery-ui.min',

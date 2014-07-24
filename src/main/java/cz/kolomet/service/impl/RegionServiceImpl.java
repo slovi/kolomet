@@ -12,4 +12,8 @@ public class RegionServiceImpl implements RegionService {
         return regionRepository.findAll(Codelist.defaultSort());
     }
     
+    public Region findByGoogleAlias(String googleAlias) {
+    	return regionRepository.findByGoogleAlias(googleAlias);
+    }
+    
 }

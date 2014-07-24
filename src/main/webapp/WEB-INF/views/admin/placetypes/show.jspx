@@ -9,5 +9,6 @@
         <field:display field="codeKey" id="s_cz_kolomet_domain_codelist_PlaceType_codeKey" object="${placetype}" z="cpyV6ScixQt2UDYxzQIJ8dw+u5k="/>
         <field:display field="codeDescription" id="s_cz_kolomet_domain_codelist_PlaceType_codeDescription" object="${placetype}" z="bYBCf+Ky2veHxbc0sq2/yZIfGiM="/>
         <field:display field="sequenceNr" id="s_cz_kolomet_domain_codelist_PlaceType_sequenceNr" object="${placetype}" z="PpoQRAkcpHzueYR9JvQUMfYU3h4="/>
+        <field:display field="placeTypeColor" id="s_cz_kolomet_domain_codelist_PlaceType_placeTypeColor" object="${placetype}" z="0u+yW0n6Gsq6Id1CLe0X37NSz94="/>
     </page:show>
 </div>

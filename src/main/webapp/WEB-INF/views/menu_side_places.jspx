@@ -21,7 +21,8 @@
 	    <menu:menu id="side_menu_body_regions" styleClass="side-menu-body ${hiddenClassOn}">
 		    <menu:item url="/public/places?menu=region" id="menuitem_category_all" label="Všechny regiony" />
 	    	<c:forEach items="${regions}" var="region">
-				<menu:item url="/public/places?region=${region.id}&amp;menu=region" id="menuitem_${region.codeKey}" label="${region.codeDescription}" />
+				<menu:item url="/public/places?region=${region.id}&amp;menu=region&amp;gps_north=${region.gpsLocation.north}&amp;gps_west=${region.gpsLocation.west}" 
+					id="menuitem_${region.codeKey}" label="${region.codeDescription}" />
 			</c:forEach>
 	     </menu:menu>
 	</div>

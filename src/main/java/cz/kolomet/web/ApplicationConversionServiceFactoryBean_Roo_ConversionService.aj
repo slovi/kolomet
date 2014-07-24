@@ -19,6 +19,7 @@ import cz.kolomet.domain.ProductAttribute;
 import cz.kolomet.domain.Rate;
 import cz.kolomet.domain.RegistrationRequest;
 import cz.kolomet.domain.Seller;
+import cz.kolomet.domain.SellerPhotoUrl;
 import cz.kolomet.domain.codelist.BicycleCategory;
 import cz.kolomet.domain.codelist.CategoryType;
 import cz.kolomet.domain.codelist.CountryState;
@@ -28,6 +29,7 @@ import cz.kolomet.domain.codelist.ProductAttributeType;
 import cz.kolomet.domain.codelist.ProductColor;
 import cz.kolomet.domain.codelist.ProductUsage;
 import cz.kolomet.domain.codelist.Region;
+import cz.kolomet.domain.codelist.SellerStatus;
 import cz.kolomet.service.ApplicationPermissionService;
 import cz.kolomet.service.ApplicationRoleService;
 import cz.kolomet.service.ApplicationUserService;
@@ -52,6 +54,7 @@ import cz.kolomet.service.ProductUsageService;
 import cz.kolomet.service.RateService;
 import cz.kolomet.service.RegionService;
 import cz.kolomet.service.RegistrationRequestService;
+import cz.kolomet.service.SellerPhotoUrlService;
 import cz.kolomet.service.SellerService;
 import cz.kolomet.web.ApplicationConversionServiceFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -110,6 +113,9 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     
     @Autowired
     SellerService ApplicationConversionServiceFactoryBean.sellerService;
+    
+    @Autowired
+    SellerPhotoUrlService ApplicationConversionServiceFactoryBean.sellerPhotoUrlService;
     
     @Autowired
     BicycleCategoryService ApplicationConversionServiceFactoryBean.bicycleCategoryService;
@@ -466,6 +472,30 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         };
     }
     
+    public Converter<SellerPhotoUrl, String> ApplicationConversionServiceFactoryBean.getSellerPhotoUrlToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<cz.kolomet.domain.SellerPhotoUrl, java.lang.String>() {
+            public String convert(SellerPhotoUrl sellerPhotoUrl) {
+                return new StringBuilder().append(sellerPhotoUrl.getCreated()).append(' ').append(sellerPhotoUrl.getLastModified()).append(' ').append(sellerPhotoUrl.getFileName()).append(' ').append(sellerPhotoUrl.getContentType()).toString();
+            }
+        };
+    }
+    
+    public Converter<Long, SellerPhotoUrl> ApplicationConversionServiceFactoryBean.getIdToSellerPhotoUrlConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, cz.kolomet.domain.SellerPhotoUrl>() {
+            public cz.kolomet.domain.SellerPhotoUrl convert(java.lang.Long id) {
+                return sellerPhotoUrlService.findSellerPhotoUrl(id);
+            }
+        };
+    }
+    
+    public Converter<String, SellerPhotoUrl> ApplicationConversionServiceFactoryBean.getStringToSellerPhotoUrlConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, cz.kolomet.domain.SellerPhotoUrl>() {
+            public cz.kolomet.domain.SellerPhotoUrl convert(String id) {
+                return getObject().convert(getObject().convert(id, Long.class), SellerPhotoUrl.class);
+            }
+        };
+    }
+    
     public Converter<BicycleCategory, String> ApplicationConversionServiceFactoryBean.getBicycleCategoryToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<cz.kolomet.domain.codelist.BicycleCategory, java.lang.String>() {
             public String convert(BicycleCategory bicycleCategory) {
@@ -642,10 +672,18 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         };
     }
     
-    public Converter<String, Region> ApplicationConversionServiceFactoryBean.getStringToRegionConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.String, cz.kolomet.domain.codelist.Region>() {
-            public cz.kolomet.domain.codelist.Region convert(String id) {
-                return getObject().convert(getObject().convert(id, Long.class), Region.class);
+    public Converter<Long, SellerStatus> ApplicationConversionServiceFactoryBean.getIdToSellerStatusConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, cz.kolomet.domain.codelist.SellerStatus>() {
+            public cz.kolomet.domain.codelist.SellerStatus convert(java.lang.Long id) {
+                return sellerStatusService.findSellerStatus(id);
+            }
+        };
+    }
+    
+    public Converter<String, SellerStatus> ApplicationConversionServiceFactoryBean.getStringToSellerStatusConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, cz.kolomet.domain.codelist.SellerStatus>() {
+            public cz.kolomet.domain.codelist.SellerStatus convert(String id) {
+                return getObject().convert(getObject().convert(id, Long.class), SellerStatus.class);
             }
         };
     }
@@ -699,6 +737,9 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         registry.addConverter(getSellerToStringConverter());
         registry.addConverter(getIdToSellerConverter());
         registry.addConverter(getStringToSellerConverter());
+        registry.addConverter(getSellerPhotoUrlToStringConverter());
+        registry.addConverter(getIdToSellerPhotoUrlConverter());
+        registry.addConverter(getStringToSellerPhotoUrlConverter());
         registry.addConverter(getBicycleCategoryToStringConverter());
         registry.addConverter(getIdToBicycleCategoryConverter());
         registry.addConverter(getStringToBicycleCategoryConverter());
@@ -726,6 +767,9 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         registry.addConverter(getRegionToStringConverter());
         registry.addConverter(getIdToRegionConverter());
         registry.addConverter(getStringToRegionConverter());
+        registry.addConverter(getSellerStatusToStringConverter());
+        registry.addConverter(getIdToSellerStatusConverter());
+        registry.addConverter(getStringToSellerStatusConverter());
     }
     
     public void ApplicationConversionServiceFactoryBean.afterPropertiesSet() {

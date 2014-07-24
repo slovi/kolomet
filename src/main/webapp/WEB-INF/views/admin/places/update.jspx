@@ -36,5 +36,7 @@
         <field:simple field="placePhotoUrls" id="c_cz_kolomet_domain_Place_placePhotoUrls" messageCode="entity_reference_not_managed" messageCodeAttribute="Place Photo Url" render="false" z="user-managed"/>
         <field:input field="nrOfRankings" id="c_cz_kolomet_domain_Place_nrOfRankings" render="false" validationMessageCode="field_invalid_integer" z="user-managed"/>
         <field:input field="qualityRanking" id="c_cz_kolomet_domain_Place_qualityRanking" render="false" validationMessageCode="field_invalid_integer" z="user-managed"/>
+        <field:input field="fileNames" id="c_cz_kolomet_domain_Place_fileNames" z="0tOuzdXZgpyFHmIUQ9yhtGPyr58="/>
+        <field:input field="descriptionLink" id="c_cz_kolomet_domain_Place_descriptionLink" z="obxloMCwz8l1092nZOr9AQDThHQ="/>
     </form:update>
 </div>

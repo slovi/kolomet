@@ -11,7 +11,6 @@ import cz.kolomet.domain.PlacePhotoUrl;
 import cz.kolomet.domain.codelist.PlaceType;
 import cz.kolomet.domain.codelist.Region;
 import java.util.List;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 privileged aspect Place_Roo_JavaBean {
     
@@ -63,11 +62,11 @@ privileged aspect Place_Roo_JavaBean {
         this.gpsLocation = gpsLocation;
     }
     
-    public Integer Place.getBikeRoadNr() {
+    public String Place.getBikeRoadNr() {
         return this.bikeRoadNr;
     }
     
-    public void Place.setBikeRoadNr(Integer bikeRoadNr) {
+    public void Place.setBikeRoadNr(String bikeRoadNr) {
         this.bikeRoadNr = bikeRoadNr;
     }
     
@@ -87,6 +86,14 @@ privileged aspect Place_Roo_JavaBean {
         this.nrOfRankings = nrOfRankings;
     }
     
+    public String Place.getDescriptionLink() {
+        return this.descriptionLink;
+    }
+    
+    public void Place.setDescriptionLink(String descriptionLink) {
+        this.descriptionLink = descriptionLink;
+    }
+    
     public List<PlacePhotoUrl> Place.getPlacePhotoUrls() {
         return this.placePhotoUrls;
     }
@@ -103,12 +110,12 @@ privileged aspect Place_Roo_JavaBean {
         this.comments = comments;
     }
     
-    public List<CommonsMultipartFile> Place.getContents() {
-        return this.contents;
+    public List<String> Place.getFileNames() {
+        return this.fileNames;
     }
     
-    public void Place.setContents(List<CommonsMultipartFile> contents) {
-        this.contents = contents;
+    public void Place.setFileNames(List<String> fileNames) {
+        this.fileNames = fileNames;
     }
     
 }

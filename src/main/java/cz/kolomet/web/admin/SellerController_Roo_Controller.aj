@@ -66,8 +66,10 @@ privileged aspect SellerController_Roo_Controller {
         addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("applicationusers", applicationUserService.findAllApplicationUsers());
         uiModel.addAttribute("products", productService.findAllProducts());
+        uiModel.addAttribute("sellerphotourls", sellerPhotoUrlService.findAllSellerPhotoUrls());
         uiModel.addAttribute("countrystates", countryStateService.findAllCountryStates());
         uiModel.addAttribute("regions", regionService.findAllRegions());
+        uiModel.addAttribute("sellerstatuses", sellerStatusService.findAllSellerStatuses());
     }
     
     String SellerController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

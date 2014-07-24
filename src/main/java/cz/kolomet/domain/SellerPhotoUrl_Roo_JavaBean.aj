@@ -8,22 +8,6 @@ import cz.kolomet.domain.SellerPhotoUrl;
 
 privileged aspect SellerPhotoUrl_Roo_JavaBean {
     
-    public String SellerPhotoUrl.getFileName() {
-        return this.fileName;
-    }
-    
-    public void SellerPhotoUrl.setFileName(String fileName) {
-        this.fileName = fileName;
-    }
-    
-    public String SellerPhotoUrl.getContentType() {
-        return this.contentType;
-    }
-    
-    public void SellerPhotoUrl.setContentType(String contentType) {
-        this.contentType = contentType;
-    }
-    
     public Seller SellerPhotoUrl.getSeller() {
         return this.seller;
     }

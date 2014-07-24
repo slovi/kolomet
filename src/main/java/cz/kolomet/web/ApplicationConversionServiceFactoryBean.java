@@ -110,10 +110,19 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
         };
     }
 	
+    public Converter<String, Region> getStringToRegionConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, cz.kolomet.domain.codelist.Region>() {
+            public cz.kolomet.domain.codelist.Region convert(String id) {
+            	// id is google alias
+                return regionService.findByGoogleAlias(id);
+            }
+        };
+    }
+	
 	public Converter<Region, String> getRegionToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<cz.kolomet.domain.codelist.Region, java.lang.String>() {
             public String convert(Region region) {
-                return new StringBuilder().append(region.getId()).toString();
+                return new StringBuilder().append(region.getGoogleAlias()).toString();
             }
         };
     }

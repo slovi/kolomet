@@ -4,6 +4,7 @@
 package cz.kolomet.domain.codelist;
 
 import cz.kolomet.domain.ApplicationUserDataOnDemand;
+import cz.kolomet.domain.PlaceTypeColor;
 import cz.kolomet.domain.codelist.PlaceType;
 import cz.kolomet.domain.codelist.PlaceTypeDataOnDemand;
 import cz.kolomet.repository.PlaceTypeRepository;
@@ -44,6 +45,7 @@ privileged aspect PlaceTypeDataOnDemand_Roo_DataOnDemand {
         setCodeKey(obj, index);
         setCreated(obj, index);
         setLastModified(obj, index);
+        setPlaceTypeColor(obj, index);
         setSequenceNr(obj, index);
         return obj;
     }
@@ -72,6 +74,11 @@ privileged aspect PlaceTypeDataOnDemand_Roo_DataOnDemand {
     public void PlaceTypeDataOnDemand.setLastModified(PlaceType obj, int index) {
         Date lastModified = new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH), Calendar.getInstance().get(Calendar.HOUR_OF_DAY), Calendar.getInstance().get(Calendar.MINUTE), Calendar.getInstance().get(Calendar.SECOND) + new Double(Math.random() * 1000).intValue()).getTime();
         obj.setLastModified(lastModified);
+    }
+    
+    public void PlaceTypeDataOnDemand.setPlaceTypeColor(PlaceType obj, int index) {
+        PlaceTypeColor placeTypeColor = null;
+        obj.setPlaceTypeColor(placeTypeColor);
     }
     
     public void PlaceTypeDataOnDemand.setSequenceNr(PlaceType obj, int index) {
@@ -119,13 +126,13 @@ privileged aspect PlaceTypeDataOnDemand_Roo_DataOnDemand {
             PlaceType obj = getNewTransientPlaceType(i);
             try {
                 placeTypeService.savePlaceType(obj);
-            } catch (final ConstraintViolationException e) {
-                final StringBuilder msg = new StringBuilder();
+            } catch (ConstraintViolationException e) {
+                StringBuilder msg = new StringBuilder();
                 for (Iterator<ConstraintViolation<?>> iter = e.getConstraintViolations().iterator(); iter.hasNext();) {
-                    final ConstraintViolation<?> cv = iter.next();
-                    msg.append("[").append(cv.getRootBean().getClass().getName()).append(".").append(cv.getPropertyPath()).append(": ").append(cv.getMessage()).append(" (invalid value = ").append(cv.getInvalidValue()).append(")").append("]");
+                    ConstraintViolation<?> cv = iter.next();
+                    msg.append("[").append(cv.getConstraintDescriptor()).append(":").append(cv.getMessage()).append("=").append(cv.getInvalidValue()).append("]");
                 }
-                throw new IllegalStateException(msg.toString(), e);
+                throw new RuntimeException(msg.toString(), e);
             }
             placeTypeRepository.flush();
             data.add(obj);

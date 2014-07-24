@@ -54,7 +54,7 @@ public class PlaceController extends AbstractPublicPlacesController {
         uiModel.asMap().clear();
         placeService.savePlace(place);
         
-        savePhotos(place, placePhotoUrlService, place.getContents());
+        savePhotos(place, placePhotoUrlService, httpServletRequest.getSession().getId(), place.getFileNames());
         
         return "redirect:/public/places/" + place.getId();
     }
@@ -81,9 +81,7 @@ public class PlaceController extends AbstractPublicPlacesController {
         place.setNrOfRankings(existingPlace.getNrOfRankings());
         place.setQualityRanking(existingPlace.getQualityRanking());
         
-        placeService.updatePlace(place);
-        
-        savePhotos(place, placePhotoUrlService, place.getContents());
+        placeService.updatePlace(place);      
         
         return "redirect:/public/places/" + place.getId();
     }

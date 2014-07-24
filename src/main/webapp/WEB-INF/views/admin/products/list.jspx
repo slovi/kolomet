@@ -47,14 +47,14 @@
                 <table:column id="c_cz_kolomet_domain_Product_seller" property="seller.sellerName" sort="true" z="a0TMwRPIIK+uZVPOhkqtLmfD/D8="/>
                 <table:column id="c_cz_kolomet_domain_Product_validFrom" property="validFrom" sort="true" z="user-managed"/>
                 <table:column id="c_cz_kolomet_domain_Product_validTo" property="validTo" sort="true" z="user-managed"/>
-                <table:column date="true" dateTimePattern="${product_created_date_format}" id="c_cz_kolomet_domain_Product_created" property="created" sort="true" z="user-managed"/>
-                <table:column date="true" dateTimePattern="${product_lastmodified_date_format}" id="c_cz_kolomet_domain_Product_lastModified" property="lastModified" sort="true" z="user-managed"/>
                 <c:set var="priceLabel">
                     <spring:message code="label_cz_kolomet_domain_product_price" htmlEscape="false"/> (<spring:message code="currency_short"/>)
 	            </c:set>
                 <table:column id="c_cz_kolomet_domain_Product_price" label="${priceLabel}" number="true" property="price" sort="true" z="user-managed"/>
                 <table:column id="c_cz_kolomet_domain_Product_createdBy" property="createdBy" z="OWG6pEX68ZoicbdE070YdkKD6ls="/>
                 <table:column id="c_cz_kolomet_domain_Product_lastModifiedBy" property="lastModifiedBy" z="ZWXEafUJDEz4eI9ifCrb8n0LVAk="/>
+                <table:column date="true" dateTimePattern="${product_created_date_format}" id="c_cz_kolomet_domain_Product_created" property="created" z="JqHa/igG4EPEyx/woRTsOB/vv8g="/>
+                <table:column date="true" dateTimePattern="${product_lastmodified_date_format}" id="c_cz_kolomet_domain_Product_lastModified" property="lastModified" z="75NG+8p0cp40DxUUY7mnfNwf+FU="/>
             </table:table>
         </page:list>
     </div>

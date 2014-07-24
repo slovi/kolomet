@@ -7,10 +7,7 @@ import cz.kolomet.domain.PlaceDataOnDemand;
 import cz.kolomet.domain.PlaceIntegrationTest;
 import cz.kolomet.repository.PlaceRepository;
 import cz.kolomet.service.PlaceService;
-import java.util.Iterator;
 import java.util.List;
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,7 +20,7 @@ privileged aspect PlaceIntegrationTest_Roo_IntegrationTest {
     
     declare @type: PlaceIntegrationTest: @RunWith(SpringJUnit4ClassRunner.class);
     
-    declare @type: PlaceIntegrationTest: @ContextConfiguration(locations = "classpath*:/META-INF/spring/applicationContext*.xml");
+    declare @type: PlaceIntegrationTest: @ContextConfiguration(locations = "classpath:/META-INF/spring/applicationContext*.xml");
     
     declare @type: PlaceIntegrationTest: @Transactional;
     
@@ -111,16 +108,7 @@ privileged aspect PlaceIntegrationTest_Roo_IntegrationTest {
         Place obj = dod.getNewTransientPlace(Integer.MAX_VALUE);
         Assert.assertNotNull("Data on demand for 'Place' failed to provide a new transient entity", obj);
         Assert.assertNull("Expected 'Place' identifier to be null", obj.getId());
-        try {
-            placeService.savePlace(obj);
-        } catch (final ConstraintViolationException e) {
-            final StringBuilder msg = new StringBuilder();
-            for (Iterator<ConstraintViolation<?>> iter = e.getConstraintViolations().iterator(); iter.hasNext();) {
-                final ConstraintViolation<?> cv = iter.next();
-                msg.append("[").append(cv.getRootBean().getClass().getName()).append(".").append(cv.getPropertyPath()).append(": ").append(cv.getMessage()).append(" (invalid value = ").append(cv.getInvalidValue()).append(")").append("]");
-            }
-            throw new IllegalStateException(msg.toString(), e);
-        }
+        placeService.savePlace(obj);
         placeRepository.flush();
         Assert.assertNotNull("Expected 'Place' identifier to no longer be null", obj.getId());
     }

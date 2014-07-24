@@ -37,6 +37,7 @@ public class PlaceController extends AbstractPublicPlacesController {
         uiModel.addAttribute("place", placeService.findPlace(id));
         uiModel.addAttribute("itemId", id);
         uiModel.addAttribute("isRated", rateService.findRate(RateType.PLACE, id, request.getRemoteAddr()));
+        addDateTimeFormatPatterns(uiModel);
         return "public/places/show";
     }
 

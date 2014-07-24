@@ -10,6 +10,6 @@ import org.springframework.roo.addon.tostring.RooToString;
 @RooJpaEntity(inheritanceType = "TABLE_PER_CLASS")
 @RooEquals
 @RooSerializable
-public class ProductComment extends Comment<Product> {
+public class ProductComment extends Comment {
 	
 }

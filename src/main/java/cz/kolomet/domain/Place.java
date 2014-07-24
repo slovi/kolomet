@@ -15,7 +15,6 @@ import org.springframework.roo.addon.jpa.entity.RooJpaEntity;
 import org.springframework.roo.addon.json.RooJson;
 import org.springframework.roo.addon.serializable.RooSerializable;
 import org.springframework.roo.addon.tostring.RooToString;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import cz.kolomet.domain.codelist.PlaceType;
 import cz.kolomet.domain.codelist.Region;
@@ -47,11 +46,13 @@ public class Place extends DomainEntity implements Commented, PhotoContainer {
     @Embedded
     private GpsLocation gpsLocation;
 
-    private Integer bikeRoadNr;
+    private String bikeRoadNr;
 
     private Double qualityRanking = 0d;
     
     private Integer nrOfRankings = 0;
+    
+    private String descriptionLink;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "place")
     private List<PlacePhotoUrl> placePhotoUrls = new ArrayList<PlacePhotoUrl>();
@@ -60,7 +61,7 @@ public class Place extends DomainEntity implements Commented, PhotoContainer {
     private List<PlaceComment> comments = new ArrayList<PlaceComment>();
     
     @Transient
-    private List<CommonsMultipartFile> contents;
+    private List<String> fileNames = new ArrayList<String>();
     
     public void increaseRate(Integer value) {
     	Double actualRanking = qualityRanking * nrOfRankings;

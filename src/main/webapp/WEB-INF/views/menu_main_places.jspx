@@ -7,6 +7,9 @@
     <div id="menu_container"> 
     	<div class="menu_inline">	
     		<menu:menu id="main_menu">
+    		
+    			<menu:item url="/public/places" messageCode="menu_main_places_intro" id="intro" renderPageParams="false" />
+    		
     			<security:authorize access="isFullyAuthenticated()">
 	    			<menu:category id="admin_menu" styleClass="admin" messageCode="menu_main_our_kolomet" url="#">
 	    				<security:authorize access="hasAnyRole('ROLE_per_registrationrequests')">    					
@@ -73,6 +76,9 @@
 				            <menu:item id="i_newsitem_list" messageCode="global_menu_list" url="/admin/newsitems" z="KOnlcMRbr4BntwwokrnIdkGVvTE="/>
 			            </security:authorize>
 	    			</menu:category>
+		            <security:authorize access="hasAnyRole('ROLE_per_products')"> 			
+						<menu:item id="i_place_new" messageCode="global_menu_new" styleClass="admin" renderPageParams="false" url="/admin/places?form" z="user-managed"/>
+					</security:authorize>
     			</security:authorize>
 				<menu:item id="i_places" messageCode="global_menu_bikes" styleClass="comeback" renderPageParams="false" url="/public/intro/index" z="user-managed"/>
     		</menu:menu>

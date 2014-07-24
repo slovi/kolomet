@@ -32,10 +32,6 @@ privileged aspect PlaceTypeServiceImpl_Roo_Service {
         return placeTypeRepository.findOne(id);
     }
     
-    public List<PlaceType> PlaceTypeServiceImpl.findAllPlaceTypes() {
-        return placeTypeRepository.findAll();
-    }
-    
     public List<PlaceType> PlaceTypeServiceImpl.findPlaceTypeEntries(int firstResult, int maxResults) {
         return placeTypeRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / maxResults, maxResults)).getContent();
     }

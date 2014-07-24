@@ -14,22 +14,24 @@
 				<br /> 
 				<label for="j_username">Přihlasovací jméno</label>
 				<br /> 
-				<input id="j_username" name="j_username" type="text" autocomplete="on" />
+				<input id="j_username" name="j_username" tabindex="1" type="text" autocomplete="on" />
 				<br /> 
 				<label for="j_password">Heslo</label>
 				<br /> 
-				<input id="j_password" name="j_password" type="password" autocomplete="on" />
+				<input id="j_password" name="j_password" tabindex="2" type="password" autocomplete="on" />
 				<br /> 
-				<spring:url value="/public/resetpasswords?form" var="resetPasswordUrl" />
-				<a href="${resetPasswordUrl}">Zapomenuté heslo</a>
 				<br />
+				<spring:url value="/public/resetpasswords?form" var="resetPasswordUrl" />
+				<a tabindex="4" href="${resetPasswordUrl}">Zapomenuté heslo</a>
+				<br />
+				<br />
+				<spring:url value="/public/registrationrequests?form" var="registrationUrl" />
+				<a tabindex="5" href="${registrationUrl}">Nově registrovat</a>
 				<br />
 				<span class="error"></span>
 			</div>
 			<div class="login_button_field">
-				<button id="login_form_button" type="submit" name="login">Přihlásit se</button>
-				<spring:url value="/public/registrationrequests?form" var="registrationUrl" />
-				<a id="register_form_button" class="action_button_dark" href="${registrationUrl}">Registrovat</a>
+				<button tabindex="3" id="login_form_button" type="submit" name="login">Přihlásit se</button>				
 			</div>
 		</form>
 	</div>

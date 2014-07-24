@@ -17,11 +17,11 @@ privileged aspect PlaceType_Roo_Equals {
             return true;
         }
         PlaceType rhs = (PlaceType) obj;
-        return new EqualsBuilder().append(codeDescription, rhs.codeDescription).append(codeKey, rhs.codeKey).append(created, rhs.created).append(createdBy, rhs.createdBy).append(id, rhs.id).append(lastModified, rhs.lastModified).append(lastModifiedBy, rhs.lastModifiedBy).append(sequenceNr, rhs.sequenceNr).isEquals();
+        return new EqualsBuilder().append(codeDescription, rhs.codeDescription).append(codeKey, rhs.codeKey).append(created, rhs.created).append(createdBy, rhs.createdBy).append(id, rhs.id).append(lastModified, rhs.lastModified).append(lastModifiedBy, rhs.lastModifiedBy).append(placeTypeColor, rhs.placeTypeColor).append(sequenceNr, rhs.sequenceNr).isEquals();
     }
     
     public int PlaceType.hashCode() {
-        return new HashCodeBuilder().append(codeDescription).append(codeKey).append(created).append(createdBy).append(id).append(lastModified).append(lastModifiedBy).append(sequenceNr).toHashCode();
+        return new HashCodeBuilder().append(codeDescription).append(codeKey).append(created).append(createdBy).append(id).append(lastModified).append(lastModifiedBy).append(placeTypeColor).append(sequenceNr).toHashCode();
     }
     
 }
