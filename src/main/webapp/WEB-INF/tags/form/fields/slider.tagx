@@ -31,13 +31,11 @@
    	<form:hidden path="max${fn:toUpperCase(fn:substring(id, 0, 1))}${fn:substring(id, 1, fn:length(id))}To"/>
 
 	<script type="text/javascript">
-    	require(['main'], function() {
-			require(['slider'], function(slider) {
-				slider.slider('${id}_slider', ${valueFrom}, ${valueTo}, ${maxValueFrom}, ${maxValueTo}, ${step}, function(slider) {
-					slider.closest("form").find("#button_filter").click();
-				});
+		requireModule(['slider'], function(slider) {
+			slider.slider('${id}_slider', ${valueFrom}, ${valueTo}, ${maxValueFrom}, ${maxValueTo}, ${step}, function(slider) {
+				slider.closest("form").find("#button_filter").click();
 			});
-    	});
+		});
 	</script>
 
   </c:if>

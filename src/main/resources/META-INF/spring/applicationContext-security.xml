@@ -38,8 +38,8 @@
 		<intercept-url pattern="/admin/placecomments/*" access="hasAnyRole('ROLE_per_places')" />
 		<intercept-url pattern="/admin/places*" access="hasAnyRole('ROLE_per_places')" />
 		<intercept-url pattern="/admin/places/*" access="hasAnyRole('ROLE_per_places')" />
-		<intercept-url pattern="/admin/placetypes*" access="hasAnyRole('ROLE_per_places')" />
-		<intercept-url pattern="/admin/placetypes/*" access="hasAnyRole('ROLE_per_places')" />
+		<intercept-url pattern="/admin/placetypes*" access="hasAnyRole('ROLE_per_placetypes')" />
+		<intercept-url pattern="/admin/placetypes/*" access="hasAnyRole('ROLE_per_placetypes')" />
 		<intercept-url pattern="/admin/placephotourls*" access="hasAnyRole('ROLE_per_places')" />
 		<intercept-url pattern="/admin/placephotourls/*" access="hasAnyRole('ROLE_per_places')" />
 		<intercept-url pattern="/admin/products*" access="hasAnyRole('ROLE_per_products')" />

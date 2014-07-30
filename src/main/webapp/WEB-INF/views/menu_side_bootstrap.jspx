@@ -80,10 +80,8 @@
     </div>
 	
 	<script type="text/javascript">
-		require(['main'], function() {
-			require(['side_menu'], function(sideMenu) {
-				sideMenu.prepare();
-			});
+		requireModule(['side_menu'], function(sideMenu) {
+			sideMenu.prepare();
 		});
 	</script>
 		

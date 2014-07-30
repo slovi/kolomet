@@ -32,6 +32,7 @@
                     <p><c:out escapeXml="false" value="${fn:substring(place.description, 0 , 30)}"/></p>
                 </div>
                 <div class="home_seller"> 
+                	<p>Hodnocení místa:</p>
                 	<p style="line-height:16px;"> 
                 		<util:rating rating="${place.qualityRanking}" isRated="true" entityId="${place.id}" rateType="place" />
                     </p>                                

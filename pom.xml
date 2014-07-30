@@ -5,7 +5,7 @@
 	<groupId>cz.kolomet</groupId>
 	<artifactId>kolomet</artifactId>
 	<packaging>war</packaging>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.6-SNAPSHOT</version>
 	<name>kolomet</name>
 
 	<distributionManagement>
@@ -24,6 +24,8 @@
 		<maven.compiler.source>1.6</maven.compiler.source>
 		<maven.compiler.target>1.6</maven.compiler.target>
 		<snapshot.distribution.url>sftp://buk02.vas-server.cz/www/hosting/vas-server.cz/www/java/</snapshot.distribution.url>
+	    <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
+	    <buildNumber>${maven.build.timestamp}</buildNumber>
 	</properties>
 
 	<repositories>
@@ -406,22 +408,6 @@
 
 	<build>
 		<finalName>kolomet</finalName>
-		<resources>
-			<resource>
-				<filtering>true</filtering>
-				<directory>src/main/resources</directory>
-				<includes>
-					<include>META-INF/version.properties</include>
-				</includes>
-			</resource>
-			<resource>
-				<filtering>false</filtering>
-				<directory>src/main/resources</directory>
-				<excludes>
-					<exclude>META-INF/version.properties</exclude>
-				</excludes>
-			</resource>
-		</resources>
 		<extensions>
 			<extension>
 				<groupId>org.apache.maven.wagon</groupId>
@@ -554,10 +540,20 @@
 			</build>
 		</profile>
 		<profile>
-			<id>production</id>
+			<id>local</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
 			<build>
 				<finalName>kolomet</finalName>
 				<resources>
+					<resource>
+						<filtering>false</filtering>
+						<directory>src/main/resources</directory>
+						<excludes>
+							<exclude>META-INF/version.properties</exclude>
+						</excludes>
+					</resource>
 					<resource>
 						<filtering>true</filtering>
 						<directory>src/main/resources</directory>
@@ -565,13 +561,28 @@
 							<include>META-INF/version.properties</include>
 						</includes>
 					</resource>
+				</resources>
+			</build>
+		</profile>
+		<profile>
+			<id>production</id>
+			<build>
+				<finalName>kolomet</finalName>
+				<resources>
 					<resource>
 						<filtering>false</filtering>
 						<directory>src/main/resources</directory>
 						<excludes>
-							<exclude>META-INF/version.properties</exclude>
 							<exclude>*.properties</exclude>
+							<exclude>META-INF/version.properties</exclude>
 						</excludes>
+					</resource>
+					<resource>
+						<filtering>true</filtering>
+						<directory>src/main/resources</directory>
+						<includes>
+							<include>META-INF/version.properties</include>
+						</includes>
 					</resource>
 				</resources>
 				<plugins>

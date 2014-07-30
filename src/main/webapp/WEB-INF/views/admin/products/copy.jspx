@@ -83,10 +83,8 @@
         <br/>                
     </form:update>
     <script type="text/javascript">
-	    require(['main'], function() {
-	    	require(['form'], function(form) {
-	    		form.computeDifferenceOnKeyUp('_price_id', '_finalPrice_id', 'discount');
-	    	});
-	    });
+    	requireModule(['form'], function(form) {
+    		form.computeDifferenceOnKeyUp('_price_id', '_finalPrice_id', 'discount');
+    	});
     </script>
 </div>

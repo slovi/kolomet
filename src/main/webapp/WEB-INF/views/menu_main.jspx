@@ -85,7 +85,7 @@
 						<menu:item id="i_product_new" messageCode="global_menu_new" styleClass="admin" renderPageParams="false" url="/admin/products?form" z="user-managed"/>
 					</security:authorize>
     			</security:authorize>
-    			<security:authorize access="isFullyAuthenticated() and principal.isPlacesAll()">
+    			<security:authorize access="isFullyAuthenticated() and hasAnyRole('ROLE_per_places')">
 					<menu:item id="i_places" messageCode="global_menu_places" styleClass="comethere" renderPageParams="false" url="/public/places" z="user-managed"/>
 				</security:authorize>
     		</menu:menu>

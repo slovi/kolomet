@@ -322,7 +322,7 @@ div.homepage_unit div.home_seller {
 }
 
 div.homepage_unit div.home_seller img {
-	margin: 15px 0;
+	margin: 5px 0 10px 0;
 }
 
 /* category */
@@ -802,10 +802,10 @@ div.menu_inline ul li:hover {
 }
 
 div.menu_inline ul li.admin:hover {
-	background: #497f96;
-	background: linear-gradient(top, #3e6576 0%, #497f96 90%);
-	background: -moz-linear-gradient(top, #3e6576 0%, #497f96 90%);
-	background: -webkit-linear-gradient(top, #3e6576 0%, #497f96 90%);
+	background: #58585a;
+	background: linear-gradient(top, #4b4b4b 0%, #58585a 90%);
+	background: -moz-linear-gradient(top, #4b4b4b 0%, #58585a 90%);
+	background: -webkit-linear-gradient(top, #4b4b4b 0%, #58585a 90%);
 }
 
 a.action_button {

@@ -158,7 +158,7 @@ public class ProductController extends AbstractAdminController {
         	ApplicationUserDetails details = ApplicationUserDetails.getActualApplicationUserDetails();
         	Page<Product> page = null;
         	if (details.isProductsOwn()) {
-        		Long sellerId = ApplicationUserDetails.getActualApplicationUserDetails().getSellerId();
+        		Long sellerId = details.getSellerId();
         		page = productService.findProductEntries(ProductSpecifications.forAdminProductFiter(productFilter, sellerId), pageable);
         	} else {
         		page = productService.findProductEntries(ProductSpecifications.forAdminProductFiter(productFilter, null), pageable); 

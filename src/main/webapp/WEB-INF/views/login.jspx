@@ -9,39 +9,38 @@
 		<spring:url value="/j_spring_security_check" var="loginUrl" />
 		<form id="login_form" action="${loginUrl}" method="post">
 			<div>
-				<label class="login_label">Přihlášení:</label>
+				<label class="login_label"><spring:message code="login_title" />:</label>
 				<br />
 				<br /> 
-				<label for="j_username">Přihlasovací jméno</label>
+				<label for="j_username"><spring:message code="login_username" /></label>
 				<br /> 
 				<input id="j_username" name="j_username" tabindex="1" type="text" autocomplete="on" />
 				<br /> 
-				<label for="j_password">Heslo</label>
+				<label for="j_password"><spring:message code="login_password" /></label>
 				<br /> 
 				<input id="j_password" name="j_password" tabindex="2" type="password" autocomplete="on" />
 				<br /> 
+				<span class="error"><!--  --></span>
+				<br />				
 				<br />
 				<spring:url value="/public/resetpasswords?form" var="resetPasswordUrl" />
-				<a tabindex="4" href="${resetPasswordUrl}">Zapomenuté heslo</a>
+				<a tabindex="4" href="${resetPasswordUrl}"><spring:message code="login_forgotten_password" /></a>
 				<br />
 				<br />
 				<spring:url value="/public/registrationrequests?form" var="registrationUrl" />
-				<a tabindex="5" href="${registrationUrl}">Nově registrovat</a>
+				<a tabindex="5" href="${registrationUrl}"><spring:message code="login_registration" /></a>
 				<br />
-				<span class="error"></span>
 			</div>
 			<div class="login_button_field">
-				<button tabindex="3" id="login_form_button" type="submit" name="login">Přihlásit se</button>				
+				<button tabindex="3" id="login_form_button" type="submit" name="login"><spring:message code="login_button" /></button>				
 			</div>
 		</form>
 	</div>
 	<div id="lean_overlay"><!--  --></div>
 	
 	<script type="text/javascript">
-		require(['main'], function() {
-			require(['login'], function(login) {
-				login.prepare();
-			});
+		requireModule(['login'], function(login) {
+			login.prepare();
 		});
 	</script>
 

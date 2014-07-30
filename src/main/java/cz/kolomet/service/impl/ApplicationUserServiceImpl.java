@@ -79,8 +79,15 @@ public class ApplicationUserServiceImpl implements ApplicationUserService {
     	// jestlize username existuje, ale jedna se o stejneho uzivatele nebo jestli username neexistuje, muzeme menit
     	if ((existingUser != null && existingUser.getId().equals(applicationUser.getId())) ||  (existingUser == null)) {
 			String password = applicationUser.getPassword();
-			if (StringUtils.isNotEmpty(password)) {
-				applicationUser.setPassword(this.passwordEncoder.encodePassword(password, null));
+			String existingPassword = existingUser.getPassword();
+			if (!existingPassword.equals(password)) {
+				if (StringUtils.isNotEmpty(password)) {
+					if (StringUtils.isNotEmpty(password)) {
+						applicationUser.setPassword(this.passwordEncoder.encodePassword(password, null));
+					}
+				} else {
+					throw new ApplicationUserPasswordException("Cannot change user password to empty value.");
+				}
 			}
 		    return applicationUserRepository.save(applicationUser);
     	} else {

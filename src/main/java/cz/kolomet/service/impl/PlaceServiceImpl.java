@@ -2,6 +2,7 @@ package cz.kolomet.service.impl;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -23,6 +24,10 @@ public class PlaceServiceImpl implements PlaceService, RatedService {
 	@Override
 	public boolean supports(RateType rateType) {
 		return rateType == RateType.PLACE;
+	}
+	
+	public Page<Place> findPlaceEntries(Specification<Place> specification, Pageable pageable) {
+		return placeRepository.findAll(specification, pageable);
 	}
 	
 	public List<Place> findPlaceEntries(Specification<Place> specification) {

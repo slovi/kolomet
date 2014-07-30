@@ -37,22 +37,7 @@ privileged aspect PlaceController_Roo_Controller {
         uiModel.addAttribute("dependencies", dependencies);
         return "admin/places/create";
     }
-    
-    @RequestMapping(produces = "text/html")
-    public String PlaceController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        if (page != null || size != null) {
-            int sizeNo = size == null ? 10 : size.intValue();
-            final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
-            uiModel.addAttribute("places", placeService.findPlaceEntries(firstResult, sizeNo));
-            float nrOfPages = (float) placeService.countAllPlaces() / sizeNo;
-            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
-        } else {
-            uiModel.addAttribute("places", placeService.findAllPlaces());
-        }
-        addDateTimeFormatPatterns(uiModel);
-        return "admin/places/list";
-    }
-    
+
     @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String PlaceController.updateForm(@PathVariable("id") Long id, Model uiModel) {
         populateEditForm(uiModel, placeService.findPlace(id));

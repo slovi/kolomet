@@ -27,13 +27,7 @@ define(['jquery', 'jquery.ui', 'jquery.number'], function($) {
 				}		
 			});
 			sliders[divId] = slider;
-		},
-		resetSlider: function(divId) {
-			var slider = sliders[divId]; 
-			var min = slider.slider("option", "min");
-			var max = slider.slider("option", "max");
-			slider.slider("values", 0, min);
-			slider.slider("values", 1, max);
+			
 		}
 	};
 	

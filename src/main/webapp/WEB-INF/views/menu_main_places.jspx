@@ -76,7 +76,7 @@
 				            <menu:item id="i_newsitem_list" messageCode="global_menu_list" url="/admin/newsitems" z="KOnlcMRbr4BntwwokrnIdkGVvTE="/>
 			            </security:authorize>
 	    			</menu:category>
-		            <security:authorize access="hasAnyRole('ROLE_per_products')"> 			
+		            <security:authorize access="hasAnyRole('ROLE_per_places')"> 			
 						<menu:item id="i_place_new" messageCode="global_menu_new" styleClass="admin" renderPageParams="false" url="/admin/places?form" z="user-managed"/>
 					</security:authorize>
     			</security:authorize>

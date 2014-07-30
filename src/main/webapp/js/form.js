@@ -97,9 +97,11 @@ define(['jquery', 'jquery.number'], function($) {
 			$("#proceed").show();
 			$("p.name").html($("input[name='name']").val());
 			$("p.place_type").html($("#_placeType_id").val());
-			$("p.bike_road_nr").html($("#_bikeRoadNr_id").val());
+			$("span.bike_road_nr").html($("#_bikeRoadNr_id").val());
 			$("span.description").html($("textarea[name='description']").val());
+			$("p.descriptionLink").html($("#_descriptionLink_id").val());
 			$("span.gps").html($("input[name='gpsLocation.north']").val() + " " + $("input[name='gpsLocation.west']").val());
+			$("span.region").html($("#_region_id").val());
 		} else {
 			$("div.step-" + step + " button.step").show();
 		}

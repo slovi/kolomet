@@ -20,10 +20,10 @@
 				</c:if>
 			</c:if>
 		</c:forEach>
-		<spring:param name="page.sort" value="price" />
+		<spring:param name="page.sort" value="finalPrice" />
 		<c:if test="${not sortOrderSet}">                    	
-               <spring:param name="page.sort.dir" value="asc" />
-           </c:if>
+        	<spring:param name="page.sort.dir" value="asc" />
+        </c:if>
 	</spring:url>
 	<spring:url value="/public/products/filter" var="sortDiscountUrl">
 		<c:forEach items="${paramValues}" var="p">

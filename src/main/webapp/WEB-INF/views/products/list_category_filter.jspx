@@ -42,20 +42,18 @@
 	    </div>
 	    
 	    <script type="text/javascript">
-		    require(['main'], function() {
-				require(['form', 'slider'], function(form, slider) {
-					
-					functions = [
-						function(resetedForm) {
-							window.location.assign($("#products_bikes a").attr("href"));
-						}
-					];
-					
-					form.resetForm("filterForm", functions);
-					form.ajaxSubmitOnInputChange("filterForm");				
-					
-				});
-		    });
+			requireModule(['form'], function(form) {
+				
+				functions = [
+					function(resetedForm) {
+						window.location.assign($("#products_bikes a").attr("href"));
+					}
+				];
+				
+				form.resetForm("filterForm", functions);
+				form.ajaxSubmitOnInputChange("filterForm");				
+				
+			});
 		</script>
 	    
     </form:form>

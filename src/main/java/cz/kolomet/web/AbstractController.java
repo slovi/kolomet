@@ -34,9 +34,17 @@ public class AbstractController {
 	@Value("${build.version}")
 	protected String version;
 	
+	@Value("${build.timestamp}")
+	protected String buildTimestamp;
+	
 	@ModelAttribute("version")
 	public String getVersion() {
 		return version;
+	}
+	
+	@ModelAttribute("buildTimestamp")
+	public String getBuildTimestamp() {
+		return buildTimestamp;
 	}
 	
 	@ModelAttribute("categoryPageSize")

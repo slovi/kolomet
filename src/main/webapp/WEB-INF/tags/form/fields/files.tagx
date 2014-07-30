@@ -47,11 +47,9 @@
 	  </c:if>
 
       <script type="text/javascript">
-	    require(['main'], function() {
-	    	require(['files'], function(files) {
-	      		files.files('_${fn:escapeXml(id)}_id_', ${filesCount});
-	      	});
-	    });
+    	requireModule(['files'], function(files) {
+      		files.files('_${fn:escapeXml(id)}_id_', ${filesCount});
+      	});
       </script>
       
     </div>

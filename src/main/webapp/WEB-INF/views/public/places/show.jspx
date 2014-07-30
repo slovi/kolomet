@@ -8,6 +8,9 @@
             <h2>
                 <c:out value="${place.name}"/>
             </h2>
+            <p>
+            	<c:out value="${place.placeType.codeDescription}" />
+            </p>
             <c:if test="${not empty place.descriptionLink}">
                 <p>
                     <c:out value="${place.descriptionLink}"/>
@@ -20,7 +23,7 @@
         <div class="detail_tag">
             <div class="left" style="height: 30px;">
                 <p>
-                    <spring:message code="place_detail_rating"/> (<c:out value="${place.qualityRanking}"/>)
+                    <spring:message code="place_detail_rating"/> <c:if test="${not empty place.qualityRanking}">(<fmt:formatNumber value="${place.qualityRanking}" />)</c:if> 
                     <br/>
                     <util:rating entityId="${place.id}" isRated="${isRated}" rateType="PLACE" rating="${place.qualityRanking}"/>
                 </p>
@@ -39,7 +42,7 @@
             </div>
         </div>
     </div>
-    <div class="general_unit" style="height: 100px;">
+    <div class="general_unit" style="min-height: 135px;">
         <table class="left_column">
             <tr>
                 <td>
@@ -161,12 +164,10 @@
     <spring:url value="/resources/images/ajax-loader.gif" var="loader_url"/>
     <spring:url value="/resources/images/error.png" var="loader_error_url"/>
     <script type="text/javascript">
-	    require(['main'], function() {
-	    	require(['images'], function(images) {
-	    		images.preloadImages('detail_image');
-	    		images.waitForLoad('${loader_url}', '${loader_error_url}', 6, 2000);
-	    	});
-	    });
+    	requireModule(['images'], function(images) {
+    		images.preloadImages('detail_image');
+    		images.waitForLoad('${loader_url}', '${loader_error_url}', 6, 2000);
+    	});
     </script>
     <page:show create="false" delete="false" id="ps_cz_kolomet_domain_Place" object="${place}" path="/public/places" render="false" update="false" z="user-managed">
         <field:display field="createdBy" id="s_cz_kolomet_domain_Place_createdBy" object="${place}" z="wbZvH4cbSMrVMBXPo1u8Q0Gec3E="/>

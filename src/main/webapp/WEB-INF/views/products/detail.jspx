@@ -206,12 +206,10 @@
     <spring:url value="/resources/images/ajax-loader.gif" var="loader_url" />
     <spring:url value="/resources/images/error.png" var="loader_error_url" />
     <script type="text/javascript">
-	    require(['main'], function() {
-	    	require(['images'], function(images) {
-	    		images.preloadImages('detail_image');
-	    		images.waitForLoad('${loader_url}', '${loader_error_url}', 6, 2000);
-	    	});
-	    });
+    	requireModule(['images'], function(images) {
+    		images.preloadImages('detail_image');
+    		images.waitForLoad('${loader_url}', '${loader_error_url}', 6, 2000);
+    	});
     </script>
     
 </div>

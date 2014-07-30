@@ -76,7 +76,7 @@ public class ProductSpecifications {
 			public Predicate toPredicate(Root<Product> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 				
 				List<Predicate> predicates = new ArrayList<Predicate>();
-				addBetweenNumberPredicate(predicates, cb, root.<BigDecimal> get("price"), productFilter.getPriceFrom(), productFilter.getPriceTo());
+				addBetweenNumberPredicate(predicates, cb, root.<BigDecimal> get("finalPrice"), productFilter.getPriceFrom(), productFilter.getPriceTo());
 				addBetweenNumberPredicate(predicates, cb, root.<BigDecimal> get("discount"), productFilter.getDiscountFrom(), productFilter.getDiscountTo());
 				addBetweenNumberPredicate(predicates, cb, root.<Double> get("weight"), productFilter.getWeightFrom(), productFilter.getWeightTo());
 				

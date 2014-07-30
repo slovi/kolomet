@@ -1,15 +1,15 @@
 <jsp:root xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
 
   <jsp:output omit-xml-declaration="yes" />
-
-  <spring:url value="/resources/dijit/themes/tundra/tundra.css" var="tundra_url" />
-  <link rel="stylesheet" type="text/css" href="${tundra_url}" />
   
   <spring:url value="/resources/css/ui-lightness/jquery-ui-1.10.4.custom.min.css" var="jquery_ui_css" />
   <link rel="stylesheet" type="text/css" href="${jquery_ui_css}" />
   
-  <spring:url value="/resources/css/style.css" var="default_css_url" />
+  <spring:url value="/resources/css/style.css?v=${version}" var="default_css_url" />
   <link rel="stylesheet" type="text/css" href="${default_css_url}" />
+
+  <spring:url value="/resources/dijit/themes/tundra/tundra.css" var="tundra_url" />
+  <link rel="stylesheet" type="text/css" href="${tundra_url}" />
 
   <spring:url value="/resources/css/standard.css" var="standard_css_url" />
   <link rel="stylesheet" type="text/css" href="${standard_css_url}" />
@@ -17,16 +17,13 @@
   <spring:url value="/resources/images/favicon.ico" var="favicon" />
   <link rel="SHORTCUT ICON" href="${favicon}" />
 
-  <spring:url value="/resources/dojox/form/resources/FileUploader.css" var="dojo_file_input_url" />
-  <link rel="stylesheet" href="${dojo_file_input_url}" />
-
   <!-- Get the user local from the page context (it was set by Spring MVC's locale resolver) -->
   <c:set var="userLocale">
     <c:set var="plocale">${pageContext.response.locale}</c:set>
     <c:out value="${fn:replace(plocale, '_', '-')}" default="en" />
   </c:set>
 
-  <spring:url value="/resources/js/main" var="main_js_url" />
+  <spring:url value="/resources/js/main.js?v=${version}" var="main_js_url" />
   <spring:url value="/resources/js/lib/require.js" var="require_js_url" />
   <script data-main="${main_js_url}" src="${require_js_url}"><!-- --></script>  
 
@@ -43,11 +40,17 @@
 
   <script type="text/javascript">var djConfig = {parseOnLoad: false, isDebug: false, locale: '${fn:toLowerCase(userLocale)}'};</script>
   
-  <style type="text/css">
-  	
-  	body {
-  		background: none;
+  <script type="text/javascript">
+  
+  	function requireModule(modules, initModuleFunction) {
+  		require(['${main_js_url}'], function() {
+  			require(modules, initModuleFunction);
+  		});
   	}
+  
+  </script>
+  
+  <style type="text/css">
   
   	.dijitTextBox[type=file] {
   		width: 25em;

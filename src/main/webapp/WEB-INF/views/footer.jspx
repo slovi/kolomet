@@ -8,7 +8,8 @@
 	<spring:url value="/public/about" var="aboutUrl" />
    	<a href="${aboutUrl}"><spring:message code="footer_about" /></a> |
    	<a href="#"><spring:message code="footer_conditions" /></a> |
-   	<a href="${aboutUrl}"><spring:message code="footer_contact" /></a></p>
+   	<a href="${aboutUrl}"><spring:message code="footer_contact" /></a>|
+   	<spring:message code="footer_version" />: <c:out value="${version}" /> (<c:out value="${buildTimestamp}" />)</p> 
    	<spring:url value="/public/registrationrequests?form" var="registrationUrl" />
    	<a href="${registrationUrl}" class="action_button_dark"><spring:message code="footer_add" /></a>
 	

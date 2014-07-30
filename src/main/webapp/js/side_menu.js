@@ -16,7 +16,9 @@ define(['jquery'], function($) {
 		
 		var header = $(".side-menu-header", parentElement);
 		
-		header.click(function() {
+		header.click(function(e) {
+			
+			e.preventDefault();
 			
 			toggleMenuVisibility(parentElement);
 			

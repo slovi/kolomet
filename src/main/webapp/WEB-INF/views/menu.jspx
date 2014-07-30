@@ -88,9 +88,11 @@
         <security:authorize access="hasRole('ROLE_per_places')">
             <menu:category id="c_place" z="ehQx2hJboGCApd1gLkBWIirIY8o=">
                 <menu:item id="i_place_list" messageCode="global_menu_list" url="/admin/places?page=1&amp;size=${empty param.size ? 10 : param.size}" z="/DMIeN4AJVoQZM6zEYjQeHs/hQw="/>
-                <menu:item id="i_placetype_new" messageCode="global_menu_new" url="/admin/placetypes?form" z="wKptQQvaeG2UB8b/eohvfCNt2/w="/>
-                <menu:item id="i_placetype_list" messageCode="global_menu_list" url="/admin/placetypes?page=1&amp;size=${empty param.size ? 10 : param.size}" z="7BUDqvzSWihBVxllFovit0Zs3PM="/>
                 <menu:item id="i_place_new" messageCode="global_menu_new" url="/admin/places?form" z="9/tpi5NAATPKHTwki21XUvo0z+w="/>
+                <security:authorize access="hasRole('ROLE_per_placetypes')">
+                	<menu:item id="i_placetype_new" messageCode="global_menu_new" url="/admin/placetypes?form" z="wKptQQvaeG2UB8b/eohvfCNt2/w="/>
+                	<menu:item id="i_placetype_list" messageCode="global_menu_list" url="/admin/placetypes?page=1&amp;size=${empty param.size ? 10 : param.size}" z="7BUDqvzSWihBVxllFovit0Zs3PM="/>
+                </security:authorize>
             </menu:category>
         </security:authorize>
         <security:authorize access="hasRole('ROLE_per_newsitems')">

@@ -79,10 +79,8 @@
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_cz_kolomet_domain_Product" render="${not empty dependencies}" z="JG9sb7H3rDmiMgYvz+ZgFJEQh6g="/>
     <script type="text/javascript">
-	    require(['main'], function() {
-	    	require(['form'], function(form) {
-	    		form.computeDifferenceOnKeyUp('_price_id', '_finalPrice_id', '_discount_id');
-	    	});
-	    });
+    	requireModule(['form'], function(form) {
+    		form.computeDifferenceOnKeyUp('_price_id', '_finalPrice_id', '_discount_id');
+    	});
     </script>
 </div>

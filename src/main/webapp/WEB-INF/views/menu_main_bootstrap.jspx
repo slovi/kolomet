@@ -96,9 +96,7 @@
 	</div>
 	
 	<script type="text/javascript">
-		require(['main'], function() {
-			require(['bootstrap'], function() {
-			});
+		requireModule(['bootstrap'], function() {
 		});
 	</script>
 	
