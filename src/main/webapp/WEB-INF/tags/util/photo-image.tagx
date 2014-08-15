@@ -36,8 +36,8 @@
 				</c:choose>
 			</c:otherwise>
 		</c:choose>
-		<div class="img_border" style="width: ${width}px; height: ${height}px; line-height: ${height + 20}px; overflow: hidden;"> 
-			<img id="detail_image" src="${detailImgUrl}" class="wait_for_load" alt="" title=""/>
+		<div class="img_border text-center"> 
+			<img id="detail_image" width="${width}" height="${height}" src="${detailImgUrl}" class="wait_for_load" alt="" title=""/>
 		</div>
 	</c:if>
 </jsp:root>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu" xmlns:spring="http://www.springframework.org/tags" xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    
+   	<div class="shadowbox">
+    	<div>
+	    	<spring:message code="news_banners_header" />
+       	</div>
+       	<c:forEach items="${newsBanners}" var="newsItem">
+	    	<div>
+	    		<p>
+	    			<span class="news_item_content"><c:out value="${newsItem.text}" escapeXml="false" /></span>		        			
+	    		</p>
+	    	</div>
+       	</c:forEach>
+	</div>
+    
+</jsp:root>

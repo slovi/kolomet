@@ -99,7 +99,8 @@ define(['jquery', 'jquery.number'], function($) {
 			$("p.place_type").html($("#_placeType_id").val());
 			$("span.bike_road_nr").html($("#_bikeRoadNr_id").val());
 			$("span.description").html($("textarea[name='description']").val());
-			$("p.descriptionLink").html($("#_descriptionLink_id").val());
+			$("a.descriptionLink").html($("#_descriptionLink_id").val());
+			$("a.descriptionLink").attr("href", $("#_descriptionLink_id").val());
 			$("span.gps").html($("input[name='gpsLocation.north']").val() + " " + $("input[name='gpsLocation.west']").val());
 			$("span.region").html($("#_region_id").val());
 		} else {

@@ -2,7 +2,7 @@ define([ 'jquery' , 'jquery.fileupload', 'jquery.fileupload-image', 'load-image'
 
 	return {
 
-		files : function(id, url, maxFiles, noImgUrl, options) {		
+		files : function(id, url, maxFiles, baseImgUrl, noImgUrl, options) {		
 			
 			var previews = $('.image-preview');
 			if (previews.length == 0) {
@@ -15,10 +15,7 @@ define([ 'jquery' , 'jquery.fileupload', 'jquery.fileupload-image', 'load-image'
 				dataType : 'json',
 				autoUpload: true,
 				acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
-				disableImageResize: /Android(?!.*Chrome)|Opera/.test(window.navigator.userAgent),
-				previewMaxWidth: 100,
-				previewMaxHegith: 100,
-				previewCrop: true,
+				disableImageResize: true,
 				singleFileUploads: false
 				
 			}).on('fileuploadadd', function(e, data) {	
@@ -41,11 +38,14 @@ define([ 'jquery' , 'jquery.fileupload', 'jquery.fileupload-image', 'load-image'
 						$(input).val('');
 					});
 					
-					var node = $('<div />').addClass('image-preview').prepend($('<span />').addClass('filename').text(file.name).append(button));
+					var node = $('<div />').addClass('image-preview').prepend(
+							$('<span />').addClass('filename').text(file.name)
+							.append($('<img />').addClass('preloaded').attr('width', '100').attr('height', '100').attr('src', baseImgUrl + '/' + file.name))
+							.append(button));
 					
 					if (data.context.children().length > maxFiles - 1) {
 						$("div.files_add").hide();
-					}												
+					}
 					
 					if (data.context.children().length == 1) {
 						node.prependTo(data.context);
@@ -54,22 +54,11 @@ define([ 'jquery' , 'jquery.fileupload', 'jquery.fileupload-image', 'load-image'
 					}
 					var input = $('#files_container input.files-multi-filename').get(data.context.children().length - 2);
 					$(input).val(file.name + '__;__' + file.type);
-					data.formData = {'filename': file.name};
 					
-				});								
+				});
 				
 				data.submit();
 				
-			}).on('fileuploadprocessalways', function(e, data) {
-				
-				var index = data.index;
-				var childrenIndex = data.context.children().length > 1 ? data.context.children().length - 2 : data.index;
-				var file = data.files[index];
-				var node = $(data.context.children()[childrenIndex]);
-
-				if (file.preview) {
-					node.prepend('<br />').prepend(file.preview);
-				}
 			}).on('fileuploadchange', function(e, data) {
 				
 				if (data.files.length == 0) {

@@ -2,22 +2,14 @@ package cz.kolomet.service.impl;
 import java.awt.Dimension;
 import java.io.File;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.task.TaskExecutor;
 
 import cz.kolomet.domain.Photo;
 import cz.kolomet.domain.PhotoUrl;
 import cz.kolomet.domain.PlacePhotoUrl;
-import cz.kolomet.service.ImageService;
 import cz.kolomet.service.PlacePhotoUrlService;
 
-public class PlacePhotoUrlServiceImpl implements PlacePhotoUrlService {
-	
-	@Autowired
-	private ImageService imageService;
+public class PlacePhotoUrlServiceImpl extends AbstractPhotoUrlService implements PlacePhotoUrlService {
 	
 	@Value("${place.img.width}")
 	private Integer width;
@@ -34,42 +26,22 @@ public class PlacePhotoUrlServiceImpl implements PlacePhotoUrlService {
 	@Value("${place.img.thumbnail.height}")
 	private Integer thumbnailHeight;
 	
-	@Value("${img.rootdir}")
-	protected String rootDir;
-		
-	@Autowired
-	private TaskExecutor executor;
-	
 	public void deletePlacePhotoUrl(PlacePhotoUrl photoUrl) {
         placePhotoUrlRepository.delete(photoUrl);
-        
-        FileUtils.deleteQuietly(new File(rootDir + "/" + photoUrl.getPhotoUrl()));
-        FileUtils.deleteQuietly(new File(rootDir + "/" + photoUrl.getOverPhotoUrl()));
-        FileUtils.deleteQuietly(new File(rootDir + "/" + photoUrl.getThumbPhotoUrl()));
+        super.deletePhoto(photoUrl);
     }
 	
+	@Override
+	protected ResizeInfo[] getResizeInfos() {
+		ResizeInfo[] resizeInfos = new ResizeInfo[3];
+		resizeInfos[0] = new ResizeInfo(new Dimension(width, height), PhotoUrl.ORIGINAL_IMG_SUFFIX); // save original image
+		resizeInfos[1] = new ResizeInfo(new Dimension(overviewWidth, overviewHeight), PhotoUrl.OVERVIEW_IMG_SUFFIX); // save overview image
+		resizeInfos[2] = new ResizeInfo(new Dimension(thumbnailWidth, thumbnailHeight), PhotoUrl.THUMBNAIL_IMG_SUFFIX); // save thumb image
+		return resizeInfos;
+	}
+	
     public void savePlacePhotoUrl(PlacePhotoUrl photoUrl, final File file) {
-        
     	placePhotoUrlRepository.save(photoUrl);
-    	
-    	executor.execute(new Runnable() {
-			
-			@Override
-			public void run() {
-				// save original image
-				String targetFileName = FilenameUtils.getBaseName(file.getName()) + PhotoUrl.ORIGINAL_IMG_SUFFIX;
-				imageService.resizeAndSave(file, new File(file.getParent(), targetFileName), new Dimension(width, height));
-				
-				String targetOverviewFileName = FilenameUtils.getBaseName(file.getName()) + PhotoUrl.OVERVIEW_IMG_SUFFIX;
-				imageService.resizeAndSave(file, new File(file.getParent(), targetOverviewFileName), new Dimension(overviewWidth, overviewHeight));
-				
-				// save thumb image
-				String targetThumbFileName = FilenameUtils.getBaseName(file.getName()) + PhotoUrl.THUMBNAIL_IMG_SUFFIX;
-				imageService.resizeAndSave(file, new File(file.getParent(), targetThumbFileName), new Dimension(thumbnailWidth, thumbnailHeight));
-				FileUtils.deleteQuietly(file);
-			}
-		});
-        
     }
 
 	@Override

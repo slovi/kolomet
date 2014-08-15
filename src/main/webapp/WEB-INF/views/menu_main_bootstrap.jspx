@@ -4,11 +4,11 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     
-    <div class="navbar navbar-inverse" role="navigation">
+    <div class="navbar navbar-default" role="navigation">
     	<div class="container"> 
 	    	<div class="collapse navbar-collapse">	
 	    		<menu:menu id="menu_main" styleClass="nav navbar-nav">
-	    			<menu:item url="/public/intro/index" styleClass="active" messageCode="menu_main_intro" id="intro" renderPageParams="false" />
+	    			<menu:item url="/public/intro/index" messageCode="menu_main_intro" id="intro" renderPageParams="false" />
 	    			<menu:item url="/public/products/filter?categoryType=${bikeCategoryTypeId}" messageCode="menu_main_products_bikes" id="products_bikes" defaultPageSize="${categoryPageSize}" />
 	    			<!-- 
 	    			<menu:item url="/public/products/filter?categoryType=${otherCategoryTypeId}" messageCode="menu_main_products_other" id="products_other" defaultPageSize="6" />

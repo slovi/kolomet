@@ -8,14 +8,16 @@
             <h2>
                 <c:out value="${place.name}"/>
             </h2>
+            <br />
             <p>
             	<c:out value="${place.placeType.codeDescription}" />
             </p>
             <c:if test="${not empty place.descriptionLink}">
                 <p>
-                    <c:out value="${place.descriptionLink}"/>
+                    <a href="${place.descriptionLink}" target="_blank"><c:out value="${place.descriptionLink}"/></a>
                 </p>
             </c:if>
+            <br />
             <p>
                 <c:out escapeXml="false" value="${place.description}"/>
             </p>

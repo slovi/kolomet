@@ -5,7 +5,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
-import org.springframework.data.web.PageableDefaults;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +19,7 @@ import cz.kolomet.domain.RegistrationRequest;
 public class RegistrationRequestController extends AbstractAdminController {
 	
 	@RequestMapping(produces = "text/html")
-    public String list(@PageableDefaults(sort = {"processed"}, sortDir = Direction.ASC, value = 10) Pageable pageable, Model uiModel) {
+    public String list(@PageableDefault(sort = {"processed"}, direction = Direction.ASC, value = 10) Pageable pageable, Model uiModel) {
         if (pageable != null) {
         	Sort usedSort = pageable.getSort().and(new Sort(Direction.DESC, "created"));
         	Pageable usedPageable = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(), usedSort);

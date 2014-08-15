@@ -1,24 +1,159 @@
 <jsp:root xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
 
   <jsp:output omit-xml-declaration="yes" />
-
-  <spring:url value="/resources/css/bootstrap.min.css" var="bootstrapUrl" />
+  
+  <spring:url value="/resources/css/ui-lightness/jquery-ui-1.10.4.custom.min.css" var="jquery_ui_css" />
+  <link rel="stylesheet" type="text/css" href="${jquery_ui_css}" />
+  
+  <spring:url value="/resources/css/bootstrap.css" var="bootstrapUrl" />
   <link rel="stylesheet" type="text/css" href="${bootstrapUrl}" />
   
-  <spring:url value="/resources/css/bootstrap-theme.min.css" var="bootstrapThemeUrl" />
+  <spring:url value="/resources/css/bootstrap-theme.css" var="bootstrapThemeUrl" />
   <link rel="stylesheet" type="text/css" href="${bootstrapThemeUrl}" />
 
   <spring:url value="/resources/images/favicon.ico" var="favicon" />
   <link rel="SHORTCUT ICON" href="${favicon}" />
 
-  <!-- Get the user local from the page context (it was set by Spring MVC's locale resolver) -->
-  <c:set var="userLocale">
-    <c:set var="plocale">${pageContext.response.locale}</c:set>
-    <c:out value="${fn:replace(plocale, '_', '-')}" default="en" />
-  </c:set>
-
-  <spring:url value="/resources/js/main" var="main_js_url" />
+  <spring:url value="/resources/js/main?v=${version}" var="main_js_url" />
   <spring:url value="/resources/js/lib/require.js" var="require_js_url" />
   <script data-main="${main_js_url}" src="${require_js_url}"><!-- --></script>  
+  
+  <!--[if lt IE 9]>
+  	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+  
+  <script type="text/javascript">
+  
+	function requireModule(modules, initModuleFunction) {
+		require(['${main_js_url}'], function() {
+			require(modules, initModuleFunction);
+		});
+	}
+  
+  </script>
+  
+  <style>
+  
+  	body {
+		background: url(background/body_bg.jpg);
+		font-family: Helvetica, "Trebuchet MS", Arial, sans-serif;
+	}
+	
+	.header {
+		height: 125px;
+		background: #f9f9f9;
+	}
+	
+	.side-bar {
+		margin-bottom: 15px;
+		padding-bottom: 20px;
+	}
+	
+	.side-bar .nav>li>a {
+		padding: 2px 20px;
+		text-decoration: underline;
+		background-color: transparent;
+		color: #497f96;
+		font-size: .9em;
+	}
+	
+	.side-bar .nav>li>a:hover, .sidebar .nav>li>a:focus {
+		padding: 2px 20px;
+		text-decoration: underline;
+		background-color: transparent;
+		color: #f1941c;
+	}
+	
+	.side-bar .nav-header {		
+		font-size: .9em;
+		font-weight: 700;
+		color: #333;
+		padding: 10px;
+	}			
+	
+	.side-bar .nav-header.active {
+		color: #f1941c;
+	}
+	
+	.side-bar .nav-header.active:after {
+		border-width: 0 6px 8px 6px;
+		border-color: #f1941c transparent;
+	}
+	
+	.side-bar li.nav-header:after {
+		content: "";
+		width: 0;
+		height: 0;
+		position: absolute;
+		right: 16px;
+		top: 22px;
+		margin-top: -10px;
+		border-width: 8px 6px 0 6px;
+		border-style: solid;
+		border-color: #58585a transparent;
+	}
+	
+	.logo {
+		margin-top: 25px;
+	}
+	
+	.login {
+		margin-top: 40px;
+	}
+	
+	.footer {
+		border-top: thin solid;
+	}
+	
+	.shadowbox {
+		background: #f9f9f9;
+		border-bottom: 4px solid #58585a;
+		box-shadow: 0px 0px 6px #C0C0C0;
+	}
+	
+	.caption p {
+		margin: 0;
+		font-size: .9em;
+	}
+	
+	.caption.product {
+		height: 140px;
+	}
+	
+	.caption.seller {
+		height: 90px;
+		background: #f3f3f3;
+	}
+	
+	p.price, p.detail_price, p.price_final {
+		font-weight: bold;
+		font-size: 1.3em;
+		color: #f1941c;
+	}
+	
+	a.action_button {
+		padding: 12px 30px 10px 30px;
+		border-bottom: 4px solid #497f96;
+		background: #f3f3f3;
+		transition: all 0.2s ease-out;
+	}
+	
+	a.action_button:hover {
+		background: #eee;
+	}
+	
+	a.action_button_dark {
+		padding: 12px 30px 12px 30px;
+		color: #f9f9f9;
+		background: #58585a;
+		transition: all 0.2s ease-out;
+	}
+
+	a.action_button_dark:hover {
+		background: #e08d21;
+	}
+  
+  </style>
 
 </jsp:root>

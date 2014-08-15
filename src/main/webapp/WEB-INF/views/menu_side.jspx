@@ -51,7 +51,7 @@
     		<c:set value="hidden" var="hiddenClassOff" />
     	</c:if>
     	<h1 class="side-menu-header">
-        	<spring:message code="menu_side_bicycle_weights" />
+        	<spring:message code="menu_side_figure_weights" />
 	    	<img class="side-menu-arrow-on ${hiddenClassOn}" src="${arrowDownImageUrl}" />
 	    	<img class="side-menu-arrow-off ${hiddenClassOff}" src="${arrowRightImageUrl}" />
         </h1>

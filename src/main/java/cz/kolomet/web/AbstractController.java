@@ -52,13 +52,14 @@ public class AbstractController {
 		return DEFAULT_PAGE_SIZE;
 	}
 	
-	protected void saveFile(MultipartFile file, String folder) {
+	protected void saveFile(final PhotoContainerService photoContainerService, MultipartFile file, String folder) {
 		File parent = new File(getTempDir(), folder);
 		try {
 			FileUtils.forceMkdir(parent);
 			File dest = new File(parent, file.getOriginalFilename());
 			logger.debug("Saving uploaded file to dest: " + dest);
 			file.transferTo(dest);
+			photoContainerService.resizePhoto(dest);
 			logger.debug("Successfully save file: " + dest + " " + dest.exists());
 		} catch (Exception e) {
 			throw new RuntimeException(e);
@@ -82,6 +83,7 @@ public class AbstractController {
 				
 				Photo photo = photoContainer.addPhoto(fileName, contentType);
 				photoContainerService.savePhoto(photo, dest);
+				photoContainerService.resizePhoto(dest);
 			}
 		}
 		FileUtils.deleteQuietly(new File(getTempDir(), folder));
@@ -101,6 +103,7 @@ public class AbstractController {
 					}
 					Photo photo = photoContainer.addPhoto(dest.getName(), content.getContentType());
 					photoContainerService.savePhoto(photo, dest);
+					photoContainerService.resizePhoto(dest);
 				}
 			}
 		}

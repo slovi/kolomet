@@ -3,17 +3,13 @@
 
 package cz.kolomet.web;
 
-import cz.kolomet.domain.Place;
-import cz.kolomet.domain.PlacePhotoUrl;
-import cz.kolomet.service.ApplicationUserService;
-import cz.kolomet.service.PlacePhotoUrlService;
-import cz.kolomet.service.PlaceService;
-import cz.kolomet.web.PlacePhotoUrlController;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -25,6 +21,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
+
+import cz.kolomet.domain.PlacePhotoUrl;
+import cz.kolomet.service.ApplicationUserService;
+import cz.kolomet.service.PlacePhotoUrlService;
+import cz.kolomet.service.PlaceService;
 
 privileged aspect PlacePhotoUrlController_Roo_Controller {
     

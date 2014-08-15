@@ -1,0 +1,47 @@
+<jsp:root xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"  xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+  	
+  	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+  	<jsp:output omit-xml-declaration="yes" />
+
+	<c:forEach items="${products.content}" var="product">
+	
+		<div class="col-lg-6">
+			<div class="thumbnail shadowbox"> 
+				<spring:url value="/public/products/detail/${product.id}" var="productIdUrl" />
+				<a href="${productIdUrl}">
+		     		<util:photo-image photos="${product.photoUrls}" imgType="over" height="146" width="224" />
+		     	</a>
+				<div class="caption product">
+					<c:if test="${fn:length(product.productName) gt 30}">
+						<h4><a href="${productIdUrl}"><c:out value="${fn:substring(product.productName, 0, 30)}" />...</a></h4>
+		     		</c:if>
+		     		<c:if test="${fn:length(product.productName) le 30}">
+		     			<h4><a href="${productIdUrl}"><c:out value="${product.productName}" /></a></h4>
+		     		</c:if>
+		         	<p class="price_final"><fmt:formatNumber groupingUsed="true" value="${product.finalPrice}" /><spring:message code="currency" /></p>
+		         	<p><spring:message code="label_cz_kolomet_domain_product_producer" />: <c:out value="${product.producer.codeDescription}" /></p>
+		         	<p><spring:message code="label_cz_kolomet_domain_product_category" />: <c:out value="${product.category.codeDescription}" /></p>
+				</div>
+				<div class="caption seller"> 
+					<spring:url value="/public/sellers/detail/${product.seller.id}" var="sellerIdUrl" />
+	                <p><a href="${sellerIdUrl}"><c:out value="${product.seller.sellerName}" /></a></p>	                
+	            	<p><c:out value="${product.seller.businessAddressString}" /><br /></p>
+	            	<p>
+		            	<c:if test="${not empty product.seller.mapUrl}">
+	           				<a target="_blank" href="${product.seller.mapUrl}">mapa</a>
+	           				<c:if test="${not empty product.seller.businessPhoneNumber}">, Tel.: </c:if>	
+	           			</c:if> 
+		                <c:out value="${product.seller.businessPhoneNumber}" />
+	                </p>							
+				</div>
+			</div>
+		</div>
+	</c:forEach>	           	         
+
+	<script type="text/javascript">
+    	requireModule(['images'], function(images) {
+    		images.waitForLoad('${loader_url}', '${loader_error_url}', 6, 2000);
+    	});
+    </script>
+
+</jsp:root>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jsp:root xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
+  	
+  	<jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  	<jsp:output omit-xml-declaration="yes"/>
+
+	<span>2014 Kolomet &#169; &#32; &#32;</span> |
+	<spring:url value="/public/about" var="aboutUrl" />
+   	<a href="${aboutUrl}"><spring:message code="footer_about" /></a> |
+   	<a href="#"><spring:message code="footer_conditions" /></a> |
+   	<a href="${aboutUrl}"><spring:message code="footer_contact" /></a>|
+   	<spring:message code="footer_version" />: <c:out value="${version}" /> (<c:out value="${buildTimestamp}" />)
+   	<spring:url value="/public/registrationrequests?form" var="registrationUrl" />
+   	<a href="${registrationUrl}" class="action_button_dark pull-right"><spring:message code="footer_add" /></a>
+	
+</jsp:root>

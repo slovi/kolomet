@@ -32,9 +32,11 @@
 	    </c:forEach>
     </div>
 
+	<spring:url value="/file/_temp/${pageContext.session.id}" var="basePhotoUrl" />
+
     <script type="text/javascript">
 		requireModule(['files-multi'], function(files) {
-			files.files('${id}', '${uploadFileUrl}', ${filesCount}, '${noPhotoUrl}', {maxWidth: 348, maxHeight: 232, minWidth: 348, minHeight: 232});
+			files.files('${id}', '${uploadFileUrl}', ${filesCount}, '${basePhotoUrl}', '${noPhotoUrl}', {});
 		});
     </script>
       

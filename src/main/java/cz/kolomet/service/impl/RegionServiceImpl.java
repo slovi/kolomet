@@ -12,7 +12,7 @@ import cz.kolomet.service.RegionService;
 public class RegionServiceImpl implements RegionService {
 	
 	public Page<Region> findRegionEntries(Pageable pageable) {
-		regionRepository.findAll(pageable);
+		return regionRepository.findAll(pageable);
 	}
 	
     public List<Region> findAllRegions() {

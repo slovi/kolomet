@@ -9,9 +9,9 @@ import org.apache.commons.io.FilenameUtils;
 @MappedSuperclass
 public abstract class BasePhotoUrl extends DomainEntity implements Photo {
 	
-	public static String ORIGINAL_IMG_SUFFIX = "_orig.jpg";
-	public static String OVERVIEW_IMG_SUFFIX = "_over.jpg";
-	public static String THUMBNAIL_IMG_SUFFIX = "_thumb.jpg";
+	public static String ORIGINAL_IMG_SUFFIX = "_orig";
+	public static String OVERVIEW_IMG_SUFFIX = "_over";
+	public static String THUMBNAIL_IMG_SUFFIX = "_thumb";
 	
     /**
      */
@@ -24,16 +24,28 @@ public abstract class BasePhotoUrl extends DomainEntity implements Photo {
     @Column(updatable = false)
     protected String contentType;
     
+    public static String getPhotoUrlFileName(String fileName, String suffix) {
+    	return FilenameUtils.getBaseName(fileName) + suffix + FilenameUtils.getExtension(fileName);
+    }
+    
+    public static String getPhotoUrl(String baseUrl, String fileName, String suffix) {
+    	return baseUrl + "/" + getPhotoUrlFileName(fileName, suffix);
+    }
+    
+    public String getPhotoUrl(String suffix) {
+    	return getPhotoUrl(getPhotoUrlPrefix() + "/" + getParentContainerId(), fileName, suffix);
+    }
+    
     public String getPhotoUrl() {
-    	return getPhotoUrlPrefix() + "/" + getParentContainerId() + "/" + FilenameUtils.getBaseName(fileName) + ORIGINAL_IMG_SUFFIX;
+    	return getPhotoUrl(ORIGINAL_IMG_SUFFIX);
     }
     
     public String getThumbPhotoUrl() {
-    	return getPhotoUrlPrefix() + "/" + getParentContainerId() + "/" + FilenameUtils.getBaseName(fileName) + THUMBNAIL_IMG_SUFFIX;
+    	return getPhotoUrl(THUMBNAIL_IMG_SUFFIX);
     }
     
     public String getOverPhotoUrl() {
-    	return getPhotoUrlPrefix() + "/" + getParentContainerId() + "/" + FilenameUtils.getBaseName(fileName) + OVERVIEW_IMG_SUFFIX;
+    	return getPhotoUrl(OVERVIEW_IMG_SUFFIX);
     }
     
     protected abstract String getPhotoUrlPrefix();
