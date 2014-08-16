@@ -37,7 +37,7 @@ privileged aspect PlaceController_Roo_Controller {
         uiModel.addAttribute("dependencies", dependencies);
         return "admin/places/create";
     }
-
+    
     @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String PlaceController.updateForm(@PathVariable("id") Long id, Model uiModel) {
         populateEditForm(uiModel, placeService.findPlace(id));

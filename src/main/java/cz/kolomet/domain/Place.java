@@ -1,5 +1,6 @@
 package cz.kolomet.domain;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -18,6 +19,7 @@ import org.springframework.roo.addon.tostring.RooToString;
 
 import cz.kolomet.domain.codelist.PlaceType;
 import cz.kolomet.domain.codelist.Region;
+import flexjson.JSONSerializer;
 
 @RooJavaBean
 @RooToString
@@ -62,6 +64,11 @@ public class Place extends DomainEntity implements Commented, PhotoContainer {
     
     @Transient
     private List<String> fileNames = new ArrayList<String>();
+    
+    public static String toJsonArray(Collection<Place> collection, String[] fields) {
+        return new JSONSerializer()
+        .include(fields).exclude("*").serialize(collection);
+    }
     
     public void increaseRate(Integer value) {
     	Double actualRanking = qualityRanking * nrOfRankings;

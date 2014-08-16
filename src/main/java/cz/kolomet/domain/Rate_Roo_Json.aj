@@ -13,19 +13,33 @@ import java.util.List;
 privileged aspect Rate_Roo_Json {
     
     public String Rate.toJson() {
-        return new JSONSerializer().exclude("*.class").serialize(this);
+        return new JSONSerializer()
+        .exclude("*.class").serialize(this);
+    }
+    
+    public String Rate.toJson(String[] fields) {
+        return new JSONSerializer()
+        .include(fields).exclude("*.class").serialize(this);
     }
     
     public static Rate Rate.fromJsonToRate(String json) {
-        return new JSONDeserializer<Rate>().use(null, Rate.class).deserialize(json);
+        return new JSONDeserializer<Rate>()
+        .use(null, Rate.class).deserialize(json);
     }
     
     public static String Rate.toJsonArray(Collection<Rate> collection) {
-        return new JSONSerializer().exclude("*.class").serialize(collection);
+        return new JSONSerializer()
+        .exclude("*.class").serialize(collection);
+    }
+    
+    public static String Rate.toJsonArray(Collection<Rate> collection, String[] fields) {
+        return new JSONSerializer()
+        .include(fields).exclude("*.class").serialize(collection);
     }
     
     public static Collection<Rate> Rate.fromJsonArrayToRates(String json) {
-        return new JSONDeserializer<List<Rate>>().use(null, ArrayList.class).use("values", Rate.class).deserialize(json);
+        return new JSONDeserializer<List<Rate>>()
+        .use("values", Rate.class).deserialize(json);
     }
     
 }

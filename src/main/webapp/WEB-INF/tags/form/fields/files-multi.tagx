@@ -21,7 +21,6 @@
 		<div id="files">
 			<div class="files_add">
 	           	<span class="fileinput-button">
-			        <i class="glyphicon glyphicon-plus"><!--  --></i>
 			        <span>Nahrat soubor...</span>
 			        <input id="${id}" type="file" name="content" />
 			    </span>
@@ -34,9 +33,11 @@
 
 	<spring:url value="/file/_temp/${pageContext.session.id}" var="basePhotoUrl" />
 
+	<spring:url value="/resources/images/ajax-loader.gif" var="loader_url" />
+    <spring:url value="/resources/images/error.png" var="loader_error_url" />
     <script type="text/javascript">
 		requireModule(['files-multi'], function(files) {
-			files.files('${id}', '${uploadFileUrl}', ${filesCount}, '${basePhotoUrl}', '${noPhotoUrl}', {});
+			files.files('${id}', '${uploadFileUrl}', ${filesCount}, '${basePhotoUrl}', '${noPhotoUrl}', '${loader_url}', '${loader_error_url}', {});
 		});
     </script>
       

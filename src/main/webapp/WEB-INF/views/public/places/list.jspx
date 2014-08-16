@@ -41,6 +41,7 @@
          </c:forEach>
     </div>
     
+    <spring:url value="/" var="contextPath" />
     <spring:url value="/public/places" var="placeUrl" />
     <spring:url value="/resources/js/gmap.js" var="gmapUrl" />
 	
@@ -93,6 +94,7 @@
 	    					    map: map,
 	    					    draggable: false,
 	    					    position: new google.maps.LatLng(place.gpsLocation.north, place.gpsLocation.west),
+	    					    icon: '${contextPath}/resources/img/places/' + place.placeType.placeTypeColor + '.png',
 	    					    title: place.name + ' ' + place.id,
 	    					    url: placeUrl + "/" + place.id
 	    					});

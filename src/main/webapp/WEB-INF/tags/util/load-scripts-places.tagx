@@ -8,9 +8,6 @@
   <spring:url value="/resources/dijit/themes/tundra/tundra.css" var="tundra_url" />
   <link rel="stylesheet" type="text/css" href="${tundra_url}" />
   
-  <spring:url value="/resources/css/jquery.fileupload.css" var="fileupload_css_url" />
-  <link rel="stylesheet" type="text/css" href="${fileupload_css_url}" />
-  
   <spring:url value="/resources/css/standard_places.css" var="standard_css_url" />
   <link rel="stylesheet" type="text/css" href="${standard_css_url}" />
 
@@ -55,30 +52,7 @@
   	.dijitTextBox[type=file] {
   		width: 25em;
   	}
-  	.uploadBtn{
-	    border:1px solid #333333;
-	    background:url(buttonEnabled.png) #d0d0d0 repeat-x scroll 0px top;
-	    font-size:14px;
-	    width:201px;
-	    height:30px;
-	    vertical-align:middle;
-	    text-align:center;
-	}
-	.uploadHover{
-	    background-image:url(buttonHover.png);
-	    cursor:pointer;
-	    font-weight:bold;
-	}
-	
-	.uploadPress{
-	    background-image:url(buttonActive.png);
-	}
-	.uploadDisabled{
-	    background-image:none;
-	    background-color:#666;
-	    color:#999;
-	    border:1px solid #999;
-	}
+
   </style>
 
 </jsp:root>

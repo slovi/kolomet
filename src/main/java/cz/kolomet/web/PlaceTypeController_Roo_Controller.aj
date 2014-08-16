@@ -3,13 +3,10 @@
 
 package cz.kolomet.web;
 
-import cz.kolomet.domain.PlaceTypeColor;
 import cz.kolomet.domain.codelist.PlaceType;
-import cz.kolomet.service.ApplicationUserService;
 import cz.kolomet.service.PlaceTypeService;
 import cz.kolomet.web.PlaceTypeController;
 import java.io.UnsupportedEncodingException;
-import java.util.Arrays;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.joda.time.format.DateTimeFormat;
@@ -28,9 +25,6 @@ privileged aspect PlaceTypeController_Roo_Controller {
     
     @Autowired
     PlaceTypeService PlaceTypeController.placeTypeService;
-    
-    @Autowired
-    ApplicationUserService PlaceTypeController.applicationUserService;
     
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String PlaceTypeController.create(@Valid PlaceType placeType, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
@@ -87,13 +81,6 @@ privileged aspect PlaceTypeController_Roo_Controller {
     void PlaceTypeController.addDateTimeFormatPatterns(Model uiModel) {
         uiModel.addAttribute("placeType_created_date_format", DateTimeFormat.patternForStyle("MM", LocaleContextHolder.getLocale()));
         uiModel.addAttribute("placeType_lastmodified_date_format", DateTimeFormat.patternForStyle("MM", LocaleContextHolder.getLocale()));
-    }
-    
-    void PlaceTypeController.populateEditForm(Model uiModel, PlaceType placeType) {
-        uiModel.addAttribute("placeType", placeType);
-        addDateTimeFormatPatterns(uiModel);
-        uiModel.addAttribute("applicationusers", applicationUserService.findAllApplicationUsers());
-        uiModel.addAttribute("placetypecolors", Arrays.asList(PlaceTypeColor.values()));
     }
     
     String PlaceTypeController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

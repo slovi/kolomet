@@ -51,7 +51,7 @@ public class DownloadFileController {
 		// if we have format parameter, we should reformat fileName to required format, ie: P702005.JPG -> P702005_org.JPG  
 		if (StringUtils.isNotEmpty(request.getParameter("format"))) {
 			String suffix = request.getParameter("format");
-			String fileName = BasePhotoUrl.getPhotoUrlFileName(file.getName(), suffix);
+			String fileName = BasePhotoUrl.getPhotoUrlFileName(resolvedFile.getName(), suffix);
 			resultFile = new File(resolvedFile.getParent(), fileName);
 		} else {
 			resultFile = resolvedFile;

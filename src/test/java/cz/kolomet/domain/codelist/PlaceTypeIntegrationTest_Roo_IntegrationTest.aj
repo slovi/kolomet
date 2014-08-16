@@ -7,7 +7,10 @@ import cz.kolomet.domain.codelist.PlaceTypeDataOnDemand;
 import cz.kolomet.domain.codelist.PlaceTypeIntegrationTest;
 import cz.kolomet.repository.PlaceTypeRepository;
 import cz.kolomet.service.PlaceTypeService;
+import java.util.Iterator;
 import java.util.List;
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,7 +23,7 @@ privileged aspect PlaceTypeIntegrationTest_Roo_IntegrationTest {
     
     declare @type: PlaceTypeIntegrationTest: @RunWith(SpringJUnit4ClassRunner.class);
     
-    declare @type: PlaceTypeIntegrationTest: @ContextConfiguration(locations = "classpath:/META-INF/spring/applicationContext*.xml");
+    declare @type: PlaceTypeIntegrationTest: @ContextConfiguration(locations = "classpath*:/META-INF/spring/applicationContext*.xml");
     
     declare @type: PlaceTypeIntegrationTest: @Transactional;
     
@@ -108,7 +111,16 @@ privileged aspect PlaceTypeIntegrationTest_Roo_IntegrationTest {
         PlaceType obj = dod.getNewTransientPlaceType(Integer.MAX_VALUE);
         Assert.assertNotNull("Data on demand for 'PlaceType' failed to provide a new transient entity", obj);
         Assert.assertNull("Expected 'PlaceType' identifier to be null", obj.getId());
-        placeTypeService.savePlaceType(obj);
+        try {
+            placeTypeService.savePlaceType(obj);
+        } catch (final ConstraintViolationException e) {
+            final StringBuilder msg = new StringBuilder();
+            for (Iterator<ConstraintViolation<?>> iter = e.getConstraintViolations().iterator(); iter.hasNext();) {
+                final ConstraintViolation<?> cv = iter.next();
+                msg.append("[").append(cv.getRootBean().getClass().getName()).append(".").append(cv.getPropertyPath()).append(": ").append(cv.getMessage()).append(" (invalid value = ").append(cv.getInvalidValue()).append(")").append("]");
+            }
+            throw new IllegalStateException(msg.toString(), e);
+        }
         placeTypeRepository.flush();
         Assert.assertNotNull("Expected 'PlaceType' identifier to no longer be null", obj.getId());
     }

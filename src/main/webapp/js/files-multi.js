@@ -1,16 +1,17 @@
-define([ 'jquery' , 'jquery.fileupload', 'jquery.fileupload-image', 'load-image' ], function($, fileUpload, fileUploadImage, loadImage) {
+define([ 'jquery' , 'jquery.fileupload', 'jquery.fileupload-image', 'images'], function($, fileUpload, fileUploadImage, images) {
 
 	return {
 
-		files : function(id, url, maxFiles, baseImgUrl, noImgUrl, options) {		
+		files : function(id, url, maxFiles, baseImgUrl, noImgUrl, loaderUrl, errorImgUrl, options) {		
 			
 			var previews = $('.image-preview');
 			if (previews.length == 0) {
-				loadDetailImage(noImgUrl, options);
+				loadEmptyDetailImage(noImgUrl);
 			}
 
 			$('#' + id).fileupload({
 				
+				enctype: 'multipart/form-data',
 				url: url,
 				dataType : 'json',
 				autoUpload: true,
@@ -40,7 +41,11 @@ define([ 'jquery' , 'jquery.fileupload', 'jquery.fileupload-image', 'load-image'
 					
 					var node = $('<div />').addClass('image-preview').prepend(
 							$('<span />').addClass('filename').text(file.name)
-							.append($('<img />').addClass('preloaded').attr('width', '100').attr('height', '100').attr('src', baseImgUrl + '/' + file.name))
+							.append(
+									$('<div />').addClass('thumb_large').prepend(
+											$('<img />').addClass('wait_for_load').attr('src', baseImgUrl + '/' + file.name + '?format=_thumb')
+									)
+							)
 							.append(button));
 					
 					if (data.context.children().length > maxFiles - 1) {
@@ -55,6 +60,8 @@ define([ 'jquery' , 'jquery.fileupload', 'jquery.fileupload-image', 'load-image'
 					var input = $('#files_container input.files-multi-filename').get(data.context.children().length - 2);
 					$(input).val(file.name + '__;__' + file.type);
 					
+					images.waitForLoad(loaderUrl, errorImgUrl, 6, 2000);
+					
 				});
 				
 				data.submit();
@@ -62,25 +69,25 @@ define([ 'jquery' , 'jquery.fileupload', 'jquery.fileupload-image', 'load-image'
 			}).on('fileuploadchange', function(e, data) {
 				
 				if (data.files.length == 0) {
-					loadDetailImage(noImgUrl, options);
+					loadEmptyDetailImage(noImgUrl);
 				} else {
-					loadDetailImage(data.files[0], options);
+					loadDetailImage(data.files[0], baseImgUrl, loaderUrl, errorImgUrl, images);
 				}
 			});
 
 		}
 	};
 	
-	function loadDetailImage(image, options) {
-		loadImage(
-			image,
-	        function (img) {
-				var detailElement = $('div#detail_image');
-				detailElement.empty();
-				detailElement.append(img);
-	        },
-	        options // Options		
-		);
+	function loadEmptyDetailImage(noImgUrl) {
+		var imgElement = $('div#detail_image img');
+		imgElement.attr('src', noImgUrl);
+	}
+	
+	function loadDetailImage(image, baseImgUrl, loaderUrl, errorImgUrl, images) {
+		var imgElement = $('div#detail_image img');
+		imgElement.attr('src', baseImgUrl + '/' + image.name + '?format=_orig');
+		imgElement.addClass('wait_for_load');
+		images.waitForImagesLoad(imgElement, loaderUrl, errorImgUrl, 6, 2000);
 	};
 
 });

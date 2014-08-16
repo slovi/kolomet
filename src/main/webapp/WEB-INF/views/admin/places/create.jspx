@@ -32,13 +32,13 @@
                             <field:input field="name" id="c_cz_kolomet_domain_Place_name" required="true" width="${input_width}" z="user-managed"/>
                             <field:input field="gpsLocation.north" id="c_cz_kolomet_domain_Place_gpsLocation_north" validationRegex="(([1-9][0-9]{0,2}(,[0-9]{1,20})?)|(1000(,[0-9]{1,20})?))" width="${input_width}" z="user-managed"/>
                             <field:input field="gpsLocation.west" id="c_cz_kolomet_domain_Place_gpsLocation_west" validationRegex="(([1-9][0-9]{0,2}(,[0-9]{1,20})?)|(1000(,[0-9]{1,20})?))" width="${input_width}" z="aaMqdkjjPg0UQLxvnIUsUnHctTY="/>
-                            <field:select field="region" id="c_cz_kolomet_domain_Place_region" itemLabel="codeDescription" itemValue="googleAlias" emptyLabel="..." items="${regions}" path="/admin/regions" width="${input_width}" z="user-managed"/>
+                            <field:select emptyLabel="..." field="region" id="c_cz_kolomet_domain_Place_region" itemLabel="codeDescription" itemValue="googleAlias" items="${regions}" path="/admin/regions" width="${input_width}" z="user-managed"/>
                             <field:input field="bikeRoadNr" id="c_cz_kolomet_domain_Place_bikeRoadNr" validationMessageCode="field_invalid_integer" width="${input_width}" z="user-managed"/>
                             <field:input field="address.street" id="c_cz_kolomet_domain_Place_address_street" render="false" width="${input_width}" z="9mNJF+/QmefeQOfR2mhIlHMeOSk="/>
                             <field:input field="address.houseNr" id="c_cz_kolomet_domain_Place_address_houseNr" render="false" validationRegex="([1-9][0-9]{0,2}|1000)" width="${input_width}" z="9mNJF+/QmefeQOfR2mhIlHMeOSk="/>
                             <field:input field="address.city" id="c_cz_kolomet_domain_Place_address_city" render="false" width="${input_width}" z="9mNJF+/QmefeQOfR2mhIlHMeOSk="/>
                             <field:input field="address.zipCode" id="c_cz_kolomet_domain_Place_address_zipCode" render="false" width="${input_width}" z="9mNJF+/QmefeQOfR2mhIlHMeOSk="/>
-                            <field:input field="descriptionLink" id="c_cz_kolomet_domain_Place_descriptionLink" width="${input_width}" z="obxloMCwz8l1092nZOr9AQDThHQ="/>
+                            <field:input field="descriptionLink" id="c_cz_kolomet_domain_Place_descriptionLink" width="${input_width}" z="user-managed"/>
                             <button class="step-1" data-step="1" type="button">
                                 <spring:message code="place_create_step_next"/>
                             </button>
@@ -64,41 +64,44 @@
                     </div>
                     <div class="step-3" style="display: none;">
                         <div id="detail_image" style="text-align:center;float:right;width:348px;height:232px;margin-left:15px;border: solid thin;">
-                            <!--  -->
+                        	<img />
                         </div>
                         <div style="width: 300px; min-height: 250px">
                             <b>
-	                            <p class="place_type">
-	                                <!--  -->
-	                            </p>
+                                <p class="place_type">
+                                    <!--  -->
+                                </p>
                             </b>
                             <br/>
                             <b>
-	                            <p class="name">
-	                                <!--  -->
-	                            </p>
+                                <p class="name">
+                                    <!--  -->
+                                </p>
                             </b>
                             <br/>
-                            <a class="descriptionLink" target="_blank"><!--  --></a>
+                            <a class="descriptionLink" target="_blank">
+                                <!--  -->
+                            </a>
                             <br/>
                             <b>Cyklostezka: </b>
                             <b>
-	                            <span class="bike_road_nr">
-	                                <!--  -->
-	                            </span>
+                                <span class="bike_road_nr">
+                                    <!--  -->
+                                </span>
                             </b>
                             <br/>
-                            <br/>                          
+                            <br/>
                             <b>Popis: </b>
                             <span class="description">
                                 <!--  -->
                             </span>
-                            <br />
+                            <br/>
+                            <br/>
                             <b>GPS: </b>
                             <span class="gps">
                                 <!--  -->
                             </span>
-                            <br />
+                            <br/>
                             <b>Kraj: </b>
                             <span class="region">
                                 <!--  -->
@@ -121,10 +124,11 @@
             <field:input field="gpsLocation" id="c_cz_kolomet_domain_Place_gpsLocation" render="false" required="true" z="user-managed"/>
             <field:input field="qualityRanking" id="c_cz_kolomet_domain_Place_qualityRanking" render="false" validationMessageCode="field_invalid_integer" z="user-managed"/>
             <field:input field="nrOfRankings" id="c_cz_kolomet_domain_Place_nrOfRankings" render="false" validationMessageCode="field_invalid_integer" z="user-managed"/>
-            <field:input field="fileNames" id="c_cz_kolomet_domain_Place_fileNames" render="false" z="user-managed"/>            
+            <field:input field="fileNames" id="c_cz_kolomet_domain_Place_fileNames" render="false" z="user-managed"/>
         </form:create>
         <form:dependency dependencies="${dependencies}" id="d_cz_kolomet_domain_Place" render="${not empty dependencies}" z="027c97vWNbBkqXvM72D6YRB6F3g="/>
-    </div>
+    </div>    
+    
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbbZrV_w_DmKzCVuFSxgkBs4pvi1gk1VA&amp;sensor=true&amp;language=cs">
         <!-- -->
     </script>
@@ -212,7 +216,7 @@
 						initialize();
 					});
    				}
-   			});    		    	
+   			});	
    		});
     	]]></script>
 </div>

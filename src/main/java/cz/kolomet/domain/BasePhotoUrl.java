@@ -25,7 +25,7 @@ public abstract class BasePhotoUrl extends DomainEntity implements Photo {
     protected String contentType;
     
     public static String getPhotoUrlFileName(String fileName, String suffix) {
-    	return FilenameUtils.getBaseName(fileName) + suffix + FilenameUtils.getExtension(fileName);
+    	return FilenameUtils.getBaseName(fileName) + suffix + '.' + FilenameUtils.getExtension(fileName);
     }
     
     public static String getPhotoUrl(String baseUrl, String fileName, String suffix) {

@@ -9,6 +9,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.MessageSource;
+import org.springframework.context.MessageSourceAware;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
@@ -17,7 +20,7 @@ import cz.kolomet.domain.Photo;
 import cz.kolomet.domain.PhotoContainer;
 import cz.kolomet.domain.PhotoContainerService;
 
-public class AbstractController {
+public class AbstractController implements MessageSourceAware {
 	
 	private static final String FILENAME_SEPARATOR = "__;__";
 
@@ -36,6 +39,10 @@ public class AbstractController {
 	
 	@Value("${build.timestamp}")
 	protected String buildTimestamp;
+	
+	protected MessageSource messageSource;
+	
+	protected MessageSourceAccessor messageSourceAcessor;
 	
 	@ModelAttribute("version")
 	public String getVersion() {
@@ -68,25 +75,19 @@ public class AbstractController {
 	
 	protected void savePhotos(final PhotoContainer photoContainer, final PhotoContainerService photoContainerService, String folder, List<String> fileNamesAndContentTypes) {
 		
+		File uploadedFileParent = new File(getTempDir(), folder);
+		
 		for (final String fileNameAndContentType: fileNamesAndContentTypes) {
 			if (StringUtils.isNotEmpty(fileNameAndContentType)) {
 				
-				File uploadedFileParent = new File(getTempDir(), folder);				
 				String fileName = resolveFileName(fileNameAndContentType);
 				String contentType = resolveContentType(fileNameAndContentType);
-				File uploadedFile = new File(uploadedFileParent, fileName);
-				File dest = getDestFile(photoContainer.getId(), photoContainer.getPhotoType(), fileName);
-				
-				logger.debug("Saving uploaded file to dest: " + dest);
-				copyFiles(uploadedFile, dest);
-				logger.debug("Successfully save file: " + dest + " " + dest.exists());
-				
 				Photo photo = photoContainer.addPhoto(fileName, contentType);
-				photoContainerService.savePhoto(photo, dest);
-				photoContainerService.resizePhoto(dest);
+				photoContainerService.savePhoto(photo);
 			}
 		}
-		FileUtils.deleteQuietly(new File(getTempDir(), folder));
+		
+		copyFiles(uploadedFileParent, getDestFolder(photoContainer.getId(), photoContainer.getPhotoType()));
 	}
 	
 	protected void savePhotos(final PhotoContainer photoContainer, final PhotoContainerService photoContainerService, List<CommonsMultipartFile> files) {
@@ -102,7 +103,7 @@ public class AbstractController {
 						throw new RuntimeException(e);
 					}
 					Photo photo = photoContainer.addPhoto(dest.getName(), content.getContentType());
-					photoContainerService.savePhoto(photo, dest);
+					photoContainerService.savePhoto(photo);
 					photoContainerService.resizePhoto(dest);
 				}
 			}
@@ -123,23 +124,35 @@ public class AbstractController {
 		return fileNameAndContentType.substring(0, index);
 	}
 
-	private void copyFiles(File uploadedFile, final File dest) {
+	private void copyFiles(File parentFolder, final File dest) {
+
+		File[] files = parentFolder.listFiles();
+		for (File file: files) {
+			try {
+				FileUtils.copyFileToDirectory(file, dest);
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+		}
+	}
+	
+	protected File getDestFolder(Long id, String photoType) {
+		File parent = new File(rootDir + "/" + photoType + "/"+ id);
 		try {
-			FileUtils.copyFile(uploadedFile, dest);
+			FileUtils.forceMkdir(parent);
+			return parent;
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
 	}
 	
 	protected File getDestFile(Long id, String photoType, String fileName) {
-		File parent = new File(rootDir + "/" + photoType + "/"+ id);
-		try {
-			FileUtils.forceMkdir(parent);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-		File dest = new File(parent, fileName);
-		return dest;
+		return new File(getDestFolder(id, photoType), fileName);
+	}
+	
+	public void setMessageSource(MessageSource messageSource) {
+		this.messageSource = messageSource;
+		this.messageSourceAcessor = new MessageSourceAccessor(messageSource);
 	}
 
 }

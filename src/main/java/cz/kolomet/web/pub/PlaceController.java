@@ -23,6 +23,7 @@ import cz.kolomet.service.RateService;
 @RooWebScaffold(path = "public/places", formBackingObject = Place.class, create = false, delete = false, update = false)
 public class PlaceController extends AbstractPublicPlacesController {
 	
+	private static String[] jsonFields = new String[] {"id", "name", "placeType.placeTypeColor", "gpsLocation.north", "gpsLocation.west"};
 	private static final int TOP_PLACES_NUMBER = 3;
 	
 	@Autowired
@@ -45,7 +46,7 @@ public class PlaceController extends AbstractPublicPlacesController {
     public String list(@Valid PlaceFilterDto placeFilter,  Model uiModel) {
 		
 		Specification<Place> placeSpecification = PlaceSpecifications.forPlaceFilter(placeFilter);
-		uiModel.addAttribute("placesJson", Place.toJsonArray(placeService.findPlaceEntries(placeSpecification)));
+		uiModel.addAttribute("placesJson", Place.toJsonArray(placeService.findPlaceEntries(placeSpecification), jsonFields));
 		uiModel.addAttribute("topPlaces", placeService.getTopPlaces(placeSpecification, TOP_PLACES_NUMBER));
         addDateTimeFormatPatterns(uiModel);
         return "public/places/list";

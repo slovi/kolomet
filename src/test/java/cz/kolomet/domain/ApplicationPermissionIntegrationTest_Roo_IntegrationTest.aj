@@ -7,7 +7,10 @@ import cz.kolomet.domain.ApplicationPermissionDataOnDemand;
 import cz.kolomet.domain.ApplicationPermissionIntegrationTest;
 import cz.kolomet.repository.ApplicationPermissionRepository;
 import cz.kolomet.service.ApplicationPermissionService;
+import java.util.Iterator;
 import java.util.List;
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,7 +23,7 @@ privileged aspect ApplicationPermissionIntegrationTest_Roo_IntegrationTest {
     
     declare @type: ApplicationPermissionIntegrationTest: @RunWith(SpringJUnit4ClassRunner.class);
     
-    declare @type: ApplicationPermissionIntegrationTest: @ContextConfiguration(locations = "classpath:/META-INF/spring/applicationContext*.xml");
+    declare @type: ApplicationPermissionIntegrationTest: @ContextConfiguration(locations = "classpath*:/META-INF/spring/applicationContext*.xml");
     
     declare @type: ApplicationPermissionIntegrationTest: @Transactional;
     
@@ -108,7 +111,16 @@ privileged aspect ApplicationPermissionIntegrationTest_Roo_IntegrationTest {
         ApplicationPermission obj = dod.getNewTransientApplicationPermission(Integer.MAX_VALUE);
         Assert.assertNotNull("Data on demand for 'ApplicationPermission' failed to provide a new transient entity", obj);
         Assert.assertNull("Expected 'ApplicationPermission' identifier to be null", obj.getId());
-        applicationPermissionService.saveApplicationPermission(obj);
+        try {
+            applicationPermissionService.saveApplicationPermission(obj);
+        } catch (final ConstraintViolationException e) {
+            final StringBuilder msg = new StringBuilder();
+            for (Iterator<ConstraintViolation<?>> iter = e.getConstraintViolations().iterator(); iter.hasNext();) {
+                final ConstraintViolation<?> cv = iter.next();
+                msg.append("[").append(cv.getRootBean().getClass().getName()).append(".").append(cv.getPropertyPath()).append(": ").append(cv.getMessage()).append(" (invalid value = ").append(cv.getInvalidValue()).append(")").append("]");
+            }
+            throw new IllegalStateException(msg.toString(), e);
+        }
         applicationPermissionRepository.flush();
         Assert.assertNotNull("Expected 'ApplicationPermission' identifier to no longer be null", obj.getId());
     }

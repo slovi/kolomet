@@ -40,13 +40,10 @@ public class PlacePhotoUrlServiceImpl extends AbstractPhotoUrlService implements
 		return resizeInfos;
 	}
 	
-    public void savePlacePhotoUrl(PlacePhotoUrl photoUrl, final File file) {
-    	placePhotoUrlRepository.save(photoUrl);
-    }
-
 	@Override
-	public void savePhoto(Photo photo, File dest) {
-		savePlacePhotoUrl((PlacePhotoUrl) photo, dest);
+	public void savePhoto(Photo photo) {
+		// TODO - optimize this cast
+		placePhotoUrlRepository.save((PlacePhotoUrl) photo);
 	}
 	
 }

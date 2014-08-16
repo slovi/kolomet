@@ -15,13 +15,19 @@ define(['jquery'], function($) {
 				});
 			});
 		},
+		
 		waitForLoad: function (processErrorImgUrl, errorImgUrl, maxAttemptsNr, timeout) {
 			
-			$("img.wait_for_load").each(function(index, element) {
+			this.waitForImagesLoad($("img.wait_for_load"), processErrorImgUrl, errorImgUrl, maxAttemptsNr, timeout);
+			
+		},
+		
+		waitForImagesLoad: function (elements, processErrorImgUrl, errorImgUrl, maxAttemptsNr, timeout) {
+			
+			elements.each(function(index, element) {
 				var imgUrl = $(element).attr("src");
 				loadImage($(element), imgUrl, processErrorImgUrl, errorImgUrl, 0, maxAttemptsNr, timeout);				
 			});
-			
 		}
 	};
 	

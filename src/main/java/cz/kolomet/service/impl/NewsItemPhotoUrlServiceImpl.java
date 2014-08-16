@@ -20,14 +20,11 @@ public class NewsItemPhotoUrlServiceImpl extends AbstractPhotoUrlService impleme
     	resizeInfos[0] = new ResizeInfo(PhotoUrl.ORIGINAL_IMG_SUFFIX);
     	return resizeInfos;
     }
-    
-	public void saveNewsItemPhotoUrl(NewsItemPhotoUrl photoUrl, final File file) {
-		newsItemPhotoUrlRepository.save(photoUrl);
-	}
 
-	@Override
-	public void savePhoto(Photo photo, File dest) {
-		saveNewsItemPhotoUrl((NewsItemPhotoUrl) photo, dest);
+    @Override
+	public void savePhoto(Photo photo) {
+    	// TODO - optimize this cast
+		newsItemPhotoUrlRepository.save((NewsItemPhotoUrl) photo);
 	}
 	
 }

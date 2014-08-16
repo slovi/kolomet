@@ -4,13 +4,13 @@
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_cz_kolomet_domain_Place" items="${places}" z="udMH8JHtvSv+1wC/XxvoeM0NJCM=">
         <table:table data="${places}" delete="false" id="l_cz_kolomet_domain_Place" path="/admin/places" update="false" z="user-managed">
-            <table:column id="c_cz_kolomet_domain_Place_name" sort="true" property="name" z="PenaILw2UK1BWROwhFdnAmOFAXs="/>
-            <table:column id="c_cz_kolomet_domain_Place_gpsLocation" sort="true" property="gpsLocation" z="A4bvFSMuwhGpy6Gn9aKyoDHqsf0="/>
-            <table:column id="c_cz_kolomet_domain_Place_createdBy" sort="true" property="createdBy" z="6UvVycOpN3hGCqKgoESdnYA4nzQ="/>
-            <table:column id="c_cz_kolomet_domain_Place_lastModifiedBy" sort="true" property="lastModifiedBy" z="DYqZTz35VLWG+dMM9uqHsPSKh7U="/>
-            <table:column date="true" dateTimePattern="${place_created_date_format}" sort="true" id="c_cz_kolomet_domain_Place_created" property="created" z="6ntIE1D567krPy/7+gg0znarR+I="/>
-            <table:column date="true" dateTimePattern="${place_lastmodified_date_format}" sort="true" id="c_cz_kolomet_domain_Place_lastModified" property="lastModified" z="neMypIHLHbMOcaJZhkD2HaOd1xI="/>
-            <table:column id="c_cz_kolomet_domain_Place_description" property="description" sort="true" z="A4bvFSMuwhGpy6Gn9aKyoDHqsf0="/>
+            <table:column id="c_cz_kolomet_domain_Place_name" property="name" sort="true" z="user-managed"/>
+            <table:column id="c_cz_kolomet_domain_Place_gpsLocation" property="gpsLocation" sort="true" z="A4bvFSMuwhGpy6Gn9aKyoDHqsf0="/>
+            <table:column id="c_cz_kolomet_domain_Place_createdBy" property="createdBy" sort="true" z="user-managed"/>
+            <table:column id="c_cz_kolomet_domain_Place_lastModifiedBy" property="lastModifiedBy" sort="true" z="user-managed"/>
+            <table:column date="true" dateTimePattern="${place_created_date_format}" id="c_cz_kolomet_domain_Place_created" property="created" sort="true" z="user-managed"/>
+            <table:column date="true" dateTimePattern="${place_lastmodified_date_format}" id="c_cz_kolomet_domain_Place_lastModified" property="lastModified" sort="true" z="user-managed"/>
+            <table:column id="c_cz_kolomet_domain_Place_description" property="description" sort="true" z="user-managed"/>
         </table:table>
     </page:list>
 </div>

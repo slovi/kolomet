@@ -4,11 +4,11 @@ import java.awt.Dimension;
 import java.io.File;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.task.TaskExecutor;
 
+import cz.kolomet.domain.BasePhotoUrl;
 import cz.kolomet.domain.Photo;
 import cz.kolomet.domain.PhotoContainerService;
 import cz.kolomet.service.ImageService;
@@ -27,31 +27,26 @@ public abstract class AbstractPhotoUrlService implements PhotoContainerService {
 	protected abstract ResizeInfo[] getResizeInfos();
 	
 	@Override
-	public void resizePhoto(final File photo) {
+	public void resizePhoto(final File file) {
 		executor.execute(new Runnable() {
 			
 			@Override
 			public void run() {
-				resizePhoto(photo, getResizeInfos(), true);
+				
+				for (ResizeInfo resizeInfo: getResizeInfos()) {
+					
+					String targetFileName = BasePhotoUrl.getPhotoUrlFileName(file.getName(), resizeInfo.getSuffix());
+					if (resizeInfo.resizeImage()) {
+						imageService.resizeAndSave(file, new File(file.getParent(), targetFileName), resizeInfo.getDimension());
+					} else {
+						imageService.save(file, new File(file.getParent(), targetFileName));
+					}
+				}
+				
+				FileUtils.deleteQuietly(file);
+				
 			}
 		});
-	}
-	
-	protected void resizePhoto(File file, ResizeInfo[] resizeInfos, boolean deleteAfterResize) {
-		
-		for (ResizeInfo resizeInfo: resizeInfos) {
-			
-			String targetFileName = FilenameUtils.getBaseName(file.getName()) + resizeInfo.getSuffix();
-			if (resizeInfo.resizeImage()) {
-				imageService.resizeAndSave(file, new File(file.getParent(), targetFileName), resizeInfo.getDimension());
-			} else {
-				imageService.save(file, new File(file.getParent(), targetFileName));
-			}
-		}
-		
-		if (deleteAfterResize) {
-			FileUtils.deleteQuietly(file);
-		}
 	}
 	
 	protected void deletePhoto(Photo photo) {

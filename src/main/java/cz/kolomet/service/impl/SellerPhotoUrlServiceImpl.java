@@ -36,14 +36,11 @@ public class SellerPhotoUrlServiceImpl extends AbstractPhotoUrlService implement
 		resizeInfos[2] = new ResizeInfo(new Dimension(thumbnailWidth, thumbnailHeight), PhotoUrl.THUMBNAIL_IMG_SUFFIX); // save thumb image
 		return resizeInfos;
 	}
-	
-	public void saveSellerPhotoUrl(SellerPhotoUrl photoUrl, final File file) {
-		sellerPhotoUrlRepository.save(photoUrl);
-	}
 
 	@Override
-	public void savePhoto(Photo photo, File dest) {
-		saveSellerPhotoUrl((SellerPhotoUrl) photo, dest);
+	public void savePhoto(Photo photo) {
+		// TODO - optimize this cast
+		sellerPhotoUrlRepository.save((SellerPhotoUrl) photo);
 	}
 	
 }

@@ -31,7 +31,7 @@ import cz.kolomet.service.NewsItemService;
 @RequestMapping("/admin/newsitems")
 @Controller
 @RooWebScaffold(path = "admin/newsitems", formBackingObject = NewsItem.class)
-public class NewsItemController extends AbstractAdminController implements MessageSourceAware {
+public class NewsItemController extends AbstractAdminController {
 	
 	@Autowired
 	private NewsItemService newsItemService;
@@ -41,9 +41,6 @@ public class NewsItemController extends AbstractAdminController implements Messa
 	
 	@Autowired
 	private ApplicationUserService applicationUserService;
-	
-	@Autowired
-	private MessageSource messageSource;
 	
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String create(@Valid NewsItem newsItem, @RequestParam(value = "stay", required = false) String stay, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) throws IOException {
@@ -108,10 +105,5 @@ public class NewsItemController extends AbstractAdminController implements Messa
         uiModel.addAttribute("newsItem_lastmodified_date_format", DateTimeFormat.patternForStyle("MM", LocaleContextHolder.getLocale()));
         uiModel.addAttribute("newsItem_newsitemdate_date_format", DateTimeFormat.patternForStyle("MS", LocaleContextHolder.getLocale()));
     }
-    
-    @Override
-    public void setMessageSource(MessageSource messageSource) {
-    	this.messageSource = messageSource;
-    }
-	
+
 }

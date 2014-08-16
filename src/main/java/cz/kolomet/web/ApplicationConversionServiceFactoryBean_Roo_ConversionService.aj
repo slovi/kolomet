@@ -52,7 +52,6 @@ import cz.kolomet.service.ProductColorService;
 import cz.kolomet.service.ProductService;
 import cz.kolomet.service.ProductUsageService;
 import cz.kolomet.service.RateService;
-import cz.kolomet.service.RegionService;
 import cz.kolomet.service.RegistrationRequestService;
 import cz.kolomet.service.SellerPhotoUrlService;
 import cz.kolomet.service.SellerService;
@@ -140,9 +139,6 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     
     @Autowired
     ProductUsageService ApplicationConversionServiceFactoryBean.productUsageService;
-    
-    @Autowired
-    RegionService ApplicationConversionServiceFactoryBean.regionService;
     
     public Converter<Long, ApplicationPermission> ApplicationConversionServiceFactoryBean.getIdToApplicationPermissionConverter() {
         return new org.springframework.core.convert.converter.Converter<java.lang.Long, cz.kolomet.domain.ApplicationPermission>() {

@@ -25,6 +25,7 @@ import cz.kolomet.domain.codelist.CountryState;
 import cz.kolomet.domain.codelist.ProductAttributeType;
 import cz.kolomet.domain.codelist.Region;
 import cz.kolomet.domain.codelist.SellerStatus;
+import cz.kolomet.service.RegionService;
 import cz.kolomet.service.SellerStatusService;
 
 /**
@@ -35,6 +36,9 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 
 	@Autowired
 	private SellerStatusService sellerStatusService;
+	
+	@Autowired
+	private RegionService regionService;
 	
 	@Override
 	@SuppressWarnings("deprecation")

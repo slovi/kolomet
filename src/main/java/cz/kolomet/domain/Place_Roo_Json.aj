@@ -13,19 +13,28 @@ import java.util.List;
 privileged aspect Place_Roo_Json {
     
     public String Place.toJson() {
-        return new JSONSerializer().exclude("*.class").serialize(this);
+        return new JSONSerializer()
+        .exclude("*.class").serialize(this);
+    }
+    
+    public String Place.toJson(String[] fields) {
+        return new JSONSerializer()
+        .include(fields).exclude("*.class").serialize(this);
     }
     
     public static Place Place.fromJsonToPlace(String json) {
-        return new JSONDeserializer<Place>().use(null, Place.class).deserialize(json);
+        return new JSONDeserializer<Place>()
+        .use(null, Place.class).deserialize(json);
     }
     
     public static String Place.toJsonArray(Collection<Place> collection) {
-        return new JSONSerializer().exclude("*.class").serialize(collection);
+        return new JSONSerializer()
+        .exclude("*.class").serialize(collection);
     }
     
     public static Collection<Place> Place.fromJsonArrayToPlaces(String json) {
-        return new JSONDeserializer<List<Place>>().use(null, ArrayList.class).use("values", Place.class).deserialize(json);
+        return new JSONDeserializer<List<Place>>()
+        .use("values", Place.class).deserialize(json);
     }
     
 }

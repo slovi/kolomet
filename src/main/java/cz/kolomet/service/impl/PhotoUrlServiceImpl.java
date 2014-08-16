@@ -41,18 +41,15 @@ public class PhotoUrlServiceImpl extends AbstractPhotoUrlService implements Phot
     	return resizeInfos;
     }
     
-    public void savePhotoUrl(PhotoUrl photoUrl, final File file) {
-    	photoUrlRepository.save(photoUrl);
-    }
-    
     @Override
     public List<PhotoUrl> findByProduct(Product product) {
     	return photoUrlRepository.findByProduct(product);
     }
 
 	@Override
-	public void savePhoto(Photo photo, File dest) {
-		savePhotoUrl((PhotoUrl) photo, dest);
+	public void savePhoto(Photo photo) {
+		// TODO - optimize this cast
+		photoUrlRepository.save((PhotoUrl) photo);
 	}
    
 }

@@ -4,7 +4,7 @@ import java.io.File;
 
 public interface PhotoContainerService {
 	
-	public void savePhoto(Photo photo, File dest);
+	public void savePhoto(Photo photo);
 	
 	public void resizePhoto(File photo);
 

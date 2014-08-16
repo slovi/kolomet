@@ -55,30 +55,6 @@
   	.dijitTextBox[type=file] {
   		width: 25em;
   	}
-  	.uploadBtn{
-	    border:1px solid #333333;
-	    background:url(buttonEnabled.png) #d0d0d0 repeat-x scroll 0px top;
-	    font-size:14px;
-	    width:201px;
-	    height:30px;
-	    vertical-align:middle;
-	    text-align:center;
-	}
-	.uploadHover{
-	    background-image:url(buttonHover.png);
-	    cursor:pointer;
-	    font-weight:bold;
-	}
-	
-	.uploadPress{
-	    background-image:url(buttonActive.png);
-	}
-	.uploadDisabled{
-	    background-image:none;
-	    background-color:#666;
-	    color:#999;
-	    border:1px solid #999;
-	}
   </style>
 
 </jsp:root>
