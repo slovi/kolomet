@@ -2,7 +2,7 @@
 <div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <page:show id="ps_cz_kolomet_domain_ApplicationRole" object="${applicationrole}" path="/admin/applicationroles" z="user-managed">
+    <page:show id="ps_cz_kolomet_domain_ApplicationRole" object="${applicationrole}" path="${subContext}/admin/applicationroles" z="user-managed">
         <field:display field="roleName" id="s_cz_kolomet_domain_ApplicationRole_roleName" object="${applicationrole}" z="8HsxOcadx6FniJx0PCUvnzuaOK4="/>
         <field:display collectionItemProperty="permissionName" field="permissions" id="s_cz_kolomet_domain_ApplicationRole_permissions" object="${applicationrole}" z="user-managed"/>
         <field:display field="createdBy" id="s_cz_kolomet_domain_ApplicationRole_createdBy" object="${applicationrole}" z="kbJND2YCE7C3bRx361JOZzqDTHM="/>

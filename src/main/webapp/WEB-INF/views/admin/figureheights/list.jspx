@@ -3,7 +3,7 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_cz_kolomet_domain_codelist_FigureHeight" items="${figureheights}" z="4dSxSDjwbUb2zH7h9IyhmkDjY6c=">
-        <table:table data="${figureheights}" id="l_cz_kolomet_domain_codelist_FigureHeight" path="/admin/figureheights" z="u6cANZEGecuM59aVPwf1bbgu2lE=">
+        <table:table data="${figureheights}" id="l_cz_kolomet_domain_codelist_FigureHeight" path="${subContext}/admin/figureheights" z="u6cANZEGecuM59aVPwf1bbgu2lE=">
             <table:column id="c_cz_kolomet_domain_codelist_FigureHeight_codeKey" property="codeKey" sort="true" z="user-managed"/>
             <table:column id="c_cz_kolomet_domain_codelist_FigureHeight_codeDescription" property="codeDescription" sort="true" z="user-managed"/>
             <table:column id="c_cz_kolomet_domain_codelist_FigureHeight_sequenceNr" property="sequenceNr" sort="true" z="zhpzNps0RzWs/kykityS93TScwI="/>

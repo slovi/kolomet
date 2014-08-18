@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 <tiles-definitions>
-    <definition extends="default_admin" name="admin/countrystates/list">
+    <definition extends="store/template_admin" name="store/admin/countrystates/list">
         <put-attribute name="body" value="/WEB-INF/views/admin/countrystates/list.jspx"/>
     </definition>
-<definition extends="default_admin" name="admin/countrystates/show">
+	<definition extends="store/template_admin" name="store/admin/countrystates/show">
         <put-attribute name="body" value="/WEB-INF/views/admin/countrystates/show.jspx"/>
     </definition>
-<definition extends="default_admin" name="admin/countrystates/create">
+	<definition extends="store/template_admin" name="store/admin/countrystates/create">
         <put-attribute name="body" value="/WEB-INF/views/admin/countrystates/create.jspx"/>
     </definition>
-<definition extends="default_admin" name="admin/countrystates/update">
+	<definition extends="store/template_admin" name="store/admin/countrystates/update">
         <put-attribute name="body" value="/WEB-INF/views/admin/countrystates/update.jspx"/>
     </definition>
 </tiles-definitions>

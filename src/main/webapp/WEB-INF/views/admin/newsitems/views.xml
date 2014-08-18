@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 <tiles-definitions>
-    <definition extends="default_admin" name="admin/newsitems/list">
+    <definition extends="store/template_admin" name="store/admin/newsitems/list">
         <put-attribute name="body" value="/WEB-INF/views/admin/newsitems/list.jspx"/>
     </definition>
-<definition extends="default_admin" name="admin/newsitems/show">
+	<definition extends="store/template_admin" name="store/admin/newsitems/show">
         <put-attribute name="body" value="/WEB-INF/views/admin/newsitems/show.jspx"/>
     </definition>
-<definition extends="default_admin" name="admin/newsitems/create">
+	<definition extends="store/template_admin" name="store/admin/newsitems/create">
         <put-attribute name="body" value="/WEB-INF/views/admin/newsitems/create.jspx"/>
     </definition>
-<definition extends="default_admin" name="admin/newsitems/update">
+	<definition extends="store/template_admin" name="store/admin/newsitems/update">
         <put-attribute name="body" value="/WEB-INF/views/admin/newsitems/update.jspx"/>
     </definition>
 </tiles-definitions>

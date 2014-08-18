@@ -23,8 +23,7 @@
        	<div style="margin:10px 6px 6px 6px;float:left;width:696px;"><h2>Top 3 místa:</h2></div>
        	<c:forEach items="${topPlaces}" var="place">
        		<div class="homepage_unit"> 
-       			<spring:url value="/public/places/${place.id}" var="placeUrl" />
-       			<spring:url value="/public/places/${place.id}" var="placeImgUrl" />
+       			<spring:url value="/tour/public/places/${place.id}" var="placeUrl" />
                 <a href="${placeUrl}"><util:photo-image height="146" width="224" photos="${place.photos}" imgType="over" /></a>
                 <div class="home_description"> 
                 	<a href="${placeUrl}" class="label"><c:out value="${place.name}"/></a>
@@ -42,7 +41,7 @@
     </div>
     
     <spring:url value="/" var="contextPath" />
-    <spring:url value="/public/places" var="placeUrl" />
+    <spring:url value="/tour/public/places" var="placeUrl" />
     <spring:url value="/resources/js/gmap.js" var="gmapUrl" />
 	
 	<c:set value="${param.highlight}" var="highlight" />

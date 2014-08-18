@@ -55,7 +55,7 @@
            	</p>
            	<br />
       		<p class="detail_seller right">
-           		<spring:url value="/public/sellers/detail/${product.seller.id}" var="sellerIdUrl" />
+           		<spring:url value="/store/public/sellers/detail/${product.seller.id}" var="sellerIdUrl" />
 	            <a href="${sellerIdUrl}"><c:out value="${product.seller.sellerName}" /></a><br/>
 	            <c:out value="${product.seller.addressString}" /><br/>
 	            <spring:message code="label_cz_kolomet_domain_seller_businessphonenumber_short" />: <c:out value="${product.seller.businessPhoneNumber}" />

@@ -12,7 +12,7 @@ public class AboutController extends AbstractPublicController {
 
     @RequestMapping
     public String index(Model model) {
-        return "about/index";
+        return "public/about/index";
     }
 
 }

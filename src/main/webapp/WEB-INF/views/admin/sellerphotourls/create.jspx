@@ -4,7 +4,7 @@
     <jsp:output omit-xml-declaration="yes"/>
     <form:create buttonCode="button_commit" id="fc_cz_kolomet_domain_SellerPhotoUrl" modelAttribute="sellerPhotoUrl" multipart="true" path="/admin/sellerphotourls" render="${empty dependencies}" z="user-managed">
         <field:files filesCount="1" id="files"/>
-        <field:select field="seller" id="c_cz_kolomet_domain_SellerPhotoUrl_seller" itemValue="id" items="${sellers}" path="/admin/sellers" render="false" required="true" z="user-managed"/>
+        <field:select field="seller" id="c_cz_kolomet_domain_SellerPhotoUrl_seller" itemValue="id" items="${sellers}" path="${subContext}/admin/sellers" render="false" required="true" z="user-managed"/>
         <input name="seller" type="hidden" value="${param.parentEntityId}"/>
         <field:input field="fileName" id="c_cz_kolomet_domain_SellerPhotoUrl_fileName" max="20" render="false" required="false" z="user-managed"/>
         <field:input field="contentType" id="c_cz_kolomet_domain_SellerPhotoUrl_contentType" max="20" render="false" required="false" z="user-managed"/>

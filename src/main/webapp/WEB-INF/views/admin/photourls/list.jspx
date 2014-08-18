@@ -3,7 +3,7 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_cz_kolomet_domain_PhotoUrl" items="${photourls}" z="user-managed">
-        <table:table create="false" data="${photourls}" id="l_cz_kolomet_domain_PhotoUrl" path="/admin/photourls" update="false" z="user-managed">
+        <table:table create="false" data="${photourls}" id="l_cz_kolomet_domain_PhotoUrl" path="${subContext}/admin/photourls" update="false" z="user-managed">
             <table:column id="c_cz_kolomet_domain_PhotoUrl_contents" img="true" label="Foto" property="thumbPhotoUrl" z="user-managed"/>
             <table:column id="c_cz_kolomet_domain_PhotoUrl_createdBy" property="createdBy" z="US7i6j2DdHL8MatgfxcXRhUCkJw="/>
             <table:column id="c_cz_kolomet_domain_PhotoUrl_lastModifiedBy" property="lastModifiedBy" z="ex0PZCGaGhYH0DgybIdSp6BvnfU="/>

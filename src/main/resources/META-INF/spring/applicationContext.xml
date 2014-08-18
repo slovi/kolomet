@@ -13,13 +13,17 @@
 
 	<context:component-scan base-package="cz.kolomet.service" />
 	
-	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-    	<property name="locations">
+	<bean id="applicationProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="locations">
     		<list>
     			<value>classpath:config.properties</value>
     			<value>classpath:META-INF/version.properties</value>
     		</list>
-    	</property>
+		</property>
+	</bean>
+	
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    	<property name="properties" ref="applicationProperties" />
     </bean>
 	
 	<context:spring-configured/>

@@ -2,7 +2,7 @@
 <div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:spring="http://www.springframework.org/tags" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <page:show id="ps_cz_kolomet_domain_NewsItem" object="${newsitem}" path="/admin/newsitems" z="user-managed">
+    <page:show id="ps_cz_kolomet_domain_NewsItem" object="${newsitem}" path="${subContext}/admin/newsitems" z="user-managed">
         <field:display date="true" dateTimePattern="${newsItem_newsitemdate_date_format}" field="newsItemDate" id="s_cz_kolomet_domain_NewsItem_newsItemDate" object="${newsitem}" z="WvUoKBJa3/eh80tAtu1QKYWcPag="/>
         <field:display enumValue="true" field="newsItemType" id="s_cz_kolomet_domain_NewsItem_newsItemType" object="${newsitem}" z="user-managed"/>
         <field:display field="text" id="s_cz_kolomet_domain_NewsItem_text" object="${newsitem}" z="HFJFPDfqDM2yxLZBaNesLBpdA60="/>

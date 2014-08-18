@@ -10,67 +10,71 @@
 	<http pattern="/background/**" security="none" />
 	<http pattern="/img/**" security="none" />
 	<http pattern="/file/**" security="none" />
-	<http pattern="/captcha_*" security="none" />
+	<http pattern="/captcha" security="none" />
 	<http auto-config="true" use-expressions="true">
-		<intercept-url pattern="/public/**" access="permitAll" />
-		<intercept-url pattern="/private/**" access="isAuthenticated()"/>
-		<intercept-url pattern="/admin/registrationrequests*" access="hasAnyRole('ROLE_per_registrationrequests')" />
-		<intercept-url pattern="/admin/registrationrequests/*" access="hasAnyRole('ROLE_per_registrationrequests')" />
-		<intercept-url pattern="/admin/applicationusers*" access="hasAnyRole('ROLE_per_applicationusers')" />
-		<intercept-url pattern="/admin/applicationusers/*" access="hasAnyRole('ROLE_per_applicationusers')" />
-		<intercept-url pattern="/admin/applicationpermissions*" access="hasAnyRole('ROLE_per_applicationusers')" />
-		<intercept-url pattern="/admin/applicationpermissions/*" access="hasAnyRole('ROLE_per_applicationusers')" />
-		<intercept-url pattern="/admin/applicationroles*" access="hasAnyRole('ROLE_per_applicationusers')" />
-		<intercept-url pattern="/admin/applicationroles/*" access="hasAnyRole('ROLE_per_applicationusers')" />
-		<intercept-url pattern="/admin/sellers*" access="hasAnyRole('ROLE_per_sellers')" />
-		<intercept-url pattern="/admin/sellers/*" access="hasAnyRole('ROLE_per_sellers')" />
-		<intercept-url pattern="/admin/sellerstatuses*" access="hasAnyRole('ROLE_per_sellerstatuses')" />
-		<intercept-url pattern="/admin/sellerstatuses/*" access="hasAnyRole('ROLE_per_sellerstatuses')" />
-		<intercept-url pattern="/admin/sellerphotourls*" access="hasAnyRole('ROLE_per_sellers')" />
-		<intercept-url pattern="/admin/sellerphotourls/*" access="hasAnyRole('ROLE_per_sellers')" />
-		<intercept-url pattern="/admin/regions*" access="hasAnyRole('ROLE_per_regions')" />
-		<intercept-url pattern="/admin/regions/*" access="hasAnyRole('ROLE_per_regions')" />
-		<intercept-url pattern="/admin/countrystates*" access="hasAnyRole('ROLE_per_countrystates')" />
-		<intercept-url pattern="/admin/countrystates/*" access="hasAnyRole('ROLE_per_countrystates')" />
-		<intercept-url pattern="/admin/region*" access="hasAnyRole('ROLE_per_regions')" />
-		<intercept-url pattern="/admin/region/*" access="hasAnyRole('ROLE_per_regions')" />
-		<intercept-url pattern="/admin/placecomments*" access="hasAnyRole('ROLE_per_places')" />
-		<intercept-url pattern="/admin/placecomments/*" access="hasAnyRole('ROLE_per_places')" />
-		<intercept-url pattern="/admin/places*" access="hasAnyRole('ROLE_per_places')" />
-		<intercept-url pattern="/admin/places/*" access="hasAnyRole('ROLE_per_places')" />
-		<intercept-url pattern="/admin/placetypes*" access="hasAnyRole('ROLE_per_placetypes')" />
-		<intercept-url pattern="/admin/placetypes/*" access="hasAnyRole('ROLE_per_placetypes')" />
-		<intercept-url pattern="/admin/placephotourls*" access="hasAnyRole('ROLE_per_places')" />
-		<intercept-url pattern="/admin/placephotourls/*" access="hasAnyRole('ROLE_per_places')" />
-		<intercept-url pattern="/admin/products*" access="hasAnyRole('ROLE_per_products')" />
-		<intercept-url pattern="/admin/products/*" access="hasAnyRole('ROLE_per_products')" />
-		<intercept-url pattern="/admin/photourls*" access="hasAnyRole('ROLE_per_products')" />
-		<intercept-url pattern="/admin/photourls/*" access="hasAnyRole('ROLE_per_products')" />
-		<intercept-url pattern="/admin/productattributes*" access="hasAnyRole('ROLE_per_products')" />
-		<intercept-url pattern="/admin/productattributes/*" access="hasAnyRole('ROLE_per_products')" />
-		<intercept-url pattern="/admin/productattributetypes*" access="hasAnyRole('ROLE_per_productattributetypes')" />
-		<intercept-url pattern="/admin/productcolors*" access="hasAnyRole('ROLE_per_productcolors')" />
-		<intercept-url pattern="/admin/productcolors/*" access="hasAnyRole('ROLE_per_productcolors')" />
-		<intercept-url pattern="/admin/productusages*" access="hasAnyRole('ROLE_per_productusages')" />
-		<intercept-url pattern="/admin/productusages/*" access="hasAnyRole('ROLE_per_productusages')" />
-		<intercept-url pattern="/admin/bicyclecategories*" access="hasAnyRole('ROLE_per_bicyclecategories')" />
-		<intercept-url pattern="/admin/bicyclecategories/*" access="hasAnyRole('ROLE_per_bicyclecategories')" />
-		<intercept-url pattern="/admin/figureheights*" access="hasAnyRole('ROLE_per_figureheights')" />
-		<intercept-url pattern="/admin/figureheights/*" access="hasAnyRole('ROLE_per_figureheights')" />
-		<intercept-url pattern="/admin/productattributetypes/*" access="hasAnyRole('ROLE_per_productattributetypes')" />
-		<intercept-url pattern="/admin/producers*" access="hasAnyRole('ROLE_per_producers')" />
-		<intercept-url pattern="/admin/producers/*" access="hasAnyRole('ROLE_per_producers')" />
-		<intercept-url pattern="/admin/categorys*" access="hasAnyRole('ROLE_per_categorys')" />
-		<intercept-url pattern="/admin/categorys/*" access="hasAnyRole('ROLE_per_categorys')" />
-		<intercept-url pattern="/admin/categorytypes*" access="hasAnyRole('ROLE_per_categorytypes')" />
-		<intercept-url pattern="/admin/categorytypes/*" access="hasAnyRole('ROLE_per_categorytypes')" />
-		<intercept-url pattern="/admin/newsitems" access="hasAnyRole('ROLE_per_newsitems')" />
-		<intercept-url pattern="/admin/newsitems/*" access="hasAnyRole('ROLE_per_newsitems')" />
-		<intercept-url pattern="/admin/newsitemphotourls" access="hasAnyRole('ROLE_per_newsitems')" />
-		<intercept-url pattern="/admin/newsitemphotourls/*" access="hasAnyRole('ROLE_per_newsitems')" />
+		<intercept-url pattern="/store/public/**" access="permitAll" />
+		<intercept-url pattern="/tour/public/**" access="permitAll" />
+		<intercept-url pattern="/store/admin/registrationrequests*" access="hasAnyRole('ROLE_per_registrationrequests')" />
+		<intercept-url pattern="/store/admin/registrationrequests/*" access="hasAnyRole('ROLE_per_registrationrequests')" />
+		<intercept-url pattern="/store/admin/applicationusers*" access="hasAnyRole('ROLE_per_applicationusers')" />
+		<intercept-url pattern="/store/admin/applicationusers/*" access="hasAnyRole('ROLE_per_applicationusers')" />
+		<intercept-url pattern="/store/admin/applicationpermissions*" access="hasAnyRole('ROLE_per_applicationusers')" />
+		<intercept-url pattern="/store/admin/applicationpermissions/*" access="hasAnyRole('ROLE_per_applicationusers')" />
+		<intercept-url pattern="/store/admin/applicationroles*" access="hasAnyRole('ROLE_per_applicationusers')" />
+		<intercept-url pattern="/store/admin/applicationroles/*" access="hasAnyRole('ROLE_per_applicationusers')" />
+		<intercept-url pattern="/store/admin/sellers*" access="hasAnyRole('ROLE_per_sellers')" />
+		<intercept-url pattern="/store/admin/sellers/*" access="hasAnyRole('ROLE_per_sellers')" />
+		<intercept-url pattern="/store/admin/sellerstatuses*" access="hasAnyRole('ROLE_per_sellerstatuses')" />
+		<intercept-url pattern="/store/admin/sellerstatuses/*" access="hasAnyRole('ROLE_per_sellerstatuses')" />
+		<intercept-url pattern="/store/admin/sellerphotourls*" access="hasAnyRole('ROLE_per_sellers')" />
+		<intercept-url pattern="/store/admin/sellerphotourls/*" access="hasAnyRole('ROLE_per_sellers')" />
+		<intercept-url pattern="/store/admin/regions*" access="hasAnyRole('ROLE_per_regions')" />
+		<intercept-url pattern="/store/admin/regions/*" access="hasAnyRole('ROLE_per_regions')" />
+		<intercept-url pattern="/store/admin/countrystates*" access="hasAnyRole('ROLE_per_countrystates')" />
+		<intercept-url pattern="/store/admin/countrystates/*" access="hasAnyRole('ROLE_per_countrystates')" />
+		<intercept-url pattern="/store/admin/region*" access="hasAnyRole('ROLE_per_regions')" />
+		<intercept-url pattern="/store/admin/region/*" access="hasAnyRole('ROLE_per_regions')" />
+		<intercept-url pattern="/store/admin/products*" access="hasAnyRole('ROLE_per_products')" />
+		<intercept-url pattern="/store/admin/products/*" access="hasAnyRole('ROLE_per_products')" />
+		<intercept-url pattern="/store/admin/photourls*" access="hasAnyRole('ROLE_per_products')" />
+		<intercept-url pattern="/store/admin/photourls/*" access="hasAnyRole('ROLE_per_products')" />
+		<intercept-url pattern="/store/admin/productattributes*" access="hasAnyRole('ROLE_per_products')" />
+		<intercept-url pattern="/store/admin/productattributes/*" access="hasAnyRole('ROLE_per_products')" />
+		<intercept-url pattern="/store/admin/productattributetypes*" access="hasAnyRole('ROLE_per_productattributetypes')" />
+		<intercept-url pattern="/store/admin/productcolors*" access="hasAnyRole('ROLE_per_productcolors')" />
+		<intercept-url pattern="/store/admin/productcolors/*" access="hasAnyRole('ROLE_per_productcolors')" />
+		<intercept-url pattern="/store/admin/productusages*" access="hasAnyRole('ROLE_per_productusages')" />
+		<intercept-url pattern="/store/admin/productusages/*" access="hasAnyRole('ROLE_per_productusages')" />
+		<intercept-url pattern="/store/admin/bicyclecategories*" access="hasAnyRole('ROLE_per_bicyclecategories')" />
+		<intercept-url pattern="/store/admin/bicyclecategories/*" access="hasAnyRole('ROLE_per_bicyclecategories')" />
+		<intercept-url pattern="/store/admin/figureheights*" access="hasAnyRole('ROLE_per_figureheights')" />
+		<intercept-url pattern="/store/admin/figureheights/*" access="hasAnyRole('ROLE_per_figureheights')" />
+		<intercept-url pattern="/store/admin/productattributetypes/*" access="hasAnyRole('ROLE_per_productattributetypes')" />
+		<intercept-url pattern="/store/admin/producers*" access="hasAnyRole('ROLE_per_producers')" />
+		<intercept-url pattern="/store/admin/producers/*" access="hasAnyRole('ROLE_per_producers')" />
+		<intercept-url pattern="/store/admin/categorys*" access="hasAnyRole('ROLE_per_categorys')" />
+		<intercept-url pattern="/store/admin/categorys/*" access="hasAnyRole('ROLE_per_categorys')" />
+		<intercept-url pattern="/store/admin/categorytypes*" access="hasAnyRole('ROLE_per_categorytypes')" />
+		<intercept-url pattern="/store/admin/categorytypes/*" access="hasAnyRole('ROLE_per_categorytypes')" />
+		<intercept-url pattern="/store/admin/newsitems" access="hasAnyRole('ROLE_per_newsitems')" />
+		<intercept-url pattern="/store/admin/newsitems/*" access="hasAnyRole('ROLE_per_newsitems')" />
+		<intercept-url pattern="/store/admin/newsitemphotourls" access="hasAnyRole('ROLE_per_newsitems')" />
+		<intercept-url pattern="/store/admin/newsitemphotourls/*" access="hasAnyRole('ROLE_per_newsitems')" />
+
+		<intercept-url pattern="/tour/admin/placecomments*" access="hasAnyRole('ROLE_per_places')" />
+		<intercept-url pattern="/tour/admin/placecomments/*" access="hasAnyRole('ROLE_per_places')" />
+		<intercept-url pattern="/tour/admin/places*" access="hasAnyRole('ROLE_per_places')" />
+		<intercept-url pattern="/tour/admin/places/*" access="hasAnyRole('ROLE_per_places')" />
+		<intercept-url pattern="/tour/admin/placetypes*" access="hasAnyRole('ROLE_per_placetypes')" />
+		<intercept-url pattern="/tour/admin/placetypes/*" access="hasAnyRole('ROLE_per_placetypes')" />
+		<intercept-url pattern="/tour/admin/placephotourls*" access="hasAnyRole('ROLE_per_places')" />
+		<intercept-url pattern="/tour/admin/placephotourls/*" access="hasAnyRole('ROLE_per_places')" />
+		<intercept-url pattern="/tour/admin/regions*" access="hasAnyRole('ROLE_per_regions')" />
+		<intercept-url pattern="/tour/admin/regions/*" access="hasAnyRole('ROLE_per_regions')" />
+
 		<intercept-url pattern="/**" access="denyAll" />
-		<form-login login-page="/public/intro/index" authentication-failure-handler-ref="authenticationFailureHandler" authentication-success-handler-ref="authenticationSuccessHandler" />
-		<logout logout-success-url="/public/intro/index" />
+		<form-login login-page="/store/public/intro/index" authentication-failure-handler-ref="authenticationFailureHandler" authentication-success-handler-ref="authenticationSuccessHandler" />
+		<logout logout-success-url="/store/public/intro/index" />
 	</http>
 
 	<authentication-manager>

@@ -2,7 +2,7 @@
 <div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <page:show id="ps_cz_kolomet_domain_codelist_BicycleCategory" object="${bicyclecategory}" path="/admin/bicyclecategories" z="user-managed">
+    <page:show id="ps_cz_kolomet_domain_codelist_BicycleCategory" object="${bicyclecategory}" path="${subContext}/admin/bicyclecategories" z="user-managed">
         <field:display field="createdBy" id="s_cz_kolomet_domain_codelist_BicycleCategory_createdBy" object="${bicyclecategory}" z="user-managed"/>
         <field:display field="lastModifiedBy" id="s_cz_kolomet_domain_codelist_BicycleCategory_lastModifiedBy" object="${bicyclecategory}" z="user-managed"/>
         <field:display date="true" dateTimePattern="${bicycleCategory_created_date_format}" field="created" id="s_cz_kolomet_domain_codelist_BicycleCategory_created" object="${bicyclecategory}" z="cOIh9xC6XpaEdN1iwNOXsuswVxY="/>

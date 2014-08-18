@@ -2,7 +2,7 @@
 <div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:spring="http://www.springframework.org/tags" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <page:show create="false" delete="false" id="ps_cz_kolomet_domain_NewsItemPhotoUrl" list="false" object="${newsitemphotourl}" path="/admin/newsitemphotourls" update="false" z="user-managed">
+    <page:show create="false" delete="false" id="ps_cz_kolomet_domain_NewsItemPhotoUrl" list="false" object="${newsitemphotourl}" path="${subContext}/admin/newsitemphotourls" update="false" z="user-managed">
         <field:display field="createdBy" id="s_cz_kolomet_domain_NewsItemPhotoUrl_createdBy" object="${newsitemphotourl}" z="FJAUCuX/4XevUnIhag7vcHQFfKc="/>
         <field:display field="lastModifiedBy" id="s_cz_kolomet_domain_NewsItemPhotoUrl_lastModifiedBy" object="${newsitemphotourl}" z="S2sZH+ETierXfwH1qc2A5qi9qWY="/>
         <field:display date="true" dateTimePattern="${newsItemPhotoUrl_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_NewsItemPhotoUrl_lastModified" object="${newsitemphotourl}" z="/Y8h3Aes6kG3XWirMsWAUkGA304="/>

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 <tiles-definitions>
-    <definition extends="default" name="admin/placephotourls/list">
+    <definition extends="tour/template_admin" name="tour/admin/placephotourls/list">
         <put-attribute name="body" value="/WEB-INF/views/admin/placephotourls/list.jspx"/>
     </definition>
-<definition extends="default" name="admin/placephotourls/show">
+	<definition extends="tour/template_admin" name="tour/admin/placephotourls/show">
         <put-attribute name="body" value="/WEB-INF/views/admin/placephotourls/show.jspx"/>
     </definition>
-<definition extends="default" name="admin/placephotourls/create">
+	<definition extends="tour/template_admin" name="tour/admin/placephotourls/create">
         <put-attribute name="body" value="/WEB-INF/views/admin/placephotourls/create.jspx"/>
     </definition>
 </tiles-definitions>

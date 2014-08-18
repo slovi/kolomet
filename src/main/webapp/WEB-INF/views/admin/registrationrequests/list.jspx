@@ -3,7 +3,7 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_cz_kolomet_domain_RegistrationRequest" items="${registrationrequests}" z="a+6/XD9uxirv9V4apclzJK6m82k=">
-        <table:table data="${registrationrequests}" id="l_cz_kolomet_domain_RegistrationRequest" path="/admin/registrationrequests" z="tHH9ytnOs3YBWdn2w/VUmFlF3bQ=">
+        <table:table data="${registrationrequests}" id="l_cz_kolomet_domain_RegistrationRequest" path="${subContext}/admin/registrationrequests" z="tHH9ytnOs3YBWdn2w/VUmFlF3bQ=">
             <table:column id="c_cz_kolomet_domain_RegistrationRequest_createdBy" property="createdBy" render="false" sort="true" z="user-managed"/>
             <table:column id="c_cz_kolomet_domain_RegistrationRequest_lastModifiedBy" property="lastModifiedBy" render="false" sort="true" z="user-managed"/>
             <table:column date="true" dateTimePattern="${registrationRequest_created_date_format}" id="c_cz_kolomet_domain_RegistrationRequest_created" property="created" sort="true" z="user-managed"/>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:security="http://www.springframework.org/security/tags" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu" xmlns:spring="http://www.springframework.org/tags" id="menu_background">
+    
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    
+    <div id="menu_container"> 
+    	<div class="menu_inline">	
+    		<menu:menu id="main_menu">
+    			<menu:item url="/store/public/intro/index" messageCode="menu_main_intro" id="intro" renderPageParams="false" />
+    			<menu:item url="/store/public/products/filter?categoryType=${bikeCategoryTypeId}" messageCode="menu_main_products_bikes" id="products_bikes" defaultPageSize="${categoryPageSize}" />
+    			<!-- 
+    			<menu:item url="/public/products/filter?categoryType=${otherCategoryTypeId}" messageCode="menu_main_products_other" id="products_other" defaultPageSize="6" />
+    			 -->
+    			<menu:item url="/store/public/sellers/map" messageCode="menu_main_sellers" id="sellers" renderPageParams="false" />
+    			<menu:item url="/store/public/about" messageCode="menu_main_about" id="about" renderPageParams="false" />
+    			
+    			<security:authorize access="isFullyAuthenticated()">
+	    			<menu:category id="admin_menu" styleClass="admin" messageCode="menu_main_our_kolomet" url="#">
+	    				<security:authorize access="hasAnyRole('ROLE_per_registrationrequests')">    					
+		            		<menu:item id="i_registrationrequest_list" messageCode="global_menu_list" sort="processed" sortDesc="false" url="/store/admin/registrationrequests" z="user-managed"/>
+		        		</security:authorize>
+		        		<security:authorize access="hasRole('ROLE_per_sellers_own')">
+			        		<security:authentication property="principal.sellerId" var="sellerId" />
+	                		<menu:item id="i_controller__private_profileseller_id" label="Upravit profil prodejce" messageCode="global_generic" renderPageParams="false" url="/store/admin/sellers/${sellerId}?form" z="user-managed"/>
+	                	</security:authorize>
+	    				<security:authorize access="hasAnyRole('ROLE_per_applicationusers')">
+	    					<menu:item id="i_applicationuser_list" messageCode="global_menu_list" url="/store/admin/applicationusers" z="18oGQE63MUIZ2YAKBPnDk0gNcZA="/>
+	    					<menu:item id="i_applicationrole_list" messageCode="global_menu_list" url="/store/admin/applicationroles" z="5BKruYLjsrCLDE9itOj1TlqWcRk="/>
+	    					<menu:item id="i_applicationpermission_list" messageCode="global_menu_list" url="/store/admin/applicationpermissions" z="Wl97kcGOo9MYPdeFlSYOwi7lAZs="/>
+	    				</security:authorize>
+	    				<security:authorize access="hasRole('ROLE_per_sellers') and hasRole('ROLE_per_sellers_all')"> 
+		    				<hr color="#f9f9f9" width="85%" align="center" size="1" />
+							<menu:item id="i_seller_list" messageCode="global_menu_list" url="/store/admin/sellers" z="57f7mMa6rXXGgX7UBUaUGHmBSqg="/>
+							<security:authorize access="hasAnyRole('ROLE_per_sellerstatuses')">
+					            <menu:item id="i_sellerstatus_list" messageCode="global_menu_list" url="/admin/sellerstatuses" z="9tyOGUgA53BPcQ2WMBbQvObHThE="/>
+				            </security:authorize>
+				            <security:authorize access="hasAnyRole('ROLE_per_regions')">
+				            	<menu:item id="i_region_list" messageCode="global_menu_list" url="/store/admin/regions" z="R4yrjjgk2KXYIlMw++M9nLkYTpE="/>
+				            </security:authorize>
+				            <security:authorize access="hasAnyRole('ROLE_per_countrystates')">
+				            	<menu:item id="i_countrystate_list" messageCode="global_menu_list" url="/store/admin/countrystates" z="6376x50wFxJokyFZdSoG7iIslIs="/>
+				            </security:authorize>
+			            </security:authorize>
+						<security:authorize access="hasAnyRole('ROLE_per_products')"> 
+							<hr color="#f9f9f9" width="85%" align="center" size="1" />
+			            	<menu:item id="i_product_list" messageCode="global_menu_list" url="/store/admin/products" z="kEeyCmUUYXShbDEWwOLheaAkM50="/>
+				            <security:authorize access="hasAnyRole('ROLE_per_productattributetypes')">
+				            	<menu:item id="i_productattributetype_list" messageCode="global_menu_list" url="/store/admin/productattributetypes" z="y9XTmdd/EfLHKNBZ/zQWt6JP+QQ="/>
+				            </security:authorize>
+				            <security:authorize access="hasAnyRole('ROLE_per_producers')">
+					            <menu:item id="i_producer_list" messageCode="global_menu_list" url="/store/admin/producers" z="jTOhiGfGTy/mKcMjOgzzIoHDkxg="/>
+				            </security:authorize>
+				            <security:authorize access="hasAnyRole('ROLE_per_categorys')">
+					            <menu:item id="i_category_list" messageCode="global_menu_list" url="/store/admin/categorys" z="0VEYbn/XUobhsOa74Uf6KyWz8/w="/>
+				            </security:authorize>
+				            <security:authorize access="hasAnyRole('ROLE_per_categorytypes')">
+					            <menu:item id="i_categorytype_list" messageCode="global_menu_list" url="/store/admin/categorytypes" z="+i+xbCARHICgKqWYpTon7hXJ4S8="/>
+				            </security:authorize>
+				            <security:authorize access="hasAnyRole('ROLE_per_productcolors')">
+					            <menu:item id="i_productcolor_list" messageCode="global_menu_list" url="/store/admin/productcolors" z="yUHhENjQvEETRvOttIb2Zk8F4WY="/>
+					        </security:authorize>
+				            <security:authorize access="hasAnyRole('ROLE_per_productusages')">
+	                			<menu:item id="i_productusage_list" messageCode="global_menu_list" url="/store/admin/productusages" z="user-managed"/>
+			               	</security:authorize>
+			               	<security:authorize access="hasAnyRole('ROLE_per_bicyclecategories')">
+			                    <menu:item id="i_bicyclecategory_list" messageCode="global_menu_list" url="/store/admin/bicyclecategories" z="user-managed"/>
+			                </security:authorize>
+			                <security:authorize access="hasAnyRole('ROLE_per_figureheights')">
+			                    <menu:item id="i_figureheight_list" messageCode="global_menu_list" url="/store/admin/figureheights" z="user-managed"/>
+			                </security:authorize>
+			            </security:authorize>
+			            <security:authorize access="hasAnyRole('ROLE_per_newsitems')"> 
+				            <hr color="#f9f9f9" width="85%" align="center" size="1" />
+				            <menu:item id="i_newsitem_list" messageCode="global_menu_list" url="/store/admin/newsitems" z="KOnlcMRbr4BntwwokrnIdkGVvTE="/>
+			            </security:authorize>
+	    			</menu:category>		 
+	    			<security:authorize access="hasAnyRole('ROLE_per_products')"> 			
+						<menu:item id="i_product_new" messageCode="global_menu_new" styleClass="admin" renderPageParams="false" url="/store/admin/products?form" z="user-managed"/>
+					</security:authorize>
+    			</security:authorize>
+    			<security:authorize access="isFullyAuthenticated() and hasAnyRole('ROLE_per_places')">
+					<menu:item id="i_places" messageCode="global_menu_places" styleClass="comethere" renderPageParams="false" url="/tour/public/places" z="user-managed"/>
+				</security:authorize>
+    		</menu:menu>
+		</div>
+	</div>
+</div>

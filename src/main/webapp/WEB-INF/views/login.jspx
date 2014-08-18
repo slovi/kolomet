@@ -23,11 +23,11 @@
 				<span class="error"><!--  --></span>
 				<br />				
 				<br />
-				<spring:url value="/public/resetpasswords?form" var="resetPasswordUrl" />
+				<spring:url value="/${subContext}/public/resetpasswords?form" var="resetPasswordUrl" />
 				<a tabindex="4" href="${resetPasswordUrl}"><spring:message code="login_forgotten_password" /></a>
 				<br />
 				<br />
-				<spring:url value="/public/registrationrequests?form" var="registrationUrl" />
+				<spring:url value="/${subContext}/public/registrationrequests?form" var="registrationUrl" />
 				<a tabindex="5" href="${registrationUrl}"><spring:message code="login_registration" /></a>
 				<br />
 			</div>

@@ -114,7 +114,9 @@
         <menu:category id="c_photourl" render="false" z="user-managed"/>
         <menu:category id="c_countrystate" render="false" z="user-managed"/>
         <menu:category id="c_productattribute" render="false" z="user-managed"/>
-        <menu:category id="c_registrationrequest" render="false" z="user-managed"/>
+        <menu:category id="c_registrationrequest" render="false" z="user-managed">
+            <menu:item id="i_registrationrequest_new" messageCode="global_menu_new" url="/public/registrationrequests?form" z="RFTPPTV4JEv4OCXcYo9/Aqi0qow="/>
+        </menu:category>
         <menu:category id="c_productusage" render="false" z="user-managed"/>
         <menu:category id="c_sellerstatus" render="false" z="user-managed"/>
         <menu:category id="c_sellerphotourl" render="false" z="user-managed"/>

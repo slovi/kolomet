@@ -19,6 +19,8 @@ import cz.kolomet.domain.codelist.ProductAttributeType;
 @RooSerializable
 public class ProductAttribute extends DomainEntity {
     
+	private String test;
+	
     /**
      */
     @NotNull

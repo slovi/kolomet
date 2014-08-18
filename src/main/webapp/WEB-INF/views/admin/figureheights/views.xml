@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 <tiles-definitions>
-    <definition extends="default_admin" name="admin/figureheights/list">
+    <definition extends="store/template_admin" name="store/admin/figureheights/list">
         <put-attribute name="body" value="/WEB-INF/views/admin/figureheights/list.jspx"/>
     </definition>
-<definition extends="default_admin" name="admin/figureheights/show">
+	<definition extends="store/template_admin" name="store/admin/figureheights/show">
         <put-attribute name="body" value="/WEB-INF/views/admin/figureheights/show.jspx"/>
     </definition>
-<definition extends="default_admin" name="admin/figureheights/create">
+	<definition extends="store/template_admin" name="store/admin/figureheights/create">
         <put-attribute name="body" value="/WEB-INF/views/admin/figureheights/create.jspx"/>
     </definition>
-<definition extends="default_admin" name="admin/figureheights/update">
+	<definition extends="store/template_admin" name="store/admin/figureheights/update">
         <put-attribute name="body" value="/WEB-INF/views/admin/figureheights/update.jspx"/>
     </definition>
 </tiles-definitions>

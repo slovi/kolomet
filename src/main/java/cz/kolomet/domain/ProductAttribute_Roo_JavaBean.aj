@@ -9,6 +9,14 @@ import cz.kolomet.domain.codelist.ProductAttributeType;
 
 privileged aspect ProductAttribute_Roo_JavaBean {
     
+    public String ProductAttribute.getTest() {
+        return this.test;
+    }
+    
+    public void ProductAttribute.setTest(String test) {
+        this.test = test;
+    }
+    
     public ProductAttributeType ProductAttribute.getAttributeType() {
         return this.attributeType;
     }

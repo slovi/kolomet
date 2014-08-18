@@ -9,7 +9,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=8" />	
 			
-		<util:load-scripts />
+		<tiles:insertAttribute name="scripts"/>
 		
 		<spring:message code="application_name" var="app_name" htmlEscape="false"/>
 		<title><spring:message code="welcome_h3" arguments="${app_name}" /></title>
@@ -22,11 +22,7 @@
 		    <div id="center_container">
 		    	<tiles:insertAttribute name="menu_side"/>
 		    	<div id="content_container">
-		    		<div>
-		    			<tiles:insertAttribute name="body_header" ignore="true" />
-	    				<tiles:insertAttribute name="body_content" />
-	    				<tiles:insertAttribute name="body_footer" ignore="true" />
-	    			</div>
+	    			<tiles:insertAttribute name="body"/>
 			    	<tiles:insertAttribute name="footer"/>
 	    		</div> 
 		    </div>

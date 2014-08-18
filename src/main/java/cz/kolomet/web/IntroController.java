@@ -27,14 +27,14 @@ public class IntroController extends AbstractPublicController implements Initial
     public String index(Model model) {
     	
     	model.addAttribute("products", productRepository.findByPriority(pageRequest));
-        return "intro/index";
+        return "public/intro/index";
     }
     
     @RequestMapping(value="intro/index", method=RequestMethod.GET)
     public String introIndex(Model model) {
     	
     	model.addAttribute("products", productRepository.findByPriority(pageRequest));
-        return "intro/index";
+        return "public/intro/index";
     }
     
     @Override

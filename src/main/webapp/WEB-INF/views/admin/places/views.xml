@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 <tiles-definitions>
-    <definition extends="default_admin" name="admin/places/list">
+    <definition extends="tour/template_admin" name="tour/admin/places/list">
         <put-attribute name="body" value="/WEB-INF/views/admin/places/list.jspx"/>
     </definition>
-	<definition extends="default_admin" name="admin/places/show">
+	<definition extends="tour/template_admin" name="tour/admin/places/show">
         <put-attribute name="body" value="/WEB-INF/views/admin/places/show.jspx"/>
     </definition>
-	<definition extends="default_places" name="admin/places/create">
+	<definition extends="tour/template_default" name="tour/admin/places/create">
         <put-attribute name="body" value="/WEB-INF/views/admin/places/create.jspx"/>
     </definition>
-	<definition extends="default_places" name="admin/places/update">
+	<definition extends="tour/template_admin" name="tour/admin/places/update">
         <put-attribute name="body" value="/WEB-INF/views/admin/places/update.jspx"/>
     </definition>
 </tiles-definitions>

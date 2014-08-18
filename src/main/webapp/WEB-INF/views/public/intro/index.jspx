@@ -4,7 +4,7 @@
 
 	<c:forEach items="${products.content}" var="product">
 		<div class="homepage_unit"> 
-			<spring:url value="/public/products/detail/${product.id}" var="productIdUrl" />
+			<spring:url value="/store/public/products/detail/${product.id}" var="productIdUrl" />
 	     	<a href="${productIdUrl}">
 	     		<util:photo-image photos="${product.photoUrls}" imgType="over" height="146" width="224" />
 	     	</a>
@@ -21,7 +21,7 @@
 	     	</div>
 	     	<div class="home_seller"> 
 	     		<p>
-	     			<spring:url value="/public/sellers/detail/${product.seller.id}" var="sellerIdUrl" />
+	     			<spring:url value="/store/public/sellers/detail/${product.seller.id}" var="sellerIdUrl" />
 	                <a href="${sellerIdUrl}"><c:out value="${product.seller.sellerName}" /></a><br /><br />
 	            	<c:out value="${product.seller.businessAddressString}" /><br />
 	            	<c:if test="${not empty product.seller.mapUrl}">

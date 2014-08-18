@@ -19,9 +19,9 @@
 	    	<img class="side-menu-arrow-off ${hiddenClassOff}" src="${arrowRightImageUrl}" />
 	    </h1>
 	    <menu:menu id="side_menu_body_categories" styleClass="side-menu-body ${hiddenClassOn}">
-		    <menu:item url="/public/products/filter?menu=category" id="menuitem_category_all" label="Všechny typy kol" defaultPageSize="${categoryPageSize}" />
+		    <menu:item url="/store/public/products/filter?menu=category" id="menuitem_category_all" label="Všechny typy kol" defaultPageSize="${categoryPageSize}" />
 	    	<c:forEach items="${categorys}" var="category">
-				<menu:item url="/public/products/filter?category=${category.id}&amp;menu=category" id="menuitem_${category.codeKey}" label="${category.codeDescription}" defaultPageSize="${categoryPageSize}" />
+				<menu:item url="/store/public/products/filter?category=${category.id}&amp;menu=category" id="menuitem_${category.codeKey}" label="${category.codeDescription}" defaultPageSize="${categoryPageSize}" />
 			</c:forEach>
 	     </menu:menu>
 	</div>
@@ -39,7 +39,7 @@
         </h1>
 		<menu:menu id="side_menu_body_producers" styleClass="side-menu-body ${hiddenClassOn}">
 			<c:forEach items="${producers}" var="producer" varStatus="status">
-				<menu:item url="/public/products/filter?producer=${producer.id}&amp;menu=producer" id="menuitem_${producer.codeKey}" label="${producer.codeDescription}" defaultPageSize="${categoryPageSize}" />
+				<menu:item url="/store/public/products/filter?producer=${producer.id}&amp;menu=producer" id="menuitem_${producer.codeKey}" label="${producer.codeDescription}" defaultPageSize="${categoryPageSize}" />
 			</c:forEach>
 		</menu:menu>
 	</div>
@@ -57,7 +57,7 @@
         </h1>
        <menu:menu id="side_menu_body_figureheights" styleClass="side-menu-body ${hiddenClassOn}">
 	   		<c:forEach items="${figureheights}" var="figureheight">
-				<menu:item url="/public/products/filter?figureHeight=${figureheight.id}&amp;menu=figureHeight" id="menuitem_${figureheight.codeKey}" label="${figureheight.codeDescription}" defaultPageSize="${categoryPageSize}" />
+				<menu:item url="/store/public/products/filter?figureHeight=${figureheight.id}&amp;menu=figureHeight" id="menuitem_${figureheight.codeKey}" label="${figureheight.codeDescription}" defaultPageSize="${categoryPageSize}" />
 			</c:forEach>
 	   </menu:menu>
 	</div>	

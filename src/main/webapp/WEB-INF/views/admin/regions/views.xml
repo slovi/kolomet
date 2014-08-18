@@ -1,16 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 <tiles-definitions>
-    <definition extends="default_admin" name="admin/regions/list">
+    
+    <definition extends="store/template_admin" name="store/admin/regions/list">
         <put-attribute name="body" value="/WEB-INF/views/admin/regions/list.jspx"/>
     </definition>
-<definition extends="default_admin" name="admin/regions/show">
+	<definition extends="store/template_admin" name="store/admin/regions/show">
         <put-attribute name="body" value="/WEB-INF/views/admin/regions/show.jspx"/>
     </definition>
-<definition extends="default_admin" name="admin/regions/create">
+	<definition extends="store/template_admin" name="store/admin/regions/create">
         <put-attribute name="body" value="/WEB-INF/views/admin/regions/create.jspx"/>
     </definition>
-<definition extends="default_admin" name="admin/regions/update">
+	<definition extends="store/template_admin" name="store/admin/regions/update">
         <put-attribute name="body" value="/WEB-INF/views/admin/regions/update.jspx"/>
     </definition>
+    
+    <definition extends="tour/template_admin"  name="tour/admin/regions/list">
+        <put-attribute name="body" value="/WEB-INF/views/admin/regions/list.jspx"/>
+    </definition>
+	<definition extends="tour/template_admin" name="tour/admin/regions/show">
+        <put-attribute name="body" value="/WEB-INF/views/admin/regions/show.jspx"/>
+    </definition>
+	<definition extends="tour/template_admin" name="tour/admin/regions/create">
+        <put-attribute name="body" value="/WEB-INF/views/admin/regions/create.jspx"/>
+    </definition>
+	<definition extends="tour/template_admin" name="tour/admin/regions/update">
+        <put-attribute name="body" value="/WEB-INF/views/admin/regions/update.jspx"/>
+    </definition>
+    
 </tiles-definitions>

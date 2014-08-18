@@ -52,7 +52,7 @@ public class ProductController extends AbstractPublicController {
 		Product product = productRepository.findOne(id);
 		model.addAttribute("product", product);
 		model.addAttribute("productAttributes", productAttributeRepository.findByProductOrderByAttributeType_SequenceNr(product));
-		return "products/detail";
+		return "public/products/detail";
 	}
 	
 	@RequestMapping("/filter")
@@ -61,7 +61,7 @@ public class ProductController extends AbstractPublicController {
 		
 		Pageable orderedPageable = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(), ProductSpecifications.getDefaultSort(pageable.getSort()));
 		model.addAttribute("products", productRepository.findAll(ProductSpecifications.forProductFilter(productFilter), orderedPageable));
-		return "products/list_category";
+		return "public/products/list_category";
 	}
 	
 	private void populateFilterForm(ProductFilterDto productFilter, Model model) {	

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu" xmlns:spring="http://www.springframework.org/tags" id="side_menu" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    
+    <div class="side-menu active">
+    	<h1 class="side-menu-header">
+    		<spring:url value="/img/arrow_down.png" var="arrowDownImgUrl" />
+    		<spring:url value="/img/arrow_right.png" var="arrowRightImgUrl" />
+      		<spring:message code="admin_menu_side_header"/>
+      		<img class="side-menu-arrow-on" src="${arrowDownImgUrl}" />
+            <img class="side-menu-arrow-off hidden" src="${arrowRightImgUrl}" />
+      	</h1>
+      	<jsp:include page="../../menu.jspx" />		   
+	</div>
+</div>

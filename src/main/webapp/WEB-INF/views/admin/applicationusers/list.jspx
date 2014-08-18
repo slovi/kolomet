@@ -3,7 +3,7 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_cz_kolomet_domain_ApplicationUser" items="${applicationusers}" z="mi4PrRwzQHaRhGkDUtz6NejR2iE=">
-        <table:table data="${applicationusers}" id="l_cz_kolomet_domain_ApplicationUser" path="/admin/applicationusers" z="user-managed">
+        <table:table data="${applicationusers}" id="l_cz_kolomet_domain_ApplicationUser" path="${subContext}/admin/applicationusers" z="user-managed">
             <table:column id="c_cz_kolomet_domain_ApplicationUser_username" property="username" sort="true" z="user-managed"/>
             <table:column id="c_cz_kolomet_domain_ApplicationUser_password" property="password" sort="true" z="user-managed" render="false"/>
             <table:column id="c_cz_kolomet_domain_ApplicationUser_seller" property="seller.sellerName" sort="true" z="user-managed"/>

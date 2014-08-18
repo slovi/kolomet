@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+  <definition name="store/template_default" extends="template_default">
+  	<put-attribute name="scripts" value="/WEB-INF/views/store/shared/scripts.jspx" />
+    <put-attribute name="header" value="/WEB-INF/views/store/shared/header.jspx" />
+    <put-attribute name="menu_main" value="/WEB-INF/views/store/shared/menu_main.jspx" />
+    <put-attribute name="menu_side" value="/WEB-INF/views/store/shared/menu_side.jspx" />
+    <put-attribute name="news" value="/WEB-INF/views/store/shared/news.jspx" />
+  </definition>
+  
+  <definition name="store/template_admin" extends="template_admin">
+  	<put-attribute name="scripts" value="/WEB-INF/views/store/shared/scripts.jspx" />
+    <put-attribute name="header" value="/WEB-INF/views/store/shared/header.jspx" />
+    <put-attribute name="menu_main" value="/WEB-INF/views/store/shared/menu_main.jspx" />
+    <put-attribute name="menu_side" value="/WEB-INF/views/store/shared/menu_side_admin.jspx" />
+    <put-attribute name="news" value="/WEB-INF/views/store/shared/news.jspx" />
+  </definition>
+  
+  <definition name="store/template_wide" extends="template_wide">
+  	<put-attribute name="scripts" value="/WEB-INF/views/store/shared/scripts.jspx" />
+    <put-attribute name="header" value="/WEB-INF/views/store/shared/header.jspx" />
+    <put-attribute name="menu_main" value="/WEB-INF/views/store/shared/menu_main.jspx" />
+    <put-attribute name="menu_side" value="/WEB-INF/views/store/shared/menu_side.jspx" />
+  </definition>
+  
+  <definition name="store/template_wide_separated_content" extends="template_wide_separated_content">
+  	<put-attribute name="scripts" value="/WEB-INF/views/store/shared/scripts.jspx" />
+    <put-attribute name="header" value="/WEB-INF/views/store/shared/header.jspx" />
+    <put-attribute name="menu_main" value="/WEB-INF/views/store/shared/menu_main.jspx" />
+    <put-attribute name="menu_side" value="/WEB-INF/views/store/shared/menu_side.jspx" />
+  </definition>
+
+</tiles-definitions>

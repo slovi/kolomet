@@ -36,12 +36,16 @@
 	</filter-mapping>
 
 	<filter>
-		<filter-name>Spring OpenEntityManagerInViewFilter</filter-name>
+		<filter-name>openEntityManageInViewFilter</filter-name>
 		<filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
 	</filter>
 	<filter-mapping>
-		<filter-name>Spring OpenEntityManagerInViewFilter</filter-name>
-		<url-pattern>/*</url-pattern>
+		<filter-name>openEntityManageInViewFilter</filter-name>
+		<servlet-name>kolomet</servlet-name>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>openEntityManageInViewFilter</filter-name>
+		<url-pattern>/j_spring_security_check</url-pattern>
 	</filter-mapping>
 
 	<filter>
@@ -59,7 +63,7 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>multipartFilter</filter-name>
-		<url-pattern>/*</url-pattern>
+		<servlet-name>kolomet</servlet-name>
 	</filter-mapping>
 	
 	<filter>
@@ -68,7 +72,7 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>HttpMethodFilter</filter-name>
-		<url-pattern>/*</url-pattern>
+		<servlet-name>kolomet</servlet-name>
 	</filter-mapping>
 
 	<filter>
@@ -81,7 +85,11 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>publicHibernateFilterActivatorFilter</filter-name>
-		<url-pattern>/public/*</url-pattern>
+		<url-pattern>/store/public/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>publicHibernateFilterActivatorFilter</filter-name>
+		<url-pattern>/tour/public/*</url-pattern>
 	</filter-mapping>
 
 	<filter>
@@ -94,7 +102,11 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>adminHibernateFilterActivatorFilter</filter-name>
-		<url-pattern>/admin/*</url-pattern>
+		<url-pattern>/store/admin/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>adminHibernateFilterActivatorFilter</filter-name>
+		<url-pattern>/tour/admin/*</url-pattern>
 	</filter-mapping>
 
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
@@ -112,10 +124,46 @@
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-
 	<servlet-mapping>
 		<servlet-name>kolomet</servlet-name>
-		<url-pattern>/</url-pattern>
+		<url-pattern>/tour/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>kolomet</servlet-name>
+		<url-pattern>/store/*</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Handles resources requests -->
+	<servlet>
+		<servlet-name>resources</servlet-name>
+		<servlet-class>org.springframework.js.resource.ResourceServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>resources</servlet-name>
+		<url-pattern>/resources/*</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Handles uploaded img files requests -->
+	<servlet>
+		<servlet-name>uploadedFiles</servlet-name>
+		<servlet-class>cz.kolomet.util.web.DownloadFileServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>uploadedFiles</servlet-name>
+		<url-pattern>/file/*</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Handles captcha requests -->
+	<servlet>
+		<servlet-name>captcha</servlet-name>
+		<servlet-class>cz.kolomet.util.web.CaptchaServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>captcha</servlet-name>
+		<url-pattern>/captcha/*</url-pattern>
 	</servlet-mapping>
 
 	<session-config>
@@ -124,12 +172,12 @@
 
 	<error-page>
 		<exception-type>java.lang.Exception</exception-type>
-		<location>/uncaughtException</location>
+		<location>/store/public/uncaughtException</location>
 	</error-page>
 
 	<error-page>
 		<error-code>404</error-code>
-		<location>/resourceNotFound</location>
+		<location>/store/public/resourceNotFound</location>
 	</error-page>
 	
 	<jsp-config>

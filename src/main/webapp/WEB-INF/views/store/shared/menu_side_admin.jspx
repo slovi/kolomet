@@ -11,6 +11,6 @@
       		<img class="side-menu-arrow-on" src="${arrowDownImgUrl}" />
             <img class="side-menu-arrow-off hidden" src="${arrowRightImgUrl}" />
       	</h1>
-      	<jsp:include page="./menu.jspx" />		   
+      	<jsp:include page="../../menu.jspx" />		   
 	</div>
 </div>

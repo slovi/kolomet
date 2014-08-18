@@ -29,7 +29,7 @@ public class SellerController extends AbstractPublicController {
 		if (StringUtils.isNotEmpty(regionCodeKey)) {
 			model.addAttribute("sellers", sellerRepository.findByRegionCodeKeyOrderBySellerNameAsc(regionCodeKey));
 		}		
-		return "sellers/map";
+		return "public/sellers/map";
 	}
 	
 	@RequestMapping("/detail/{id}")
@@ -37,7 +37,7 @@ public class SellerController extends AbstractPublicController {
 		Seller seller = sellerRepository.findOne(id);
 		model.addAttribute("seller", seller);
 		model.addAttribute("products", productRepository.findBySellerId(id, new PageRequest(0, 10)));
-		return "sellers/detail";
+		return "public/sellers/detail";
 	}
 	
 }

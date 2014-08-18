@@ -43,7 +43,7 @@
  			<div id="mapa_inner">
  		 		<map name="map" id="map"> 
  		 			
- 		 			<spring:url value="/public/sellers/map" var="sellersMapUrl" />
+ 		 			<spring:url value="/store/public/sellers/map" var="sellersMapUrl" />
 					<area shape="poly" id="area1" coords="136,98,133,92,139,88,143,87,147,84,150,85,152,83,156,86,157,89,160,89,164,91,162,95,159,97,161,99,158,101,153,101,150,103,147,104,145,106,143,108,140,105,138,102,136,99,136,99" href="${sellersMapUrl}?regionCodeKey=reg_pha" 
 							 onmouseover="highlight('reg_pha');" 
 							 onmouseout="highlight('');"
@@ -135,9 +135,9 @@
 	</div>
 
 	<c:forEach items="${sellers}" var="seller">	
-		<spring:url value="/public/sellers/detail" var="sellersDetailUrl" />
+		<spring:url value="/store/public/sellers/detail" var="sellersDetailUrl" />
 		<div class="category_unit"> 
-			<spring:url value="/public/sellers/detail/${seller.id}" var="sellerIdUrl" />
+			<spring:url value="/store/public/sellers/detail/${seller.id}" var="sellerIdUrl" />
 	     	<a href="${sellerIdUrl}">
 	     		<util:photo-image photos="${seller.sellerPhotoUrls}" imgType="over" height="146" width="224" />
 	     	</a>

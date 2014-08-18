@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 <tiles-definitions>
-    <definition extends="default_admin" name="admin/sellerphotourls/list">
+    <definition extends="store/template_admin" name="store/admin/sellerphotourls/list">
         <put-attribute name="body" value="/WEB-INF/views/admin/sellerphotourls/list.jspx"/>
     </definition>
-	<definition extends="default_admin" name="admin/sellerphotourls/show">
+	<definition extends="store/template_admin" name="store/admin/sellerphotourls/show">
         <put-attribute name="body" value="/WEB-INF/views/admin/sellerphotourls/show.jspx"/>
     </definition>
-	<definition extends="default_admin" name="admin/sellerphotourls/create">
+	<definition extends="store/template_admin" name="store/admin/sellerphotourls/create">
         <put-attribute name="body" value="/WEB-INF/views/admin/sellerphotourls/create.jspx"/>
     </definition>
 	

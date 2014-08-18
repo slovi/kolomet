@@ -32,7 +32,7 @@
             </div>
             <div class="right">
                 <p style="line-height:16px;">
-                    <spring:url value="/public/places" var="placesUrl">
+                    <spring:url value="/tour/public/places" var="placesUrl">
                         <spring:param name="highlight" value="${place.id}"/>
                     </spring:url>
                     <a href="${placesUrl}">

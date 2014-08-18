@@ -19,9 +19,9 @@
 	    	<img class="side-menu-arrow-off ${hiddenClassOff}" src="${arrowRightImageUrl}" />
 	    </h1>
 	    <menu:menu id="side_menu_body_regions" styleClass="side-menu-body ${hiddenClassOn}">
-		    <menu:item url="/public/places?menu=region" id="menuitem_category_all" label="Všechny regiony" />
+		    <menu:item url="/tour/public/places?menu=region" id="menuitem_category_all" label="Všechny regiony" />
 	    	<c:forEach items="${regions}" var="region">
-				<menu:item url="/public/places?region=${region.id}&amp;menu=region&amp;gps_north=${region.gpsLocation.north}&amp;gps_west=${region.gpsLocation.west}" 
+				<menu:item url="/tour/public/places?region=${region.id}&amp;menu=region&amp;gps_north=${region.gpsLocation.north}&amp;gps_west=${region.gpsLocation.west}" 
 					id="menuitem_${region.codeKey}" label="${region.codeDescription}" />
 			</c:forEach>
 	     </menu:menu>
@@ -40,7 +40,7 @@
         </h1>
 		<menu:menu id="side_menu_body_producers" styleClass="side-menu-body ${hiddenClassOn}">
 			<c:forEach items="${placeTypes}" var="placeType" varStatus="status">
-				<menu:item url="/public/places?placeType=${placeType.id}&amp;menu=placeType" id="menuitem_${placeType.codeKey}" label="${placeType.codeDescription}" />
+				<menu:item url="/tour/public/places?placeType=${placeType.id}&amp;menu=placeType" id="menuitem_${placeType.codeKey}" label="${placeType.codeDescription}" />
 			</c:forEach>
 		</menu:menu>
 	</div>

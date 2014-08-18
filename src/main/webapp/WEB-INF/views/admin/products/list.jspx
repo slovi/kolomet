@@ -38,8 +38,9 @@
     <div>
         <jsp:directive.page contentType="text/html;charset=UTF-8"/>
         <jsp:output omit-xml-declaration="yes"/>
-        <page:list id="pl_cz_kolomet_domain_Product" items="${products}" path="/admin/products" z="user-managed">
-            <table:table data="${products}" delete="false" id="l_cz_kolomet_domain_Product" path="/admin/products" update="false" z="user-managed">
+        <c:out value="${subContext}/admin/products" />
+        <page:list id="pl_cz_kolomet_domain_Product" items="${products}" path="${subContext}/admin/products" z="user-managed">
+            <table:table data="${products}" delete="false" id="l_cz_kolomet_domain_Product" path="${subContext}/admin/products" update="false" z="user-managed">
                 <table:column id="c_cz_kolomet_domain_Product_productName" property="productName" sort="true" z="user-managed"/>
                 <table:column bool="true" id="c_cz_kolomet_domain_Product_enabled" property="enabled" sort="true" z="user-managed"/>
                 <table:column id="c_cz_kolomet_domain_Product_seller" property="seller.sellerName" sort="true" z="a0TMwRPIIK+uZVPOhkqtLmfD/D8="/>

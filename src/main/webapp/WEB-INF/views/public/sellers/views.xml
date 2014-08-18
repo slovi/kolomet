@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 <tiles-definitions>
-    <definition extends="default_wide" name="sellers/map">
-        <put-attribute name="body" value="/WEB-INF/views/sellers/map.jspx"/>
+    <definition extends="store/template_wide" name="store/public/sellers/map">
+        <put-attribute name="body" value="/WEB-INF/views/public/sellers/map.jspx"/>
     </definition>
-    <definition extends="default_wide" name="sellers/detail">
-        <put-attribute name="body" value="/WEB-INF/views/sellers/detail.jspx"/>
+    <definition extends="store/template_wide" name="store/public/sellers/detail">
+        <put-attribute name="body" value="/WEB-INF/views/public/sellers/detail.jspx"/>
     </definition>
 </tiles-definitions>

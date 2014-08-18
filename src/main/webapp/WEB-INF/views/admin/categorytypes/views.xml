@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 <tiles-definitions>
-	<definition extends="default_admin" name="admin/categorytypes/list">
+	<definition extends="store/template_admin" name="store/admin/categorytypes/list">
         <put-attribute name="body" value="/WEB-INF/views/admin/categorytypes/list.jspx"/>
     </definition>
-	<definition extends="default_admin" name="admin/categorytypes/show">
+	<definition extends="store/template_admin" name="store/admin/categorytypes/show">
         <put-attribute name="body" value="/WEB-INF/views/admin/categorytypes/show.jspx"/>
     </definition>
-	<definition extends="default_admin" name="admin/categorytypes/create">
+	<definition extends="store/template_admin" name="store/admin/categorytypes/create">
         <put-attribute name="body" value="/WEB-INF/views/admin/categorytypes/create.jspx"/>
     </definition>
-	<definition extends="default_admin" name="admin/categorytypes/update">
+	<definition extends="store/template_admin" name="store/admin/categorytypes/update">
         <put-attribute name="body" value="/WEB-INF/views/admin/categorytypes/update.jspx"/>
     </definition>
 </tiles-definitions>

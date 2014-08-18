@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 <tiles-definitions>
-    <definition extends="default" name="public/registrationrequests/list">
+    <definition extends="store/template_default" name="public/registrationrequests/list">
         <put-attribute name="body" value="/WEB-INF/views/public/registrationrequests/list.jspx"/>
     </definition>
-	<definition extends="default" name="public/registrationrequests/show">
+	<definition extends="store/template_default" name="public/registrationrequests/show">
         <put-attribute name="body" value="/WEB-INF/views/public/registrationrequests/show.jspx"/>
     </definition>
-	<definition extends="default" name="public/registrationrequests/create">
+	<definition extends="store/template_default" name="public/registrationrequests/create">
         <put-attribute name="body" value="/WEB-INF/views/public/registrationrequests/create.jspx"/>
     </definition>
 </tiles-definitions>

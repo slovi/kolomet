@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -43,6 +45,11 @@ public class AbstractController implements MessageSourceAware {
 	protected MessageSource messageSource;
 	
 	protected MessageSourceAccessor messageSourceAcessor;
+	
+	@ModelAttribute("subContext")
+	public String getSubContext(HttpServletRequest request) {
+		return request.getServletPath();
+	}
 	
 	@ModelAttribute("version")
 	public String getVersion() {
