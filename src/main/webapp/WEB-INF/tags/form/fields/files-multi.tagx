@@ -17,9 +17,9 @@
   		<c:set var="filesCount" value="4" />
   	</c:if>
    
-   	<div id="files_container">
+   	<div class="files_container">
 		<div id="files">
-			<div class="files_add">
+			<div class="files_add image_preview">
 	           	<span class="fileinput-button">
 			        <span>Nahrat soubor...</span>
 			        <input id="${id}" type="file" name="content" />

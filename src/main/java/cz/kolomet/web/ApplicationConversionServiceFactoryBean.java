@@ -22,6 +22,7 @@ import cz.kolomet.domain.Product;
 import cz.kolomet.domain.Seller;
 import cz.kolomet.domain.codelist.CategoryType;
 import cz.kolomet.domain.codelist.CountryState;
+import cz.kolomet.domain.codelist.PlaceType;
 import cz.kolomet.domain.codelist.ProductAttributeType;
 import cz.kolomet.domain.codelist.Region;
 import cz.kolomet.domain.codelist.SellerStatus;
@@ -49,6 +50,14 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 		registry.addFormatter(getAddressFormatter());
 		registry.addConverter(getSellerStatusToStringConverter());
 	}
+	
+	public Converter<PlaceType, String> getPlaceTypeToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<cz.kolomet.domain.codelist.PlaceType, java.lang.String>() {
+            public String convert(PlaceType placeType) {
+                return new StringBuilder().append(placeType.getId()).toString();
+            }
+        };
+    }
 	
 	public Converter<Seller, String> getSellerToStringConverter() {
         return new Converter<Seller, String>() {
@@ -117,8 +126,14 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
     public Converter<String, Region> getStringToRegionConverter() {
         return new org.springframework.core.convert.converter.Converter<java.lang.String, cz.kolomet.domain.codelist.Region>() {
             public cz.kolomet.domain.codelist.Region convert(String id) {
-            	// id is google alias
-                return regionService.findByGoogleAlias(id);
+            	
+            	try {
+            		Long parsedId = Long.parseLong(id);
+            		return regionService.findRegion(parsedId);
+            	} catch (Exception e) {
+            		// id is google alias
+            		return regionService.findByGoogleAlias(id);
+            	}
             }
         };
     }

@@ -1,5 +1,7 @@
 package cz.kolomet.web.pub;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -13,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import cz.kolomet.domain.Place;
 import cz.kolomet.domain.RateType;
+import cz.kolomet.domain.codelist.PlaceType;
 import cz.kolomet.dto.PlaceFilterDto;
 import cz.kolomet.repository.PlaceSpecifications;
 import cz.kolomet.service.PlaceService;
+import cz.kolomet.service.PlaceTypeService;
 import cz.kolomet.service.RateService;
 
 @RequestMapping("/public/places")
@@ -31,6 +35,9 @@ public class PlaceController extends AbstractPublicPlacesController {
 	
 	@Autowired
 	private RateService rateService;
+
+	@Autowired
+	private PlaceTypeService placeTypeService;
 	
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String show(@PathVariable("id") Long id, Model uiModel, HttpServletRequest request) {
@@ -48,6 +55,18 @@ public class PlaceController extends AbstractPublicPlacesController {
 		Specification<Place> placeSpecification = PlaceSpecifications.forPlaceFilter(placeFilter);
 		uiModel.addAttribute("placesJson", Place.toJsonArray(placeService.findPlaceEntries(placeSpecification), jsonFields));
 		uiModel.addAttribute("topPlaces", placeService.getTopPlaces(placeSpecification, TOP_PLACES_NUMBER));
+		
+		List<PlaceType> placeTypes = placeTypeService.findAllPlaceTypes();
+		uiModel.addAttribute("placeTypes", placeTypes);
+		
+		if (!placeFilter.isUsedFilter()) {
+			PlaceFilterDto placeFilterDto = new PlaceFilterDto();
+			placeFilterDto.setPlaceTypes(placeTypes);
+			uiModel.addAttribute("placeFilter", placeFilterDto);
+		} else {
+			uiModel.addAttribute("placeFilter", placeFilter);
+		}
+		
         addDateTimeFormatPatterns(uiModel);
         return "public/places/list";
     }

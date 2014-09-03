@@ -2,8 +2,12 @@
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 <tiles-definitions>
     <definition extends="store/template_wide_separated_content" name="store/public/products/list_category">
-    	<put-attribute name="body_header" value="/WEB-INF/views/public/products/list_category_filter.jspx"/>
-        <put-attribute name="body_content" value="/WEB-INF/views/public/products/list_category.jspx"/>
+    	<put-attribute name="body">
+    		<definition extends="subtemplate_separated_content">
+    			<put-attribute name="body_header" value="/WEB-INF/views/public/products/list_body_header.jspx"/> <!-- filters -->
+        		<put-attribute name="body_content" value="/WEB-INF/views/public/products/list_body_content.jspx"/> <!-- content, sorting, paging -->
+    		</definition>
+    	</put-attribute>    	
     </definition>
     <definition extends="store/template_wide" name="store/public/products/detail">
         <put-attribute name="body" value="/WEB-INF/views/public/products/detail.jspx"/>

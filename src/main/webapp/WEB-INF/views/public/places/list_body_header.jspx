@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div id="body_header" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="http://www.springframework.org/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:spring="http://www.springframework.org/tags" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    
+    <div class="general_unit">
+    
+    	<div id="places_general_unit_filter" class="general_unit_filter">
+	    	<h2>Všechny regiony</h2>
+	    	<br />
+    		<div>
+				<form:form id="place_filter_form" method="get" modelAttribute="placeFilter">
+				
+					<input type="hidden" name="usedFilter" value="true" />
+					<input type="hidden" name="region" value="" />
+				
+		    		<c:forEach items="${placeTypes}" var="placeType" varStatus="status">
+		    			<form:checkbox id="place_type_${status.index}" path="placeTypes[${status.index}]" value="${placeType}" /><c:out value="${placeType.codeDescription}" />
+		    		</c:forEach>
+    		</form:form>
+			</div>    		
+    	</div>
+    </div>
+    
+</div>

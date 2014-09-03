@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.octo.captcha.service.image.ImageCaptchaService;
@@ -29,8 +30,11 @@ public class ResetPasswordController extends AbstractPublicController {
 	private ApplicationUserService applicationUserService;
 	
 	@RequestMapping(params = "form", produces = "text/html")
-    public String createForm(Model uiModel) {
-        populateEditForm(uiModel, new ResetPasswordDto());
+    public String createForm(@RequestParam("email") String email, Model uiModel) {
+		
+		ResetPasswordDto resetPasswordDto = new ResetPasswordDto();
+		resetPasswordDto.setUsername(email);
+        populateEditForm(uiModel, resetPasswordDto);
         return "public/resetpasswords/create";
     }
 

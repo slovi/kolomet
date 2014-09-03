@@ -47,7 +47,7 @@ public class ApplicationUserServiceImpl implements ApplicationUserService {
 	@Value("${applicationuser.mail.reset.template}")
 	private String resetApplicationuserMailTemplate;
 	
-	@PreAuthorize("hasRole('ROLE_per_applicationusers') or #applicationUser.id == principal.userId")
+	@PreAuthorize("principal.isCapableToSaveApplicationUser(#applicationUser)")
 	public void saveApplicationUser(ApplicationUser applicationUser) {
 
     	if (applicationUserRepository.findByUsername(applicationUser.getUsername()) == null) {
@@ -72,6 +72,7 @@ public class ApplicationUserServiceImpl implements ApplicationUserService {
 		return applicationUserRepository.findAll(pageable);
 	}
 	
+	@PreAuthorize("principal.isCapableToUpdateApplicationUser(#applicationUser)")
     public ApplicationUser updateApplicationUser(ApplicationUser applicationUser) {
     	
     	ApplicationUser existingUser = applicationUserRepository.findByUsername(applicationUser.getUsername());
@@ -95,6 +96,7 @@ public class ApplicationUserServiceImpl implements ApplicationUserService {
     	}
     }
 
+	@PreAuthorize("principal.isCapableToUpdatePassword(#applicationUserPassword)")
 	public void updatePassword(ApplicationUserPasswordDto applicationUserPassword) {
 		ApplicationUser user = applicationUserRepository.findByUsername(applicationUserPassword.getUsername());
 		if (!user.getPassword().equals(passwordEncoder.encodePassword(applicationUserPassword.getPassword(), null))) {

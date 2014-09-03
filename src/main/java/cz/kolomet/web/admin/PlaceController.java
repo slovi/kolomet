@@ -117,6 +117,8 @@ public class PlaceController extends AbstractPublicPlacesController {
         
         placeService.updatePlace(place);      
         
+        savePhotos(place, placePhotoUrlService, place.getContents());
+        
         return "redirect:/public/places/" + place.getId();
     }
 	

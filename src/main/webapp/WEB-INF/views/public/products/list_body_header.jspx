@@ -3,7 +3,7 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     
-   	<spring:url value="/public/products/filter" var="filterActionUrl" />
+   	<spring:url value="${subContext}/public/products/filter" var="filterActionUrl" />
    	<form:form id="filterForm" action="${filterActionUrl}" method="get" modelAttribute="productFilter">
 	    <div class="filters">
     

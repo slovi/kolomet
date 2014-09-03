@@ -11,10 +11,8 @@
     			<menu:item url="/tour/public/places" messageCode="menu_main_places_intro" id="intro" renderPageParams="false" />
     		
     			<security:authorize access="isFullyAuthenticated()">
-	    			<menu:category id="admin_menu" styleClass="admin" messageCode="menu_main_our_kolomet" url="#">
-	    				<security:authorize access="hasAnyRole('ROLE_per_registrationrequests')">    					
-		            		<menu:item id="i_registrationrequest_list" messageCode="global_menu_list" sort="processed" sortDesc="false" url="/tour/admin/registrationrequests" z="user-managed"/>
-		        		</security:authorize>
+	    			<menu:category id="admin_menu" styleClass="admin" messageCode="menu_main_our_kolomet" url="#">					
+		            	<menu:item id="i_password_change" label="Změna hesla" sort="processed" sortDesc="false" url="/tour/admin/password?form" z="user-managed"/>
 			            <security:authorize access="hasRole('ROLE_per_places')">
 			            	<hr color="#f9f9f9" width="85%" align="center" size="1" />
 				            <menu:item id="i_place_list" messageCode="global_menu_list" url="/tour/admin/places" z="/DMIeN4AJVoQZM6zEYjQeHs/hQw="/>

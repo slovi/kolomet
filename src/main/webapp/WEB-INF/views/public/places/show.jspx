@@ -103,63 +103,63 @@
             </c:choose>
         </c:forEach>
     </div>
-    <div style="margin:10px 6px 0px 6px;float:left;width:696px;">
-        <h2 style="padding:0;margin:0;">
-            <spring:message code="place_detail_comments"/>:</h2>
-    </div>
-    <spring:url value="/public/placecomments?form" var="commentsUrl">
-        <spring:param name="parentEntityId" value="${place.id}"/>
-    </spring:url>
-    <spring:url value="/resources/images/profile_pic.png" var="profileUrl"/>
-    <c:choose>
-        <c:when test="${fn:length(place.comments) gt 0}">
-            <c:forEach items="${place.comments}" var="comment">
-                <div class="mista_comment_box">
-                    <img src="${profileUrl}" style="float:left;"/>
-                    <div>
-                        <a style="font-weight:bold;">
-                            <c:out value="${comment.createdBy.username}"/>
-                        </a>
-                        <br/>
-                        <c:out value="${comment.created}"/>
-                    </div>
-                    <div class="comment_text">
-                        <c:out value="${comment.text}"/>
-                    </div>
-                    <div>
-                        <a href="${commentsUrl}">
-                            <spring:message code="place_detail_comments_response"/>
-                        </a>
-                    </div>
-                </div>
-            </c:forEach>
-            <div class="clear">
-                <!--  -->
-            </div>
-            <div style="width: 696px; margin-top: 20px;">
-                <p style="text-align: center;">
-                    <a href="${commentsUrl}">
-                        <spring:message code="place_detail_comments_add_comment"/>
-                    </a>
-                </p>
-            </div>
-        </c:when>
-        <c:otherwise>
-            <div style="width: 696px;">
-                <p style="text-align: center;">
-                    <spring:message code="place_detail_comments_no_comment"/>: <a href="${commentsUrl}">
-                        <spring:message code="place_detail_comments_new_comment"/>
-                    </a>
-                </p>
-            </div>
-        </c:otherwise>
-    </c:choose>
-    <div style="clear: both; padding: 5px;">
+    <div class="general_unit_empty">
+        <h2 style="padding:0;margin-left:5px;margin-top: 10px"><spring:message code="place_detail_comments"/>:</h2>
+        
+        <spring:url value="/public/placecomments?form" var="commentsUrl">
+	        <spring:param name="parentEntityId" value="${place.id}"/>
+	    </spring:url>
+	    <spring:url value="/resources/images/profile_pic.png" var="profileUrl"/>
+	    <c:choose>
+	        <c:when test="${fn:length(place.comments) gt 0}">
+	            <c:forEach items="${place.comments}" var="comment">
+	                <div class="mista_comment_box">
+	                    <img src="${profileUrl}" style="float:left;"/>
+	                    <div>
+	                        <a style="font-weight:bold;">
+	                            <c:out value="${comment.createdBy.username}"/>
+	                        </a>
+	                        <br/>
+	                        <c:out value="${comment.created}"/>
+	                    </div>
+	                    <div class="comment_text">
+	                        <c:out value="${comment.text}"/>
+	                    </div>
+	                    <div>
+	                        <a href="${commentsUrl}">
+	                            <spring:message code="place_detail_comments_response"/>
+	                        </a>
+	                    </div>
+	                </div>
+	            </c:forEach>
+	            <div class="clear">
+	                <!--  -->
+	            </div>
+	            <div style="width: 696px; margin-top: 20px;">
+	                <p style="text-align: center;">
+	                    <a href="${commentsUrl}">
+	                        <spring:message code="place_detail_comments_add_comment"/>
+	                    </a>
+	                </p>
+	            </div>
+	        </c:when>
+	        <c:otherwise>
+	            <div style="width: 696px;">
+	                <p style="text-align: center;">
+	                    <spring:message code="place_detail_comments_no_comment"/>: <a href="${commentsUrl}">
+	                        <spring:message code="place_detail_comments_new_comment"/>
+	                    </a>
+	                </p>
+	            </div>
+	        </c:otherwise>
+	    </c:choose>
+    </div>    
+    <div class="general_unit_empty">
         <security:authorize access="isAuthenticated()">
             <security:authorize access="principal.isPlaceOwner(#place)">
                 <security:authorize access="principal.isCapableToUpdatePlace(#place)" var="update"/>
                 <security:authorize access="principal.isCapableToDeletePlace(#place)" var="delete"/>
-                <util:quicklinks copy="false" create="false" delete="${delete}" itemId="${place.id}" largeIcons="true" list="true" path="/admin/places" typeName="place" typeNamePlural="places" update="${update}"/>
+                <util:quicklinks copy="false" create="false" delete="${delete}" itemId="${place.id}" largeIcons="true" list="true" path="${subContext}/admin/places" typeName="place" typeNamePlural="places" update="${update}"/>
             </security:authorize>
         </security:authorize>
     </div>

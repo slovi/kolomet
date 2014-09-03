@@ -17,6 +17,7 @@ import cz.kolomet.domain.ApplicationUser;
 import cz.kolomet.domain.Place;
 import cz.kolomet.domain.Product;
 import cz.kolomet.domain.Seller;
+import cz.kolomet.dto.ApplicationUserPasswordDto;
 
 public class ApplicationUserDetails implements UserDetails {
 	
@@ -60,6 +61,26 @@ public class ApplicationUserDetails implements UserDetails {
 	
 	public boolean isApplicationUsersOwn() {
 		return hasAuthority("per_applicationusers_own");
+	}
+	
+	public boolean isApplicationUserOwner(ApplicationUser applicationUser) {
+		return isApplicationUsersAll() || (isApplicationUsersOwn() && applicationUser.getId().equals(getUserId()));
+	}
+	
+	public boolean isApplicationUserOwner(String username) {
+		return isApplicationUsersAll() || (isApplicationUsersOwn() && username.equals(this.user.getUsername()));
+	}
+	
+	public boolean isCapableToSaveApplicationUser(ApplicationUser applicationUser) {
+		return isApplicationUsersAll();
+	}
+	
+	public boolean isCapableToUpdateApplicationUser(ApplicationUser applicationUser) {
+		return isApplicationUserOwner(applicationUser);
+	}
+	
+	public boolean isCapableToUpdatePassword(ApplicationUserPasswordDto applicationUserPassword) {
+		return isApplicationUserOwner(applicationUserPassword.getUsername());
 	}
 	
 	public boolean isSellersAll() {
@@ -211,5 +232,4 @@ public class ApplicationUserDetails implements UserDetails {
 	public Long getUserId() {
 		return user.getId();
 	}
-
 }

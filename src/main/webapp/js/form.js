@@ -85,29 +85,33 @@ define(['jquery', 'jquery.number'], function($) {
 	};
 	
 	function nextStep(step, maxStep, stepListener) {
-		for (var i = 1; i <= maxStep; i++) {
-			if (i != step) {
-				$("#proceed").hide();
-				$("div.step-" + i).hide();
-				$("div.step div a.step-" + i).attr("class", "navi step-" + i);
+		
+		var next = stepListener(parseInt(step));
+		
+		if (next) {
+			for (var i = 1; i <= maxStep; i++) {
+				if (i != step) {
+					$("#proceed").hide();
+					$("div.step-" + i).hide();
+					$("div.step div a.step-" + i).attr("class", "navi step-" + i);
+				}
 			}
+			$("div.step div a.step-" + step).attr("class", "navi step-" + step + " current");
+			if (step == maxStep) {
+				$("#proceed").show();
+				$("p.name").html($("input[name='name']").val());
+				$("p.place_type").html($("#_placeType_id").val());
+				$("span.bike_road_nr").html($("#_bikeRoadNr_id").val());
+				$("span.description").html($("textarea[name='description']").val());
+				$("a.descriptionLink").html($("#_descriptionLink_id").val());
+				$("a.descriptionLink").attr("href", $("#_descriptionLink_id").val());
+				$("span.gps").html($("input[name='gpsLocation.north']").val() + " " + $("input[name='gpsLocation.west']").val());
+				$("span.region").html($("#_region_id").val());
+			} else {
+				$("div.step-" + step + " button.step").show();
+			}
+			$("div.step-" + step).show("slow");
 		}
-		$("div.step div a.step-" + step).attr("class", "navi step-" + step + " current");
-		if (step == maxStep) {
-			$("#proceed").show();
-			$("p.name").html($("input[name='name']").val());
-			$("p.place_type").html($("#_placeType_id").val());
-			$("span.bike_road_nr").html($("#_bikeRoadNr_id").val());
-			$("span.description").html($("textarea[name='description']").val());
-			$("a.descriptionLink").html($("#_descriptionLink_id").val());
-			$("a.descriptionLink").attr("href", $("#_descriptionLink_id").val());
-			$("span.gps").html($("input[name='gpsLocation.north']").val() + " " + $("input[name='gpsLocation.west']").val());
-			$("span.region").html($("#_region_id").val());
-		} else {
-			$("div.step-" + step + " button.step").show();
-		}
-		$("div.step-" + step).show("slow");
-		stepListener(parseInt(step));
 	}
 	
 	function formatCurrency(element) {

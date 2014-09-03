@@ -3,6 +3,7 @@ import java.awt.Dimension;
 import java.io.File;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.task.SyncTaskExecutor;
 
 import cz.kolomet.domain.Photo;
 import cz.kolomet.domain.PhotoUrl;
@@ -36,7 +37,7 @@ public class PlacePhotoUrlServiceImpl extends AbstractPhotoUrlService implements
 		ResizeInfo[] resizeInfos = new ResizeInfo[3];
 		resizeInfos[0] = new ResizeInfo(new Dimension(width, height), PhotoUrl.ORIGINAL_IMG_SUFFIX); // save original image
 		resizeInfos[1] = new ResizeInfo(new Dimension(overviewWidth, overviewHeight), PhotoUrl.OVERVIEW_IMG_SUFFIX); // save overview image
-		resizeInfos[2] = new ResizeInfo(new Dimension(thumbnailWidth, thumbnailHeight), PhotoUrl.THUMBNAIL_IMG_SUFFIX); // save thumb image
+		resizeInfos[2] = new ResizeInfo(new Dimension(thumbnailWidth, thumbnailHeight), PhotoUrl.THUMBNAIL_IMG_SUFFIX, false); // save thumb image
 		return resizeInfos;
 	}
 	

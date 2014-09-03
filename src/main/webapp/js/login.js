@@ -5,6 +5,18 @@ define(['jquery', 'jquery.lean'], function($) {
 			
 			$("#login_modal").leanModal({top : 200, overlay : 0.4, closeButton: ".modal_close"});
 			
+			$("#j_username").keyup(function(event) {
+				var paramString = "&email=";
+				var href = $("#link_forgotten_password").attr("href");
+				var lastIndex = href.lastIndexOf(paramString);
+				if (lastIndex > 0) {
+					href = href.substring(0, lastIndex) + paramString + $(this).val();
+				} else {
+					href += paramString + $(this).val();
+				}
+				$("#link_forgotten_password").attr("href", href);
+			});
+			
 			$("#login_form").submit(function(event) {
 				
 				event.preventDefault();		

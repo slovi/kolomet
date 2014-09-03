@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
@@ -14,6 +15,7 @@ import org.springframework.data.domain.Sort.Order;
 import org.springframework.data.jpa.domain.Specification;
 
 import cz.kolomet.domain.Place;
+import cz.kolomet.domain.codelist.PlaceType;
 import cz.kolomet.dto.PlaceFilterDto;
 
 public class PlaceSpecifications {
@@ -30,8 +32,9 @@ public class PlaceSpecifications {
 				if (placeFilterDto.getRegion() != null) {
 					predicates.add(cb.equal(root.get("region"), placeFilterDto.getRegion()));
 				}
-				if (placeFilterDto.getPlaceType() != null) {
-					predicates.add(cb.equal(root.get("placeType"), placeFilterDto.getPlaceType()));
+				if (placeFilterDto.getPlaceTypes() != null) {
+					Expression<PlaceType> placeType = root.get("placeType");
+					predicates.add(placeType.in(placeFilterDto.getPlaceTypes()));
 				}
 				
 				return cb.and(predicates.toArray(new Predicate[predicates.size()]));

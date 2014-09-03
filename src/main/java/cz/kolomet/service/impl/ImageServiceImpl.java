@@ -31,12 +31,19 @@ public class ImageServiceImpl implements ImageService {
 	
 	@Override
 	public void save(File sourceFile, File targetFile) {
+		InputStream in = null; 
+		OutputStream out = null; 
 		try {
+			in = new FileInputStream(sourceFile);
+			out = new FileOutputStream(targetFile);
 			logger.debug("Try to save image: " + sourceFile + " " + targetFile);
-			save(new FileInputStream(sourceFile), new FileOutputStream(targetFile));
+			save(in, out);
 		} catch (FileNotFoundException e) {
 			logger.error(e, e);
 			throw new RuntimeException(e);
+		} finally {
+			closeIfPossible(in);
+			closeIfPossible(out);
 		}
 	}
 	
@@ -57,21 +64,19 @@ public class ImageServiceImpl implements ImageService {
 		BufferedImage image = readImage(inputStream);
 		BufferedImage scaledImage = resize(image, toDimension);
 		saveImage(scaledImage, outputStream);
-		try {
-			inputStream.close();
-			outputStream.close();
-		} catch (IOException e) {
-			logger.error(e, e);
-			throw new RuntimeException(e);
-		}
 	}
 	
 	@Override
 	public void resizeAndSave(File sourceFile, File targetFile, Dimension toDimension) {
+		
+		InputStream in = null;
+		OutputStream out = null;
 		try {
 			logger.debug("Trying resize and save image: " + sourceFile + " " + targetFile);
 			File tempTargetFile = new File(targetFile.getParent(), FilenameUtils.getBaseName(targetFile.getName()));
-			resizeAndSave(new FileInputStream(sourceFile), new FileOutputStream(tempTargetFile), toDimension);
+			in = new FileInputStream(sourceFile);
+			out = new FileOutputStream(tempTargetFile);
+			resizeAndSave(in, out, toDimension);
 			FileUtils.deleteQuietly(targetFile);
 			FileUtils.moveFile(tempTargetFile, targetFile);
 		} catch (FileNotFoundException e) {
@@ -80,6 +85,9 @@ public class ImageServiceImpl implements ImageService {
 		} catch (IOException e) {
 			logger.error(e, e);
 			throw new RuntimeException(e);
+		} finally {
+			closeIfPossible(in);
+			closeIfPossible(out);
 		}
 	}
 	
@@ -125,6 +133,28 @@ public class ImageServiceImpl implements ImageService {
 			return new Dimension((int) (actualDimension.getWidth() * rateY), (int) (actualDimension.getHeight() * rateY));
 		} else {
 			return new Dimension((int) (actualDimension.getWidth() * rateX), (int) (actualDimension.getHeight() * rateX));
+		}
+	}
+
+	private void closeIfPossible(OutputStream out) {
+		if (out != null) {
+			try {
+				out.close();
+			} catch (IOException e) {
+				logger.error(e, e);
+				throw new RuntimeException(e);
+			}
+		}
+	}
+
+	private void closeIfPossible(InputStream in) {
+		if (in != null) {
+			try {
+				in.close();
+			} catch (IOException e) {
+				logger.error(e, e);
+				throw new RuntimeException(e);
+			}
 		}
 	}
 

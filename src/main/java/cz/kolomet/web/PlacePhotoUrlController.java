@@ -21,13 +21,9 @@ public class PlacePhotoUrlController extends AbstractAdminController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/file", method = RequestMethod.POST)
-	public AjaxResponse savePhoto(@RequestParam("content") MultipartFile content, HttpServletRequest request) {
-		try {
-			saveFile(placePhotoUrlService, content, request.getSession().getId());
-			return AjaxResponse.emptySuccessul();
-		} catch (RuntimeException e) {
-			return AjaxResponse.error(AjaxError.ERROR_FILE_UPLOAD_CODE, e);
-		}
+	public AjaxResponse savePhoto(@RequestParam("content") MultipartFile content, HttpServletRequest request) throws Exception {
+		saveFile(placePhotoUrlService, content, request.getSession().getId());
+		return AjaxResponse.emptySuccessul();
 	}
 	
 }

@@ -16,6 +16,7 @@ import org.springframework.roo.addon.jpa.entity.RooJpaEntity;
 import org.springframework.roo.addon.json.RooJson;
 import org.springframework.roo.addon.serializable.RooSerializable;
 import org.springframework.roo.addon.tostring.RooToString;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import cz.kolomet.domain.codelist.PlaceType;
 import cz.kolomet.domain.codelist.Region;
@@ -42,6 +43,7 @@ public class Place extends DomainEntity implements Commented, PhotoContainer {
     private Address address;
     
     @ManyToOne
+    @NotNull
     private Region region;
 
     @NotNull
@@ -64,6 +66,9 @@ public class Place extends DomainEntity implements Commented, PhotoContainer {
     
     @Transient
     private List<String> fileNames = new ArrayList<String>();
+    
+    @Transient
+    private List<CommonsMultipartFile> contents = new ArrayList<CommonsMultipartFile>();
     
     public static String toJsonArray(Collection<Place> collection, String[] fields) {
         return new JSONSerializer()
@@ -98,6 +103,14 @@ public class Place extends DomainEntity implements Commented, PhotoContainer {
     	photoUrl.setPlace(this);
     	this.placePhotoUrls.add(photoUrl);
 		return photoUrl;
+	}
+
+	public List<CommonsMultipartFile> getContents() {
+		return contents;
+	}
+
+	public void setContents(List<CommonsMultipartFile> contents) {
+		this.contents = contents;
 	}
 
 }

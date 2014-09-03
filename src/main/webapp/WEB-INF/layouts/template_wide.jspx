@@ -27,6 +27,7 @@
 	    		</div> 
 		    </div>
 		    <tiles:insertAttribute name="login" />
+		    <tiles:insertAttribute name="loader" />
 		</div>
 	</body>
 </html>

@@ -143,21 +143,9 @@
        	</div>
        	
 		<div class="seller_ads">
-			<c:set value="${fn:length(product.photoUrls)}" var="photoSize" />
-			<c:forEach begin="0" end="3" varStatus="status">
-				<c:choose>
-					<c:when test="${photoSize gt status.index}">
-						<spring:url value="/file/${product.photoUrls[status.index].thumbPhotoUrl}" var="thumbPhotoUrl" />
-						<spring:url value="/file/${product.photoUrls[status.index].photoUrl}" var="photoUrl" />
-						<div style="width: 80px; height: 80px; line-height: 100px; text-align: center; float: left; margin-right: 10px;"> 
-							<a href="#">
-				    			<img class="preloaded wait_for_load" src="${thumbPhotoUrl}" />
-				    			<span style="display: none;"><c:out value="${photoUrl}" /></span>
-				    		</a>
-			    		</div>
-					</c:when>
-				</c:choose>
-			</c:forEach>
+		
+			<field:files-thumbnails photos="${product.photoUrls}" id="thumbnails" />
+			
 			<div class="clear"></div>
 			<security:authorize access="isAuthenticated()">
 	    		<security:authorize access="principal.isProductOwner(#product)">
@@ -201,15 +189,6 @@
 	    		<util:quicklinks update="${update}" copy="${copy}" create="false" erase="${erase}" list="true" itemId="${product.id}" typeName="product" delete="${delete}" typeNamePlural="products" path="/admin/products" largeIcons="true" />
 	    	</security:authorize>
     	</security:authorize>
-    </div>
-        
-    <spring:url value="/resources/images/ajax-loader.gif" var="loader_url" />
-    <spring:url value="/resources/images/error.png" var="loader_error_url" />
-    <script type="text/javascript">
-    	requireModule(['images'], function(images) {
-    		images.preloadImages('detail_image');
-    		images.waitForLoad('${loader_url}', '${loader_error_url}', 6, 2000);
-    	});
-    </script>
+    </div>          
     
 </div>

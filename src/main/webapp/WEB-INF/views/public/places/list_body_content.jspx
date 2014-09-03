@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div id="body_content" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="http://www.springframework.org/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:spring="http://www.springframework.org/tags" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    
+    <div class="general_unit">
+    
+        <div><div id="map-canvas" style="width: 100%; height:400px;"><!----></div><!----></div>
+        
+        <br/>
+        <page:list render="false" id="pl_cz_kolomet_domain_Place" items="${places}" path="/admin/places" z="user-managed">
+            <table:table data="${places}" delete="false" id="l_cz_kolomet_domain_Place" path="/public/places" update="false" z="VMrTd9yG1/Z9bAclM3AfYiBaJVI=">
+                <table:column id="c_cz_kolomet_domain_Place_createdBy" property="createdBy" z="6UvVycOpN3hGCqKgoESdnYA4nzQ="/>
+                <table:column id="c_cz_kolomet_domain_Place_lastModifiedBy" property="lastModifiedBy" z="DYqZTz35VLWG+dMM9uqHsPSKh7U="/>
+                <table:column date="true" dateTimePattern="${place_created_date_format}" id="c_cz_kolomet_domain_Place_created" property="created" z="6ntIE1D567krPy/7+gg0znarR+I="/>
+                <table:column date="true" dateTimePattern="${place_lastmodified_date_format}" id="c_cz_kolomet_domain_Place_lastModified" property="lastModified" z="neMypIHLHbMOcaJZhkD2HaOd1xI="/>
+                <table:column id="c_cz_kolomet_domain_Place_name" property="name" z="PenaILw2UK1BWROwhFdnAmOFAXs="/>
+                <table:column id="c_cz_kolomet_domain_Place_description" property="description" z="A4bvFSMuwhGpy6Gn9aKyoDHqsf0="/>
+            </table:table>
+        </page:list>
+    </div>
+    
+    <spring:url value="/" var="contextPath" />
+    <spring:url value="/tour/public/places" var="placeUrl" />
+    <spring:url value="/resources/js/gmap.js" var="gmapUrl" />
+	
+	<c:set value="${param.highlight}" var="highlight" />
+	<c:if test="${empty highlight}">
+		<c:set value="0" var="highlight" />
+	</c:if>
+	
+	<c:set value="${param.gps_north}" var="gpsNorth" />
+	<c:set value="${param.gps_west}" var="gpsWest" />
+	
+	<c:if test="${empty gpsNorth}">
+		<c:set value="null" var="gpsNorth" />
+	</c:if>
+	<c:if test="${empty gpsWest}">
+		<c:set value="null" var="gpsWest" />
+	</c:if>
+	
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbbZrV_w_DmKzCVuFSxgkBs4pvi1gk1VA&amp;sensor=true&amp;language=cs"><!-- --></script>
+	<script src="${gmapUrl}"><!-- --></script>
+    <script type="text/javascript">  
+    	<![CDATA[
+    	         
+			requireModule(['side_menu', 'ajaxLink', 'ajaxSubmit', 'jquery'], function(sideMenu, ajaxLink, ajaxSubmit, $) {
+			
+				// google map
+				
+				var defaultZoom = 7;
+				var regionZoom = 9;
+				var defaultCenter = new google.maps.LatLng(49.8, 15.5); 
+				
+				var places = ${placesJson};
+		    	var placeUrl = "${placeUrl}";
+		    	var highlightPlaceId = ${highlight};
+				
+				var mapOptions = {
+					zoom: defaultZoom,
+					center: defaultCenter
+				};
+
+				var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+				
+				var markers = addPlaces(map, places);
+				
+				// side menu
+				sideMenu.prepare();
+				
+				// ajax submit
+				ajaxSubmit.decorate(
+						'form#place_filter_form input[type=checkbox]',
+						'click',
+						function(element, modelFragmentsData) {
+							
+							removePlaces(markers);
+							
+							var placesJson = modelFragmentsData['placesJson'];
+							if (placesJson) {
+								markers = addPlaces(map, eval(placesJson));
+							}
+							
+						},
+						{
+							fragments: 'body_footer,body_footer_hidden', 
+							modelFragments: 'placesJson'
+						}
+				);
+							
+				// ajax links in side menu
+				ajaxLink.decorate(
+						'div#region-side-menu a.ajaxLink', 
+						'click', 
+						
+						// creates data for ajax link - by serializing checkbox form
+						function(element, params) {
+					
+							var filterForm = $('#place_filter_form');
+							var filterRegionInput = $('input[name=region]', filterForm);
+							
+							filterRegionInput.val('');
+							var data = {paramsArray: filterForm.serializeArray(), fragments: 'body_footer,body_footer_hidden', modelFragments: 'placesJson'};
+							filterRegionInput.val(params['region']);
+							
+							if (params['gps_north'] && params['gps_west']) {
+								map.setCenter(new google.maps.LatLng(params['gps_north'], params['gps_west']));
+								map.setZoom(regionZoom);
+							} else {
+								map.setCenter(defaultCenter);
+								map.setZoom(defaultZoom);
+							}
+							
+							return data;
+							
+						},
+						
+						// set h2 text and replace places in google map
+						function(element, modelFragmentsData) {
+							
+							$('div#places_general_unit_filter h2').html($(element).html());
+							
+							removePlaces(markers);
+							
+							var placesJson = modelFragmentsData['placesJson'];
+							if (placesJson) {
+								markers = addPlaces(map, eval(placesJson));
+							}	
+							
+						});
+				
+				function removePlaces(markers) {
+					for (var i = 0; i < markers.length; i++) {
+						markers[i].setMap(null);
+					}
+				}
+				
+				function addPlaces(map, places) {
+					
+					var markers = [];
+					
+					for (var i = 0; i < places.length; i++) {
+						var place = places[i];
+						var highlight = place.id == highlightPlaceId;    					
+						
+						if (place.gpsLocation) {
+							marker = new google.maps.Marker({
+							    map: map,
+							    draggable: false,
+							    position: new google.maps.LatLng(place.gpsLocation.north, place.gpsLocation.west),
+							    icon: '${contextPath}/resources/img/places/' + place.placeType.placeTypeColor + '.png',
+							    title: place.name + ' ' + place.id,
+							    url: placeUrl + "/" + place.id
+							});
+							
+							markers.push(marker);
+							
+							if (highlight) {
+								var infowindow = new google.maps.InfoWindow({
+									content: "<h2>" + place.name + "</h2>"
+								});
+								infowindow.open(map, marker);
+							}
+							
+							marker.addListener('click', function(marker) {
+								window.location.assign(this.url);    						
+							});    					
+						}
+					}
+					return markers;
+				}
+				
+			});
+    	
+    	]]>
+    </script>
+</div>

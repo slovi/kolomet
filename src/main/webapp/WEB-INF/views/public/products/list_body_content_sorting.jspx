@@ -3,7 +3,7 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
 	    
-    <spring:url value="/public/products/filter" var="sortPriceUrl">
+    <spring:url value="${subContext}/public/products/filter" var="sortPriceUrl">
 		<c:forEach items="${paramValues}" var="p">
 			<c:if test="${p.key ne 'page.sort' and p.key ne 'page.sort.dir'}">
 				<c:forEach items="${p.value}" var="value">
@@ -25,7 +25,7 @@
         	<spring:param name="page.sort.dir" value="asc" />
         </c:if>
 	</spring:url>
-	<spring:url value="/public/products/filter" var="sortDiscountUrl">
+	<spring:url value="${subContext}/public/products/filter" var="sortDiscountUrl">
 		<c:forEach items="${paramValues}" var="p">
 			<c:if test="${p.key ne 'page.sort' and p.key ne 'page.sort.dir'}">
 				<c:forEach items="${p.value}" var="value">

@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 <tiles-definitions>
-    <definition extends="tour/template_default" name="tour/public/places/list">
-        <put-attribute name="body" value="/WEB-INF/views/public/places/list.jspx"/>
+    <definition extends="tour/template_default_separated_content" name="tour/public/places/list">
+    	<put-attribute name="body">
+    		<definition extends="subtemplate_separated_content">
+		        <put-attribute name="body_header" value="/WEB-INF/views/public/places/list_body_header.jspx"/>
+		        <put-attribute name="body_content" value="/WEB-INF/views/public/places/list_body_content.jspx"/>
+		        <put-attribute name="body_footer" value="/WEB-INF/views/public/places/list_body_footer.jspx"/>
+		        <put-attribute name="body_footer_hidden" value="/WEB-INF/views/public/places/list_body_footer_hidden.jspx" />
+	        </definition>
+        </put-attribute>
     </definition>
 	<definition extends="tour/template_default" name="tour/public/places/show">
         <put-attribute name="body" value="/WEB-INF/views/public/places/show.jspx"/>

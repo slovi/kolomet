@@ -570,15 +570,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
                 return getObject().convert(getObject().convert(id, Long.class), FigureHeight.class);
             }
         };
-    }
-    
-    public Converter<PlaceType, String> ApplicationConversionServiceFactoryBean.getPlaceTypeToStringConverter() {
-        return new org.springframework.core.convert.converter.Converter<cz.kolomet.domain.codelist.PlaceType, java.lang.String>() {
-            public String convert(PlaceType placeType) {
-                return new StringBuilder().append(placeType.getCreated()).append(' ').append(placeType.getLastModified()).append(' ').append(placeType.getCodeKey()).append(' ').append(placeType.getCodeDescription()).toString();
-            }
-        };
-    }
+    }    
     
     public Converter<Long, PlaceType> ApplicationConversionServiceFactoryBean.getIdToPlaceTypeConverter() {
         return new org.springframework.core.convert.converter.Converter<java.lang.Long, cz.kolomet.domain.codelist.PlaceType>() {

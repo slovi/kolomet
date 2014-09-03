@@ -34,6 +34,8 @@
 		<intercept-url pattern="/store/admin/countrystates/*" access="hasAnyRole('ROLE_per_countrystates')" />
 		<intercept-url pattern="/store/admin/region*" access="hasAnyRole('ROLE_per_regions')" />
 		<intercept-url pattern="/store/admin/region/*" access="hasAnyRole('ROLE_per_regions')" />
+		<intercept-url pattern="/store/admin/password*" access="isFullyAuthenticated()" />
+		<intercept-url pattern="/store/admin/password/*" access="isFullyAuthenticated()" />
 		<intercept-url pattern="/store/admin/products*" access="hasAnyRole('ROLE_per_products')" />
 		<intercept-url pattern="/store/admin/products/*" access="hasAnyRole('ROLE_per_products')" />
 		<intercept-url pattern="/store/admin/photourls*" access="hasAnyRole('ROLE_per_products')" />
@@ -61,6 +63,8 @@
 		<intercept-url pattern="/store/admin/newsitemphotourls" access="hasAnyRole('ROLE_per_newsitems')" />
 		<intercept-url pattern="/store/admin/newsitemphotourls/*" access="hasAnyRole('ROLE_per_newsitems')" />
 
+		<intercept-url pattern="/tour/admin/password*" access="isFullyAuthenticated()" />
+		<intercept-url pattern="/tour/admin/password/*" access="isFullyAuthenticated()" />
 		<intercept-url pattern="/tour/admin/placecomments*" access="hasAnyRole('ROLE_per_places')" />
 		<intercept-url pattern="/tour/admin/placecomments/*" access="hasAnyRole('ROLE_per_places')" />
 		<intercept-url pattern="/tour/admin/places*" access="hasAnyRole('ROLE_per_places')" />
@@ -74,7 +78,7 @@
 
 		<intercept-url pattern="/**" access="denyAll" />
 		<form-login login-page="/store/public/intro/index" authentication-failure-handler-ref="authenticationFailureHandler" authentication-success-handler-ref="authenticationSuccessHandler" />
-		<logout logout-success-url="/store/public/intro/index" />
+		<logout success-handler-ref="logoutSuccessHandler" />
 	</http>
 
 	<authentication-manager>
@@ -87,7 +91,8 @@
 	<beans:bean id="authenticationFailureHandler" class="cz.kolomet.security.KolometAuthenticationFailureHandler">
 		<beans:property name="localeResolver" ref="localeResolver" />
 	</beans:bean>
-	<beans:bean id="authenticationSuccessHandler" class="cz.kolomet.security.KolometAuthenticationSuccessHandler" />		
+	<beans:bean id="authenticationSuccessHandler" class="cz.kolomet.security.KolometAuthenticationSuccessHandler" />	
+	<beans:bean id="logoutSuccessHandler" class="cz.kolomet.security.KolometLogoutSuccessHandler" />	
 	<beans:bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.ShaPasswordEncoder" />
 
 	<global-method-security pre-post-annotations="enabled">

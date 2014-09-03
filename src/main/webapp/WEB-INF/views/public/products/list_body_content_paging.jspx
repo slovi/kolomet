@@ -14,7 +14,7 @@
 			
 			<c:choose>
 				<c:when test="${products.number + 1 gt 1}">
-					<spring:url value="/public/products/filter" var="firstPageUrl">
+					<spring:url value="${subContext}/public/products/filter" var="firstPageUrl">
 						<c:forEach items="${paramValues}" var="p">
 							<c:if test="${p.key ne 'page.size' and p.key ne 'page.page'}">
 								<c:forEach items="${p.value}" var="value">
@@ -34,7 +34,7 @@
 			
 			<c:choose>
 				<c:when test="${products.number + 1 gt 1}">
-					<spring:url value="/public/products/filter" var="previousPageUrl">
+					<spring:url value="${subContext}/public/products/filter" var="previousPageUrl">
 						<c:forEach items="${paramValues}" var="p">
 							<c:if test="${p.key ne 'page.size' and p.key ne 'page.page'}">
 								<c:forEach items="${p.value}" var="value">
@@ -54,7 +54,7 @@
 			
 			<c:forEach begin="0" end="${totalPages}" varStatus="status" step="1">
 				<c:if test="${status.index != products.number}">
-					<spring:url value="/public/products/filter" var="pageUrl">
+					<spring:url value="${subContext}/public/products/filter" var="pageUrl">
 						<c:forEach items="${paramValues}" var="p">
 							<c:if test="${p.key ne 'page.size' and p.key ne 'page.page'}">
 								<c:forEach items="${p.value}" var="value">
@@ -75,7 +75,7 @@
 			
 			<c:choose>
 				<c:when test="${products.number + 1 lt products.totalPages}">
-					<spring:url value="/public/products/filter" var="nextPageUrl">
+					<spring:url value="${subContext}/public/products/filter" var="nextPageUrl">
 						<c:forEach items="${paramValues}" var="p">
 							<c:if test="${p.key ne 'page.size' and p.key ne 'page.page'}">
 								<c:forEach items="${p.value}" var="value">

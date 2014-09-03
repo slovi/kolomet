@@ -13,6 +13,14 @@
     <put-attribute name="news" value="/WEB-INF/views/tour/shared/news.jspx" />
   </definition>
   
+  <definition name="tour/template_default_separated_content" extends="template_default_separated_content">
+  	<put-attribute name="scripts" value="/WEB-INF/views/tour/shared/scripts.jspx" />
+    <put-attribute name="header" value="/WEB-INF/views/tour/shared/header.jspx" />
+    <put-attribute name="menu_main" value="/WEB-INF/views/tour/shared/menu_main.jspx" />
+    <put-attribute name="menu_side" value="/WEB-INF/views/tour/shared/menu_side.jspx" />
+    <put-attribute name="news" value="/WEB-INF/views/tour/shared/news.jspx" />
+  </definition>
+  
   <definition name="tour/template_admin" extends="template_admin">
   	<put-attribute name="scripts" value="/WEB-INF/views/tour/shared/scripts.jspx" />
     <put-attribute name="header" value="/WEB-INF/views/tour/shared/header.jspx" />

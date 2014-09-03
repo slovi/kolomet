@@ -5,8 +5,8 @@
 
 	<span id="body_content">
 
-	<jsp:directive.include file="./list_category_sorting.jspx" />
-	<jsp:directive.include file="./list_category_paging.jspx" />
+	<jsp:directive.include file="./list_body_content_sorting.jspx" />
+	<jsp:directive.include file="./list_body_content_paging.jspx" />
 	
 	<div>
 	
@@ -16,7 +16,7 @@
 			<spring:url value="${product.buyUrl}" var="buyUrl" />
 			<spring:url value="/resources/img/bike_02.jpg" var="productImgUrl" />
 		    <div class="category_unit"> 
-		    	<spring:url value="/public/products/detail/${product.id}" var="productIdUrl" />
+		    	<spring:url value="${subContext}/public/products/detail/${product.id}" var="productIdUrl" />
 		    	<a href="${productIdUrl}">
 		    		<util:photo-image photos="${product.photoUrls}" imgType="over" height="146" width="224" />
 		    	</a>
@@ -38,7 +38,7 @@
 		        </div>
 		        <div class="cat_seller"> 
 		        	<p>
-		        		<spring:url value="/public/sellers/detail/${product.seller.id}" var="sellerIdUrl" />
+		        		<spring:url value="${subContext}/public/sellers/detail/${product.seller.id}" var="sellerIdUrl" />
 		                <a href="${sellerIdUrl}"><c:out value="${product.seller.sellerName}" /></a><br/>
 		            	<c:out value="${product.seller.addressString}" /><br/>
 		                <spring:message code="label_cz_kolomet_domain_seller_businessphonenumber_short" />: <c:out value="${product.seller.businessPhoneNumber}" />
@@ -48,7 +48,7 @@
 		            </p>
 		            <c:if test="${not empty product.buyUrl}">
 			        	<div>
-			        		<spring:url value="/public/products/detail/${product.id}" var="detailUrl" />
+			        		<spring:url value="${subContext}/public/products/detail/${product.id}" var="detailUrl" />
 			                <a class="action_button_dark" target="_blank" href="${detailUrl}"><spring:message code="button_detail" /></a>
 			            </div>
 		            </c:if>

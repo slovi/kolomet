@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 <tiles-definitions>
-    <definition extends="default" name="admin/password/index">
+    <definition extends="store/template_admin" name="store/admin/password/index">
         <put-attribute name="body" value="/WEB-INF/views/admin/password/index.jspx"/>
+    </definition>
+    <definition extends="store/template_admin" name="store/admin/password/update">
+        <put-attribute name="body" value="/WEB-INF/views/admin/password/update.jspx"/>
+    </definition>
+    <definition extends="store/template_admin" name="store/admin/password/show">
+        <put-attribute name="body" value="/WEB-INF/views/admin/password/show.jspx"/>
+    </definition>
+    <definition extends="tour/template_admin" name="tour/admin/password/index">
+        <put-attribute name="body" value="/WEB-INF/views/admin/password/index.jspx"/>
+    </definition>
+    <definition extends="tour/template_admin" name="tour/admin/password/update">
+        <put-attribute name="body" value="/WEB-INF/views/admin/password/update.jspx"/>
+    </definition>
+    <definition extends="tour/template_admin" name="tour/admin/password/show">
+        <put-attribute name="body" value="/WEB-INF/views/admin/password/show.jspx"/>
     </definition>
 </tiles-definitions>

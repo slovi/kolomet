@@ -56,7 +56,7 @@ public class SellerServiceImpl implements SellerService {
 		return sellerRepository.findAll(pageable);
 	}
     
-	@PreAuthorize("principal.isSellersAll()")
+	@PreAuthorize("principal.isCapableToDeleteSeller(#seller)")
     public void deleteSeller(Seller seller) {
         seller.setEnabled(false);
         sellerRepository.save(seller);

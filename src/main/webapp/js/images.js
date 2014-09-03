@@ -34,7 +34,7 @@ define(['jquery'], function($) {
 	function loadImage(img, imgUrl, processErrorImgUrl, errorImgUrl, attempts, maxAttemptsNr, timeout) {
 		console.log("loading image: " + imgUrl);
 		$.ajax({
-			url: imgUrl,
+			url: createResultUrl(imgUrl, attempts),
 			success: function(data) {
 				console.log("successfully loaded image: " + imgUrl + ". setting attr.");
 				window.setTimeout(function() {
@@ -54,6 +54,14 @@ define(['jquery'], function($) {
 				}
 			}
 		});
+	}
+	
+	function createResultUrl(imgUrl, attempt) {
+		if (imgUrl.indexOf('?') > 0) {
+			return imgUrl + '&attempt=' + attempt;
+		} else {
+			return imgUrl + '?attempt=' + attempt;
+		}
 	}
 
 });

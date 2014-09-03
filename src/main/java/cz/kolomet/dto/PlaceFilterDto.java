@@ -1,5 +1,7 @@
 package cz.kolomet.dto;
 
+import java.util.List;
+
 import cz.kolomet.domain.codelist.PlaceType;
 import cz.kolomet.domain.codelist.Region;
 
@@ -7,7 +9,9 @@ public class PlaceFilterDto {
 	
 	private Region region;
 	
-	private PlaceType placeType;
+	private List<PlaceType> placeTypes;
+	
+	private boolean usedFilter;
 
 	public Region getRegion() {
 		return region;
@@ -17,12 +21,20 @@ public class PlaceFilterDto {
 		this.region = region;
 	}
 
-	public PlaceType getPlaceType() {
-		return placeType;
+	public List<PlaceType> getPlaceTypes() {
+		return placeTypes;
 	}
 
-	public void setPlaceType(PlaceType placeType) {
-		this.placeType = placeType;
+	public void setPlaceTypes(List<PlaceType> placeTypes) {
+		this.placeTypes = placeTypes;
+	}
+
+	public boolean isUsedFilter() {
+		return usedFilter;
+	}
+
+	public void setUsedFilter(boolean usedFilter) {
+		this.usedFilter = usedFilter;
 	}
 
 }

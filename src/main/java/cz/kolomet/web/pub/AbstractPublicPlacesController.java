@@ -21,10 +21,7 @@ public class AbstractPublicPlacesController extends AbstractController {
 	private Integer newsItemsSize = 10;
 	
 	@Autowired
-	private RegionService regionService;
-	
-	@Autowired
-	private PlaceTypeService placeTypeService;
+	private RegionService regionService;	
 	
 	@Autowired
 	private NewsItemRepository newsItemRepository;
@@ -33,12 +30,7 @@ public class AbstractPublicPlacesController extends AbstractController {
 	public List<Region> loadRegions() {
 		return regionService.findAllRegions();
 	}
-	
-	@ModelAttribute("placeTypes")
-	public List<PlaceType> loadPlaceTypes() {
-		return placeTypeService.findAllPlaceTypes();
-	}
-	
+
 	@ModelAttribute("newsBanners")
 	public List<NewsItem> loadNewsBanners() {
 		return newsItemRepository.findAll(NewsItemSpecifications.allNewsBanners(), new PageRequest(0, newsItemsSize, Direction.DESC, "newsItemDate")).getContent(); 

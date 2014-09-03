@@ -13,6 +13,9 @@ require.config({
 		'jquery.fileupload-ui': 'lib/jquery.fileupload-ui',
 		'jquery.fileupload-validate': 'lib/jquery.fileupload-validate',
 		'jquery.fileupload-video': 'lib/jquery.fileupload-video',
+		'jquery.block-ui': 'lib/jquery.blockUI',
+		'jquery.steps': 'lib/jquery.steps.min',
+		'jquery.validation': 'lib/jquery.validate.min',
 		'load-image-meta': 'lib/load-image-meta',
 		'load-image-exif': 'lib/load-image-exif',
 		'load-image': 'lib/load-image',
@@ -22,8 +25,8 @@ require.config({
 		'jquery.lean': 'lib/jquery.leanModal.min',
 		'jquery.number': 'lib/jquery.numberformatter-1.2.4.min',
 		'bootstrap': 'lib/bootstrap.min',
-		jquery_maphilight: 'lib/jquery.maphilight',
-		jshashtable: 'lib/jshashtable-3.0'
+		'jquery_maphilight': 'lib/jquery.maphilight',
+		'jshashtable': 'lib/jshashtable-3.0'
 	},
 	shim: {
 		'bootstrap': {
@@ -42,6 +45,12 @@ require.config({
 			deps: ['jquery', 'jshashtable']
 		},
 		'jquery_maphilight': {
+			deps: ['jquery']
+		},
+		'jquery.steps': {
+			deps: ['jquery']
+		},
+		'jquery.validation': {
 			deps: ['jquery']
 		}
 	},

@@ -15,7 +15,7 @@ import cz.kolomet.dto.ApplicationUserPasswordDto;
 import cz.kolomet.service.ApplicationUserService;
 import cz.kolomet.web.admin.AbstractAdminController;
 
-@RequestMapping("/private/password/**")
+@RequestMapping("/admin/password/**")
 @Controller
 public class ApplicationUserPasswordController extends AbstractAdminController {
 
@@ -24,14 +24,14 @@ public class ApplicationUserPasswordController extends AbstractAdminController {
 	
 	@RequestMapping("show")
 	public String show(RedirectAttributes redirectAttributes) {
-		return "private/password/show";
+		return "admin/password/show";
 	}
 	
     @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
     public String update(@Valid ApplicationUserPasswordDto password, BindingResult bindingResult, RedirectAttributes redirectAttributes, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
             populateEditForm(redirectAttributes, new ApplicationUserPasswordDto());
-            return "private/password/update";
+            return "admin/password/update";
         }
         
         password.setUsername(getUsername());        
@@ -39,16 +39,17 @@ public class ApplicationUserPasswordController extends AbstractAdminController {
         
         redirectAttributes.asMap().clear();
         redirectAttributes.addFlashAttribute("password", password);
-        return "redirect:/private/password/show";
+        return "redirect:/admin/password/show";
     }
 
     @RequestMapping(params = "form", produces = "text/html")
     public String updateForm(Model uiModel) {
         populateEditForm(uiModel, new ApplicationUserPasswordDto());
-        return "private/password/update";
+        return "admin/password/update";
     }
     
     void populateEditForm(Model uiModel, ApplicationUserPasswordDto applicationUserPassword) {
         uiModel.addAttribute("password", applicationUserPassword);
     }
+
 }
