@@ -1,0 +1,78 @@
+<html xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:tiles="http://tiles.apache.org/tags-tiles" xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" >  
+	
+	<jsp:output doctype-root-element="HTML" doctype-system="about:legacy-compat" />
+	
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />  
+	<jsp:directive.page pageEncoding="UTF-8" /> 
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Kolomet</title>
+		
+		<spring:url value="/resources/css/style.css?v=${version}" var="default_css_url" />
+  		<link rel="stylesheet" type="text/css" href="${default_css_url}" />		
+				
+		<style type="text/css">
+			body {
+				background: url(resources/img/intro/bg_large_final.jpg) no-repeat center center fixed;
+				-webkit-background-size: cover;
+			  	-moz-background-size: cover;
+			  	-o-background-size: cover;
+			    background-size: cover;
+			}
+			
+			div.homepage_unit div.home_description {
+				height: auto;
+			}
+			
+			div.homepage_unit div.home_seller {
+				min-height: inherit;
+			}
+			
+		</style>
+		
+	</head>
+
+	<body>
+		<div style="margin: 60px auto; width: 500px;">
+			<div style="width: 100%; text-align: center; margin-bottom: 20px;">
+				<spring:url value="/resources/img/intro/logo.png" var="logoUrl" />
+				<img alt="kolomet_logo" src="${logoUrl}" />
+			</div>
+			<div class="homepage_unit">
+				<spring:url value="/store/public/intro/index" var="storeIndexUrl" />
+				<a href="${storeIndexUrl}">
+					<spring:url value="/resources/img/intro/store_final.jpg" var="storeImgUrl" />
+					<img alt="Store" src="${storeImgUrl}" />
+				</a>
+				<div class="home_description">
+					<p style="font-weight: bold; font-size: 1.1em; margin-bottom: 5px;"><spring:message code="intro.store.1" /></p>
+					<p style="font-style: italic; color: #f1941c; font-weight: bold;"><spring:message code="intro.store.2" /></p>
+				</div>
+				<div class="home_seller">
+					<center>
+						<a href="${storeIndexUrl}" style="font-size: 1.5em;"><spring:message code="intro.store.link" /></a>
+					</center>
+				</div>
+			</div>
+			<div class="homepage_unit" style="float: right;">
+				<spring:url value="/tour/public/places" var="tourIndexUrl" />
+				<a href="${tourIndexUrl}">
+					<spring:url value="/resources/img/intro/tour_final.jpg" var="tourImgUrl" />					
+					<img alt="tour_logo" src="${tourImgUrl}" />
+				</a>
+				<!-- odkaz na detail inzerátu -->
+				<div class="home_description">
+					<p style="font-weight: bold; font-size: 1.1em; margin-bottom: 5px;"><spring:message code="intro.tour.1" /></p>
+					<!-- odkaz na detail inzerátu -->
+					<p style="font-style: italic; color: #f1941c; font-weight: bold;"><spring:message code="intro.tour.2" /></p>
+				</div>
+				<div class="home_seller">
+					<center>
+						<a href="${tourIndexUrl}" style="font-size: 1.5em;"><spring:message code="intro.tour.link" /></a>
+					</center>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

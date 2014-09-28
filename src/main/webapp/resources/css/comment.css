@@ -1,0 +1,19 @@
+div.comment_box {
+	margin: 10px 0 0 6px;
+	padding: 15px 15px 25px 15px;
+	background: #f9f9f9;
+	box-shadow: 0px 0px 6px #C0C0C0;
+}
+
+div.comment_box div.comment_box_img_content {
+	float: left;
+}
+
+div.comment_box div.comment_box_text_content {
+	margin-left: 100px;
+}
+
+div.comment_box div.comment_box_text_content div.comment_box_text {
+	margin: 10px 0 10px 0;
+	font-size: 1.2em;
+}

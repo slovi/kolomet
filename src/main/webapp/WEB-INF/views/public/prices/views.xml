@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+    <definition extends="store/template_default" name="store/public/prices/index">
+        <put-attribute name="body" value="/WEB-INF/views/public/prices/index.jspx"/>
+    </definition>
+    <definition extends="tour/template_default" name="tour/public/prices/index">
+        <put-attribute name="body" value="/WEB-INF/views/public/prices/index.jspx"/>
+    </definition>
+</tiles-definitions>

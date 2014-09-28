@@ -1,0 +1,30 @@
+.clickable {
+	cursor: pointer;
+}
+
+.large {
+	font-size: large;
+}
+
+.red {
+	color: red;
+}
+
+.pull_left {
+	float: left;
+}
+
+.left_justify {
+	margin-left: 40px;
+	margin-right: 20px;
+}
+
+a.undecorated {
+	text-decoration: none;
+	color: inherit;
+}
+
+a.undecorated:hover {
+	text-decoration: none;
+	color: inherit;
+}

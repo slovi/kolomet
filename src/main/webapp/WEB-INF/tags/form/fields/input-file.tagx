@@ -1,0 +1,104 @@
+<jsp:root xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:spring="http://www.springframework.org/tags" xmlns:form="http://www.springframework.org/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+  <jsp:output omit-xml-declaration="yes" />
+
+  <jsp:directive.attribute name="id" type="java.lang.String" required="true" rtexprvalue="true" description="The identifier for this tag (do not change!)" />
+  <jsp:directive.attribute name="render" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Indicate if the contents of this tag and all enclosed tags should be rendered (default 'true')" />
+  <jsp:directive.attribute name="uploadFileUrl" type="java.lang.String" required="false" rtexprvalue="true" description="Indicate server upload file url" />
+  <jsp:directive.attribute name="addedFiles" type="java.lang.String" required="false" rtexprvalue="true" description="Indicate server added file names" />
+  <jsp:directive.attribute name="uploadedFiles" type="java.lang.String" required="false" rtexprvalue="true" description="Indicate server upload file url" />
+  <jsp:directive.attribute name="size" type="java.lang.Integer" required="false" rtexprvalue="true" description="Indicate number of files input" />
+  
+  <!-- tepmlates -->
+  <jsp:directive.attribute name="templateThumbnailUrl" type="java.lang.String" required="false" rtexprvalue="true" description="Indicate thumbnail template url" />
+  <jsp:directive.attribute name="templateThumbnailErrorUrl" type="java.lang.String" required="false" rtexprvalue="true" description="Indicate thumbnail template error url" />
+  <jsp:directive.attribute name="templateThumbnailProgressUrl" type="java.lang.String" required="false" rtexprvalue="true" description="Indicate thumbnail template progress url" />
+  
+  <!-- imgs -->
+  <jsp:directive.attribute name="fileErrorUrl" type="java.lang.String" required="false" rtexprvalue="true" description="Indicate error img url" />
+  <jsp:directive.attribute name="fileNotFoundUrl" type="java.lang.String" required="false" rtexprvalue="true" description="Indicate not found img url" />
+  <jsp:directive.attribute name="fileNotFoundThubnailUrl" type="java.lang.String" required="false" rtexprvalue="true" description="Indicate not found img thumbnail url" />
+  <jsp:directive.attribute name="fileLoaderUrl" type="java.lang.String" required="false" rtexprvalue="true" description="Indicate img loader img url" />
+  <jsp:directive.attribute name="fileBaseUrl" type="java.lang.String" required="false" rtexprvalue="true" description="Indicate base img url" />
+  <jsp:directive.attribute name="fileBaseDeleteUrl" type="java.lang.String" required="false" rtexprvalue="true" description="Indicate base img temp url" />
+  <jsp:directive.attribute name="fileTempBaseUrl" type="java.lang.String" required="false" rtexprvalue="true" description="Indicate base img temp url" />
+  <jsp:directive.attribute name="fileTempBaseDeleteUrl" type="java.lang.String" required="false" rtexprvalue="true" description="Indicate base img temp url" />  
+  
+  
+  <c:if test="${empty render or render}">
+  
+  	<c:if test="${empty size}">
+  		<c:set var="size" value="4" />
+  	</c:if>
+   
+   	<div id="${id}_container" class="files_container">
+		
+		<!-- templates -->
+		<c:if test="${empty templateThumbnailUrl}">
+			<spring:url value="/resources/js/modules/input-file/template-thumbnail.html" var="templateThumbnailUrl" />
+		</c:if>
+		<c:if test="${empty templateThumbnailErrorUrl}">
+			<spring:url value="/resources/js/modules/input-file/template-thumbnail-error.html" var="templateThumbnailErrorUrl" />
+		</c:if>
+		<c:if test="${empty templateThumbnailProgressUrl}">
+			<spring:url value="/resources/js/modules/input-file/template-thumbnail-progress.html" var="templateThumbnailProgressUrl" />
+		</c:if>
+		
+		<!-- imgs -->
+		<c:if test="${empty fileErrorUrl}">
+			<spring:url value="/resources/images/error.png" var="fileErrorUrl" />
+		</c:if>
+		<c:if test="${empty fileTempBaseUrl}">
+			<spring:url value="/file/_temp/${pageContext.session.id}" var="fileTempBaseUrl" />
+		</c:if>
+		<c:if test="${empty fileTempBaseDeleteUrl}">
+			<spring:url value="/file/_temp/${pageContext.session.id}" var="fileTempBaseDeleteUrl" />
+		</c:if>
+		<c:if test="${empty fileLoaderUrl}">
+			<spring:url value="/resources/images/ajax-loader.gif" var="fileLoaderUrl" />
+		</c:if>
+		<c:if test="${empty fileNotFoundUrl}">
+			<spring:url value="/resources/images/product/no-photo-detail.jpg" var="fileNotFoundUrl" />
+		</c:if>
+		<c:if test="${empty fileNotFoundThumbnailUrl}">
+			<spring:url value="/resources/images/no-photo-thumb.jpg" var="fileNotFoundThumbnailUrl" />
+		</c:if>
+	    
+	    <c:if test="${empty uploadedFiles}">
+	    	<c:set value="[]" var="uploadedFiles" />
+	    </c:if>
+	    
+		<span class="config" style="display: none;">
+    		<![CDATA[
+				{
+					"uploadFileUrl": "${uploadFileUrl}", 
+					"size": ${size},
+					"uploadedFiles": ${uploadedFiles},
+					"addedFiles": ${addedFiles},
+					"fileErrorUrl": "${fileErrorUrl}",
+					"fileLoaderUrl": "${fileLoaderUrl}",
+					"fileNotFoundUrl": "${fileNotFoundUrl}",
+					"fileNotFoundThumbnailUrl": "${fileNotFoundThumbnailUrl}",  
+					"fileBaseUrl": "${fileBaseUrl}",
+					"fileBaseDeleteUrl": "${fileBaseDeleteUrl}",
+					"fileTempBaseUrl": "${fileTempBaseUrl}",
+					"fileTempBaseDeleteUrl": "${fileTempBaseDeleteUrl}",
+					"templateThumbnail": "${templateThumbnailUrl}",
+					"templateThumbnailError": "${templateThumbnailErrorUrl}",
+					"templateThumbnailProgress": "${templateThumbnailProgressUrl}"
+				}
+    		]]>
+    	</span>
+		
+		<div class="thumbnails_container">
+			<div class="files_add thumbnail_wrapper">
+	           	<span class="fileinput-button">
+			        <span><spring:message code="global_upload_file" /></span>
+			    </span>
+		        <input id="${id}" type="file" name="content" multiple="true" />
+		    </div>
+    	</div>
+    </div>
+      
+    <br />
+  </c:if>
+</jsp:root>

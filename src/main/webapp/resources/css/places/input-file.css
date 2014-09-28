@@ -1,0 +1,44 @@
+div#thumbnails div.thumbnail_wrapper, div.thumbnails_container {
+	margin-top: 10px;
+	height: 160px;
+}
+
+div#thumbnails div.thumbnail_wrapper, div.thumbnails_container div.thumbnail_wrapper {
+	width: 120px;
+	height: 160px;
+	margin: 5px;
+	float: left;
+	border: solid thin black;
+	text-align: center;
+}
+
+div#thumbnails div.thumbnail_wrapper span, div.thumbnails_container div.thumbnail_wrapper span {
+	display: block;
+	margin: 4px;
+	overflow: hidden;
+}
+
+div#thumbnails div.thumbnail_wrapper div.thumbnail, div.thumbnails_container div.thumbnail_wrapper div.thumbnail {
+	width: 104px;
+	height: 104px;
+	display: block;
+	float: none;
+	margin: auto;
+	line-height: 1em;
+}
+
+div.files_add {
+	background: #f5f5f5 url('/kolomet/resources/images/input_file.png') no-repeat center center;
+	line-height: 1em !important;
+	border: thin solid black;	
+}
+
+div.files_add input {
+	width: 120px;
+	height: 140px;
+	position: relative;
+	top: -30px;
+	opacity: 0;
+	-ms-filter: 'alpha(opacity=0)';
+	cursor: pointer;
+}

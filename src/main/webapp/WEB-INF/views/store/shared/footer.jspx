@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" id="footer" version="2.0">
+  	
+  	<jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  	<jsp:output omit-xml-declaration="yes"/>
+
+	<p>2014 Kolomet &#169; &#32; &#32; |
+	
+	<spring:url value="${subContext}/public/about#about" var="aboutIndexUrl" />
+   	<a href="${aboutIndexUrl}"><spring:message code="footer_about" /></a> |
+   	
+   	<spring:url value="${subContext}/public/about#conditions" var="conditionsIndexUrl" />
+   	<a href="${conditionsIndexUrl}"><spring:message code="footer_conditions" /></a> |
+   	
+   	<spring:url value="${subContext}/public/about#contacts" var="contactIndexUrl" />
+   	<a href="${contactIndexUrl}"><spring:message code="footer_contact" /></a> |
+   	
+   	<spring:url value="${subContext}/public/prices" var="pricesIndexUrl" />
+   	<a href="${pricesIndexUrl}"><spring:message code="footer_prices" /></a> |
+   	<c:out value="&#160;" /><c:out value="&#160;" /><spring:message code="footer_version" />: <c:out value="${version}" /></p>
+   	 
+   	<spring:url value="${subContext}/public/registrationrequests?form" var="registrationUrl" />
+   	<a href="${registrationUrl}" class="action_button_dark"><spring:message code="footer_add" /></a>
+	
+</div>

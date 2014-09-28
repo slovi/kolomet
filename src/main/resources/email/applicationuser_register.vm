@@ -1,0 +1,21 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	</head>
+	<body>
+		<h3>Dobrý den, byl Vám vytvořen účet v aplikaci kolomet</h3>
+		<div>
+			<h4>Informace:</h4>
+			<ul>
+				<li><b>Uživatelské jméno:</b> ${applicationuser.username}</li>
+			</ul>
+			<p>
+				Pro aktivaci účtu klikněte na tento odkaz: <a href="{{link}}">{{link}}</a>
+			</p>
+		</div>		
+		<br />
+		Kolomet s.r.o.
+	</body>
+</html>

@@ -1,0 +1,49 @@
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0">
+	<jsp:output omit-xml-declaration="yes" />
+
+	<jsp:directive.attribute name="comment" type="java.lang.Object" required="true" rtexprvalue="true" description="Comment to render" />
+	<jsp:directive.attribute name="render" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Indicate if the contents of this tag and all enclosed tags should be rendered (default 'true')" />
+
+	<c:if test="${empty render or render}">
+	
+		<c:choose>
+     		<c:when test="${empty comment.createdBy.profilePhotoEmpty}">
+     			<spring:url value="/resources/images/no-photo-thumb.jpg" var="profileUrl" />
+     		</c:when>
+     		<c:otherwise>
+     			<spring:url value="/file/${comment.createdBy.profilePhotoUrl}" var="profileUrl" />
+     		</c:otherwise>
+     	</c:choose>
+
+		<div class="comment_box">
+			<div class="comment_box_img_content">
+				<img alt="Profile photo" src="${profileUrl}" />
+			</div>
+			<div class="comment_box_text_content">
+				<div>
+					<a> 
+						<b><c:out value="${comment.createdBy.username}" /></b>
+					</a> 
+					<br />
+					<c:out value="${comment.created}" />
+				</div>
+				<div class="comment_box_text">
+					<c:out value="${comment.text}" />
+				</div>
+				<div>
+					<spring:url value="${subContext}/public/placecomments?form" var="commentsUrl">
+				        <spring:param name="parentEntityId" value="${place.id}"/>
+				    </spring:url>
+					<a href="${commentsUrl}">
+						<spring:message code="place_detail_comments_response" />
+					</a>
+				</div>
+			</div>
+		</div>
+
+	</c:if>
+	
+</jsp:root>
