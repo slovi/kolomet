@@ -3,9 +3,9 @@
 
 package cz.kolomet.service;
 
-import cz.kolomet.domain.RegistrationRequest;
-import cz.kolomet.service.RegistrationRequestService;
 import java.util.List;
+
+import cz.kolomet.domain.RegistrationRequest;
 
 privileged aspect RegistrationRequestService_Roo_Service {
     

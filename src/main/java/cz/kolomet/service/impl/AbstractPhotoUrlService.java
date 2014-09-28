@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.task.TaskExecutor;
 
-import cz.kolomet.domain.BasePhotoUrl;
+import cz.kolomet.domain.BasePhoto;
 import cz.kolomet.domain.Photo;
 import cz.kolomet.domain.PhotoContainerService;
 import cz.kolomet.service.ImageService;
@@ -35,7 +35,7 @@ public abstract class AbstractPhotoUrlService implements PhotoContainerService {
 		
 		for (ResizeInfo resizeInfo: getResizeInfos()) {
 			
-			String targetFileName = BasePhotoUrl.getPhotoUrlFileName(file.getName(), resizeInfo.getSuffix());
+			String targetFileName = BasePhoto.getPhotoUrlFileName(file.getName(), resizeInfo.getSuffix());
 			if (!resizeInfo.isAsync()) {
 				doResize(file, resizeInfo, targetFileName);
 			} else {
@@ -52,7 +52,7 @@ public abstract class AbstractPhotoUrlService implements PhotoContainerService {
 					
 					for (ResizeInfo resizeInfo: asyncResizeInfos) {
 						
-						String targetFileName = BasePhotoUrl.getPhotoUrlFileName(file.getName(), resizeInfo.getSuffix());
+						String targetFileName = BasePhoto.getPhotoUrlFileName(file.getName(), resizeInfo.getSuffix());
 						doResize(file, resizeInfo, targetFileName);
 					}
 					
@@ -73,7 +73,8 @@ public abstract class AbstractPhotoUrlService implements PhotoContainerService {
 		}
 	}
 	
-	protected void deletePhoto(Photo photo) {
+	@Override
+	public void deletePhoto(Photo photo) {
 		if (photo.getPhotoUrl() != null) {
 			FileUtils.deleteQuietly(new File(rootDir + "/" + photo.getPhotoUrl()));
 		}
@@ -120,7 +121,7 @@ public abstract class AbstractPhotoUrlService implements PhotoContainerService {
 		}
 		
 		public ResizeInfo(Dimension dimension, String suffix) {
-			this(null, suffix, true);
+			this(dimension, suffix, true);
 		}
 		
 		public ResizeInfo(Dimension dimension, String suffix, boolean async) {

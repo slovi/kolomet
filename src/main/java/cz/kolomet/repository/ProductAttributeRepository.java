@@ -1,12 +1,12 @@
 package cz.kolomet.repository;
 import java.util.List;
 
-import cz.kolomet.domain.Product;
-import cz.kolomet.domain.ProductAttribute;
-
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.roo.addon.layers.repository.jpa.RooJpaRepository;
+
+import cz.kolomet.domain.Product;
+import cz.kolomet.domain.ProductAttribute;
 
 @RooJpaRepository(domainType = ProductAttribute.class)
 public interface ProductAttributeRepository {

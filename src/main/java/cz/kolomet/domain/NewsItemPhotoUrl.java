@@ -20,7 +20,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 @RooJpaEntity(inheritanceType = "TABLE_PER_CLASS")
 @RooEquals(excludeFields = {"seller", "createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate", "newsItem"})
 @RooSerializable
-public class NewsItemPhotoUrl extends BasePhotoUrl {
+public class NewsItemPhotoUrl extends BasePhoto {
 	
 	public static final String PHOTO_URL_PREFIX = "newsitem";
     

@@ -3,7 +3,6 @@
 
 package cz.kolomet.dto;
 
-import cz.kolomet.dto.ApplicationUserPasswordDto;
 import java.io.Serializable;
 
 privileged aspect ApplicationUserPasswordDto_Roo_Serializable {

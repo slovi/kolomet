@@ -3,11 +3,11 @@
 
 package cz.kolomet.repository;
 
-import cz.kolomet.domain.NewsItemPhotoUrl;
-import cz.kolomet.repository.NewsItemPhotoUrlRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
+
+import cz.kolomet.domain.NewsItemPhotoUrl;
 
 privileged aspect NewsItemPhotoUrlRepository_Roo_Jpa_Repository {
     

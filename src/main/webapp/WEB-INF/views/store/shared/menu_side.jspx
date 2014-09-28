@@ -78,11 +78,5 @@
        		</c:forEach>
     	</div>
     </div>
-	
-	<script type="text/javascript">
-		requireModule(['side_menu'], function(sideMenu) {
-			sideMenu.prepare();
-		});
-	</script>
 		
 </div>

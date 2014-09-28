@@ -22,4 +22,14 @@ public class Region extends Codelist {
 	
 	private String googleAlias;
 	
+	private Integer zoom;
+
+	public Integer getZoom() {
+		return zoom;
+	}
+
+	public void setZoom(Integer zoom) {
+		this.zoom = zoom;
+	}
+	
 }

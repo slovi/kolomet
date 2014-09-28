@@ -3,11 +3,11 @@
 
 package cz.kolomet.repository;
 
-import cz.kolomet.domain.codelist.ProductAttributeType;
-import cz.kolomet.repository.ProductAttributeTypeRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
+
+import cz.kolomet.domain.codelist.ProductAttributeType;
 
 privileged aspect ProductAttributeTypeRepository_Roo_Jpa_Repository {
     

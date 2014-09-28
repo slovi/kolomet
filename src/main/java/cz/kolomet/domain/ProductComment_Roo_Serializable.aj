@@ -3,7 +3,6 @@
 
 package cz.kolomet.domain;
 
-import cz.kolomet.domain.ProductComment;
 import java.io.Serializable;
 
 privileged aspect ProductComment_Roo_Serializable {

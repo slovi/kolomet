@@ -1,4 +1,5 @@
 package cz.kolomet.domain;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.FetchType;
@@ -14,12 +15,14 @@ import org.springframework.roo.addon.serializable.RooSerializable;
 import org.springframework.roo.addon.tostring.RooToString;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import flexjson.JSONSerializer;
+
 @RooJavaBean
 @RooToString(excludeFields = {"createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate"})
 @RooJpaEntity(inheritanceType = "TABLE_PER_CLASS")
 @RooEquals(excludeFields = {"product", "createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate"}, appendSuper = false)
 @RooSerializable
-public class PhotoUrl extends BasePhotoUrl implements Cloneable {
+public class PhotoUrl extends BasePhoto implements Cloneable {
 	
 	public static final String PHOTO_URL_PREFIX = "product";
     
@@ -28,7 +31,12 @@ public class PhotoUrl extends BasePhotoUrl implements Cloneable {
     @JoinColumn(name = "PRODUCT_ID")
     private Product product;
     
-    private Long getPhotoId() {
+
+    public static String toJsonArray(Collection<PhotoUrl> collection, String[] fields) {
+        return new JSONSerializer().include(fields).exclude("*").serialize(collection);
+    }
+    
+    private Long getProductId() {
     	Long id = product.getId();
     	if (id == null && product.getCopiedFrom() != null) {
     		id = product.getCopiedFrom().getId();
@@ -70,7 +78,7 @@ public class PhotoUrl extends BasePhotoUrl implements Cloneable {
 
 	@Override
 	protected Long getParentContainerId() {
-		return getPhotoId();
+		return getProductId();
 	}
     
 }

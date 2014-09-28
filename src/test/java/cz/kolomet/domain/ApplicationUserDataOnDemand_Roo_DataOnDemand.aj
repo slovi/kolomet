@@ -37,15 +37,31 @@ privileged aspect ApplicationUserDataOnDemand_Roo_DataOnDemand {
     
     public ApplicationUser ApplicationUserDataOnDemand.getNewTransientApplicationUser(int index) {
         ApplicationUser obj = new ApplicationUser();
+        setConditionAgreement(obj, index);
+        setConditionVersion(obj, index);
         setCreated(obj, index);
         setCreatedBy(obj, index);
         setEnabled(obj, index);
         setLastModified(obj, index);
         setLastModifiedBy(obj, index);
+        setName(obj, index);
         setPassword(obj, index);
+        setPhone(obj, index);
         setSeller(obj, index);
+        setSurname(obj, index);
+        setToken(obj, index);
         setUsername(obj, index);
         return obj;
+    }
+    
+    public void ApplicationUserDataOnDemand.setConditionAgreement(ApplicationUser obj, int index) {
+        Date conditionAgreement = new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH), Calendar.getInstance().get(Calendar.HOUR_OF_DAY), Calendar.getInstance().get(Calendar.MINUTE), Calendar.getInstance().get(Calendar.SECOND) + new Double(Math.random() * 1000).intValue()).getTime();
+        obj.setConditionAgreement(conditionAgreement);
+    }
+    
+    public void ApplicationUserDataOnDemand.setConditionVersion(ApplicationUser obj, int index) {
+        String conditionVersion = "conditionVersion_" + index;
+        obj.setConditionVersion(conditionVersion);
     }
     
     public void ApplicationUserDataOnDemand.setCreated(ApplicationUser obj, int index) {
@@ -73,14 +89,34 @@ privileged aspect ApplicationUserDataOnDemand_Roo_DataOnDemand {
         obj.setLastModifiedBy(lastModifiedBy);
     }
     
+    public void ApplicationUserDataOnDemand.setName(ApplicationUser obj, int index) {
+        String name = "name_" + index;
+        obj.setName(name);
+    }
+    
     public void ApplicationUserDataOnDemand.setPassword(ApplicationUser obj, int index) {
         String password = "password_" + index;
         obj.setPassword(password);
     }
     
+    public void ApplicationUserDataOnDemand.setPhone(ApplicationUser obj, int index) {
+        String phone = "phone_" + index;
+        obj.setPhone(phone);
+    }
+    
     public void ApplicationUserDataOnDemand.setSeller(ApplicationUser obj, int index) {
         Seller seller = null;
         obj.setSeller(seller);
+    }
+    
+    public void ApplicationUserDataOnDemand.setSurname(ApplicationUser obj, int index) {
+        String surname = "surname_" + index;
+        obj.setSurname(surname);
+    }
+    
+    public void ApplicationUserDataOnDemand.setToken(ApplicationUser obj, int index) {
+        String token = "token_" + index;
+        obj.setToken(token);
     }
     
     public void ApplicationUserDataOnDemand.setUsername(ApplicationUser obj, int index) {
@@ -128,13 +164,13 @@ privileged aspect ApplicationUserDataOnDemand_Roo_DataOnDemand {
             ApplicationUser obj = getNewTransientApplicationUser(i);
             try {
                 applicationUserService.saveApplicationUser(obj);
-            } catch (final ConstraintViolationException e) {
-                final StringBuilder msg = new StringBuilder();
+            } catch (ConstraintViolationException e) {
+                StringBuilder msg = new StringBuilder();
                 for (Iterator<ConstraintViolation<?>> iter = e.getConstraintViolations().iterator(); iter.hasNext();) {
-                    final ConstraintViolation<?> cv = iter.next();
-                    msg.append("[").append(cv.getRootBean().getClass().getName()).append(".").append(cv.getPropertyPath()).append(": ").append(cv.getMessage()).append(" (invalid value = ").append(cv.getInvalidValue()).append(")").append("]");
+                    ConstraintViolation<?> cv = iter.next();
+                    msg.append("[").append(cv.getConstraintDescriptor()).append(":").append(cv.getMessage()).append("=").append(cv.getInvalidValue()).append("]");
                 }
-                throw new IllegalStateException(msg.toString(), e);
+                throw new RuntimeException(msg.toString(), e);
             }
             applicationUserRepository.flush();
             data.add(obj);

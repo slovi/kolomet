@@ -3,7 +3,6 @@
 
 package cz.kolomet.domain;
 
-import cz.kolomet.domain.RegistrationRequest;
 
 privileged aspect RegistrationRequest_Roo_JavaBean {
     

@@ -1,7 +1,8 @@
 package cz.kolomet.repository;
 
-import cz.kolomet.domain.ApplicationRole;
 import org.springframework.roo.addon.layers.repository.jpa.RooJpaRepository;
+
+import cz.kolomet.domain.ApplicationRole;
 
 @RooJpaRepository(domainType = ApplicationRole.class)
 public interface ApplicationRoleRepository {

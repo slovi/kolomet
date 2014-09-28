@@ -17,11 +17,11 @@ privileged aspect DomainEntity_Roo_Equals {
             return true;
         }
         DomainEntity rhs = (DomainEntity) obj;
-        return new EqualsBuilder().append(created, rhs.created).append(id, rhs.id).append(lastModified, rhs.lastModified).isEquals();
+        return new EqualsBuilder().append(created, rhs.created).append(id, rhs.id).append(lastModified, rhs.lastModified).append(version, rhs.version).isEquals();
     }
     
     public int DomainEntity.hashCode() {
-        return new HashCodeBuilder().append(created).append(id).append(lastModified).toHashCode();
+        return new HashCodeBuilder().append(created).append(id).append(lastModified).append(version).toHashCode();
     }
     
 }

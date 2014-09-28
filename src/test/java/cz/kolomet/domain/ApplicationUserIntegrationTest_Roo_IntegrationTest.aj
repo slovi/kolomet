@@ -3,14 +3,12 @@
 
 package cz.kolomet.domain;
 
-import cz.kolomet.domain.ApplicationUserDataOnDemand;
-import cz.kolomet.domain.ApplicationUserIntegrationTest;
-import cz.kolomet.repository.ApplicationUserRepository;
-import cz.kolomet.service.ApplicationUserService;
 import java.util.Iterator;
 import java.util.List;
+
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,6 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
+
+import cz.kolomet.repository.ApplicationUserRepository;
+import cz.kolomet.service.ApplicationUserService;
 
 privileged aspect ApplicationUserIntegrationTest_Roo_IntegrationTest {
     

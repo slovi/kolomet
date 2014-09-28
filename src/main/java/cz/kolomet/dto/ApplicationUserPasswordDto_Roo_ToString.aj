@@ -3,7 +3,6 @@
 
 package cz.kolomet.dto;
 
-import cz.kolomet.dto.ApplicationUserPasswordDto;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 

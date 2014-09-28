@@ -4,4 +4,7 @@
     <definition extends="store/template_default" name="store/public/about/index">
         <put-attribute name="body" value="/WEB-INF/views/public/about/index.jspx"/>
     </definition>
+    <definition extends="tour/template_default" name="tour/public/about/index">
+        <put-attribute name="body" value="/WEB-INF/views/public/about/index.jspx"/>
+    </definition>
 </tiles-definitions>

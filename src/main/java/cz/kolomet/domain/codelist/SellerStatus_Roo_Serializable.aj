@@ -3,7 +3,6 @@
 
 package cz.kolomet.domain.codelist;
 
-import cz.kolomet.domain.codelist.SellerStatus;
 import java.io.Serializable;
 
 privileged aspect SellerStatus_Roo_Serializable {

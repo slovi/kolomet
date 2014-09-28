@@ -3,13 +3,14 @@
 
 package cz.kolomet.service.impl;
 
-import cz.kolomet.domain.codelist.ProductUsage;
-import cz.kolomet.repository.ProductUsageRepository;
-import cz.kolomet.service.impl.ProductUsageServiceImpl;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import cz.kolomet.domain.codelist.ProductUsage;
+import cz.kolomet.repository.ProductUsageRepository;
 
 privileged aspect ProductUsageServiceImpl_Roo_Service {
     

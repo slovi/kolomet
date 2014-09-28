@@ -27,6 +27,7 @@
 
     <mvc:default-servlet-handler/>
 
+    <mvc:view-controller path="/intro" view-name="public/index"/>
     <mvc:view-controller path="/public/uncaughtException" view-name="public/uncaughtException"/>
     <mvc:view-controller path="/public/resourceNotFound" view-name="public/resourceNotFound"/>
     <mvc:view-controller path="/public/dataAccessFailure" view-name="public/dataAccessFailure"/>
@@ -61,6 +62,13 @@
   		<property name="order" value="1" />
 		<property name="viewClass" value="cz.kolomet.util.web.ajax.AjaxModelAwareTilesView" />  	
   	</bean>
+  	
+  	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" id="defaultViewResolver">
+  		<property name="order" value="2" />
+  		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+  		<property name="prefix" value="WEB-INF/views/" />
+  		<property name="suffix" value=".jspx" />
+  	</bean>
     
     <bean class="org.springframework.web.servlet.view.tiles2.TilesConfigurer" id="tilesConfigurer">
     	<property name="definitions">
@@ -78,9 +86,5 @@
   	</bean>
 
 	<bean id="applicationConversionService" class="cz.kolomet.web.ApplicationConversionServiceFactoryBean" />
-<!-- 	<bean id="applicationConversionService" class="cz.kolomet.util.OrmConversionServiceAdapter"> -->
-<!-- 		<property name="conversionService"> -->
-<!-- 		</property> -->
-<!-- 	</bean> -->
 		
 </beans>

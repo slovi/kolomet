@@ -3,9 +3,8 @@
 
 package cz.kolomet.domain;
 
-import cz.kolomet.domain.NewsItem;
-import cz.kolomet.domain.NewsItemPhotoUrl;
 import java.util.List;
+
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 privileged aspect NewsItemPhotoUrl_Roo_JavaBean {

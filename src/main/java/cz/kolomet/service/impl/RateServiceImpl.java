@@ -7,6 +7,7 @@ import cz.kolomet.domain.Rate;
 import cz.kolomet.domain.RateType;
 import cz.kolomet.service.RateService;
 import cz.kolomet.service.RatedService;
+import cz.kolomet.service.exception.ExistingRateException;
 
 public class RateServiceImpl implements RateService {
 	
@@ -15,16 +16,22 @@ public class RateServiceImpl implements RateService {
 	
 	@Override
 	public void saveRate(Rate rate) {
-		rateRepository.save(rate);
-		for (RatedService ratedService: ratedServices) {
-			if (ratedService.supports(rate.getRateType())) {
-				ratedService.addRate(rate.getEntityId(), rate.getValue());
+		
+		List<Rate> existingRates = findRate(rate.getRateType(), rate.getEntityId(), rate.getIpAddress()); 
+		if (existingRates.isEmpty()) {
+			rateRepository.save(rate);
+			for (RatedService ratedService: ratedServices) {
+				if (ratedService.supports(rate.getRateType())) {
+					ratedService.addRate(rate.getEntityId(), rate.getValue());
+				}
 			}
+		} else {
+			throw new ExistingRateException(rate);
 		}
 	}
 	
 	@Override
-	public Rate findRate(RateType rateType, Long entityId, String ipAddress) {
+	public List<Rate> findRate(RateType rateType, Long entityId, String ipAddress) {
 		return rateRepository.findByRateTypeAndEntityIdAndIpAddress(rateType, entityId, ipAddress);
 	}
 	

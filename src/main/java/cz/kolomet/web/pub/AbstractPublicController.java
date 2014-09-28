@@ -1,23 +1,21 @@
 package cz.kolomet.web.pub;
 
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-import cz.kolomet.domain.Category;
-import cz.kolomet.domain.NewsItem;
-import cz.kolomet.domain.Producer;
-import cz.kolomet.domain.codelist.FigureHeight;
 import cz.kolomet.repository.CategoryRepository;
 import cz.kolomet.repository.NewsItemRepository;
 import cz.kolomet.repository.NewsItemSpecifications;
 import cz.kolomet.service.CategoryTypeService;
 import cz.kolomet.service.FigureHeightService;
 import cz.kolomet.service.ProducerService;
+import cz.kolomet.service.RegionService;
 import cz.kolomet.web.AbstractController;
 
 public class AbstractPublicController extends AbstractController implements InitializingBean {
@@ -43,41 +41,30 @@ public class AbstractPublicController extends AbstractController implements Init
 	@Autowired
 	private FigureHeightService figureHeightsService;
 	
-	@ModelAttribute("categorys")
-	public List<Category> loadCategories() {
-		return categoryRepository.find(bikeCategoryTypeId);
+	@Autowired
+	private RegionService regionService;
+	
+	@ModelAttribute
+	public void loadMenuModel(Model uiModel, HttpServletRequest request) {
+		
+		if (isTour(request)) {
+			uiModel.addAttribute("regions", regionService.findAllRegions());
+		}
+		
+		if (isStore(request)) {
+			uiModel.addAttribute("categorys", categoryRepository.find(bikeCategoryTypeId));
+			uiModel.addAttribute("producers", producerService.findAllProducers());
+			uiModel.addAttribute("figureheights", figureHeightsService.findAllFigureHeights());
+			uiModel.addAttribute("newsItems", newsItemRepository.findAll(NewsItemSpecifications.allNewsItems(), new PageRequest(0, newsItemsSize, Direction.DESC, "newsItemDate")).getContent());
+			uiModel.addAttribute("bikeCategoryTypeId", bikeCategoryTypeId);
+			uiModel.addAttribute("otherCategoryTypeId", otherCategoryTypeId);
+		}
+		
+		uiModel.addAttribute("newsBanners", newsItemRepository.findAll(NewsItemSpecifications.allNewsBanners(), new PageRequest(0, newsItemsSize, Direction.DESC, "newsItemDate")).getContent());
+		
+		return ;
 	}
 	
-	@ModelAttribute("producers")
-	public List<Producer> loadProducers() {
-		return producerService.findAllProducers();
-	}
-	
-	@ModelAttribute("figureheights")
-	public List<FigureHeight> loadFigureHeights() {
-		return figureHeightsService.findAllFigureHeights();
-	}
-	
-	@ModelAttribute("newsItems")
-	public List<NewsItem> loadNewsItems() {
-		return newsItemRepository.findAll(NewsItemSpecifications.allNewsItems(), new PageRequest(0, newsItemsSize, Direction.DESC, "newsItemDate")).getContent();
-	}
-	
-	@ModelAttribute("newsBanners")
-	public List<NewsItem> loadNewsBanners() {
-		return newsItemRepository.findAll(NewsItemSpecifications.allNewsBanners(), new PageRequest(0, newsItemsSize, Direction.DESC, "newsItemDate")).getContent(); 
-	}
-	
-	@ModelAttribute("bikeCategoryTypeId")
-	public Long getBikeCategoryTypeId() {
-		return bikeCategoryTypeId;
-	}
-	
-	@ModelAttribute("otherCategoryTypeId")
-	public Long getOtherCategoryTypeId() {
-		return otherCategoryTypeId;
-	}
-
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		this.bikeCategoryTypeId = categoryTypeService.findByCategoryCodeKey("cattype_bike").getId();

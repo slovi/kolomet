@@ -33,13 +33,13 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.entity.RooJpaEntity;
 import org.springframework.roo.addon.serializable.RooSerializable;
 import org.springframework.roo.addon.tostring.RooToString;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import cz.kolomet.domain.codelist.BicycleCategory;
 import cz.kolomet.domain.codelist.FigureHeight;
 import cz.kolomet.domain.codelist.ProductAttributeType;
 import cz.kolomet.domain.codelist.ProductColor;
 import cz.kolomet.domain.codelist.ProductUsage;
+import cz.kolomet.dto.FileInfo;
 
 @RooJavaBean
 @RooToString(excludeFields = {"createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate", "seller", "category", "producer", "photoUrls", "productAttributes"})
@@ -162,11 +162,20 @@ public class Product extends DomainEntity implements Cloneable, PhotoContainer {
     private List<ProductAttribute> productAttributes = new ArrayList<ProductAttribute>();
     
     @Transient
-    private List<CommonsMultipartFile> contents;
+    private List<FileInfo> fileInfos = new ArrayList<FileInfo>();
     
     @Override
     public String getPhotoType() {
     	return PhotoUrl.PHOTO_URL_PREFIX;
+    }
+
+    public Photo getPhotoByName(String photoName) {
+    	for (Photo photo: getPhotos()) {
+    		if (photo.getFileName().equals(photoName)) {
+    			return photo;
+    		}
+    	}
+    	return null;
     }
     
     public ProductAttribute getColorAttribute() {
@@ -324,6 +333,14 @@ public class Product extends DomainEntity implements Cloneable, PhotoContainer {
     	photoUrl.setProduct(this);
     	this.getPhotoUrls().add(photoUrl);
     	return photoUrl;
+	}
+
+	public List<FileInfo> getFileInfos() {
+		return fileInfos;
+	}
+
+	public void setFileInfos(List<FileInfo> fileInfos) {
+		this.fileInfos = fileInfos;
 	}
     
 }

@@ -16,10 +16,10 @@ import org.springframework.roo.addon.jpa.entity.RooJpaEntity;
 import org.springframework.roo.addon.json.RooJson;
 import org.springframework.roo.addon.serializable.RooSerializable;
 import org.springframework.roo.addon.tostring.RooToString;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import cz.kolomet.domain.codelist.PlaceType;
 import cz.kolomet.domain.codelist.Region;
+import cz.kolomet.dto.FileInfo;
 import flexjson.JSONSerializer;
 
 @RooJavaBean
@@ -65,10 +65,7 @@ public class Place extends DomainEntity implements Commented, PhotoContainer {
     private List<PlaceComment> comments = new ArrayList<PlaceComment>();
     
     @Transient
-    private List<String> fileNames = new ArrayList<String>();
-    
-    @Transient
-    private List<CommonsMultipartFile> contents = new ArrayList<CommonsMultipartFile>();
+    private List<FileInfo> fileInfos = new ArrayList<FileInfo>();
     
     public static String toJsonArray(Collection<Place> collection, String[] fields) {
         return new JSONSerializer()
@@ -76,6 +73,14 @@ public class Place extends DomainEntity implements Commented, PhotoContainer {
     }
     
     public void increaseRate(Integer value) {
+    	
+    	if (qualityRanking == null) {
+    		this.qualityRanking = 0d;
+    	}
+    	if (nrOfRankings == null) {
+    		this.nrOfRankings = 0;
+    	}
+    	
     	Double actualRanking = qualityRanking * nrOfRankings;
     	if (nrOfRankings == null) {
     		this.nrOfRankings = 1;
@@ -105,12 +110,12 @@ public class Place extends DomainEntity implements Commented, PhotoContainer {
 		return photoUrl;
 	}
 
-	public List<CommonsMultipartFile> getContents() {
-		return contents;
+	public List<FileInfo> getFileInfos() {
+		return fileInfos;
 	}
 
-	public void setContents(List<CommonsMultipartFile> contents) {
-		this.contents = contents;
+	public void setFileInfos(List<FileInfo> fileInfos) {
+		this.fileInfos = fileInfos;
 	}
 
 }

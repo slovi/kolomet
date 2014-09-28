@@ -3,13 +3,14 @@
 
 package cz.kolomet.service.impl;
 
-import cz.kolomet.domain.codelist.PlaceType;
-import cz.kolomet.repository.PlaceTypeRepository;
-import cz.kolomet.service.impl.PlaceTypeServiceImpl;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import cz.kolomet.domain.codelist.PlaceType;
+import cz.kolomet.repository.PlaceTypeRepository;
 
 privileged aspect PlaceTypeServiceImpl_Roo_Service {
     

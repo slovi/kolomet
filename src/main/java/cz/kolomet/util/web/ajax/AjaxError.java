@@ -2,8 +2,6 @@ package cz.kolomet.util.web.ajax;
 
 public class AjaxError {
 	
-	public static int ERROR_FILE_UPLOAD_CODE = 1000;
-	
 	private final int errorCode;
 	
 	private final String errorDescription;

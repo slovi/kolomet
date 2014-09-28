@@ -11,6 +11,10 @@ import cz.kolomet.service.ApplicationRoleService;
 
 public class ApplicationRoleServiceImpl implements ApplicationRoleService {
 	
+	public ApplicationRole findApplicationRole(String name) {
+		return applicationRoleRepository.findByRoleName(name);
+	}
+	
 	public Page<ApplicationRole> findApplicationRoleEntries(Pageable pageable) {
 		return applicationRoleRepository.findAll(pageable);
 	}

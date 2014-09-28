@@ -17,7 +17,8 @@
                 <div class="home_seller"> 
                 	<p>Hodnocení místa:</p>
                 	<p style="line-height:16px;"> 
-                		<util:rating rating="${place.qualityRanking}" isRated="true" entityId="${place.id}" rateType="place" />
+                		<util:rating rating="${place.qualityRanking}" isRated="true" entityId="${place.id}" rateType="place" /><br/>
+                		<spring:message code="place_detail_rating_nr"/>: <c:out value="${place.nrOfRankings}"/> 
                     </p>                                
                 </div>
          	</div>

@@ -3,11 +3,6 @@
 
 package cz.kolomet.domain;
 
-import cz.kolomet.domain.ApplicationRole;
-import cz.kolomet.domain.ApplicationRoleDataOnDemand;
-import cz.kolomet.domain.ApplicationUserDataOnDemand;
-import cz.kolomet.repository.ApplicationRoleRepository;
-import cz.kolomet.service.ApplicationRoleService;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -16,10 +11,15 @@ import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import cz.kolomet.repository.ApplicationRoleRepository;
+import cz.kolomet.service.ApplicationRoleService;
 
 privileged aspect ApplicationRoleDataOnDemand_Roo_DataOnDemand {
     

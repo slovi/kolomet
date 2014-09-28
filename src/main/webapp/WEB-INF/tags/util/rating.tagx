@@ -17,7 +17,7 @@
 		<c:set value="0" var="rating" />
 	</c:if>
 	
-	<spring:url value="/public/rates" var="rateUrl" />
+	<spring:url value="${subContext}/public/places/rate" var="rateUrl" />
 	<c:forEach begin="0" end="4" varStatus="status">
 			
 		<c:choose>
@@ -27,13 +27,11 @@
 						<img src="${ratingUrl}"/>
 					</c:when>
 					<c:otherwise>
-						<form id="rate_${status.index}" method="post" action="${rateUrl}" style="display: inline;">
+						<form id="rate_${status.index}" class="rate_form" method="post" action="${rateUrl}" style="display: inline;">
 							<input type="hidden" name="rateType" value="${rateType}" />
 							<input type="hidden" name="entityId" value="${entityId}" />
 							<input type="hidden" name="value" value="${status.index + 1}" />
-							<field:ajaxSubmitLink id="rate_${status.index}" rerender="body" event="click" formId="rate_${status.index}">
-								<img src="${ratingUrl}"/>		
-							</field:ajaxSubmitLink>
+							<a id="rate_${status.index}" href="#"><img src="${ratingUrl}"/></a>
 						</form>
 					</c:otherwise>
 				</c:choose>	
@@ -44,13 +42,11 @@
 						<img src="${ratingHalfUrl}"/>
 					</c:when>
 					<c:otherwise>
-						<form id="rate_${status.index}" method="post" action="${rateUrl}" style="display: inline;">
+						<form id="rate_${status.index}" class="rate_form" method="post" action="${rateUrl}" style="display: inline;">
 							<input type="hidden" name="rateType" value="${rateType}" />
 							<input type="hidden" name="entityId" value="${entityId}" />
 							<input type="hidden" name="value" value="${status.index + 1}" />
-							<field:ajaxSubmitLink id="rate_${status.index}" rerender="body" event="click" formId="rate_${status.index}">
-								<img src="${ratingHalfUrl}"/>	
-							</field:ajaxSubmitLink>
+							<a id="rate_${status.index}" href="#"><img src="${ratingHalfUrl}"/></a>
 						</form>
 					</c:otherwise>
 				</c:choose>
@@ -61,13 +57,11 @@
 						<img src="${ratingEmptyUrl}"/>
 					</c:when>
 					<c:otherwise>
-						<form id="rate_${status.index}" method="post" action="${rateUrl}" style="display: inline;">
+						<form id="rate_${status.index}" class="rate_form" method="post" action="${rateUrl}" style="display: inline;">
 							<input type="hidden" name="rateType" value="${rateType}" />
 							<input type="hidden" name="entityId" value="${entityId}" />
 							<input type="hidden" name="value" value="${status.index + 1}" />
-							<field:ajaxSubmitLink id="rate_${status.index}" rerender="body" event="click" formId="rate_${status.index}">
-								<img src="${ratingEmptyUrl}"/>	
-							</field:ajaxSubmitLink>
+							<a id="rate_${status.index}" href="#"><img src="${ratingEmptyUrl}"/></a>
 						</form>
 					</c:otherwise>
 				</c:choose>	

@@ -23,6 +23,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Service;
 
 import cz.kolomet.service.ImageService;
+import cz.kolomet.service.exception.ResizeImageException;
 
 @Service
 public class ImageServiceImpl implements ImageService {
@@ -59,24 +60,34 @@ public class ImageServiceImpl implements ImageService {
 	}
 
 	@Override
-	public void resizeAndSave(InputStream inputStream, OutputStream outputStream, Dimension toDimension) {
+	public void resizeAndSave(InputStream inputStream, OutputStream outputStream, Dimension toDimension) throws ResizeImageException {
 		
 		BufferedImage image = readImage(inputStream);
+		
+		if (image == null) {
+			throw new ResizeImageException();
+		}
+		
 		BufferedImage scaledImage = resize(image, toDimension);
 		saveImage(scaledImage, outputStream);
 	}
 	
 	@Override
-	public void resizeAndSave(File sourceFile, File targetFile, Dimension toDimension) {
+	public void resizeAndSave(File sourceFile, File targetFile, Dimension toDimension) throws ResizeImageException {
 		
 		InputStream in = null;
 		OutputStream out = null;
 		try {
+			
 			logger.debug("Trying resize and save image: " + sourceFile + " " + targetFile);
 			File tempTargetFile = new File(targetFile.getParent(), FilenameUtils.getBaseName(targetFile.getName()));
 			in = new FileInputStream(sourceFile);
 			out = new FileOutputStream(tempTargetFile);
 			resizeAndSave(in, out, toDimension);
+			
+			closeIfPossible(in);
+			closeIfPossible(out);
+			
 			FileUtils.deleteQuietly(targetFile);
 			FileUtils.moveFile(tempTargetFile, targetFile);
 		} catch (FileNotFoundException e) {

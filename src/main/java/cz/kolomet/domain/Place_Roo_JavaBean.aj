@@ -110,12 +110,4 @@ privileged aspect Place_Roo_JavaBean {
         this.comments = comments;
     }
     
-    public List<String> Place.getFileNames() {
-        return this.fileNames;
-    }
-    
-    public void Place.setFileNames(List<String> fileNames) {
-        this.fileNames = fileNames;
-    }
-    
 }

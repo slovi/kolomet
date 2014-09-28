@@ -1,5 +1,6 @@
 package cz.kolomet.web;
 import java.util.Arrays;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cz.kolomet.domain.Rate;
 import cz.kolomet.domain.RateType;
+import cz.kolomet.service.exception.ExistingRateException;
 import cz.kolomet.util.web.ajax.AjaxResponse;
 
 @RequestMapping("/public/rates")
@@ -28,8 +30,12 @@ public class RateController {
             return "public/rates/create";
         }
         uiModel.asMap().clear();
-        rateService.saveRate(rate);
-        return "redirect:/public/" + rate.getRateType().getId() + "/" + rate.getEntityId();
+        try {
+        	rateService.saveRate(rate);
+        	return "redirect:/public/" + rate.getRateType().getId() + "/" + rate.getEntityId();
+        } catch (ExistingRateException e) {
+        	return null;
+        }
     }
     
     protected void populateEditForm(Model uiModel, Rate rate) {
@@ -42,9 +48,9 @@ public class RateController {
 	@RequestMapping(method = RequestMethod.GET, produces = "text/json")
 	public AjaxResponse get(Rate rate, HttpServletRequest request) {
 		
-		Rate existingRate = rateService.findRate(rate.getRateType(), rate.getEntityId(), request.getRemoteAddr());
+		List<Rate> existingRates = rateService.findRate(rate.getRateType(), rate.getEntityId(), request.getRemoteAddr());
 		
-		return AjaxResponse.successful(existingRate);
+		return AjaxResponse.successful(existingRates);
 	
 	}
 	

@@ -1,42 +1,144 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
+<jsp:root xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <form:update id="fu_cz_kolomet_domain_Place" modelAttribute="place" multipart="true" path="${subContext}/admin/places" versionField="Version" z="user-managed">
-        <field:input field="name" id="c_cz_kolomet_domain_Place_name" required="true" z="7wptnLPTNCq8izxDgxSKREIWcIY="/>
-        <field:select field="placeType" id="c_cz_kolomet_domain_Place_placeType" itemLabel="codeDescription" itemValue="id" items="${placetypes}" path="/admin/placetypes" required="true" z="user-managed"/>
-        <field:input field="address.street" id="c_cz_kolomet_domain_Place_address_street" z="9mNJF+/QmefeQOfR2mhIlHMeOSk="/>
-        <field:input field="address.houseNr" id="c_cz_kolomet_domain_Place_address_houseNr" validationRegex="([1-9][0-9]{0,2}|1000)" z="9mNJF+/QmefeQOfR2mhIlHMeOSk="/>
-        <field:input field="address.city" id="c_cz_kolomet_domain_Place_address_city" z="9mNJF+/QmefeQOfR2mhIlHMeOSk="/>
-        <field:input field="address.zipCode" id="c_cz_kolomet_domain_Place_address_zipCode" z="9mNJF+/QmefeQOfR2mhIlHMeOSk="/>
-        <field:select field="region" id="c_cz_kolomet_domain_Place_region" itemLabel="codeDescription" itemValue="id" items="${regions}" path="/admin/regions" z="user-managed"/>
-        <field:input field="gpsLocation.north" id="c_cz_kolomet_domain_Place_gpsLocation_north" validationRegex="(([1-9][0-9]{0,2}(,[0-9]{1,20})?)|(1000(,[0-9]{1,20})?))" z="user-managed"/>
-        <field:input field="gpsLocation.west" id="c_cz_kolomet_domain_Place_gpsLocation_west" validationRegex="(([1-9][0-9]{0,2}(,[0-9]{1,20})?)|(1000(,[0-9]{1,20})?))" z="aaMqdkjjPg0UQLxvnIUsUnHctTY="/>
-        <field:input field="bikeRoadNr" id="c_cz_kolomet_domain_Place_bikeRoadNr" z="user-managed"/>
-        <field:editor field="description" id="c_cz_kolomet_domain_Place_description" z="user-managed"/>
-        <field:input field="descriptionLink" id="c_cz_kolomet_domain_Place_descriptionLink" z="obxloMCwz8l1092nZOr9AQDThHQ="/>
-        <h2>
-            <spring:message code="label_cz_kolomet_domain_place_placephotourls"/>
-        </h2>
-        <br/>
-        <c:set scope="request" value="${place.photos}" var="placephotourls"/>
-        <jsp:include flush="true" page="../placephotourls/list.jspx"/>
-        <br/>
-        <spring:message code="label_cz_kolomet_domain_place_placephotourls" var="photourls_panel_label"/>
-        <spring:message code="button_add_photo" var="photourls_panel_add"/>
-        <util:panel id="fc_cz_kolomet_domain_Place_placephotoUrls" title="${photourls_panel_add}">
-            <field:files filesCount="4" id="files"/>
-        </util:panel>
-        <field:select field="createdBy" id="c_cz_kolomet_domain_Place_createdBy" itemValue="id" items="${applicationusers}" path="/admin/applicationusers" render="false" z="user-managed"/>
-        <field:select field="lastModifiedBy" id="c_cz_kolomet_domain_Place_lastModifiedBy" itemValue="id" items="${applicationusers}" path="/admin/applicationusers" render="false" z="user-managed"/>
-        <field:datetime dateTimePattern="${place_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_Place_lastModified" render="false" z="user-managed"/>
-        <field:simple field="comments" id="c_cz_kolomet_domain_Place_comments" messageCode="entity_reference_not_managed" messageCodeAttribute="Product Comment" render="false" z="user-managed"/>
-        <field:input field="contents" id="c_cz_kolomet_domain_Place_contents" render="false" z="user-managed"/>
-        <field:input field="address" id="c_cz_kolomet_domain_Place_address" render="false" z="user-managed"/>
-        <field:input field="gpsLocation" id="c_cz_kolomet_domain_Place_gpsLocation" render="false" required="true" z="user-managed"/>
-        <field:simple field="placePhotoUrls" id="c_cz_kolomet_domain_Place_placePhotoUrls" messageCode="entity_reference_not_managed" messageCodeAttribute="Place Photo Url" render="false" z="user-managed"/>
-        <field:input field="nrOfRankings" id="c_cz_kolomet_domain_Place_nrOfRankings" render="false" validationMessageCode="field_invalid_integer" z="user-managed"/>
-        <field:input field="qualityRanking" id="c_cz_kolomet_domain_Place_qualityRanking" render="false" validationMessageCode="field_invalid_integer" z="user-managed"/>
-        <field:input render="false" field="fileNames" id="c_cz_kolomet_domain_Place_fileNames" z="0tOuzdXZgpyFHmIUQ9yhtGPyr58="/>
-    </form:update>
-</div>
+    
+    <div class="general_unit">
+    
+	    <h2 style="padding:0;margin:0 0 10px 6px;">
+	        <spring:message code="place_create_title"/>
+	    </h2>
+	    <c:set value="12" var="input_width"/>
+	    <form:update id="fu_cz_kolomet_domain_Place" renderInTab="false" modelAttribute="place" multipart="true" path="${subContext}/admin/places" versionField="Version" z="user-managed">
+	        <div>
+	            <div class="step">
+	                <div style="width:640px; height: 40px;">
+	                    <a id="step_1_link" class="step-1 navi current" data-step="1" href="#">
+	                        <spring:message code="place_create_step_1"/>
+	                    </a>
+	                    <a id="step_2_link" class="step-2 navi" data-step="2" href="#">
+	                        <spring:message code="place_create_step_2"/>
+	                    </a>
+	                    <a id="step_3_link" class="step-3 navi" data-step="3" href="#">
+	                        <spring:message code="place_create_step_3"/>
+	                    </a>
+	                </div>
+	                <div class="step-1">
+	                    <div style="float:right;">
+	                        <div id="map-canvas-1" style="width: 410px; height: 246px;">
+	                            <!---->
+	                        </div>
+	                    </div>
+	                    <div style="width: 300px;">
+	                        <field:select field="placeType" id="c_cz_kolomet_domain_Place_placeType" itemLabel="codeDescription" itemValue="id" items="${placetypes}" path="/admin/placetypes" required="true" width="${input_width}" z="user-managed"/>
+	                        <field:input field="name" id="c_cz_kolomet_domain_Place_name" required="true" width="${input_width}" z="user-managed"/>
+	                        <field:input field="gpsLocation.north" id="c_cz_kolomet_domain_Place_gpsLocation_north" required="true" validationRegex="(([1-9][0-9]{0,2}(,[0-9]{1,20})?)|(1000(,[0-9]{1,20})?))" width="${input_width}" z="user-managed"/>
+	                        <field:input field="gpsLocation.west" id="c_cz_kolomet_domain_Place_gpsLocation_west" required="true" validationRegex="(([1-9][0-9]{0,2}(,[0-9]{1,20})?)|(1000(,[0-9]{1,20})?))" width="${input_width}" z="aaMqdkjjPg0UQLxvnIUsUnHctTY="/>
+	                        <field:select emptyLabel="..." field="region" id="c_cz_kolomet_domain_Place_region" required="true" itemLabel="codeDescription" itemValue="googleAlias" items="${regions}" path="/admin/regions" width="${input_width}" z="user-managed"/>
+	                        <field:input field="bikeRoadNr" id="c_cz_kolomet_domain_Place_bikeRoadNr" required="false" validationMessageCode="field_invalid_integer" width="${input_width}" z="user-managed"/>
+	                        <field:input field="address.street" id="c_cz_kolomet_domain_Place_address_street" render="false" width="${input_width}" z="9mNJF+/QmefeQOfR2mhIlHMeOSk="/>
+	                        <field:input field="address.houseNr" id="c_cz_kolomet_domain_Place_address_houseNr" render="false" validationRegex="([1-9][0-9]{0,2}|1000)" width="${input_width}" z="9mNJF+/QmefeQOfR2mhIlHMeOSk="/>
+	                        <field:input field="address.city" id="c_cz_kolomet_domain_Place_address_city" render="false" width="${input_width}" z="9mNJF+/QmefeQOfR2mhIlHMeOSk="/>
+	                        <field:input field="address.zipCode" id="c_cz_kolomet_domain_Place_address_zipCode" render="false" width="${input_width}" z="9mNJF+/QmefeQOfR2mhIlHMeOSk="/>
+	                        <field:input field="descriptionLink" id="c_cz_kolomet_domain_Place_descriptionLink" width="${input_width}" z="user-managed"/>
+	                        <button id="step_1_button" class="step-1" data-step="1" type="button">
+	                            <spring:message code="place_create_step_next"/>
+	                        </button>
+	                    </div>
+	                </div>
+	                <div class="step-2" style="display: none;">
+	                	<div>
+		                    <div style="float:right;">
+		                        <div id="map-canvas-2" style="width: 410px; height: 246px;">
+		                            <!---->
+		                        </div>
+		                    </div>
+		                    <div style="width: 300px; height: 246px;">
+		                        <field:textarea styleClass="place_description" style="height: 225px; width: 250px; min-width: 250px;" field="description" id="c_cz_kolomet_domain_Place_description" z="user-managed"/>
+		                    </div>
+	                    </div>
+	                    <div>
+	                        
+	                        <spring:url value="/resources/images/places/no-photo-detail.jpg" var="fileNotFoundUrl"/>
+					        <spring:url value="/tour/admin/placephotourls/file" var="uploadFileUrl"/>
+					        <spring:url value="/file/place/${place.id}" var="fileBaseUrl"/>
+					        <spring:url value="${subContext}/admin/placephotourls" var="fileBaseDeleteUrl"/>
+					        
+				            <field:input-file id="placeFiles" 
+				            	uploadFileUrl="${uploadFileUrl}"
+				            	addedFiles="${addedFiles}"
+				            	uploadedFiles="${uploadedFiles}"
+				            	fileNotFoundUrl="${fileNotFoundUrl}" 
+				        		fileBaseUrl="${fileBaseUrl}"
+				        		fileBaseDeleteUrl="${fileBaseDeleteUrl}" />
+	                        
+	                        <br />
+	                        <br />
+	                        <button id="step_2_button" class="step-2" data-step="2" type="button">
+	                            <spring:message code="place_create_step_next"/>
+	                        </button>
+	                    </div>
+	                </div>
+	                <div class="step-3" style="display: none;">
+	                    <div style="float:right;">
+	                    	<div id="detail_image" style="text-align:center;float:right;width:348px;height:232px;line-height:232px;margin-left:15px;border: solid thin;"> 
+	                    		<img />
+	                    	</div>									                    
+	                    </div>
+	                    <div style="width: 300px; min-height: 250px">
+	                        <b>
+	                            <p class="place_type">
+	                                <!--  -->
+	                            </p>
+	                        </b>
+	                        <br/>
+	                        <b>
+	                            <p class="name">
+	                                <!--  -->
+	                            </p>
+	                        </b>
+	                        <br/>
+	                        <a class="descriptionLink" target="_blank">
+	                            <!--  -->
+	                        </a>
+	                        <br/>
+	                        <b>Cyklostezka: </b>
+	                        <b>
+	                            <span class="bike_road_nr">
+	                                <!--  -->
+	                            </span>
+	                        </b>
+	                        <br/>
+	                        <br/>
+	                        <b>Popis: </b>
+	                        <span class="description">
+	                            <!--  -->
+	                        </span>
+	                        <br/>
+	                        <br/>
+	                        <b>GPS: </b>
+	                        <span class="gps">
+	                            <!--  -->
+	                        </span>
+	                        <br/>
+	                        <b>Kraj: </b>
+	                        <span class="region">
+	                            <!--  -->
+	                        </span>
+	                        <br/>
+	                        <br/>
+	                        <br/>
+	                    </div>
+	                    <div>
+	                   		<div id="thumbnails">
+	                   			<!--  -->
+	                   		</div>
+	                   	</div>	                 
+	                </div>
+	            </div>
+	        </div>
+	        <spring:message code="label_cz_kolomet_domain_place_photourls" var="photourls_panel_label"/>
+	        <spring:message code="button_add_photo" var="photourls_panel_add"/>
+	    </form:update>
+	</div>
+</jsp:root>

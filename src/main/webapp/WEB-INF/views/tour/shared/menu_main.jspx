@@ -16,7 +16,9 @@
 			            <security:authorize access="hasRole('ROLE_per_places')">
 			            	<hr color="#f9f9f9" width="85%" align="center" size="1" />
 				            <menu:item id="i_place_list" messageCode="global_menu_list" url="/tour/admin/places" z="/DMIeN4AJVoQZM6zEYjQeHs/hQw="/>
-				            <menu:item id="i_placetype_list" messageCode="global_menu_list" url="/tour/admin/placetypes" z="7BUDqvzSWihBVxllFovit0Zs3PM="/>
+				            <security:authorize access="hasAnyRole('ROLE_per_placetypes')">
+				            	<menu:item id="i_placetype_list" messageCode="global_menu_list" url="/tour/admin/placetypes" z="7BUDqvzSWihBVxllFovit0Zs3PM="/>
+				            </security:authorize>				            
 				            <security:authorize access="hasAnyRole('ROLE_per_regions')">
 				            	<menu:item id="i_region_list" messageCode="global_menu_list" url="/tour/admin/regions" z="R4yrjjgk2KXYIlMw++M9nLkYTpE="/>
 				            </security:authorize>

@@ -3,14 +3,11 @@
 
 package cz.kolomet.web.admin;
 
-import cz.kolomet.domain.codelist.ProductAttributeType;
-import cz.kolomet.service.ApplicationUserService;
-import cz.kolomet.service.CategoryTypeService;
-import cz.kolomet.service.ProductAttributeTypeService;
-import cz.kolomet.web.admin.ProductAttributeTypeController;
 import java.io.UnsupportedEncodingException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -22,6 +19,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
+
+import cz.kolomet.domain.codelist.ProductAttributeType;
+import cz.kolomet.service.ApplicationUserService;
+import cz.kolomet.service.CategoryTypeService;
+import cz.kolomet.service.ProductAttributeTypeService;
 
 privileged aspect ProductAttributeTypeController_Roo_Controller {
     

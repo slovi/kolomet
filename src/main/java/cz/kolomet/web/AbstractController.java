@@ -18,13 +18,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import cz.kolomet.domain.BasePhoto;
 import cz.kolomet.domain.Photo;
 import cz.kolomet.domain.PhotoContainer;
 import cz.kolomet.domain.PhotoContainerService;
+import cz.kolomet.dto.FileInfo;
+import cz.kolomet.util.web.Regex;
 
 public class AbstractController implements MessageSourceAware {
-	
-	private static final String FILENAME_SEPARATOR = "__;__";
 
 	public static final int DEFAULT_PAGE_SIZE = 25;
 	
@@ -46,9 +47,22 @@ public class AbstractController implements MessageSourceAware {
 	
 	protected MessageSourceAccessor messageSourceAcessor;
 	
+	@ModelAttribute("regex")
+	public Regex getRegex() {
+		return new Regex();
+	}
+	
 	@ModelAttribute("subContext")
 	public String getSubContext(HttpServletRequest request) {
 		return request.getServletPath();
+	}
+	
+	public boolean isTour(HttpServletRequest request) {
+		return getSubContext(request).equals("/tour");
+	}
+	
+	public boolean isStore(HttpServletRequest request) {
+		return getSubContext(request).equals("/store");
 	}
 	
 	@ModelAttribute("version")
@@ -75,26 +89,38 @@ public class AbstractController implements MessageSourceAware {
 			file.transferTo(dest);
 			photoContainerService.resizePhoto(dest);
 			logger.debug("Successfully save file: " + dest + " " + dest.exists());
-		} catch (Exception e) {
+		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
 	}
 	
-	protected void savePhotos(final PhotoContainer photoContainer, final PhotoContainerService photoContainerService, String folder, List<String> fileNamesAndContentTypes) {
+	protected void savePhotos(final PhotoContainer photoContainer, final PhotoContainerService photoContainerService, String folder, List<FileInfo> fileInfos) {
 		
 		File uploadedFileParent = new File(getTempDir(), folder);
 		
-		for (final String fileNameAndContentType: fileNamesAndContentTypes) {
-			if (StringUtils.isNotEmpty(fileNameAndContentType)) {
-				
-				String fileName = resolveFileName(fileNameAndContentType);
-				String contentType = resolveContentType(fileNameAndContentType);
-				Photo photo = photoContainer.addPhoto(fileName, contentType);
-				photoContainerService.savePhoto(photo);
+		for (final FileInfo fileInfo: fileInfos) {
+			if (fileInfo != null) {
+				if (StringUtils.isNotEmpty(fileInfo.getFileName())) {
+					
+					String fileName = fileInfo.getFileName();
+					String contentType = fileInfo.getContentType();
+					Photo photo = photoContainer.addPhoto(fileName, contentType);
+					photoContainerService.savePhoto(photo);
+					
+					for (String suffix: BasePhoto.SUFFIXES_ALL)  {
+						File sourceFile = new File(uploadedFileParent, BasePhoto.getPhotoUrlFileName(fileName, suffix));
+						if (sourceFile.exists()) {
+							File targetFile = new File(getDestFolder(photoContainer.getId(), photoContainer.getPhotoType()), BasePhoto.getPhotoUrlFileName(fileName, suffix));
+							moveFile(sourceFile, targetFile, true);
+						}
+					}
+				}
 			}
 		}
 		
-		copyFiles(uploadedFileParent, getDestFolder(photoContainer.getId(), photoContainer.getPhotoType()));
+		if (uploadedFileParent.exists()) {
+			deleteFile(uploadedFileParent);
+		}
 	}
 	
 	protected void savePhotos(final PhotoContainer photoContainer, final PhotoContainerService photoContainerService, List<CommonsMultipartFile> files) {
@@ -121,28 +147,6 @@ public class AbstractController implements MessageSourceAware {
 		return new File(rootDir, tempDir);
 	}
 
-	private String resolveContentType(final String fileNameAndContentType) {
-		int index = fileNameAndContentType.indexOf(FILENAME_SEPARATOR);
-		return fileNameAndContentType.substring(index + FILENAME_SEPARATOR.length());
-	}
-
-	private String resolveFileName(final String fileNameAndContentType) {
-		int index = fileNameAndContentType.indexOf(FILENAME_SEPARATOR);
-		return fileNameAndContentType.substring(0, index);
-	}
-
-	private void copyFiles(File parentFolder, final File dest) {
-
-		File[] files = parentFolder.listFiles();
-		for (File file: files) {
-			try {
-				FileUtils.copyFileToDirectory(file, dest);
-			} catch (Exception e) {
-				throw new RuntimeException(e);
-			}
-		}
-	}
-	
 	protected File getDestFolder(Long id, String photoType) {
 		File parent = new File(rootDir + "/" + photoType + "/"+ id);
 		try {
@@ -160,6 +164,25 @@ public class AbstractController implements MessageSourceAware {
 	public void setMessageSource(MessageSource messageSource) {
 		this.messageSource = messageSource;
 		this.messageSourceAcessor = new MessageSourceAccessor(messageSource);
+	}
+
+	private void deleteFile(File uploadedFileParent) {
+		try {
+			FileUtils.forceDelete(uploadedFileParent);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	private void moveFile(File sourceFile, File targetFile, boolean replaceExisting) {
+		try {
+			if (replaceExisting && targetFile.exists()) {
+				FileUtils.forceDelete(targetFile);
+			}
+			FileUtils.moveFile(sourceFile, targetFile);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 }

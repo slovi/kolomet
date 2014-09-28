@@ -1,13 +1,13 @@
 package cz.kolomet.web.admin;
 
-import cz.kolomet.domain.codelist.ProductUsage;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import cz.kolomet.domain.codelist.ProductUsage;
 
 @RequestMapping("/admin/productusages")
 @Controller

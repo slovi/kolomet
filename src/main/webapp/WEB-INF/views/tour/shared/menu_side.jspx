@@ -21,8 +21,18 @@
 	    <menu:menu id="side_menu_body_regions" styleClass="side-menu-body ${hiddenClassOn}">
 		    <menu:item url="/tour/public/places?menu=region" styleClass="ajaxLink" id="menuitem_category_all" label="Všechny regiony" />
 	    	<c:forEach items="${regions}" var="region">
-				<menu:item url="/tour/public/places?region=${region.id}&amp;menu=region&amp;gps_north=${region.gpsLocation.north}&amp;gps_west=${region.gpsLocation.west}" 
-					id="menuitem_${region.codeKey}" styleClass="ajaxLink" label="${region.codeDescription}" />
+	    	
+	    		<c:choose>
+	    			<c:when test="${param.region eq region.id}">
+	    				<c:set var="styleClass" value="current ajaxLink" />
+	    			</c:when>
+	    			<c:otherwise>
+	    				<c:set var="styleClass" value="ajaxLink" />
+	    			</c:otherwise>
+	    		</c:choose>
+	    	
+				<menu:item url="/tour/public/places?region=${region.id}&amp;region_zoom=${region.zoom}&amp;menu=region&amp;gps_north=${region.gpsLocation.north}&amp;gps_west=${region.gpsLocation.west}" 
+					id="menuitem_${region.codeKey}" styleClass="${styleClass}" label="${region.codeDescription}" />
 			</c:forEach>
 	     </menu:menu>
 	</div>

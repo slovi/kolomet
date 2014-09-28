@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import cz.kolomet.domain.PhotoUrl;
 import cz.kolomet.domain.Product;
 import cz.kolomet.domain.ProductAttribute;
 import cz.kolomet.domain.codelist.ProductAttributeType;
@@ -34,6 +35,7 @@ import cz.kolomet.service.ProductColorService;
 import cz.kolomet.service.ProductService;
 import cz.kolomet.service.ProductUsageService;
 import cz.kolomet.service.SellerService;
+import flexjson.JSONSerializer;
 
 @RequestMapping("/admin/products")
 @Controller
@@ -123,7 +125,7 @@ public class ProductController extends AbstractAdminController {
         }
         
         productService.saveProduct(product);
-        savePhotos(product, photoUrlService, product.getContents());
+        savePhotos(product, photoUrlService, httpServletRequest.getSession().getId(), product.getFileInfos());
         
         return "redirect:/public/products/detail/" + product.getId();
     }
@@ -147,7 +149,7 @@ public class ProductController extends AbstractAdminController {
         }
         
         productService.updateProduct(product);
-        savePhotos(product, photoUrlService, product.getContents());
+        savePhotos(product, photoUrlService, httpServletRequest.getSession().getId(), product.getFileInfos());
         
         return "redirect:/public/products/detail/" + product.getId();
     }
@@ -184,6 +186,9 @@ public class ProductController extends AbstractAdminController {
         uiModel.addAttribute("productcolors", productColorService.findAllProductColors());
         uiModel.addAttribute("bicyclecategories", bicycleCategoryService.findAllBicycleCategorys());
         uiModel.addAttribute("sellers", sellerService.findAllSellers());
+
+        uiModel.addAttribute("addedFiles", new JSONSerializer().serialize(product.getFileInfos()));
+        uiModel.addAttribute("uploadedFiles", PhotoUrl.toJsonArray(product.getPhotoUrls(), new String[] {"id", "fileName"}));
         
         if (product.isActiveState()) {
 	        if (product.getId() != null && product.getPhotoUrls().isEmpty()) {

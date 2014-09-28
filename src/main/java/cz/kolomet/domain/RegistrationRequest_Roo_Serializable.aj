@@ -3,7 +3,6 @@
 
 package cz.kolomet.domain;
 
-import cz.kolomet.domain.RegistrationRequest;
 import java.io.Serializable;
 
 privileged aspect RegistrationRequest_Roo_Serializable {

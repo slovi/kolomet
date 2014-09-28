@@ -3,9 +3,9 @@
 
 package cz.kolomet.service;
 
-import cz.kolomet.domain.codelist.FigureHeight;
-import cz.kolomet.service.FigureHeightService;
 import java.util.List;
+
+import cz.kolomet.domain.codelist.FigureHeight;
 
 privileged aspect FigureHeightService_Roo_Service {
     

@@ -4,7 +4,6 @@
 package cz.kolomet.domain.codelist;
 
 import cz.kolomet.domain.GpsLocation;
-import cz.kolomet.domain.codelist.Region;
 
 privileged aspect Region_Roo_JavaBean {
     

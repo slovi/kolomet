@@ -3,7 +3,6 @@
 
 package cz.kolomet.domain;
 
-import cz.kolomet.domain.SellerPhotoUrl;
 import java.io.Serializable;
 
 privileged aspect SellerPhotoUrl_Roo_Serializable {

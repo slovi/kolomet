@@ -1,30 +1,42 @@
 package cz.kolomet.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Table;
+import javax.persistence.Version;
 
 import org.joda.time.DateTime;
 import org.springframework.data.domain.Auditable;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.equals.RooEquals;
-import org.springframework.roo.addon.javabean.RooJavaBean;
-import org.springframework.roo.addon.jpa.entity.RooJpaEntity;
-import org.springframework.roo.addon.serializable.RooSerializable;
 import org.springframework.roo.addon.tostring.RooToString;
 
-@RooJavaBean
 @RooToString(excludeFields = {"createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate"})
-@RooJpaEntity(schema = "sa", mappedSuperclass = true)
 @RooEquals(excludeFields = {"createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate"})
-@RooSerializable
+@Table(schema = "sa")
+@MappedSuperclass
 @EntityListeners({ org.springframework.data.jpa.domain.support.AuditingEntityListener.class })
-public abstract class DomainEntity implements Auditable<ApplicationUser, Long> {
+public abstract class DomainEntity implements Auditable<ApplicationUser, Long>, Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private Long id;
+    
+    @Version
+    @Column(name = "version")
+    private Integer version;
+	
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CREATED_ID", updatable = false)
     private ApplicationUser createdBy;
@@ -73,5 +85,53 @@ public abstract class DomainEntity implements Auditable<ApplicationUser, Long> {
     	setLastModifiedBy(null);
     	setVersion(null);
     }
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Integer getVersion() {
+		return version;
+	}
+
+	public void setVersion(Integer version) {
+		this.version = version;
+	}
+
+	public ApplicationUser getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(ApplicationUser createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public ApplicationUser getLastModifiedBy() {
+		return lastModifiedBy;
+	}
+
+	public void setLastModifiedBy(ApplicationUser lastModifiedBy) {
+		this.lastModifiedBy = lastModifiedBy;
+	}
+
+	public Date getCreated() {
+		return created;
+	}
+
+	public void setCreated(Date created) {
+		this.created = created;
+	}
+
+	public Date getLastModified() {
+		return lastModified;
+	}
+
+	public void setLastModified(Date lastModified) {
+		this.lastModified = lastModified;
+	}
     
 }

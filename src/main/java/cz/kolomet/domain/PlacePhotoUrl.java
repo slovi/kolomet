@@ -1,4 +1,6 @@
 package cz.kolomet.domain;
+import java.util.Collection;
+
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -10,12 +12,14 @@ import org.springframework.roo.addon.jpa.entity.RooJpaEntity;
 import org.springframework.roo.addon.serializable.RooSerializable;
 import org.springframework.roo.addon.tostring.RooToString;
 
+import flexjson.JSONSerializer;
+
 @RooJavaBean
 @RooToString
 @RooJpaEntity(inheritanceType = "TABLE_PER_CLASS")
 @RooEquals
 @RooSerializable
-public class PlacePhotoUrl extends BasePhotoUrl {
+public class PlacePhotoUrl extends BasePhoto {
 	
 	public static final String PHOTO_URL_PREFIX = "place";
 
@@ -23,6 +27,10 @@ public class PlacePhotoUrl extends BasePhotoUrl {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PLACE_ID")
 	private Place place;
+	
+    public static String toJsonArray(Collection<PlacePhotoUrl> collection, String[] fields) {
+        return new JSONSerializer().include(fields).exclude("*").serialize(collection);
+    }
 	
 	@Override
 	protected String getPhotoUrlPrefix() {

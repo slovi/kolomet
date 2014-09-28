@@ -4,16 +4,25 @@
     <jsp:output omit-xml-declaration="yes"/>
     
     <div id="news">
-    	<div class="news_content">
-            <div class="news_header">Hrajte Kolomet</div>
-            <div class="news_item">
-                <p><span class="news_item_content"></span></p>
-                <br />
-                <div>V KOLOMET si jako podnikatelé vytváříte Vaši virtuální cyklistickou cestovní kancelář … objevte zajímavé destinace … dojeďte tam na kole … udělejte jim na kolomet.cz/vylety reklamu fotografiemi a poutavým popisem. Nalákejte například přes Facebook nebo jinak své přátele k jejich návštěvě = získejte co nejvíce "zákazníků" kteří Vaše destinace kladně ohodnotí. Součet bodů hodnocení pro všechny Vaše destinace určuje, jak úspěšná je Vaše virtuální cyklistická CK v porovnání s ostatními. Strategii vedení Vaší virtuální cyklistické CK je potřeba přizpůsobit podmínce, že zajímavou destinaci již objevenou jinými CK a prezentovanou na ...
-                </div>
-                <p></p>
-            </div>
-        </div>
+    	<spring:url value="${subContext}/public/applicationuserregistrations?form" var="registrationUrl" />
+    	<a href="${registrationUrl}" class="undecorated">
+	    	<div id="kolomet_game" class="news_content">
+	            <div class="news_header">JEĎTE NA CYKLOVÝLET A HRAJTE „KOLOMET“</div>
+	            <div class="news_item">
+	                <p><span class="news_item_content"></span></p>
+	                <p>
+	                	Ve hře KOLOMET si jako podnikatelé vytváříte Vaši virtuální cyklistickou cestovní kancelář
+	                	<ul>
+	                		<li>objevte zajímavé místo v ČR</li>
+							<li>dojeďte tam na kole</li> 
+							<li>udělejte tomuto místu na <b>KOLOMET.cz</b> reklamu Vašimi fotografiemi a poutavým popisem.</li> 
+							<li>získejte např. přes Facebook co nejvíce „zákazníků“ kteří Vaše tipy na výlet kladně ohodnotí.</li>
+	                	</ul> 
+	                </p>
+	                <p>Za umístění Vašeho tipu v TOP-TREE v měsíci Vám zašleme softwarovou plaketu <b>„KOLOMET enterpreneur AWARD“</b>, kterou si můžete vystavit například na sociálních sítích</p>
+	            </div>
+	        </div>
+        </a>
        	<div class="news_content">
        		<div class="news_header">
 	    		<spring:message code="news_banners_header" />

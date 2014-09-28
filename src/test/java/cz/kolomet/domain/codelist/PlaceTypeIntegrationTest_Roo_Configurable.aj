@@ -3,7 +3,6 @@
 
 package cz.kolomet.domain.codelist;
 
-import cz.kolomet.domain.codelist.PlaceTypeIntegrationTest;
 import org.springframework.beans.factory.annotation.Configurable;
 
 privileged aspect PlaceTypeIntegrationTest_Roo_Configurable {

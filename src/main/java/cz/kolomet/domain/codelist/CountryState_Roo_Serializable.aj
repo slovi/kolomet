@@ -3,7 +3,6 @@
 
 package cz.kolomet.domain.codelist;
 
-import cz.kolomet.domain.codelist.CountryState;
 import java.io.Serializable;
 
 privileged aspect CountryState_Roo_Serializable {

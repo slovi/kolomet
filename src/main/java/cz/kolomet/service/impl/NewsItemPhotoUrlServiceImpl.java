@@ -1,7 +1,5 @@
 package cz.kolomet.service.impl;
 
-import java.io.File;
-
 import cz.kolomet.domain.NewsItemPhotoUrl;
 import cz.kolomet.domain.Photo;
 import cz.kolomet.domain.PhotoUrl;
@@ -12,6 +10,11 @@ public class NewsItemPhotoUrlServiceImpl extends AbstractPhotoUrlService impleme
     public void deleteNewsItemPhotoUrl(NewsItemPhotoUrl newsItemPhotoUrl) {
         newsItemPhotoUrlRepository.delete(newsItemPhotoUrl);
         super.deletePhoto(newsItemPhotoUrl);
+    }
+    
+    @Override
+    public void deletePhoto(Photo photo) {
+    	this.deleteNewsItemPhotoUrl((NewsItemPhotoUrl) photo);
     }
 	
     @Override

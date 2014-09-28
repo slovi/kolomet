@@ -3,14 +3,12 @@
 
 package cz.kolomet.domain.codelist;
 
-import cz.kolomet.domain.codelist.PlaceTypeDataOnDemand;
-import cz.kolomet.domain.codelist.PlaceTypeIntegrationTest;
-import cz.kolomet.repository.PlaceTypeRepository;
-import cz.kolomet.service.PlaceTypeService;
 import java.util.Iterator;
 import java.util.List;
+
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,6 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
+
+import cz.kolomet.repository.PlaceTypeRepository;
+import cz.kolomet.service.PlaceTypeService;
 
 privileged aspect PlaceTypeIntegrationTest_Roo_IntegrationTest {
     

@@ -3,7 +3,6 @@
 
 package cz.kolomet.dto;
 
-import cz.kolomet.dto.ApplicationUserPasswordDto;
 
 privileged aspect ApplicationUserPasswordDto_Roo_JavaBean {
     

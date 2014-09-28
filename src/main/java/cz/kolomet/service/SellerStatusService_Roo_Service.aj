@@ -3,9 +3,9 @@
 
 package cz.kolomet.service;
 
-import cz.kolomet.domain.codelist.SellerStatus;
-import cz.kolomet.service.SellerStatusService;
 import java.util.List;
+
+import cz.kolomet.domain.codelist.SellerStatus;
 
 privileged aspect SellerStatusService_Roo_Service {
     

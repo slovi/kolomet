@@ -21,7 +21,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import cz.kolomet.domain.BasePhotoUrl;
+import cz.kolomet.domain.BasePhoto;
 
 public class DownloadFileServlet extends HttpServlet {
 	
@@ -51,7 +51,7 @@ public class DownloadFileServlet extends HttpServlet {
 		// if we have format parameter, we should reformat fileName to required format, ie: P702005.JPG -> P702005_org.JPG  
 		if (StringUtils.isNotEmpty(request.getParameter("format"))) {
 			String suffix = request.getParameter("format");
-			String fileName = BasePhotoUrl.getPhotoUrlFileName(resolvedFile.getName(), suffix);
+			String fileName = BasePhoto.getPhotoUrlFileName(resolvedFile.getName(), suffix);
 			resultFile = new File(resolvedFile.getParent(), fileName);
 		} else {
 			resultFile = resolvedFile;
@@ -72,6 +72,16 @@ public class DownloadFileServlet extends HttpServlet {
 			}
 		}
 		
+	}
+	
+	@Override
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		logger.debug("Try to delete file: " + request.getRequestURI());
+		
+		String pathInfo = resolveFilePathFromRequest(request);
+		File resolvedFile = new File(rootDir + pathInfo);
+		resolvedFile.delete();
 	}
 	
 	private String resolveFilePathFromRequest(HttpServletRequest request) throws UnsupportedEncodingException {

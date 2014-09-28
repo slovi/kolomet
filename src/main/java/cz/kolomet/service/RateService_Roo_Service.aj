@@ -3,9 +3,9 @@
 
 package cz.kolomet.service;
 
-import cz.kolomet.domain.Rate;
-import cz.kolomet.service.RateService;
 import java.util.List;
+
+import cz.kolomet.domain.Rate;
 
 privileged aspect RateService_Roo_Service {
     

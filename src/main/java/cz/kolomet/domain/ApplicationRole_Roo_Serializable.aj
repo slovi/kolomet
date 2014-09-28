@@ -3,7 +3,6 @@
 
 package cz.kolomet.domain;
 
-import cz.kolomet.domain.ApplicationRole;
 import java.io.Serializable;
 
 privileged aspect ApplicationRole_Roo_Serializable {

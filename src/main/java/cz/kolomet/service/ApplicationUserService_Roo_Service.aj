@@ -3,9 +3,9 @@
 
 package cz.kolomet.service;
 
-import cz.kolomet.domain.ApplicationUser;
-import cz.kolomet.service.ApplicationUserService;
 import java.util.List;
+
+import cz.kolomet.domain.ApplicationUser;
 
 privileged aspect ApplicationUserService_Roo_Service {
     

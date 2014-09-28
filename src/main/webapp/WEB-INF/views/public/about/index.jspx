@@ -3,28 +3,179 @@
   <jsp:directive.page contentType="text/html;charset=UTF-8"/>
   <jsp:output omit-xml-declaration="yes"/>
   
-	<div class="general_unit">	
-
-  		<br/>
-		<h2>KOLOMET  o nás</h2>	 
-		<br/>       	
-      	
-      	<p>
-       		Jsme softwarová společnost, specializovaná výhradně na podporu a zvyšování prodejů obchodníků s koly a cyklistickým vybavením.  
-      	</p>
-      	<p>
-      		Výhodnost využití prezentace Vašeho zboží na KOLOMET  vychází z faktu:
-      	</p>
-      	<ul>
-      		<li>že lidé při nákupu zboží dávají přednost vyhledávání na souhrnném inzertním serveru, před jednotlivými návštěvami webů různých firem</li>
-      		<li>že u zboží vyšší a trvalé hodnoty lidé raději hledají na specializovaném jednooborovém serveru, než na serverech srovnávajících zboží všeho druhu</li>
-      	</ul>
-      	<p>
-      		V KOLOMET máte zaručené propojení inzerce výrobků s firemním zápisem, odkazy na Vaše prodejny i s jejich foto-zobrazením a umístěním na mapě, jednoduchý přechod klienta z inzerátu na Vaše www stránky apod. Inzerci je možné vkládat, měnit či po prodeji zboží mazat, jak jednotlivě, tak i prostřednictvím synchronizace. Ceny za využití našich služeb jsou velmi příznivé a hlavně jednoznačné a jednoduše čitelné => ceník. 
-      	</p>			     
-      	
-      	<br />
-      	<br />
+	<div class="general_unit">
+		<div class="inner_content">	
+	
+	  		<br/>
+			<h2 id="about">KOLOMET  o nás</h2>	 
+			<br/>       	
+	      	
+	      	<p>
+	       		Jsme softwarová společnost, specializovaná na podporu a zvyšování prodejů obchodníků s koly a cyklistickým vybavením a na předávání tipů na zajímavé cíle výletů mezi cyklisty.  
+	      	</p>
+	      	<p>
+	      		Výhodnost využití prezentace Vašeho zboží na KOLOMET vychází z faktu:
+	      	</p>
+	      	<ul>
+	      		<li>že návštěvnost serveru podporuje přehledné vyhledávání zajímavých destinací pro cyklo-výlety</li>
+	      		<li>že lidé při nákupu zboží dávají přednost vyhledávání na souhrnném inzertním serveru, před jednotlivými návštěvami webů různých firem</li>
+	      		<li>že u zboží vyšší a trvalé hodnoty lidé raději hledají na specializovaném jednooborovém serveru, než na serverech srovnávajících zboží všeho druhu</li>
+	      	</ul>
+	      	<spring:url value="${subContext}/public/prices" var="pricesIndexUrl" />
+	      	<p>
+	      		V KOLOMET máte zaručené propojení inzerce výrobků s firemním zápisem, odkazy na Vaše prodejny i s jejich foto-zobrazením a umístěním na mapě, jednoduchý přechod klienta z inzerátu na Vaše www stránky apod. Inzerci je možné vkládat, měnit či po prodeji zboží mazat, jak jednotlivě, tak i prostřednictvím synchronizace. Ceny za využití našich služeb jsou velmi příznivé a hlavně jednoznačné a jednoduše čitelné => <a href="${pricesIndexUrl}">ceník</a>. 
+	      	</p>		
+	      	
+	      	<br/>
+	      	<br/>
+	      	<br/>
+	      	
+			<h2 id="conditions">Podmínky pro inzerci a užívání služeb na serveru KOLOMET.cz</h2>
+			<span>(dále jen „Podmínky“)</span>
+			<br/>       	
+	      	
+	      	<ol>
+	      		<li>Provozovatelem internetové aplikace www.KOLOMET.cz je společnost Kolomet s.r.o., se sídlem na adrese Černická 1309/16, PSČ 100 00, Praha 10, IČO: 03016714, zapsaná v obchodním rejstříku vedeném u Městského soudu v Praze, sp. zn.: C 226627 (dále jen „Provozovatel").</li>
+	      		<li>Internetová aplikace www.KOLOMET.cz  (dále jen „Server“) je koncipována jednak jako internetová inzertní výkladní skříň profesionálních prodejců jízdních kol a cyklistického vybavení a podnikatelů poskytujících služby cyklistům, a jednak jako prostor pro sdílení a hodnocení tipů na turisticky zajímavá místa.</li>
+	      		<li>Server je zaměřen na:</li>
+	      		<ol type="a">
+	      			<li>Zobrazování jednotlivých inzerátů (dále jen „Inzeráty“) a reklam propagujících a specifikujících provozovny (dále jen „Reklamy“) prodejců podnikajících v oboru prodeje jízdních kol, cyklistického vybavení a podnikatelů poskytujících služby cyklistům (dále jen „Obchodníci“) za účelem nabídky a prodeje zboží nebo poskytnutí služeb návštěvníkům Serveru (dále jen „Uživatelé“). Server umožňuje Uživatelům vyhledávání jednotlivých Inzerátů a Reklam zveřejněných na Serveru.</li>
+	      			<li>Zobrazování tipů na zajímavá místa (dále jen „Cykloturistické cíle“), a umožňuje Uživatelům vyhledávání jednotlivých Cykloturistických cílů na Serveru a vkládání Cykloturistických cílů na Server</li>
+	      			<li>Hodnocení tipů na Cykloturistické cíle formou vkládáním uživatelských recenzí (dále jen „Uživatelské recenze“) na Server</li>
+	      		</ol>
+	      		<li>Vzhledem k inzertnímu zaměření Serveru bere Uživatel, který je v postavení spotřebitele, na vědomí, že</li>
+	      		<ol type="a">
+	      			<li>Inzeráty umístěné na Serveru nemusí obsahovat všechny údaje potřebné k uzavření smlouvy mezi jím a Obchodníkem, jako např. cenu dopravy k uživateli, cenu za provedení úhrady apod.</li>
+	      			<li>Informace o nákladech na prostředky komunikace na dálku, informace o právech vznikajících z dodávky vadného zboží nebo jeho nedodání, informace o právech ze záruky, reklamacích, informace o odstoupení od smlouvy apod., jsou případnou součástí přímého vztahu a jednání mezi Uživatelem a Obchodníkem</li>
+	      			<li>Provozovatel sám není prodávajícím ve smyslu občanského zákoníku č.89/2012 Sb., tj. sám Provozovatel žádné zboží k prodeji nenabízí.</li>
+	      		</ol>
+	      		<li>Inzeráty a Reklama umístěné na Serveru nejsou ve smyslu platných právních norem nabídkou k prodeji zboží či služby Provozovatele. Odpovědnost za dodání či převzetí zboží nebo služby a zaplacení zboží nebo služby nesou plně Obchodník a Uživatel. Mezi Uživatelem a Provozovatelem žádný přímý právní vztah nevzniká.</li>
+	      		<li>Oprávnění vkládat na Server</li>
+	      		<ol type="a">
+	      			<li>Inzeráty a Reklamu jsou na Server oprávněni vkládat pouze registrovaní Obchodníci, podnikající v oboru prodeje jízdních kol a cyklistického vybavení a podnikatelé poskytující služby cyklistům, zapsaní v živnostenském nebo obchodním rejstříku, kteří mají s Provozovatelem uzavřenou smlouvu o inzerci.</li>
+	      			<li>Cykloturistické cíle a Uživatelské recenze jsou na Server oprávněni vkládat pouze registrovaní Uživatelé, kteří jsou fyzickými osobami.</li>
+	      		</ol>
+	      		<li>Pravidla pro vkládání na Server</li>
+	      		<ol type="a">
+	      			<li>Pravidla pro vkládání Inzerátů a Reklamy. Obchodník je oprávněn vkládat na Server pouze Inzeráty a Reklamu, které jsou v souladu s následujícími pravidly pro inzerci na Serveru:</li>
+	      			<ol type="i">
+	      				<li>Obchodník nesmí na Server vložit Inzerát/Reklamu propagující násilí, rasovou nesnášenlivost, Inzeráty/Reklamu pornografického charakteru, Inzeráty/Reklamu, které jsou v rozporu s právními předpisy, dobrými mravy, veřejným pořádkem, Inzeráty/Reklamu na zboží, jehož prodej je zakázán či omezen či které bylo získáno v rozporu s právními předpisy.</li>
+	      				<li>Obchodník může na Server vložit pouze Inzeráty jízdních kol, koloběžek, rotopedů, cyklo-trenažerů a Reklamu na svoje provozovny a to výhradně do polí a částí Serveru k tomu určených.</li>
+	      				<li>Údaje o technických parametrech zboží Obchodník vloží do předepsaných polí, aby bylo technicky možné zajistit funkčnost vyhledávání a filtrace.</li>
+	      				<li>Obchodník je v Inzerátu/Reklamě povinen uvést úplné a pravdivé údaje o nabízeném zboží a podmínkách jeho prodeje. Totéž se týká nabízených služeb.</li>
+	      				<li>Vložení Inzerátu/Reklamy propagující inzertní server se stejným zaměřením jako Server KOLOMET.cz, není možné.</li>
+	      				<li>Obchodník je oprávněn vložit na Server maximální počet Inzerátů/Reklamy odpovídající počtu dohodnutému ve smlouvě.</li>
+	      				<li>Vložení Inzerátu/Reklamy propagující inzertní server se stejným zaměřením jako Server KOLOMET.cz, není možné.</li>
+	      				<li>Obchodník je oprávněn vložit na Server maximální počet Inzerátů/Reklamy odpovídající počtu dohodnutému ve smlouvě.</li>
+	      				<li>Obchodník je oprávněn jím vložené Inzeráty/Reklamu měnit či odstranit.</li>
+	      				<li>Vložením fotografií a textu na Server dává Obchodník najevo, že je k tomu z pohledu autorského práva oprávněn.</li>
+	      				<li>U každého Inzerátu musí být uvedeny (vloženy) minimálně tyto údaje</li>
+	      				<ul>
+	      					<li>Název zboží</li>
+	      					<li>Fotografie zboží</li>
+	      					<li>Specifikace zboží (především údaj o výrobci, modelu, technické parametry). Uvedená specifikace nesmí být odlišná od specifikace téhož zboží, které uvádí Obchodník na svých internetových stránkách.</li>
+	      					<li>Cena zboží. Cena je uvedena jako konečná včetně DPH. Tato cena nesmí být odlišná od ceny, za kterou totéž zboží nabízí Obchodník na svých internetových stránkách.</li>
+	      					<li>V případě, že by Inzerát obsahoval zboží, které Obchodník nabízí jako nikoli nové, musí text inzerátu obsahovat upozornění na tuto skutečnost.</li>
+	      				</ul>
+	      				<li>U každé Reklamy musí být uvedeny (vloženy) minimálně tyto údaje</li>
+	      				<ul>
+	      					<li>Název provozovny</li>
+	      					<li>Fotografie provozovny</li>
+	      					<li>Adresa provozovny</li>
+	      					<li>E-mail</li>
+	      					<li>Telefon</li>
+	      					<li>Stručný popis služeb a otvírací doba</li>
+	      				</ul>
+	      				<li>Obchodník má povinnost vkládat k inzerátům a reklamně korektní odkazy na své stránky a udržovat je stále aktuální.</li>
+	      				<li>Podmínky uvedené v odstavcích 7) a. i. až viii. a xi. platí analogicky pro vkládání reklamních bannerů na Server.</li>
+	      			</ol>
+	      			<li>Pravidla pro vkládání Cykloturistických cílů. Uživatel je oprávněn vkládat na Server pouze Cykloturistické cíle, které jsou v souladu s následujícími pravidly pro zveřejnění na Serveru</li>
+	      			<ol type="i">
+	      				<li>Uživatel nesmí na Server vložit jakékoli texty či obrázky propagující násilí, rasovou nesnášenlivost, pornografického charakteru, a takové, které jsou v rozporu s právními předpisy, dobrými mravy, veřejným pořádkem.</li>
+	      				<li>Uživatel může vložit na Server pouze fotografie a text, jejichž je sám autorem. Vložením uděluje Uživatel bezúplatně Provozovateli časově neomezenou a neodvolatelnou licenci na zveřejnění těchto fotografií a textu na Serveru.</li>
+	      				<li>Uživatel nesmí na Server vložit fotografie ani text, které by mohly způsobit porušení zákona na ochranu osobních dat. Zejména nesmí vkládat fotografie, na nichž jsou osoby, které by bylo z fotografie možné identifikovat, fotografie, ze kterých lze zjistit registrační značku vozidla, texty se jmény a jinými osobními údaji osob.</li>
+	      				<li>Jednotlivé údaje o Cykloturistických cílech Uživatel vloží do předepsaných polí, aby bylo technicky možné zajistit funkčnost vyhledávání a filtraci.</li>
+	      				<li>Uživatel je při vkládání povinen uvést úplné, přesné a pravdivé údaje.</li>
+	      				<li>Text Cykloturistického cíle může obsahovat pouze jeho popis, zeměpisné a historické údaje, které se s ním pojí a případná doporučení Uživatele.</li>
+	      				<li>Je vyloučeno, aby Cykloturistického cíle bylo využíváno k provádění reklamy.</li>
+	      				<li>Uživatel vložením Cykloturistického cíle dává výslovný souhlas s tím, že u tohoto Cykloturistického cíle bude na Serveru uveřejněno jeho jméno a příjmení, jakožto autora. Uživatel také dává souhlas s přidáním loga Serveru do fotografií jím vložených k Cykloturistickým cílům, zobrazovaných na Serveru a s případnou úpravou fotografií z důvodu jejich korektního zobrazení na Serveru.</li>	      				
+	      			</ol>
+	      			<li>Pravidla vkládání uživatelských recenzí. Uživatel je oprávněn vkládat na Server pouze Uživatelské recenze, které jsou v souladu s následujícími pravidly pro zveřejnění na Serveru</li>
+	      			<ol type="i">
+	      				<li>Uživatel nesmí na Server vložit jakékoli texty propagující násilí, rasovou nesnášenlivost, pornografického charakteru, obsahující vulgarismy, a takové, které jsou v rozporu s právními předpisy, dobrými mravy, veřejným pořádkem.</li>
+	      				<li>Uživatel může vložit na Server pouze text, jehož je sám autorem. Vložením uděluje Uživatel bezúplatně Provozovateli časově neomezenou a neodvolatelnou licenci na zveřejnění textu na Serveru.</li>
+	      				<li>Uživatel vložením Uživatelské recenze dává výslovný souhlas s tím, že u této Uživatelské recenze bude na Serveru uveřejněno jeho jméno a příjmení, jakožto autora.</li>
+	      				<li>Uživatelská recenze může obsahovat pouze hodnocení Cykloturistického cíle.</li>
+	      				<li>Je vyloučeno, aby Uživatelská recenze obsahovala text se jmény a jinými osobními údaji osob, či jinak porušovala zákon o ochraně osobních údajů.</li>	      				
+	      			</ol>	      			
+	      		</ol>
+	      		<li>Provozovatel je oprávněn odstranit vložené Inzeráty, Reklamu, Cykloturistické cíle nebo Uživatelské recenze, u nichž zjistí, že jsou v rozporu s právy a oprávněnými zájmy Provozovatele či třetích osob, či zjistí-li, že nesplňují pravidla Podmínek. Odstranění je oprávněn provést i bez předchozí výzvy k nápravě a bez náhrady. Nastane-li některá z uvedených okolností, je Provozovatel oprávněn i odepřít další přístup na Server.</li>
+	      		<li>Provozovatel si vyhrazuje právo na kontrolu a korekturu textu u Inzerátů, Reklamy a Cykloturistických cílů z hlediska pravopisných chyb a překlepů. Takovou úpravou textu Inzerátu, Reklamy nebo Cykloturistického místa, nepřebírá Provozovatel odpovědnost za pravdivost údajů zde obsažených.</li>
+	      		<li>Odpovědnost</li>
+	      		<ol type="a">
+	      			<li>Odpovědnost za obsah Inzerátů a Reklamy (včetně fotografií)</li>
+	      			<ol type="i">
+	      				<li>Za obsah Inzerátů a Reklamy odpovídá Obchodník, který je vložil. Provozovatel nenese žádnou odpovědnost za obsah vložených Inzerátů a Reklamy</li>
+	      				<li>Obchodník, který Inzerát/Reklamu na Sever vložil, odpovídá za to, že vloženým obsahem nebo fotografiemi nebudou dotčena práva třetích osob. Provozovatel za zásahy do práv třetích osob ze strany Obchodníka neodpovídá.</li>
+	      				<li>Pokud Provozovatel poskytne Obchodníkovi technickou pomoc či součinnost v procesu vkládání nebo vložení provede na jeho žádost, pak platí stejné odpovědnosti a podmínky, jako kdyby vložení provedl sám Obchodník.</li>
+	      				<li>Provozovatel tím, že umožňuje zobrazení Inzerátu/Reklamy na Serveru, pouze zprostředkovává kontakt mezi Obchodníkem a Uživatelem a nepřebírá žádné záruky ani nenese žádnou odpovědnost za kvalitu či původ nabízeného zboží nebo služby. Provozovatel rovněž nenese žádnou odpovědnost za aktuálnost a správnost dat, vložených na Server Obchodníkem. Odpovědnost za tyto nese Obchodník.</li>
+	      			</ol>
+	      			<li>Odpovědnost za obsah Cykloturistických cílů (včetně fotografií) </li>
+	      			<ol type="i">
+	      				<li>Za obsah Cykloturistických cílů odpovídá Uživatel, který je vložil. Provozovatel nenese žádnou odpovědnost za obsah Uživatelem vložených Cykloturistických cílů.</li>
+	      				<li>Uživatel, který Cykloturistický cíl na Sever vložil, odpovídá za to, že vloženým obsahem nebo fotografiemi nebudou dotčena práva třetích osob. Provozovatel za zásahy do práv třetích osob ze strany Uživatele neodpovídá.</li>
+	      				<li>Pokud Provozovatel poskytne Uživateli technickou pomoc v procesu vkládání nebo vložení provede na jeho žádost, pak platí stejné odpovědnosti a podmínky, jako kdyby vložení provedl sám Uživatel.</li>
+	      				<li>Provozovatel tím, že umožňuje zobrazení Cykloturistického cíle na Serveru, pouze zprostředkovává doporučení Uživatele ostatním Uživatelům, a nepřebírá žádné záruky ani nenese žádnou odpovědnost za kvalitu doporučení. Provozovatel nenese odpovědnost za případnou újmu, která by mohla Uživateli v souvislosti s návštěvou doporučeného Cykloturistického cíle vzniknout. Provozovatel rovněž nenese žádnou odpovědnost za aktuálnost a správnost dat, vložených na Server Uživatelem. Odpovědnost za tyto nese Uživatel.</li>
+	      			</ol>
+	      			<li>Odpovědnost za obsah Uživatelských recenzí</li>
+	      			<ol type="i">
+	      				<li>Za obsah Uživatelské recenze odpovídá Uživatel, který ji vložil. Provozovatel nenese žádnou odpovědnost za obsah Uživatelských recenzí ani za pravdivost informací v nich obsažených.</li>
+	      				<li>Uživatel, který Uživatelskou recenzi na server vloží, odpovídá za to, že vloženým obsahem nebudou dotčena práva třetích osob. Provozovatel za zásahy do práv třetích osob ze strany Uživatele neodpovídá.</li>
+	      			</ol>
+	      		</ol>
+	      		<li>Provozovatel nenese odpovědnost za zneužití uživatelského účtu Obchodníka resp. Uživatele, pokud tento sdělil svůj uživatelský účet a heslo třetí osobě nebo takové třetí osobě umožnil k těmto údajům přístup. Pokud však ke zneužití uživatelského účtu Obchodníka resp. Uživatele dojde a Obchodník toto nahlásí Provozovateli, zavazuje se Provozovatel vyvinout maximální úsilí pro rychlou nápravu dle pokynů Obchodníka.</li>
+	      		<li>Provozovatel nenese odpovědnost za to, že Obchodník je oprávněn zboží prodat nebo službu poskytnout a že Uživatel je oprávněn zboží koupit nebo službu přijmout. Provozovatel je však povinen v době uzavírání smlouvy o inzerci prověřit Obchodníka z pozice těchto veřejně přístupný zdrojů (obchodní rejstřík, živnostenských rejstřík, insolvenční rejstřík).</li>
+	      		<li>Provozovatel neposkytuje záruku bezchybného provozu, nepřetržité funkčnosti a zabezpečení systému Serveru. Provozovatel nenese žádnou odpovědnost za přerušení služeb v důsledku technických problémů, ani za újmu, která může Obchodníkovi nebo Uživateli vzniknout v důsledku nefunkčnosti systému Serveru, či ztráty dat umístěných v systému Serveru. Ustanovení tohoto odstavce se však vztahují na běžné technické problémy, nikoliv dlouhodobé výpadky zaviněné Provozovatelem. U dlouhodobých výpadků Provozovatel odpovídá těm subjektům, které jsou s ním v úplatném smluvním vztahu.</li>
+	      		<li>Uživatelské recenze vyjadřují subjektivní názory jejich autorů a nikoli Provozovatele. Vzhledem k tomu je Uživatelské recenze doporučeno ostatním Uživatelům brát s přiměřeným nadhledem.</li>
+	      		<li>Ochrana osobních dat</li>
+	      		<ol type="a">
+	      			<li>Uživatel zadáním registrace dává souhlas se zpracováním a shromažďováním svých osobních údajů uvedených v registračním formuláři. Zpracování osobních údajů Provozovatelem bude probíhat po dobu nezbytně nutnou pro účely zajištění práv a povinností plynoucích z obecně závazných předpisů (např. zákon o archivnictví, autorský zákon apod.) </li>
+	      			<li>S osobními údaji Uživatelů bude Provozovatel zacházet v souladu se zákonem o ochraně osobních údajů (č.101/2000 Sb.) v platném znění. Provozovatel nepředá osobní údaje žádné třetí osobě s výjimkou povinnosti stanovené zákonem.</li>
+	      			<li>Osoby, které do vztahu s Provozovatelem vstoupí záměrně pod falešnou identitou a ve snaze zásadně poškodit buďto Provozovatele, či jiný subjekt, si musejí být vědomy toho, že Provozovatel bude iniciovat trestní řízení a poskytne veškerá data ke ztotožnění takové subjektu.</li>
+	      		</ol>
+	      		<li>Umístění Inzerátů/Reklamy  a reklamních bannerů na Server jsou zpoplatněny podle ceníku (dále jen „Ceník“), který je dostupný na Serveru.</li>
+	      		<li>Provozovatel je oprávněn změnit tyto Smluvní podmínky, jakož i Ceník.</li>
+	      		<li>V případě, že dojde ke změně těchto smluvních podmínek po vzniku právního vztahu mezi Provozovatelem a třetí osobou, má Provozovatel právo tyto podmínky změnit pouze ve prospěch takové třetí osoby. Třetí osoba se pak může výhodnějšího znění smluvních podmínek pro svoji osobu dovolat, byť tato nastala až po vzniku právního vztahu mezi ní a Provozovatelem.</li>
+	      	</ol>		     
+	      	
+	      	<br />
+	      	
+	      	<p>Tyto Podmínky nabývají platnosti a účinnosti 1. 9. 2014.</p>
+	      	<spring:url value="/file/_other/PODM_20140901" var="conditionsUrl" />	   
+	      	<p>Stáhnout podmínky v <a href="${conditionsUrl}?displayInline=false">pdf</a>.</p>
+	      	
+	      	<br />
+	      	<br />
+	      	<br/>
+			<h2 id="contacts">KOLOMET kotakty</h2>	 
+			<br/>       	
+	      	
+			<table class="inner_content">
+				<tr>
+					<td><u>Obchodní záležitosti: </u></td>
+					<td>řešení záležitostí ohledně inzerce na webovských stránkách, reklamní bannery, apod.<br /><a href="mailto:vit.ratislav@kolomet.cz">vit.ratislav@kolomet.cz</a></td>
+				</tr>
+				<tr>
+					<td><u>Technická podpora: </u></td>
+					<td>pomoc s technickými záležitostmi webu, propojení s jinými systémy, apod. <br/><a href="mailto:ales.radomersky@kolomet.cz">ales.radomersky@kolomet.cz</a></td>
+				</tr>
+				<tr>
+					<td><u>Účetní oddělení</u></td>
+					<td>řešení fakturačních záležitostí<br/><a href="mailto:uctarna@kolomet.cz">uctarna@kolomet.cz</a></td>
+				</tr>
+			</table>
+	      	
+      	</div>
     </div>
   
 </div>

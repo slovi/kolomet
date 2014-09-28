@@ -3,7 +3,6 @@
 
 package cz.kolomet.web.pub;
 
-import cz.kolomet.web.pub.PlaceController;
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.ui.Model;

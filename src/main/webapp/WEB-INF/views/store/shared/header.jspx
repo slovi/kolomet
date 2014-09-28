@@ -2,7 +2,7 @@
   <jsp:directive.page contentType="text/html;charset=UTF-8" />
   <jsp:output omit-xml-declaration="yes" />
   
-  <spring:url var="logoUrl" value="/img/logotyp.png" />
+  <spring:url var="logoUrl" value="/resources/img/logotyp.png" />
   <div class="page_header"> 
     <div id="header"> 		    
    		<img src="${logoUrl}" id="logo"/>
@@ -13,7 +13,7 @@
         </security:authorize>
         <security:authorize access="isFullyAuthenticated()">
         	<div> 
-        		<spring:url value="/j_spring_security_logout" var="logoutUrl" />
+        		<spring:url value="/j_spring_security_logout?source=store" var="logoutUrl" />
         		<a class="action_button" id="logout_button" rel="logout" name="login" href="${logoutUrl}"><spring:message code="header_logout" /> (<security:authentication property="principal.username"/>)</a>
         	</div>
         </security:authorize>

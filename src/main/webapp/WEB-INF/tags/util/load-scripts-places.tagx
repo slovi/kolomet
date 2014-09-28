@@ -2,10 +2,12 @@
 
   <jsp:output omit-xml-declaration="yes" />
   
+  <jsp:directive.attribute name="mainJsFileName" type="java.lang.String" required="true" rtexprvalue="true" description="The name of main js file." />
+  
   <spring:url value="/resources/css/style_mista.css?v=${version}" var="default_css_url" />
   <link rel="stylesheet" type="text/css" href="${default_css_url}" />
   
-  <spring:url value="/resources/dijit/themes/tundra/tundra.css" var="tundra_url" />
+  <spring:url value="/package-resources/dijit/themes/tundra/tundra.css" var="tundra_url" />
   <link rel="stylesheet" type="text/css" href="${tundra_url}" />
   
   <spring:url value="/resources/css/standard_places.css" var="standard_css_url" />
@@ -20,39 +22,21 @@
     <c:out value="${fn:replace(plocale, '_', '-')}" default="en" />
   </c:set>
 
-  <spring:url value="/resources/js/main.js?v=${version}" var="main_js_url" />
+  <spring:url value="/resources/js/app${subContext}/${mainJsFileName}.js?v=${version}" var="main_js_url" />
   <spring:url value="/resources/js/lib/require.js" var="require_js_url" />
   <script data-main="${main_js_url}" src="${require_js_url}"><!-- --></script>  
 
-  <spring:url value="/resources/dojo/dojo.js" var="dojo_url" />
+  <spring:url value="/package-resources/dojo/dojo.js" var="dojo_url" />
   <script src="${dojo_url}" type="text/javascript"><!-- required for FF3 and Opera --></script>
 
-  <spring:url value="/resources/spring/Spring.js.uncompressed.js" var="spring_url" />
+  <spring:url value="/package-resources/spring/Spring.js.uncompressed.js" var="spring_url" />
   <script src="${spring_url}" type="text/javascript"><!-- /required for FF3 and Opera --></script>
   
-  <spring:url value="/resources/spring/Spring-Dojo.js.uncompressed.js" var="spring_dojo_url" />
+  <spring:url value="/package-resources/spring/Spring-Dojo.js.uncompressed.js" var="spring_dojo_url" />
   <script src="${spring_dojo_url}" type="text/javascript"><!-- required for FF3 and Opera --></script>
   <script language="JavaScript" type="text/javascript">dojo.require("dojo.parser");</script>
   
 
   <script type="text/javascript">var djConfig = {parseOnLoad: false, isDebug: false, locale: '${fn:toLowerCase(userLocale)}'};</script>
-  
-  <script type="text/javascript">
-  
-  	function requireModule(modules, initModuleFunction) {
-  		require(['${main_js_url}'], function() {
-  			require(modules, initModuleFunction);
-  		});
-  	}
-  
-  </script>
-  
-  <style type="text/css">
-
-  	.dijitTextBox[type=file] {
-  		width: 25em;
-  	}
-
-  </style>
 
 </jsp:root>

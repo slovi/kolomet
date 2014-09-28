@@ -3,7 +3,6 @@
 
 package cz.kolomet.domain.codelist;
 
-import cz.kolomet.domain.codelist.ProductAttributeType;
 import java.io.Serializable;
 
 privileged aspect ProductAttributeType_Roo_Serializable {

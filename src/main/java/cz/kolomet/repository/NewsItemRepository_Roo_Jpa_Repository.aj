@@ -3,11 +3,11 @@
 
 package cz.kolomet.repository;
 
-import cz.kolomet.domain.NewsItem;
-import cz.kolomet.repository.NewsItemRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
+
+import cz.kolomet.domain.NewsItem;
 
 privileged aspect NewsItemRepository_Roo_Jpa_Repository {
     

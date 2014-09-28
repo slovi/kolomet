@@ -3,13 +3,14 @@
 
 package cz.kolomet.service.impl;
 
-import cz.kolomet.domain.RegistrationRequest;
-import cz.kolomet.repository.RegistrationRequestRepository;
-import cz.kolomet.service.impl.RegistrationRequestServiceImpl;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import cz.kolomet.domain.RegistrationRequest;
+import cz.kolomet.repository.RegistrationRequestRepository;
 
 privileged aspect RegistrationRequestServiceImpl_Roo_Service {
     

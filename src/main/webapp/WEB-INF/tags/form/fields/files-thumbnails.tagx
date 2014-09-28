@@ -10,25 +10,18 @@
 			<c:choose>
 				<c:when test="${photoSize gt status.index}">
 					<spring:url value="/file/${photos[status.index].thumbPhotoUrl}" var="thumbPhotoUrl" />
-					<spring:url value="/file/${photos[status.index].photoUrl}" var="photoUrl" />
+					<spring:url value="/file/${photos[status.index].detailPhotoUrl}" var="detailPhotoUrl" />
+					<spring:url value="/file/${photos[status.index].origPhotoUrl}" var="origPhotoUrl"/>
 					<div class="thumbnail"> 
 						<a href="#">
-			    			<img class="preloaded wait_for_load" src="${thumbPhotoUrl}" />
-			    			<span style="display: none;"><c:out value="${photoUrl}" /></span>
+			    			<img class="preloaded" src="${thumbPhotoUrl}" />
+			    			<span style="display: none;"><c:out value="${detailPhotoUrl}" /></span>
+			    			<span style="display: none;"><c:out value="${origPhotoUrl}"/></span>
 			    		</a>
 		    		</div>
 				</c:when>
 			</c:choose>
 		</c:forEach>
 	</c:if>
-	
-	<spring:url value="/resources/images/ajax-loader.gif" var="loader_url" />
-    <spring:url value="/resources/images/error.png" var="loader_error_url" />
-    <script type="text/javascript">
-    	requireModule(['images'], function(images) {
-    		images.preloadImages('detail_image');
-    		images.waitForLoad('${loader_url}', '${loader_error_url}', 6, 2000);
-    	});
-    </script>
 
 </jsp:root>

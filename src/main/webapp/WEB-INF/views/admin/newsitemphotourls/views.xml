@@ -13,4 +13,16 @@
 	<definition extends="store/template_admin" name="store/admin/newsitemphotourls/update">
         <put-attribute name="body" value="/WEB-INF/views/admin/newsitemphotourls/update.jspx"/>
     </definition>
+<definition extends="default" name="admin/newsitemphotourls/list">
+        <put-attribute name="body" value="/WEB-INF/views/admin/newsitemphotourls/list.jspx"/>
+    </definition>
+<definition extends="default" name="admin/newsitemphotourls/show">
+        <put-attribute name="body" value="/WEB-INF/views/admin/newsitemphotourls/show.jspx"/>
+    </definition>
+<definition extends="default" name="admin/newsitemphotourls/create">
+        <put-attribute name="body" value="/WEB-INF/views/admin/newsitemphotourls/create.jspx"/>
+    </definition>
+<definition extends="default" name="admin/newsitemphotourls/update">
+        <put-attribute name="body" value="/WEB-INF/views/admin/newsitemphotourls/update.jspx"/>
+    </definition>
 </tiles-definitions>

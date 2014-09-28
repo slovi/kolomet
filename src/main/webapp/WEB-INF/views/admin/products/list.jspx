@@ -20,19 +20,6 @@
                     <input name="reset" type="reset" value="${button_reset_label}"/>
                 </div>
             </div>
-            <script type="text/javascript">
-				requireModule(['form'], function(form) {
-					
-					functions = [
-						function(resetedForm) {
-							window.location.assign($("#i_product_list a").attr("href"));
-						}
-					];
-					
-					form.resetForm("filterForm", functions);
-					
-				});
-			</script>
         </form:form>
     </div>
     <div>
@@ -53,6 +40,7 @@
                 <table:column id="c_cz_kolomet_domain_Product_lastModifiedBy" property="lastModifiedBy" z="ZWXEafUJDEz4eI9ifCrb8n0LVAk="/>
                 <table:column date="true" dateTimePattern="${product_created_date_format}" id="c_cz_kolomet_domain_Product_created" property="created" z="JqHa/igG4EPEyx/woRTsOB/vv8g="/>
                 <table:column date="true" dateTimePattern="${product_lastmodified_date_format}" id="c_cz_kolomet_domain_Product_lastModified" property="lastModified" z="75NG+8p0cp40DxUUY7mnfNwf+FU="/>
+                <table:column id="c_cz_kolomet_domain_Product_fileInfos" property="fileInfos" z="ugf702VT/xIrSPfSU7cgHJgzbTw="/>
             </table:table>
         </page:list>
     </div>

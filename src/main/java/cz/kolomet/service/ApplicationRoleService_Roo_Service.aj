@@ -3,9 +3,9 @@
 
 package cz.kolomet.service;
 
-import cz.kolomet.domain.ApplicationRole;
-import cz.kolomet.service.ApplicationRoleService;
 import java.util.List;
+
+import cz.kolomet.domain.ApplicationRole;
 
 privileged aspect ApplicationRoleService_Roo_Service {
     

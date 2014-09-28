@@ -3,7 +3,6 @@
 
 package cz.kolomet.domain.codelist;
 
-import cz.kolomet.domain.codelist.SellerStatus;
 
 privileged aspect SellerStatus_Roo_JavaBean {
     

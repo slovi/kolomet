@@ -3,13 +3,14 @@
 
 package cz.kolomet.service.impl;
 
-import cz.kolomet.domain.codelist.SellerStatus;
-import cz.kolomet.repository.SellerStatusRepository;
-import cz.kolomet.service.impl.SellerStatusServiceImpl;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import cz.kolomet.domain.codelist.SellerStatus;
+import cz.kolomet.repository.SellerStatusRepository;
 
 privileged aspect SellerStatusServiceImpl_Roo_Service {
     

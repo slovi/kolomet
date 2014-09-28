@@ -3,11 +3,11 @@
 
 package cz.kolomet.repository;
 
-import cz.kolomet.domain.codelist.BicycleCategory;
-import cz.kolomet.repository.BicycleCategoryRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
+
+import cz.kolomet.domain.codelist.BicycleCategory;
 
 privileged aspect BicycleCategoryRepository_Roo_Jpa_Repository {
     

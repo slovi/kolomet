@@ -3,9 +3,9 @@
 
 package cz.kolomet.service;
 
-import cz.kolomet.domain.codelist.ProductAttributeType;
-import cz.kolomet.service.ProductAttributeTypeService;
 import java.util.List;
+
+import cz.kolomet.domain.codelist.ProductAttributeType;
 
 privileged aspect ProductAttributeTypeService_Roo_Service {
     

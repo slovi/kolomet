@@ -3,11 +3,11 @@
 
 package cz.kolomet.repository;
 
-import cz.kolomet.domain.SellerPhotoUrl;
-import cz.kolomet.repository.SellerPhotoUrlRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
+
+import cz.kolomet.domain.SellerPhotoUrl;
 
 privileged aspect SellerPhotoUrlRepository_Roo_Jpa_Repository {
     

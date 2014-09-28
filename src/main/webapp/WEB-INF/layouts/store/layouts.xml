@@ -11,6 +11,7 @@
     <put-attribute name="menu_main" value="/WEB-INF/views/store/shared/menu_main.jspx" />
     <put-attribute name="menu_side" value="/WEB-INF/views/store/shared/menu_side.jspx" />
     <put-attribute name="news" value="/WEB-INF/views/store/shared/news.jspx" />
+    <put-attribute name="footer" value="/WEB-INF/views/store/shared/footer.jspx" />
   </definition>
   
   <definition name="store/template_default_separated_content" extends="template_default_separated_content">
@@ -19,6 +20,7 @@
     <put-attribute name="menu_main" value="/WEB-INF/views/store/shared/menu_main.jspx" />
     <put-attribute name="menu_side" value="/WEB-INF/views/store/shared/menu_side.jspx" />
     <put-attribute name="news" value="/WEB-INF/views/store/shared/news.jspx" />
+    <put-attribute name="footer" value="/WEB-INF/views/store/shared/footer.jspx" />
   </definition>
   
   <definition name="store/template_admin" extends="template_admin">
@@ -27,6 +29,7 @@
     <put-attribute name="menu_main" value="/WEB-INF/views/store/shared/menu_main.jspx" />
     <put-attribute name="menu_side" value="/WEB-INF/views/store/shared/menu_side_admin.jspx" />
     <put-attribute name="news" value="/WEB-INF/views/store/shared/news.jspx" />
+    <put-attribute name="footer" value="/WEB-INF/views/store/shared/footer.jspx" />
   </definition>
   
   <definition name="store/template_wide" extends="template_wide">
@@ -34,6 +37,7 @@
     <put-attribute name="header" value="/WEB-INF/views/store/shared/header.jspx" />
     <put-attribute name="menu_main" value="/WEB-INF/views/store/shared/menu_main.jspx" />
     <put-attribute name="menu_side" value="/WEB-INF/views/store/shared/menu_side.jspx" />
+    <put-attribute name="footer" value="/WEB-INF/views/store/shared/footer.jspx" />
   </definition>
   
   <definition name="store/template_wide_separated_content" extends="template_wide_separated_content">
@@ -41,6 +45,7 @@
     <put-attribute name="header" value="/WEB-INF/views/store/shared/header.jspx" />
     <put-attribute name="menu_main" value="/WEB-INF/views/store/shared/menu_main.jspx" />
     <put-attribute name="menu_side" value="/WEB-INF/views/store/shared/menu_side.jspx" />
+    <put-attribute name="footer" value="/WEB-INF/views/store/shared/footer.jspx" />
   </definition>
 
 </tiles-definitions>

@@ -3,7 +3,6 @@
 
 package cz.kolomet.service.impl;
 
-import cz.kolomet.service.impl.SellerServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

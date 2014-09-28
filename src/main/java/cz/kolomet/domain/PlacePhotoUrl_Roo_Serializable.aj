@@ -3,7 +3,6 @@
 
 package cz.kolomet.domain;
 
-import cz.kolomet.domain.PlacePhotoUrl;
 import java.io.Serializable;
 
 privileged aspect PlacePhotoUrl_Roo_Serializable {

@@ -45,12 +45,6 @@
 		  	<a class="multiple_input_add" href="#"><spring:message code="button_add_photo" /></a>
 		  </div>
 	  </c:if>
-
-      <script type="text/javascript">
-    	requireModule(['files'], function(files) {
-      		files.files('_${fn:escapeXml(id)}_id_', ${filesCount});
-      	});
-      </script>
       
     </div>
     <br />

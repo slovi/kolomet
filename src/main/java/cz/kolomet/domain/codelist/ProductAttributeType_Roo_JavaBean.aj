@@ -3,8 +3,6 @@
 
 package cz.kolomet.domain.codelist;
 
-import cz.kolomet.domain.codelist.CategoryType;
-import cz.kolomet.domain.codelist.ProductAttributeType;
 
 privileged aspect ProductAttributeType_Roo_JavaBean {
     

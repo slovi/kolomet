@@ -13,4 +13,16 @@
 	<definition extends="store/template_admin" name="store/admin/productattributetypes/update">
         <put-attribute name="body" value="/WEB-INF/views/admin/productattributetypes/update.jspx"/>
     </definition>
+<definition extends="default" name="admin/productattributetypes/list">
+        <put-attribute name="body" value="/WEB-INF/views/admin/productattributetypes/list.jspx"/>
+    </definition>
+<definition extends="default" name="admin/productattributetypes/show">
+        <put-attribute name="body" value="/WEB-INF/views/admin/productattributetypes/show.jspx"/>
+    </definition>
+<definition extends="default" name="admin/productattributetypes/create">
+        <put-attribute name="body" value="/WEB-INF/views/admin/productattributetypes/create.jspx"/>
+    </definition>
+<definition extends="default" name="admin/productattributetypes/update">
+        <put-attribute name="body" value="/WEB-INF/views/admin/productattributetypes/update.jspx"/>
+    </definition>
 </tiles-definitions>

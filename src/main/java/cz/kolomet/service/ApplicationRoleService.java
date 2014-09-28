@@ -12,6 +12,8 @@ import cz.kolomet.domain.ApplicationRole;
 @RooService(domainTypes = { cz.kolomet.domain.ApplicationRole.class })
 public interface ApplicationRoleService {
 	
+	public ApplicationRole findApplicationRole(String name);
+	
 	public Page<ApplicationRole> findApplicationRoleEntries(Pageable pageable);
 	
 	public List<ApplicationRole> findApplicationRoleEntries(Sort sort);

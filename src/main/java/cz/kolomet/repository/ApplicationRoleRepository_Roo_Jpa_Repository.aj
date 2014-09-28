@@ -3,11 +3,11 @@
 
 package cz.kolomet.repository;
 
-import cz.kolomet.domain.ApplicationRole;
-import cz.kolomet.repository.ApplicationRoleRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
+
+import cz.kolomet.domain.ApplicationRole;
 
 privileged aspect ApplicationRoleRepository_Roo_Jpa_Repository {
     

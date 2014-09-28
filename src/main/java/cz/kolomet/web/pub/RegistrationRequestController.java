@@ -46,8 +46,9 @@ public class RegistrationRequestController extends AbstractPublicController {
             return "public/registrationrequests/create";
         }
         
-        if (!captchaService.validateResponseForID("registration_request_" + httpServletRequest.getSession().getId(), registrationRequest.getCaptchaText())) {
+        if (!captchaService.validateResponseForID("registrationrequest_" + httpServletRequest.getSession().getId(), registrationRequest.getCaptchaText())) {
         	bindingResult.rejectValue("captchaText", "exception_incorrect_captcha");
+        	populateEditForm(uiModel, registrationRequest);
         	return "public/registrationrequests/create";
         }
         

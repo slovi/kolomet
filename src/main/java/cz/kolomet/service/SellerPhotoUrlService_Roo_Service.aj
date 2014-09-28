@@ -3,9 +3,9 @@
 
 package cz.kolomet.service;
 
-import cz.kolomet.domain.SellerPhotoUrl;
-import cz.kolomet.service.SellerPhotoUrlService;
 import java.util.List;
+
+import cz.kolomet.domain.SellerPhotoUrl;
 
 privileged aspect SellerPhotoUrlService_Roo_Service {
     

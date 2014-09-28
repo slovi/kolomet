@@ -37,7 +37,7 @@ public class AjaxResponse {
 	}
 	
 	public static AjaxResponse error(int errorCode, Exception e) {
-		return new AjaxResponse(false, AjaxError.ERROR_FILE_UPLOAD_CODE, e);
+		return new AjaxResponse(false, errorCode, e);
 	}
 
 	public AjaxError getAjaxError() {

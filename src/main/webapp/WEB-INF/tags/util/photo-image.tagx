@@ -9,35 +9,41 @@
   	<jsp:directive.attribute name="noPhotoUrl" type="java.lang.String" required="false" rtexprvalue="true" description="Render image if no photo is present" />
 	
 	<c:if test="${empty imgType}">
-		<c:set value="orig" var="imgType" />
+		<c:set value="detail" var="imgType" />
 	</c:if>
 	
 	<c:set value="${fn:length(photos)}" var="photoSize" />
 	<c:if test="${empty render or render}">
-		<c:choose>
-			<c:when test="${photoSize gt 0}">
-				<c:choose>
-					<c:when test="${imgType eq 'orig'}">
-		 				<spring:url value="/file/${photos[0].photoUrl}" var="detailImgUrl" />
-		 			</c:when>
-		 			<c:otherwise>
-		 				<spring:url value="/file/${photos[0].overPhotoUrl}" var="detailImgUrl" />
-		 			</c:otherwise>
-	 			</c:choose>
-			</c:when>
-			<c:otherwise>
-				<c:choose>
-					<c:when test="${not empty noPhotoUrl}">
-						<spring:url value="${noPhotoUrl}" var="detailImgUrl" />
-					</c:when>
-					<c:otherwise>
-						<spring:url value="/resources/images/no-photo-${imgType}.jpg" var="detailImgUrl" />
-					</c:otherwise>
-				</c:choose>
-			</c:otherwise>
-		</c:choose>
-		<div class="img_border text-center"> 
-			<img id="detail_image" width="${width}" height="${height}" src="${detailImgUrl}" class="wait_for_load" alt="" title=""/>
+		<div class="img_border text-center">
+			<c:choose>
+				<c:when test="${photoSize gt 0}">
+					<c:choose>
+						<c:when test="${imgType eq 'detail'}">
+			 				<spring:url value="/file/${photos[0].detailPhotoUrl}" var="detailImgUrl" />
+			 				<spring:url value="/file/${photos[0].photoUrl}" var="origImgUrl" />
+			 				<a href="${origImgUrl}" data-lightbox="image-1">
+			 					<img id="detail_image" width="${width}" height="${height}" src="${detailImgUrl}" alt="" title=""/>
+			 				</a>		 				
+			 			</c:when>
+			 			<c:otherwise>
+			 				<spring:url value="/file/${photos[0].overPhotoUrl}" var="detailImgUrl" />
+			 				<img id="detail_image" width="${width}" height="${height}" src="${detailImgUrl}" alt="" title=""/>
+			 			</c:otherwise>
+		 			</c:choose>
+				</c:when>
+				<c:otherwise>
+					<c:choose>
+						<c:when test="${not empty noPhotoUrl}">
+							<spring:url value="${noPhotoUrl}" var="detailImgUrl" />
+						</c:when>
+						<c:otherwise>
+							<spring:url value="/resources/images/no-photo-${imgType}.jpg" var="detailImgUrl" />
+						</c:otherwise>
+					</c:choose>
+					<img id="detail_image" width="${width}" height="${height}" src="${detailImgUrl}" alt="" title=""/>
+				</c:otherwise>
+			</c:choose>
 		</div>
 	</c:if>
+	
 </jsp:root>

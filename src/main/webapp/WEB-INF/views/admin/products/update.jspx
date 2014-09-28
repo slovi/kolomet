@@ -76,19 +76,16 @@
             <spring:message code="label_cz_kolomet_domain_product_photourls"/>
         </h2>
         <br/>
-        <c:set scope="request" value="${product.photoUrls}" var="photourls"/>
-        <jsp:include flush="true" page="../photourls/list.jspx"/>
-        <br/>
         <spring:message code="label_cz_kolomet_domain_product_photourls" var="photourls_panel_label"/>
         <spring:message code="button_add_photo" var="photourls_panel_add"/>
         <util:panel id="fc_cz_kolomet_domain_Product_photoUrls" title="${photourls_panel_add}">
-            <field:files id="files"/>
+            <spring:url value="/resources/images/products/no-photo-detail.jpg" var="fileNotFoundUrl"/>
+            <spring:url value="/store/admin/photourls/file" var="uploadFileUrl"/>
+            <spring:url value="/file/product/${product.id}" var="fileBaseUrl"/>
+            <spring:url value="${subContext}/admin/photourls" var="fileBaseDeleteUrl"/>
+            <field:input-file fileBaseDeleteUrl="${fileBaseDeleteUrl}" fileBaseUrl="${fileBaseUrl}" fileNotFoundUrl="${fileNotFoundUrl}" id="product_files" uploadFileUrl="${uploadFileUrl}" uploadedFiles="${uploadedFiles}"/>
         </util:panel>
         <br/>
+        <field:input field="fileInfos" id="c_cz_kolomet_domain_Product_fileInfos" z="+t3+bKofu/jKMnU7tnfAMJLBSi4="/>
     </form:update>
-    <script type="text/javascript">
-    	requireModule(['form'], function(form) {
-    		form.computeDifferenceOnKeyUp('_price_id', '_finalPrice_id', '_discount_id');
-    	});
-    </script>
 </div>

@@ -3,13 +3,14 @@
 
 package cz.kolomet.service.impl;
 
-import cz.kolomet.domain.codelist.ProductColor;
-import cz.kolomet.repository.ProductColorRepository;
-import cz.kolomet.service.impl.ProductColorServiceImpl;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import cz.kolomet.domain.codelist.ProductColor;
+import cz.kolomet.repository.ProductColorRepository;
 
 privileged aspect ProductColorServiceImpl_Roo_Service {
     

@@ -10,6 +10,14 @@ import java.util.List;
 
 privileged aspect ApplicationUser_Roo_JavaBean {
     
+    public String ApplicationUser.getPhone() {
+        return this.phone;
+    }
+    
+    public void ApplicationUser.setPhone(String phone) {
+        this.phone = phone;
+    }
+    
     public String ApplicationUser.getUsername() {
         return this.username;
     }

@@ -13,4 +13,16 @@
 	<definition extends="store/template_admin" name="store/admin/applicationpermissions/update">
         <put-attribute name="body" value="/WEB-INF/views/admin/applicationpermissions/update.jspx"/>
     </definition>
+<definition extends="default" name="admin/applicationpermissions/list">
+        <put-attribute name="body" value="/WEB-INF/views/admin/applicationpermissions/list.jspx"/>
+    </definition>
+<definition extends="default" name="admin/applicationpermissions/show">
+        <put-attribute name="body" value="/WEB-INF/views/admin/applicationpermissions/show.jspx"/>
+    </definition>
+<definition extends="default" name="admin/applicationpermissions/create">
+        <put-attribute name="body" value="/WEB-INF/views/admin/applicationpermissions/create.jspx"/>
+    </definition>
+<definition extends="default" name="admin/applicationpermissions/update">
+        <put-attribute name="body" value="/WEB-INF/views/admin/applicationpermissions/update.jspx"/>
+    </definition>
 </tiles-definitions>

@@ -4,7 +4,7 @@
     <jsp:output omit-xml-declaration="yes"/>
 
    	<div class="detail_header"> 
-   		<util:photo-image photos="${product.photoUrls}" imgType="orig" width="508" height="338" />    
+   		<util:photo-image photos="${product.photoUrls}" imgType="detail" width="508" height="338" />    
        	<div class="detail_description right">
        		<c:set var="description_class" value="description" />
        		<c:choose>
@@ -144,7 +144,7 @@
        	
 		<div class="seller_ads">
 		
-			<field:files-thumbnails photos="${product.photoUrls}" id="thumbnails" />
+			<field:files-thumbnails photos="${product.photos}" id="thumbnails" />
 			
 			<div class="clear"></div>
 			<security:authorize access="isAuthenticated()">
@@ -186,7 +186,7 @@
 	    		<security:authorize access="principal.isCapableToCopyProduct(#product)" var="copy" />
 	    		<security:authorize access="principal.isCapableToDeleteProduct(#product)" var="delete" />
 	    		<security:authorize access="principal.isCapableToEraseProduct(#product)" var="erase" />
-	    		<util:quicklinks update="${update}" copy="${copy}" create="false" erase="${erase}" list="true" itemId="${product.id}" typeName="product" delete="${delete}" typeNamePlural="products" path="/admin/products" largeIcons="true" />
+	    		<util:quicklinks update="${update}" copy="${copy}" create="false" erase="${erase}" list="true" itemId="${product.id}" typeName="product" delete="${delete}" typeNamePlural="products" path="${subContext}/admin/products" largeIcons="true" />
 	    	</security:authorize>
     	</security:authorize>
     </div>          

@@ -132,6 +132,10 @@
 		<servlet-name>kolomet</servlet-name>
 		<url-pattern>/store/*</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>kolomet</servlet-name>
+		<url-pattern>/intro</url-pattern>
+	</servlet-mapping>
 	
 	<!-- Handles resources requests -->
 	<servlet>
@@ -141,9 +145,9 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>resources</servlet-name>
-		<url-pattern>/resources/*</url-pattern>
+		<url-pattern>/package-resources/*</url-pattern>
 	</servlet-mapping>
-	
+
 	<!-- Handles uploaded img files requests -->
 	<servlet>
 		<servlet-name>uploadedFiles</servlet-name>
@@ -165,6 +169,10 @@
 		<servlet-name>captcha</servlet-name>
 		<url-pattern>/captcha/*</url-pattern>
 	</servlet-mapping>
+	
+	<welcome-file-list>
+		<welcome-file>index.jspx</welcome-file>
+	</welcome-file-list>
 
 	<session-config>
 		<session-timeout>30</session-timeout>

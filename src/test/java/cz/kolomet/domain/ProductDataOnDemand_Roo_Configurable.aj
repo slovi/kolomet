@@ -3,7 +3,6 @@
 
 package cz.kolomet.domain;
 
-import cz.kolomet.domain.ProductDataOnDemand;
 import org.springframework.beans.factory.annotation.Configurable;
 
 privileged aspect ProductDataOnDemand_Roo_Configurable {

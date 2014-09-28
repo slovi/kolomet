@@ -3,9 +3,9 @@
 
 package cz.kolomet.service;
 
-import cz.kolomet.domain.codelist.BicycleCategory;
-import cz.kolomet.service.BicycleCategoryService;
 import java.util.List;
+
+import cz.kolomet.domain.codelist.BicycleCategory;
 
 privileged aspect BicycleCategoryService_Roo_Service {
     

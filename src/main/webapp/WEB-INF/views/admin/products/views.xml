@@ -8,9 +8,23 @@
         <put-attribute name="body" value="/WEB-INF/views/admin/products/show.jspx"/>
     </definition>
 	<definition extends="store/template_admin" name="store/admin/products/create">
+		<put-attribute cascade="true" name="mainJsFileName" value="main_admin_products_create"/>
         <put-attribute name="body" value="/WEB-INF/views/admin/products/create.jspx"/>
     </definition>
 	<definition extends="store/template_admin" name="store/admin/products/update">
+		<put-attribute cascade="true" name="mainJsFileName" value="main_admin_products_create"/>
+        <put-attribute name="body" value="/WEB-INF/views/admin/products/update.jspx"/>
+    </definition>
+<definition extends="default" name="admin/products/list">
+        <put-attribute name="body" value="/WEB-INF/views/admin/products/list.jspx"/>
+    </definition>
+<definition extends="default" name="admin/products/show">
+        <put-attribute name="body" value="/WEB-INF/views/admin/products/show.jspx"/>
+    </definition>
+<definition extends="default" name="admin/products/create">
+        <put-attribute name="body" value="/WEB-INF/views/admin/products/create.jspx"/>
+    </definition>
+<definition extends="default" name="admin/products/update">
         <put-attribute name="body" value="/WEB-INF/views/admin/products/update.jspx"/>
     </definition>
 </tiles-definitions>

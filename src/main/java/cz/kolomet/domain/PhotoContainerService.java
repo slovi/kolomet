@@ -6,6 +6,8 @@ public interface PhotoContainerService {
 	
 	public void savePhoto(Photo photo);
 	
+	public void deletePhoto(Photo photo);
+	
 	public void resizePhoto(File photo);
 
 }

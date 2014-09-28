@@ -13,4 +13,16 @@
 	<definition extends="store/template_admin" name="store/admin/productusages/update">
         <put-attribute name="body" value="/WEB-INF/views/admin/productusages/update.jspx"/>
     </definition>
+<definition extends="default" name="admin/productusages/list">
+        <put-attribute name="body" value="/WEB-INF/views/admin/productusages/list.jspx"/>
+    </definition>
+<definition extends="default" name="admin/productusages/show">
+        <put-attribute name="body" value="/WEB-INF/views/admin/productusages/show.jspx"/>
+    </definition>
+<definition extends="default" name="admin/productusages/create">
+        <put-attribute name="body" value="/WEB-INF/views/admin/productusages/create.jspx"/>
+    </definition>
+<definition extends="default" name="admin/productusages/update">
+        <put-attribute name="body" value="/WEB-INF/views/admin/productusages/update.jspx"/>
+    </definition>
 </tiles-definitions>

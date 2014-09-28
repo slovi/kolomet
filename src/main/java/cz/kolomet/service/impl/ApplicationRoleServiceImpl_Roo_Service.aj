@@ -3,13 +3,14 @@
 
 package cz.kolomet.service.impl;
 
-import cz.kolomet.domain.ApplicationRole;
-import cz.kolomet.repository.ApplicationRoleRepository;
-import cz.kolomet.service.impl.ApplicationRoleServiceImpl;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import cz.kolomet.domain.ApplicationRole;
+import cz.kolomet.repository.ApplicationRoleRepository;
 
 privileged aspect ApplicationRoleServiceImpl_Roo_Service {
     

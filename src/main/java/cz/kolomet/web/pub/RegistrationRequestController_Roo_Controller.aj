@@ -3,18 +3,20 @@
 
 package cz.kolomet.web.pub;
 
-import cz.kolomet.domain.RegistrationRequest;
-import cz.kolomet.service.ApplicationUserService;
-import cz.kolomet.service.RegistrationRequestService;
-import cz.kolomet.web.pub.RegistrationRequestController;
 import java.io.UnsupportedEncodingException;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
+
+import cz.kolomet.domain.RegistrationRequest;
+import cz.kolomet.service.ApplicationUserService;
+import cz.kolomet.service.RegistrationRequestService;
 
 privileged aspect RegistrationRequestController_Roo_Controller {
     

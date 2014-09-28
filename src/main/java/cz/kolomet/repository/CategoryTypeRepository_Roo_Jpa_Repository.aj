@@ -3,11 +3,11 @@
 
 package cz.kolomet.repository;
 
-import cz.kolomet.domain.codelist.CategoryType;
-import cz.kolomet.repository.CategoryTypeRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
+
+import cz.kolomet.domain.codelist.CategoryType;
 
 privileged aspect CategoryTypeRepository_Roo_Jpa_Repository {
     

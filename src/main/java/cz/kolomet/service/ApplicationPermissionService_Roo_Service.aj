@@ -3,9 +3,9 @@
 
 package cz.kolomet.service;
 
-import cz.kolomet.domain.ApplicationPermission;
-import cz.kolomet.service.ApplicationPermissionService;
 import java.util.List;
+
+import cz.kolomet.domain.ApplicationPermission;
 
 privileged aspect ApplicationPermissionService_Roo_Service {
     

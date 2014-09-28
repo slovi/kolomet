@@ -13,31 +13,31 @@
 	<!-- templates -->
 
 	<definition name="template_default" template="/WEB-INF/layouts/template_default.jspx">
-		<put-attribute name="footer" value="/WEB-INF/views/footer.jspx" />
+		<put-attribute name="mainJsFileName" value="main_default_public" cascade="true" />
 		<put-attribute name="login" value="/WEB-INF/views/login.jspx" />
 		<put-attribute name="loader" value="/WEB-INF/views/loader.jspx" />
 	</definition>
 	
 	<definition name="template_default_separated_content" template="/WEB-INF/layouts/template_default.jspx">
-		<put-attribute name="footer" value="/WEB-INF/views/footer.jspx" />
+		<put-attribute name="mainJsFileName" value="main_default_public" cascade="true" />
 		<put-attribute name="login" value="/WEB-INF/views/login.jspx" />
 		<put-attribute name="loader" value="/WEB-INF/views/loader.jspx" />
 	</definition>
 
 	<definition name="template_admin" template="/WEB-INF/layouts/template_admin.jspx">
-		<put-attribute name="footer" value="/WEB-INF/views/footer.jspx" />
+		<put-attribute name="mainJsFileName" value="main_default_admin" cascade="true" />		
 		<put-attribute name="login" value="/WEB-INF/views/login.jspx" />
 		<put-attribute name="loader" value="/WEB-INF/views/loader.jspx" />
 	</definition>
 
 	<definition name="template_wide" template="/WEB-INF/layouts/template_wide.jspx">
-		<put-attribute name="footer" value="/WEB-INF/views/footer.jspx" />
+		<put-attribute name="mainJsFileName" value="main_default_public" cascade="true" />
 		<put-attribute name="login" value="/WEB-INF/views/login.jspx" />
 		<put-attribute name="loader" value="/WEB-INF/views/loader.jspx" />
 	</definition>
 
 	<definition name="template_wide_separated_content" template="/WEB-INF/layouts/template_wide.jspx">
-		<put-attribute name="footer" value="/WEB-INF/views/footer.jspx" />
+		<put-attribute name="mainJsFileName" value="main_default_public" cascade="true" />
 		<put-attribute name="login" value="/WEB-INF/views/login.jspx" />
 		<put-attribute name="loader" value="/WEB-INF/views/loader.jspx" />
 	</definition>

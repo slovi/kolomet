@@ -26,6 +26,7 @@ import cz.kolomet.domain.codelist.PlaceType;
 import cz.kolomet.domain.codelist.ProductAttributeType;
 import cz.kolomet.domain.codelist.Region;
 import cz.kolomet.domain.codelist.SellerStatus;
+import cz.kolomet.dto.FileInfo;
 import cz.kolomet.service.RegionService;
 import cz.kolomet.service.SellerStatusService;
 
@@ -49,6 +50,8 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 		registry.addFormatter(getGpsLocationFormatter());
 		registry.addFormatter(getAddressFormatter());
 		registry.addConverter(getSellerStatusToStringConverter());
+		registry.addConverter(getFileInfoToStringConverter());
+		registry.addConverter(getStringToFileInfoConverter());
 	}
 	
 	public Converter<PlaceType, String> getPlaceTypeToStringConverter() {
@@ -166,6 +169,31 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
         return new Converter<ApplicationPermission, String>() {
             public String convert(ApplicationPermission applicationPermission) {
                 return new StringBuilder().append(applicationPermission.getPermissionName()).toString();
+            }
+        };
+    }
+    
+    public Converter<String, FileInfo> getStringToFileInfoConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, cz.kolomet.dto.FileInfo>() {
+            public cz.kolomet.dto.FileInfo convert(String value) {
+            	
+            	String[] values = value.split("__;__");
+            	FileInfo fileInfo = new FileInfo();
+            	if (values.length > 0) {
+            		fileInfo.setFileName(values[0]);
+            	}
+            	if (values.length > 1) {
+            		fileInfo.setContentType(values[1]);
+            	}
+            	return fileInfo;
+            }
+        };
+    }
+	
+	public Converter<FileInfo, String> getFileInfoToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<cz.kolomet.dto.FileInfo, java.lang.String>() {
+            public String convert(FileInfo fileInfo) {
+                return new StringBuilder().append(fileInfo.getFileName() + "__;__" + fileInfo.getContentType()).toString();
             }
         };
     }

@@ -3,9 +3,9 @@
 
 package cz.kolomet.service;
 
-import cz.kolomet.domain.Place;
-import cz.kolomet.service.PlaceService;
 import java.util.List;
+
+import cz.kolomet.domain.Place;
 
 privileged aspect PlaceService_Roo_Service {
     

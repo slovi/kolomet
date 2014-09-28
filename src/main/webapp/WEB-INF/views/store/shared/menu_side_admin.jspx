@@ -5,8 +5,8 @@
     
     <div class="side-menu active">
     	<h1 class="side-menu-header">
-    		<spring:url value="/img/arrow_down.png" var="arrowDownImgUrl" />
-    		<spring:url value="/img/arrow_right.png" var="arrowRightImgUrl" />
+    		<spring:url value="/resources/img/arrow_down.png" var="arrowDownImgUrl" />
+    		<spring:url value="/resources/img/arrow_right.png" var="arrowRightImgUrl" />
       		<spring:message code="admin_menu_side_header"/>
       		<img class="side-menu-arrow-on" src="${arrowDownImgUrl}" />
             <img class="side-menu-arrow-off hidden" src="${arrowRightImgUrl}" />
@@ -24,82 +24,82 @@
 	                <menu:item id="i_registrationrequest_list" messageCode="global_menu_list" sort="processed" sortDesc="false" url="/store/admin/registrationrequests" z="user-managed"/>
 	            </security:authorize>
 	            <security:authorize access="hasAnyRole('ROLE_per_applicationusers')">
-	                <menu:item id="i_applicationuser_new" messageCode="global_menu_new" renderPageParams="false" url="/admin/applicationusers?form" z="user-managed"/>
-	                <menu:item id="i_applicationuser_list" messageCode="global_menu_list" url="/admin/applicationusers" z="user-managed"/>
-	                <menu:item id="i_applicationrole_new" messageCode="global_menu_new" renderPageParams="false" url="/admin/applicationroles?form" z="user-managed"/>
-	                <menu:item id="i_applicationrole_list" messageCode="global_menu_list" url="/admin/applicationroles" z="user-managed"/>
-	                <menu:item id="i_applicationpermission_new" messageCode="global_menu_new" renderPageParams="false" url="/admin/applicationpermissions?form" z="user-managed"/>
-	                <menu:item id="i_applicationpermission_list" messageCode="global_menu_list" url="/admin/applicationpermissions" z="user-managed"/>
+	                <menu:item id="i_applicationuser_new" messageCode="global_menu_new" renderPageParams="false" url="/store/admin/applicationusers?form" z="user-managed"/>
+	                <menu:item id="i_applicationuser_list" messageCode="global_menu_list" url="/store/admin/applicationusers" z="user-managed"/>
+	                <menu:item id="i_applicationrole_new" messageCode="global_menu_new" renderPageParams="false" url="/store/admin/applicationroles?form" z="user-managed"/>
+	                <menu:item id="i_applicationrole_list" messageCode="global_menu_list" url="/store/admin/applicationroles" z="user-managed"/>
+	                <menu:item id="i_applicationpermission_new" messageCode="global_menu_new" renderPageParams="false" url="/store/admin/applicationpermissions?form" z="user-managed"/>
+	                <menu:item id="i_applicationpermission_list" messageCode="global_menu_list" url="/store/admin/applicationpermissions" z="user-managed"/>
 	            </security:authorize>
 	        </menu:category>
 	        <security:authorize access="principal.isSellersAll()">
 	            <menu:category id="c_seller" z="WlsOMc1O7s/g2W1aWsDxWyIlXs4=">
-	                <menu:item id="i_seller_new" messageCode="global_menu_new" renderPageParams="false" url="/admin/sellers?form" z="user-managed"/>
-	                <menu:item id="i_seller_list" messageCode="global_menu_list" url="/admin/sellers" z="user-managed"/>
-	                <menu:item id="i_sellerphotourl_new" messageCode="global_menu_new" render="false" renderPageParams="false" url="/admin/sellerphotourls?form" z="user-managed"/>
-	                <menu:item id="i_sellerphotourl_list" messageCode="global_menu_list" render="false" url="/admin/sellerphotourls" z="user-managed"/>
+	                <menu:item id="i_seller_new" messageCode="global_menu_new" renderPageParams="false" url="/store/admin/sellers?form" z="user-managed"/>
+	                <menu:item id="i_seller_list" messageCode="global_menu_list" url="/store/admin/sellers" z="user-managed"/>
+	                <menu:item id="i_sellerphotourl_new" messageCode="global_menu_new" render="false" renderPageParams="false" url="/store/admin/sellerphotourls?form" z="user-managed"/>
+	                <menu:item id="i_sellerphotourl_list" messageCode="global_menu_list" render="false" url="/store/admin/sellerphotourls" z="user-managed"/>
 	                <security:authorize access="hasAnyRole('ROLE_per_sellerstatuses')">
-	                    <menu:item id="i_sellerstatus_new" messageCode="global_menu_new" renderPageParams="false" url="/admin/sellerstatuses?form" z="user-managed"/>
-	                    <menu:item id="i_sellerstatus_list" messageCode="global_menu_list" url="/admin/sellerstatuses" z="user-managed"/>
+	                    <menu:item id="i_sellerstatus_new" messageCode="global_menu_new" renderPageParams="false" url="/store/admin/sellerstatuses?form" z="user-managed"/>
+	                    <menu:item id="i_sellerstatus_list" messageCode="global_menu_list" url="/store/admin/sellerstatuses" z="user-managed"/>
 	                </security:authorize>
 	                <security:authorize access="hasAnyRole('ROLE_per_regions')">
-	                    <menu:item id="i_region_new" messageCode="global_menu_new" renderPageParams="false" url="/admin/regions?form" z="user-managed"/>
-	                    <menu:item id="i_region_list" messageCode="global_menu_list" url="/admin/regions" z="user-managed"/>
+	                    <menu:item id="i_region_new" messageCode="global_menu_new" renderPageParams="false" url="/store/admin/regions?form" z="user-managed"/>
+	                    <menu:item id="i_region_list" messageCode="global_menu_list" url="/store/admin/regions" z="user-managed"/>
 	                </security:authorize>
 	                <security:authorize access="hasAnyRole('ROLE_per_countrystates')">
-	                    <menu:item id="i_countrystate_new" messageCode="global_menu_new" renderPageParams="false" url="/admin/countrystates?form" z="user-managed"/>
-	                    <menu:item id="i_countrystate_list" messageCode="global_menu_list" url="/admin/countrystates" z="user-managed"/>
+	                    <menu:item id="i_countrystate_new" messageCode="global_menu_new" renderPageParams="false" url="/store/admin/countrystates?form" z="user-managed"/>
+	                    <menu:item id="i_countrystate_list" messageCode="global_menu_list" url="/store/admin/countrystates" z="user-managed"/>
 	                </security:authorize>
 	            </menu:category>
 	        </security:authorize>
 	        <security:authorize access="principal.isProductsAll()">
 	            <menu:category id="c_product" z="vJ6efqiSxFssuvqFTsXpvZ3AvA8=">
-	                <menu:item id="i_product_new" messageCode="global_menu_new" renderPageParams="false" url="/admin/products?form" z="user-managed"/>
+	                <menu:item id="i_product_new" messageCode="global_menu_new" renderPageParams="false" url="/store/admin/products?form" z="user-managed"/>
 	                <menu:item id="i_product_list" messageCode="global_menu_list" url="/admin/products" z="user-managed"/>
-	                <menu:item id="i_productattribute_new" messageCode="global_menu_new" render="false" renderPageParams="false" url="/admin/productattributes?form" z="user-managed"/>
-	                <menu:item id="i_productattribute_list" messageCode="global_menu_list" render="false" url="/admin/productattributes" z="user-managed"/>
+	                <menu:item id="i_productattribute_new" messageCode="global_menu_new" render="false" renderPageParams="false" url="/store/admin/productattributes?form" z="user-managed"/>
+	                <menu:item id="i_productattribute_list" messageCode="global_menu_list" render="false" url="/store/admin/productattributes" z="user-managed"/>
 	                <security:authorize access="hasAnyRole('ROLE_per_productattributetypes')">
-	                    <menu:item id="i_productattributetype_new" messageCode="global_menu_new" renderPageParams="false" url="/admin/productattributetypes?form" z="user-managed"/>
-	                    <menu:item id="i_productattributetype_list" messageCode="global_menu_list" url="/admin/productattributetypes" z="user-managed"/>
+	                    <menu:item id="i_productattributetype_new" messageCode="global_menu_new" renderPageParams="false" url="/store/admin/productattributetypes?form" z="user-managed"/>
+	                    <menu:item id="i_productattributetype_list" messageCode="global_menu_list" url="/store/admin/productattributetypes" z="user-managed"/>
 	                </security:authorize>
-	                <menu:item id="i_photourl_new" messageCode="global_menu_new" render="false" renderPageParams="false" url="/admin/photourls?form" z="user-managed"/>
-	                <menu:item id="i_photourl_list" messageCode="global_menu_list" render="false" url="/admin/photourls" z="user-managed"/>
+	                <menu:item id="i_photourl_new" messageCode="global_menu_new" render="false" renderPageParams="false" url="/store/admin/photourls?form" z="user-managed"/>
+	                <menu:item id="i_photourl_list" messageCode="global_menu_list" render="false" url="/store/admin/photourls" z="user-managed"/>
 	                <security:authorize access="hasAnyRole('ROLE_per_producers')">
-	                    <menu:item id="i_producer_new" messageCode="global_menu_new" renderPageParams="false" url="/admin/producers?form" z="user-managed"/>
-	                    <menu:item id="i_producer_list" messageCode="global_menu_list" url="/admin/producers" z="user-managed"/>
+	                    <menu:item id="i_producer_new" messageCode="global_menu_new" renderPageParams="false" url="/store/admin/producers?form" z="user-managed"/>
+	                    <menu:item id="i_producer_list" messageCode="global_menu_list" url="/store/admin/producers" z="user-managed"/>
 	                </security:authorize>
 	                <security:authorize access="hasAnyRole('ROLE_per_categorys')">
-	                    <menu:item id="i_category_new" messageCode="global_menu_new" renderPageParams="false" url="/admin/categorys?form" z="user-managed"/>
-	                    <menu:item id="i_category_list" messageCode="global_menu_list" url="/admin/categorys" z="user-managed"/>
+	                    <menu:item id="i_category_new" messageCode="global_menu_new" renderPageParams="false" url="/store/admin/categorys?form" z="user-managed"/>
+	                    <menu:item id="i_category_list" messageCode="global_menu_list" url="/store/admin/categorys" z="user-managed"/>
 	                </security:authorize>
 	                <security:authorize access="hasAnyRole('ROLE_per_categorytypes')">
-	                    <menu:item id="i_categorytype_new" messageCode="global_menu_new" renderPageParams="false" url="/admin/categorytypes?form" z="user-managed"/>
-	                    <menu:item id="i_categorytype_list" messageCode="global_menu_list" url="/admin/categorytypes" z="user-managed"/>
+	                    <menu:item id="i_categorytype_new" messageCode="global_menu_new" renderPageParams="false" url="/store/admin/categorytypes?form" z="user-managed"/>
+	                    <menu:item id="i_categorytype_list" messageCode="global_menu_list" url="/store/admin/categorytypes" z="user-managed"/>
 	                </security:authorize>
 	                <security:authorize access="hasAnyRole('ROLE_per_productcolors')">
-	                    <menu:item id="i_productcolor_new" messageCode="global_menu_new" url="/admin/productcolors?form" z="QLOU2vDJbHboxXdDF8CKLklt9Vs="/>
-	                    <menu:item id="i_productcolor_list" messageCode="global_menu_list" url="/admin/productcolors" z="user-managed"/>
+	                    <menu:item id="i_productcolor_new" messageCode="global_menu_new" url="/store/admin/productcolors?form" z="QLOU2vDJbHboxXdDF8CKLklt9Vs="/>
+	                    <menu:item id="i_productcolor_list" messageCode="global_menu_list" url="/store/admin/productcolors" z="user-managed"/>
 	                </security:authorize>
 	                <security:authorize access="hasAnyRole('ROLE_per_productusages')">
-	                    <menu:item id="i_productusage_new" messageCode="global_menu_new" renderPageParams="false" url="/admin/productusages?form" z="user-managed"/>
-	                    <menu:item id="i_productusage_list" messageCode="global_menu_list" url="/admin/productusages" z="user-managed"/>
+	                    <menu:item id="i_productusage_new" messageCode="global_menu_new" renderPageParams="false" url="/store/admin/productusages?form" z="user-managed"/>
+	                    <menu:item id="i_productusage_list" messageCode="global_menu_list" url="/store/admin/productusages" z="user-managed"/>
 	                </security:authorize>
 	                <security:authorize access="hasAnyRole('ROLE_per_bicyclecategories')">
-	                    <menu:item id="i_bicyclecategory_new" messageCode="global_menu_new" renderPageParams="false" url="/admin/bicyclecategories?form" z="user-managed"/>
-	                    <menu:item id="i_bicyclecategory_list" messageCode="global_menu_list" url="/admin/bicyclecategories" z="user-managed"/>
+	                    <menu:item id="i_bicyclecategory_new" messageCode="global_menu_new" renderPageParams="false" url="/store/admin/bicyclecategories?form" z="user-managed"/>
+	                    <menu:item id="i_bicyclecategory_list" messageCode="global_menu_list" url="/store/admin/bicyclecategories" z="user-managed"/>
 	                </security:authorize>
 	                <security:authorize access="hasAnyRole('ROLE_per_figureheights')">
-	                    <menu:item id="i_figureheight_new" messageCode="global_menu_new" renderPageParams="false" url="/admin/figureheights?form" z="user-managed"/>
-	                    <menu:item id="i_figureheight_list" messageCode="global_menu_list" url="/admin/figureheights" z="user-managed"/>
+	                    <menu:item id="i_figureheight_new" messageCode="global_menu_new" renderPageParams="false" url="/store/admin/figureheights?form" z="user-managed"/>
+	                    <menu:item id="i_figureheight_list" messageCode="global_menu_list" url="/store/admin/figureheights" z="user-managed"/>
 	                </security:authorize>
 	            </menu:category>
 	        </security:authorize>
 	        <security:authorize access="hasRole('ROLE_per_newsitems')">
 	            <menu:category id="c_newsitem" z="1bfnIdeFG6Mjmi/SPd9xw1yWIWI=">
-	                <menu:item id="i_newsitem_new" messageCode="global_menu_new" renderPageParams="false" url="/admin/newsitems?form" z="user-managed"/>
-	                <menu:item id="i_newsitem_list" messageCode="global_menu_list" url="/admin/newsitems" z="user-managed"/>
-	                <menu:item id="i_newsitemphotourl_new" messageCode="global_menu_new" render="false" url="/admin/newsitemphotourls?form" z="user-managed"/>
-	                <menu:item id="i_newsitemphotourl_list" messageCode="global_menu_list" render="false" url="/admin/newsitemphotourls?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
+	                <menu:item id="i_newsitem_new" messageCode="global_menu_new" renderPageParams="false" url="/store/admin/newsitems?form" z="user-managed"/>
+	                <menu:item id="i_newsitem_list" messageCode="global_menu_list" url="/store/admin/newsitems" z="user-managed"/>
+	                <menu:item id="i_newsitemphotourl_new" messageCode="global_menu_new" render="false" url="/store/admin/newsitemphotourls?form" z="user-managed"/>
+	                <menu:item id="i_newsitemphotourl_list" messageCode="global_menu_list" render="false" url="/store/admin/newsitemphotourls?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
 	            </menu:category>
 	        </security:authorize>
 	    </menu:menu> 

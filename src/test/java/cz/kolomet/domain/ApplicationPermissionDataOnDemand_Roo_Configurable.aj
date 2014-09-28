@@ -3,7 +3,6 @@
 
 package cz.kolomet.domain;
 
-import cz.kolomet.domain.ApplicationPermissionDataOnDemand;
 import org.springframework.beans.factory.annotation.Configurable;
 
 privileged aspect ApplicationPermissionDataOnDemand_Roo_Configurable {

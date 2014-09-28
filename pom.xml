@@ -5,7 +5,7 @@
 	<groupId>cz.kolomet</groupId>
 	<artifactId>kolomet</artifactId>
 	<packaging>war</packaging>
-	<version>1.0.20-SNAPSHOT</version>
+	<version>1.0.29-SNAPSHOT</version>
 	<name>kolomet</name>
 
 	<distributionManagement>
@@ -440,7 +440,7 @@
 							<filtering>true</filtering>
 							<directory>src/main/webapp</directory>
 							<includes>
-								<include>js/main.js</include>
+								<include>resources/js/app/common.js</include>
 							</includes>
 						</resource>
 					</webResources>

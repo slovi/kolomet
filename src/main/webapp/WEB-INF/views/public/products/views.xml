@@ -2,6 +2,7 @@
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 <tiles-definitions>
     <definition extends="store/template_wide_separated_content" name="store/public/products/list_category">
+    	<put-attribute name="mainJsFileName" value="main_public_products_list_category" cascade="true" />
     	<put-attribute name="body">
     		<definition extends="subtemplate_separated_content">
     			<put-attribute name="body_header" value="/WEB-INF/views/public/products/list_body_header.jspx"/> <!-- filters -->
@@ -10,6 +11,7 @@
     	</put-attribute>    	
     </definition>
     <definition extends="store/template_wide" name="store/public/products/detail">
+    	<put-attribute name="mainJsFileName" value="main_public_products_detail" cascade="true" />
         <put-attribute name="body" value="/WEB-INF/views/public/products/detail.jspx"/>
     </definition>
 </tiles-definitions>

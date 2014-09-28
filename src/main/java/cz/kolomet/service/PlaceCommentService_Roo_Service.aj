@@ -3,9 +3,9 @@
 
 package cz.kolomet.service;
 
-import cz.kolomet.domain.PlaceComment;
-import cz.kolomet.service.PlaceCommentService;
 import java.util.List;
+
+import cz.kolomet.domain.PlaceComment;
 
 privileged aspect PlaceCommentService_Roo_Service {
     

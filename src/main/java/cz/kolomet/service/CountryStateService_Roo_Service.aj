@@ -3,9 +3,9 @@
 
 package cz.kolomet.service;
 
-import cz.kolomet.domain.codelist.CountryState;
-import cz.kolomet.service.CountryStateService;
 import java.util.List;
+
+import cz.kolomet.domain.codelist.CountryState;
 
 privileged aspect CountryStateService_Roo_Service {
     

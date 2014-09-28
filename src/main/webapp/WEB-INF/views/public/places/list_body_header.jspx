@@ -3,19 +3,25 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     
+    <c:if test="${registrationSuccess eq true or param.registration_success eq true}">
+    	<div class="general_unit">
+    		<spring:message code="registration_user_success_activate" />
+    	</div>
+    </c:if>
+    
     <div class="general_unit">
     
     	<div id="places_general_unit_filter" class="general_unit_filter">
-	    	<h2>Všechny regiony</h2>
-	    	<br />
     		<div>
 				<form:form id="place_filter_form" method="get" modelAttribute="placeFilter">
 				
 					<input type="hidden" name="usedFilter" value="true" />
 					<input type="hidden" name="region" value="" />
 				
+					<b><spring:message code="places_filter_placetype" /></b>:<util:nbsp number="5" /> 
+				
 		    		<c:forEach items="${placeTypes}" var="placeType" varStatus="status">
-		    			<form:checkbox id="place_type_${status.index}" path="placeTypes[${status.index}]" value="${placeType}" /><c:out value="${placeType.codeDescription}" />
+		    			<form:checkbox id="place_type_${status.index}" path="placeTypes[${status.index}]" value="${placeType}" /><util:nbsp number="1" /><c:out value="${placeType.codeDescription}" /><util:nbsp number="6" />
 		    		</c:forEach>
     		</form:form>
 			</div>    		

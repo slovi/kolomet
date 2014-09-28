@@ -45,5 +45,6 @@
         <field:display field="finalPrice" id="s_cz_kolomet_domain_Product_finalPrice" object="${product}" z="FC9382OaPgkl6bfu4zroYxYIkn4="/>
         <field:display field="copiedFrom" id="s_cz_kolomet_domain_Product_copiedFrom" object="${product}" z="hb8xlub3VDr/HGt44Gy4/Qk71F4="/>
         <field:display field="productState" id="s_cz_kolomet_domain_Product_productState" object="${product}" z="e8xGRBZYozrv3LjJCve1txTEMJ4="/>
+        <field:display field="fileInfos" id="s_cz_kolomet_domain_Product_fileInfos" object="${product}" z="g3+gW3/z8MjbKWgaQwAqaTZvnsk="/>
     </page:show>
 </div>

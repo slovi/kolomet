@@ -1,4 +1,6 @@
 package cz.kolomet.service;
+import java.util.List;
+
 import org.springframework.roo.addon.layers.service.RooService;
 
 import cz.kolomet.domain.Rate;
@@ -9,6 +11,6 @@ public interface RateService {
 	
 	public void saveRate(Rate rate);
 	
-	public Rate findRate(RateType rateType, Long entityId, String ipAddress);    
+	public List<Rate> findRate(RateType rateType, Long entityId, String ipAddress);    
 	
 }

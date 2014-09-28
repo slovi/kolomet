@@ -1,7 +1,10 @@
-<jsp:root xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:spring="http://www.springframework.org/tags" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+<jsp:root xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:tiles="http://tiles.apache.org/tags-tiles" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:spring="http://www.springframework.org/tags" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
 
 	<jsp:output omit-xml-declaration="yes" />
 
-	<util:load-scripts />
+	<c:set var="mainJsFileName">
+		<tiles:getAsString name="mainJsFileName" />
+	</c:set>
+	<util:load-scripts mainJsFileName="${mainJsFileName}" />
 
 </jsp:root>

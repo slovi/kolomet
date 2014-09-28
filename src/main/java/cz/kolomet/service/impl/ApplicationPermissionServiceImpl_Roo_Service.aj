@@ -3,13 +3,14 @@
 
 package cz.kolomet.service.impl;
 
-import cz.kolomet.domain.ApplicationPermission;
-import cz.kolomet.repository.ApplicationPermissionRepository;
-import cz.kolomet.service.impl.ApplicationPermissionServiceImpl;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import cz.kolomet.domain.ApplicationPermission;
+import cz.kolomet.repository.ApplicationPermissionRepository;
 
 privileged aspect ApplicationPermissionServiceImpl_Roo_Service {
     

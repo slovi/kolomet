@@ -15,8 +15,9 @@ public class KolometLogoutSuccessHandler implements LogoutSuccessHandler {
 	public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
 			throws IOException, ServletException {
 		
-		if (request.getServletPath().startsWith("/tour")) {
-			response.sendRedirect(request.getContextPath() + "/tour/pulic/places");
+		String source = request.getParameter("source");
+		if ("tour".equals(source)) {
+			response.sendRedirect(request.getContextPath() + "/tour/public/places");
 		} else {
 			response.sendRedirect(request.getContextPath() + "/store/public/intro/index");
 		}

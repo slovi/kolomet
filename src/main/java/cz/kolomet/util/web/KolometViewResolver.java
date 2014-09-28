@@ -51,7 +51,7 @@ public class KolometViewResolver extends UrlBasedViewResolver {
 		if (view != null) {
 			return view;
 		} else {
-			throw new ViewNotFoundException("Cannot find view with name: " + viewName);
+			return null;
 		}
 	}
 	

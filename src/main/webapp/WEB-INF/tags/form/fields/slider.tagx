@@ -23,20 +23,17 @@
     </c:if>
     
   	<div id="${id}_slider" class="slider filter_input">
+    	<span class="config" style="display: none;">
+    		<![CDATA[
+    			{ "valueFrom": ${valueFrom}, "valueTo": ${valueTo}, "maxValueFrom": ${maxValueFrom}, "maxValueTo": ${maxValueTo}, "step": ${step} }
+    		]]>
+    	</span>
      	<spring:message code="products_list_filter_${id}" /> (<spring:message code="${units}" />):
     	<form:input cssClass="amountFromInput" path="${id}From" cssStyle="width: ${width}px;" />-<form:input cssClass="amountToInput" path="${id}To" cssStyle="width: ${width}px;" />
     	<div><!--  --></div>
    	</div>
    	
    	<form:hidden path="max${fn:toUpperCase(fn:substring(id, 0, 1))}${fn:substring(id, 1, fn:length(id))}To"/>
-
-	<script type="text/javascript">
-		requireModule(['slider'], function(slider) {
-			slider.slider('${id}_slider', ${valueFrom}, ${valueTo}, ${maxValueFrom}, ${maxValueTo}, ${step}, function(slider) {
-				slider.closest("form").find("#button_filter").click();
-			});
-		});
-	</script>
 
   </c:if>
 </jsp:root>

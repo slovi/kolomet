@@ -3,13 +3,14 @@
 
 package cz.kolomet.service.impl;
 
-import cz.kolomet.domain.PhotoUrl;
-import cz.kolomet.repository.PhotoUrlRepository;
-import cz.kolomet.service.impl.PhotoUrlServiceImpl;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import cz.kolomet.domain.PhotoUrl;
+import cz.kolomet.repository.PhotoUrlRepository;
 
 privileged aspect PhotoUrlServiceImpl_Roo_Service {
     

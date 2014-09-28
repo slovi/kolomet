@@ -5,6 +5,7 @@
         <put-attribute name="body" value="/WEB-INF/views/public/registrationrequests/show.jspx"/>
     </definition>
 	<definition extends="store/template_default" name="store/public/registrationrequests/create">
+		<put-attribute name="mainJsFileName" value="main_public_registrationrequests_create" cascade="true" />
         <put-attribute name="body" value="/WEB-INF/views/public/registrationrequests/create.jspx"/>
     </definition>
 </tiles-definitions>

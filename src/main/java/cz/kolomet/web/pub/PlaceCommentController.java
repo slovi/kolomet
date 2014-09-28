@@ -23,7 +23,7 @@ import cz.kolomet.service.PlaceService;
 @RequestMapping("/public/placecomments")
 @Controller
 @RooWebScaffold(path = "public/placecomments", formBackingObject = PlaceComment.class)
-public class PlaceCommentController {
+public class PlaceCommentController extends AbstractPublicController {
 	
 	@Autowired
 	private PlaceService placeService;

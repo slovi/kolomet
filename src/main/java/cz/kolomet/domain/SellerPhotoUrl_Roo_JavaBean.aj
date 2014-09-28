@@ -3,8 +3,6 @@
 
 package cz.kolomet.domain;
 
-import cz.kolomet.domain.Seller;
-import cz.kolomet.domain.SellerPhotoUrl;
 
 privileged aspect SellerPhotoUrl_Roo_JavaBean {
     

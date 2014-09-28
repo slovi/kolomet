@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:jsp="http://java.sun.com/JSP/Page"
+<div
+	xmlns:c="http://java.sun.com/jsp/jstl/core" 
+	xmlns:jsp="http://java.sun.com/JSP/Page"
 	xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu"
 	xmlns:spring="http://www.springframework.org/tags" version="2.0">
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
@@ -27,7 +29,14 @@
 				<a id="link_forgotten_password" tabindex="4" href="${resetPasswordUrl}"><spring:message code="login_forgotten_password" /></a>
 				<br />
 				<br />
-				<spring:url value="${subContext}/public/registrationrequests?form" var="registrationUrl" />
+				<c:choose>
+					<c:when test="${subContext eq '/tour'}">
+						<spring:url value="${subContext}/public/applicationuserregistrations?form" var="registrationUrl" />
+					</c:when>
+					<c:otherwise>
+						<spring:url value="${subContext}/public/registrationrequests?form" var="registrationUrl" />
+					</c:otherwise>
+				</c:choose>
 				<a tabindex="5" href="${registrationUrl}"><spring:message code="login_registration" /></a>
 				<br />
 			</div>
@@ -37,11 +46,5 @@
 		</form>
 	</div>
 	<div id="lean_overlay"><!--  --></div>
-	
-	<script type="text/javascript">
-		requireModule(['login'], function(login) {
-			login.prepare();
-		});
-	</script>
 
 </div>

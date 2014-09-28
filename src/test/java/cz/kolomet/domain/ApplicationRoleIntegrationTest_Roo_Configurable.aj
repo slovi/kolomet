@@ -3,7 +3,6 @@
 
 package cz.kolomet.domain;
 
-import cz.kolomet.domain.ApplicationRoleIntegrationTest;
 import org.springframework.beans.factory.annotation.Configurable;
 
 privileged aspect ApplicationRoleIntegrationTest_Roo_Configurable {

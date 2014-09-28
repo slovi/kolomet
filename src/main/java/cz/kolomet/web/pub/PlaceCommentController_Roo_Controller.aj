@@ -3,11 +3,10 @@
 
 package cz.kolomet.web.pub;
 
-import cz.kolomet.domain.PlaceComment;
-import cz.kolomet.service.PlaceCommentService;
-import cz.kolomet.web.pub.PlaceCommentController;
 import java.io.UnsupportedEncodingException;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -18,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
+
+import cz.kolomet.domain.PlaceComment;
+import cz.kolomet.service.PlaceCommentService;
 
 privileged aspect PlaceCommentController_Roo_Controller {
     

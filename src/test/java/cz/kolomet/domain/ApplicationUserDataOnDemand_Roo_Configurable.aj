@@ -3,7 +3,6 @@
 
 package cz.kolomet.domain;
 
-import cz.kolomet.domain.ApplicationUserDataOnDemand;
 import org.springframework.beans.factory.annotation.Configurable;
 
 privileged aspect ApplicationUserDataOnDemand_Roo_Configurable {

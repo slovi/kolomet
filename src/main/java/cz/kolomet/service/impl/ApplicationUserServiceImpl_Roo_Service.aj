@@ -3,11 +3,12 @@
 
 package cz.kolomet.service.impl;
 
-import cz.kolomet.domain.ApplicationUser;
-import cz.kolomet.service.impl.ApplicationUserServiceImpl;
 import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import cz.kolomet.domain.ApplicationUser;
 
 privileged aspect ApplicationUserServiceImpl_Roo_Service {
     

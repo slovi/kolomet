@@ -3,6 +3,11 @@
 
 package cz.kolomet.web;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.core.convert.converter.Converter;
+import org.springframework.format.FormatterRegistry;
+
 import cz.kolomet.domain.ApplicationPermission;
 import cz.kolomet.domain.ApplicationRole;
 import cz.kolomet.domain.ApplicationUser;
@@ -55,11 +60,6 @@ import cz.kolomet.service.RateService;
 import cz.kolomet.service.RegistrationRequestService;
 import cz.kolomet.service.SellerPhotoUrlService;
 import cz.kolomet.service.SellerService;
-import cz.kolomet.web.ApplicationConversionServiceFactoryBean;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
-import org.springframework.core.convert.converter.Converter;
-import org.springframework.format.FormatterRegistry;
 
 privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService {
     

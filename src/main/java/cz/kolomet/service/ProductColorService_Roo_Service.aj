@@ -3,9 +3,9 @@
 
 package cz.kolomet.service;
 
-import cz.kolomet.domain.codelist.ProductColor;
-import cz.kolomet.service.ProductColorService;
 import java.util.List;
+
+import cz.kolomet.domain.codelist.ProductColor;
 
 privileged aspect ProductColorService_Roo_Service {
     

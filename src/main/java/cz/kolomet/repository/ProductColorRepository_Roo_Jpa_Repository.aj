@@ -3,11 +3,11 @@
 
 package cz.kolomet.repository;
 
-import cz.kolomet.domain.codelist.ProductColor;
-import cz.kolomet.repository.ProductColorRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
+
+import cz.kolomet.domain.codelist.ProductColor;
 
 privileged aspect ProductColorRepository_Roo_Jpa_Repository {
     

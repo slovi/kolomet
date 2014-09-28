@@ -3,17 +3,13 @@
 
 package cz.kolomet.web.admin;
 
-import cz.kolomet.domain.Category;
-import cz.kolomet.domain.codelist.CategoryType;
-import cz.kolomet.service.ApplicationUserService;
-import cz.kolomet.service.CategoryService;
-import cz.kolomet.service.CategoryTypeService;
-import cz.kolomet.web.admin.CategoryController;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -25,6 +21,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
+
+import cz.kolomet.domain.Category;
+import cz.kolomet.service.ApplicationUserService;
+import cz.kolomet.service.CategoryService;
+import cz.kolomet.service.CategoryTypeService;
 
 privileged aspect CategoryController_Roo_Controller {
     

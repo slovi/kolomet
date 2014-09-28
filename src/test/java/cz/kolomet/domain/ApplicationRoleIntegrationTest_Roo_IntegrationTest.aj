@@ -3,14 +3,12 @@
 
 package cz.kolomet.domain;
 
-import cz.kolomet.domain.ApplicationRoleDataOnDemand;
-import cz.kolomet.domain.ApplicationRoleIntegrationTest;
-import cz.kolomet.repository.ApplicationRoleRepository;
-import cz.kolomet.service.ApplicationRoleService;
 import java.util.Iterator;
 import java.util.List;
+
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,6 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
+
+import cz.kolomet.repository.ApplicationRoleRepository;
+import cz.kolomet.service.ApplicationRoleService;
 
 privileged aspect ApplicationRoleIntegrationTest_Roo_IntegrationTest {
     

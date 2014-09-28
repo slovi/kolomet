@@ -3,7 +3,6 @@
 
 package cz.kolomet.domain.codelist;
 
-import cz.kolomet.domain.codelist.PlaceTypeDataOnDemand;
 import org.springframework.beans.factory.annotation.Configurable;
 
 privileged aspect PlaceTypeDataOnDemand_Roo_Configurable {

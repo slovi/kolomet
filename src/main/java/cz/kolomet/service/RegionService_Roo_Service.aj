@@ -3,9 +3,9 @@
 
 package cz.kolomet.service;
 
-import cz.kolomet.domain.codelist.Region;
-import cz.kolomet.service.RegionService;
 import java.util.List;
+
+import cz.kolomet.domain.codelist.Region;
 
 privileged aspect RegionService_Roo_Service {
     

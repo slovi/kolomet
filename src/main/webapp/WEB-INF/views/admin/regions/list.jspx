@@ -8,6 +8,7 @@
             <table:column id="c_cz_kolomet_domain_codelist_Region_codeDescription" property="codeDescription" z="QW2Ei03EsV3DaEBUWg/8rEAn/kw="/>
             <table:column id="c_cz_kolomet_domain_codelist_Region_sequenceNr" property="sequenceNr" sort="true" z="zhpzNps0RzWs/kykityS93TScwI="/>
             <table:column id="c_cz_kolomet_domain_codelist_Region_gpsLocation" property="gpsLocation" sort="true" z="zhpzNps0RzWs/kykityS93TScwI="/>
+            <table:column id="c_cz_kolomet_domain_codelist_Region_zoom" property="zoom" sort="true" />
             <table:column id="c_cz_kolomet_domain_codelist_Region_googleAlias" property="googleAlias" sort="true" z="zhpzNps0RzWs/kykityS93TScwI="/>
             <table:column id="c_cz_kolomet_domain_codelist_Region_createdBy" property="createdBy" z="6EMX84DPuKM//VjQQEZ4peFt0tM="/>
             <table:column id="c_cz_kolomet_domain_codelist_Region_lastModifiedBy" property="lastModifiedBy" z="Z4Evbnp7QG3dn+RbvNWU2h/1NQM="/>

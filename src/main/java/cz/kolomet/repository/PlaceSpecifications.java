@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
@@ -14,11 +15,27 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.domain.Sort.Order;
 import org.springframework.data.jpa.domain.Specification;
 
+import cz.kolomet.domain.ApplicationUser;
 import cz.kolomet.domain.Place;
 import cz.kolomet.domain.codelist.PlaceType;
 import cz.kolomet.dto.PlaceFilterDto;
 
 public class PlaceSpecifications {
+	
+	public static Specification<Place> ownPlaces(final Long userId) {
+		
+		return new Specification<Place>() {
+			
+			@Override
+			public Predicate toPredicate(Root<Place> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+				
+				Join<Place, ApplicationUser> applicationUserJoin = root.join("createdBy");
+				return cb.equal(applicationUserJoin.get("id"), userId);
+			}
+			
+		};
+		
+	}
 
 	public static Specification<Place> forPlaceFilter(final PlaceFilterDto placeFilterDto) {
 		

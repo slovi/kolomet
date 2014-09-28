@@ -3,10 +3,10 @@
 
 package cz.kolomet.web.admin;
 
-import cz.kolomet.domain.NewsItem;
-import cz.kolomet.web.admin.NewsItemController;
 import java.io.UnsupportedEncodingException;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
+
+import cz.kolomet.domain.NewsItem;
 
 privileged aspect NewsItemController_Roo_Controller {
     
