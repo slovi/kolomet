@@ -1,28 +1,18 @@
 package cz.kolomet.domain;
-import java.util.Collection;
+import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
-import org.springframework.roo.addon.equals.RooEquals;
-import org.springframework.roo.addon.javabean.RooJavaBean;
-import org.springframework.roo.addon.jpa.entity.RooJpaEntity;
-import org.springframework.roo.addon.serializable.RooSerializable;
-import org.springframework.roo.addon.tostring.RooToString;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-import flexjson.JSONSerializer;
-
-@RooJavaBean
-@RooToString(excludeFields = {"createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate"})
-@RooJpaEntity(inheritanceType = "TABLE_PER_CLASS")
-@RooEquals(excludeFields = {"product", "createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate"}, appendSuper = false)
-@RooSerializable
-public class PhotoUrl extends BasePhoto implements Cloneable {
+@Entity
+public class PhotoUrl extends BasePhoto implements Cloneable, Serializable {
 	
 	public static final String PHOTO_URL_PREFIX = "product";
     
@@ -30,11 +20,6 @@ public class PhotoUrl extends BasePhoto implements Cloneable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PRODUCT_ID")
     private Product product;
-    
-
-    public static String toJsonArray(Collection<PhotoUrl> collection, String[] fields) {
-        return new JSONSerializer().include(fields).exclude("*").serialize(collection);
-    }
     
     private Long getProductId() {
     	Long id = product.getId();
@@ -80,5 +65,21 @@ public class PhotoUrl extends BasePhoto implements Cloneable {
 	protected Long getParentContainerId() {
 		return getProductId();
 	}
-    
+	
+	public Product getProduct() {
+        return this.product;
+    }
+
+	public void setProduct(Product product) {
+        this.product = product;
+    }
+
+	public List<CommonsMultipartFile> getContents() {
+        return this.contents;
+    }
+
+	public void setContents(List<CommonsMultipartFile> contents) {
+        this.contents = contents;
+    }
+
 }

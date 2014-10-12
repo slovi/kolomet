@@ -3,7 +3,7 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     
- 	<div class="pages">
+ 	<div id="pages" class="pages">
  			Strana: 
 			<c:if test="${products.totalPages gt 0}">
 				<c:set value="${products.totalPages - 1}" var="totalPages" />
@@ -25,7 +25,7 @@
 						<spring:param name="page.page" value="1" />
 						<spring:param name="page.size" value="${products.size}" />
 					</spring:url>
-					<field:ajaxLink href="${firstPageUrl}" event="onclick" value="&#171;" rerender="body_content" id="firt_page_link" />&#160;
+					<a id="firt_page_link" class="page_link" href="${firstPageUrl}">&#171;</a>&#160;
 				</c:when>
 				<c:otherwise>
 					&#171;&#160;
@@ -45,7 +45,7 @@
 						<spring:param name="page.page" value="${products.number}" />
 						<spring:param name="page.size" value="${products.size}" />
 					</spring:url>
-					<field:ajaxLink href="${previousPageUrl}" event="onclick" value="&#8249;" rerender="body_content" id="previous_page_link" />&#160;
+					<a id="previous_page_link" class="page_link" href="${previousPageUrl}">&#8249;</a>&#160;
 				</c:when>
 				<c:otherwise>
 					&#8249;&#160;
@@ -66,7 +66,7 @@
 						<spring:param name="page.size" value="${products.size}" />
 					</spring:url>
 					<spring:eval expression="status.index + 1" var="actual_page" />
-					<field:ajaxLink href="${pageUrl}" event="onclick" value="[${actual_page}]" rerender="body_content" id="page_link_${status.index}" />&#160;&#160;
+					<a id="page_link_${status.index}" class="page_link" href="${pageUrl}">[${actual_page}]</a>&#160;&#160;
 				</c:if>
 				<c:if test="${status.index == products.number}">
 					[<spring:eval expression="status.index + 1" />]&#160;
@@ -86,7 +86,7 @@
 						<spring:param name="page.page" value="${products.number + 2}" />
 						<spring:param name="page.size" value="${products.size}" />
 					</spring:url>
-					<field:ajaxLink href="${nextPageUrl}" event="onclick" value="&#8250;" rerender="body_content" id="previous_page_link" />&#160;
+					<a id="previous_page_link" class="page_link" href="${nextPageUrl}">&#8250;</a>&#160;
 				</c:when>
 				<c:otherwise>
 					&#8250;&#160;
@@ -95,7 +95,7 @@
 			
 			<c:choose>
 				<c:when test="${products.number + 1 lt products.totalPages}">
-					<spring:url value="/public/products/filter" var="lastPageUrl">
+					<spring:url value="${subContext}/public/products/filter" var="lastPageUrl">
 						<c:forEach items="${paramValues}" var="p">
 							<c:if test="${p.key ne 'page.size' and p.key ne 'page.page'}">
 								<c:forEach items="${p.value}" var="value">
@@ -106,7 +106,7 @@
 						<spring:param name="page.page" value="${products.totalPages}" />
 						<spring:param name="page.size" value="${products.size}" />
 					</spring:url>
-					<field:ajaxLink href="${lastPageUrl}" event="onclick" value="&#187;" rerender="body_content" id="last_page_link" />&#160;
+					<a id="last_page_link" class="page_link" href="${lastPageUrl}">&#187;</a>&#160;
 				</c:when>
 				<c:otherwise>
 					&#187;&#160;

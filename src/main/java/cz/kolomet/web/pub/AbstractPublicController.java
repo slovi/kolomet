@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.ui.Model;
@@ -25,6 +26,9 @@ public class AbstractPublicController extends AbstractController implements Init
 	private Long bikeCategoryTypeId;
 	
 	private Long otherCategoryTypeId;
+	
+	@Value("${applicationuser.agreement.version}")
+	private String agreementVersion;
 	
 	@Autowired
 	private ProducerService producerService; 
@@ -49,6 +53,7 @@ public class AbstractPublicController extends AbstractController implements Init
 		
 		if (isTour(request)) {
 			uiModel.addAttribute("regions", regionService.findAllRegions());
+			uiModel.addAttribute("agreementVersion", agreementVersion);
 		}
 		
 		if (isStore(request)) {
@@ -58,6 +63,7 @@ public class AbstractPublicController extends AbstractController implements Init
 			uiModel.addAttribute("newsItems", newsItemRepository.findAll(NewsItemSpecifications.allNewsItems(), new PageRequest(0, newsItemsSize, Direction.DESC, "newsItemDate")).getContent());
 			uiModel.addAttribute("bikeCategoryTypeId", bikeCategoryTypeId);
 			uiModel.addAttribute("otherCategoryTypeId", otherCategoryTypeId);
+			uiModel.addAttribute("agreementVersion", agreementVersion);
 		}
 		
 		uiModel.addAttribute("newsBanners", newsItemRepository.findAll(NewsItemSpecifications.allNewsBanners(), new PageRequest(0, newsItemsSize, Direction.DESC, "newsItemDate")).getContent());

@@ -1,23 +1,16 @@
 package cz.kolomet.domain;
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
-
-import org.springframework.roo.addon.equals.RooEquals;
-import org.springframework.roo.addon.javabean.RooJavaBean;
-import org.springframework.roo.addon.jpa.entity.RooJpaEntity;
-import org.springframework.roo.addon.serializable.RooSerializable;
-import org.springframework.roo.addon.tostring.RooToString;
-
-@RooJavaBean
-@RooToString
-@RooJpaEntity(inheritanceType = "TABLE_PER_CLASS")
-@RooEquals
-@RooSerializable
-public class PlaceComment extends Comment {
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)public class PlaceComment extends Comment implements Serializable {
 	
 	@ManyToOne
 	private PlaceComment parent;
@@ -36,5 +29,20 @@ public class PlaceComment extends Comment {
 	public void setPlace(Place place) {
 		this.place = place;
 	}
-	
+
+	public PlaceComment getParent() {
+        return this.parent;
+    }
+
+	public void setParent(PlaceComment parent) {
+        this.parent = parent;
+    }
+
+	public List<PlaceComment> getChildren() {
+        return this.children;
+    }
+
+	public void setChildren(List<PlaceComment> children) {
+        this.children = children;
+    }
 }

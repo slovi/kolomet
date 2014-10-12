@@ -1,13 +1,16 @@
 package cz.kolomet.web.admin;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,10 +18,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.util.UriUtils;
+import org.springframework.web.util.WebUtils;
 
-import cz.kolomet.domain.PhotoUrl;
+import cz.kolomet.domain.BasePhoto;
 import cz.kolomet.domain.Product;
 import cz.kolomet.domain.ProductAttribute;
+import cz.kolomet.domain.Seller;
 import cz.kolomet.domain.codelist.ProductAttributeType;
 import cz.kolomet.dto.AdminProductFilterDto;
 import cz.kolomet.repository.ProductSpecifications;
@@ -39,7 +45,6 @@ import flexjson.JSONSerializer;
 
 @RequestMapping("/admin/products")
 @Controller
-@RooWebScaffold(path = "admin/products", formBackingObject = Product.class)
 public class ProductController extends AbstractAdminController {
 	
 	@Autowired
@@ -137,7 +142,7 @@ public class ProductController extends AbstractAdminController {
             return "admin/products/update";
         }
         
-        if (!ApplicationUserDetails.getActualApplicationUserDetails().isCapableToEditValidDates(product)) {
+        if (!getActualUserDetails().isCapableToEditValidDates(product)) {
     		Product actualProduct = productService.findProduct(product.getId());
     		product.setValidFrom(actualProduct.getValidFrom());
     		product.setValidTo(actualProduct.getValidTo());
@@ -157,7 +162,7 @@ public class ProductController extends AbstractAdminController {
     @RequestMapping(produces = "text/html")
     public String list(Pageable pageable, Model uiModel, AdminProductFilterDto productFilter) {
         if (pageable != null) {
-        	ApplicationUserDetails details = ApplicationUserDetails.getActualApplicationUserDetails();
+        	ApplicationUserDetails details = getActualUserDetails();
         	Page<Product> page = null;
         	if (details.isProductsOwn()) {
         		Long sellerId = details.getSellerId();
@@ -177,7 +182,8 @@ public class ProductController extends AbstractAdminController {
     }
 	
     void populateEditForm(Model uiModel, Product product) {
-        uiModel.addAttribute("product", product);
+
+    	uiModel.addAttribute("product", product);
         addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("categorys", categoryService.findAllCategorys());
         uiModel.addAttribute("producers", producerService.findAllProducers());
@@ -185,10 +191,15 @@ public class ProductController extends AbstractAdminController {
         uiModel.addAttribute("figureheights", figureHeightsService.findAllFigureHeights());
         uiModel.addAttribute("productcolors", productColorService.findAllProductColors());
         uiModel.addAttribute("bicyclecategories", bicycleCategoryService.findAllBicycleCategorys());
-        uiModel.addAttribute("sellers", sellerService.findAllSellers());
+        
+        if (getActualUserDetails().isSellersAll()) {
+        	uiModel.addAttribute("sellers", sellerService.findAllEnabledSellers());
+        } else {
+        	uiModel.addAttribute("sellers", Arrays.asList(new Seller[] {sellerService.findSeller(getActualUserDetails().getSellerId())}));
+        }
 
         uiModel.addAttribute("addedFiles", new JSONSerializer().serialize(product.getFileInfos()));
-        uiModel.addAttribute("uploadedFiles", PhotoUrl.toJsonArray(product.getPhotoUrls(), new String[] {"id", "fileName"}));
+        uiModel.addAttribute("uploadedFiles", BasePhoto.toJsonArray(product.getPhotoUrls(), new String[] {"id", "fileName"}));
         
         if (product.isActiveState()) {
 	        if (product.getId() != null && product.getPhotoUrls().isEmpty()) {
@@ -210,7 +221,31 @@ public class ProductController extends AbstractAdminController {
 	    		product.addProductAttribute(productAttribute);
     		}
     	}     	
-    	uiModel.addAttribute("capableToEditValidDates", ApplicationUserDetails.getActualApplicationUserDetails().isCapableToEditValidDates(product));
+    	uiModel.addAttribute("capableToEditValidDates", getActualUserDetails().isCapableToEditValidDates(product));
     }
 	
+
+	@RequestMapping(params = "form", produces = "text/html")
+    public String createForm(Model uiModel) {
+        populateEditForm(uiModel, new Product());
+        return "admin/products/create";
+    }
+
+	void addDateTimeFormatPatterns(Model uiModel) {
+        uiModel.addAttribute("product_created_date_format", DateTimeFormat.patternForStyle("MM", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("product_lastmodified_date_format", DateTimeFormat.patternForStyle("MM", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("product_validfrom_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("product_validto_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
+    }
+
+	String encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {
+        String enc = httpServletRequest.getCharacterEncoding();
+        if (enc == null) {
+            enc = WebUtils.DEFAULT_CHARACTER_ENCODING;
+        }
+        try {
+            pathSegment = UriUtils.encodePathSegment(pathSegment, enc);
+        } catch (UnsupportedEncodingException uee) {}
+        return pathSegment;
+    }
 }

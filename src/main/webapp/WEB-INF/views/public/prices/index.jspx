@@ -10,13 +10,86 @@
 			<h2>KOLOMET ceník</h2>	 
 			<br/>       	
 	      	
+	      	<p>Měsíční cena závisí na tom, kolik kol chcete maximálně najednou inzerovat.</p>
+	      	<br/>
+	      	<p>Je to podobné, jako když dáváte kola do výlohy. Když máte výlohu na 50 kol, můžete v ní mít maximálně 50 kol. A je zcela na Vás, jestli tam vystavíte 30 nebo 50 různých kol, jestli z nich 10 prodáte a umístíte sem 10 nových.</p>
+
+			<h3>Ceník inzerce 2014 … v roce 2014 je zaváděcí cena v přepočtu jen 1,-Kč za inzerát a měsíc:</h3>
+	      	
 			<table class="inner_content">
 				<tr>
-					<td>Cena jednoho inzerátu za minutu: </td>
-					<td>1 000 000,- Kč</td>
+					<td class="text_right">max. počet kol</td>
+					<td class="text_right">cena za rok (Kč)</td>
+				</tr>
+				<tr>
+					<td class="text_right">50</td>
+					<td class="text_right">600</td>
+				</tr>
+				<tr>
+					<td class="text_right">100</td>
+					<td class="text_right">1200</td>
+				</tr>
+				<tr>
+					<td class="text_right">200</td>
+					<td class="text_right">2400</td>
 				</tr>
 			</table>
-		
+			<br/>
+			
+			<h3>Akční zóna:</h3>
+			<p>Umístění Vaší reklamy = banneru v akční zóně (k dispozici je max. 8 bannerů na domovské stránce KOLOMET … výška banneru je ½ jeho šířky dané šířkou sloupce akční zóny vpravo na domovské stránce)</p>
+			<br/>
+			<table class="inner_content">
+				<tr>
+					<td class="text_right">reklamní banner</td>
+					<td class="text_right">cena za měsíc (Kč)</td>
+				</tr>
+				<tr>
+					<td class="text_right">1</td>
+					<td class="text_right">500</td>
+				</tr>
+			</table>
+			<br/>
+			<h3>Ceník inzerce 2015 … v přepočtu jen 5,-Kč za inzerát a měsíc:</h3>
+			
+			<table class="inner_content">
+				<tr>
+					<td class="text_right">max. počet kol</td>
+					<td class="text_right">Roční platba (Kč)</td>
+					<td class="text_right">Pololetní platba (Kč)</td>
+				</tr>
+				<tr>
+					<td class="text_right">50</td>
+					<td class="text_right">3000</td>
+					<td class="text_right">1600</td>
+				</tr>
+				<tr>
+					<td class="text_right">100</td>
+					<td class="text_right">6000</td>
+					<td class="text_right">3200</td>
+				</tr>
+				<tr>
+					<td class="text_right">200</td>
+					<td class="text_right">12000</td>
+					<td class="text_right">6400</td>
+				</tr>
+			</table>
+			<br/>
+			
+			<h3>Akční zóna:</h3>
+			<p>Umístění Vaší reklamy = banneru v akční zóně (k dispozici je max. 8 bannerů na domovské stránce KOLOMET … výška banneru je ½ jeho šířky dané šířkou sloupce akční zóny vpravo na domovské stránce)</p>
+			<br/>
+			<table class="inner_content">
+				<tr>
+					<td class="text_right">reklamní banner</td>
+					<td class="text_right">cena za měsíc (Kč)</td>
+				</tr>
+				<tr>
+					<td class="text_right">1</td>
+					<td class="text_right">5000</td>
+				</tr>
+			</table>
+			
 		</div>
     </div>
   

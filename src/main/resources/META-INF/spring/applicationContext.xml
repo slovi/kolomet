@@ -20,10 +20,11 @@
     			<value>classpath:META-INF/version.properties</value>
     		</list>
 		</property>
-	</bean>
+	</bean>		
 	
 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
     	<property name="properties" ref="applicationProperties" />
+    	<property name="ignoreUnresolvablePlaceholders" value="true" />
     </bean>
 	
 	<context:spring-configured/>
@@ -51,61 +52,34 @@
     	 <property name="fallbackToSystemLocale" value="false" />
     </bean>
 
-	<beans profile="default">
-		
-		<bean id="dataSource" class="org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseFactoryBean">
-			<property name="databaseConfigurer">
-				<bean class="cz.kolomet.util.db.H2FileEmbeddedDatabaseConfigurer" />
-			</property>
-		</bean>
-		
-		<bean id="entityManagerFactory"
-			class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-			<property name="dataSource" ref="dataSource" />
-			<property name="jpaVendorAdapter">
-				<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
-			</property>
-			<property name="jpaProperties">
-				<props>
-					<prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>
-					<prop key="hibernate.hbm2ddl.auto">update</prop>
-				</props>
-			</property>
-		</bean>
-	</beans>
-
-	<beans profile="prod">
-
-		<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-			<property name="jdbcUrl" value="${database.url}" />
-			<property name="driverClass" value="${database.driverClass}" />
-			<property name="user" value="${database.user}" />
-			<property name="password" value="${database.password}" />
-			<property name="acquireIncrement" value="${database.pool.acquireIncrement}" />
-			<property name="maxIdleTime" value="${database.pool.maxIdleTime}" /> 
-			<property name="minPoolSize" value="${database.pool.minPoolSize}" /> 
-			<property name="maxPoolSize" value="${database.pool.maxPoolSize}" /> 
-		 	<property name="idleConnectionTestPeriod" value="${database.pool.idleConnectionTestPeriod}" /> 
-			<property name="unreturnedConnectionTimeout" value="${database.pool.unreturnedConnectionTimeout}" /> 
-			<property name="debugUnreturnedConnectionStackTraces" value="${database.pool.debugUnreturnedConnectionStackTraces}" /> 
-			<property name="maxIdleTimeExcessConnections" value="${database.pool.maxIdleTimeExcessConnections}" />
-		</bean>
-
-		<bean id="entityManagerFactory"
-			class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-			<property name="dataSource" ref="dataSource" />
-			<property name="jpaVendorAdapter">
-				<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
-			</property>
-			<property name="jpaProperties">
-				<props>
-					<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
-					<prop key="hibernate.show_sql">false</prop>
-					<!-- change this to 'verify' before running as a production app -->
-					<prop key="hibernate.hbm2ddl.auto">update</prop>
-				</props>
-			</property>
-		</bean>
-	</beans>
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="jdbcUrl" value="${database.url}" />
+		<property name="driverClass" value="${database.driverClass}" />
+		<property name="user" value="${database.user}" />
+		<property name="password" value="${database.password}" />
+		<property name="acquireIncrement" value="${database.pool.acquireIncrement}" />
+		<property name="maxIdleTime" value="${database.pool.maxIdleTime}" /> 
+		<property name="minPoolSize" value="${database.pool.minPoolSize}" /> 
+		<property name="maxPoolSize" value="${database.pool.maxPoolSize}" /> 
+	 	<property name="idleConnectionTestPeriod" value="${database.pool.idleConnectionTestPeriod}" /> 
+		<property name="unreturnedConnectionTimeout" value="${database.pool.unreturnedConnectionTimeout}" /> 
+		<property name="debugUnreturnedConnectionStackTraces" value="${database.pool.debugUnreturnedConnectionStackTraces}" /> 
+		<property name="maxIdleTimeExcessConnections" value="${database.pool.maxIdleTimeExcessConnections}" />
+	</bean>
 	
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+		</property>
+		<property name="jpaProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.ejb.naming_strategy">cz.kolomet.util.db.StandardNamingStrategy</prop>
+			</props>
+		</property>
+	</bean>
+
 </beans>

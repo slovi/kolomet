@@ -14,6 +14,9 @@
   <definition name="store/public/uncaughtException" extends="store/template_wide">
     <put-attribute name="body" value="/WEB-INF/views/public/exception/uncaughtException.jspx" />
   </definition>
+  <definition name="store/public/accessDenied" extends="store/template_wide">
+    <put-attribute name="body" value="/WEB-INF/views/public/exception/accessDenied.jspx" />
+  </definition>
   
   <definition name="tour/public/dataAccessFailure" extends="tour/template_wide">
     <put-attribute name="body" value="/WEB-INF/views/public/exception/dataAccessFailure.jspx" />
@@ -23,6 +26,9 @@
   </definition>
   <definition name="tour/public/uncaughtException" extends="tour/template_wide">
     <put-attribute name="body" value="/WEB-INF/views/public/exception/uncaughtException.jspx" />
+  </definition>
+  <definition name="tour/public/accessDenied" extends="tour/template_wide">
+    <put-attribute name="body" value="/WEB-INF/views/public/exception/accessDenied.jspx" />
   </definition>
 
 </tiles-definitions>

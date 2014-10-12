@@ -3,6 +3,7 @@ package cz.kolomet.service.impl;
 import java.awt.Dimension;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -12,6 +13,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import cz.kolomet.domain.ApplicationUser;
 import cz.kolomet.domain.ApplicationUserPhoto;
@@ -29,6 +32,8 @@ import cz.kolomet.service.exception.ExistingUserException;
 import cz.kolomet.service.exception.TokenNotFoundException;
 import cz.kolomet.service.exception.UserNotFoundException;
 
+@Service
+@Transactional
 public class ApplicationUserServiceImpl extends AbstractPhotoUrlService implements ApplicationUserService {
 	
 	@Autowired
@@ -79,6 +84,10 @@ public class ApplicationUserServiceImpl extends AbstractPhotoUrlService implemen
 	@Value("${applicationuserregistration.registration.link}")
 	private String registrationLinkBase;
 	
+	public ApplicationUserPhoto findApplicationUserPhoto(Long id) {
+		return applicationUserPhotoRepository.findOne(id);
+	}
+	
 	@Override
     public void deletePhoto(Photo photo) {
 		applicationUserPhotoRepository.delete((ApplicationUserPhoto) photo);
@@ -91,7 +100,7 @@ public class ApplicationUserServiceImpl extends AbstractPhotoUrlService implemen
 	}
 
 	@Override
-	protected ResizeInfo[] getResizeInfos() {
+	public ResizeInfo[] getResizeInfos() {
 		ResizeInfo[] resizeInfos = new ResizeInfo[1];
 		resizeInfos[0] = new ResizeInfo(new Dimension(thumbnailWidth, thumbnailHeight), PhotoUrl.THUMBNAIL_IMG_SUFFIX, false);
     	return resizeInfos;
@@ -220,4 +229,26 @@ public class ApplicationUserServiceImpl extends AbstractPhotoUrlService implemen
 		}
 	}
 	
+
+	public long countAllApplicationUsers() {
+        return applicationUserRepository.count();
+    }
+
+	@PreAuthorize("principal.isCapableToDeleteApplicationUser(#applicationUser)")
+	public void deleteApplicationUser(ApplicationUser applicationUser) {
+        applicationUserRepository.delete(applicationUser);
+    }
+
+	@PreAuthorize("principal.isApplicationUserOwner(#id)")
+	public ApplicationUser findApplicationUser(Long id) {
+        return applicationUserRepository.findOne(id);
+    }
+
+	public List<ApplicationUser> findAllApplicationUsers() {
+        return applicationUserRepository.findAll();
+    }
+
+	public List<ApplicationUser> findApplicationUserEntries(int firstResult, int maxResults) {
+        return applicationUserRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / maxResults, maxResults)).getContent();
+    }
 }

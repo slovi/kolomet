@@ -1,19 +1,23 @@
 package cz.kolomet.domain.codelist;
-import org.springframework.roo.addon.equals.RooEquals;
-import org.springframework.roo.addon.javabean.RooJavaBean;
-import org.springframework.roo.addon.jpa.entity.RooJpaEntity;
-import org.springframework.roo.addon.serializable.RooSerializable;
-import org.springframework.roo.addon.tostring.RooToString;
+import java.io.Serializable;
+
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
 import cz.kolomet.domain.PlaceTypeColor;
 
-@RooJavaBean
-@RooToString
-@RooJpaEntity(inheritanceType = "TABLE_PER_CLASS")
-@RooEquals
-@RooSerializable
-public class PlaceType extends Codelist {
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)public class PlaceType extends Codelist implements Serializable {
 	
 	private PlaceTypeColor placeTypeColor;
-	
+
+	public PlaceTypeColor getPlaceTypeColor() {
+        return this.placeTypeColor;
+    }
+
+	public void setPlaceTypeColor(PlaceTypeColor placeTypeColor) {
+        this.placeTypeColor = placeTypeColor;
+    }
+
 }

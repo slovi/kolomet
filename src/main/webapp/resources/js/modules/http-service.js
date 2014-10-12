@@ -21,7 +21,11 @@ define(['jquery', 'loader'], function($, loader) {
 		        error: function(xhr, status, errorThrown) {
 		        	
 		        	loader.hide();
-		        	alert('Error: ' + xhr.responseJSON.ajaxError.errorDescription);
+		        	if (data.jqXHR.responseJSON) {
+		        		alert('Error: ' + xhr.responseJSON.ajaxError.errorDescription);
+		        	} else {
+		        		alert('Error: ' + errorThrown);
+		        	}
 		        },
 		        complete: function(xhr) {
 		        	
@@ -32,6 +36,10 @@ define(['jquery', 'loader'], function($, loader) {
 		},
 		
 		sendAndRerender: function(url, method, paramsData, success) {
+			
+			if (!paramsData.paramsArray) {
+				paramsData.paramsArray = [];
+			}
 			
 			paramsData.paramsArray.push({name: 'ajaxSource', value: paramsData.ajaxSource});
 			paramsData.paramsArray.push({name: 'fragments', value: paramsData.fragments});
@@ -54,23 +62,23 @@ define(['jquery', 'loader'], function($, loader) {
 		        	if (paramsData.fragments) {
 						var fragments = paramsData.fragments.split(',');
 						for (var i = 0; i < fragments.length; i++) {
-							var fragment = $('#' + fragments[i].trim()); 
+							var fragment = $('#' + $.trim(fragments[i])); 
 							fragment.empty();
 							fragment.html(nodes[i]);
 							offset++;
 						}
 		        	}
 					
+		        	var modelFragmentsData = [];
 		        	if (paramsData.modelFragments) {
 						var modelFragments = paramsData.modelFragments.split(',');
-						var modelFragmentsData = [];
 						for (var i = 0; i < modelFragments.length; i++) {
 							modelFragmentsData[modelFragments[i]] = $(nodes[i + offset]).text();
 						}
-						
-						success(modelFragmentsData);
 		        	}
 					
+		        	success(modelFragmentsData);
+		        	
 					loader.hide();
 		        },
 		        error: function(xhr, status, errorThrown) {

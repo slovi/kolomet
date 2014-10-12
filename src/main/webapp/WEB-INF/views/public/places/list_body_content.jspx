@@ -11,9 +11,18 @@
 	    <spring:url value="/" var="contextPath" />
 	    <spring:url value="/tour/public/places" var="placeUrl" />
 	    <spring:url value="/resources/js/gmap.js" var="gmapUrl" />
+	    
         <span id="map_config" class="config" style="display: none;">
         	<![CDATA[
-    			{ "contextPath": "${contextPath}", "placesJson": ${placesJson}, "placeUrl": "${placeUrl}", "highlight": "${param.highlight}" }
+    			{ 
+    				"contextPath": "${contextPath}", 
+    				"placesJson": ${placesJson}, 
+    				"placeUrl": "${placeUrl}", 
+    				"highlight": "${param.highlight}",
+    				"initWest": "${param.gps_west}",
+    				"initNorth": "${param.gps_north}",
+    				"initZoom": "${param.gps_region_zoom}" 
+    			}
     		]]>
         </span>
     </div>

@@ -34,7 +34,7 @@
 	                        <field:input field="name" id="c_cz_kolomet_domain_Place_name" required="true" width="${input_width}" z="user-managed"/>
 	                        <field:input field="gpsLocation.north" id="c_cz_kolomet_domain_Place_gpsLocation_north" required="true" validationRegex="(([1-9][0-9]{0,2}(,[0-9]{1,20})?)|(1000(,[0-9]{1,20})?))" width="${input_width}" z="user-managed"/>
 	                        <field:input field="gpsLocation.west" id="c_cz_kolomet_domain_Place_gpsLocation_west" required="true" validationRegex="(([1-9][0-9]{0,2}(,[0-9]{1,20})?)|(1000(,[0-9]{1,20})?))" width="${input_width}" z="aaMqdkjjPg0UQLxvnIUsUnHctTY="/>
-	                        <field:select emptyLabel="..." field="region" id="c_cz_kolomet_domain_Place_region" required="true" itemLabel="codeDescription" itemValue="googleAlias" items="${regions}" path="/admin/regions" width="${input_width}" z="user-managed"/>
+	                        <field:input field="region" width="${input_width}" id="c_cz_kolomet_domain_Place_region" readonly="true" />
 	                        <field:input field="bikeRoadNr" id="c_cz_kolomet_domain_Place_bikeRoadNr" required="false" validationMessageCode="field_invalid_integer" width="${input_width}" z="user-managed"/>
 	                        <field:input field="address.street" id="c_cz_kolomet_domain_Place_address_street" render="false" width="${input_width}" z="9mNJF+/QmefeQOfR2mhIlHMeOSk="/>
 	                        <field:input field="address.houseNr" id="c_cz_kolomet_domain_Place_address_houseNr" render="false" validationRegex="([1-9][0-9]{0,2}|1000)" width="${input_width}" z="9mNJF+/QmefeQOfR2mhIlHMeOSk="/>

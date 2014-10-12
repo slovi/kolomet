@@ -1,7 +1,28 @@
 package cz.kolomet.service;
 
-import org.springframework.roo.addon.layers.service.RooService;
+import cz.kolomet.domain.codelist.CountryState;
+import java.util.List;
 
-@RooService(domainTypes = { cz.kolomet.domain.codelist.CountryState.class })
 public interface CountryStateService {
+
+	public abstract long countAllCountryStates();
+
+
+	public abstract void deleteCountryState(CountryState countryState);
+
+
+	public abstract CountryState findCountryState(Long id);
+
+
+	public abstract List<CountryState> findAllCountryStates();
+
+
+	public abstract List<CountryState> findCountryStateEntries(int firstResult, int maxResults);
+
+
+	public abstract void saveCountryState(CountryState countryState);
+
+
+	public abstract CountryState updateCountryState(CountryState countryState);
+
 }

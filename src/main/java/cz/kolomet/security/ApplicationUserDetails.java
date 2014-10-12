@@ -15,6 +15,7 @@ import cz.kolomet.domain.ApplicationPermission;
 import cz.kolomet.domain.ApplicationRole;
 import cz.kolomet.domain.ApplicationUser;
 import cz.kolomet.domain.Place;
+import cz.kolomet.domain.PlaceComment;
 import cz.kolomet.domain.Product;
 import cz.kolomet.domain.Seller;
 import cz.kolomet.dto.ApplicationUserPasswordDto;
@@ -28,8 +29,12 @@ public class ApplicationUserDetails implements UserDetails {
 	
 	public ApplicationUserDetails(ApplicationUser user) {
 		this.user = user;
-		this.sellerId = user.getSeller() != null ? user.getSeller().getId() : null;
+		this.sellerId = (user instanceof Seller) ? ((Seller) user).getId() : null;
 		this.authorities = resolveAuthorities();
+	}
+	
+	public static ApplicationUser getActualApplicationUser() {
+		return getActualApplicationUserDetails().getUser();
 	}
 	
 	public static ApplicationUserDetails getActualApplicationUserDetails() {
@@ -63,8 +68,12 @@ public class ApplicationUserDetails implements UserDetails {
 		return hasAuthority("per_applicationusers_own");
 	}
 	
+	public boolean isApplicationUserOwner(Long id) {
+		return isApplicationUsersAll() || (isApplicationUsersOwn() && id.equals(getUserId()));
+	}
+	
 	public boolean isApplicationUserOwner(ApplicationUser applicationUser) {
-		return isApplicationUsersAll() || (isApplicationUsersOwn() && applicationUser.getId().equals(getUserId()));
+		return isApplicationUserOwner(applicationUser.getId());
 	}
 	
 	public boolean isApplicationUserOwner(String username) {
@@ -77,6 +86,10 @@ public class ApplicationUserDetails implements UserDetails {
 	
 	public boolean isCapableToUpdateApplicationUser(ApplicationUser applicationUser) {
 		return isApplicationUserOwner(applicationUser);
+	}
+	
+	public boolean isCapableToDeleteApplicationUser(ApplicationUser applicationUser) {
+		return isApplicationUsersAll();
 	}
 	
 	public boolean isCapableToUpdatePassword(ApplicationUserPasswordDto applicationUserPassword) {
@@ -152,7 +165,7 @@ public class ApplicationUserDetails implements UserDetails {
 	}
 	
 	public boolean isCapableToSavePlace(Place place) {
-		return isPlaceOwner(place);
+		return isPlacesAll() || isPlacesOwn();
 	}
 	
 	public boolean isCapableToUpdatePlace(Place place) {
@@ -164,6 +177,22 @@ public class ApplicationUserDetails implements UserDetails {
 	}
 	
 	public boolean isCapableToDisplayPlace(Place place) {
+		return true;
+	}
+	
+	public boolean isCapableToSavePlaceComment(PlaceComment placeComment) {
+		return true;
+	}
+	
+	public boolean isCapableToUpdatePlaceComment(PlaceComment placeComment) {
+		return isPlacesAll();
+	}
+	
+	public boolean isCapableToDeletePlaceComment(PlaceComment placeComment) {
+		return isPlacesAll();
+	}
+	
+	public boolean isCapableToDisplayPlaceComment(PlaceComment placeComment) {
 		return true;
 	}
 	

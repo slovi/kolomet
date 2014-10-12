@@ -1,11 +1,13 @@
 package cz.kolomet.web.pub;
 
+import java.io.UnsupportedEncodingException;
 import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,15 +15,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.util.UriUtils;
+import org.springframework.web.util.WebUtils;
 
 import com.octo.captcha.service.image.ImageCaptchaService;
 
 import cz.kolomet.domain.RegistrationRequest;
+import cz.kolomet.service.ApplicationUserService;
+import cz.kolomet.service.RegistrationRequestService;
 import cz.kolomet.service.exception.DefaultObjectDataReadException;
 
 @RequestMapping("/public/registrationrequests")
 @Controller("publicRegistrationRequestController")
-@RooWebScaffold(path = "public/registrationrequests", formBackingObject = RegistrationRequest.class, update = false, delete = false)
 public class RegistrationRequestController extends AbstractPublicController {
 	
 	@Autowired
@@ -67,4 +72,32 @@ public class RegistrationRequestController extends AbstractPublicController {
         throw new EntityNotFoundException();
     }
 	
+
+	@Autowired
+    RegistrationRequestService registrationRequestService;
+
+	@Autowired
+    ApplicationUserService applicationUserService;
+
+	void addDateTimeFormatPatterns(Model uiModel) {
+        uiModel.addAttribute("registrationRequest_created_date_format", DateTimeFormat.patternForStyle("MM", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("registrationRequest_lastmodified_date_format", DateTimeFormat.patternForStyle("MM", LocaleContextHolder.getLocale()));
+    }
+
+	void populateEditForm(Model uiModel, RegistrationRequest registrationRequest) {
+        uiModel.addAttribute("registrationRequest", registrationRequest);
+        addDateTimeFormatPatterns(uiModel);
+        uiModel.addAttribute("applicationusers", applicationUserService.findAllApplicationUsers());
+    }
+
+	String encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {
+        String enc = httpServletRequest.getCharacterEncoding();
+        if (enc == null) {
+            enc = WebUtils.DEFAULT_CHARACTER_ENCODING;
+        }
+        try {
+            pathSegment = UriUtils.encodePathSegment(pathSegment, enc);
+        } catch (UnsupportedEncodingException uee) {}
+        return pathSegment;
+    }
 }

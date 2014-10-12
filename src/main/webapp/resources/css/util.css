@@ -14,9 +14,21 @@
 	float: left;
 }
 
+.pull_right {
+	float: right;
+}
+
+.text_right {
+	text-align: right;
+}
+
 .left_justify {
 	margin-left: 40px;
 	margin-right: 20px;
+}
+
+div.info_label {
+	margin: 10px 5px;
 }
 
 a.undecorated {
@@ -27,4 +39,8 @@ a.undecorated {
 a.undecorated:hover {
 	text-decoration: none;
 	color: inherit;
+}
+
+a img {
+	border: none;
 }

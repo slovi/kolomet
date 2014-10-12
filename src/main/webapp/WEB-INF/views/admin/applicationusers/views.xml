@@ -8,9 +8,22 @@
         <put-attribute name="body" value="/WEB-INF/views/admin/applicationusers/show.jspx"/>
     </definition>
 	<definition extends="store/template_admin" name="store/admin/applicationusers/create">
+		<put-attribute name="mainJsFileName" value="main_admin_applicationusers_create" cascade="true" />
         <put-attribute name="body" value="/WEB-INF/views/admin/applicationusers/create.jspx"/>
     </definition>
 	<definition extends="store/template_admin" name="store/admin/applicationusers/update">
+		<put-attribute name="mainJsFileName" value="main_admin_applicationusers_create" cascade="true" />
         <put-attribute name="body" value="/WEB-INF/views/admin/applicationusers/update.jspx"/>
+    </definition>
+    <definition extends="tour/template_admin" name="tour/admin/applicationusers/create">
+		<put-attribute name="mainJsFileName" value="main_admin_applicationusers_create" cascade="true" />
+        <put-attribute name="body" value="/WEB-INF/views/admin/applicationusers/create.jspx"/>
+    </definition>
+	<definition extends="tour/template_admin" name="tour/admin/applicationusers/update">
+		<put-attribute name="mainJsFileName" value="main_admin_applicationusers_create" cascade="true" />
+        <put-attribute name="body" value="/WEB-INF/views/admin/applicationusers/update.jspx"/>
+    </definition>
+    <definition extends="tour/template_admin" name="tour/admin/applicationusers/show">
+        <put-attribute name="body" value="/WEB-INF/views/admin/applicationusers/show.jspx"/>
     </definition>
 </tiles-definitions>

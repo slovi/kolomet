@@ -1,47 +1,27 @@
 package cz.kolomet.domain;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.StringUtils;
-import org.hibernate.annotations.Filter;
-import org.hibernate.annotations.FilterDef;
-import org.hibernate.annotations.FilterDefs;
-import org.hibernate.annotations.Filters;
-import org.hibernate.annotations.ParamDef;
-import org.springframework.roo.addon.equals.RooEquals;
-import org.springframework.roo.addon.javabean.RooJavaBean;
-import org.springframework.roo.addon.jpa.entity.RooJpaEntity;
-import org.springframework.roo.addon.serializable.RooSerializable;
-import org.springframework.roo.addon.tostring.RooToString;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.hibernate.annotations.BatchSize;
 
 import cz.kolomet.domain.codelist.CountryState;
 import cz.kolomet.domain.codelist.Region;
 import cz.kolomet.domain.codelist.SellerStatus;
 
-@RooJavaBean
-@RooToString(excludeFields = {"createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate", "products", "sellerPhotoUrls"})
-@RooJpaEntity
-@RooEquals(excludeFields = {"createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate", "products", "sellerPhotoUrls"})
-@RooSerializable
-@FilterDefs({
-	@FilterDef(name = "sellerEnabledFilter", parameters = @ParamDef(type = "boolean", name = "enabled")),
-	@FilterDef(name = "sellerOwnFilter", parameters = @ParamDef(type = "long", name= "sellerId"))
-})
-@Filters({
-	@Filter(name = "sellerEnabledFilter", condition = "enabled = :enabled"),
-	@Filter(name = "sellerOwnFilter", condition = "id = :sellerId")
-})
-public class Seller extends DomainEntity implements PhotoContainer {
+@Entity
+@BatchSize(size = 9)
+public class Seller extends ApplicationUser implements PhotoContainer, Serializable {
 	
 	@NotNull
 	@Size(max = 20)
@@ -55,8 +35,6 @@ public class Seller extends DomainEntity implements PhotoContainer {
     
     private String sellerTitle;
     
-    private Boolean enabled = true;
-    
     // zodpovedna osoba
     @Size(max = 20)
     private String personSalutation;
@@ -69,43 +47,12 @@ public class Seller extends DomainEntity implements PhotoContainer {
     
     @Size(max = 20)
     private String personSurname;
-    
-    // provozovna
-    @NotNull
-    @ManyToOne
-    private CountryState businessCountry;
-    
-    @Size(max = 30)
-    private String businessCity;
-    
-    @Size(max = 50)
-    private String businessStreet;
-    
-    @Size(max = 30)
-    private String businessPostCode;
-    
-    @Size(max = 20)
-    private String businessSalutation;
-    
-    @Size(max = 20)
-    private String businessDegree;
-    
-    @Size(max = 30)
-    private String businessName;
-    
-    @Size(max = 50)
-    private String businessEmail;
-    
-    @Size(max = 30)
-    private String businessPhoneNumber;
 
     // ostatni
-    
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private SellerStatus sellerStatus;
     
-    @NotNull
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Region region;
     
     @Size(max = 255)
@@ -118,44 +65,20 @@ public class Seller extends DomainEntity implements PhotoContainer {
     @Size(max = 255)
     private String mapUrl;
     
-    // korespondencni adresa
-    @NotNull
-    @ManyToOne
-    private CountryState addressCountry;
-    
-    @Size(max = 30)
-    private String addressCity;
-    
-    @Size(max = 50)
-    private String addressStreet;
-    
-    @Size(max = 5)
-    private String addressPostCode;
-    
-    @Size(max = 20)
-    private String addressSalutation;
-    
-    @Size(max = 20)
-    private String addressDegree;
-    
-    @Size(max = 50)
-    private String addressName;
-    
-    @Size(max = 50)
-    private String addressEmail;
-    
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "seller", cascade = CascadeType.ALL)
     private List<SellerPhotoUrl> sellerPhotoUrls = new ArrayList<SellerPhotoUrl>();
     
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "seller", cascade = CascadeType.ALL)
     private List<Product> products = new ArrayList<Product>();
     
-    @Transient
-    private List<CommonsMultipartFile> contents;
-    
     @Override
     public String getPhotoType() {
     	return SellerPhotoUrl.PHOTO_URL_PREFIX;
+    }
+    
+    @Override
+    public String getNickname() {
+    	return getSellerName();
     }
     
     public String getPersonString() {
@@ -181,48 +104,15 @@ public class Seller extends DomainEntity implements PhotoContainer {
     }
     
     public String getAddressString() {
-    	StringBuilder builder = new StringBuilder();
-    	if (StringUtils.isNotEmpty(addressStreet)) {
-    		builder.append(addressStreet);
-    		builder.append(", ");
-    	}
-    	if (StringUtils.isNotEmpty(addressCity)) {
-    		builder.append(addressCity);
-    		builder.append(", ");
-    	}
-    	if (StringUtils.isNotEmpty(addressPostCode)) {
-    		builder.append(addressPostCode);
-    	}
-    	return builder.toString();
+    	return getCorrespondenceAddress().getAddressString();
     }
     
     public String getBusinessAddressString() {
-    	StringBuilder builder = new StringBuilder();
-    	if (StringUtils.isNotEmpty(businessStreet)) {
-    		builder.append(businessStreet);
-    		builder.append(", ");
-    	}
-    	if (StringUtils.isNotEmpty(businessCity)) {
-    		builder.append(businessCity);
-    		builder.append(", ");
-    	}
-    	if (StringUtils.isNotEmpty(businessPostCode)) {
-    		builder.append(businessPostCode);
-    	}
-    	return builder.toString();
+    	return getBusinessAddress().getAddressString();
     }
-
     
     public String getContactString() {
-    	StringBuilder builder = new StringBuilder();
-    	if (StringUtils.isNotEmpty(businessEmail)) {
-    		builder.append(businessEmail);
-    		builder.append(", ");
-    	}
-    	if (StringUtils.isNotEmpty(businessPhoneNumber)) {
-    		builder.append(businessPhoneNumber);
-    	}
-    	return builder.toString();
+    	return getBusinessAddress().getContactString();
     }
     
     public void normalizeWebUrl() {
@@ -245,5 +135,277 @@ public class Seller extends DomainEntity implements PhotoContainer {
     	this.getSellerPhotoUrls().add(sellerPhotoUrl);
 		return sellerPhotoUrl;
 	}
+
+    public ApplicationUserAddress getCorrespondenceAddress() {
+    	return getAddressByTypeNullSafe(AddressType.CORRESPONDENCE);
+    }
     
+    public ApplicationUserAddress getBusinessAddress() {
+    	return getAddressByTypeNullSafe(AddressType.BUSINNES_PLACE);
+    }
+	
+	public String getSellerName() {
+		return sellerName;
+	}
+
+	public void setSellerName(String sellerName) {
+		this.sellerName = sellerName;
+	}
+
+	public String getSellerDescription() {
+		return sellerDescription;
+	}
+
+	public void setSellerDescription(String sellerDescription) {
+		this.sellerDescription = sellerDescription;
+	}
+
+	public String getSellerTitle() {
+		return sellerTitle;
+	}
+
+	public void setSellerTitle(String sellerTitle) {
+		this.sellerTitle = sellerTitle;
+	}
+	
+	public String getPersonSalutation() {
+		return personSalutation;
+	}
+
+	public void setPersonSalutation(String personSalutation) {
+		this.personSalutation = personSalutation;
+	}
+
+	public String getPersonDegree() {
+		return personDegree;
+	}
+
+	public void setPersonDegree(String personDegree) {
+		this.personDegree = personDegree;
+	}
+
+	public String getPersonName() {
+		return personName;
+	}
+
+	public void setPersonName(String personName) {
+		this.personName = personName;
+	}
+
+	public String getPersonSurname() {
+		return personSurname;
+	}
+
+	public void setPersonSurname(String personSurname) {
+		this.personSurname = personSurname;
+	}
+
+	public Long getBusinessAddressId() {
+		return getBusinessAddress().getId();
+	}
+	
+	public void setBusinessAddressId(Long id) {
+		getBusinessAddress().setId(id);
+	}
+	
+	public CountryState getBusinessCountry() {
+		return getBusinessAddress().getCountryState();
+	}
+
+	public void setBusinessCountry(CountryState businessCountry) {
+		getBusinessAddress().setCountryState(businessCountry);
+	}
+
+	public String getBusinessCity() {
+		return getBusinessAddress().getCity();
+	}
+
+	public void setBusinessCity(String businessCity) {
+		getBusinessAddress().setCity(businessCity);
+	}
+
+	public String getBusinessStreet() {
+		return getBusinessAddress().getStreet();
+	}
+
+	public void setBusinessStreet(String businessStreet) {
+		getBusinessAddress().setStreet(businessStreet);
+	}
+
+	public String getBusinessPostCode() {
+		return getBusinessAddress().getPostCode();
+	}
+
+	public void setBusinessPostCode(String businessPostCode) {
+		getBusinessAddress().setPostCode(businessPostCode);
+	}
+
+	public String getBusinessSalutation() {
+		return getBusinessAddress().getSalutation();
+	}
+
+	public void setBusinessSalutation(String businessSalutation) {
+		getBusinessAddress().setSalutation(businessSalutation);
+	}
+
+	public String getBusinessDegree() {
+		return getBusinessAddress().getDegree();
+	}
+
+	public void setBusinessDegree(String businessDegree) {
+		getBusinessAddress().setDegree(businessDegree);
+	}
+
+	public String getBusinessEmail() {
+		return getBusinessAddress().getEmail();
+	}
+
+	public void setBusinessEmail(String businessEmail) {
+		getBusinessAddress().setEmail(businessEmail);
+	}
+
+	public String getBusinessPhoneNumber() {
+		return getBusinessAddress().getPhoneNumber();
+	}
+
+	public void setBusinessPhoneNumber(String businessPhoneNumber) {
+		getBusinessAddress().setPhoneNumber(businessPhoneNumber);
+	}
+	
+	public String getBusinessName() {
+		return getBusinessAddress().getName();
+	}
+	
+	public void setBusinessName(String businessName) {
+		getBusinessAddress().setName(businessName);
+	}
+
+	public SellerStatus getSellerStatus() {
+		return sellerStatus;
+	}
+
+	public void setSellerStatus(SellerStatus sellerStatus) {
+		this.sellerStatus = sellerStatus;
+	}
+
+	public Region getRegion() {
+		return region;
+	}
+
+	public void setRegion(Region region) {
+		this.region = region;
+	}
+
+	public String getWeb() {
+		return web;
+	}
+
+	public void setWeb(String web) {
+		this.web = web;
+	}
+
+	public String getSaleType() {
+		return saleType;
+	}
+
+	public void setSaleType(String saleType) {
+		this.saleType = saleType;
+	}
+
+	public String getMapUrl() {
+		return mapUrl;
+	}
+
+	public void setMapUrl(String mapUrl) {
+		this.mapUrl = mapUrl;
+	}
+	
+	public Long getAddressId() {
+		return getCorrespondenceAddress().getId();
+	}
+	
+	public void setAddressId(Long id) {
+		getCorrespondenceAddress().setId(id);
+	}
+
+	public CountryState getAddressCountry() {
+		return getCorrespondenceAddress().getCountryState();
+	}
+
+	public void setAddressCountry(CountryState addressCountry) {
+		getCorrespondenceAddress().setCountryState(addressCountry);
+	}
+
+	public String getAddressCity() {
+		return getCorrespondenceAddress().getCity();
+	}
+
+	public void setAddressCity(String addressCity) {
+		getCorrespondenceAddress().setCity(addressCity);
+	}
+
+	public String getAddressStreet() {
+		return getCorrespondenceAddress().getStreet();
+	}
+
+	public void setAddressStreet(String addressStreet) {
+		getCorrespondenceAddress().setStreet(addressStreet);
+	}
+
+	public String getAddressPostCode() {
+		return getCorrespondenceAddress().getPostCode();
+	}
+
+	public void setAddressPostCode(String addressPostCode) {
+		getCorrespondenceAddress().setPostCode(addressPostCode);
+	}
+
+	public String getAddressSalutation() {
+		return getCorrespondenceAddress().getSalutation();
+	}
+
+	public void setAddressSalutation(String addressSalutation) {
+		getCorrespondenceAddress().setSalutation(addressSalutation);
+	}
+
+	public String getAddressDegree() {
+		return getCorrespondenceAddress().getDegree();
+	}
+
+	public void setAddressDegree(String addressDegree) {
+		getCorrespondenceAddress().setDegree(addressDegree);
+	}
+
+	public String getAddressEmail() {
+		return getCorrespondenceAddress().getEmail();
+	}
+
+	public void setAddressEmail(String addressEmail) {
+		getCorrespondenceAddress().setEmail(addressEmail);
+	}
+	
+	public String getAddressName() {
+		return getCorrespondenceAddress().getName();
+	}
+	
+	public void setAddressName(String addressName) {
+		getCorrespondenceAddress().setName(addressName);
+	}
+
+	public List<SellerPhotoUrl> getSellerPhotoUrls() {
+		return sellerPhotoUrls;
+	}
+
+	public void setSellerPhotoUrls(List<SellerPhotoUrl> sellerPhotoUrls) {
+		this.sellerPhotoUrls = sellerPhotoUrls;
+	}
+
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
+	}
+
 }

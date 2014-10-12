@@ -1,5 +1,6 @@
 package cz.kolomet.web.admin;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,7 +27,7 @@ public class PhotoUrlController extends AbstractAdminController {
 	
     @ResponseBody
     @RequestMapping(method = {RequestMethod.POST, RequestMethod.PUT}, value = "/file")
-    public AjaxResponse savePhoto(@RequestParam("content") MultipartFile content, HttpServletRequest request) throws Exception {
+    public AjaxResponse savePhoto(@RequestParam("content") MultipartFile content, HttpServletRequest request, HttpServletResponse response) throws Exception {
     	try {
     		saveFile(photoUrlService, content, request.getSession().getId());
     		return AjaxResponse.emptySuccessul();

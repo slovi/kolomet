@@ -39,6 +39,10 @@ input.image {
 	vertical-align: middle;
 }
 
+form#place, .dj_webkit .dijitTextBoxDisabled input:disabled {
+	color: black;
+}
+
 submit {
 	height:25px;
 }

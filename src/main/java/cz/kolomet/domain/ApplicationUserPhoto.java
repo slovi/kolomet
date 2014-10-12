@@ -4,19 +4,16 @@ import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public class ApplicationUserPhoto extends BasePhoto implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	public static final String PHOTO_URL_PREFIX = "application_user";
+	public static final String PHOTO_URL_PREFIX = "applicationuser";
 
 	@NotNull
     @ManyToOne(fetch = FetchType.LAZY)

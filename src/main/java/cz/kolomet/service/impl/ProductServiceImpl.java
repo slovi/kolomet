@@ -3,17 +3,23 @@ import java.io.File;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import cz.kolomet.domain.Product;
 import cz.kolomet.domain.ProductState;
+import cz.kolomet.repository.ProductRepository;
 import cz.kolomet.service.ProductService;
 
+@Service
+@Transactional
 public class ProductServiceImpl implements ProductService {
 	
 	@Value("${img.rootdir}")
@@ -89,4 +95,19 @@ public class ProductServiceImpl implements ProductService {
 		productRepository.delete(product);
 	}
 
+
+	@Autowired
+    ProductRepository productRepository;
+
+	public long countAllProducts() {
+        return productRepository.count();
+    }
+
+	public List<Product> findAllProducts() {
+        return productRepository.findAll();
+    }
+
+	public List<Product> findProductEntries(int firstResult, int maxResults) {
+        return productRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / maxResults, maxResults)).getContent();
+    }
 }

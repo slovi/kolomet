@@ -17,7 +17,17 @@
         <field:datetime dateTimePattern="${newsItem_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_NewsItem_lastModified" render="false" z="user-managed"/>
         <field:simple field="newsItemPhotoUrls" id="c_cz_kolomet_domain_NewsItem_newsItemPhotoUrls" messageCode="entity_reference_not_managed" messageCodeAttribute="News Item Photo Url" render="false" z="user-managed"/>
         <util:panel id="fc_cz_kolomet_domain_Newsitem_newsItemPhotoUrls" title="NewsItemPhotoUrls">
-            <field:files id="files"/>
+        	<spring:url value="/resources/images/products/no-photo-detail.jpg" var="fileNotFoundUrl"/>
+            <spring:url value="/store/admin/newsitemphotourls/file" var="uploadFileUrl"/>
+            <spring:url value="/file/newsitem/${newsItem.id}" var="fileBaseUrl"/>
+            <spring:url value="${subContext}/admin/newsitemphotourls" var="fileBaseDeleteUrl"/>
+            <field:input-file 
+            	fileBaseDeleteUrl="${fileBaseDeleteUrl}" 
+            	fileBaseUrl="${fileBaseUrl}" 
+            	fileNotFoundUrl="${fileNotFoundUrl}"
+            	addedFiles="${addedFiles}" 
+            	id="newsitem_files" 
+            	uploadFileUrl="${uploadFileUrl}"/>
         </util:panel>
         <field:input field="contents" id="c_cz_kolomet_domain_NewsItem_contents" render="false" z="user-managed"/>
     </form:create>

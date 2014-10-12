@@ -1,14 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" 
+	xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" 
+	xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" 
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:security="http://www.springframework.org/security/tags" 
+	xmlns:spring="http://www.springframework.org/tags" version="2.0">
+	
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <form:create id="fc_cz_kolomet_domain_PlaceComment" modelAttribute="placeComment" path="/admin/placecomments" render="${empty dependencies}" z="xa5Nqr8CRrg2Gr6WjPYbVLj4W1A=">
-        <field:select field="createdBy" id="c_cz_kolomet_domain_PlaceComment_createdBy" itemValue="id" items="${applicationusers}" path="/admin/applicationusers" render="false" z="user-managed"/>
-        <field:select field="lastModifiedBy" id="c_cz_kolomet_domain_PlaceComment_lastModifiedBy" itemValue="id" items="${applicationusers}" path="/admin/applicationusers" render="false" z="user-managed"/>
-        <field:datetime dateTimePattern="${placeComment_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_PlaceComment_lastModified" render="false" z="user-managed"/>
-        <field:input field="commented" id="c_cz_kolomet_domain_PlaceComment_commented" render="false" required="true" z="user-managed"/>
-        <field:editor field="text" id="c_cz_kolomet_domain_PlaceComment_text" required="true" z="user-managed"/>
-        <field:datetime dateTimePattern="${placeComment_date_date_format}" field="date" id="c_cz_kolomet_domain_PlaceComment_date" required="true" z="O9jpQ1B6l3+fTBa9V/D2HDczbig="/>
+
+    <form:create id="fc_cz_kolomet_domain_PlaceComment" modelAttribute="placeComment" path="${subContext}/admin/placecomments" render="${empty dependencies}" z="CDmFtUSV1Q5d3g4ssmAJCcAlHzo=">
+
+        <input name="place" type="hidden" value="${place}"/>
+        
+        <security:authorize access="principal.isPlacesAll()" var="admin" />
+        
+        <c:choose>
+        	<c:when test="${admin}">
+				<field:editor id="c_cz_kolomet_domain_PlaceComment_text" field="text" />        	
+        	</c:when>
+        	<c:otherwise>
+		        <field:textarea field="text" id="c_cz_kolomet_domain_PlaceComment_text" style="width: 500px; height: 300px;" required="true" z="user-managed"/>
+        	</c:otherwise>
+        </c:choose>
+
     </form:create>
-    <form:dependency dependencies="${dependencies}" id="d_cz_kolomet_domain_PlaceComment" render="${not empty dependencies}" z="ic6sCUo7lQbuNSvZ0+Ed9MBBUgo="/>
+
 </div>

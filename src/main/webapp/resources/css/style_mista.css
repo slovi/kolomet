@@ -381,6 +381,7 @@ div.category_unit div.cat_prodejce_popis div {
 div.detail_description div.order_button {
 	float: right;
 	margin: 25px 0;
+	overflow: auto;
 }
 
 div.detail_description div.description {
@@ -393,6 +394,13 @@ div.detail_description div.description_short {
 	width: 100%;
 	overflow-y: scroll;
 	height: 145px;
+}
+
+div.detail_author {
+	float: right;
+	width: 300px;
+	text-align: right;
+	padding-right: 15px;
 }
 
 div.filters {
@@ -536,17 +544,22 @@ div.detail_header div.detail_img img.detail_img_content {
 
 div.detail_tag {
 	width: 318px;
+	min-height: 65px;
 	padding: 15px;
 	margin: 0;
 	float: left;
 }
 
-div.detail_description {
-	width: 330px;
-	padding: 15px;
+div.detail_description_wrapper {
 	background: #f9F9F9;
-	min-height: 293px;
 	float: right;
+	width: 330px;
+	overflow: hidden;
+}
+
+div.detail_description {
+	padding: 15px;
+	min-height: 280px;
 	margin: 0;
 	overflow: auto;
 }
@@ -590,8 +603,8 @@ div.detail_specifications {
 	width: 666px;
 }
 
-table.left_column {
-	width: 240px;
+div.left_column {
+	width: 210px;
 	margin: 0 10px 0 0;
 	float: left;
 }
@@ -1055,6 +1068,8 @@ p.price,p.detail_price {
 .errors {
 	font-weight: bold;
 	color: red;
+	display: block;
+	padding-left: 5px;
 }
 
 .cenovka_2:after {

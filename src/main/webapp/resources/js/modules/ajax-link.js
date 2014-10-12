@@ -1,6 +1,7 @@
-define(['jquery', 'http-service'], function($, httpService) {
-	
+define(['jquery', 'http-service', 'jquery.history'], function($, httpService) {
+
 	return {
+		
 		decorateId: function(id, eventType, paramsCallback, successCallback) {				
 			$('a#' + id).bind(eventType, function(event) {
 				doDecoration($(this), event, paramsCallback, successCallback);
@@ -10,7 +11,7 @@ define(['jquery', 'http-service'], function($, httpService) {
 		decorate: function(expr, eventType, paramsCallback, successCallback) {
 			$(expr).each(function(index, element) {
 				$(element).bind(eventType, function(event) {
-					doDecoration(element, event, paramsCallback, successCallback);
+					doDecoration(element, event, paramsCallback, successCallback, history);
 				});
 			});
 		}
@@ -24,6 +25,7 @@ define(['jquery', 'http-service'], function($, httpService) {
 		var params = parseQueryString(href);	
 		
 		var paramsData = paramsCallback(element, params);
+		
 		paramsData.ajaxSource = 'a#' + $(element).attr('id');
 		
 		httpService.sendAndRerender(href, 'GET', paramsData, function(modelFragmentsData) {

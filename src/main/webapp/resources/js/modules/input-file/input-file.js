@@ -1,5 +1,5 @@
-define([ 'jquery' , 'jquery.fileupload', 'jquery.fileupload-image', 'images', 'http-service', 'config-service', 'template-service'], 
-		function($, fileUpload, fileUploadImage, images, httpService, configService, templateService) {
+define([ 'jquery' , 'jquery.fileupload', 'jquery.iframe-transport', 'http-service', 'config-service', 'template-service'], 
+		function($, fileUpload, iframeTransport, httpService, configService, templateService) {
 
 	return {
 		
@@ -71,7 +71,6 @@ define([ 'jquery' , 'jquery.fileupload', 'jquery.fileupload-image', 'images', 'h
 			}
 			
 			$('#' + id).fileupload({
-				
 				enctype: 'multipart/form-data',
 				url: configuration.get('uploadFileUrl'),
 				dataType : 'json',
@@ -110,8 +109,14 @@ define([ 'jquery' , 'jquery.fileupload', 'jquery.fileupload-image', 'images', 'h
 				$.each(data.files, function(index, file) {
 					
 					renderUploadedFile(files, files.getIndex(index), context, 'templateThumbnailError', configuration, true);
-					console.log('Cannot upload file: ' + data.files[0].name + ', problem: ' + data.jqXHR.responseJSON.ajaxError.errorDescription);
-					alert('Cannot upload file: ' + data.files[0].name + ', problem: ' + data.jqXHR.responseJSON.ajaxError.errorDescription);
+					
+					if (data.jqXHR.responseJSON) {
+						console.log('Cannot upload file: ' + data.files[0].name + ', problem: ' + data.jqXHR.responseJSON.ajaxError.errorDescription);
+						alert('Neni mozne nahrat soubor: ' + data.files[0].name + ', problem: ' + data.jqXHR.responseJSON.ajaxError.errorDescription);
+					} else {
+						console.log('Cannot upload file: ' + data.errorThrown);
+						alert('Neni mozne nahrat soubor: ' + data.errorThrown);
+					}
 					
 					if (data.jqXHR.responseJSON.ajaxError.errorCode == 100) { // bad format
 						removeFileItem(files, files.getIndex(index), context, configuration);
@@ -249,6 +254,7 @@ define([ 'jquery' , 'jquery.fileupload', 'jquery.fileupload-image', 'images', 'h
 		return files;
 	}
 	
+	// acutally uploaded files - internal model is model of jquery input-file.js
 	function convertUploadedFileFromInternalModel(uploadedFile, configuration) {
 		
 		var fileUrl = configuration.get('fileTempBaseUrl') + '/' + uploadedFile.name;
@@ -258,7 +264,7 @@ define([ 'jquery' , 'jquery.fileupload', 'jquery.fileupload-image', 'images', 'h
 			name: uploadedFile.name, 
 			contentType: uploadedFile.type,
 			fileThumbUrl: fileUrl + '?format=_thumb',
-			fileDetailUrl: fileUrl + '?format=_detail',
+			fileDetailUrl: fileUrl + '?format=_detail&forceSendError=true',
 			fileOrigUrl: fileUrl + '?format=_orig',
 			fileOverUrl: fileUrl + '?format=_over',
 			fileDeleteUrl: fileDeleteUrl,
@@ -270,6 +276,7 @@ define([ 'jquery' , 'jquery.fileupload', 'jquery.fileupload-image', 'images', 'h
 		};
 	}
 	
+	// fileInfo, or Photo
 	function convertUploadedFileFromExistingFile(index, uploadedFile, configuration) {
 		
 		var id = uploadedFile.id;
@@ -283,12 +290,12 @@ define([ 'jquery' , 'jquery.fileupload', 'jquery.fileupload-image', 'images', 'h
 			name: fileName, 
 			contentType: contentType, 
 			fileThumbUrl: fileUrl + '?format=_thumb',
-			fileDetailUrl: fileUrl + '?format=_detail',
+			fileDetailUrl: fileUrl + '?format=_detail&forceSendError=true',
 			fileOrigUrl: fileUrl + '?format=_orig',
 			fileOverUrl: fileUrl + '?format=_over',
 			fileDeleteUrl: fileDeleteUrl,
 			isTemp: function() {return !this.id},
-			nameAndContentType: function() {return this.isTemp() ? this.name + '__;__' + this.contentType : ''}
+			nameAndContentType: function() {return this.name + '__;__' + this.contentType + '__;__' + this.id}
 		};
 	}
 	

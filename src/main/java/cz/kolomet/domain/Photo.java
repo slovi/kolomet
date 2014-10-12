@@ -2,6 +2,8 @@ package cz.kolomet.domain;
 
 public interface Photo {
 	
+	public boolean isNew();
+	
 	public String getFileName();
 	
 	public PhotoContainer getParentContainer();

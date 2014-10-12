@@ -1,9 +1,11 @@
 package cz.kolomet.repository;
 
-import org.springframework.roo.addon.layers.repository.jpa.RooJpaRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.stereotype.Repository;
 
 import cz.kolomet.domain.codelist.CountryState;
 
-@RooJpaRepository(domainType = CountryState.class)
-public interface CountryStateRepository {
+@Repository
+public interface CountryStateRepository extends JpaRepository<CountryState, Long>, JpaSpecificationExecutor<CountryState> {
 }

@@ -14,7 +14,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -57,21 +59,56 @@ public class DownloadFileServlet extends HttpServlet {
 			resultFile = resolvedFile;
 		}
 		
-		FileInputStream fis = null;
-		try {
-			fis = new FileInputStream(resultFile);
-			IOUtils.copy(fis, response.getOutputStream());
-			logger.debug("Successfuly downloaded file: " + resultFile.getAbsolutePath());
-			response.setContentType("image/jpeg");	
-		} catch (FileNotFoundException e) {
-			logger.warn(e);
-			response.sendError(HttpServletResponse.SC_NOT_FOUND, e.getLocalizedMessage());
-		} finally {
-			if (fis != null) {
-				fis.close();
-			}
+		Boolean forceSendError = false;
+		if (StringUtils.isNotEmpty(request.getParameter("forceSendError"))) {
+			forceSendError = BooleanUtils.toBoolean(request.getParameter("forceSendError"));
 		}
 		
+		if (resultFile.exists()) {
+		
+			String displayInline = request.getParameter("displayInline");
+			if (StringUtils.isNotEmpty(displayInline)) {
+				if (!BooleanUtils.toBoolean(displayInline)) {
+					response.setHeader("Content-Disposition", "attachment;filename=" + resultFile.getName());
+				}
+			}
+	
+			response.setContentType(determineContentType(FilenameUtils.getExtension(resultFile.getName())));	
+			
+			FileInputStream fis = null;
+			try {
+				fis = new FileInputStream(resultFile);
+				IOUtils.copy(fis, response.getOutputStream());
+				logger.debug("Successfuly downloaded file: " + resultFile.getAbsolutePath());
+			} catch (FileNotFoundException e) {
+				logger.warn(e);
+				response.sendError(HttpServletResponse.SC_NOT_FOUND, e.getLocalizedMessage());
+			} finally {
+				if (fis != null) {
+					fis.close();
+				}
+			}
+		} else {
+			
+			if (forceSendError) {
+				response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			} else {
+				// add this logic to basePhoto and its hierarchy
+				if (resultFile.getName().contains(BasePhoto.OVERVIEW_IMG_SUFFIX)) {
+					response.sendRedirect(request.getContextPath() + "/resources/images/no-photo-over.jpg");
+				} else if (resultFile.getName().contains(BasePhoto.THUMBNAIL_IMG_SUFFIX)) {
+					response.sendRedirect(request.getContextPath() + "/resources/images/no-photo-thumb.jpg");
+				} else if (resultFile.getName().contains(BasePhoto.DETAIL_IMG_SUFFIX) || resultFile.getName().contains(BasePhoto.ORIGINAL_IMG_SUFFIX)) {
+					if (resultFile.getAbsolutePath().contains("product")) {
+						response.sendRedirect(request.getContextPath() + "/resources/images/products/no-photo-detail.jpg");
+					} else if (resultFile.getAbsolutePath().contains("places")) {
+						response.sendRedirect(request.getContextPath() + "/resources/images/places/no-photo-detail.jpg");
+					} else if (resultFile.getAbsolutePath().contains("sellers")) {
+						response.sendRedirect(request.getContextPath() + "/resources/images/sellers/no-photo-detail.jpg");
+					}
+				}
+			}
+		}
 	}
 	
 	@Override
@@ -90,6 +127,15 @@ public class DownloadFileServlet extends HttpServlet {
 		int filePathIndex = request.getContextPath().length() + "/file".length();
 		String pathInfo = requestUri.substring(filePathIndex, lastSemicolonIndex > 0 ? lastSemicolonIndex : requestUri.length());
 		return pathInfo;
-	}	
+	}
+
+	private String determineContentType(String extension) {
+		
+		if ("pdf".equalsIgnoreCase(extension)) {
+			return "application/pdf";
+		}
+		
+		return "image/jpeg";
+	}
 
 }

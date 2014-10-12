@@ -1,15 +1,14 @@
 package cz.kolomet.web.pub;
 
-import java.util.Date;
-
 import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.mail.MailException;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,10 +23,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.octo.captcha.service.image.ImageCaptchaService;
 
+import cz.kolomet.domain.AddressType;
 import cz.kolomet.domain.ApplicationUser;
+import cz.kolomet.domain.ApplicationUserAddress;
 import cz.kolomet.dto.ApplicationUserRegistration;
 import cz.kolomet.service.ApplicationRoleService;
 import cz.kolomet.service.ApplicationUserService;
+import cz.kolomet.service.CountryStateService;
 import cz.kolomet.service.exception.ExistingUserException;
 import cz.kolomet.util.web.ajax.AjaxResponse;
 import flexjson.JSONSerializer;
@@ -48,6 +50,9 @@ public class ApplicationUserRegistrationController extends AbstractPublicControl
 	@Autowired
 	private ApplicationRoleService applicationRoleService;
 	
+	@Autowired
+	private CountryStateService countryStateService;
+	
 	@RequestMapping(params = "token")
 	public String activeAccount(@RequestParam(value = "token", required = true) String token, RedirectAttributes redirectAttributes) {
 		
@@ -64,8 +69,8 @@ public class ApplicationUserRegistrationController extends AbstractPublicControl
     }
     
     @ResponseBody
-    @RequestMapping(method = RequestMethod.POST, value = "/file")
-    public AjaxResponse savePhoto(@RequestParam("content") MultipartFile content, HttpServletRequest request) throws Exception {
+    @RequestMapping(method = RequestMethod.POST, value = "/file", produces = {"text/plain", "application/json"})
+    public AjaxResponse savePhoto(@RequestParam("content") MultipartFile content, HttpServletRequest request, HttpServletResponse response) throws Exception {
     	saveFile(applicationUserService, content, request.getSession().getId());
     	return AjaxResponse.emptySuccessul();
     }
@@ -100,14 +105,24 @@ public class ApplicationUserRegistrationController extends AbstractPublicControl
         	populateEditForm(uiModel, applicationUserRegistration);
         	return "public/applicationuserregistrations/create";
         }
+
+        ApplicationUserAddress address = new ApplicationUserAddress();
+        address.setCity(applicationUserRegistration.getCity());
+        address.setStreet(applicationUserRegistration.getStreet());
+        address.setHouseNr(applicationUserRegistration.getHouseNr());
+        address.setCountryState(applicationUserRegistration.getCountryState());
+        address.setPostCode(applicationUserRegistration.getPostCode());
+        address.setAddressType(AddressType.PERMANENT);
         
 		ApplicationUser applicationUser = new ApplicationUser();
 		applicationUser.setEnabled(false);
 		applicationUser.setPassword(passwordEncoder.encodePassword(applicationUserRegistration.getPassword(), null));
-		applicationUser.setUsername(applicationUserRegistration.getUsername());		
 		applicationUser.setName(applicationUserRegistration.getName());
+		applicationUser.setUsername(applicationUserRegistration.getUsername());		
+		applicationUser.setNickname(applicationUserRegistration.getNickname());
 		applicationUser.setSurname(applicationUserRegistration.getSurname());
 		applicationUser.addRole(applicationRoleService.findApplicationRole("role_user"));
+		applicationUser.addAddress(address);
 		
 		try {
 			applicationUserService.saveApplicationUser(applicationUser, false);
@@ -116,6 +131,10 @@ public class ApplicationUserRegistrationController extends AbstractPublicControl
 			return "redirect:public/applicationuserregistrations/" + applicationUser.getId();
 		} catch (ExistingUserException e) {
 			bindingResult.rejectValue("username", "exception_bad_username", new Object[] {applicationUser.getUsername()}, "");
+			populateEditForm(uiModel, applicationUserRegistration);
+			return "public/applicationuserregistrations/create";
+		} catch (MailException e) {
+			bindingResult.rejectValue("username", messageSourceAcessor.getMessage("exception_cannot_send_email_to_address"));
 			populateEditForm(uiModel, applicationUserRegistration);
 			return "public/applicationuserregistrations/create";
 		}
@@ -132,6 +151,7 @@ public class ApplicationUserRegistrationController extends AbstractPublicControl
         addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("applicationusers", applicationUserService.findAllApplicationUsers());
         uiModel.addAttribute("addedFiles", new JSONSerializer().serialize(applicationUserRegistration.getFileInfos()));
+        uiModel.addAttribute("countryStates", countryStateService.findAllCountryStates());
     }
 	
     @RequestMapping(value = "/{id}", produces = "text/html")

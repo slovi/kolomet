@@ -10,24 +10,30 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
 import org.springframework.context.support.MessageSourceAccessor;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import cz.kolomet.domain.ApplicationUser;
 import cz.kolomet.domain.BasePhoto;
 import cz.kolomet.domain.Photo;
 import cz.kolomet.domain.PhotoContainer;
 import cz.kolomet.domain.PhotoContainerService;
+import cz.kolomet.domain.PhotoContainerService.ResizeInfo;
 import cz.kolomet.dto.FileInfo;
+import cz.kolomet.security.ApplicationUserDetails;
 import cz.kolomet.util.web.Regex;
 
 public class AbstractController implements MessageSourceAware {
 
 	public static final int DEFAULT_PAGE_SIZE = 25;
+	
+	public static final int DEFAULT_MAX_ATTEMPT_COUNT = 10;
 	
 	protected final Log logger = LogFactory.getLog(getClass());
 	
@@ -46,6 +52,11 @@ public class AbstractController implements MessageSourceAware {
 	protected MessageSource messageSource;
 	
 	protected MessageSourceAccessor messageSourceAcessor;
+	
+	@Autowired
+	protected ConversionService converionService;
+
+	private int maxAttemptCount = DEFAULT_MAX_ATTEMPT_COUNT;
 	
 	@ModelAttribute("regex")
 	public Regex getRegex() {
@@ -80,66 +91,55 @@ public class AbstractController implements MessageSourceAware {
 		return DEFAULT_PAGE_SIZE;
 	}
 	
-	protected void saveFile(final PhotoContainerService photoContainerService, MultipartFile file, String folder) {
-		File parent = new File(getTempDir(), folder);
-		try {
-			FileUtils.forceMkdir(parent);
-			File dest = new File(parent, file.getOriginalFilename());
-			logger.debug("Saving uploaded file to dest: " + dest);
-			file.transferTo(dest);
-			photoContainerService.resizePhoto(dest);
-			logger.debug("Successfully save file: " + dest + " " + dest.exists());
-		} catch (IOException e) {
-			throw new RuntimeException(e);
+	protected ApplicationUserDetails getActualUserDetails() {
+		return ApplicationUserDetails.getActualApplicationUserDetails();
+	}
+	
+	protected ApplicationUser getActualUser() {
+		return ApplicationUserDetails.getActualApplicationUser();
+	}
+	
+	protected void savePhotos(final PhotoContainer photoContainer, final PhotoContainerService photoContainerService, String folder) {
+		
+		File uploadedFileParent = new File(getTempDir(), folder);
+		
+		for (final Photo photo: photoContainer.getPhotos()) {
+			if (photo.isNew()) {
+				String fileName = photo.getFileName();
+				photoContainerService.savePhoto(photo);
+				movePhotos(photoContainer, photoContainerService, uploadedFileParent, fileName);
+			}
 		}
 	}
 	
 	protected void savePhotos(final PhotoContainer photoContainer, final PhotoContainerService photoContainerService, String folder, List<FileInfo> fileInfos) {
 		
 		File uploadedFileParent = new File(getTempDir(), folder);
-		
+
 		for (final FileInfo fileInfo: fileInfos) {
-			if (fileInfo != null) {
+			if (fileInfo != null && fileInfo.isNew()) {
 				if (StringUtils.isNotEmpty(fileInfo.getFileName())) {
-					
 					String fileName = fileInfo.getFileName();
 					String contentType = fileInfo.getContentType();
 					Photo photo = photoContainer.addPhoto(fileName, contentType);
 					photoContainerService.savePhoto(photo);
-					
-					for (String suffix: BasePhoto.SUFFIXES_ALL)  {
-						File sourceFile = new File(uploadedFileParent, BasePhoto.getPhotoUrlFileName(fileName, suffix));
-						if (sourceFile.exists()) {
-							File targetFile = new File(getDestFolder(photoContainer.getId(), photoContainer.getPhotoType()), BasePhoto.getPhotoUrlFileName(fileName, suffix));
-							moveFile(sourceFile, targetFile, true);
-						}
-					}
+					movePhotos(photoContainer, photoContainerService, uploadedFileParent, fileName);
 				}
 			}
-		}
-		
-		if (uploadedFileParent.exists()) {
-			deleteFile(uploadedFileParent);
 		}
 	}
 	
-	protected void savePhotos(final PhotoContainer photoContainer, final PhotoContainerService photoContainerService, List<CommonsMultipartFile> files) {
-		if (files != null) {
-			for (final CommonsMultipartFile content: files) {
-				if (StringUtils.isNotEmpty(content.getOriginalFilename())) {
-					final File dest = getDestFile(photoContainer.getId(), photoContainer.getPhotoType(), content.getOriginalFilename());
-					try {
-						logger.debug("Saving uploaded file to dest: " + dest);
-						content.transferTo(dest);
-						logger.debug("Successfully save file: " + dest + " " + dest.exists());
-					} catch (Exception e) {
-						throw new RuntimeException(e);
-					}
-					Photo photo = photoContainer.addPhoto(dest.getName(), content.getContentType());
-					photoContainerService.savePhoto(photo);
-					photoContainerService.resizePhoto(dest);
-				}
-			}
+	protected void saveFile(final PhotoContainerService photoContainerService, MultipartFile file, String folder) {
+		File parent = new File(getTempDir(), folder);
+		try {
+			FileUtils.forceMkdir(parent);
+			File dest = new File(parent, file.getOriginalFilename());
+			logger.debug("Saving uploaded file from (" + file.getOriginalFilename() + ") to dest (" + dest.getAbsolutePath() + ")");
+			file.transferTo(dest);
+			photoContainerService.resizePhoto(dest);
+			logger.debug("Successfully save file: " + dest + " " + dest.exists());
+		} catch (IOException e) {
+			throw new RuntimeException(e);
 		}
 	}
 	
@@ -161,19 +161,40 @@ public class AbstractController implements MessageSourceAware {
 		return new File(getDestFolder(id, photoType), fileName);
 	}
 	
-	public void setMessageSource(MessageSource messageSource) {
-		this.messageSource = messageSource;
-		this.messageSourceAcessor = new MessageSourceAccessor(messageSource);
-	}
-
-	private void deleteFile(File uploadedFileParent) {
-		try {
-			FileUtils.forceDelete(uploadedFileParent);
-		} catch (Exception e) {
-			throw new RuntimeException(e);
+	// TODO move to new class
+	private void movePhotos(final PhotoContainer photoContainer, final PhotoContainerService photoContainerService, File uploadedFileParent, String fileName) {
+		for (ResizeInfo resizeInfo: photoContainerService.getResizeInfos()) {
+			File sourceFile = new File(uploadedFileParent, BasePhoto.getPhotoUrlFileName(fileName, resizeInfo.getSuffix()));
+			tryToMoveFile(photoContainer, fileName, resizeInfo, sourceFile, 0);
 		}
 	}
 
+	// TODO move to new class
+	private void tryToMoveFile(final PhotoContainer photoContainer, String fileName, ResizeInfo resizeInfo, File sourceFile, int attemptCount) {
+		
+		if (attemptCount >= maxAttemptCount) {
+			logger.warn("Cannot move file (" + sourceFile.getAbsolutePath() + ") to target file (" + fileName + ")");
+			return;
+		}
+		if (sourceFile.exists()) {
+			File targetFile = new File(getDestFolder(photoContainer.getId(), photoContainer.getPhotoType()), BasePhoto.getPhotoUrlFileName(fileName, resizeInfo.getSuffix()));
+			moveFile(sourceFile, targetFile, true);
+		} else {
+			waitForImageResize();
+			tryToMoveFile(photoContainer, fileName, resizeInfo, sourceFile, ++attemptCount);
+		}
+	}
+	
+	// TODO move to new class
+	private void waitForImageResize() {
+		try {
+			Thread.sleep(1000l);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
+	// TODO move to new class
 	private void moveFile(File sourceFile, File targetFile, boolean replaceExisting) {
 		try {
 			if (replaceExisting && targetFile.exists()) {
@@ -183,6 +204,11 @@ public class AbstractController implements MessageSourceAware {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+	}
+	
+	public void setMessageSource(MessageSource messageSource) {
+		this.messageSource = messageSource;
+		this.messageSourceAcessor = new MessageSourceAccessor(messageSource);
 	}
 
 }

@@ -7,10 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.security.access.prepost.PostAuthorize;
-import org.springframework.security.access.prepost.PostFilter;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import cz.kolomet.domain.ApplicationRole;
 import cz.kolomet.domain.ApplicationUser;
@@ -23,6 +27,8 @@ import cz.kolomet.service.MailService;
 import cz.kolomet.service.SellerService;
 import cz.kolomet.service.exception.ExistingUserException;
 
+@Service
+@Transactional
 public class SellerServiceImpl implements SellerService {
 	
 	@Autowired
@@ -52,6 +58,11 @@ public class SellerServiceImpl implements SellerService {
 	@Value("${seller.mail.new.template}")
 	private String newSellerEmailTemplate;
 	
+	private static final Sort defaultSort() {
+    	Order sellerNameOrder = new Order(Direction.ASC, "sellerName");
+		return new Sort(sellerNameOrder);
+	}
+	
 	public Page<Seller> findSellerEntries(Pageable pageable) {
 		return sellerRepository.findAll(pageable);
 	}
@@ -75,7 +86,7 @@ public class SellerServiceImpl implements SellerService {
     @PreAuthorize("principal.isCapableToSaveSeller(#seller)")
     public void saveSeller(Seller seller) {
     	
-    	String email = seller.getAddressEmail();
+    	String email = seller.getCorrespondenceAddress().getEmail();
     	ApplicationUser user = applicationUserRepository.findByUsername(email); 
     	if (user == null) {
     		
@@ -83,14 +94,12 @@ public class SellerServiceImpl implements SellerService {
         	
         	ApplicationRole applicationRole = applicationRoleRepository.findByRoleName(sellerRoleName);
         	
-        	ApplicationUser applicationUser = new ApplicationUser();
-        	applicationUser.setEnabled(true);
-        	applicationUser.setPassword(passwordEncoder.encodePassword(password, null));
-        	applicationUser.setSeller(seller);
-        	applicationUser.addRole(applicationRole);
-        	applicationUser.setUsername(email);
-        	
-        	applicationUserRepository.save(applicationUser);
+        	seller.setEnabled(true);
+        	seller.setPassword(passwordEncoder.encodePassword(password, null));
+        	seller.addRole(applicationRole);
+        	seller.setUsername(email);
+        	seller.normalizeWebUrl();
+
             sellerRepository.save(seller);
             
             Map<String, Object> params = new HashMap<String, Object>();
@@ -98,7 +107,6 @@ public class SellerServiceImpl implements SellerService {
             params.put("password", password);
             params.put("seller", seller);
             
-            seller.normalizeWebUrl();
             
             mailService.send(email, newSellerEmailSubject, newSellerEmailTemplate, params);
             
@@ -111,9 +119,17 @@ public class SellerServiceImpl implements SellerService {
     @PreAuthorize("principal.isCapableToUpdateSeller(#seller)")
     public Seller updateSeller(Seller seller) {
     	
-    	seller.normalizeWebUrl();
+    	String email = seller.getCorrespondenceAddress().getEmail();
+    	ApplicationUser existingUser = applicationUserRepository.findByUsername(email);
+    	seller.setUsername(email);
     	
-   		return sellerRepository.save(seller);
+    	// jestlize username existuje, ale jedna se o stejneho uzivatele nebo jestli username neexistuje, muzeme menit
+    	if ((existingUser != null && existingUser.getId().equals(seller.getId())) ||  (existingUser == null)) {
+    		seller.normalizeWebUrl();
+		    return sellerRepository.save(seller);
+    	} else {
+    		throw new ExistingUserException(seller);
+    	}
     }
     
     @PreAuthorize("principal.isSellersAll()")
@@ -121,9 +137,12 @@ public class SellerServiceImpl implements SellerService {
         return sellerRepository.count();
     }
     
-    @PostFilter("hasPermission(filterObject, 'read')")
     public List<Seller> findAllSellers() {
-        return sellerRepository.findAll();
+    	return sellerRepository.findAll(defaultSort());
+    }
+    
+    public List<Seller> findAllEnabledSellers() {
+    	return sellerRepository.findByEnabledOrderBySellerNameAsc(true);
     }
     
     @PreAuthorize("principal.isSellersAll()")

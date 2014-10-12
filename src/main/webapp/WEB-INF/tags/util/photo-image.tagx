@@ -19,15 +19,15 @@
 				<c:when test="${photoSize gt 0}">
 					<c:choose>
 						<c:when test="${imgType eq 'detail'}">
-			 				<spring:url value="/file/${photos[0].detailPhotoUrl}" var="detailImgUrl" />
-			 				<spring:url value="/file/${photos[0].photoUrl}" var="origImgUrl" />
+			 				<spring:url value="/file/${photos[0].detailPhotoUrl}" var="detailImgUrl" htmlEscape="false" />
+			 				<spring:url value="/file/${photos[0].photoUrl}" var="origImgUrl" htmlEscape="false" />
 			 				<a href="${origImgUrl}" data-lightbox="image-1">
-			 					<img id="detail_image" width="${width}" height="${height}" src="${detailImgUrl}" alt="" title=""/>
+			 					<img id="detail_image" width="${width}" height="${height}" src="${detailImgUrl}" alt="detail_img" title="detail_img"/>
 			 				</a>		 				
 			 			</c:when>
 			 			<c:otherwise>
-			 				<spring:url value="/file/${photos[0].overPhotoUrl}" var="detailImgUrl" />
-			 				<img id="detail_image" width="${width}" height="${height}" src="${detailImgUrl}" alt="" title=""/>
+			 				<spring:url value="/file/${photos[0].overPhotoUrl}" var="detailImgUrl" htmlEscape="false" />
+			 				<img id="detail_image" width="${width}" height="${height}" src="${detailImgUrl}" alt="detail_img" title="detail_img"/>
 			 			</c:otherwise>
 		 			</c:choose>
 				</c:when>

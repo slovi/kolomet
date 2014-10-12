@@ -6,7 +6,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,62 +14,44 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import cz.kolomet.domain.Photo;
 import cz.kolomet.domain.Seller;
 import cz.kolomet.domain.SellerPhotoUrl;
+import cz.kolomet.service.PlacePhotoUrlService;
 import cz.kolomet.service.SellerPhotoUrlService;
 import cz.kolomet.service.SellerService;
+import cz.kolomet.service.exception.CommonServiceException;
+import cz.kolomet.service.exception.IgnorableCommonServiceException;
+import cz.kolomet.service.exception.ResizeImageException;
+import cz.kolomet.util.web.ajax.AjaxResponse;
 import cz.kolomet.web.admin.AbstractAdminController;
 
 @RequestMapping("/admin/sellerphotourls")
 @Controller
-@RooWebScaffold(path = "admin/sellerphotourls", formBackingObject = SellerPhotoUrl.class, update = false)
 public class SellerPhotoUrlController extends AbstractAdminController {
-	
-	@Autowired
-	private SellerService sellerService;
 	
 	@Autowired
 	private SellerPhotoUrlService sellerPhotoUrlService;
 	
-    @RequestMapping(params = "form", produces = "text/html")
-    public String createForm(Model uiModel, @RequestParam(value = "parentEntityId", required = false) Long parentEntityId) {
-    	Seller seller = parentEntityId != null ? sellerService.findSeller(parentEntityId) : null;
-        populateEditForm(uiModel, new SellerPhotoUrl(), seller);
-        List<String[]> dependencies = new ArrayList<String[]>();
-        if (sellerService.countAllSellers() == 0) {
-            dependencies.add(new String[] { "seller", "sellers" });
-        }
-        uiModel.addAttribute("dependencies", dependencies);
-        return "admin/sellerphotourls/create";
-    }
-    
-	@RequestMapping(method = RequestMethod.POST, produces = "text/html")
-    public String create(SellerPhotoUrl sellerPhotoUrl, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-
-		if (bindingResult.hasErrors()) {
-            populateEditForm(uiModel, sellerPhotoUrl, null);
-            return "admin/sellerphotourls/create";
-        }
-        uiModel.asMap().clear();
-        savePhotos(sellerPhotoUrl.getSeller(), sellerPhotoUrlService, sellerPhotoUrl.getContents());
-        return "redirect:/admin/sellers/" + sellerPhotoUrl.getSeller().getId();
-    }
-    
 	@ResponseBody
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public String delete(@PathVariable("id") Long id) {
-        SellerPhotoUrl sellerPhotoUrl = sellerPhotoUrlService.findSellerPhotoUrl(id);
-        sellerPhotoUrlService.deleteSellerPhotoUrl(sellerPhotoUrl);
-        return "OK";
-    }
-    
-    void populateEditForm(Model uiModel, SellerPhotoUrl sellerPhotoUrl, Seller seller) {
-    	if (seller != null) {
-			sellerPhotoUrl.setSeller(seller);
+	@RequestMapping(value = "/file", method = {RequestMethod.POST, RequestMethod.PUT})
+	public AjaxResponse savePhoto(@RequestParam("content") MultipartFile content, HttpServletRequest request) throws Exception {
+		try {
+			saveFile(sellerPhotoUrlService, content, request.getSession().getId());
+			return AjaxResponse.emptySuccessul();
+		} catch (ResizeImageException e) {
+			throw new IgnorableCommonServiceException(
+    				messageSourceAcessor.getMessage("error_file_is_not_image"), CommonServiceException.FILE_NOT_SUPPORTED_FORMAT);
 		}
-        uiModel.addAttribute("sellerPhotoUrl", sellerPhotoUrl);
-        uiModel.addAttribute("sellers", sellerService.findAllSellers());
+	}
+	
+    @ResponseBody
+    @RequestMapping(method = {RequestMethod.DELETE}, value = "/{photoId}")
+    public AjaxResponse deletePhoto(@PathVariable("photoId") Long photoId, HttpServletRequest request) throws Exception {
+    	Photo photo = sellerPhotoUrlService.findSellerPhotoUrl(photoId);
+    	sellerPhotoUrlService.deletePhoto(photo);
+    	return AjaxResponse.emptySuccessul();
     }
-
 }

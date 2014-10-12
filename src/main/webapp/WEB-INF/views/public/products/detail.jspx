@@ -4,7 +4,7 @@
     <jsp:output omit-xml-declaration="yes"/>
 
    	<div class="detail_header"> 
-   		<util:photo-image photos="${product.photoUrls}" imgType="detail" width="508" height="338" />    
+   		<util:photo-image photos="${product.photoUrls}" noPhotoUrl="/resources/images/products/no-photo-detail.jpg" imgType="detail" width="508" height="338" />    
        	<div class="detail_description right">
        		<c:set var="description_class" value="description" />
        		<c:choose>
@@ -38,7 +38,9 @@
 					</div>
 				</c:when>
 			</c:choose>
-        	<p class="label"><c:out value="${product.productName}" /></p>
+        	<p class="label">
+        		<c:out value="${product.productName}" />
+        	</p>        	
         	<div class="${description_class}">
         		<p></p>
         		<p><c:out escapeXml="false" value="${product.description}" /></p>
@@ -156,6 +158,10 @@
 									<td colspan="2">Systémové údaje</td>
 								</tr>
 							</thead>
+							<tr>
+			       				<td><b><spring:message code="label_cz_kolomet_domain_product_id" /></b></td>
+			       				<td><spring:eval expression="product.id" /></td>
+			       			</tr>
 			       			<tr>
 			       				<td><b><spring:message code="label_cz_kolomet_domain_product_createdby" /></b></td>
 			       				<td><spring:eval expression="product.createdBy" /></td>
@@ -165,11 +171,11 @@
 			       				<td><fmt:formatDate value="${product.created}" pattern="${product_created_date_format}" /></td>
 			       			</tr>
 			       			<tr>
-			       				<td><b><spring:message code="label_cz_kolomet_domain_seller_lastmodifiedby" /></b></td>
+			       				<td><b><spring:message code="label_cz_kolomet_domain_product_lastmodifiedby" /></b></td>
 			       				<td><spring:eval expression="product.lastModifiedBy" /></td>
 			       			</tr>
 			       			<tr>
-			       				<td><b><spring:message code="kolomet_domain_product_lastmodified" /></b></td>
+			       				<td><b><spring:message code="label_cz_kolomet_domain_product_lastmodified" /></b></td>
 			       				<td><fmt:formatDate value="${product.lastModified}" pattern="${product_lastmodified_date_format}" /></td>
 			       			</tr>
 			            </table>

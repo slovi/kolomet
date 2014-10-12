@@ -38,6 +38,7 @@
         	<img class="side-menu-arrow-off ${hiddenClassOff}" src="${arrowRightImageUrl}" />
         </h1>
 		<menu:menu id="side_menu_body_producers" styleClass="side-menu-body ${hiddenClassOn}">
+	        <menu:item url="/store/public/products/filter?menu=producer" id="menuitem_producer_all" label="Všechny značky" defaultPageSize="${categoryPageSize}" />
 			<c:forEach items="${producers}" var="producer" varStatus="status">
 				<menu:item url="/store/public/products/filter?producer=${producer.id}&amp;menu=producer" id="menuitem_${producer.codeKey}" label="${producer.codeDescription}" defaultPageSize="${categoryPageSize}" />
 			</c:forEach>
@@ -56,6 +57,7 @@
 	    	<img class="side-menu-arrow-off ${hiddenClassOff}" src="${arrowRightImageUrl}" />
         </h1>
        <menu:menu id="side_menu_body_figureheights" styleClass="side-menu-body ${hiddenClassOn}">
+       		<menu:item url="/store/public/products/filter?menu=figureHeight" id="menuitem_figureheight_all" label="Všechny výšky postavy" defaultPageSize="${categoryPageSize}" />
 	   		<c:forEach items="${figureheights}" var="figureheight">
 				<menu:item url="/store/public/products/filter?figureHeight=${figureheight.id}&amp;menu=figureHeight" id="menuitem_${figureheight.codeKey}" label="${figureheight.codeDescription}" defaultPageSize="${categoryPageSize}" />
 			</c:forEach>

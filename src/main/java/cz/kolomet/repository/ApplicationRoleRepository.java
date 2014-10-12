@@ -1,11 +1,13 @@
 package cz.kolomet.repository;
 
-import org.springframework.roo.addon.layers.repository.jpa.RooJpaRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.stereotype.Repository;
 
 import cz.kolomet.domain.ApplicationRole;
 
-@RooJpaRepository(domainType = ApplicationRole.class)
-public interface ApplicationRoleRepository {
+@Repository
+public interface ApplicationRoleRepository extends JpaRepository<ApplicationRole, Long>, JpaSpecificationExecutor<ApplicationRole> {
 	
 	public ApplicationRole findByRoleName(String roleName);
 	

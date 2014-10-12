@@ -63,6 +63,7 @@
     <div id="_${fn:escapeXml(id)}_id" class="${cssClass}">
       <c:choose>
         <c:when test="${not empty items}">
+       	  <form:errors cssClass="errors" id="_${sec_field}_error_id" path="${sec_field}" />
           <c:if test="${renderLabel}">
 	          <label for="_${sec_field}_id">
 	            <c:out value="${fn:escapeXml(label)}" />
@@ -167,8 +168,7 @@
                       </c:choose>
                     </c:otherwise>
                   </c:choose>
-                  <br />
-                  <form:errors cssClass="errors" id="_${sec_field}_error_id" path="${sec_field}" />
+                  <br />                  
                 </c:otherwise>
               </c:choose>
             </c:when>

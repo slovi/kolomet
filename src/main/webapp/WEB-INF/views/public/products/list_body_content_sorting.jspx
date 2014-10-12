@@ -48,8 +48,8 @@
            </c:if>
 	</spring:url>
   	<div class="sorting">
-  	Řadit podle: 
-  	<field:ajaxLink href="${sortPriceUrl}" id="sort_link_price" event="onclick" rerender="body_content" value="cena" />, 
-  	<field:ajaxLink href="${sortDiscountUrl}" id="sort_link_discount" event="onclick" rerender="body_content" value="sleva" /></div>
-			   
+	  	Řadit podle: 
+	  	<a id="sort_link_price" href="${sortPriceUrl}">cena</a><util:nbsp number="1" />
+	  	<a id="sort_link_discount" href="${sortDiscountUrl}">sleva</a> 
+	</div>			   
 </jsp:root>

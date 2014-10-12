@@ -8,9 +8,11 @@
         <put-attribute name="body" value="/WEB-INF/views/admin/newsitems/show.jspx"/>
     </definition>
 	<definition extends="store/template_admin" name="store/admin/newsitems/create">
+		<put-attribute name="mainJsFileName" value="main_admin_newsitems_create" cascade="true" />
         <put-attribute name="body" value="/WEB-INF/views/admin/newsitems/create.jspx"/>
     </definition>
 	<definition extends="store/template_admin" name="store/admin/newsitems/update">
+		<put-attribute name="mainJsFileName" value="main_admin_newsitems_create" cascade="true" />
         <put-attribute name="body" value="/WEB-INF/views/admin/newsitems/update.jspx"/>
     </definition>
 </tiles-definitions>

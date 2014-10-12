@@ -1,27 +1,20 @@
 package cz.kolomet.domain;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-import org.springframework.roo.addon.equals.RooEquals;
-import org.springframework.roo.addon.javabean.RooJavaBean;
-import org.springframework.roo.addon.jpa.entity.RooJpaEntity;
-import org.springframework.roo.addon.serializable.RooSerializable;
-import org.springframework.roo.addon.tostring.RooToString;
 
 import cz.kolomet.service.exception.DefaultObjectDataReadException;
 
-@RooJavaBean
-@RooToString
-@RooJpaEntity(inheritanceType = "TABLE_PER_CLASS")
-@RooEquals
-@RooSerializable
-public class RegistrationRequest extends DomainEntity {
+@Entity
+public class RegistrationRequest extends BaseDomainEntity implements Serializable {
 	
 	@NotNull
 	private String email;
@@ -44,5 +37,45 @@ public class RegistrationRequest extends DomainEntity {
 			throw new DefaultObjectDataReadException(this, "text.default", e);
 		}
 	}
-	
+
+	public String getEmail() {
+        return this.email;
+    }
+
+	public void setEmail(String email) {
+        this.email = email;
+    }
+
+	public String getPhone() {
+        return this.phone;
+    }
+
+	public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+	public String getText() {
+        return this.text;
+    }
+
+	public void setText(String text) {
+        this.text = text;
+    }
+
+	public Boolean getProcessed() {
+        return this.processed;
+    }
+
+	public void setProcessed(Boolean processed) {
+        this.processed = processed;
+    }
+
+	public String getCaptchaText() {
+        return this.captchaText;
+    }
+
+	public void setCaptchaText(String captchaText) {
+        this.captchaText = captchaText;
+    }
+
 }

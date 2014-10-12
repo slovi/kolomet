@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import cz.kolomet.domain.NewsItem;
 import cz.kolomet.repository.NewsItemRepository;
-import cz.kolomet.security.ApplicationUserDetails;
 import cz.kolomet.web.AbstractController;
 
 public class AbstractAdminController extends AbstractController {
@@ -22,7 +21,7 @@ public class AbstractAdminController extends AbstractController {
 	}
 	
 	protected String getUsername() {
-		return ApplicationUserDetails.getActualApplicationUserDetails().getUsername();
+		return getActualUserDetails().getUsername();
 	}
 	
 	protected String normalizeDescription(String description) {

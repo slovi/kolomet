@@ -1,6 +1,7 @@
 package cz.kolomet.util.db;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -22,6 +23,17 @@ public class JpaUtils {
 	public static void addBetweenNumberPredicate(List<Predicate> predicates, final CriteriaBuilder cb,
 			final Expression<Double> expression, Double valueFrom, Double valueTo) {
 		addBetweenPredicate(predicates, cb, expression, valueFrom, valueTo);
+	}
+	
+	public static void addBetweenDatePredicate(List<Predicate> predicates, final CriteriaBuilder cb,
+			final Expression<Date> expressionFrom, Expression<Date> expressionTo, Date value) {
+		addBetweenPredicate(predicates, cb, value, expressionFrom, expressionTo);
+	}
+	
+	public static <T extends Comparable<? super T>> void addBetweenPredicate(List<Predicate> predicates,
+			final CriteriaBuilder cb, T value, final Expression<T> expressionFrom, final Expression<T> expressionTo) {
+		predicates.add(cb.lessThanOrEqualTo(expressionFrom, value));
+		predicates.add(cb.greaterThanOrEqualTo(expressionTo, value));		
 	}
 	
 	public static <T extends Comparable<? super T>> void addBetweenPredicate(List<Predicate> predicates,

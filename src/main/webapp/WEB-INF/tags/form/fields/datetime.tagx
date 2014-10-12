@@ -38,6 +38,7 @@
 
     <script type="text/javascript">dojo.require('dijit.form.DateTextBox')</script>
     <div id="_${sec_id}_id">
+    	<form:errors cssClass="errors" id="_${sec_field}_error_id" path="${sec_field}" />
       <label for="_${sec_field}_id">
         <c:out value="${label}" />
         :
@@ -47,8 +48,7 @@
           <input id="_${sec_field}_id" name="${sec_field}" />
         </c:when>
         <c:otherwise>
-          <form:input id="_${sec_field}_id" style="width: ${width}em" path="${sec_field}" disabled="${disabled}" />
-          <form:errors cssClass="errors" id="_${sec_field}_error_id" path="${sec_field}" />
+          <form:input id="_${sec_field}_id" style="width: ${width}em" path="${sec_field}" disabled="${disabled}" />          
           <br />
         </c:otherwise>
       </c:choose>

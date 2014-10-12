@@ -1,17 +1,16 @@
 package cz.kolomet.repository;
 
-import org.springframework.roo.addon.layers.repository.jpa.RooJpaRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.stereotype.Repository;
 
 import cz.kolomet.domain.ApplicationUser;
-import cz.kolomet.domain.Seller;
 
-@RooJpaRepository(domainType = ApplicationUser.class)
-public interface ApplicationUserRepository {
+@Repository
+public interface ApplicationUserRepository extends JpaRepository<ApplicationUser, Long>, JpaSpecificationExecutor<ApplicationUser> {
 	
 	public ApplicationUser findByToken(String token);
 	
-	public ApplicationUser findByUsername(String username);
-	
-	public ApplicationUser findBySeller(Seller seller);
+	public ApplicationUser findByUsername(String username);	
 	
 }

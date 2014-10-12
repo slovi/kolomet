@@ -9,13 +9,26 @@
     		<menu:menu id="main_menu">
     		
     			<menu:item url="/tour/public/places" messageCode="menu_main_places_intro" id="intro" renderPageParams="false" />
+    			<menu:item url="/tour/public/game" messageCode="menu_main_places_game" id="intro" renderPageParams="false" />
     		
     			<security:authorize access="isFullyAuthenticated()">
-	    			<menu:category id="admin_menu" styleClass="admin" messageCode="menu_main_our_kolomet" url="#">					
-		            	<menu:item id="i_password_change" label="Změna hesla" sort="processed" sortDesc="false" url="/tour/admin/password?form" z="user-managed"/>
+	    			<menu:category id="admin_menu" styleClass="admin" messageCode="menu_main_our_kolomet" url="#">
+
+	    				<spring:message code="label_private_password_index" var="password_index" />					
+		            	<menu:item id="i_password_change" label="${password_index}" sort="processed" sortDesc="false" url="/tour/admin/password?form" />
+
+						<spring:message code="label_private_profile_index" var="profile_index" />
+						<security:authentication property="principal.userId" var="userId" />
+		            	<menu:item id="i_password_change" label="${profile_index}" sort="processed" sortDesc="false" url="/tour/admin/applicationusers/${userId}?form" />
+		            	
 			            <security:authorize access="hasRole('ROLE_per_places')">
 			            	<hr color="#f9f9f9" width="85%" align="center" size="1" />
-				            <menu:item id="i_place_list" messageCode="global_menu_list" url="/tour/admin/places" z="/DMIeN4AJVoQZM6zEYjQeHs/hQw="/>
+			            	<security:authorize access="principal.isPlacesAll()">
+				            	<menu:item id="i_place_list" messageCode="global_menu_list" url="/tour/admin/places" z="/DMIeN4AJVoQZM6zEYjQeHs/hQw="/>
+				            </security:authorize>
+				            <security:authorize access="principal.isPlacesOwn()">
+				            	<menu:item id="i_place_list" messageCode="global_menu_own_list" url="/tour/admin/places" z="/DMIeN4AJVoQZM6zEYjQeHs/hQw="/>
+				            </security:authorize>
 				            <security:authorize access="hasAnyRole('ROLE_per_placetypes')">
 				            	<menu:item id="i_placetype_list" messageCode="global_menu_list" url="/tour/admin/placetypes" z="7BUDqvzSWihBVxllFovit0Zs3PM="/>
 				            </security:authorize>				            

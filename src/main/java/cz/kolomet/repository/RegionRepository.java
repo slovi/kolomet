@@ -1,11 +1,13 @@
 package cz.kolomet.repository;
 
-import org.springframework.roo.addon.layers.repository.jpa.RooJpaRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.stereotype.Repository;
 
 import cz.kolomet.domain.codelist.Region;
 
-@RooJpaRepository(domainType = Region.class)
-public interface RegionRepository {
+@Repository
+public interface RegionRepository extends JpaRepository<Region, Long>, JpaSpecificationExecutor<Region> {
 	
 	public Region findByGoogleAlias(String googleAlias);
 	

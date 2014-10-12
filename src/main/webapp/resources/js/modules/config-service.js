@@ -7,7 +7,7 @@ define(['jquery'], function($) {
 			var element = $('#' + id + ' > span.config');
 			var configHtml = element.html();
 			
-			var config = JSON.parse(configHtml);
+			var config = $.parseJSON(configHtml);
 			
 			var configuration = {
 				configData: config,

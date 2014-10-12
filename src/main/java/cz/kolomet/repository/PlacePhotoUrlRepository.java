@@ -1,8 +1,10 @@
 package cz.kolomet.repository;
-import org.springframework.roo.addon.layers.repository.jpa.RooJpaRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.stereotype.Repository;
 
 import cz.kolomet.domain.PlacePhotoUrl;
 
-@RooJpaRepository(domainType = PlacePhotoUrl.class)
-public interface PlacePhotoUrlRepository {
+@Repository
+public interface PlacePhotoUrlRepository extends JpaSpecificationExecutor<PlacePhotoUrl>, JpaRepository<PlacePhotoUrl, Long> {
 }

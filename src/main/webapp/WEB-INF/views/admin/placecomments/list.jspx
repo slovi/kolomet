@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <page:list id="pl_cz_kolomet_domain_PlaceComment" items="${placecomments}" z="LjGCmoi1ucfWzlq/cLQjM97GzQ4=">
-        <table:table data="${placecomments}" id="l_cz_kolomet_domain_PlaceComment" create="false" delete="false" update="false" path="/admin/placecomments" z="KMbeyLwCFUUfWHJ4FknvzmYOnR8=">
+    
+    <c:set value="${param.place}" var="parentEntityId" scope="request" />
+    
+    <page:list id="pl_cz_kolomet_domain_PlaceComment" items="${placecomments}" path="/public/placecomments" z="user-managed">
+        <table:table data="${placecomments}" id="l_cz_kolomet_domain_PlaceComment" path="/public/placecomments" z="QbZtSOO/jkN8djJZgUnQgIXkmVc=">
             <table:column id="c_cz_kolomet_domain_PlaceComment_createdBy" property="createdBy" z="IxP5AoJiOU7f4e16RyfZqHEr0ZM="/>
             <table:column id="c_cz_kolomet_domain_PlaceComment_lastModifiedBy" property="lastModifiedBy" z="jKDSsItB+H9Uus5pBvBdlFwrHjQ="/>
             <table:column date="true" dateTimePattern="${placeComment_created_date_format}" id="c_cz_kolomet_domain_PlaceComment_created" property="created" z="9AvTK1uaxXDUKKgonIW7WYVz1CU="/>
             <table:column date="true" dateTimePattern="${placeComment_lastmodified_date_format}" id="c_cz_kolomet_domain_PlaceComment_lastModified" property="lastModified" z="M+574ZkQeZGOllmpkE8iWN8OSDs="/>
-            <table:column id="c_cz_kolomet_domain_PlaceComment_commented" property="commented" z="RG+GW2+Pu3VMlW0qjAtCuvp13tA="/>
-            <table:column date="true" dateTimePattern="${placeComment_date_date_format}" id="c_cz_kolomet_domain_PlaceComment_date" property="date" z="tjoP1TB2iEoY4PU9xGD7EUnETLA="/>
+            <table:column id="c_cz_kolomet_domain_PlaceComment_text" property="text" z="AvkDcOTPVHSCAU++kw4Q4C6gquk="/>
+            <table:column id="c_cz_kolomet_domain_PlaceComment_place" property="place" z="Kzheo195JWfgg8fib3ZITubEAC4="/>
         </table:table>
     </page:list>
 </div>

@@ -1,11 +1,13 @@
 package cz.kolomet.repository;
 
-import org.springframework.roo.addon.layers.repository.jpa.RooJpaRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.stereotype.Repository;
 
 import cz.kolomet.domain.codelist.CategoryType;
 
-@RooJpaRepository(domainType = CategoryType.class)
-public interface CategoryTypeRepository {
+@Repository
+public interface CategoryTypeRepository extends JpaSpecificationExecutor<CategoryType>, JpaRepository<CategoryType, Long> {
 	
 	public CategoryType findByCodeKeyOrderBySequenceNrDesc(String codeKey);
 	

@@ -22,12 +22,25 @@
         <h2>
             <spring:message code="label_cz_kolomet_domain_newsitemphotourl_plural"/>
         </h2>
-        <br/>
-        <c:set scope="request" value="${newsItem.newsItemPhotoUrls}" var="newsitemphotourls"/>
-        <jsp:include flush="true" page="../newsitemphotourls/list.jspx"/>
-        <br/>
+        <ul>
+	        <c:forEach items="${newsItem.newsItemPhotoUrls}" var="photoUrl">
+	        	<spring:url value="/file/${photoUrl.origPhotoUrl}" var="url" />
+	        	<li><c:out value="${url}" /></li>
+	        </c:forEach>
+        </ul>
         <util:panel id="fc_cz_kolomet_domain_Newsitem_newsItemPhotoUrls" title="NewsItemPhotoUrls">
-            <field:files id="files"/>
+        	<spring:url value="/resources/images/products/no-photo-detail.jpg" var="fileNotFoundUrl"/>
+            <spring:url value="/store/admin/newsitemphotourls/file" var="uploadFileUrl"/>
+            <spring:url value="/file/newsitem/${newsItem.id}" var="fileBaseUrl"/>
+            <spring:url value="${subContext}/admin/newsitemphotourls" var="fileBaseDeleteUrl"/>
+            <field:input-file 
+            	fileBaseDeleteUrl="${fileBaseDeleteUrl}" 
+            	fileBaseUrl="${fileBaseUrl}" 
+            	fileNotFoundUrl="${fileNotFoundUrl}"
+            	uploadedFiles="${uploadedFiles}"
+            	addedFiles="${addedFiles}" 
+            	id="newsitem_files"
+            	uploadFileUrl="${uploadFileUrl}"/>
         </util:panel>
     </form:update>
 </div>

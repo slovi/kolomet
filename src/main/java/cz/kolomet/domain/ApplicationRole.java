@@ -1,25 +1,16 @@
 package cz.kolomet.domain;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-
-import org.springframework.roo.addon.equals.RooEquals;
-import org.springframework.roo.addon.javabean.RooJavaBean;
-import org.springframework.roo.addon.jpa.entity.RooJpaEntity;
-import org.springframework.roo.addon.serializable.RooSerializable;
-import org.springframework.roo.addon.tostring.RooToString;
-
-@RooJavaBean
-@RooToString(excludeFields = {"createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate", "permissions", "users"})
-@RooJpaEntity(inheritanceType = "TABLE_PER_CLASS")
-@RooEquals(excludeFields = {"createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate", "permissions", "users"})
-@RooSerializable
-public class ApplicationRole extends DomainEntity {
+@Entity
+public class ApplicationRole extends BaseDomainEntity implements Serializable {
 	
 	/**
 	 */
@@ -34,5 +25,28 @@ public class ApplicationRole extends DomainEntity {
 	      joinColumns={@JoinColumn(name="ROLE_ID", referencedColumnName="ID")},
 	      inverseJoinColumns={@JoinColumn(name="PERMISSION_ID", referencedColumnName="ID")})
 	private List<ApplicationPermission> permissions;
-	
+
+	public String getRoleName() {
+        return this.roleName;
+    }
+
+	public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
+	public List<ApplicationUser> getUsers() {
+        return this.users;
+    }
+
+	public void setUsers(List<ApplicationUser> users) {
+        this.users = users;
+    }
+
+	public List<ApplicationPermission> getPermissions() {
+        return this.permissions;
+    }
+
+	public void setPermissions(List<ApplicationPermission> permissions) {
+        this.permissions = permissions;
+    }
 }

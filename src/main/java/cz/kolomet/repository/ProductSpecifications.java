@@ -27,6 +27,7 @@ import cz.kolomet.domain.Seller;
 import cz.kolomet.domain.codelist.Region;
 import cz.kolomet.dto.AdminProductFilterDto;
 import cz.kolomet.dto.ProductFilterDto;
+import cz.kolomet.util.db.JpaUtils;
 
 public class ProductSpecifications {
 	
@@ -111,6 +112,7 @@ public class ProductSpecifications {
 					Join<Product, Category> category = root.join("category");
 					predicates.add(cb.equal(category.get("categoryType"), productFilter.getCategoryType()));
 				}
+				JpaUtils.addBetweenDatePredicate(predicates, cb, root.<Date> get("validFrom"), root.<Date> get("validTo"), new Date());
 				predicates.add(cb.equal(seller.get("enabled"), true));
 				return cb.and(predicates.toArray(new Predicate[predicates.size()]));
 			}

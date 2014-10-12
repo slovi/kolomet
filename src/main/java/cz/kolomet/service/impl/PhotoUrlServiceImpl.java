@@ -2,13 +2,19 @@ package cz.kolomet.service.impl;
 import java.awt.Dimension;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import cz.kolomet.domain.Photo;
 import cz.kolomet.domain.PhotoUrl;
 import cz.kolomet.domain.Product;
+import cz.kolomet.repository.PhotoUrlRepository;
 import cz.kolomet.service.PhotoUrlService;
 
+@Service
+@Transactional
 public class PhotoUrlServiceImpl extends AbstractPhotoUrlService implements PhotoUrlService {
 	
 	@Value("${product.img.width}")
@@ -44,12 +50,12 @@ public class PhotoUrlServiceImpl extends AbstractPhotoUrlService implements Phot
     }
     
     @Override
-    protected ResizeInfo[] getResizeInfos() {
+    public ResizeInfo[] getResizeInfos() {
     	ResizeInfo[] resizeInfos = new ResizeInfo[4];
-    	resizeInfos[0] = new ResizeInfo(new Dimension(width, height), PhotoUrl.ORIGINAL_IMG_SUFFIX); // save original image
-    	resizeInfos[1] = new ResizeInfo(new Dimension(detailWidth, detailHeight), PhotoUrl.DETAIL_IMG_SUFFIX); // save detail image
-		resizeInfos[2] = new ResizeInfo(new Dimension(overviewWidth, overviewHeight), PhotoUrl.OVERVIEW_IMG_SUFFIX); // save overview image
-		resizeInfos[3] = new ResizeInfo(new Dimension(thumbnailWidth, thumbnailHeight), PhotoUrl.THUMBNAIL_IMG_SUFFIX, false); // save thumb image
+    	resizeInfos[0] = new ResizeInfo(new Dimension(thumbnailWidth, thumbnailHeight), PhotoUrl.THUMBNAIL_IMG_SUFFIX, false); // save thumb image
+    	resizeInfos[1] = new ResizeInfo(new Dimension(overviewWidth, overviewHeight), PhotoUrl.OVERVIEW_IMG_SUFFIX); // save overview image
+    	resizeInfos[2] = new ResizeInfo(new Dimension(detailWidth, detailHeight), PhotoUrl.DETAIL_IMG_SUFFIX); // save detail image
+    	resizeInfos[3] = new ResizeInfo(new Dimension(width, height), PhotoUrl.ORIGINAL_IMG_SUFFIX); // save original image
     	return resizeInfos;
     }
     
@@ -64,4 +70,31 @@ public class PhotoUrlServiceImpl extends AbstractPhotoUrlService implements Phot
 		photoUrlRepository.save((PhotoUrl) photo);
 	}
    
+
+	@Autowired
+    PhotoUrlRepository photoUrlRepository;
+
+	public long countAllPhotoUrls() {
+        return photoUrlRepository.count();
+    }
+
+	public PhotoUrl findPhotoUrl(Long id) {
+        return photoUrlRepository.findOne(id);
+    }
+
+	public List<PhotoUrl> findAllPhotoUrls() {
+        return photoUrlRepository.findAll();
+    }
+
+	public List<PhotoUrl> findPhotoUrlEntries(int firstResult, int maxResults) {
+        return photoUrlRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / maxResults, maxResults)).getContent();
+    }
+
+	public void savePhotoUrl(PhotoUrl photoUrl) {
+        photoUrlRepository.save(photoUrl);
+    }
+
+	public PhotoUrl updatePhotoUrl(PhotoUrl photoUrl) {
+        return photoUrlRepository.save(photoUrl);
+    }
 }

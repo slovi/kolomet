@@ -1,10 +1,12 @@
 package cz.kolomet.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
@@ -16,23 +18,15 @@ import org.hibernate.annotations.FilterDef;
 import org.hibernate.annotations.Filters;
 import org.hibernate.annotations.ParamDef;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.roo.addon.equals.RooEquals;
-import org.springframework.roo.addon.javabean.RooJavaBean;
-import org.springframework.roo.addon.jpa.entity.RooJpaEntity;
-import org.springframework.roo.addon.serializable.RooSerializable;
-import org.springframework.roo.addon.tostring.RooToString;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-@RooJavaBean
-@RooToString(excludeFields = {"createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate"})
-@RooJpaEntity(inheritanceType = "TABLE_PER_CLASS")
-@RooEquals(excludeFields = {"createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate"})
-@RooSerializable
+import cz.kolomet.dto.FileInfo;
+
+@Entity
 @FilterDef(name = "newsItemEnabledFilter", parameters = @ParamDef(type = "boolean", name = "enabled"))
 @Filters({
 	@Filter(name = "newsItemEnabledFilter", condition = "enabled = :enabled")
 })
-public class NewsItem extends DomainEntity implements PhotoContainer {
+public class NewsItem extends BaseDomainEntity implements PhotoContainer, Serializable {
 	
 	@NotNull
 	private Boolean enabled = true;
@@ -47,10 +41,10 @@ public class NewsItem extends DomainEntity implements PhotoContainer {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "newsItem", cascade = CascadeType.ALL)
     private List<NewsItemPhotoUrl> newsItemPhotoUrls = new ArrayList<NewsItemPhotoUrl>();
 
-	@Transient
-    private List<CommonsMultipartFile> contents;
-	
 	private NewsItemType newsItemType;
+	
+	@Transient
+    private List<FileInfo> fileInfos = new ArrayList<FileInfo>();
 
 	@Override
 	public List<? extends Photo> getPhotos() {
@@ -71,6 +65,54 @@ public class NewsItem extends DomainEntity implements PhotoContainer {
 		this.getNewsItemPhotoUrls().add(newsItemPhotoUrl);
 		return newsItemPhotoUrl;
 	}
+
+	public Boolean getEnabled() {
+        return this.enabled;
+    }
+
+	public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
+	public Date getNewsItemDate() {
+        return this.newsItemDate;
+    }
+
+	public void setNewsItemDate(Date newsItemDate) {
+        this.newsItemDate = newsItemDate;
+    }
+
+	public String getText() {
+        return this.text;
+    }
+
+	public void setText(String text) {
+        this.text = text;
+    }
+
+	public List<NewsItemPhotoUrl> getNewsItemPhotoUrls() {
+        return this.newsItemPhotoUrls;
+    }
+
+	public void setNewsItemPhotoUrls(List<NewsItemPhotoUrl> newsItemPhotoUrls) {
+        this.newsItemPhotoUrls = newsItemPhotoUrls;
+    }
 	
+	public NewsItemType getNewsItemType() {
+        return this.newsItemType;
+    }
+
+	public void setNewsItemType(NewsItemType newsItemType) {
+        this.newsItemType = newsItemType;
+    }
+
+	public List<FileInfo> getFileInfos() {
+		return fileInfos;
+	}
+
+	public void setFileInfos(List<FileInfo> fileInfos) {
+		this.fileInfos = fileInfos;
+	}
+
 }
 

@@ -10,13 +10,8 @@ require.config({
 		'jquery.block-ui': '../../lib/jquery.blockUI',
 		'jquery.iframe-transport': '../../lib/jquery.iframe-transport',
 		'jquery.fileupload': '../../lib/jquery.fileupload',
-		'jquery.fileupload-audio': '../../lib/jquery.fileupload-audio',
-		'jquery.fileupload-image': '../../lib/jquery.fileupload-image',
-		'jquery.fileupload-jquery-ui': '../../lib/jquery.fileupload-jquery-ui',
-		'jquery.fileupload-process': '../../lib/jquery.fileupload-process',
-		'jquery.fileupload-ui': '../../lib/jquery.fileupload-ui',
-		'jquery.fileupload-validate': '../../lib/jquery.fileupload-validate',
-		'jquery.fileupload-video': '../../lib/jquery.fileupload-video',
+		'jquery.history': '../../lib/jquery.history',
+		'jquery.iframe-transport': '../../lib/jquery.iframe-transport',
 		'jquery.lean': '../../lib/jquery.leanModal.min',
 		'jquery.number': '../../lib/jquery.numberformatter-1.2.4.min',
 		'jquery.ui': '../../lib/jquery-ui.min',
@@ -31,7 +26,6 @@ require.config({
 		'tmpl': '../../lib/tmpl.min',
 
 		// modules
-		
 		'ajax-link': '../../modules/ajax-link',
 		'ajax-submit': '../../modules/ajax-submit',
 		'config-service': '../../modules/config-service',
@@ -54,6 +48,9 @@ require.config({
 			deps: ['jquery']
 		},
 		'jquery.iframe-transport': {
+			deps: ['jquery']
+		},
+		'jquery.history': {
 			deps: ['jquery']
 		},
 		'jquery.lean': {

@@ -6,7 +6,7 @@
     <div class="detail_header"> 
    		
    		<div class="detail_img left">
-           	<util:photo-image photos="${seller.sellerPhotoUrls}" imgType="" height="338" width="508" />
+           	<util:photo-image photos="${seller.sellerPhotoUrls}" noPhotoUrl="/resources/images/sellers/no-photo-detail.jpg" imgType="" height="338" width="508" />
         </div>
         
        	<div class="detail_description right"> 
@@ -90,14 +90,22 @@
             	<thead>               		
                   	<tr>
                   		<td><spring:message code="seller_detail_product_name" /></td>
-                      	<td><spring:message code="seller_detail_product_price" /> (<spring:message code="currency_short" />)</td>
+                      	<td class="text_right"><b><spring:message code="label_cz_kolomet_domain_product_finalprice" /> (<spring:message code="currency_short" />)</b></td>
+                  		<security:authorize access="!isAuthenticated() or (isAuthenticated() and !principal.isSellerOwner(#seller))">
+    						<td class="text_right"><spring:message code="label_cz_kolomet_domain_product_discount" /> (<spring:message code="currency_short" />)</td>
+    						<td class="text_right"><spring:message code="label_cz_kolomet_domain_product_price" /> (<spring:message code="currency_short" />)</td>
+                      	</security:authorize>
                   	</tr>
                 </thead>
                 <c:forEach items="${products.content}" var="product">
                    	<tr>
-                   		<spring:url value="/public/products/detail" var="productDetailUrl" />
+                   		<spring:url value="${subContext}/public/products/detail" var="productDetailUrl" />
                    		<td><a href="${productDetailUrl}/${product.id}">${product.productName}</a></td>
-                       	<td><fmt:formatNumber groupingUsed="true" value="${product.price}" /></td>
+                       	<td class="text_right"><b><fmt:formatNumber groupingUsed="true" value="${product.finalPrice}" /></b></td>
+                       	<security:authorize access="!isAuthenticated() or (isAuthenticated() and !principal.isSellerOwner(#seller))">
+    						<td class="text_right"><fmt:formatNumber groupingUsed="true" value="${product.discount}" /></td>
+    						<td class="text_right"><fmt:formatNumber groupingUsed="true" value="${product.price}" /></td>
+                      	</security:authorize>
                    	</tr>
             	</c:forEach>
             </table>
@@ -110,7 +118,7 @@
 	    		<security:authorize access="principal.isCapableToUpdateSeller(#seller)" var="update" />
 	    		<security:authorize access="principal.isCapableToDeleteSeller(#seller)" var="delete" />
 	    		<security:authorize access="principal.isCapableToEraseSeller(#seller)" var="erase" />
-	    		<util:quicklinks update="${update}" create="false" erase="${erase}" list="true" itemId="${seller.id}" typeName="seller" delete="${delete}" typeNamePlural="sellers" path="/admin/sellers" largeIcons="true" />
+	    		<util:quicklinks update="${update}" create="false" erase="${erase}" list="true" itemId="${seller.id}" typeName="seller" delete="${delete}" typeNamePlural="sellers" path="${subContext}/admin/sellers" largeIcons="true" />
 	    	</security:authorize>
     	</security:authorize>
     </div>

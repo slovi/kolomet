@@ -1,15 +1,9 @@
 package cz.kolomet.domain;
-import org.springframework.roo.addon.equals.RooEquals;
-import org.springframework.roo.addon.javabean.RooJavaBean;
-import org.springframework.roo.addon.jpa.entity.RooJpaEntity;
-import org.springframework.roo.addon.serializable.RooSerializable;
-import org.springframework.roo.addon.tostring.RooToString;
+import java.io.Serializable;
 
-@RooJavaBean
-@RooToString
-@RooJpaEntity(inheritanceType = "TABLE_PER_CLASS")
-@RooEquals
-@RooSerializable
-public class ProductComment extends Comment {
+import javax.persistence.Entity;
+
+@Entity
+public class ProductComment extends Comment implements Serializable {
 	
 }

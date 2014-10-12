@@ -1,15 +1,9 @@
 package cz.kolomet.domain.codelist;
 
-import org.springframework.roo.addon.equals.RooEquals;
-import org.springframework.roo.addon.javabean.RooJavaBean;
-import org.springframework.roo.addon.jpa.entity.RooJpaEntity;
-import org.springframework.roo.addon.serializable.RooSerializable;
-import org.springframework.roo.addon.tostring.RooToString;
+import java.io.Serializable;
 
-@RooJavaBean
-@RooToString(excludeFields = {"createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate"})
-@RooJpaEntity(inheritanceType = "TABLE_PER_CLASS")
-@RooEquals(excludeFields = {"createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate"})
-@RooSerializable
-public class CategoryType extends Codelist {
+import javax.persistence.Entity;
+@Entity
+public class CategoryType extends Codelist implements Serializable {
+
 }

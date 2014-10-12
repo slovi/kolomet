@@ -8,9 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.apache.commons.io.FileUtils;
+import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -36,7 +37,6 @@ import cz.kolomet.service.RateService;
 
 @RequestMapping("/public/places")
 @Controller("publicPlaceController")
-@RooWebScaffold(path = "public/places", formBackingObject = Place.class, create = false, delete = false, update = false)
 public class PlaceController extends AbstractPublicController {
 	
 	private static String[] jsonFields = new String[] {"id", "name", "placeType.placeTypeColor", "gpsLocation.north", "gpsLocation.west"};
@@ -128,4 +128,9 @@ public class PlaceController extends AbstractPublicController {
 		
 	}
 	
+
+	void addDateTimeFormatPatterns(Model uiModel) {
+        uiModel.addAttribute("place_created_date_format", DateTimeFormat.patternForStyle("MM", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("place_lastmodified_date_format", DateTimeFormat.patternForStyle("MM", LocaleContextHolder.getLocale()));
+    }
 }

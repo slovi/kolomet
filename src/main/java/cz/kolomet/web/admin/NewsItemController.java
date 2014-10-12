@@ -1,6 +1,7 @@
 package cz.kolomet.web.admin;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -11,24 +12,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.util.UriUtils;
+import org.springframework.web.util.WebUtils;
 
+import cz.kolomet.domain.BasePhoto;
 import cz.kolomet.domain.NewsItem;
 import cz.kolomet.domain.NewsItemType;
 import cz.kolomet.dto.EnumDto;
 import cz.kolomet.service.ApplicationUserService;
 import cz.kolomet.service.NewsItemPhotoUrlService;
 import cz.kolomet.service.NewsItemService;
+import flexjson.JSONSerializer;
 
 @RequestMapping("/admin/newsitems")
 @Controller
-@RooWebScaffold(path = "admin/newsitems", formBackingObject = NewsItem.class)
 public class NewsItemController extends AbstractAdminController {
 	
 	@Autowired
@@ -51,7 +55,7 @@ public class NewsItemController extends AbstractAdminController {
     	uiModel.asMap().clear();              
 
     	newsItemService.saveNewsItem(newsItem);
-    	savePhotos(newsItem, newsItemPhotoUrlService, newsItem.getContents());
+    	savePhotos(newsItem, newsItemPhotoUrlService, httpServletRequest.getSession().getId(), newsItem.getFileInfos());
     	
     	if (StringUtils.isNotEmpty(stay)) {
     		return "redirect:/admin/newsitems/" + newsItem.getId() + "?form";
@@ -69,7 +73,7 @@ public class NewsItemController extends AbstractAdminController {
         uiModel.asMap().clear();        
         
         newsItemService.updateNewsItem(newsItem);
-        savePhotos(newsItem, newsItemPhotoUrlService, newsItem.getContents());
+        savePhotos(newsItem, newsItemPhotoUrlService, httpServletRequest.getSession().getId(), newsItem.getFileInfos());
         if (StringUtils.isNotEmpty(stay)) {
         	return "redirect:/admin/newsitems/" + newsItem.getId() + "?form";
         } else {
@@ -96,6 +100,10 @@ public class NewsItemController extends AbstractAdminController {
         uiModel.addAttribute("applicationusers", applicationUserService.findAllApplicationUsers());
         uiModel.addAttribute("newsitemphotourls", newsItemPhotoUrlService.findAllNewsItemPhotoUrls());
         uiModel.addAttribute("newsitemtypes", EnumDto.createCollection(NewsItemType.values(), messageSource));
+        
+        uiModel.addAttribute("addedFiles", new JSONSerializer().serialize(newsItem.getFileInfos()));
+        uiModel.addAttribute("uploadedFiles", BasePhoto.toJsonArray(newsItem.getNewsItemPhotoUrls(), new String[] {"id", "fileName"}));
+        
     }
     
     void addDateTimeFormatPatterns(Model uiModel) {
@@ -104,4 +112,45 @@ public class NewsItemController extends AbstractAdminController {
         uiModel.addAttribute("newsItem_newsitemdate_date_format", DateTimeFormat.patternForStyle("MS", LocaleContextHolder.getLocale()));
     }
 
+
+	@RequestMapping(params = "form", produces = "text/html")
+    public String createForm(Model uiModel) {
+        populateEditForm(uiModel, new NewsItem());
+        return "admin/newsitems/create";
+    }
+
+	@RequestMapping(value = "/{id}", produces = "text/html")
+    public String show(@PathVariable("id") Long id, Model uiModel) {
+        addDateTimeFormatPatterns(uiModel);
+        uiModel.addAttribute("newsitem", newsItemService.findNewsItem(id));
+        uiModel.addAttribute("itemId", id);
+        return "admin/newsitems/show";
+    }
+
+	@RequestMapping(value = "/{id}", params = "form", produces = "text/html")
+    public String updateForm(@PathVariable("id") Long id, Model uiModel) {
+        populateEditForm(uiModel, newsItemService.findNewsItem(id));
+        return "admin/newsitems/update";
+    }
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
+    public String delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
+        NewsItem newsItem = newsItemService.findNewsItem(id);
+        newsItemService.deleteNewsItem(newsItem);
+        uiModel.asMap().clear();
+        uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
+        uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
+        return "redirect:/admin/newsitems";
+    }
+
+	String encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {
+        String enc = httpServletRequest.getCharacterEncoding();
+        if (enc == null) {
+            enc = WebUtils.DEFAULT_CHARACTER_ENCODING;
+        }
+        try {
+            pathSegment = UriUtils.encodePathSegment(pathSegment, enc);
+        } catch (UnsupportedEncodingException uee) {}
+        return pathSegment;
+    }
 }

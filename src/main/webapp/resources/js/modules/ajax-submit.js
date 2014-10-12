@@ -33,7 +33,7 @@ define(['jquery', 'http-service'], function($, httpService) {
 		paramsData.ajaxSource = $(element).attr('id');
 		
 		httpService.sendAndRerender(action, method, paramsData, function(modelFragmentsData) {
-			successCallback(element, modelFragmentsData);
+			successCallback(element, paramsData, modelFragmentsData);
 		});
 	}
 

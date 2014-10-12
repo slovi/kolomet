@@ -23,7 +23,7 @@
 	    	<c:forEach items="${regions}" var="region">
 	    	
 	    		<c:choose>
-	    			<c:when test="${param.region eq region.id}">
+	    			<c:when test="${param.region_id eq region.id}">
 	    				<c:set var="styleClass" value="current ajaxLink" />
 	    			</c:when>
 	    			<c:otherwise>
@@ -31,7 +31,7 @@
 	    			</c:otherwise>
 	    		</c:choose>
 	    	
-				<menu:item url="/tour/public/places?region=${region.id}&amp;region_zoom=${region.zoom}&amp;menu=region&amp;gps_north=${region.gpsLocation.north}&amp;gps_west=${region.gpsLocation.west}" 
+				<menu:item url="/tour/public/places?region_id=${region.id}&amp;region_zoom=${region.zoom}&amp;menu=region&amp;gps_north=${region.gpsLocation.north}&amp;gps_west=${region.gpsLocation.west}" 
 					id="menuitem_${region.codeKey}" styleClass="${styleClass}" label="${region.codeDescription}" />
 			</c:forEach>
 	     </menu:menu>

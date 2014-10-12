@@ -8,12 +8,16 @@
 	
 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
     	<property name="properties" ref="applicationProperties" />
+    	<property name="ignoreUnresolvablePlaceholders" value="true" />
     </bean>
     
     <mvc:annotation-driven conversion-service="applicationConversionService" validator="validator">
     	<mvc:argument-resolvers>
     		<bean class="org.springframework.data.web.PageableArgumentResolver"/>
     	</mvc:argument-resolvers>
+    	<mvc:message-converters>
+    		<bean class="cz.kolomet.util.web.ajax.AjaxResponseTextHttpMessageConverter" />
+    	</mvc:message-converters>
     </mvc:annotation-driven>
     
     <bean id="validator" class="cz.kolomet.util.CompositeValidator">
@@ -31,6 +35,7 @@
     <mvc:view-controller path="/public/uncaughtException" view-name="public/uncaughtException"/>
     <mvc:view-controller path="/public/resourceNotFound" view-name="public/resourceNotFound"/>
     <mvc:view-controller path="/public/dataAccessFailure" view-name="public/dataAccessFailure"/>
+    <mvc:view-controller path="/public/accessDenied" view-name="public/accessDenied"/>
 
     <bean class="org.springframework.context.support.ReloadableResourceBundleMessageSource" id="messageSource" p:basenames="WEB-INF/i18n/messages,WEB-INF/i18n/application,WEB-INF/i18n/errors" p:fallbackToSystemLocale="false">
     	 <property name="useCodeAsDefaultMessage" value="true"/>
@@ -52,6 +57,7 @@
                 <prop key=".MissingServletRequestParameterException">public/resourceNotFound</prop>
                 <prop key=".EntityNotFoundException">public/resourceNotFound</prop>
                 <prop key=".ViewNotFoundException">public/resourceNotFound</prop>
+                <prop key=".AccessDeniedException">public/accessDenied</prop>
             </props>
         </property>
     </bean>

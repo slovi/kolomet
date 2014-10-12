@@ -1,9 +1,11 @@
 package cz.kolomet.repository;
 
-import org.springframework.roo.addon.layers.repository.jpa.RooJpaRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.stereotype.Repository;
 
 import cz.kolomet.domain.ApplicationPermission;
 
-@RooJpaRepository(domainType = ApplicationPermission.class)
-public interface ApplicationPermissionRepository {
+@Repository
+public interface ApplicationPermissionRepository extends JpaSpecificationExecutor<ApplicationPermission>, JpaRepository<ApplicationPermission, Long> {
 }

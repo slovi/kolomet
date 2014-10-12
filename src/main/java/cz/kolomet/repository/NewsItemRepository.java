@@ -1,10 +1,12 @@
 package cz.kolomet.repository;
 
-import org.springframework.roo.addon.layers.repository.jpa.RooJpaRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.stereotype.Repository;
 
 import cz.kolomet.domain.NewsItem;
 
-@RooJpaRepository(domainType = NewsItem.class)
-public interface NewsItemRepository {
+@Repository
+public interface NewsItemRepository extends JpaSpecificationExecutor<NewsItem>, JpaRepository<NewsItem, Long> {
 	 
 }

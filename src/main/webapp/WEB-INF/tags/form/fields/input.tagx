@@ -67,6 +67,7 @@
     </c:set>
     
     <div id="_${fn:escapeXml(id)}_id">
+      <form:errors cssClass="errors" id="_${sec_field}_error_id" path="${sec_field}" />
       <label for="_${sec_field}_id">
         <c:out value="${fn:escapeXml(label)}" />
         :
@@ -84,7 +85,6 @@
               <form:input id="_${sec_field}_id" style="width: ${width}em;" path="${sec_field}" disabled="${disabled}" readonly="${readonly}" />
             </c:otherwise>
           </c:choose>          
-          <form:errors cssClass="errors" id="_${sec_field}_error_id" path="${sec_field}" />
           <br />
         </c:otherwise>
       </c:choose>

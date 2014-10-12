@@ -1,12 +1,15 @@
 package cz.kolomet.domain;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
@@ -20,19 +23,11 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.apache.commons.io.FileUtils;
-import org.hibernate.annotations.Filter;
-import org.hibernate.annotations.FilterDef;
-import org.hibernate.annotations.FilterDefs;
-import org.hibernate.annotations.Filters;
-import org.hibernate.annotations.ParamDef;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
-import org.springframework.roo.addon.equals.RooEquals;
-import org.springframework.roo.addon.javabean.RooJavaBean;
-import org.springframework.roo.addon.jpa.entity.RooJpaEntity;
-import org.springframework.roo.addon.serializable.RooSerializable;
-import org.springframework.roo.addon.tostring.RooToString;
 
 import cz.kolomet.domain.codelist.BicycleCategory;
 import cz.kolomet.domain.codelist.FigureHeight;
@@ -41,22 +36,8 @@ import cz.kolomet.domain.codelist.ProductColor;
 import cz.kolomet.domain.codelist.ProductUsage;
 import cz.kolomet.dto.FileInfo;
 
-@RooJavaBean
-@RooToString(excludeFields = {"createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate", "seller", "category", "producer", "photoUrls", "productAttributes"})
-@RooJpaEntity(inheritanceType = "TABLE_PER_CLASS")
-@RooEquals(excludeFields = {"createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate", "seller", "category", "producer", "photoUrls", "productAttributes"})
-@RooSerializable
-@FilterDefs({
-	@FilterDef(name = "productEnabledFilter", parameters = @ParamDef(type = "boolean", name = "enabled")),
-	@FilterDef(name = "productValidToFilter", parameters = @ParamDef(type = "date", name = "actualDate")),
-	@FilterDef(name = "sellerOwnFilter", parameters = @ParamDef(type = "long", name= "sellerId"))
-})
-@Filters({
-	@Filter(name = "productValidToFilter", condition = "validfrom <= :actualDate and validto >= :actualDate"),
-	@Filter(name = "productEnabledFilter", condition = "enabled = :enabled"),
-	@Filter(name = "sellerOwnFilter", condition = "seller_id = :sellerId")
-})
-public class Product extends DomainEntity implements Cloneable, PhotoContainer {
+@Entity
+public class Product extends BaseDomainEntity implements Cloneable, PhotoContainer, Serializable {
 	
 	public static final Date DEFAULT_VALID_TO_DATE = new DateTime(9999, 12, 31, 0, 0, 0, 0).toDate();
 	
@@ -89,35 +70,34 @@ public class Product extends DomainEntity implements Cloneable, PhotoContainer {
 
     /**
      */
-    @ManyToOne
-    @Filter(name = "sellerEnabledFilter", condition = "enabled = :enabled")
+    @ManyToOne(fetch = FetchType.LAZY)
     private Seller seller;
 
     /**
      */
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Category category;
 
     /**
      */
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Producer producer;
     
     /**
      */
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private ProductUsage productUsage;
     
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private BicycleCategory bicycleCategory;
     
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private FigureHeight figureHeight;
     
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private ProductColor productColor;
     
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PRODUCT_ID")
     private Product copiedFrom;
     
@@ -153,12 +133,14 @@ public class Product extends DomainEntity implements Cloneable, PhotoContainer {
 
     /**
      */
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product", fetch = FetchType.LAZY)
+    @Fetch(FetchMode.SUBSELECT)
     private List<PhotoUrl> photoUrls = new ArrayList<PhotoUrl>();
 
     /**
      */
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product", fetch = FetchType.LAZY)
+    @Fetch(FetchMode.SUBSELECT)
     private List<ProductAttribute> productAttributes = new ArrayList<ProductAttribute>();
     
     @Transient
@@ -342,5 +324,189 @@ public class Product extends DomainEntity implements Cloneable, PhotoContainer {
 	public void setFileInfos(List<FileInfo> fileInfos) {
 		this.fileInfos = fileInfos;
 	}
-    
+
+	public String getProductName() {
+        return this.productName;
+    }
+
+	public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+	public BigDecimal getPrice() {
+        return this.price;
+    }
+
+	public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+	public BigDecimal getFinalPrice() {
+        return this.finalPrice;
+    }
+
+	public void setFinalPrice(BigDecimal finalPrice) {
+        this.finalPrice = finalPrice;
+    }
+
+	public BigDecimal getDiscount() {
+        return this.discount;
+    }
+
+	public void setDiscount(BigDecimal discount) {
+        this.discount = discount;
+    }
+
+	public String getDescription() {
+        return this.description;
+    }
+
+	public void setDescription(String description) {
+        this.description = description;
+    }
+
+	public Seller getSeller() {
+        return this.seller;
+    }
+
+	public void setSeller(Seller seller) {
+        this.seller = seller;
+    }
+
+	public Category getCategory() {
+        return this.category;
+    }
+
+	public void setCategory(Category category) {
+        this.category = category;
+    }
+
+	public Producer getProducer() {
+        return this.producer;
+    }
+
+	public void setProducer(Producer producer) {
+        this.producer = producer;
+    }
+
+	public ProductUsage getProductUsage() {
+        return this.productUsage;
+    }
+
+	public void setProductUsage(ProductUsage productUsage) {
+        this.productUsage = productUsage;
+    }
+
+	public BicycleCategory getBicycleCategory() {
+        return this.bicycleCategory;
+    }
+
+	public void setBicycleCategory(BicycleCategory bicycleCategory) {
+        this.bicycleCategory = bicycleCategory;
+    }
+
+	public FigureHeight getFigureHeight() {
+        return this.figureHeight;
+    }
+
+	public void setFigureHeight(FigureHeight figureHeight) {
+        this.figureHeight = figureHeight;
+    }
+
+	public ProductColor getProductColor() {
+        return this.productColor;
+    }
+
+	public void setProductColor(ProductColor productColor) {
+        this.productColor = productColor;
+    }
+
+	public Product getCopiedFrom() {
+        return this.copiedFrom;
+    }
+
+	public void setCopiedFrom(Product copiedFrom) {
+        this.copiedFrom = copiedFrom;
+    }
+
+	public Boolean getEnabled() {
+        return this.enabled;
+    }
+
+	public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
+	public Date getValidFrom() {
+        return this.validFrom;
+    }
+
+	public void setValidFrom(Date validFrom) {
+        this.validFrom = validFrom;
+    }
+
+	public Date getValidTo() {
+        return this.validTo;
+    }
+
+	public void setValidTo(Date validTo) {
+        this.validTo = validTo;
+    }
+
+	public Boolean getCanSendToAllCountry() {
+        return this.canSendToAllCountry;
+    }
+
+	public void setCanSendToAllCountry(Boolean canSendToAllCountry) {
+        this.canSendToAllCountry = canSendToAllCountry;
+    }
+
+	public Boolean getDeliveryForFree() {
+        return this.deliveryForFree;
+    }
+
+	public void setDeliveryForFree(Boolean deliveryForFree) {
+        this.deliveryForFree = deliveryForFree;
+    }
+
+	public Double getWeight() {
+        return this.weight;
+    }
+
+	public void setWeight(Double weight) {
+        this.weight = weight;
+    }
+
+	public String getBuyUrl() {
+        return this.buyUrl;
+    }
+
+	public void setBuyUrl(String buyUrl) {
+        this.buyUrl = buyUrl;
+    }
+
+	public ProductState getProductState() {
+        return this.productState;
+    }
+
+	public void setProductState(ProductState productState) {
+        this.productState = productState;
+    }
+
+	public List<PhotoUrl> getPhotoUrls() {
+        return this.photoUrls;
+    }
+
+	public void setPhotoUrls(List<PhotoUrl> photoUrls) {
+        this.photoUrls = photoUrls;
+    }
+
+	public List<ProductAttribute> getProductAttributes() {
+        return this.productAttributes;
+    }
+
+	public void setProductAttributes(List<ProductAttribute> productAttributes) {
+        this.productAttributes = productAttributes;
+    }
+
 }

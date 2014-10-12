@@ -3,28 +3,34 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     
-    <div class="general_unit" style="padding:0;background:#f3f3f3;min-height:323px;">
+    <div class="general_unit" style="overflow: hidden; padding: 0px;">
     
-        <util:photo-image height="232" imgType="detail" noPhotoUrl="/resources/images/no-photo-orig_places.jpg" photos="${place.photos}" width="348"/>
+        <util:photo-image height="232" imgType="detail" noPhotoUrl="/resources/images/places/no-photo-detail.jpg" photos="${place.photos}" width="348"/>
     
-        <div class="detail_description">
-            <h2>
-                <c:out value="${place.name}"/>
-            </h2>
-            <br />
-            <p>
-            	<c:out value="${place.placeType.codeDescription}" />
-            </p>
-            <c:if test="${not empty place.descriptionLink}">
-                <p>
-                    <a href="${place.descriptionLink}" target="_blank"><c:out value="${place.descriptionLink}"/></a>
-                </p>
-            </c:if>
-            <br />
-            <p>
-                <c:out escapeXml="false" value="${place.description}"/>
-            </p>
-        </div>
+    	<div class="detail_description_wrapper">
+	        <div class="detail_description">
+	            <h2>
+	                <c:out value="${place.name}"/>
+	            </h2>
+	            <br />
+	            <p>
+	            	<c:out value="${place.placeType.codeDescription}" />
+	            </p>
+	            <c:if test="${not empty place.descriptionLink}">
+	                <p>
+	                    <a href="${place.descriptionLink}" target="_blank"><c:out value="${place.descriptionLink}"/></a>
+	                </p>
+	            </c:if>
+	            <br />
+	            <p>
+	                <c:out escapeXml="false" value="${place.description}"/>
+	            </p>
+	        </div>
+	        <div class="detail_author">
+	        	Autor: <c:out value="${place.createdBy.nickname}" />
+	        </div>
+	    </div>
+
         <div class="detail_tag">
             <div class="left" style="height: 30px;">
                 <p>
@@ -46,9 +52,11 @@
                 </p>
             </div>
         </div>
+        
     </div>
-    <div class="general_unit" style="min-height: 135px;">
-        <table class="left_column">
+    <div class="general_unit" style="min-height: 165px;">
+    	<div class="left_column">
+        <table>
             <tr>
                 <td>
                     <b>
@@ -91,7 +99,32 @@
             </tr>
         </table>
         
-        <field:files-thumbnails photos="${place.photos}" id="place_thumbnails" />
+        <br />
+        
+        <security:authorize access="isAuthenticated()">
+	    		<security:authorize access="principal.isPlaceOwner(#place)">
+			        <table class="left_column">
+			        	<thead>
+			        		<tr>
+			        			<td colspan="2">Systémové údaje</td>
+			        		</tr>
+			        	</thead>
+			            <tr>
+			                <td>
+			                    <b>
+			                        <spring:message code="label_cz_kolomet_domain_place_id"/>
+			                    </b>
+			                </td>
+			                <td>
+			                    <c:out value="${place.id}"/>
+			                </td>
+			            </tr>
+			        </table>
+        	</security:authorize>
+        </security:authorize>
+        </div>
+        
+        <field:files-thumbnails photos="${place.photos}" id="place_thumbnails" />               
         
     </div>
     
@@ -104,38 +137,46 @@
 			</div>
      	</security:authorize>
  	</security:authorize>
+ 	
     
     <div class="general_unit_empty">
-        <h2 style="padding:0;margin-left:5px;margin-top: 10px"><spring:message code="place_detail_comments"/>:</h2>
-        
-        <spring:url value="${subContext}/public/placecomments?form" var="commentsUrl">
+      
+        <spring:url value="${subContext}/admin/placecomments?form" var="commentsUrl">
 	        <spring:param name="parentEntityId" value="${place.id}"/>
 	    </spring:url>
 	    
-	    <c:choose>
+        <c:choose>
 	        <c:when test="${fn:length(place.comments) gt 0}">
+	        
+	        	<security:authorize access="isAuthenticated()" var="authenticated" />
+	        
+	        	<h2 style="padding:0;margin-left:5px;margin-top: 10px"><spring:message code="place_detail_comments"/>:</h2>
 	            <c:forEach items="${place.comments}" var="comment">	            	            	
-	            	<util:comment comment="${comment}" />
+	            	<util:comment comment="${comment}" renderResponseButton="${authenticated}" />
 	            </c:forEach>
 	            <div class="clear">
 	                <!--  -->
 	            </div>
-	            <div style="width: 696px; margin-top: 20px;">
-	                <p style="text-align: center;">
-	                    <a href="${commentsUrl}">
-	                        <spring:message code="place_detail_comments_add_comment"/>
-	                    </a>
-	                </p>
-	            </div>
+	            <c:if test="${authenticated}">
+		            <div style="width: 696px; margin-top: 20px;">
+		                <p style="text-align: center;">
+		                    <a href="${commentsUrl}">
+		                        <spring:message code="place_detail_comments_add_comment"/>
+		                    </a>
+		                </p>
+		            </div>
+	            </c:if>
 	        </c:when>
 	        <c:otherwise>
-	            <div style="width: 696px;">
-	                <p style="text-align: center;">
-	                    <spring:message code="place_detail_comments_no_comment"/>: <a href="${commentsUrl}">
-	                        <spring:message code="place_detail_comments_new_comment"/>
-	                    </a>
-	                </p>
-	            </div>
+	        	<c:if test="${authenticated}">
+		            <div style="width: 696px;">
+		                <p style="text-align: center;">
+		                    <spring:message code="place_detail_comments_no_comment"/>: <a href="${commentsUrl}">
+		                        <spring:message code="place_detail_comments_new_comment"/>
+		                    </a>
+		                </p>
+		            </div>
+	            </c:if>
 	        </c:otherwise>
 	    </c:choose>
     </div>

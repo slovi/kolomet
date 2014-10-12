@@ -7,7 +7,7 @@ public class ExistingUserException extends ServiceExpcetion {
 	private final ApplicationUser applicationUser;
 	
 	public ExistingUserException(ApplicationUser applicationUser) {
-		super("User with username " + applicationUser.getUsername() + " already exists.", "exception_bad_username");
+		super("User with username " + applicationUser.getUsername() + " already exists.", "exception_bad_username", applicationUser.getUsername());
 		this.applicationUser = applicationUser;
 	}
 

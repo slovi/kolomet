@@ -4,11 +4,9 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.roo.addon.layers.service.RooService;
 
 import cz.kolomet.domain.Product;
 
-@RooService(domainTypes = { cz.kolomet.domain.Product.class })
 public interface ProductService {
 	
 	public List<Product> findProductEntries(Specification<Product> specification);
@@ -21,4 +19,25 @@ public interface ProductService {
 	
 	public void eraseProduct(Product product);
 	
+
+	public abstract long countAllProducts();
+
+
+	public abstract void deleteProduct(Product product);
+
+
+	public abstract Product findProduct(Long id);
+
+
+	public abstract List<Product> findAllProducts();
+
+
+	public abstract List<Product> findProductEntries(int firstResult, int maxResults);
+
+
+	public abstract void saveProduct(Product product);
+
+
+	public abstract Product updateProduct(Product product);
+
 }

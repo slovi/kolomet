@@ -67,6 +67,10 @@
 	    	<c:set value="[]" var="uploadedFiles" />
 	    </c:if>
 	    
+	    <c:if test="${empty addedFiles}">
+	    	<c:set value="[]" var="addedFiles" />
+	    </c:if>
+	    
 		<span class="config" style="display: none;">
     		<![CDATA[
 				{

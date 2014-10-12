@@ -15,7 +15,7 @@
     			<menu:item url="/store/public/sellers/map" messageCode="menu_main_sellers" id="sellers" renderPageParams="false" />
     			<menu:item url="/store/public/about" messageCode="menu_main_about" id="about" renderPageParams="false" />
     			
-    			<security:authorize access="isFullyAuthenticated()">
+    			<security:authorize access="isFullyAuthenticated() and (principal.isProductsOwn() or principal.isProductsAll())">
 	    			<menu:category id="admin_menu" styleClass="admin" messageCode="menu_main_our_kolomet" url="#">
 	    			
 	    				<menu:item id="i_controller__private_passwordindex_id" messageCode="global_generic" renderPageParams="false" url="/store/admin/password?form" z="user-managed"/>

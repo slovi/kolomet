@@ -60,16 +60,6 @@
                 <field:input field="productAttributes[${status.index}].attributeValue" id="fc_cz_kolomet_domain_Product_productAttribute_value_${status.index}" label="${attributeLabel}" required="${productAttribute.attributeType.required}"/>
             </c:forEach>
         </util:panel>
-        <c:if test="${not empty product.photoUrls}">
-            <br/>
-            <h2>
-                <spring:message code="label_cz_kolomet_domain_product_photourls"/>
-            </h2>
-            <br/>
-            <c:set scope="request" value="${product.photoUrls}" var="photourls"/>
-            <jsp:include flush="true" page="../photourls/list.jspx"/>
-            <br/>
-        </c:if>
         <br/>
         <spring:message code="label_cz_kolomet_domain_product_photourls" var="photourls_panel_label"/>
         <spring:message code="button_add_photo" var="photourls_panel_add"/>
@@ -78,9 +68,14 @@
             <spring:url value="/store/admin/photourls/file" var="uploadFileUrl"/>
             <spring:url value="/file/product/${product.id}" var="fileBaseUrl"/>
             <spring:url value="${subContext}/admin/photourls" var="fileBaseDeleteUrl"/>
-            <field:input-file fileBaseDeleteUrl="${fileBaseDeleteUrl}" fileBaseUrl="${fileBaseUrl}" fileNotFoundUrl="${fileNotFoundUrl}" id="product_files" uploadFileUrl="${uploadFileUrl}"/>
+            <field:input-file 
+            	fileBaseDeleteUrl="${fileBaseDeleteUrl}" 
+            	fileBaseUrl="${fileBaseUrl}" 
+            	fileNotFoundUrl="${fileNotFoundUrl}"
+            	addedFiles="${addedFiles}" 
+            	id="product_files" 
+            	uploadFileUrl="${uploadFileUrl}"/>
         </util:panel>
-        <field:input field="fileInfos" id="c_cz_kolomet_domain_Product_fileInfos" z="+t3+bKofu/jKMnU7tnfAMJLBSi4="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_cz_kolomet_domain_Product" render="${not empty dependencies}" z="JG9sb7H3rDmiMgYvz+ZgFJEQh6g="/>
 </div>

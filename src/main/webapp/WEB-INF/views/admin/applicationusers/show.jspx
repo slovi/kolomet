@@ -1,16 +1,36 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" 
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:spring="http://www.springframework.org/tags" 
+	xmlns:form="urn:jsptagdir:/WEB-INF/tags/form"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" 
+	xmlns:security="http://www.springframework.org/security/tags"  
+	xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+	
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <page:show id="ps_cz_kolomet_domain_ApplicationUser" object="${applicationuser}" path="${subContext}/admin/applicationusers" z="user-managed">
-        <field:display field="username" id="s_cz_kolomet_domain_ApplicationUser_username" object="${applicationuser}" z="+YwpQqls8d3uKMJwcrtuc+jPAqM="/>
-        <field:display field="password" id="s_cz_kolomet_domain_ApplicationUser_password" object="${applicationuser}" z="g9qBySlgX5ZGeRaingLOiAAFqg8="/>
-        <field:display field="seller" id="s_cz_kolomet_domain_ApplicationUser_seller" object="${applicationuser}" z="lPBTe6ImSyV2BrrfRXD2fR9wcmo="/>
-        <field:display field="createdBy" id="s_cz_kolomet_domain_ApplicationUser_createdBy" object="${applicationuser}" z="X8SWEJdL9ipG/+PxBS1oOnJflgc="/>
-        <field:display field="lastModifiedBy" id="s_cz_kolomet_domain_ApplicationUser_lastModifiedBy" object="${applicationuser}" z="G8TIp/39R6724nbo7e0Qc/wr+7k="/>
-        <field:display date="true" dateTimePattern="${applicationUser_created_date_format}" field="created" id="s_cz_kolomet_domain_ApplicationUser_created" object="${applicationuser}" z="5W2iGix117sX1SxqsTenJXiMoAA="/>
-        <field:display date="true" dateTimePattern="${applicationUser_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_ApplicationUser_lastModified" object="${applicationuser}" z="5W2iGix117sX1SxqsTenJXiMoAA="/>
-        <field:display field="enabled" id="s_cz_kolomet_domain_ApplicationUser_enabled" object="${applicationuser}" z="/pt0Pwgdamgfr/fTVjx6mdt94FI="/>
-        <field:display collectionItemProperty="roleName" field="roles" id="s_cz_kolomet_domain_ApplicationUser_roles" object="${applicationuser}" z="user-managed"/>
+    
+    <security:authorize access="principal.isCapableToUpdateApplicationUser(#applicationuser)" var="update" />
+    <security:authorize access="principal.isCapableToDeleteApplicationUser(#applicationuser)" var="delete" />
+    <security:authorize access="principal.isApplicationUsersAll()" var="list" />
+    
+    <spring:message code="menu_item_applicationuser_new_label" var="label" />
+        
+    <page:show id="ps_cz_kolomet_domain_ApplicationUser" object="${applicationuser}" label="${label}" largeIcons="true"
+    	path="${subContext}/admin/applicationusers" create="false" delete="${delete}" update="${update}" list="${list}">
+        <field:files-thumbnails photos="${applicationuser.photos}" id="thumbnails" />
+    	<field:display field="name" id="s_cz_kolomet_domain_ApplicationUser_name" object="${applicationuser}" />
+    	<field:display field="surname" id="s_cz_kolomet_domain_ApplicationUser_surname" object="${applicationuser}" />    
+        <field:display field="username" id="s_cz_kolomet_domain_ApplicationUser_username" object="${applicationuser}" />
+        <field:display field="nickname" id="s_cz_kolomet_domain_ApplicationUser_nickname" object="${applicationuser}" />
+        <security:authorize access="principal.isApplicationUsersAll()">
+        	<field:display field="password" id="s_cz_kolomet_domain_ApplicationUser_password" object="${applicationuser}" />
+	        <field:display field="createdBy" id="s_cz_kolomet_domain_ApplicationUser_createdBy" object="${applicationuser}" />
+    	    <field:display field="lastModifiedBy" id="s_cz_kolomet_domain_ApplicationUser_lastModifiedBy" object="${applicationuser}" />
+	        <field:display date="true" dateTimePattern="${applicationUser_created_date_format}" field="created" id="s_cz_kolomet_domain_ApplicationUser_created" object="${applicationuser}" />
+    	    <field:display date="true" dateTimePattern="${applicationUser_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_ApplicationUser_lastModified" object="${applicationuser}" />
+	        <field:display field="enabled" id="s_cz_kolomet_domain_ApplicationUser_enabled" object="${applicationuser}" />
+	        <field:display collectionItemProperty="roleName" field="roles" id="s_cz_kolomet_domain_ApplicationUser_roles" object="${applicationuser}" />
+        </security:authorize>
     </page:show>
 </div>

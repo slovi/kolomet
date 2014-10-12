@@ -12,7 +12,7 @@ require(['../common'], function (common) {
 	    	
 	    	$('div.comment_box > div.comment_box_text_content > div.comment_box_text, div.detail_description').each(function(index, element) {
 	    		var el = $(element);
-	    		el.html(el.html().replace('\n', '<br/>'));
+	    		el.html(el.html().replace(/\n/g, '<br/>'));
 	    	});
 	    	
 	    });

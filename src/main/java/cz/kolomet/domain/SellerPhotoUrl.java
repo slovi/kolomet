@@ -1,26 +1,18 @@
 package cz.kolomet.domain;
 
-import java.util.List;
+import java.io.Serializable;
+import java.util.Collection;
 
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
-import org.springframework.roo.addon.equals.RooEquals;
-import org.springframework.roo.addon.javabean.RooJavaBean;
-import org.springframework.roo.addon.jpa.entity.RooJpaEntity;
-import org.springframework.roo.addon.serializable.RooSerializable;
-import org.springframework.roo.addon.tostring.RooToString;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import flexjson.JSONSerializer;
 
-@RooJavaBean
-@RooToString(excludeFields = {"createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate", "seller"})
-@RooJpaEntity(inheritanceType = "TABLE_PER_CLASS")
-@RooEquals(excludeFields = {"seller", "createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate", "seller"})
-@RooSerializable
-public class SellerPhotoUrl extends BasePhoto {
+@Entity
+public class SellerPhotoUrl extends BasePhoto implements Serializable {
 	
 	public static final String PHOTO_URL_PREFIX = "seller";
     
@@ -29,8 +21,9 @@ public class SellerPhotoUrl extends BasePhoto {
     @JoinColumn(name = "SELLER_ID")
     private Seller seller;
     
-    @Transient
-    private List<CommonsMultipartFile> contents;
+    public static String toJsonArray(Collection<SellerPhotoUrl> collection, String[] fields) {
+        return new JSONSerializer().include(fields).exclude("*").serialize(collection);
+    }
     
     @Override
     protected String getPhotoUrlPrefix() {
@@ -41,18 +34,18 @@ public class SellerPhotoUrl extends BasePhoto {
     protected Long getParentContainerId() {
     	return seller.getId();
     }
-    
-    public List<CommonsMultipartFile> getContents() {
-    	return contents;
-    }
-    
-    public void setContents(List<CommonsMultipartFile> contents) {
-    	this.contents = contents;
-    }
 
 	@Override
 	public PhotoContainer getParentContainer() {
 		return seller;
 	}
-	
+
+	public Seller getSeller() {
+        return this.seller;
+    }
+
+	public void setSeller(Seller seller) {
+        this.seller = seller;
+    }
+
 }

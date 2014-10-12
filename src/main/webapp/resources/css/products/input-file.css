@@ -25,6 +25,13 @@ div.thumbnails_container div.thumbnail_wrapper div.thumbnail {
 	line-height: 1em;
 }
 
+div.thumbnails_container div.thumbnail_wrapper div.thumbnail_label {
+	width: 100px;
+	padding-top: 3px;
+	overflow: hidden;
+	height: 20px;
+}
+
 div.files_add {
 	background: #f5f5f5 url('/kolomet/resources/images/input_file.png') no-repeat center center;
 	line-height: 1em !important;

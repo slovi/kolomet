@@ -1,22 +1,15 @@
 package cz.kolomet.domain;
+import java.io.Serializable;
+
+import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.springframework.roo.addon.equals.RooEquals;
-import org.springframework.roo.addon.javabean.RooJavaBean;
-import org.springframework.roo.addon.jpa.entity.RooJpaEntity;
-import org.springframework.roo.addon.serializable.RooSerializable;
-import org.springframework.roo.addon.tostring.RooToString;
-
 import cz.kolomet.domain.codelist.CategoryType;
 
-@RooJavaBean
-@RooToString(excludeFields = {"createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate"})
-@RooJpaEntity(inheritanceType = "TABLE_PER_CLASS")
-@RooEquals(excludeFields = {"createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate"})
-@RooSerializable
-public class Category extends DomainEntity {
+@Entity
+public class Category extends BaseDomainEntity implements Serializable {
 	
 	public static final String ALL_CATEGORY_CODE_KEY = "cat_bike_all";
 	
@@ -35,5 +28,29 @@ public class Category extends DomainEntity {
 	@NotNull
 	@ManyToOne
 	private CategoryType categoryType;
+
+	public String getCodeKey() {
+        return this.codeKey;
+    }
+
+	public void setCodeKey(String codeKey) {
+        this.codeKey = codeKey;
+    }
+
+	public String getCodeDescription() {
+        return this.codeDescription;
+    }
+
+	public void setCodeDescription(String codeDescription) {
+        this.codeDescription = codeDescription;
+    }
+
+	public CategoryType getCategoryType() {
+        return this.categoryType;
+    }
+
+	public void setCategoryType(CategoryType categoryType) {
+        this.categoryType = categoryType;
+    }
 
 }

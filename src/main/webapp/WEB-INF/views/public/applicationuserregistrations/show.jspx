@@ -4,7 +4,7 @@
     <jsp:output omit-xml-declaration="yes"/>
     <util:panel id="registration" title="Registrace">
         <p>
-            <spring:message code="registration_user_success"/>
+            <spring:message code="registration_user_success_wait_for_activate"/>
         </p>
     </util:panel>
 </div>

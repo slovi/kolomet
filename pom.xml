@@ -5,7 +5,7 @@
 	<groupId>cz.kolomet</groupId>
 	<artifactId>kolomet</artifactId>
 	<packaging>war</packaging>
-	<version>1.0.29-SNAPSHOT</version>
+	<version>1.0.36-SNAPSHOT</version>
 	<name>kolomet</name>
 
 	<distributionManagement>
@@ -19,7 +19,6 @@
 		<org.springframework.version>3.1.1.RELEASE</org.springframework.version>
 		<org.springframework.js.version>2.3.2.RELEASE</org.springframework.js.version>
 		<org.aspectj.version>1.7.4</org.aspectj.version>
-		<org.springframework.roo.version>1.2.5.RELEASE</org.springframework.roo.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.6</maven.compiler.source>
 		<maven.compiler.target>1.6</maven.compiler.target>
@@ -38,11 +37,6 @@
 			<id>spring-maven-milestone</id>
 			<name>Spring Maven Milestone Repository</name>
 			<url>http://maven.springframework.org/milestone</url>
-		</repository>
-		<repository>
-			<id>spring-roo-repository</id>
-			<name>Spring Roo Repository</name>
-			<url>http://spring-roo-repository.springsource.org/release</url>
 		</repository>
 		<repository>
 			<id>eap</id>
@@ -65,11 +59,6 @@
 			<id>spring-maven-milestone</id>
 			<name>Spring Maven Milestone Repository</name>
 			<url>http://maven.springframework.org/milestone</url>
-		</pluginRepository>
-		<pluginRepository>
-			<id>spring-roo-repository</id>
-			<name>Spring Roo Repository</name>
-			<url>http://spring-roo-repository.springsource.org/release</url>
 		</pluginRepository>
 		<pluginRepository>
 			<id>eap</id>
@@ -195,14 +184,6 @@
 			<groupId>com.github.jsimone</groupId>
 			<artifactId>webapp-runner</artifactId>
 			<version>7.0.34.0</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<!-- roo annotations -->
-		<dependency>
-			<groupId>org.springframework.roo</groupId>
-			<artifactId>org.springframework.roo.annotations</artifactId>
-			<version>${org.springframework.roo.version}</version>
 			<scope>provided</scope>
 		</dependency>
 

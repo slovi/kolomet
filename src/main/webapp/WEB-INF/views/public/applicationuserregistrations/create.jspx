@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:spring-form="http://www.springframework.org/tags/form" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:spring-form="http://www.springframework.org/tags/form" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     
@@ -8,7 +8,16 @@
         
         <field:input field="name" required="true" id="c_cz_kolomet_domain_ApplicationUser_name" />
         <field:input field="surname" required="true" id="c_cz_kolomet_domain_ApplicationUser_surname" />
-        <field:input field="phone"  required="true" validationRegex="${regex.phone}" id="c_cz_kolomet_domain_ApplicationUser_phone" />
+        <div class="info_label">
+        	<spring:message code="label_cz_kolomet_domain_applicationuser_nickname_info" />:
+        </div>
+        <field:input field="nickname" required="false" id="c_cz_kolomet_domain_ApplicationUser_nickname" />
+        <field:input field="street" required="true" id="c_cz_kolomet_domain_ApplicationUser_street" />
+        <field:input field="houseNr" required="true" id="c_cz_kolomet_domain_ApplicationUser_houseNr" />
+        <field:input field="city" required="true" id="c_cz_kolomet_domain_ApplicationUser_city" />
+        <field:input field="postCode" required="true" validationRegex="${regex.postalCode}" validationMessageCode="typeMismatch.postalCode" id="c_cz_kolomet_domain_ApplicationUser_postCode" />
+        <field:select field="countryState" id="c_cz_kolomet_domain_ApplicationUser_countryState" itemLabel="codeDescription" itemValue="id" items="${countryStates}" path="/admin/countryStates" />
+        <field:input field="phone"  required="false" validationRegex="${regex.phone}" id="c_cz_kolomet_domain_ApplicationUser_phone" />
         <field:input field="username" required="true" validationRegex="${regex.email}" id="c_cz_kolomet_domain_ApplicationUser_username" /> <!-- email -->
         <field:input field="password" required="true" type="password" id="c_cz_kolomet_domain_ApplicationUser_password" render="true" z="user-managed"/>
         <field:input field="passwordConfirm" required="true" type="password" id="c_cz_kolomet_domain_ApplicationUser_password_confirm" render="true" z="user-managed"/>
@@ -19,6 +28,7 @@
 	    
 	    <spring:url value="/resources/images/places/no-photo-detail.jpg" var="fileNotFoundUrl"/>
 		<spring:url value="${subContext}/public/applicationuserregistrations/file" var="uploadFileUrl"/>
+		<spring:url value="/file/applicationuser/${applicationUser.id}" var="fileBaseUrl"/>
 		
 		<field:input-file id="profileFiles" 
 				size="1"
@@ -27,16 +37,19 @@
 				fileNotFoundUrl="${fileNotFoundUrl}" 
 				fileBaseUrl="${fileBaseUrl}" />
 	    
-	    <spring:url value="/captcha?type=applicationuserregistration" var="captchaImgUrl"/>
-        <div class="captcha_img_wrapper"><img src="${captchaImgUrl}"/></div>
-        <field:input field="captchaText" id="c_cz_kolomet_domain_RegistrationRequest_captchaText" z="U3oUtCmGe6VdYh468OBWnzOCvK0="/>
-	    
+	    <br/>
+	    <br/>
+	    <br/>
 	    <br/>
 	    <div>
 		    <div class="pull_left left_justify">
 			    <spring-form:checkbox id="conditionAgreement" path="conditionAgreement" />
 		    </div>
-		    <span class="large"><b><spring:message code="label_cz_kolomet_domain_applicationuser_conditionagreement" /></b><c:out value="&#160;" /><span class="red">*</span></span>
+		    <span class="large"><b><spring:message code="label_cz_kolomet_domain_applicationuser_conditionagreement" /></b>
+		    <spring:url value="${subContext}/public/about#conditions" var="conditionsUrl" />
+		    - <a href="${conditionsUrl}" target="_blank">zobrazit</a>
+		    <util:nbsp number="1" />
+		    <span class="red">*</span></span>
 		    <spring-form:errors path="conditionAgreement" cssClass="red" />
 		    <script type="text/javascript">
 		    	Spring.addDecoration(new Spring.ElementDecoration({elementId : 'conditionAgreement', widgetType : 'dijit.form.CheckBox', widgetAttrs : {}}));
@@ -48,7 +61,11 @@
 		    <div class="pull_left left_justify">
 			    <spring-form:checkbox id="privateAgreement" path="privateAgreement" />
 		    </div>
-		    <span class="large"><b><spring:message code="label_cz_kolomet_domain_applicationuser_privateagreement" /></b><c:out value="&#160;" /><span class="red">*</span></span>
+		    <span class="large"><b><spring:message code="label_cz_kolomet_domain_applicationuser_privateagreement" /></b>
+		    <spring:url value="${subContext}/public/about#personal_data" var="personalDataUrl" />
+		    - <a href="${personalDataUrl}" target="_blank">zobrazit</a>
+		    <util:nbsp number="1" />
+		    <span class="red">*</span></span>
 		    <spring-form:errors path="privateAgreement" cssClass="red" />
 		    <script type="text/javascript">
 		    	Spring.addDecoration(new Spring.ElementDecoration({elementId : 'privateAgreement', widgetType : 'dijit.form.CheckBox', widgetAttrs : {}}));
@@ -60,6 +77,15 @@
 	    <p>
 	    <spring:message code="registration_text" />
 	    </p>
+
+		<br/>
+		<br/>
+			    
+	    <spring:url value="/captcha?type=applicationuserregistration" var="captchaImgUrl"/>
+        <div class="captcha_img_wrapper"><img src="${captchaImgUrl}"/></div>
+        <br/>
+        <field:input field="captchaText" id="c_cz_kolomet_domain_RegistrationRequest_captchaText" z="U3oUtCmGe6VdYh468OBWnzOCvK0="/>
+        
 	    <br/>
     </form:create>
     <spring:message code="registration_warning" />

@@ -66,6 +66,10 @@
 		<intercept-url pattern="/store/admin/newsitemphotourls" access="hasAnyRole('ROLE_per_newsitems')" />
 		<intercept-url pattern="/store/admin/newsitemphotourls/*" access="hasAnyRole('ROLE_per_newsitems')" />
 
+		<intercept-url pattern="/tour/admin/applicationusers*" access="hasAnyRole('ROLE_per_applicationusers')" />
+		<intercept-url pattern="/tour/admin/applicationusers/*" access="hasAnyRole('ROLE_per_applicationusers')" />
+		<intercept-url pattern="/tour/admin/applicationuserphotourls*" access="hasAnyRole('ROLE_per_applicationusers')" />
+		<intercept-url pattern="/tour/admin/applicationuserphotourls/*" access="hasAnyRole('ROLE_per_applicationusers')" />
 		<intercept-url pattern="/tour/admin/password*" access="isFullyAuthenticated()" />
 		<intercept-url pattern="/tour/admin/password/*" access="isFullyAuthenticated()" />
 		<intercept-url pattern="/tour/admin/placecomments*" access="hasAnyRole('ROLE_per_places')" />
@@ -101,11 +105,7 @@
 		<expression-handler ref="expressionHandler"/>
 	</global-method-security>
 
-	<beans:bean id="expressionHandler" class="org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler">
-		<beans:property name="permissionEvaluator">
-			<beans:bean class="cz.kolomet.security.KolometPermissionEveluator" />
-		</beans:property>
-	</beans:bean>
+	<beans:bean id="expressionHandler" class="org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler" />
 
 	<beans:bean class="cz.kolomet.security.DefaultPasswordGenerator" />
 

@@ -13,16 +13,4 @@
 	<definition extends="tour/template_admin" name="tour/admin/placetypes/show">
         <put-attribute name="body" value="/WEB-INF/views/admin/placetypes/show.jspx"/>
     </definition>
-<definition extends="default" name="admin/placetypes/list">
-        <put-attribute name="body" value="/WEB-INF/views/admin/placetypes/list.jspx"/>
-    </definition>
-<definition extends="default" name="admin/placetypes/show">
-        <put-attribute name="body" value="/WEB-INF/views/admin/placetypes/show.jspx"/>
-    </definition>
-<definition extends="default" name="admin/placetypes/create">
-        <put-attribute name="body" value="/WEB-INF/views/admin/placetypes/create.jspx"/>
-    </definition>
-<definition extends="default" name="admin/placetypes/update">
-        <put-attribute name="body" value="/WEB-INF/views/admin/placetypes/update.jspx"/>
-    </definition>
 </tiles-definitions>

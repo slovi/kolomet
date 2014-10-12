@@ -52,11 +52,9 @@
         <br/>
         <c:set scope="request" value="${product.id}" var="parentEntityId"/>
         <c:set scope="request" value="update" var="source"/>
-        <h2>
-            <spring:message code="label_cz_kolomet_domain_product_productattributes"/>
-        </h2>
         <br/>
-        <util:panel id="fc_cz_kolomet_domain_Product_productAttributes" title="ProductAttributes">
+        <spring:message code="label_cz_kolomet_domain_product_productattributes" var="title"/>
+        <util:panel id="fc_cz_kolomet_domain_Product_productAttributes" title="${title}">
             <c:forEach items="${product.productAttributes}" var="productAttribute" varStatus="status">
                 <field:hidden field="productAttributes[${status.index}].id" id="fc_cz_kolomet_domain_Product_productAttribute_id_${status.index}"/>
                 <field:hidden field="productAttributes[${status.index}].version" id="fc_cz_kolomet_domain_Product_productAttribute_version_${status.index}"/>
@@ -72,9 +70,6 @@
             </c:forEach>
         </util:panel>
         <br/>
-        <h2>
-            <spring:message code="label_cz_kolomet_domain_product_photourls"/>
-        </h2>
         <br/>
         <spring:message code="label_cz_kolomet_domain_product_photourls" var="photourls_panel_label"/>
         <spring:message code="button_add_photo" var="photourls_panel_add"/>
@@ -83,9 +78,15 @@
             <spring:url value="/store/admin/photourls/file" var="uploadFileUrl"/>
             <spring:url value="/file/product/${product.id}" var="fileBaseUrl"/>
             <spring:url value="${subContext}/admin/photourls" var="fileBaseDeleteUrl"/>
-            <field:input-file fileBaseDeleteUrl="${fileBaseDeleteUrl}" fileBaseUrl="${fileBaseUrl}" fileNotFoundUrl="${fileNotFoundUrl}" id="product_files" uploadFileUrl="${uploadFileUrl}" uploadedFiles="${uploadedFiles}"/>
+            <field:input-file 
+            	fileBaseDeleteUrl="${fileBaseDeleteUrl}" 
+            	fileBaseUrl="${fileBaseUrl}" 
+            	fileNotFoundUrl="${fileNotFoundUrl}" 
+            	id="product_files" 
+            	uploadFileUrl="${uploadFileUrl}"
+            	addedFiles="${addedFiles}" 
+            	uploadedFiles="${uploadedFiles}"/>
         </util:panel>
         <br/>
-        <field:input field="fileInfos" id="c_cz_kolomet_domain_Product_fileInfos" z="+t3+bKofu/jKMnU7tnfAMJLBSi4="/>
     </form:update>
 </div>

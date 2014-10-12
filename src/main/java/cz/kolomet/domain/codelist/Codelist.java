@@ -1,24 +1,17 @@
 package cz.kolomet.domain.codelist;
+import java.io.Serializable;
+
+import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.domain.Sort.Order;
-import org.springframework.roo.addon.equals.RooEquals;
-import org.springframework.roo.addon.javabean.RooJavaBean;
-import org.springframework.roo.addon.jpa.entity.RooJpaEntity;
-import org.springframework.roo.addon.serializable.RooSerializable;
-import org.springframework.roo.addon.tostring.RooToString;
 
-import cz.kolomet.domain.DomainEntity;
+import cz.kolomet.domain.BaseDomainEntity;
 
-@RooJavaBean
-@RooToString(excludeFields = {"createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate"})
-@RooJpaEntity(mappedSuperclass = true)
-@RooEquals(excludeFields = {"createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate"})
-@RooSerializable
-public abstract class Codelist extends DomainEntity {
+@MappedSuperclasspublic abstract class Codelist extends BaseDomainEntity implements Serializable {
 
     /**
      */
@@ -40,4 +33,29 @@ public abstract class Codelist extends DomainEntity {
     	return new Sort(sequenceNrOrder, codeDescriptionOrder);
     }
     
+
+	public String getCodeKey() {
+        return this.codeKey;
+    }
+
+	public void setCodeKey(String codeKey) {
+        this.codeKey = codeKey;
+    }
+
+	public String getCodeDescription() {
+        return this.codeDescription;
+    }
+
+	public void setCodeDescription(String codeDescription) {
+        this.codeDescription = codeDescription;
+    }
+
+	public Integer getSequenceNr() {
+        return this.sequenceNr;
+    }
+
+	public void setSequenceNr(Integer sequenceNr) {
+        this.sequenceNr = sequenceNr;
+    }
+
 }

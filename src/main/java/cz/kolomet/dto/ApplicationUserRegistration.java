@@ -2,6 +2,8 @@ package cz.kolomet.dto;
 
 import java.util.List;
 
+import cz.kolomet.domain.codelist.CountryState;
+
 public class ApplicationUserRegistration {
 	
 	private String name;
@@ -10,6 +12,8 @@ public class ApplicationUserRegistration {
 	
 	private String username;
 	
+	private String nickname;
+	
 	private String phone;
 
 	private String password;
@@ -17,6 +21,16 @@ public class ApplicationUserRegistration {
 	private String passwordConfirm;
 	
 	private String captchaText;
+	
+	private String street;
+	
+	private String houseNr;
+	
+	private String postCode;
+	
+	private String city;
+	
+	private CountryState countryState;
 	
 	private List<FileInfo> fileInfos;
 	
@@ -54,6 +68,14 @@ public class ApplicationUserRegistration {
 
 	public void setSurname(String surname) {
 		this.surname = surname;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	public String getPhone() {
@@ -110,6 +132,46 @@ public class ApplicationUserRegistration {
 
 	public void setPrivateAgreement(Boolean privateAgreement) {
 		this.privateAgreement = privateAgreement;
+	}
+
+	public String getStreet() {
+		return street;
+	}
+
+	public void setStreet(String street) {
+		this.street = street;
+	}
+
+	public String getHouseNr() {
+		return houseNr;
+	}
+
+	public void setHouseNr(String houseNr) {
+		this.houseNr = houseNr;
+	}
+
+	public String getPostCode() {
+		return postCode;
+	}
+
+	public void setPostCode(String postCode) {
+		this.postCode = postCode;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public CountryState getCountryState() {
+		return countryState;
+	}
+
+	public void setCountryState(CountryState countryState) {
+		this.countryState = countryState;
 	}
 	
 }
