@@ -32,10 +32,10 @@
 					<c:out value="${comment.created}" />
 				</div>
 				<div class="comment_box_text">
-					<c:out value="${comment.text}" />
+					<c:out value="${comment.text}" escapeXml="false" />
 				</div>
 				<div>
-					<spring:url value="${subContext}/public/placecomments?form" var="commentsUrl">
+					<spring:url value="${subContext}/admin/placecomments?form" var="commentsUrl">
 				        <spring:param name="parentEntityId" value="${place.id}"/>
 				    </spring:url>
 				    <c:if test="${not empty renderResponseButton and renderResponseButton}">

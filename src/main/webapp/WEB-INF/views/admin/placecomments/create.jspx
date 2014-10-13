@@ -17,7 +17,7 @@
         
         <c:choose>
         	<c:when test="${admin}">
-				<field:editor id="c_cz_kolomet_domain_PlaceComment_text" field="text" />        	
+				<field:editor id="c_cz_kolomet_domain_PlaceComment_text" renderFontMenu="true" field="text" />        	
         	</c:when>
         	<c:otherwise>
 		        <field:textarea field="text" id="c_cz_kolomet_domain_PlaceComment_text" style="width: 500px; height: 300px;" required="true" z="user-managed"/>

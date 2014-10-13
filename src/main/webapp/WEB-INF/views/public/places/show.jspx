@@ -146,9 +146,10 @@
 	    </spring:url>
 	    
         <c:choose>
-	        <c:when test="${fn:length(place.comments) gt 0}">
+        	
+        	<security:authorize access="isAuthenticated()" var="authenticated" />
 	        
-	        	<security:authorize access="isAuthenticated()" var="authenticated" />
+	        <c:when test="${fn:length(place.comments) gt 0}">   
 	        
 	        	<h2 style="padding:0;margin-left:5px;margin-top: 10px"><spring:message code="place_detail_comments"/>:</h2>
 	            <c:forEach items="${place.comments}" var="comment">	            	            	
