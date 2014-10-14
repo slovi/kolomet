@@ -14,28 +14,34 @@ public interface SellerService {
 	
 	public Page<Seller> findSellerEntries(Pageable pageable);
 	
-
-	public abstract long countAllSellers();
-
-
-	public abstract void deleteSeller(Seller seller);
-
-
-	public abstract Seller findSeller(Long id);
-
 	
-	public abstract List<Seller> findAllSellers();
-	
-	
-	public abstract List<Seller> findAllEnabledSellers();
+	public List<Seller> findByRegionCodeKeyOrderBySellerNameAsc(String regionCodeKey);
 	
 
-	public abstract List<Seller> findSellerEntries(int firstResult, int maxResults);
+	public long countAllSellers();
 
 
-	public abstract void saveSeller(Seller seller);
+	public void deleteSeller(Seller seller);
 
 
-	public abstract Seller updateSeller(Seller seller);
+	public Seller detail(Long id, String userInfo);
+	
+	
+	public Seller findSeller(Long id);
+
+	
+	public List<Seller> findAllSellers();
+	
+	
+	public List<Seller> findAllEnabledSellers();
+	
+
+	public List<Seller> findSellerEntries(int firstResult, int maxResults);
+
+
+	public void saveSeller(Seller seller);
+
+
+	public Seller updateSeller(Seller seller);
 
 }

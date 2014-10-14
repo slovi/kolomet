@@ -17,7 +17,8 @@
            	<p><c:out value="${seller.sellerTitle}" />
            	<br/>
            	<br/>
-           	<a href="${seller.web}" target="_blank"><c:out value="${seller.web}" /></a>
+           	<util:external-url activityType="EXTERNAL_SELLER_VISIT" sellerId="${product.seller.id}" externalUrl="${seller.web}" />
+           	<a href="${externalUrlValue}" target="_blank"><c:out value="${seller.web}" /></a>
            	<br/>
            	<br/>
            	<c:out value="${seller.sellerDescription}" escapeXml="false" />

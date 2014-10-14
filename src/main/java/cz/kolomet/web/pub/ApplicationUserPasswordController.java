@@ -1,4 +1,4 @@
-package cz.kolomet.web;
+package cz.kolomet.web.pub;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;

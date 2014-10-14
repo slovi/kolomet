@@ -145,9 +145,8 @@
 	        <spring:param name="parentEntityId" value="${place.id}"/>
 	    </spring:url>
 	    
+       	<security:authorize access="isAuthenticated()" var="authenticated" />
         <c:choose>
-        	
-        	<security:authorize access="isAuthenticated()" var="authenticated" />
 	        
 	        <c:when test="${fn:length(place.comments) gt 0}">   
 	        

@@ -1,5 +1,6 @@
 package cz.kolomet.service.impl;
 import java.io.File;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -15,8 +16,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import cz.kolomet.domain.Product;
 import cz.kolomet.domain.ProductState;
+import cz.kolomet.domain.VisitorActivityLog.VisitorActivityType;
 import cz.kolomet.repository.ProductRepository;
 import cz.kolomet.service.ProductService;
+import cz.kolomet.service.VisitorActivityLogService;
 
 @Service
 @Transactional
@@ -25,12 +28,24 @@ public class ProductServiceImpl implements ProductService {
 	@Value("${img.rootdir}")
 	protected String rootDir;
 	
+	@Autowired
+	private VisitorActivityLogService visitorActivityLogService;
+	
 	@PreAuthorize("principal.isCapableToDeleteProduct(#product)")
     public void deleteProduct(Product product) {
         product.setEnabled(false);
         product.setValidTo(new Date());
         product.setProductState(ProductState.DELETED);
     }
+	
+	
+	@PostAuthorize("isAnonymous() or principal.isCapableToDisplayProduct(returnObject)")
+	public Product detail(Long id, String userInfo) {
+		Product product = findProduct(id);
+		visitorActivityLogService.saveVisitorActivityLog(product.getSeller(), product, userInfo, VisitorActivityType.PRODUCT_VISIT);
+		return product;
+	}
+	
     
 	@PostAuthorize("isAnonymous() or principal.isCapableToDisplayProduct(returnObject)")
     public Product findProduct(Long id) {
@@ -110,4 +125,17 @@ public class ProductServiceImpl implements ProductService {
 	public List<Product> findProductEntries(int firstResult, int maxResults) {
         return productRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / maxResults, maxResults)).getContent();
     }
+	
+	public BigDecimal findMaxPrice() {
+		return productRepository.findMaxPrice();
+	}
+	
+	public Double findMaxWeight() {
+		return productRepository.findMaxWeight();
+	}
+	
+	public BigDecimal findMaxDiscount() {
+		return productRepository.findMaxDiscount();
+	}
+	
 }

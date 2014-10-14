@@ -47,7 +47,8 @@
         	</div>
         	<div class="order_button">        
         		<c:if test="${not empty product.buyUrl}">
-        			<a class="action_button_dark" href="${product.buyUrl}" target="_blank"><spring:message code="product_detail_order" /></a>
+        			<util:external-url activityType="EXTERNAL_PRODUCT_VISIT" productId="${product.id}" sellerId="${product.seller.id}" externalUrl="${product.buyUrl}" />
+        			<a class="action_button_dark" href="${externalUrlValue}" target="_blank"><spring:message code="product_detail_order" /></a>
         		</c:if>
             </div>
        	</div>

@@ -19,12 +19,14 @@ import org.springframework.transaction.annotation.Transactional;
 import cz.kolomet.domain.ApplicationRole;
 import cz.kolomet.domain.ApplicationUser;
 import cz.kolomet.domain.Seller;
+import cz.kolomet.domain.VisitorActivityLog.VisitorActivityType;
 import cz.kolomet.repository.ApplicationRoleRepository;
 import cz.kolomet.repository.ApplicationUserRepository;
 import cz.kolomet.repository.SellerRepository;
 import cz.kolomet.security.PasswordGenerator;
 import cz.kolomet.service.MailService;
 import cz.kolomet.service.SellerService;
+import cz.kolomet.service.VisitorActivityLogService;
 import cz.kolomet.service.exception.ExistingUserException;
 
 @Service
@@ -33,6 +35,9 @@ public class SellerServiceImpl implements SellerService {
 	
 	@Autowired
 	private SellerRepository sellerRepository;
+	
+	@Autowired
+	private VisitorActivityLogService visitorActivityLogService;
 	
 	@Autowired
 	private ApplicationUserRepository applicationUserRepository;
@@ -66,6 +71,10 @@ public class SellerServiceImpl implements SellerService {
 	public Page<Seller> findSellerEntries(Pageable pageable) {
 		return sellerRepository.findAll(pageable);
 	}
+	
+	public List<Seller> findByRegionCodeKeyOrderBySellerNameAsc(String regionCodeKey) {
+		return sellerRepository.findByRegionCodeKeyOrderBySellerNameAsc(regionCodeKey);
+	}
     
 	@PreAuthorize("principal.isCapableToDeleteSeller(#seller)")
     public void deleteSeller(Seller seller) {
@@ -76,6 +85,13 @@ public class SellerServiceImpl implements SellerService {
 	@PreAuthorize("principal.isCapableToEraseSeller(#seller)")
 	public void eraseSeller(Seller seller) {
 		sellerRepository.delete(seller);
+	}
+	
+	@PostAuthorize("isAnonymous() or principal.isSellerOwner(returnObject)")
+	public Seller detail(Long id, String userInfo) {
+		Seller seller = findSeller(id);
+		visitorActivityLogService.saveVisitorActivityLog(seller, null, userInfo, VisitorActivityType.SELLER_VISIT);
+		return seller;
 	}
 	
 	@PostAuthorize("isAnonymous() or principal.isSellerOwner(returnObject)")

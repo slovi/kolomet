@@ -12,11 +12,13 @@ public interface ApplicationRoleService {
 	
 	public ApplicationRole findApplicationRole(String name);
 	
+	
 	public Page<ApplicationRole> findApplicationRoleEntries(Pageable pageable);
 	
-	public List<ApplicationRole> findApplicationRoleEntries(Sort sort);
 	
+	public List<ApplicationRole> findApplicationRoleEntries(Sort sort);
 
+	
 	public abstract long countAllApplicationRoles();
 
 

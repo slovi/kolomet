@@ -1,6 +1,7 @@
-package cz.kolomet.web;
+package cz.kolomet.web.pub;
 import java.math.BigDecimal;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,20 +17,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import cz.kolomet.domain.Product;
 import cz.kolomet.dto.ProductFilterDto;
 import cz.kolomet.repository.ProductAttributeRepository;
-import cz.kolomet.repository.ProductRepository;
 import cz.kolomet.repository.ProductSpecifications;
 import cz.kolomet.repository.ProductUsageRepository;
 import cz.kolomet.repository.RegionRepository;
 import cz.kolomet.service.BicycleCategoryService;
 import cz.kolomet.service.ProductColorService;
-import cz.kolomet.web.pub.AbstractPublicController;
+import cz.kolomet.service.ProductService;
 
 @RequestMapping("/public/products")
 @Controller("publicProductController")
 public class ProductController extends AbstractPublicController {
 	
 	@Autowired
-	private ProductRepository productRepository;
+	private ProductService productService;
 	
 	@Autowired
 	private ProductAttributeRepository productAttributeRepository;
@@ -47,9 +47,9 @@ public class ProductController extends AbstractPublicController {
 	private ProductColorService productColorService;	
 	
 	@RequestMapping("/detail/{id}")
-	public String detail(@PathVariable("id") Long id, Model model) {
+	public String detail(@PathVariable("id") Long id, Model model, HttpServletRequest request) {
 		
-		Product product = productRepository.findOne(id);
+		Product product = productService.detail(id, request.getRemoteAddr());
 		model.addAttribute("product", product);
 		model.addAttribute("productAttributes", productAttributeRepository.findByProductOrderByAttributeType_SequenceNr(product));
 		return "public/products/detail";
@@ -60,24 +60,24 @@ public class ProductController extends AbstractPublicController {
 		populateFilterForm(productFilter, model);
 		
 		Pageable orderedPageable = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(), ProductSpecifications.getDefaultSort(pageable.getSort()));
-		model.addAttribute("products", productRepository.findAll(ProductSpecifications.forProductFilter(productFilter), orderedPageable));
+		model.addAttribute("products", productService.findProductEntries(ProductSpecifications.forProductFilter(productFilter), orderedPageable));
 		return "public/products/list_category";
 	}
 	
 	private void populateFilterForm(ProductFilterDto productFilter, Model model) {	
 		
 		if (productFilter.getPriceTo() == null) {
-			BigDecimal maxPrice = productRepository.findMaxPrice();
+			BigDecimal maxPrice = productService.findMaxPrice();
 			productFilter.setPriceTo(maxPrice);
 			productFilter.setMaxPriceTo(maxPrice);
 		}
 		if (productFilter.getDiscountTo() == null) {
-			BigDecimal maxDiscount = productRepository.findMaxDiscount();
+			BigDecimal maxDiscount = productService.findMaxDiscount();
 			productFilter.setDiscountTo(maxDiscount);
 			productFilter.setMaxDiscountTo(maxDiscount);
 		}
 		if (productFilter.getWeightTo() == null) {
-			Double maxWeight = productRepository.findMaxWeight();
+			Double maxWeight = productService.findMaxWeight();
 			if (maxWeight != null) {
 				productFilter.setWeightTo(maxWeight);
 				productFilter.setMaxWeightTo(maxWeight);

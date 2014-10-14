@@ -14,10 +14,11 @@ import javax.persistence.Version;
 
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
+import org.springframework.data.domain.Auditable;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-public class ApplicationUserAddress extends Address implements DomainEntity {
+public class ApplicationUserAddress extends Address implements DomainEntity, Auditable<ApplicationUser, Long> {
 	
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
