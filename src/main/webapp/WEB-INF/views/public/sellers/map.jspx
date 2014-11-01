@@ -129,8 +129,11 @@
 						margin:15px auto;
 						width:430px;						 
 					}
-				</style>  
+				</style>
+				<br clear="all">
+				<center>Kliknutí na příslušný kraj na mapě zobrazí prodejce v tomto regionu</center>  
         	</div>
+			
        	</div>            	 	
 	</div>
 
