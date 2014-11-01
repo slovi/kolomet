@@ -111,15 +111,15 @@ public class Seller extends BaseDomainEntity implements PhotoContainer, Serializ
     }
     
     public String getAddressString() {
-    	return getCorrespondenceAddress().getAddressString();
+    	return getCorrespondenceAddressNullSafe().getAddressString();
     }
     
     public String getBusinessAddressString() {
-    	return getBusinessAddress().getAddressString();
+    	return getBusinessAddressNullSafe().getAddressString();
     }
     
     public String getContactString() {
-    	return getBusinessAddress().getContactString();
+    	return getBusinessAddressNullSafe().getContactString();
     }
     
     public void normalizeWebUrl() {
@@ -150,7 +150,6 @@ public class Seller extends BaseDomainEntity implements PhotoContainer, Serializ
 		} else {
 			SellerAddress newAddress = new SellerAddress();
 			newAddress.setAddressType(addressType);
-			this.addresses.add(newAddress);
 			return newAddress;
 		}
 	}
@@ -163,12 +162,20 @@ public class Seller extends BaseDomainEntity implements PhotoContainer, Serializ
 		}
 		return null;
 	}
-
+	
     public SellerAddress getCorrespondenceAddress() {
-    	return getAddressByTypeNullSafe(AddressType.CORRESPONDENCE);
+    	return getAddressByType(AddressType.CORRESPONDENCE);
     }
     
     public SellerAddress getBusinessAddress() {
+    	return getAddressByType(AddressType.BUSINNES_PLACE);
+    }
+
+    private SellerAddress getCorrespondenceAddressNullSafe() {
+    	return getAddressByTypeNullSafe(AddressType.CORRESPONDENCE);
+    }
+    
+    private SellerAddress getBusinessAddressNullSafe() {
     	return getAddressByTypeNullSafe(AddressType.BUSINNES_PLACE);
     }
 	
@@ -237,83 +244,43 @@ public class Seller extends BaseDomainEntity implements PhotoContainer, Serializ
 	}
 
 	public Long getBusinessAddressId() {
-		return getBusinessAddress().getId();
-	}
-	
-	public void setBusinessAddressId(Long id) {
-		getBusinessAddress().setId(id);
+		return getBusinessAddressNullSafe().getId();
 	}
 	
 	public CountryState getBusinessCountry() {
-		return getBusinessAddress().getCountryState();
-	}
-
-	public void setBusinessCountry(CountryState businessCountry) {
-		getBusinessAddress().setCountryState(businessCountry);
+		return getBusinessAddressNullSafe().getCountryState();
 	}
 
 	public String getBusinessCity() {
-		return getBusinessAddress().getCity();
-	}
-
-	public void setBusinessCity(String businessCity) {
-		getBusinessAddress().setCity(businessCity);
+		return getBusinessAddressNullSafe().getCity();
 	}
 
 	public String getBusinessStreet() {
-		return getBusinessAddress().getStreet();
-	}
-
-	public void setBusinessStreet(String businessStreet) {
-		getBusinessAddress().setStreet(businessStreet);
+		return getBusinessAddressNullSafe().getStreet();
 	}
 
 	public String getBusinessPostCode() {
-		return getBusinessAddress().getPostCode();
-	}
-
-	public void setBusinessPostCode(String businessPostCode) {
-		getBusinessAddress().setPostCode(businessPostCode);
+		return getBusinessAddressNullSafe().getPostCode();
 	}
 
 	public String getBusinessSalutation() {
-		return getBusinessAddress().getSalutation();
-	}
-
-	public void setBusinessSalutation(String businessSalutation) {
-		getBusinessAddress().setSalutation(businessSalutation);
+		return getBusinessAddressNullSafe().getSalutation();
 	}
 
 	public String getBusinessDegree() {
-		return getBusinessAddress().getDegree();
-	}
-
-	public void setBusinessDegree(String businessDegree) {
-		getBusinessAddress().setDegree(businessDegree);
+		return getBusinessAddressNullSafe().getDegree();
 	}
 
 	public String getBusinessEmail() {
-		return getBusinessAddress().getEmail();
-	}
-
-	public void setBusinessEmail(String businessEmail) {
-		getBusinessAddress().setEmail(businessEmail);
+		return getBusinessAddressNullSafe().getEmail();
 	}
 
 	public String getBusinessPhoneNumber() {
-		return getBusinessAddress().getPhoneNumber();
-	}
-
-	public void setBusinessPhoneNumber(String businessPhoneNumber) {
-		getBusinessAddress().setPhoneNumber(businessPhoneNumber);
+		return getBusinessAddressNullSafe().getPhoneNumber();
 	}
 	
 	public String getBusinessName() {
-		return getBusinessAddress().getName();
-	}
-	
-	public void setBusinessName(String businessName) {
-		getBusinessAddress().setName(businessName);
+		return getBusinessAddressNullSafe().getName();
 	}
 
 	public SellerStatus getSellerStatus() {
@@ -357,67 +324,35 @@ public class Seller extends BaseDomainEntity implements PhotoContainer, Serializ
 	}
 	
 	public Long getAddressId() {
-		return getCorrespondenceAddress().getId();
+		return getCorrespondenceAddressNullSafe().getId();
 	}
 	
-	public void setAddressId(Long id) {
-		getCorrespondenceAddress().setId(id);
-	}
-
 	public CountryState getAddressCountry() {
-		return getCorrespondenceAddress().getCountryState();
-	}
-
-	public void setAddressCountry(CountryState addressCountry) {
-		getCorrespondenceAddress().setCountryState(addressCountry);
+		return getCorrespondenceAddressNullSafe().getCountryState();
 	}
 
 	public String getAddressCity() {
-		return getCorrespondenceAddress().getCity();
-	}
-
-	public void setAddressCity(String addressCity) {
-		getCorrespondenceAddress().setCity(addressCity);
+		return getCorrespondenceAddressNullSafe().getCity();
 	}
 
 	public String getAddressStreet() {
-		return getCorrespondenceAddress().getStreet();
-	}
-
-	public void setAddressStreet(String addressStreet) {
-		getCorrespondenceAddress().setStreet(addressStreet);
+		return getCorrespondenceAddressNullSafe().getStreet();
 	}
 
 	public String getAddressPostCode() {
-		return getCorrespondenceAddress().getPostCode();
-	}
-
-	public void setAddressPostCode(String addressPostCode) {
-		getCorrespondenceAddress().setPostCode(addressPostCode);
+		return getCorrespondenceAddressNullSafe().getPostCode();
 	}
 
 	public String getAddressSalutation() {
-		return getCorrespondenceAddress().getSalutation();
-	}
-
-	public void setAddressSalutation(String addressSalutation) {
-		getCorrespondenceAddress().setSalutation(addressSalutation);
+		return getCorrespondenceAddressNullSafe().getSalutation();
 	}
 
 	public String getAddressDegree() {
-		return getCorrespondenceAddress().getDegree();
-	}
-
-	public void setAddressDegree(String addressDegree) {
-		getCorrespondenceAddress().setDegree(addressDegree);
+		return getCorrespondenceAddressNullSafe().getDegree();
 	}
 
 	public String getAddressName() {
-		return getCorrespondenceAddress().getName();
-	}
-	
-	public void setAddressName(String addressName) {
-		getCorrespondenceAddress().setName(addressName);
+		return getCorrespondenceAddressNullSafe().getName();
 	}
 
 	public Boolean getEnabled() {

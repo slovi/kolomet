@@ -32,7 +32,7 @@ public class RegistrationRequestController extends AbstractAdminController {
 	
 	@RequestMapping(produces = "text/html")
     public String list(@PageableDefault(sort = {"processed"}, direction = Direction.ASC, value = 10) Pageable pageable, Model uiModel) {
-        if (pageable != null) {
+        if (pageable != null && pageable.getSort() != null) {
         	Sort usedSort = pageable.getSort().and(new Sort(Direction.DESC, "created"));
         	Pageable usedPageable = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(), usedSort);
         	Page<RegistrationRequest> page = registrationRequestService.findRegistrationRequestEntries(usedPageable);

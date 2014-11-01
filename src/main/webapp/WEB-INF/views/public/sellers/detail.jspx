@@ -55,7 +55,7 @@
 						<spring:message code="label_cz_kolomet_domain_seller_addressemail" />: <spring:eval expression="seller.personEmail" /><br />
 						<br />			
 						<strong><spring:message code="seller_detail_business" /></strong><br />
-						<spring:message code="label_cz_kolomet_domain_seller_businesscountry" />: <spring:eval expression="seller.businessCountry.codeDescription" /><br />
+						<spring:message code="label_cz_kolomet_domain_seller_businesscountry" />: <c:out value="${seller.businessCountry.codeDescription}" /><br />
 						<spring:message code="label_cz_kolomet_domain_seller_businesscity" />: <spring:eval expression="seller.businessCity" /><br />
 						<spring:message code="label_cz_kolomet_domain_seller_businessstreet" />: <spring:eval expression="seller.businessStreet" /><br />
 						<spring:message code="label_cz_kolomet_domain_seller_businesspostcode" />: <spring:eval expression="seller.businessPostCode" /><br />
@@ -66,14 +66,14 @@
 					</p>
 					<p class="right_column right">
 						<strong><spring:message code="seller_detail_other" /></strong><br />
-						<spring:message code="label_cz_kolomet_domain_seller_sellerstatus" />: <spring:eval expression="seller.sellerStatus.codeDescription" /><br />
-						<spring:message code="label_cz_kolomet_domain_seller_region" />: <spring:eval expression="seller.region.codeDescription" /><br />
+						<spring:message code="label_cz_kolomet_domain_seller_sellerstatus" />: <c:out value="${seller.sellerStatus.codeDescription}" /><br />
+						<spring:message code="label_cz_kolomet_domain_seller_region" />: <c:out value="${seller.region.codeDescription}" /><br />
 						<spring:message code="label_cz_kolomet_domain_seller_web" />: <spring:eval expression="seller.web" /><br />
 						<spring:message code="label_cz_kolomet_domain_seller_saletype" />: <spring:eval expression="seller.saleType" /><br />
 						<spring:message code="label_cz_kolomet_domain_seller_enabled" />: <util:boolean value="${seller.enabled}" /><br />
 						<br/>
 						<strong><spring:message code="seller_detail_address" /></strong><br />
-						<spring:message code="label_cz_kolomet_domain_seller_addresscountry" />: <spring:eval expression="seller.addressCountry.codeDescription" /><br />
+						<spring:message code="label_cz_kolomet_domain_seller_addresscountry" />: <c:out value="${seller.addressCountry.codeDescription}" /><br />
 						<spring:message code="label_cz_kolomet_domain_seller_addresscity" />: <spring:eval expression="seller.addressCity" /><br />
 						<spring:message code="label_cz_kolomet_domain_seller_addressstreet" />: <spring:eval expression="seller.addressStreet" /><br />
 						<spring:message code="label_cz_kolomet_domain_seller_addresspostcode" />: <spring:eval expression="seller.addressPostCode" /><br />

@@ -129,6 +129,10 @@ public class ProductController extends AbstractAdminController {
         	productAttribute.setProduct(product);
         }
         
+        if (!getActualUserDetails().isSellersAll()) {
+        	product.setSeller(getActualUser().getSeller());
+        }
+        
         productService.saveProduct(product);
         savePhotos(product, photoUrlService, httpServletRequest.getSession().getId(), product.getFileInfos());
         
@@ -151,6 +155,10 @@ public class ProductController extends AbstractAdminController {
         uiModel.asMap().clear();
         for (ProductAttribute productAttribute: product.getProductAttributes()) {
         	productAttribute.setProduct(product);
+        }
+        
+        if (!getActualUserDetails().isSellersAll()) {
+        	product.setSeller(getActualUser().getSeller());
         }
         
         productService.updateProduct(product);

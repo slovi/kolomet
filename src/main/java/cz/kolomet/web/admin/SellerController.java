@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import cz.kolomet.domain.AddressType;
 import cz.kolomet.domain.Seller;
 import cz.kolomet.domain.SellerAddress;
 import cz.kolomet.domain.SellerPhotoUrl;
@@ -214,6 +215,11 @@ import flexjson.JSONSerializer;
         }
 		
 		SellerAddress address = seller.getCorrespondenceAddress();
+		if (address == null) {
+			address = new SellerAddress();
+			address.setAddressType(AddressType.CORRESPONDENCE);
+			seller.getAddresses().add(address);
+		}
 		address.setCity(sellerDto.getAddressCity());
 		address.setCountryState(sellerDto.getAddressCountry());
 		address.setDegree(sellerDto.getAddressDegree());
@@ -223,6 +229,11 @@ import flexjson.JSONSerializer;
 		address.setStreet(sellerDto.getAddressStreet());
 		
 		SellerAddress businessAddress = seller.getBusinessAddress();
+		if (businessAddress == null) {
+			businessAddress = new SellerAddress();
+			businessAddress.setAddressType(AddressType.BUSINNES_PLACE);
+			seller.getAddresses().add(businessAddress);
+		}
 		businessAddress.setCity(sellerDto.getBusinessCity());
 		businessAddress.setCountryState(sellerDto.getBusinessCountry());
 		businessAddress.setDegree(sellerDto.getBusinessDegree());
@@ -253,24 +264,28 @@ import flexjson.JSONSerializer;
 		sellerDto.setPersonEmail(seller.getPersonEmail());
 		
 		SellerAddress address = seller.getCorrespondenceAddress();
-		sellerDto.setAddressCity(address.getCity());
-		sellerDto.setAddressCountry(address.getCountryState());
-		sellerDto.setAddressDegree(address.getDegree());
-		sellerDto.setAddressName(address.getName());
-		sellerDto.setAddressPostCode(address.getPostCode());
-		sellerDto.setAddressSalutation(address.getSalutation());
-		sellerDto.setAddressStreet(address.getStreet());
+		if (address != null) {
+			sellerDto.setAddressCity(address.getCity());
+			sellerDto.setAddressCountry(address.getCountryState());
+			sellerDto.setAddressDegree(address.getDegree());
+			sellerDto.setAddressName(address.getName());
+			sellerDto.setAddressPostCode(address.getPostCode());
+			sellerDto.setAddressSalutation(address.getSalutation());
+			sellerDto.setAddressStreet(address.getStreet());
+		}
 		
 		SellerAddress businessAddress = seller.getBusinessAddress();
-		sellerDto.setBusinessCity(businessAddress.getCity());
-		sellerDto.setBusinessCountry(businessAddress.getCountryState());
-		sellerDto.setBusinessDegree(businessAddress.getDegree());
-		sellerDto.setBusinessEmail(businessAddress.getEmail());
-		sellerDto.setBusinessName(businessAddress.getName());
-		sellerDto.setBusinessPhoneNumber(businessAddress.getPhoneNumber());
-		sellerDto.setBusinessPostCode(businessAddress.getPostCode());
-		sellerDto.setBusinessSalutation(businessAddress.getSalutation());
-		sellerDto.setBusinessStreet(businessAddress.getStreet());
+		if (address != null) {
+			sellerDto.setBusinessCity(businessAddress.getCity());
+			sellerDto.setBusinessCountry(businessAddress.getCountryState());
+			sellerDto.setBusinessDegree(businessAddress.getDegree());
+			sellerDto.setBusinessEmail(businessAddress.getEmail());
+			sellerDto.setBusinessName(businessAddress.getName());
+			sellerDto.setBusinessPhoneNumber(businessAddress.getPhoneNumber());
+			sellerDto.setBusinessPostCode(businessAddress.getPostCode());
+			sellerDto.setBusinessSalutation(businessAddress.getSalutation());
+			sellerDto.setBusinessStreet(businessAddress.getStreet());
+		}
 		
 		for (SellerPhotoUrl photoUrl: seller.getSellerPhotoUrls()) {
 			sellerDto.addFileInfo(new FileInfo(photoUrl.getId(), photoUrl.getFileName(), photoUrl.getContentType()));
