@@ -9,6 +9,7 @@
   <jsp:directive.attribute name="styleClass" type="java.lang.String" required="false" rtexprvalue="true" description="Specify the styleClass of this textarea" />
   <jsp:directive.attribute name="style" type="java.lang.String" required="false" rtexprvalue="true" description="Specify the style of this textarea" />
   <jsp:directive.attribute name="cols" type="java.lang.Integer" required="false" rtexprvalue="true" description="Nr of cols" />
+  <jsp:directive.attribute name="width" type="java.lang.Integer" required="false" rtexprvalue="true" description="width" />
   <jsp:directive.attribute name="rows" type="java.lang.Integer" required="false" rtexprvalue="true" description="Nr of rows" />
   <jsp:directive.attribute name="render" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Indicate if the contents of this tag and all enclosed tags should be rendered (default 'true')" />
   <jsp:directive.attribute name="z" type="java.lang.String" required="false" description="Used for checking if element has been modified (to recalculate simply provide empty string value)" />
@@ -37,10 +38,6 @@
 
     <c:if test="${empty required}">
       <c:set value="false" var="required" />
-    </c:if>   
-    
-    <c:if test="${empty style}">
-    	<c:set value="max-width: 1000px;" var="style" />
     </c:if>
     
     <c:set var="sec_field">

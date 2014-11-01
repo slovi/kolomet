@@ -27,7 +27,7 @@
                 <spring:message code="seller_edit_address_email"/>
             </p>
             <br/>
-            <field:textarea field="addressEmail" id="c_cz_kolomet_domain_Seller_addressEmail" z="b040cbjtTAnHdEZ3j5X1JtGIouI="/>
+            <field:textarea field="personEmail" id="c_cz_kolomet_domain_Seller_addressEmail" z="b040cbjtTAnHdEZ3j5X1JtGIouI="/>
         </fieldset>
         <br/>
         <fieldset>

@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import cz.kolomet.domain.ApplicationUserAddress;
 import cz.kolomet.domain.Seller;
+import cz.kolomet.domain.SellerAddress;
 import cz.kolomet.domain.SellerPhotoUrl;
 import cz.kolomet.dto.FileInfo;
 import cz.kolomet.dto.SellerDto;
@@ -98,16 +98,16 @@ import flexjson.JSONSerializer;
         	convert(sellerDto, seller);
         	
         	// improve the order dependency of this two method calls
-        	savePhotos(seller, sellerPhotoUrlService, httpServletRequest.getSession().getId(), seller.getFileInfos());
         	sellerService.saveSeller(seller);
+        	savePhotos(seller, sellerPhotoUrlService, httpServletRequest.getSession().getId(), sellerDto.getFileInfos());
         	uiModel.asMap().clear();
         	return "redirect:/public/sellers/detail/" + seller.getId();
         } catch (ServiceExpcetion e) {
-        	bindingResult.rejectValue("addressEmail", e.getCode(), e.getArguments(), null);
+        	bindingResult.rejectValue("personEmail", e.getCode(), e.getArguments(), null);
         	populateEditForm(uiModel, sellerDto);
         	return "admin/sellers/create";
         } catch (MailException e) {
-			bindingResult.rejectValue("addressEmail", "exception_cannot_send_email_to_address");
+			bindingResult.rejectValue("personEmail", "exception_cannot_send_email_to_address");
         	populateEditForm(uiModel, sellerDto);
         	return "admin/sellers/create";
         }
@@ -125,7 +125,7 @@ import flexjson.JSONSerializer;
         try {
         	
         	// improve the order dependency of this two method calls        	
-        	savePhotos(seller, sellerPhotoUrlService, httpServletRequest.getSession().getId());
+        	savePhotos(seller, sellerPhotoUrlService, httpServletRequest.getSession().getId(), sellerDto.getFileInfos());
         	sellerService.updateSeller(seller);
         	uiModel.asMap().clear();
         	return "redirect:/public/sellers/detail/" + seller.getId();
@@ -206,23 +206,23 @@ import flexjson.JSONSerializer;
 		seller.setPersonName(sellerDto.getPersonName());
 		seller.setPersonSalutation(sellerDto.getPersonSalutation());
 		seller.setPersonSurname(sellerDto.getPersonSurname());
+		seller.setPersonEmail(sellerDto.getPersonEmail());
 		
         if (getActualUserDetails().isSellersOwn()) {
         	seller.setSellerStatus(sellerDto.getSellerStatus());
         	seller.setEnabled(sellerDto.getEnabled());
         }
 		
-		ApplicationUserAddress address = seller.getCorrespondenceAddress();
+		SellerAddress address = seller.getCorrespondenceAddress();
 		address.setCity(sellerDto.getAddressCity());
 		address.setCountryState(sellerDto.getAddressCountry());
 		address.setDegree(sellerDto.getAddressDegree());
-		address.setEmail(sellerDto.getAddressEmail());
 		address.setName(sellerDto.getAddressName());
 		address.setPostCode(sellerDto.getAddressPostCode());
 		address.setSalutation(sellerDto.getAddressSalutation());
 		address.setStreet(sellerDto.getAddressStreet());
 		
-		ApplicationUserAddress businessAddress = seller.getBusinessAddress();
+		SellerAddress businessAddress = seller.getBusinessAddress();
 		businessAddress.setCity(sellerDto.getBusinessCity());
 		businessAddress.setCountryState(sellerDto.getBusinessCountry());
 		businessAddress.setDegree(sellerDto.getBusinessDegree());
@@ -232,12 +232,6 @@ import flexjson.JSONSerializer;
 		businessAddress.setPostCode(sellerDto.getBusinessPostCode());
 		businessAddress.setSalutation(sellerDto.getBusinessSalutation());
 		businessAddress.setStreet(sellerDto.getBusinessStreet());
-		
-		for (FileInfo fileInfo: sellerDto.getFileInfos()) {
-			if (fileInfo.isNew()) {
-				seller.addPhoto(fileInfo.getFileName(), fileInfo.getContentType());
-			}
-		}
 	}
 	
 	private void convert(Seller seller, SellerDto sellerDto) {
@@ -256,18 +250,18 @@ import flexjson.JSONSerializer;
 		sellerDto.setPersonName(seller.getPersonName());
 		sellerDto.setPersonSalutation(seller.getPersonSalutation());
 		sellerDto.setPersonSurname(seller.getPersonSurname());
+		sellerDto.setPersonEmail(seller.getPersonEmail());
 		
-		ApplicationUserAddress address = seller.getCorrespondenceAddress();
+		SellerAddress address = seller.getCorrespondenceAddress();
 		sellerDto.setAddressCity(address.getCity());
 		sellerDto.setAddressCountry(address.getCountryState());
 		sellerDto.setAddressDegree(address.getDegree());
-		sellerDto.setAddressEmail(address.getEmail());
 		sellerDto.setAddressName(address.getName());
 		sellerDto.setAddressPostCode(address.getPostCode());
 		sellerDto.setAddressSalutation(address.getSalutation());
 		sellerDto.setAddressStreet(address.getStreet());
 		
-		ApplicationUserAddress businessAddress = seller.getBusinessAddress();
+		SellerAddress businessAddress = seller.getBusinessAddress();
 		sellerDto.setBusinessCity(businessAddress.getCity());
 		sellerDto.setBusinessCountry(businessAddress.getCountryState());
 		sellerDto.setBusinessDegree(businessAddress.getDegree());

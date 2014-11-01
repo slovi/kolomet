@@ -102,50 +102,40 @@ public class SellerServiceImpl implements SellerService {
     @PreAuthorize("principal.isCapableToSaveSeller(#seller)")
     public void saveSeller(Seller seller) {
     	
-    	String email = seller.getCorrespondenceAddress().getEmail();
-    	ApplicationUser user = applicationUserRepository.findByUsername(email); 
+    	String email = seller.getPersonEmail();
+    	ApplicationUser user = applicationUserRepository.findByUsernameAndEnabled(email, true); 
     	if (user == null) {
     		
+    		seller.normalizeWebUrl();
+    		seller.setEnabled(true);
+    		seller.normalizeWebUrl();
+    		sellerRepository.save(seller);
+    		
     		String password = passwordGenerator.generatePassword(user);
-        	
         	ApplicationRole applicationRole = applicationRoleRepository.findByRoleName(sellerRoleName);
         	
-        	seller.setEnabled(true);
-        	seller.setPassword(passwordEncoder.encodePassword(password, null));
-        	seller.addRole(applicationRole);
-        	seller.setUsername(email);
-        	seller.normalizeWebUrl();
-
-            sellerRepository.save(seller);
+        	ApplicationUser newUser = new ApplicationUser();
+        	newUser.setEnabled(true);
+        	newUser.setPassword(passwordEncoder.encodePassword(password, null));
+        	newUser.addRole(applicationRole);
+        	newUser.setUsername(email);
+        	newUser.setSeller(seller);
+        	applicationUserRepository.save(newUser);
             
             Map<String, Object> params = new HashMap<String, Object>();
             params.put("username", email);
             params.put("password", password);
             params.put("seller", seller);
-            
-            
-            mailService.send(email, newSellerEmailSubject, newSellerEmailTemplate, params);
-            
+        	mailService.send(email, newSellerEmailSubject, newSellerEmailTemplate, params);
     	} else {
     		throw new ExistingUserException(user);
     	}
-    	    	
     }
     
     @PreAuthorize("principal.isCapableToUpdateSeller(#seller)")
     public Seller updateSeller(Seller seller) {
-    	
-    	String email = seller.getCorrespondenceAddress().getEmail();
-    	ApplicationUser existingUser = applicationUserRepository.findByUsername(email);
-    	seller.setUsername(email);
-    	
-    	// jestlize username existuje, ale jedna se o stejneho uzivatele nebo jestli username neexistuje, muzeme menit
-    	if ((existingUser != null && existingUser.getId().equals(seller.getId())) ||  (existingUser == null)) {
-    		seller.normalizeWebUrl();
-		    return sellerRepository.save(seller);
-    	} else {
-    		throw new ExistingUserException(seller);
-    	}
+    	seller.normalizeWebUrl();
+		return sellerRepository.save(seller);
     }
     
     @PreAuthorize("principal.isSellersAll()")

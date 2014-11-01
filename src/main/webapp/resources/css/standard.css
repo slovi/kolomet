@@ -2,7 +2,18 @@
 	padding-bottom: 15px;
 	margin-top: 40px;
 }
+
 .quicklinks span {
+	float: right;
+}
+
+.quicklinks_large {
+	padding-bottom: 15px;
+	height: 40px;
+	margin-top: 10px;
+}
+
+.quicklinks_large span {
 	float: right;
 }
 

@@ -4,6 +4,11 @@ require(['../common'], function (common) {
     	
     	login.prepare();
     	
+    	$('#i_place_new.anonymous').click(function(event) {
+    		event.preventDefault();
+    		$("#login_modal").click();
+    	});
+    	
     	setInterval(animateStoreButton, 5000);
     	
     	function animateStoreButton() {

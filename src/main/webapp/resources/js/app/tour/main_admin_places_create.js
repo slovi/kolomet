@@ -62,13 +62,13 @@ require(['../common'], function (common) {
 				
 				markers = [];
 				
-				inputGpsNorth.val(event.latLng.lat().toString().replace('.', ','));
-				inputGpsWest.val(event.latLng.lng().toString().replace('.', ','));	
-				inputGpsNorth.parent().parent().removeClass('dijitTextBoxError dijitValidationTextBoxError dijitError');
-				inputGpsWest.parent().parent().removeClass('dijitTextBoxError dijitValidationTextBoxError dijitError');						
-			    map.setCenter(event.latLng);
-				map.setZoom(8);					
+				dijit.byId('_gpsLocation.north_id').set('value', event.latLng.lat().toString().replace('.', ','));
+				dijit.byId('_gpsLocation.west_id').set('value', event.latLng.lng().toString().replace('.', ','));
 				
+			    map.setCenter(event.latLng);					
+			    if (map.getZoom() < 8) {
+			    	map.setZoom(8);
+			    }
 				markers.push(createPlaceMarker(map));					
 				
 			});
@@ -76,23 +76,37 @@ require(['../common'], function (common) {
 	   		// listener - prefil region based on the choosed place in map  
 			var geocoder = new google.maps.Geocoder();
 			google.maps.event.addListener(map, 'click', function(event) {
-				geocoder.geocode({'latLng': event.latLng}, function(results, status) { 
-					if (status == google.maps.GeocoderStatus.OK) {
-						var result = '';
-						var addressComponents = results[0].address_components;
-						$.each(addressComponents, function(addressComponentIndex, addressComponent) {
-							$.each(addressComponent.types, function(typeIndex, type) {
-								if (type == 'administrative_area_level_1') {
-									result = addressComponent.short_name;
-									return false;
-								}
+				
+				var loadDistrict = function(geocoder, districtLoaded) {
+					geocoder.geocode({'latLng': event.latLng}, function(results, status) { 
+						if (status == google.maps.GeocoderStatus.OK) {
+							console.log('returned status ok, resolving district from response.')
+							var addressComponents = results[0].address_components;
+							$.each(addressComponents, function(addressComponentIndex, addressComponent) {
+								$.each(addressComponent.types, function(typeIndex, type) {
+									if (type == 'administrative_area_level_1') {
+										result = addressComponent.short_name;
+										districtLoaded(result);
+										
+										return;
+									}
+								});
 							});
-						});
-						 dijit.byId('_region_id').set('value', result);
-					} else {
-						alert('error during resolving region id');
-					}
+						} else if (status = google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {
+							setTimeout(function() {
+								loadDistrict(geocoder, districtLoaded);
+								console.log('returned status over_query_limit, next try in one second.')
+							}, 1000);							
+						} else {
+							console.log('error communicating with geocode.')
+						}
+					});
+				}
+				
+				loadDistrict(geocoder, function(result) {
+					$('#_region_id').val(result);
 				});
+				
 			});
 			
 			Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'step_2_link', event:'onclick'}));
@@ -117,6 +131,12 @@ require(['../common'], function (common) {
 	    
 	   		var formConfig = {
    				beforeStepListener: function(step) {
+   					if (step == 3) {
+   	   					if ($('.thumbnails_container').children().length == 1) {
+   	   						alert('Není nahrán zadny soubor, neni mozne pokracovat na dalsi krok.');
+   	   						return false;
+   	   					}
+   	   				}
    					return validForm;
    				},
    				afterStepListener: function(step) {
@@ -134,14 +154,7 @@ require(['../common'], function (common) {
    	   						step2Map.setCenter(marker.getPosition());
    	   						step2Map.setZoom(8);
    	   					}
-   	   				}
-   	   				
-   	   				if (step == 3) {
-   	   					if ($('#files').children().length == 1) {
-   	   						alert('Není nahrán zadny soubor, neni mozne pokracovat na dalsi krok.');
-   	   						return false;
-   	   					}
-   	   				}
+   	   				}   	   				   	   			
    				}
 	   		}
 	   		

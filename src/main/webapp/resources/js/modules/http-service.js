@@ -63,8 +63,12 @@ define(['jquery', 'loader'], function($, loader) {
 						var fragments = paramsData.fragments.split(',');
 						for (var i = 0; i < fragments.length; i++) {
 							var fragment = $('#' + $.trim(fragments[i])); 
-							fragment.empty();
-							fragment.html(nodes[i]);
+							if (paramsData.append) {
+								fragment.append(nodes[i]);
+							} else {
+								fragment.empty();
+								fragment.html(nodes[i]);
+							}
 							offset++;
 						}
 		        	}

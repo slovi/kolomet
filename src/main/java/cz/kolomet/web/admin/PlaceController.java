@@ -26,6 +26,7 @@ import cz.kolomet.domain.Place;
 import cz.kolomet.domain.PlacePhotoUrl;
 import cz.kolomet.repository.PlaceSpecifications;
 import cz.kolomet.security.ApplicationUserDetails;
+import cz.kolomet.service.ApplicationUserService;
 import cz.kolomet.service.PlacePhotoUrlService;
 import cz.kolomet.service.PlaceService;
 import cz.kolomet.service.PlaceTypeService;
@@ -45,6 +46,9 @@ public class PlaceController extends AbstractAdminController {
 	
 	@Autowired
 	private RegionService regionService;
+	
+	@Autowired
+	private ApplicationUserService applicationUserService;
 	
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String show(@PathVariable("id") Long id, Model uiModel) {
@@ -78,6 +82,9 @@ public class PlaceController extends AbstractAdminController {
             return "admin/places/create";
         }        
         try {
+        	if (!getActualUserDetails().isPlacesAll()) {
+        		place.setOwner(getActualUser());
+        	}
         	placeService.savePlace(place);
         	savePhotos(place, placePhotoUrlService, httpServletRequest.getSession().getId(), place.getFileInfos());
         	uiModel.asMap().clear();
@@ -96,6 +103,9 @@ public class PlaceController extends AbstractAdminController {
         uiModel.addAttribute("uploadedFiles", PlacePhotoUrl.toJsonArray(place.getPlacePhotoUrls(), new String[] {"id", "fileName"}));
         uiModel.addAttribute("placetypes", placeTypeService.findAllPlaceTypes());
         uiModel.addAttribute("regions", regionService.findAllRegions());
+        if (getActualUserDetails().isPlacesAll()) {
+        	uiModel.addAttribute("applicationusers", applicationUserService.findAllApplicationUsers());
+        }
     }
     
     @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
@@ -121,6 +131,9 @@ public class PlaceController extends AbstractAdminController {
         existingPlace.setPlaceType(place.getPlaceType());
         existingPlace.setQualityRanking(place.getQualityRanking());
         existingPlace.setRegion(place.getRegion());
+        if (getActualUserDetails().isPlacesAll()) {
+    		existingPlace.setOwner(place.getOwner());
+    	}
     
         try {
 	        placeService.updatePlace(existingPlace);      

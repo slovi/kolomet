@@ -71,7 +71,7 @@
 				<c:if test="${status.index == products.number}">
 					[<spring:eval expression="status.index + 1" />]&#160;
 				</c:if>
-			</c:forEach>					
+			</c:forEach>
 			
 			<c:choose>
 				<c:when test="${products.number + 1 lt products.totalPages}">

@@ -4,7 +4,7 @@
     <jsp:output omit-xml-declaration="yes"/>
     
     <spring:message code="menu_item_applicationuser_new_label" var="label" />
-    <form:create id="fc_cz_kolomet_domain_ApplicationUser" modelAttribute="applicationUser" label="${label}" path="${subContext}/admin/applicationusers" render="${empty dependencies}" z="user-managed">
+    <form:create id="fc_cz_kolomet_domain_ApplicationUser" modelAttribute="applicationUser" label="${label}" path="${subContext}/admin/applicationusers">
     	<field:input field="name" required="true" id="c_cz_kolomet_domain_ApplicationUser_name" />
         <field:input field="surname" required="true" id="c_cz_kolomet_domain_ApplicationUser_surname" />
         <div class="info_label">
@@ -14,7 +14,8 @@
         <spring:message code="typeMismatch.email" var="invalidEmail" />
         <field:input field="username" id="c_cz_kolomet_domain_ApplicationUser_username" validationRegex="${regex.email}" validationMessage="${invalidEmail}" />
         <field:checkbox field="enabled" id="c_cz_kolomet_domain_ApplicationUser_enabled" />
-        <field:select field="roles" id="c_cz_kolomet_domain_ApplicationUser_roles" itemLabel="roleName" itemValue="id" items="${applicationroles}" multiple="true" path="/admin/applicationroles" z="user-managed"/>
+        <field:select field="roles" id="c_cz_kolomet_domain_ApplicationUser_roles" itemLabel="roleName" itemValue="id" items="${applicationroles}" multiple="true" path="/admin/applicationroles" />
+        <field:select field="seller" id="c_cz_kolomet_domain_ApplicationUser_seller" emptyLabel="..." itemLabel="sellerName" itemValue="id" items="${sellers}" path="/admin/sellers" />
         
 	    <label>Profilová fotka :</label>
 		<spring:url value="${subContext}/admin/applicationuserphotourls" var="fileBaseDeleteUrl"/>	    
@@ -32,5 +33,5 @@
 				fileBaseUrl="${fileBaseUrl}" />
         
     </form:create>
-    <form:dependency dependencies="${dependencies}" id="d_cz_kolomet_domain_ApplicationUser" render="${not empty dependencies}" z="Svf97I0u8Iv4axjHEq7hx4B9uc8="/>
+    
 </div>

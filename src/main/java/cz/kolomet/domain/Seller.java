@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -14,6 +15,8 @@ import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import cz.kolomet.domain.codelist.CountryState;
 import cz.kolomet.domain.codelist.Region;
@@ -21,7 +24,7 @@ import cz.kolomet.domain.codelist.SellerStatus;
 
 @Entity
 @BatchSize(size = 9)
-public class Seller extends ApplicationUser implements PhotoContainer, Serializable {
+public class Seller extends BaseDomainEntity implements PhotoContainer, Serializable {
 	
 	@NotNull
 	@Size(max = 20)
@@ -47,6 +50,8 @@ public class Seller extends ApplicationUser implements PhotoContainer, Serializa
     
     @Size(max = 20)
     private String personSurname;
+   
+    private String personEmail;
 
     // ostatni
     @ManyToOne(fetch = FetchType.LAZY)
@@ -65,20 +70,22 @@ public class Seller extends ApplicationUser implements PhotoContainer, Serializa
     @Size(max = 255)
     private String mapUrl;
     
+    private Boolean enabled;
+    
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "seller", cascade = CascadeType.ALL)
     private List<SellerPhotoUrl> sellerPhotoUrls = new ArrayList<SellerPhotoUrl>();
     
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "seller", cascade = CascadeType.ALL)
     private List<Product> products = new ArrayList<Product>();
     
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "APPLICATION_USER_ID")
+	@Fetch(FetchMode.SUBSELECT)
+	private List<SellerAddress> addresses = new ArrayList<SellerAddress>();
+    
     @Override
     public String getPhotoType() {
     	return SellerPhotoUrl.PHOTO_URL_PREFIX;
-    }
-    
-    @Override
-    public String getNickname() {
-    	return getSellerName();
     }
     
     public String getPersonString() {
@@ -135,12 +142,33 @@ public class Seller extends ApplicationUser implements PhotoContainer, Serializa
     	this.getSellerPhotoUrls().add(sellerPhotoUrl);
 		return sellerPhotoUrl;
 	}
+	
+	protected SellerAddress getAddressByTypeNullSafe(AddressType addressType) {
+		SellerAddress address = getAddressByType(addressType);
+		if (address != null) {
+			return address;
+		} else {
+			SellerAddress newAddress = new SellerAddress();
+			newAddress.setAddressType(addressType);
+			this.addresses.add(newAddress);
+			return newAddress;
+		}
+	}
+	
+	protected SellerAddress getAddressByType(AddressType addressType) {
+		for (SellerAddress address: addresses) {
+			if (address.getAddressType() != null && address.getAddressType().equals(addressType)) {
+				return address;
+			}
+		}
+		return null;
+	}
 
-    public ApplicationUserAddress getCorrespondenceAddress() {
+    public SellerAddress getCorrespondenceAddress() {
     	return getAddressByTypeNullSafe(AddressType.CORRESPONDENCE);
     }
     
-    public ApplicationUserAddress getBusinessAddress() {
+    public SellerAddress getBusinessAddress() {
     	return getAddressByTypeNullSafe(AddressType.BUSINNES_PLACE);
     }
 	
@@ -198,6 +226,14 @@ public class Seller extends ApplicationUser implements PhotoContainer, Serializa
 
 	public void setPersonSurname(String personSurname) {
 		this.personSurname = personSurname;
+	}
+
+	public String getPersonEmail() {
+		return personEmail;
+	}
+
+	public void setPersonEmail(String personEmail) {
+		this.personEmail = personEmail;
 	}
 
 	public Long getBusinessAddressId() {
@@ -376,20 +412,20 @@ public class Seller extends ApplicationUser implements PhotoContainer, Serializa
 		getCorrespondenceAddress().setDegree(addressDegree);
 	}
 
-	public String getAddressEmail() {
-		return getCorrespondenceAddress().getEmail();
-	}
-
-	public void setAddressEmail(String addressEmail) {
-		getCorrespondenceAddress().setEmail(addressEmail);
-	}
-	
 	public String getAddressName() {
 		return getCorrespondenceAddress().getName();
 	}
 	
 	public void setAddressName(String addressName) {
 		getCorrespondenceAddress().setName(addressName);
+	}
+
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
 	}
 
 	public List<SellerPhotoUrl> getSellerPhotoUrls() {
@@ -406,6 +442,14 @@ public class Seller extends ApplicationUser implements PhotoContainer, Serializa
 
 	public void setProducts(List<Product> products) {
 		this.products = products;
+	}
+
+	public List<SellerAddress> getAddresses() {
+		return addresses;
+	}
+
+	public void setAddresses(List<SellerAddress> addresses) {
+		this.addresses = addresses;
 	}
 
 }

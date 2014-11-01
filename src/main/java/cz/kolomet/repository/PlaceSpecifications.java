@@ -49,7 +49,7 @@ public class PlaceSpecifications {
 			@Override
 			public Predicate toPredicate(Root<Place> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 				
-				Join<Place, ApplicationUser> applicationUserJoin = root.join("createdBy");
+				Join<Place, ApplicationUser> applicationUserJoin = root.join("owner");
 				return cb.equal(applicationUserJoin.get("id"), userId);
 			}
 			

@@ -75,8 +75,6 @@ import cz.kolomet.service.SellerStatusService;
  */
 public class ApplicationConversionServiceFactoryBean extends FormattingConversionServiceFactoryBean {
 
-	
-
 	@Autowired
     ApplicationPermissionService applicationPermissionService;
 

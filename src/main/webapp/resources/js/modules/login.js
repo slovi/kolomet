@@ -38,6 +38,7 @@ define(['jquery', 'jquery.lean'], function($) {
 				});
 			}
 		}
+		
 	};
 	
 });

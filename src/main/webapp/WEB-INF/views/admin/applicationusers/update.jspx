@@ -22,6 +22,7 @@
 	       	<field:input field="password" id="c_cz_kolomet_domain_ApplicationUser_password" />
         	<field:checkbox field="enabled" id="c_cz_kolomet_domain_ApplicationUser_enabled" />
         	<field:select field="roles" id="c_cz_kolomet_domain_ApplicationUser_roles" itemLabel="roleName" itemValue="id" items="${applicationroles}" multiple="true" path="/admin/applicationroles" />
+        	<field:select field="seller" id="c_cz_kolomet_domain_ApplicationUser_seller" emptyLabel="..." itemLabel="sellerName" itemValue="id" items="${sellers}" path="/admin/sellers" />
         </security:authorize>
         
 	    <label>Profilová fotka :</label>

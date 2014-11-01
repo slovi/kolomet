@@ -21,6 +21,7 @@ import cz.kolomet.domain.ApplicationUser;
 import cz.kolomet.domain.BasePhoto;
 import cz.kolomet.service.ApplicationRoleService;
 import cz.kolomet.service.ApplicationUserService;
+import cz.kolomet.service.SellerService;
 import cz.kolomet.service.exception.ExistingUserException;
 import flexjson.JSONSerializer;
 
@@ -29,11 +30,14 @@ import flexjson.JSONSerializer;
 public class ApplicationUserController extends AbstractAdminController {
 	
 	@Autowired
-    ApplicationUserService applicationUserService;
+    private ApplicationUserService applicationUserService;
 	
     @Autowired
     private ApplicationRoleService applicationRoleService;
 
+    @Autowired
+    private SellerService sellerService;
+    
     @RequestMapping(produces = "text/html")
     public String list(Pageable pageable, Model uiModel) {
         if (pageable != null) {
@@ -135,6 +139,7 @@ public class ApplicationUserController extends AbstractAdminController {
         uiModel.addAttribute("applicationroles", applicationRoleService.findAllApplicationRoles());
         uiModel.addAttribute("applicationusers", applicationUserService.findAllApplicationUsers());
         uiModel.addAttribute("addedFiles", new JSONSerializer().serialize(applicationUser.getFileInfos()));
+        uiModel.addAttribute("sellers", sellerService.findAllEnabledSellers());
         uiModel.addAttribute("uploadedFiles", BasePhoto.toJsonArray(applicationUser.getApplicationUserPhotos(), new String[] {"id", "fileName"}));
     }
 	
@@ -144,6 +149,7 @@ public class ApplicationUserController extends AbstractAdminController {
 			existingApplicationUser.setEnabled(applicationUser.getEnabled());
 			existingApplicationUser.setRoles(applicationUser.getRoles());
 			existingApplicationUser.setPassword(applicationUser.getPassword());
+			existingApplicationUser.setSeller(applicationUser.getSeller());
 		}
 		existingApplicationUser.setName(applicationUser.getName());
 		existingApplicationUser.setNickname(applicationUser.getNickname());

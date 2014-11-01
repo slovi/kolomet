@@ -4,7 +4,7 @@
     <jsp:output omit-xml-declaration="yes"/>
     
     <div id="news">
-    	<spring:url value="${subContext}/public/applicationuserregistrations?form" var="registrationUrl" />
+    	<spring:url value="${subContext}/public/game" var="registrationUrl" />
     	<a href="${registrationUrl}" class="undecorated">
 	    	<div id="kolomet_game" class="news_content">
 	            <div class="news_header">JEĎTE NA CYKLOVÝLET A HRAJTE „KOLOMET“</div>

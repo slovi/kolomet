@@ -24,24 +24,27 @@
 			            <security:authorize access="hasRole('ROLE_per_places')">
 			            	<hr color="#f9f9f9" width="85%" align="center" size="1" />
 			            	<security:authorize access="principal.isPlacesAll()">
-				            	<menu:item id="i_place_list" messageCode="global_menu_list" url="/tour/admin/places" z="/DMIeN4AJVoQZM6zEYjQeHs/hQw="/>
+				            	<menu:item id="i_place_list" messageCode="global_menu_list" url="/tour/admin/places" />
 				            </security:authorize>
 				            <security:authorize access="principal.isPlacesOwn()">
-				            	<menu:item id="i_place_list" messageCode="global_menu_own_list" url="/tour/admin/places" z="/DMIeN4AJVoQZM6zEYjQeHs/hQw="/>
+				            	<menu:item id="i_place_list" messageCode="global_menu_own_list" url="/tour/admin/places" />
 				            </security:authorize>
 				            <security:authorize access="hasAnyRole('ROLE_per_placetypes')">
-				            	<menu:item id="i_placetype_list" messageCode="global_menu_list" url="/tour/admin/placetypes" z="7BUDqvzSWihBVxllFovit0Zs3PM="/>
+				            	<menu:item id="i_placetype_list" messageCode="global_menu_list" url="/tour/admin/placetypes" />
 				            </security:authorize>				            
 				            <security:authorize access="hasAnyRole('ROLE_per_regions')">
-				            	<menu:item id="i_region_list" messageCode="global_menu_list" url="/tour/admin/regions" z="R4yrjjgk2KXYIlMw++M9nLkYTpE="/>
+				            	<menu:item id="i_region_list" messageCode="global_menu_list" url="/tour/admin/regions" />
 				            </security:authorize>
 				        </security:authorize>
 	    			</menu:category>
 		            <security:authorize access="hasAnyRole('ROLE_per_places')"> 			
-						<menu:item id="i_place_new" messageCode="global_menu_new" styleClass="admin" renderPageParams="false" url="/tour/admin/places?form" z="user-managed"/>
-					</security:authorize>
+						<menu:item id="i_place_new" messageCode="global_menu_new" styleClass="admin" renderPageParams="false" url="/tour/admin/places?form" />
+					</security:authorize>					
     			</security:authorize>
-				<menu:item id="i_bikes" messageCode="global_menu_bikes" styleClass="comeback" renderPageParams="false" url="/store/public/intro/index" z="user-managed"/>
+    			<security:authorize access="isAnonymous()">
+					<menu:item id="i_place_new" messageCode="global_menu_new" styleClass="admin anonymous" renderPageParams="false" url="#" />
+				</security:authorize>
+				<menu:item id="i_bikes" messageCode="global_menu_bikes" styleClass="comeback" renderPageParams="false" url="/store/public/intro/index" />
     		</menu:menu>
 		</div>
 	</div>

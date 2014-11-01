@@ -23,7 +23,7 @@
 	            <security:authorize access="hasAnyRole('ROLE_per_registrationrequests')">
 	                <menu:item id="i_registrationrequest_list" messageCode="global_menu_list" sort="processed" sortDesc="false" url="/store/admin/registrationrequests" z="user-managed"/>
 	            </security:authorize>
-	            <security:authorize access="hasAnyRole('ROLE_per_applicationusers')">
+	            <security:authorize access="principal.isApplicationUsersAll()">
 	                <menu:item id="i_applicationuser_new" messageCode="global_menu_new" renderPageParams="false" url="/store/admin/applicationusers?form" z="user-managed"/>
 	                <menu:item id="i_applicationuser_list" messageCode="global_menu_list" url="/store/admin/applicationusers" z="user-managed"/>
 	                <menu:item id="i_applicationrole_new" messageCode="global_menu_new" renderPageParams="false" url="/store/admin/applicationroles?form" z="user-managed"/>
@@ -50,6 +50,12 @@
 	                    <menu:item id="i_countrystate_new" messageCode="global_menu_new" renderPageParams="false" url="/store/admin/countrystates?form" z="user-managed"/>
 	                    <menu:item id="i_countrystate_list" messageCode="global_menu_list" url="/store/admin/countrystates" z="user-managed"/>
 	                </security:authorize>
+	            </menu:category>
+	        </security:authorize>
+	        <security:authorize access="principal.isProductsOwn()">
+	        	<menu:category id="c_product" z="vJ6efqiSxFssuvqFTsXpvZ3AvA8=">
+	                <menu:item id="i_product_new" messageCode="global_menu_new" renderPageParams="false" url="/store/admin/products?form" z="user-managed"/>
+	                <menu:item id="i_product_list" messageCode="global_menu_list" url="/store/admin/products" z="user-managed"/>
 	            </menu:category>
 	        </security:authorize>
 	        <security:authorize access="principal.isProductsAll()">

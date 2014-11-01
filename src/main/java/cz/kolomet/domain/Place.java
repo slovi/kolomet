@@ -7,8 +7,10 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
@@ -50,6 +52,10 @@ public class Place extends BaseDomainEntity implements Commented, PhotoContainer
     private Integer nrOfRankings = 0;
     
     private String descriptionLink;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "OWNER_ID")
+    private ApplicationUser owner;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "place")
     private List<PlacePhotoUrl> placePhotoUrls = new ArrayList<PlacePhotoUrl>();
@@ -189,6 +195,14 @@ public class Place extends BaseDomainEntity implements Commented, PhotoContainer
 
 	public void setDescriptionLink(String descriptionLink) {
 		this.descriptionLink = descriptionLink;
+	}
+
+	public ApplicationUser getOwner() {
+		return owner;
+	}
+
+	public void setOwner(ApplicationUser owner) {
+		this.owner = owner;
 	}
 
 	public List<PlacePhotoUrl> getPlacePhotoUrls() {

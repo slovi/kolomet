@@ -52,6 +52,7 @@
 						<spring:message code="label_cz_kolomet_domain_seller_persondegree" />: <spring:eval expression="seller.personDegree" /><br />
 						<spring:message code="label_cz_kolomet_domain_seller_personname" />: <spring:eval expression="seller.personName" /><br />
 						<spring:message code="label_cz_kolomet_domain_seller_personsurname" />: <spring:eval expression="seller.personSurname" /><br />
+						<spring:message code="label_cz_kolomet_domain_seller_addressemail" />: <spring:eval expression="seller.personEmail" /><br />
 						<br />			
 						<strong><spring:message code="seller_detail_business" /></strong><br />
 						<spring:message code="label_cz_kolomet_domain_seller_businesscountry" />: <spring:eval expression="seller.businessCountry.codeDescription" /><br />
@@ -79,7 +80,6 @@
 						<spring:message code="label_cz_kolomet_domain_seller_addresssalutation" />: <spring:eval expression="seller.addressSalutation" /><br />
 						<spring:message code="label_cz_kolomet_domain_seller_addressdegree" />: <spring:eval expression="seller.addressDegree" /><br />
 						<spring:message code="label_cz_kolomet_domain_seller_addressname" />: <spring:eval expression="seller.addressName" /><br />
-						<spring:message code="label_cz_kolomet_domain_seller_addressemail" />: <spring:eval expression="seller.addressEmail" /><br />
 		            </p>
 		       	</div>
 	       	</security:authorize>

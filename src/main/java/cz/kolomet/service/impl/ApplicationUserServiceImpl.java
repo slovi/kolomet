@@ -137,7 +137,7 @@ public class ApplicationUserServiceImpl extends AbstractPhotoUrlService implemen
 	
 	public void saveApplicationUser(ApplicationUser applicationUser, boolean generatePassword) {
 
-    	if (applicationUserRepository.findByUsername(applicationUser.getUsername()) == null) {
+    	if (applicationUserRepository.findByUsernameAndEnabled(applicationUser.getUsername(), true) == null) {
     		
     		if (generatePassword) {
     			
@@ -176,7 +176,7 @@ public class ApplicationUserServiceImpl extends AbstractPhotoUrlService implemen
 	@PreAuthorize("principal.isCapableToUpdateApplicationUser(#applicationUser)")
     public ApplicationUser updateApplicationUser(ApplicationUser applicationUser) {
     	
-    	ApplicationUser existingUser = applicationUserRepository.findByUsername(applicationUser.getUsername());
+    	ApplicationUser existingUser = applicationUserRepository.findByUsernameAndEnabled(applicationUser.getUsername(), true);
     	
     	// jestlize username existuje, ale jedna se o stejneho uzivatele nebo jestli username neexistuje, muzeme menit
     	if ((existingUser != null && existingUser.getId().equals(applicationUser.getId())) ||  (existingUser == null)) {
@@ -199,7 +199,7 @@ public class ApplicationUserServiceImpl extends AbstractPhotoUrlService implemen
 
 	@PreAuthorize("principal.isCapableToUpdatePassword(#applicationUserPassword)")
 	public void updatePassword(ApplicationUserPasswordDto applicationUserPassword) {
-		ApplicationUser user = applicationUserRepository.findByUsername(applicationUserPassword.getUsername());
+		ApplicationUser user = applicationUserRepository.findByUsernameAndEnabled(applicationUserPassword.getUsername(), true);
 		if (!user.getPassword().equals(passwordEncoder.encodePassword(applicationUserPassword.getPassword(), null))) {
 			throw new ApplicationUserPasswordException("Cannot change password - old password is incorrect.", "exception_old_password_incorrect");
 		}
@@ -212,7 +212,7 @@ public class ApplicationUserServiceImpl extends AbstractPhotoUrlService implemen
 	
 	public void resetPassword(String username) {
 		
-		ApplicationUser user = applicationUserRepository.findByUsername(username);
+		ApplicationUser user = applicationUserRepository.findByUsernameAndEnabled(username, true);
 		if (user != null) {
 			
 			String password = passwordGenerator.generatePassword(user);
@@ -236,7 +236,8 @@ public class ApplicationUserServiceImpl extends AbstractPhotoUrlService implemen
 
 	@PreAuthorize("principal.isCapableToDeleteApplicationUser(#applicationUser)")
 	public void deleteApplicationUser(ApplicationUser applicationUser) {
-        applicationUserRepository.delete(applicationUser);
+		applicationUser.setEnabled(false);
+		applicationUserRepository.save(applicationUser);
     }
 
 	@PreAuthorize("principal.isApplicationUserOwner(#id)")

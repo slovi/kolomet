@@ -12,6 +12,7 @@
         <field:display field="personDegree" id="s_cz_kolomet_domain_Seller_personDegree" object="${seller}" z="zODKfQlIbTYTO8gfgbdTZiXiTqU="/>
         <field:display field="personName" id="s_cz_kolomet_domain_Seller_personName" object="${seller}" z="l9ZR0ofQxlpTyaVUaRXg56LApYg="/>
         <field:display field="personSurname" id="s_cz_kolomet_domain_Seller_personSurname" object="${seller}" z="yVrtNHjG6EG0ffxQz4fDfML5HdE="/>
+        <field:display field="personEmail" id="s_cz_kolomet_domain_Seller_addressEmail" object="${seller}" z="MdRlkzTu4hvtWYfmPeSgj2q1oJo="/>
         <field:display field="businessCountry.codeDescription" id="s_cz_kolomet_domain_Seller_businessCountry" object="${seller}" z="user-managed"/>
         <field:display field="businessCity" id="s_cz_kolomet_domain_Seller_businessCity" object="${seller}" z="qaQJieE/4JCLhrQj2j1xNGgjYRI="/>
         <field:display field="businessStreet" id="s_cz_kolomet_domain_Seller_businessStreet" object="${seller}" z="8PTuFs/8XYmxFhxcTgeEXXjykZA="/>
@@ -31,7 +32,6 @@
         <field:display field="addressSalutation" id="s_cz_kolomet_domain_Seller_addressSalutation" object="${seller}" z="HlunXw9fe24GxN085j075LOMFdM="/>
         <field:display field="addressDegree" id="s_cz_kolomet_domain_Seller_addressDegree" object="${seller}" z="M/5vywWHjUjUdF9qBzXmCtTN6sM="/>
         <field:display field="addressName" id="s_cz_kolomet_domain_Seller_addressName" object="${seller}" z="Xqr9NUBujwOGHJTkDgRWFdwojjg="/>
-        <field:display field="addressEmail" id="s_cz_kolomet_domain_Seller_addressEmail" object="${seller}" z="MdRlkzTu4hvtWYfmPeSgj2q1oJo="/>
         <field:display bool="true" field="enabled" id="s_cz_kolomet_domain_Seller_enabled" object="${seller}" z="user-managed"/>
         <field:display field="createdBy" id="s_cz_kolomet_domain_Seller_createdBy" object="${seller}" z="user-managed"/>
         <field:display field="lastModifiedBy" id="s_cz_kolomet_domain_Seller_lastModifiedBy" object="${seller}" z="user-managed"/>

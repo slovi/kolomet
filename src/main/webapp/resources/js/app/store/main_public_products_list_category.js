@@ -29,25 +29,37 @@ require(['../common'], function (common) {
 					'button_filter', 
 					'click', 
 					function(element, paramsData, modelFragmentsData) {
-						pageAndSortLinks();
+						nextPageAndSortLinks();
 						History.pushState(null, null, '?' + encodeArrayToQueryString(paramsData.paramsArray));
 					}, 
 					{fragments: 'body_content'});
 			
-			// paging
-			function pageAndSortLinks() {
+			var nextPageAndSortLinks = function() {
 				ajaxLink.decorate(
-					'div#pages a.page_link, #sort_link_price, #sort_link_discount', 
-					'click', 
-					function(element, modelFragmentsData) {
-						return {fragments: 'body_content'}
-					}, 
-					function(element, paramsInfo, modelFragmentsData) {		
-						pageAndSortLinks();
-						History.pushState(null, null, '?' + encodeArrayToQueryString(concatParams(objectToObjectArray(paramsInfo.params), paramsInfo.paramsData.paramsArray)));
-					})}
+						'div#category_content div:last a.next_page_link', 
+						'click',
+						function(element, modelFragmentsData) {
+							return {fragments: 'body_content', append: true}
+						},
+						function(element, paramsInfo, modelFragmentsData) {		
+							nextPageAndSortLinks();
+							$('html,body').animate({scrollTop: $(element).offset().top}, 1000);
+							$(element).closest('div').hide();
+						})
+						
+				ajaxLink.decorate(
+						'span#body_content div.sorting a', 
+						'click',
+						function(element, modelFragmentsData) {
+							return {fragments: 'body_content'}
+						},
+						function(element, paramsInfo, modelFragmentsData) {		
+							nextPageAndSortLinks();
+						})
 			
-			pageAndSortLinks();
+			};
+			
+			nextPageAndSortLinks();
 			
 			function concatParams(array1, array2) {
 				var keys = {};

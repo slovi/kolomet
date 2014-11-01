@@ -25,10 +25,10 @@ import cz.kolomet.service.exception.ExistingPlaceException;
 @Transactional
 public class PlaceServiceImpl implements PlaceService, RatedService {
 
-	private static final Double LOCATION_RADIUS = 0.010000000000000d;
+	private static final Double LOCATION_RADIUS = 0.0006d;
 	
 	@Autowired
-    PlaceRepository placeRepository;
+    private PlaceRepository placeRepository;
 
 	public long countAllPlaces() {
         return placeRepository.count();
@@ -86,6 +86,7 @@ public class PlaceServiceImpl implements PlaceService, RatedService {
 	public void addRate(Long id, Integer value) {
 		Place place = placeRepository.findOne(id);
 		place.increaseRate(value);
+		placeRepository.save(place);
 	}
 	
 	@Override

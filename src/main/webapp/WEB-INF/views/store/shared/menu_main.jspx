@@ -46,6 +46,9 @@
 				            	<menu:item id="i_countrystate_list" messageCode="global_menu_list" url="/store/admin/countrystates" z="6376x50wFxJokyFZdSoG7iIslIs="/>
 				            </security:authorize>
 			            </security:authorize>
+			            <security:authorize access="principal.isProductsOwn()"> 
+			            	<menu:item id="i_product_list" messageCode="global_menu_list" url="/store/admin/products" z="kEeyCmUUYXShbDEWwOLheaAkM50="/>
+			            </security:authorize>
 						<security:authorize access="principal.isProductsAll()"> 
 							<hr color="#f9f9f9" width="85%" align="center" size="1" />
 			            	<menu:item id="i_product_list" messageCode="global_menu_list" url="/store/admin/products" z="kEeyCmUUYXShbDEWwOLheaAkM50="/>

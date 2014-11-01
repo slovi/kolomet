@@ -13,6 +13,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
@@ -54,7 +55,11 @@ public class ApplicationUser extends BaseDomainEntity implements PhotoContainer,
 	@JoinColumn(name = "APPLICATION_USER_ID")
 	@Fetch(FetchMode.SUBSELECT)
 	private List<ApplicationUserAddress> addresses = new ArrayList<ApplicationUserAddress>();
-		
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "SELLER_ID")
+	private Seller seller;
+	
 	@ManyToMany
 	  @JoinTable(
 	      name="APPLICATION_USER_ROLE",
@@ -100,27 +105,6 @@ public class ApplicationUser extends BaseDomainEntity implements PhotoContainer,
 	
 	public void addRole(ApplicationRole applicationRole) {
 		this.roles.add(applicationRole);
-	}
-
-	protected ApplicationUserAddress getAddressByTypeNullSafe(AddressType addressType) {
-		ApplicationUserAddress address = getAddressByType(addressType);
-		if (address != null) {
-			return address;
-		} else {
-			ApplicationUserAddress newAddress = new ApplicationUserAddress();
-			newAddress.setAddressType(addressType);
-			this.addresses.add(newAddress);
-			return newAddress;
-		}
-	}
-	
-	protected ApplicationUserAddress getAddressByType(AddressType addressType) {
-		for (ApplicationUserAddress address: addresses) {
-			if (address.getAddressType() != null && address.getAddressType().equals(addressType)) {
-				return address;
-			}
-		}
-		return null;
 	}
 
 	public List<ApplicationUserPhoto> getApplicationUserPhotos() {
@@ -237,6 +221,14 @@ public class ApplicationUser extends BaseDomainEntity implements PhotoContainer,
 
 	public void setFileInfos(List<FileInfo> fileInfos) {
 		this.fileInfos = fileInfos;
+	}
+
+	public Seller getSeller() {
+		return seller;
+	}
+
+	public void setSeller(Seller seller) {
+		this.seller = seller;
 	}
 	
 }

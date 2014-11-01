@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<jsp:root xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
+<jsp:root xmlns:c="http://java.sun.com/jsp/jstl/core" 
+	xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" 
+	xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" 
+	xmlns:jsp="http://java.sun.com/JSP/Page" 
+	xmlns:spring="http://www.springframework.org/tags" 
+	xmlns:security="http://www.springframework.org/security/tags"
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
+    
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     
@@ -25,22 +32,29 @@
 	                </div>
 	                <div class="step-1">
 	                    <div style="float:right;">
-	                        <div id="map-canvas-1" style="width: 410px; height: 246px;">
+	                    	<div class="alert alert-info">
+	                    		<spring:message code="place_create_info" />
+	                    	</div>
+	                        <div id="map-canvas-1" style="width: 410px; height: 255px;">
 	                            <!---->
 	                        </div>
 	                    </div>
 	                    <div style="width: 300px;">
-	                        <field:select field="placeType" id="c_cz_kolomet_domain_Place_placeType" itemLabel="codeDescription" itemValue="id" items="${placetypes}" path="/admin/placetypes" required="true" width="${input_width}" z="user-managed"/>
+	                        <field:select field="placeType" id="c_cz_kolomet_domain_Place_placeType" itemLabel="codeDescription" itemValue="id" items="${placetypes}" path="/admin/placetypes" required="true" width="${input_width}" />
 	                        <field:input field="name" id="c_cz_kolomet_domain_Place_name" required="true" width="${input_width}" z="user-managed"/>
-	                        <field:input field="gpsLocation.north" id="c_cz_kolomet_domain_Place_gpsLocation_north" required="true" validationRegex="(([1-9][0-9]{0,2}(,[0-9]{1,20})?)|(1000(,[0-9]{1,20})?))" width="${input_width}" z="user-managed"/>
-	                        <field:input field="gpsLocation.west" id="c_cz_kolomet_domain_Place_gpsLocation_west" required="true" validationRegex="(([1-9][0-9]{0,2}(,[0-9]{1,20})?)|(1000(,[0-9]{1,20})?))" width="${input_width}" z="aaMqdkjjPg0UQLxvnIUsUnHctTY="/>
-	                        <field:input field="region" width="${input_width}" id="c_cz_kolomet_domain_Place_region" readonly="true" />
 	                        <field:input field="bikeRoadNr" id="c_cz_kolomet_domain_Place_bikeRoadNr" required="false" validationMessageCode="field_invalid_integer" width="${input_width}" z="user-managed"/>
 	                        <field:input field="address.street" id="c_cz_kolomet_domain_Place_address_street" render="false" width="${input_width}" z="9mNJF+/QmefeQOfR2mhIlHMeOSk="/>
 	                        <field:input field="address.houseNr" id="c_cz_kolomet_domain_Place_address_houseNr" render="false" validationRegex="([1-9][0-9]{0,2}|1000)" width="${input_width}" z="9mNJF+/QmefeQOfR2mhIlHMeOSk="/>
 	                        <field:input field="address.city" id="c_cz_kolomet_domain_Place_address_city" render="false" width="${input_width}" z="9mNJF+/QmefeQOfR2mhIlHMeOSk="/>
 	                        <field:input field="address.zipCode" id="c_cz_kolomet_domain_Place_address_zipCode" render="false" width="${input_width}" z="9mNJF+/QmefeQOfR2mhIlHMeOSk="/>
-	                        <field:input field="descriptionLink" id="c_cz_kolomet_domain_Place_descriptionLink" width="${input_width}" z="user-managed"/>
+	                        <field:textarea field="descriptionLink" id="c_cz_kolomet_domain_Place_descriptionLink" cols="18" />
+	                        <field:input field="gpsLocation.north" id="c_cz_kolomet_domain_Place_gpsLocation_north" required="true" readonly="true" width="${input_width}" />
+	                        <field:input field="gpsLocation.west" id="c_cz_kolomet_domain_Place_gpsLocation_west" required="true" readonly="true" width="${input_width}" />
+	                        <field:input field="region" width="${input_width}" id="c_cz_kolomet_domain_Place_region" readonly="true" />
+	                        <security:authorize access="principal.isPlacesAll()">
+	                        	<field:select field="owner" id="c_cz_kolomet_domain_Place_owner" itemValue="id" itemLabel="username" items="${applicationusers}" path="/admin/applicationusers" width="${input_width}" />
+	                        </security:authorize>
+	                        
 	                        <button id="step_1_button" class="step-1" data-step="1" type="button">
 	                            <spring:message code="place_create_step_next"/>
 	                        </button>

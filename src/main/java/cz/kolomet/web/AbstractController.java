@@ -31,7 +31,7 @@ import cz.kolomet.util.web.Regex;
 
 public class AbstractController implements MessageSourceAware {
 
-	public static final int DEFAULT_PAGE_SIZE = 25;
+	public static final int DEFAULT_PAGE_SIZE = 15;
 	
 	public static final int DEFAULT_MAX_ATTEMPT_COUNT = 10;
 	
@@ -57,6 +57,21 @@ public class AbstractController implements MessageSourceAware {
 	protected ConversionService converionService;
 
 	private int maxAttemptCount = DEFAULT_MAX_ATTEMPT_COUNT;
+	
+	@ModelAttribute("currencyFormat")
+	public String getCurrencyFormat() {
+		return "";
+	}
+	
+	@ModelAttribute("dateFormat")
+	public String getDateFormat() {
+		return "dd.MM.yyyy";
+	}
+	
+	@ModelAttribute("dateTimeFormat")
+	public String getDateTimeFormat() {
+		return "dd.MM.yyyy HH:mm";
+	}
 	
 	@ModelAttribute("regex")
 	public Regex getRegex() {
@@ -97,19 +112,6 @@ public class AbstractController implements MessageSourceAware {
 	
 	protected ApplicationUser getActualUser() {
 		return ApplicationUserDetails.getActualApplicationUser();
-	}
-	
-	protected void savePhotos(final PhotoContainer photoContainer, final PhotoContainerService photoContainerService, String folder) {
-		
-		File uploadedFileParent = new File(getTempDir(), folder);
-		
-		for (final Photo photo: photoContainer.getPhotos()) {
-			if (photo.isNew()) {
-				String fileName = photo.getFileName();
-				photoContainerService.savePhoto(photo);
-				movePhotos(photoContainer, photoContainerService, uploadedFileParent, fileName);
-			}
-		}
 	}
 	
 	protected void savePhotos(final PhotoContainer photoContainer, final PhotoContainerService photoContainerService, String folder, List<FileInfo> fileInfos) {

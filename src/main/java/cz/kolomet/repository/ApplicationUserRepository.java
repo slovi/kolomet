@@ -11,6 +11,6 @@ public interface ApplicationUserRepository extends JpaRepository<ApplicationUser
 	
 	public ApplicationUser findByToken(String token);
 	
-	public ApplicationUser findByUsername(String username);	
+	public ApplicationUser findByUsernameAndEnabled(String username, Boolean enabled);	
 	
 }

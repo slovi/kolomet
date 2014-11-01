@@ -34,6 +34,8 @@ public class SellerDto {
     
     @Size(max = 20)
     private String personSurname;
+    
+    private String personEmail;
 
     private SellerStatus sellerStatus;
     
@@ -77,8 +79,6 @@ public class SellerDto {
     private String addressSalutation;
     
     private String addressDegree;
-    
-    private String addressEmail;
 
     private String addressName;
     
@@ -316,12 +316,12 @@ public class SellerDto {
 		this.addressDegree = addressDegree;
 	}
 
-	public String getAddressEmail() {
-		return addressEmail;
+	public String getPersonEmail() {
+		return personEmail;
 	}
 
-	public void setAddressEmail(String addressEmail) {
-		this.addressEmail = addressEmail;
+	public void setPersonEmail(String personEmail) {
+		this.personEmail = personEmail;
 	}
 
 	public String getAddressName() {
