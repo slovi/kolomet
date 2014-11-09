@@ -70,6 +70,10 @@ public class ApplicationUser extends BaseDomainEntity implements PhotoContainer,
 	@Transient
     private List<FileInfo> fileInfos = new ArrayList<FileInfo>();
 	
+	public boolean isDisabled() {
+		return !getEnabled();
+	}
+	
 	public String getLabelName() {
 		return StringUtils.isNotBlank(nickname) ? nickname : this.name + " " + this.surname;
 	}

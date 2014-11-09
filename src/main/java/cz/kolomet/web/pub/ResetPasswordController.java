@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.octo.captcha.service.CaptchaServiceException;
 import com.octo.captcha.service.image.ImageCaptchaService;
 
 import cz.kolomet.dto.ResetPasswordDto;
@@ -46,8 +47,14 @@ public class ResetPasswordController extends AbstractPublicController {
 			return "public/resetpasswords/create";
 		}
 
-		if (!captchaService.validateResponseForID("reset_password_" + httpServletRequest.getSession().getId(),
-				resetPassword.getCaptchaText())) {
+		try {
+			if (!captchaService.validateResponseForID("reset_password_" + httpServletRequest.getSession().getId(),
+					resetPassword.getCaptchaText())) {
+				bindingResult.rejectValue("captchaText", "exception_incorrect_captcha");
+				populateEditForm(uiModel, resetPassword);
+				return "public/resetpasswords/create";
+			}
+		} catch (CaptchaServiceException e) {
 			bindingResult.rejectValue("captchaText", "exception_incorrect_captcha");
 			populateEditForm(uiModel, resetPassword);
 			return "public/resetpasswords/create";

@@ -8,10 +8,7 @@
     	<div class="menu_inline">	
     		<menu:menu id="main_menu">
     			<menu:item url="/store/public/intro/index" messageCode="menu_main_intro" id="intro" renderPageParams="false" />
-    			<menu:item url="/store/public/products/filter?categoryType=${bikeCategoryTypeId}" messageCode="menu_main_products_bikes" id="products_bikes" defaultPageSize="${categoryPageSize}" />
-    			<!-- 
-    			<menu:item url="/public/products/filter?categoryType=${otherCategoryTypeId}" messageCode="menu_main_products_other" id="products_other" defaultPageSize="6" />
-    			 -->
+    			<menu:item url="/store/public/products/filter?categoryType=${bikeCategoryTypeId}" messageCode="menu_main_products_bikes" id="products_bikes" defaultPageSize="${categoryPageSize}" />    			
     			<menu:item url="/store/public/sellers/map" messageCode="menu_main_sellers" id="sellers" renderPageParams="false" />
     			<menu:item url="/store/public/about" messageCode="menu_main_about" id="about" renderPageParams="false" />
     			
@@ -81,12 +78,16 @@
 				            <hr color="#f9f9f9" width="85%" align="center" size="1" />
 				            <menu:item id="i_newsitem_list" messageCode="global_menu_list" url="/store/admin/newsitems" z="KOnlcMRbr4BntwwokrnIdkGVvTE="/>
 			            </security:authorize>
+						<security:authorize access="principal.isProductsAll()">
+							<hr color="#f9f9f9" width="85%" align="center" size="1" /> 
+		    				<menu:item url="${menuGoogleLink}" blank="true" messageCode="menu_main_google_analytics" id="google_analytics" renderPageParams="false"/>
+		    			</security:authorize>
 	    			</menu:category>		 
 	    			<security:authorize access="hasAnyRole('ROLE_per_products')"> 			
 						<menu:item id="i_product_new" messageCode="global_menu_new" styleClass="admin" renderPageParams="false" url="/store/admin/products?form" z="user-managed"/>
 					</security:authorize>
     			</security:authorize>
-				<menu:item id="i_places" messageCode="global_menu_places" styleClass="comethere" renderPageParams="false" url="/tour/public/places" z="user-managed"/>
+				<menu:item id="i_places" messageCode="global_menu_places" styleClass="comethere" renderPageParams="false" url="/tour/public/places" z="user-managed"/>				
     		</menu:menu>
 		</div>
 	</div>

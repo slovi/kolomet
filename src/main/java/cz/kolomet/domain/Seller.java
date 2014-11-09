@@ -84,6 +84,31 @@ public class Seller extends BaseDomainEntity implements PhotoContainer, Serializ
 	private List<SellerAddress> addresses = new ArrayList<SellerAddress>();
     
     @Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((getSellerName() == null) ? 0 : getSellerName().hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (!(obj instanceof Seller))
+			return false;
+		Seller other = (Seller) obj;
+		if (getSellerName() == null) {
+			if (other.getSellerName() != null)
+				return false;
+		} else if (!getSellerName().equals(other.getSellerName()))
+			return false;
+		return true;
+	}
+
+	@Override
     public String getPhotoType() {
     	return SellerPhotoUrl.PHOTO_URL_PREFIX;
     }

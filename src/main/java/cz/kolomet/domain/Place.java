@@ -66,7 +66,32 @@ public class Place extends BaseDomainEntity implements Commented, PhotoContainer
     @Transient
     private List<FileInfo> fileInfos = new ArrayList<FileInfo>();
     
-    public static String toJsonArray(Collection<Place> collection, String[] fields) {
+    @Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (!(obj instanceof Place))
+			return false;
+		Place other = (Place) obj;
+		if (getName() == null) {
+			if (other.getName() != null)
+				return false;
+		} else if (!getName().equals(other.getName()))
+			return false;
+		return true;
+	}
+
+	public static String toJsonArray(Collection<Place> collection, String[] fields) {
         return new JSONSerializer()
         .include(fields).exclude("*").serialize(collection);
     }

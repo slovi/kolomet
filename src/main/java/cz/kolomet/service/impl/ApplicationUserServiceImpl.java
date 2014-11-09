@@ -100,10 +100,15 @@ public class ApplicationUserServiceImpl extends AbstractPhotoUrlService implemen
 	}
 
 	@Override
-	public ResizeInfo[] getResizeInfos() {
+	public ResizeInfo[] getThumbnailResizeInfos() {
 		ResizeInfo[] resizeInfos = new ResizeInfo[1];
 		resizeInfos[0] = new ResizeInfo(new Dimension(thumbnailWidth, thumbnailHeight), PhotoUrl.THUMBNAIL_IMG_SUFFIX, false);
     	return resizeInfos;
+	}
+	
+	@Override
+	public ResizeInfo[] getResizeInfos() {
+    	return new ResizeInfo[0];
 	}
 	
 	public void activateApplicationUser(String token) {

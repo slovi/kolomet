@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.octo.captcha.service.CaptchaServiceException;
 import com.octo.captcha.service.image.ImageCaptchaService;
 
 import cz.kolomet.domain.AddressType;
@@ -82,12 +83,6 @@ public class ApplicationUserRegistrationController extends AbstractPublicControl
             return "public/applicationuserregistrations/create";
         }
         
-        if (!captchaService.validateResponseForID("applicationuserregistration_" + httpServletRequest.getSession().getId(), applicationUserRegistration.getCaptchaText())) {
-        	bindingResult.rejectValue("captchaText", "exception_incorrect_captcha");
-        	populateEditForm(uiModel, applicationUserRegistration);
-        	return "public/applicationuserregistrations/create";
-        }
-        
         if (!applicationUserRegistration.getConditionAgreement()) {
         	bindingResult.rejectValue("conditionAgreement", "exception_unagreed_conditions");
         	populateEditForm(uiModel, applicationUserRegistration);
@@ -102,6 +97,18 @@ public class ApplicationUserRegistrationController extends AbstractPublicControl
         
         if (!applicationUserRegistration.samePasswordValues()) {
         	bindingResult.rejectValue("password", "exception_password_not_same");
+        	populateEditForm(uiModel, applicationUserRegistration);
+        	return "public/applicationuserregistrations/create";
+        }
+        
+        try {
+	        if (!captchaService.validateResponseForID("applicationuserregistration_" + httpServletRequest.getSession().getId(), applicationUserRegistration.getCaptchaText())) {
+	        	bindingResult.rejectValue("captchaText", "exception_incorrect_captcha");
+	        	populateEditForm(uiModel, applicationUserRegistration);
+	        	return "public/applicationuserregistrations/create";
+	        }
+        } catch (CaptchaServiceException e) {
+        	bindingResult.rejectValue("captchaText", "exception_incorrect_captcha");
         	populateEditForm(uiModel, applicationUserRegistration);
         	return "public/applicationuserregistrations/create";
         }
@@ -125,7 +132,7 @@ public class ApplicationUserRegistrationController extends AbstractPublicControl
 		applicationUser.addAddress(address);
 		
 		try {
-			applicationUserService.saveApplicationUser(applicationUser, false);
+			applicationUserService.registerApplicationUser(applicationUser);
 			savePhotos(applicationUser, applicationUserService, httpServletRequest.getSession().getId(), applicationUserRegistration.getFileInfos());
 			uiModel.asMap().clear();
 			return "redirect:public/applicationuserregistrations/" + applicationUser.getId();
@@ -134,7 +141,8 @@ public class ApplicationUserRegistrationController extends AbstractPublicControl
 			populateEditForm(uiModel, applicationUserRegistration);
 			return "public/applicationuserregistrations/create";
 		} catch (MailException e) {
-			bindingResult.rejectValue("username", messageSourceAcessor.getMessage("exception_cannot_send_email_to_address"));
+			logger.error(e, e);
+			bindingResult.rejectValue("username", "exception_cannot_send_email_to_client_address");
 			populateEditForm(uiModel, applicationUserRegistration);
 			return "public/applicationuserregistrations/create";
 		}

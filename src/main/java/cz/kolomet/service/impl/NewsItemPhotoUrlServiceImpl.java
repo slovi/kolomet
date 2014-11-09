@@ -34,10 +34,16 @@ public class NewsItemPhotoUrlServiceImpl extends AbstractPhotoUrlService impleme
     }
 	
     @Override
-    public ResizeInfo[] getResizeInfos() {
-    	ResizeInfo[] resizeInfos = new ResizeInfo[2];
+    public ResizeInfo[] getThumbnailResizeInfos() {
+    	ResizeInfo[] resizeInfos = new ResizeInfo[1];
     	resizeInfos[0] = new ResizeInfo(new Dimension(thumbnailWidth, thumbnailHeight), PhotoUrl.THUMBNAIL_IMG_SUFFIX, false);
-    	resizeInfos[1] = new ResizeInfo(PhotoUrl.ORIGINAL_IMG_SUFFIX);
+    	return resizeInfos;
+    }
+    
+    @Override
+    public ResizeInfo[] getResizeInfos() {
+    	ResizeInfo[] resizeInfos = new ResizeInfo[1];
+    	resizeInfos[0] = new ResizeInfo(PhotoUrl.ORIGINAL_IMG_SUFFIX);
     	return resizeInfos;
     }
 

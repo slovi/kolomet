@@ -11,6 +11,7 @@
   <jsp:directive.attribute name="sort" type="java.lang.String" required="false" rtexprvalue="true" description="Sort attribute sent to controller as request param" />
   <jsp:directive.attribute name="sortDesc" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Sort Desc attribute sent to controller as request param" />
   <jsp:directive.attribute name="render" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Indicate if the contents of this tag and all enclosed tags should be rendered (default 'true')" />
+  <jsp:directive.attribute name="blank" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Indicate if the target has to be opened in new window" />
   <jsp:directive.attribute name="z" type="java.lang.String" required="false" description="Used for checking if element has been modified (to recalculate simply provide empty string value)" />
 
   <c:if test="${empty render or render}">
@@ -50,9 +51,18 @@
 	      	</c:choose>	      	
       	</c:if>
       </spring:url>
-      <a href="${menu_item_url}" title="${fn:escapeXml(label)}" class="${styleClass}">
-        <c:out value="${label}"/>
-      </a>
+      <c:choose>
+      	<c:when test="${not empty blank and blank}">
+      	  <a href="${menu_item_url}" target="_blank" title="${fn:escapeXml(label)}" class="${styleClass}">
+	        <c:out value="${label}" escapeXml="false"/>
+	      </a>
+      	</c:when>
+      	<c:otherwise>
+	      <a href="${menu_item_url}" title="${fn:escapeXml(label)}" class="${styleClass}">
+	        <c:out value="${label}" escapeXml="false"/>
+	      </a>
+      	</c:otherwise>
+      </c:choose>
     </li>
 
   </c:if>

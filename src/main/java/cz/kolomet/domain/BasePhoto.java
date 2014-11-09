@@ -47,6 +47,22 @@ public abstract class BasePhoto extends BaseDomainEntity implements Photo {
     	return getPhotoUrl(getPhotoUrlPrefix() + "/" + getParentContainerId(), fileName, suffix);
     }
     
+    public String getOrigFileName() {
+    	return getPhotoUrlFileName(fileName, ORIGINAL_IMG_SUFFIX);
+    }
+    
+    public String getDetailFileName() {
+    	return getPhotoUrlFileName(fileName, DETAIL_IMG_SUFFIX);
+    }
+    
+    public String getThumbFileName() {
+    	return getPhotoUrlFileName(fileName, THUMBNAIL_IMG_SUFFIX);
+    }
+    
+    public String getOverFileName() {
+    	return getPhotoUrlFileName(fileName, OVERVIEW_IMG_SUFFIX);
+    }
+    
     public String getPhotoUrl() {
     	return getPhotoUrl(ORIGINAL_IMG_SUFFIX);
     }

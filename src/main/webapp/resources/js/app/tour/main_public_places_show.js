@@ -6,6 +6,11 @@ require(['../common'], function (common) {
 	    	
 	    	images.preloadImages('detail_image');
 	    	
+	    	var detailImage = $('img#detail_image');
+			var fileLoaderUrl = detailImage.data('loader-url');
+			var fileNotFoundUrl = detailImage.data('not-found-url');
+			images.waitForImagesLoad(detailImage, fileLoaderUrl, fileNotFoundUrl, 4, 2000);
+	    	
 	    	for (var i = 0; i < 5; i++) {
 	    		ajaxSubmit.decorateId('rate_' + i, 'click', function(element, modelFragmentsData) {}, {fragments: 'body'});
 	    	}

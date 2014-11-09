@@ -10,7 +10,7 @@ public class TokenGeneratorImpl implements TokenGenerator {
 	
 	@Override
 	public String generateToken(Object baseValue) {
-		return RandomStringUtils.random(40);
+		return RandomStringUtils.randomAlphanumeric(40);
 	}
 
 }

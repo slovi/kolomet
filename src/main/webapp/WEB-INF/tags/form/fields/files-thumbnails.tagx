@@ -10,7 +10,9 @@
 			<c:choose>
 				<c:when test="${photoSize gt status.index}">
 					<spring:url value="/file/${photos[status.index].thumbPhotoUrl}" var="thumbPhotoUrl" />
-					<spring:url value="/file/${photos[status.index].detailPhotoUrl}" var="detailPhotoUrl" htmlEscape="false" />
+					<spring:url value="/file/${photos[status.index].detailPhotoUrl}" var="detailPhotoUrl" htmlEscape="false">
+						<spring:param name="forceSendError" value="false" />
+					</spring:url>
 					<spring:url value="/file/${photos[status.index].origPhotoUrl}" var="origPhotoUrl" htmlEscape="false"/>
 					<div class="thumbnail"> 
 						<a href="#">

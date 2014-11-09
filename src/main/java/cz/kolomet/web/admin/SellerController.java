@@ -108,6 +108,7 @@ import flexjson.JSONSerializer;
         	populateEditForm(uiModel, sellerDto);
         	return "admin/sellers/create";
         } catch (MailException e) {
+        	logger.error(e, e);
 			bindingResult.rejectValue("personEmail", "exception_cannot_send_email_to_address");
         	populateEditForm(uiModel, sellerDto);
         	return "admin/sellers/create";
@@ -135,6 +136,7 @@ import flexjson.JSONSerializer;
         	populateEditForm(uiModel, sellerDto);
         	return "admin/sellers/update";
         } catch (MailException e) {
+        	logger.error(e, e);
 			bindingResult.rejectValue("addressEmail", "exception_cannot_send_email_to_address");
         	populateEditForm(uiModel, sellerDto);
         	return "admin/sellers/update";

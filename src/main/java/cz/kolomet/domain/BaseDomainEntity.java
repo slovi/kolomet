@@ -44,12 +44,11 @@ public abstract class BaseDomainEntity implements Auditable<ApplicationUser, Lon
     @DateTimeFormat(style = "MM")
     private Date lastModified;
 
-    @Override
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((version == null) ? 0 : version.hashCode());
 		return result;
 	}
 
@@ -59,18 +58,13 @@ public abstract class BaseDomainEntity implements Auditable<ApplicationUser, Lon
 			return true;
 		if (obj == null)
 			return false;
-		if (getClass() != obj.getClass())
+		if (!(obj instanceof BaseDomainEntity))
 			return false;
 		BaseDomainEntity other = (BaseDomainEntity) obj;
-		if (id == null) {
-			if (other.id != null)
+		if (getId() == null) {
+			if (other.getId() != null)
 				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (version == null) {
-			if (other.version != null)
-				return false;
-		} else if (!version.equals(other.version))
+		} else if (!getId().equals(other.getId()))
 			return false;
 		return true;
 	}

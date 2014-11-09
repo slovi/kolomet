@@ -1,5 +1,7 @@
 define(['jquery'], function($) {
 
+	var PRELOAD_IMG_ATTR = 'preload-img';
+	
 	return {
 		preloadImages: function (detailImgId) {
 			$("img.preloaded").each(function(index, element) {		
@@ -13,7 +15,10 @@ define(['jquery'], function($) {
 				$(element).click(function(e) {
 					e.preventDefault();
 					var detailImg = $("#" + detailImgId); 
-					detailImg.attr("src", detailUrl);
+					detailImg.data(PRELOAD_IMG_ATTR, detailUrl);
+					var fileLoaderUrl = detailImg.data('loader-url');
+					var fileNotFoundUrl = detailImg.data('not-found-url');
+					loadImage(detailImg, detailUrl, fileLoaderUrl, fileNotFoundUrl, 0, 4, 2000);	
 					var parentElement = detailImg.parent();
 					if (parentElement.is("a")) {
 						parentElement.attr("href", origUrl);
@@ -31,7 +36,7 @@ define(['jquery'], function($) {
 		waitForImagesLoad: function (elements, processErrorImgUrl, errorImgUrl, maxAttemptsNr, timeout) {
 			
 			elements.each(function(index, element) {
-				var imgUrl = $(element).attr("src");
+				var imgUrl = $(element).data(PRELOAD_IMG_ATTR);
 				loadImage($(element), imgUrl, processErrorImgUrl, errorImgUrl, 0, maxAttemptsNr, timeout);				
 			});
 		}
@@ -43,9 +48,7 @@ define(['jquery'], function($) {
 			url: createResultUrl(imgUrl, attempts),
 			success: function(data) {
 				console.log("successfully loaded image: " + imgUrl + ". setting attr.");
-				window.setTimeout(function() {
-					img.attr("src", imgUrl);
-				}, 1000);
+				img.attr('src', imgUrl);
 			},
 			error: function(xhr, status, error) {				
 				if (attempts < maxAttemptsNr) {

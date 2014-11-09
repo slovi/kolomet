@@ -48,12 +48,18 @@ public class PlacePhotoUrlServiceImpl extends AbstractPhotoUrlService implements
     }
 	
 	@Override
-	public ResizeInfo[] getResizeInfos() {
-		ResizeInfo[] resizeInfos = new ResizeInfo[4];
+	public ResizeInfo[] getThumbnailResizeInfos() {
+		ResizeInfo[] resizeInfos = new ResizeInfo[2];
 		resizeInfos[0] = new ResizeInfo(new Dimension(thumbnailWidth, thumbnailHeight), PhotoUrl.THUMBNAIL_IMG_SUFFIX, false); // save thumb image
-		resizeInfos[1] = new ResizeInfo(new Dimension(overviewWidth, overviewHeight), PhotoUrl.OVERVIEW_IMG_SUFFIX); // save overview image
-		resizeInfos[2] = new ResizeInfo(new Dimension(detailWidth, detailHeight), PhotoUrl.DETAIL_IMG_SUFFIX); // save detail image
-		resizeInfos[3] = new ResizeInfo(new Dimension(width, height), PhotoUrl.ORIGINAL_IMG_SUFFIX); // save original image
+		resizeInfos[1] = new ResizeInfo(new Dimension(detailWidth, detailHeight), PhotoUrl.DETAIL_IMG_SUFFIX); // save detail image
+		return resizeInfos;
+	}
+	
+	@Override
+	public ResizeInfo[] getResizeInfos() {
+		ResizeInfo[] resizeInfos = new ResizeInfo[2];
+		resizeInfos[0] = new ResizeInfo(new Dimension(overviewWidth, overviewHeight), PhotoUrl.OVERVIEW_IMG_SUFFIX); // save overview image
+		resizeInfos[1] = new ResizeInfo(new Dimension(width, height), PhotoUrl.ORIGINAL_IMG_SUFFIX); // save original image
 		return resizeInfos;
 	}
 	

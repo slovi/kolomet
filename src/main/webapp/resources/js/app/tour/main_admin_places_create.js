@@ -162,8 +162,8 @@ require(['../common'], function (common) {
 	   		
 	   		function loadDetailImage(files, images, configuration) {
 	   			var detailImage = $('div#detail_image img'); 
-	   			detailImage.attr('src', files.getLastFile().fileDetailUrl);
-	   			images.waitForImagesLoad(detailImage, configuration.get('fileLoaderUrl'), configuration.get('fileNotFoundUrl'), 4, 2000)
+	   			detailImage.data('preload-img', files.getLastFile().fileDetailUrl);
+	   			images.waitForImagesLoad(detailImage, configuration.get('fileLoaderUrl'), configuration.get('fileNotFoundUrl'), 4, 2000);
 	   		}
 	   		
 	   		function loadThumbnails(files, template) {

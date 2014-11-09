@@ -98,7 +98,7 @@
 	           	<span class="fileinput-button">
 			        <span><spring:message code="global_upload_file" /></span>
 			    </span>
-		        <input id="${id}" type="file" name="content" multiple="true" />
+		        <input id="${id}" type="file" name="content" />
 		    </div>
     	</div>
     </div>

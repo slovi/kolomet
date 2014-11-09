@@ -1,5 +1,4 @@
 package cz.kolomet.service.impl;
-import java.io.File;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -60,15 +59,10 @@ public class ProductServiceImpl implements ProductService {
 		if (product.isEmptyState()) {
 			product.setProductState(ProductState.ACTIVE);
 		}
+		if (product.isCopyState()) {
+			product.setProductState(ProductState.ACTIVE);
+		}
         productRepository.save(product);
-        
-        // nejdrive musi byt produkt ulozen, pak bude mit ID a az pak muzeme kopirovat slozky
-        if (product.isCopyState()) {
-        	product.copyPhotoUrlFiles(new File(rootDir));
-        	// pak nasledne muzeme zmenit stav na aktivni a aktualizovat
-        	product.setProductState(ProductState.ACTIVE);
-        	productRepository.save(product);
-        }
     }
     
 	@PreAuthorize("principal.isCapableToUpdateProduct(#product)")

@@ -1,12 +1,18 @@
 define(['jquery', 'jquery.lean'], function($) {
 	
+	function _isAndroid() {
+		var isAndroid = navigator.userAgent.toLowerCase().indexOf("android");
+		return isAndroid > -1;
+	}
+	
 	return {
 		prepare: function() {
 			
 			var loginModal = $("#login_modal"); 
 
 			if (loginModal) {
-				loginModal.leanModal({top : 200, overlay : 0.4, closeButton: ".modal_close"});
+				var top = _isAndroid() ? 30 : 200;
+				loginModal.leanModal({top : top, overlay : 0.4, closeButton: ".modal_close"});
 			
 				$("#j_username").keyup(function(event) {
 					var paramString = "&email=";

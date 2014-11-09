@@ -12,7 +12,7 @@
 				<li><b>Uživatelské jméno:</b> ${applicationuser.username}</li>
 			</ul>
 			<p>
-				Pro aktivaci účtu klikněte na tento odkaz: <a href="{{link}}">{{link}}</a>
+				Pro aktivaci účtu klikněte na tento odkaz: <a href="${link}">${link}</a>
 			</p>
 		</div>		
 		<br />

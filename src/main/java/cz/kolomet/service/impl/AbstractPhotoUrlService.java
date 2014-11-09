@@ -29,19 +29,77 @@ public abstract class AbstractPhotoUrlService implements PhotoContainerService {
 	@Autowired
 	protected TaskExecutor executor;
 	
+	public abstract ResizeInfo[] getThumbnailResizeInfos();
+	
 	public abstract ResizeInfo[] getResizeInfos();
 	
 	@Override
-	public void resizePhoto(final File file) {
+	public void createThumbnail(final File photo) {
+		resizePhoto(photo, getThumbnailResizeInfos(), 
+			
+			new AfterResizeCallback() {
+				@Override
+				public void afterResize(File file) {
+				}
+			},
+			
+			new AfterResizeCallback() {
+				@Override
+				public void afterResize(File file) {
+				}
+			});
+	}
+	
+	@Override
+	public void createImages(final File photo, final File targetFolder) {
+		
+		// v dobe vytvareni thumb neni jeste zrejma slozka, do ktere by se mel obrazek presunout, prvni chvile, kdy je mozne 
+		// tak ucinit je nyni.
+		for (ResizeInfo resizeInfo: getThumbnailResizeInfos()) {
+			File thumbnailSource = new File(photo.getParent(), BasePhoto.getPhotoUrlFileName(photo.getName(), resizeInfo.getSuffix()));
+			File thumbnailTarget = new File(targetFolder, BasePhoto.getPhotoUrlFileName(photo.getName(), resizeInfo.getSuffix()));
+			moveFile(thumbnailSource, thumbnailTarget, true);
+		}
+		
+		resizePhoto(photo, getResizeInfos(), 
+			
+			// zavola se po kazdem zmenseni obrazku a vstupem je zmenseny file
+			new AfterResizeCallback() {
+				
+				@Override
+				public void afterResize(File file) {
+					moveFile(file, new File(targetFolder, file.getName()), true);
+				}
+			},
+				
+			// zavola se po zmenseni vsech obrazku a vstupem je zdrojovy file
+			new AfterResizeCallback() {
+				
+				@Override
+				public void afterResize(File file) {
+					deleteAfterImageProcess(file);
+				}
+			});
+	}
+	
+	@Override
+	public void copyImages(File sourceFolder, File targetFolder) {
+		for (File sourceFile: sourceFolder.listFiles()) {
+			moveFile(sourceFile, new File(targetFolder, sourceFile.getName()), true);
+		}
+	}
+	
+	private void resizePhoto(final File file, final ResizeInfo[] resizeInfos, final AfterResizeCallback targetFileCallback, final AfterResizeCallback sourceFileCallback) {
 		
 		final List<ResizeInfo> asyncResizeInfos = new ArrayList<AbstractPhotoUrlService.ResizeInfo>();
 		
-		for (ResizeInfo resizeInfo: getResizeInfos()) {
+		for (ResizeInfo resizeInfo: resizeInfos) {
 			
-			String targetFileName = BasePhoto.getPhotoUrlFileName(file.getName(), resizeInfo.getSuffix());
 			if (!resizeInfo.isAsync()) {
+				String targetFileName = BasePhoto.getPhotoUrlFileName(file.getName(), resizeInfo.getSuffix());
 				logger.debug("Try to resize file (" + file.getAbsolutePath() + ") to target file (" + targetFileName + ") in sync mode, calling doResize");
-				doResize(file, resizeInfo, targetFileName);
+				File targetFile = new File(file.getParent(), targetFileName);
+				doResize(file, targetFile, resizeInfo);
 			} else {
 				asyncResizeInfos.add(resizeInfo);
 			}
@@ -58,22 +116,24 @@ public abstract class AbstractPhotoUrlService implements PhotoContainerService {
 						
 						String targetFileName = BasePhoto.getPhotoUrlFileName(file.getName(), resizeInfo.getSuffix());
 						logger.debug("Try to resize file (" + file.getAbsolutePath() + ") to target file (" + targetFileName + ") in async mode, calling doResize");
-						doResize(file, resizeInfo, targetFileName);
+						File targetFile = new File(file.getParent(), targetFileName);
+						doResize(file, targetFile, resizeInfo);
+						targetFileCallback.afterResize(targetFile);
 					}
-					deleteAfterImageProcess(file);
+					sourceFileCallback.afterResize(file);
 				}
 
 			});
 		} else {
-			deleteAfterImageProcess(file);
+			sourceFileCallback.afterResize(file);
 		}
 	}
 
-	private void doResize(final File file, ResizeInfo resizeInfo, String targetFileName) {
+	private void doResize(final File file, File targetFile, ResizeInfo resizeInfo) {
 		if (resizeInfo.resizeImage()) {
-			imageService.resizeAndSave(file, new File(file.getParent(), targetFileName), resizeInfo.getDimension());
+			imageService.resizeAndSave(file, targetFile, resizeInfo.getDimension());
 		} else {
-			imageService.save(file, new File(file.getParent(), targetFileName));
+			imageService.save(file, targetFile);
 		}
 	}
 	
@@ -100,6 +160,17 @@ public abstract class AbstractPhotoUrlService implements PhotoContainerService {
 			logger.warn("Cannot delete uploaded file " + file.getAbsolutePath());
 		}
 	}
+
+	private void moveFile(File sourceFile, File targetFile, boolean replaceExisting) {
+		try {
+			if (replaceExisting && targetFile.exists()) {
+				FileUtils.forceDelete(targetFile);
+			}
+			FileUtils.moveFile(sourceFile, targetFile);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
 	
 	public String getRootDir() {
 		return rootDir;
@@ -123,6 +194,10 @@ public abstract class AbstractPhotoUrlService implements PhotoContainerService {
 
 	public void setExecutor(TaskExecutor executor) {
 		this.executor = executor;
+	}
+	
+	interface AfterResizeCallback {
+		public void afterResize(File file);
 	}
 
 }

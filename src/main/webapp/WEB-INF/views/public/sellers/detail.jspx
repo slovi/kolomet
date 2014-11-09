@@ -6,7 +6,9 @@
     <div class="detail_header"> 
    		
    		<div class="detail_img left">
-           	<util:photo-image photos="${seller.sellerPhotoUrls}" noPhotoUrl="/resources/images/sellers/no-photo-detail.jpg" imgType="" height="338" width="508" />
+   			<spring:url value="/resources/images/ajax-loader.gif" var="loaderUrl" />
+           	<util:photo-image photos="${seller.sellerPhotoUrls}" loaderUrl="${loaderUrl}" preloaded="true"
+           		noPhotoUrl="/resources/images/sellers/no-photo-detail.jpg" imgType="" height="338" width="508" />
         </div>
         
        	<div class="detail_description right"> 

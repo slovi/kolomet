@@ -9,7 +9,11 @@ public interface PhotoContainerService {
 	
 	public void deletePhoto(Photo photo);
 	
-	public void resizePhoto(File photo);
+	public void copyImages(File sourceFolder, File targetFolder);
+	
+	public void createThumbnail(File photo);
+	
+	public void createImages(File photo, File targetFolder);
 	
 	public ResizeInfo[] getResizeInfos();
 

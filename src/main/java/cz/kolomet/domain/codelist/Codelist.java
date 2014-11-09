@@ -32,7 +32,31 @@ import cz.kolomet.domain.BaseDomainEntity;
     	Order codeDescriptionOrder = new Order(Direction.ASC, "codeDescription");
     	return new Sort(sequenceNrOrder, codeDescriptionOrder);
     }
-    
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((getCodeKey() == null) ? 0 : getCodeKey().hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (!(obj instanceof Codelist))
+			return false;
+		Codelist other = (Codelist) obj;
+		if (getCodeKey() == null) {
+			if (other.getCodeKey() != null)
+				return false;
+		} else if (!getCodeKey().equals(other.getCodeKey()))
+			return false;
+		return true;
+	}
 
 	public String getCodeKey() {
         return this.codeKey;

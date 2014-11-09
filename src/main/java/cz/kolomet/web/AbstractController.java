@@ -20,11 +20,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
 import cz.kolomet.domain.ApplicationUser;
-import cz.kolomet.domain.BasePhoto;
 import cz.kolomet.domain.Photo;
 import cz.kolomet.domain.PhotoContainer;
 import cz.kolomet.domain.PhotoContainerService;
-import cz.kolomet.domain.PhotoContainerService.ResizeInfo;
+import cz.kolomet.domain.Product;
 import cz.kolomet.dto.FileInfo;
 import cz.kolomet.security.ApplicationUserDetails;
 import cz.kolomet.util.web.Regex;
@@ -48,6 +47,9 @@ public class AbstractController implements MessageSourceAware {
 	
 	@Value("${build.timestamp}")
 	protected String buildTimestamp;
+
+	@Value("${menu.google.link}")
+	private String menuGoogleLink;
 	
 	protected MessageSource messageSource;
 	
@@ -55,9 +57,12 @@ public class AbstractController implements MessageSourceAware {
 	
 	@Autowired
 	protected ConversionService converionService;
-
-	private int maxAttemptCount = DEFAULT_MAX_ATTEMPT_COUNT;
 	
+	@ModelAttribute("menuGoogleLink")
+	public String getMenuGoogleLink() {
+		return menuGoogleLink;
+	}
+
 	@ModelAttribute("currencyFormat")
 	public String getCurrencyFormat() {
 		return "";
@@ -114,23 +119,51 @@ public class AbstractController implements MessageSourceAware {
 		return ApplicationUserDetails.getActualApplicationUser();
 	}
 	
-	protected void savePhotos(final PhotoContainer photoContainer, final PhotoContainerService photoContainerService, String folder, List<FileInfo> fileInfos) {
+	protected void savePhotos(final PhotoContainer photoContainer, final PhotoContainerService photoContainerService, String sessionFolder, List<FileInfo> fileInfos) {
 		
-		File uploadedFileParent = new File(getTempDir(), folder);
-
-		for (final FileInfo fileInfo: fileInfos) {
-			if (fileInfo != null && fileInfo.isNew()) {
-				if (StringUtils.isNotEmpty(fileInfo.getFileName())) {
-					String fileName = fileInfo.getFileName();
-					String contentType = fileInfo.getContentType();
-					Photo photo = photoContainer.addPhoto(fileName, contentType);
-					photoContainerService.savePhoto(photo);
-					movePhotos(photoContainer, photoContainerService, uploadedFileParent, fileName);
+		if (fileInfos != null) {
+			for (final FileInfo fileInfo: fileInfos) {
+				if (fileInfo != null && fileInfo.isNew()) {
+					if (StringUtils.isNotEmpty(fileInfo.getFileName())) {
+						String fileName = fileInfo.getFileName();
+						String contentType = fileInfo.getContentType();
+						Photo photo = photoContainer.addPhoto(fileName, contentType);
+						photoContainerService.savePhoto(photo);
+						File uploadedFile = new File(new File(getTempDir(), sessionFolder), fileInfo.getFileName());
+						photoContainerService.createImages(uploadedFile, getDestFolder(photoContainer.getId(), photoContainer.getPhotoType()));
+					}
 				}
 			}
 		}
 	}
 	
+	protected void saveCopied(final Product photoContainer, final PhotoContainerService photoContainerService, String sessionFolder, List<FileInfo> fileInfos) {
+		
+		if (fileInfos != null) {
+			for (final FileInfo fileInfo: fileInfos) {
+				if (fileInfo != null && fileInfo.isNew()) {
+					if (StringUtils.isNotEmpty(fileInfo.getFileName())) {
+						if (photoContainer.isPhotoCopied(fileInfo)) {
+							String fileName = fileInfo.getFileName();
+							String contentType = fileInfo.getContentType();
+							Photo photo = photoContainer.addPhoto(fileName, contentType);
+							photoContainerService.savePhoto(photo);
+							photoContainer.copyPhotoUrlFiles(fileInfo.getFileName(), getTempDir(sessionFolder), getDestFolder(photoContainer));
+						} else {
+							String fileName = fileInfo.getFileName();
+							String contentType = fileInfo.getContentType();
+							Photo photo = photoContainer.addPhoto(fileName, contentType);
+							photoContainerService.savePhoto(photo);
+							File uploadedFile = new File(new File(getTempDir(), sessionFolder), fileInfo.getFileName());
+							photoContainerService.createImages(uploadedFile, getDestFolder(photoContainer.getId(), photoContainer.getPhotoType()));
+						}
+						
+					}
+				}
+			}
+		}
+	}
+
 	protected void saveFile(final PhotoContainerService photoContainerService, MultipartFile file, String folder) {
 		File parent = new File(getTempDir(), folder);
 		try {
@@ -138,15 +171,23 @@ public class AbstractController implements MessageSourceAware {
 			File dest = new File(parent, file.getOriginalFilename());
 			logger.debug("Saving uploaded file from (" + file.getOriginalFilename() + ") to dest (" + dest.getAbsolutePath() + ")");
 			file.transferTo(dest);
-			photoContainerService.resizePhoto(dest);
+			photoContainerService.createThumbnail(dest);
 			logger.debug("Successfully save file: " + dest + " " + dest.exists());
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
 	}
 	
-	private File getTempDir() {
+	protected File getTempDir() {
 		return new File(rootDir, tempDir);
+	}
+	
+	protected File getTempDir(String sessionId) {
+		return new File(getTempDir(), sessionId);
+	}
+	
+	protected File getTempDir(HttpServletRequest httpServletRequest) {
+		return getTempDir(httpServletRequest.getSession().getId());
 	}
 
 	protected File getDestFolder(Long id, String photoType) {
@@ -158,54 +199,13 @@ public class AbstractController implements MessageSourceAware {
 			throw new RuntimeException(e);
 		}
 	}
+
+	protected File getDestFolder(PhotoContainer photoContainer) {
+		return getDestFolder(photoContainer.getId(), photoContainer.getPhotoType());
+	}
 	
 	protected File getDestFile(Long id, String photoType, String fileName) {
 		return new File(getDestFolder(id, photoType), fileName);
-	}
-	
-	// TODO move to new class
-	private void movePhotos(final PhotoContainer photoContainer, final PhotoContainerService photoContainerService, File uploadedFileParent, String fileName) {
-		for (ResizeInfo resizeInfo: photoContainerService.getResizeInfos()) {
-			File sourceFile = new File(uploadedFileParent, BasePhoto.getPhotoUrlFileName(fileName, resizeInfo.getSuffix()));
-			tryToMoveFile(photoContainer, fileName, resizeInfo, sourceFile, 0);
-		}
-	}
-
-	// TODO move to new class
-	private void tryToMoveFile(final PhotoContainer photoContainer, String fileName, ResizeInfo resizeInfo, File sourceFile, int attemptCount) {
-		
-		if (attemptCount >= maxAttemptCount) {
-			logger.warn("Cannot move file (" + sourceFile.getAbsolutePath() + ") to target file (" + fileName + ")");
-			return;
-		}
-		if (sourceFile.exists()) {
-			File targetFile = new File(getDestFolder(photoContainer.getId(), photoContainer.getPhotoType()), BasePhoto.getPhotoUrlFileName(fileName, resizeInfo.getSuffix()));
-			moveFile(sourceFile, targetFile, true);
-		} else {
-			waitForImageResize();
-			tryToMoveFile(photoContainer, fileName, resizeInfo, sourceFile, ++attemptCount);
-		}
-	}
-	
-	// TODO move to new class
-	private void waitForImageResize() {
-		try {
-			Thread.sleep(1000l);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
-
-	// TODO move to new class
-	private void moveFile(File sourceFile, File targetFile, boolean replaceExisting) {
-		try {
-			if (replaceExisting && targetFile.exists()) {
-				FileUtils.forceDelete(targetFile);
-			}
-			FileUtils.moveFile(sourceFile, targetFile);
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
 	}
 	
 	public void setMessageSource(MessageSource messageSource) {

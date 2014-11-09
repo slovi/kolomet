@@ -65,7 +65,8 @@ public class ApplicationUserController extends AbstractAdminController {
         	populateEditForm(uiModel, applicationUser);
             return "admin/applicationusers/create";
         } catch (MailException e) {
-			bindingResult.rejectValue("username", messageSourceAcessor.getMessage("exception_cannot_send_email_to_address"));
+        	logger.error(e, e);
+			bindingResult.rejectValue("username", "exception_cannot_send_email_to_client_address");
 			populateEditForm(uiModel, applicationUser);
 			return "admin/applicationusers/create";
 		}
@@ -89,7 +90,8 @@ public class ApplicationUserController extends AbstractAdminController {
 	    	populateEditForm(uiModel, applicationUser);
 	        return "admin/applicationusers/update";
 	    } catch (MailException e) {
-			bindingResult.rejectValue("username", messageSourceAcessor.getMessage("exception_cannot_send_email_to_address"));
+	    	logger.error(e, e);
+			bindingResult.rejectValue("username", "exception_cannot_send_email_to_client_address");
 			populateEditForm(uiModel, applicationUser);
 			return "admin/applicationusers/create";
 		}

@@ -6,6 +6,16 @@
 	float: right;
 }
 
+.quicklinks_large {
+	padding-bottom: 15px;
+	height: 40px;
+	margin-top: 10px;
+}
+
+.quicklinks_large span {
+	float: right;
+}
+
 table.navigation {
 	border: 0px;
 }

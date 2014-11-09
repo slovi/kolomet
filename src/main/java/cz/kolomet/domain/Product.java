@@ -147,6 +147,31 @@ public class Product extends BaseDomainEntity implements Cloneable, PhotoContain
     private List<FileInfo> fileInfos = new ArrayList<FileInfo>();
     
     @Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((getProductName() == null) ? 0 : getProductName().hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (!(obj instanceof Product))
+			return false;
+		Product other = (Product) obj;
+		if (getProductName() == null) {
+			if (other.getProductName() != null)
+				return false;
+		} else if (!getProductName().equals(other.getProductName()))
+			return false;
+		return true;
+	}
+
+	@Override
     public String getPhotoType() {
     	return PhotoUrl.PHOTO_URL_PREFIX;
     }
@@ -180,59 +205,70 @@ public class Product extends BaseDomainEntity implements Cloneable, PhotoContain
     
     public Product copy() {
     	try {
-			return clone();
-		} catch (CloneNotSupportedException e) {
+    		Product product = clone();
+    		product.setBaseParamsAsNull();
+        	product.setCopiedFrom(this);
+        	List<FileInfo> fileInfos = new ArrayList<FileInfo>();   
+        	for (PhotoUrl photoUrl: this.photoUrls) {
+        		FileInfo fileInfo = new FileInfo(photoUrl.getFileName(), photoUrl.getContentType());
+        		fileInfos.add(fileInfo);
+        	}
+        	product.setFileInfos(fileInfos);
+        	product.setPhotoUrls(new ArrayList<PhotoUrl>());
+        	List<ProductAttribute> productAttributes = new ArrayList<ProductAttribute>();
+        	for (ProductAttribute productAttribute: this.productAttributes) {
+        		ProductAttribute newProductAttribute = new ProductAttribute();
+        		newProductAttribute.setAttributeType(productAttribute.getAttributeType());
+        		newProductAttribute.setAttributeValue(productAttribute.getAttributeValue());
+        		newProductAttribute.setProduct(this);
+        		productAttributes.add(newProductAttribute);
+        	}
+        	product.setProductAttributes(productAttributes);
+        	return product;
+    	} catch (CloneNotSupportedException e) {
 			throw new RuntimeException(e);
 		}
     }
     
     @Override
     protected Product clone() throws CloneNotSupportedException {
-    	Product product = (Product) super.clone();
-    	product.setBaseParamsAsNull();
-    	product.setCopiedFrom(this);
-    	List<PhotoUrl> photoUrls = new ArrayList<PhotoUrl>();   
-    	for (PhotoUrl photoUrl: this.photoUrls) {
-    		PhotoUrl newPhotoUrl = photoUrl.copy();
-    		newPhotoUrl.setProduct(product);
-    		photoUrls.add(newPhotoUrl);
-    	}
-    	product.setPhotoUrls(photoUrls);
-    	List<ProductAttribute> productAttributes = new ArrayList<ProductAttribute>();
-    	for (ProductAttribute productAttribute: this.productAttributes) {
-    		ProductAttribute newProductAttribute = new ProductAttribute();
-    		newProductAttribute.setAttributeType(productAttribute.getAttributeType());
-    		newProductAttribute.setAttributeValue(productAttribute.getAttributeValue());
-    		newProductAttribute.setProduct(this);
-    		productAttributes.add(newProductAttribute);
-    	}
-    	product.setProductAttributes(productAttributes);
-    	return product;
+    	return (Product) super.clone();
     }
     
-    public void copyPhotoUrls(List<PhotoUrl> photoUrls) {
-    	for (PhotoUrl photoUrl: photoUrls) {
-    		addPhotoUrl(photoUrl.copy());
-    	}
-    }
-    
-    public void copyPhotoUrlFiles(File baseFolder) {
-    	this.copyPhotoUrlFiles(baseFolder, getCopiedFrom());
-    }
-    
-    public void copyPhotoUrlFiles(File baseFolder, Product copiedFromProduct) {
-    	this.photoUrls.clear();
-    	for (PhotoUrl photoUrl: copiedFromProduct.getPhotoUrls()) {
-    		PhotoUrl newPhotoUrl = photoUrl.copy();
-    		newPhotoUrl.setProduct(this);
-    		try {
-    			FileUtils.copyFile(new File(baseFolder, photoUrl.getPhotoUrl()), new File(baseFolder, newPhotoUrl.getPhotoUrl()));
-    			FileUtils.copyFile(new File(baseFolder, photoUrl.getOverPhotoUrl()), new File(baseFolder, newPhotoUrl.getOverPhotoUrl()));
-				FileUtils.copyFile(new File(baseFolder, photoUrl.getThumbPhotoUrl()), new File(baseFolder, newPhotoUrl.getThumbPhotoUrl()));
-			} catch (IOException e) {
-				throw new RuntimeException(e);
+	public boolean isPhotoCopied(FileInfo fileInfo) {
+		Product copiedFrom = getCopiedFrom();
+		if (copiedFrom != null) {
+			for (PhotoUrl photoUrl: copiedFrom.getPhotoUrls()) {
+				if (photoUrl.getFileName().equals(fileInfo.getFileName())) {
+					return true;
+				}
 			}
-    		addPhotoUrl(newPhotoUrl);
+		}
+		return false;
+	}
+
+    public void copyPhotoUrlFiles(String fileName, File baseFolder, File targetFolder) {
+    	
+    	try {
+	    	String detailFileName = BasePhoto.getPhotoUrlFileName(fileName, BasePhoto.DETAIL_IMG_SUFFIX);
+	    	FileUtils.copyFile(new File(baseFolder, detailFileName), new File(targetFolder, detailFileName));
+	    	
+	    	String overFileName = BasePhoto.getPhotoUrlFileName(fileName, BasePhoto.OVERVIEW_IMG_SUFFIX);
+			FileUtils.copyFile(new File(baseFolder, overFileName), new File(targetFolder, overFileName));
+			
+			String thumbFileName = BasePhoto.getPhotoUrlFileName(fileName, BasePhoto.THUMBNAIL_IMG_SUFFIX);
+			FileUtils.copyFile(new File(baseFolder, thumbFileName), new File(targetFolder, thumbFileName));
+			
+			String origFileName = BasePhoto.getPhotoUrlFileName(fileName, BasePhoto.ORIGINAL_IMG_SUFFIX);
+			FileUtils.copyFile(new File(baseFolder, origFileName), new File(targetFolder, origFileName));
+    	} catch (IOException e) {
+    		throw new RuntimeException(e);
+    	}
+    }
+    
+    public void copyAllPhotoUrlFiles(File baseFolder, File targetFolder) {
+    	for (PhotoUrl photoUrl: getCopiedFrom().getPhotoUrls()) {
+    		copyPhotoUrlFiles(photoUrl.getFileName(), baseFolder, targetFolder);
     	}
     }
     

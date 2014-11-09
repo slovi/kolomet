@@ -12,8 +12,12 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
 
-   	<div class="detail_header"> 
-   		<util:photo-image photos="${product.photoUrls}" noPhotoUrl="/resources/images/products/no-photo-detail.jpg" imgType="detail" width="508" height="338" />    
+   	<div class="detail_header">
+   	
+   		<spring:url value="/resources/images/ajax-loader.gif" var="loaderUrl" />
+   		<util:photo-image photos="${product.photoUrls}" noPhotoUrl="/resources/images/products/no-photo-detail.jpg" 
+   			loaderUrl="${loaderUrl}" imgType="detail" width="508" height="338" preloaded="true" />
+   			    
        	<div class="detail_description right">
        		<c:set var="description_class" value="description" />
        		<c:choose>
@@ -176,9 +180,9 @@
 			       				<td><b><spring:message code="label_cz_kolomet_domain_product_createdby" /></b></td>
 			       				<td><spring:eval expression="product.createdBy" /></td>
 			       			</tr>
-			       			<tr>
+			       			<tr>			       				
 			       				<td><b><spring:message code="label_cz_kolomet_domain_product_created" /></b></td>
-			       				<td><fmt:formatDate value="${product.created}" pattern="${product_created_date_format}" /></td>
+			       				<td><fmt:formatDate value="${product.created}" pattern="${dateTimeFormat}" /></td>
 			       			</tr>
 			       			<tr>
 			       				<td><b><spring:message code="label_cz_kolomet_domain_product_lastmodifiedby" /></b></td>
@@ -186,7 +190,7 @@
 			       			</tr>
 			       			<tr>
 			       				<td><b><spring:message code="label_cz_kolomet_domain_product_lastmodified" /></b></td>
-			       				<td><fmt:formatDate value="${product.lastModified}" pattern="${product_lastmodified_date_format}" /></td>
+			       				<td><fmt:formatDate value="${product.lastModified}" pattern="${dateTimeFormat}" /></td>
 			       			</tr>
 			            </table>
 					</div>

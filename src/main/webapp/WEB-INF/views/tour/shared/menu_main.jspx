@@ -35,14 +35,20 @@
 				            <security:authorize access="hasAnyRole('ROLE_per_regions')">
 				            	<menu:item id="i_region_list" messageCode="global_menu_list" url="/tour/admin/regions" />
 				            </security:authorize>
+				            <security:authorize access="principal.isPlacesAll()"> 
+					            <hr color="#f9f9f9" width="85%" align="center" size="1" />
+			    				<menu:item url="${menuGoogleLink}" blank="true" messageCode="menu_main_google_analytics" id="google_analytics" renderPageParams="false"/>
+			    			</security:authorize>
 				        </security:authorize>
-	    			</menu:category>
-		            <security:authorize access="hasAnyRole('ROLE_per_places')"> 			
-						<menu:item id="i_place_new" messageCode="global_menu_new" styleClass="admin" renderPageParams="false" url="/tour/admin/places?form" />
-					</security:authorize>					
+	    			</menu:category>					
+		            <security:authorize access="hasAnyRole('ROLE_per_places')">
+		            	<spring:message code="menu_main_place_create" var="menu_place_create" /> 			
+						<menu:item id="i_place_new" label="${menu_place_create}" styleClass="admin" renderPageParams="false" url="/tour/admin/places?form" />
+					</security:authorize>		
     			</security:authorize>
     			<security:authorize access="isAnonymous()">
-					<menu:item id="i_place_new" messageCode="global_menu_new" styleClass="admin anonymous" renderPageParams="false" url="#" />
+    				<spring:message code="menu_main_place_create" var="menu_place_create" />
+					<menu:item id="i_place_new" label="${menu_place_create}" styleClass="admin anonymous" renderPageParams="false" url="#" />
 				</security:authorize>
 				<menu:item id="i_bikes" messageCode="global_menu_bikes" styleClass="comeback" renderPageParams="false" url="/store/public/intro/index" />
     		</menu:menu>

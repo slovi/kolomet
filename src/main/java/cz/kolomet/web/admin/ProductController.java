@@ -1,4 +1,5 @@
 package cz.kolomet.web.admin;
+import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
@@ -6,6 +7,7 @@ import java.util.Arrays;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.apache.commons.io.FileUtils;
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -89,8 +91,13 @@ public class ProductController extends AbstractAdminController {
     }
     
     @RequestMapping(value = "/{id}", params = "copy", produces = "text/html")
-    public String copyForm(@PathVariable("id") Long id, Model uiModel) {
-        populateEditForm(uiModel, productService.copyProduct(id));
+    public String copyForm(@PathVariable("id") Long id, Model uiModel, HttpServletRequest httpServletRequest) throws IOException {
+    	
+    	Product product = productService.copyProduct(id);
+    	File targetFolder = new File(new File(rootDir, tempDir), httpServletRequest.getSession().getId());
+    	FileUtils.forceMkdir(targetFolder);
+    	product.copyAllPhotoUrlFiles(getDestFolder(product.getCopiedFrom()), targetFolder);
+        populateEditForm(uiModel, product);
         return "admin/products/create";
     }
     
@@ -134,8 +141,7 @@ public class ProductController extends AbstractAdminController {
         }
         
         productService.saveProduct(product);
-        savePhotos(product, photoUrlService, httpServletRequest.getSession().getId(), product.getFileInfos());
-        
+       	saveCopied(product, photoUrlService, httpServletRequest.getSession().getId(), product.getFileInfos());
         return "redirect:/public/products/detail/" + product.getId();
     }
     
@@ -207,19 +213,8 @@ public class ProductController extends AbstractAdminController {
         }
 
         uiModel.addAttribute("addedFiles", new JSONSerializer().serialize(product.getFileInfos()));
-        uiModel.addAttribute("uploadedFiles", BasePhoto.toJsonArray(product.getPhotoUrls(), new String[] {"id", "fileName"}));
-        
-        if (product.isActiveState()) {
-	        if (product.getId() != null && product.getPhotoUrls().isEmpty()) {
-	        	product.copyPhotoUrls(photoUrlService.findByProduct(product));
-	        }
-        }
-        if (product.isCopyState()) {
-        	if (product.getCopiedFrom() != null && product.getPhotoUrls().isEmpty()) {
-        		product.copyPhotoUrls(photoUrlService.findByProduct(product.getCopiedFrom()));
-        	}
-        }
-        
+        uiModel.addAttribute("uploadedFiles", BasePhoto.toJsonArray(product.getPhotoUrls(), new String[] {"id", "contentType", "fileName"}));
+
     	for (ProductAttributeType type: productAttributeTypeService.findAllProductAttributeTypes()) {
     		if (!product.containsProductAttributeType(type)) {
 	    		ProductAttribute productAttribute = new ProductAttribute();

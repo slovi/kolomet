@@ -77,7 +77,7 @@ define([ 'jquery' , 'jquery.fileupload', 'jquery.iframe-transport', 'http-servic
 				autoUpload: false,
 				acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
 				disableImageResize: true,
-				singleFileUploads: false
+				singleFileUploads: true
 				
 			}).on('fileuploadadd', function(e, data) {				
 				
@@ -95,7 +95,7 @@ define([ 'jquery' , 'jquery.fileupload', 'jquery.iframe-transport', 'http-servic
 					}
 					
 					hideUploadFileButtonIfPossible(files, configuration);
-					console.log('Try to send data for file: ' + data.files[0].name);
+					console.log('Try to send data for file: ' + file.name);
 					data.submit();
 					
 				});				
@@ -114,15 +114,16 @@ define([ 'jquery' , 'jquery.fileupload', 'jquery.iframe-transport', 'http-servic
 						console.log('Cannot upload file: ' + data.files[0].name + ', problem: ' + data.jqXHR.responseJSON.ajaxError.errorDescription);
 						alert('Neni mozne nahrat soubor: ' + data.files[0].name + ', problem: ' + data.jqXHR.responseJSON.ajaxError.errorDescription);
 					} else {
-						console.log('Cannot upload file: ' + data.errorThrown);
-						alert('Neni mozne nahrat soubor: ' + data.errorThrown);
+						if (data.errorThrown) {
+							console.log('Cannot upload file: ' + data.errorThrown);
+							alert('Neni mozne nahrat soubor: ' + data.errorThrown);
+						} else {
+							console.log('Cannot upload file: Nedostatecne pripojeni k internetu.');
+							alert('Neni mozne nahrat soubor: Nedostatecne pripojeni k internetu.');
+						}
 					}
-					
-					if (data.jqXHR.responseJSON.ajaxError.errorCode == 100) { // bad format
-						removeFileItem(files, files.getIndex(index), context, configuration);
-					} else {
-						files.markFileAsPreviouslyUploaded(index);
-					}
+
+					removeFileItem(files, files.getIndex(index), context, configuration);
 					
 					if (listeners.onFileUploadFail) {
 						listeners.onFileUploadFail(files, files.getIndex(index), configuration);
@@ -151,9 +152,6 @@ define([ 'jquery' , 'jquery.fileupload', 'jquery.iframe-transport', 'http-servic
 				}
 				
 			}).on('fileuploadprogress', function(e, data) {
-				
-				var progress = parseInt(data.loaded / data.total * 100, 10);
-				console.log(progress);
 				
 				$.each(data.files, function(index, file) {
 					
