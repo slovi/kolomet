@@ -1,15 +1,12 @@
 package cz.kolomet.domain;
 
 import java.io.Serializable;
-import java.util.Collection;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
-
-import flexjson.JSONSerializer;
 
 @Entity
 public class SellerPhotoUrl extends BasePhoto implements Serializable {
@@ -20,10 +17,6 @@ public class SellerPhotoUrl extends BasePhoto implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "SELLER_ID")
     private Seller seller;
-    
-    public static String toJsonArray(Collection<SellerPhotoUrl> collection, String[] fields) {
-        return new JSONSerializer().include(fields).exclude("*").serialize(collection);
-    }
     
     @Override
     protected String getPhotoUrlPrefix() {

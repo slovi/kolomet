@@ -6,10 +6,12 @@ import java.util.Locale;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.Formatter;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.format.support.FormattingConversionServiceFactoryBean;
+
 
 import cz.kolomet.domain.Address;
 import cz.kolomet.domain.ApplicationPermission;
@@ -321,13 +323,17 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
     public Converter<String, Region> getStringToRegionConverter() {
         return new org.springframework.core.convert.converter.Converter<java.lang.String, cz.kolomet.domain.codelist.Region>() {
             public cz.kolomet.domain.codelist.Region convert(String id) {
-            	
             	try {
             		Long parsedId = Long.parseLong(id);
             		return regionService.findRegion(parsedId);
             	} catch (Exception e) {
             		// id is google alias
-            		return regionService.findByGoogleAlias(id);
+            		Locale locale = LocaleContextHolder.getLocale();
+            		if (locale.getLanguage().equals("en")) {
+            			return regionService.findByGoogleAliasEn(id);
+            		} else {
+            			return regionService.findByGoogleAlias(id);
+            		}
             	}
             }
         };

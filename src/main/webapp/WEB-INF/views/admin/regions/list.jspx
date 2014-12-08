@@ -2,18 +2,17 @@
 <div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <page:list id="pl_cz_kolomet_domain_codelist_Region" items="${regions}" z="r7oNRbKgSQK7dT+p2PJomHxC2TM=">
-        <table:table data="${regions}" id="l_cz_kolomet_domain_codelist_Region" path="${subContext}/admin/regions" z="user-managed">
-            <table:column id="c_cz_kolomet_domain_codelist_Region_codeKey" property="codeKey" z="XVItV/N3pjs8LHz+/O+HvETHirs="/>
-            <table:column id="c_cz_kolomet_domain_codelist_Region_codeDescription" property="codeDescription" z="QW2Ei03EsV3DaEBUWg/8rEAn/kw="/>
-            <table:column id="c_cz_kolomet_domain_codelist_Region_sequenceNr" property="sequenceNr" sort="true" z="zhpzNps0RzWs/kykityS93TScwI="/>
-            <table:column id="c_cz_kolomet_domain_codelist_Region_gpsLocation" property="gpsLocation" sort="true" z="zhpzNps0RzWs/kykityS93TScwI="/>
+    <page:list id="pl_cz_kolomet_domain_codelist_Region" items="${regions}">
+        <table:table data="${regions}" id="l_cz_kolomet_domain_codelist_Region" path="${subContext}/admin/regions">
+            <table:column id="c_cz_kolomet_domain_codelist_Region_codeKey" property="codeKey" />
+            <table:column id="c_cz_kolomet_domain_codelist_Region_codeDescription" property="codeDescription" />
+            <table:column id="c_cz_kolomet_domain_codelist_Region_sequenceNr" property="sequenceNr" sort="true" />
+            <table:column id="c_cz_kolomet_domain_codelist_Region_gpsLocation" property="gpsLocation" sort="true" />
             <table:column id="c_cz_kolomet_domain_codelist_Region_zoom" property="zoom" sort="true" />
-            <table:column id="c_cz_kolomet_domain_codelist_Region_googleAlias" property="googleAlias" sort="true" z="zhpzNps0RzWs/kykityS93TScwI="/>
-            <table:column id="c_cz_kolomet_domain_codelist_Region_createdBy" property="createdBy" z="6EMX84DPuKM//VjQQEZ4peFt0tM="/>
-            <table:column id="c_cz_kolomet_domain_codelist_Region_lastModifiedBy" property="lastModifiedBy" z="Z4Evbnp7QG3dn+RbvNWU2h/1NQM="/>
-            <table:column date="true" dateTimePattern="${region_created_date_format}" id="c_cz_kolomet_domain_codelist_Region_created" property="created" z="xZw8J1OoRDQ+zepIdHdQj1VvJ8Y="/>
-            <table:column date="true" dateTimePattern="${region_lastmodified_date_format}" id="c_cz_kolomet_domain_codelist_Region_lastModified" property="lastModified" z="mZTD7MdvvC3Ve+hYjAijqgTWuiY="/>
+            <table:column id="c_cz_kolomet_domain_codelist_Region_googleAlias" property="googleAlias" sort="true" />
+			<table:column id="c_cz_kolomet_domain_codelist_Region_googleAliasEn" property="googleAliasEn" sort="true" />
+            <table:column date="true" dateTimePattern="${region_created_date_format}" id="c_cz_kolomet_domain_codelist_Region_created" property="created" />
+            <table:column date="true" dateTimePattern="${region_lastmodified_date_format}" id="c_cz_kolomet_domain_codelist_Region_lastModified" property="lastModified" />
         </table:table>
     </page:list>
 </div>

@@ -1,14 +1,20 @@
 package cz.kolomet.domain;
 import java.io.Serializable;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import cz.kolomet.domain.codelist.CategoryType;
 
 @Entity
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Category extends BaseDomainEntity implements Serializable {
 	
 	public static final String ALL_CATEGORY_CODE_KEY = "cat_bike_all";

@@ -1,5 +1,6 @@
 package cz.kolomet.service.impl;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,6 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import cz.kolomet.domain.Place;
 import cz.kolomet.domain.RateType;
+import cz.kolomet.domain.codelist.PlaceType;
+import cz.kolomet.dto.PlaceDto;
 import cz.kolomet.repository.PlaceRepository;
 import cz.kolomet.repository.PlaceSpecifications;
 import cz.kolomet.service.PlaceService;
@@ -44,6 +47,22 @@ public class PlaceServiceImpl implements PlaceService, RatedService {
         return placeRepository.findOne(id);
     }
 
+	public List<PlaceDto> findPlaceDtos(Specification<Place> specification) {
+		List<Place> places = findPlaceEntries(specification);
+		List<PlaceDto> placeDtos = new ArrayList<PlaceDto>();
+		for (Place place: places) {
+			PlaceDto placeDto = new PlaceDto();
+			placeDto.setId(place.getId());
+			placeDto.setName(place.getName());
+			placeDto.setGpsLocation(place.getGpsLocation());
+			PlaceType placeType = place.getPlaceType();
+			placeDto.setPlaceType(placeType.getCodeDescription());
+			placeDto.setPlaceTypeColor(placeType.getPlaceTypeColor().toString());
+			placeDtos.add(placeDto);
+		}
+		return placeDtos;
+	}
+	
 	public List<Place> findAllPlaces() {
         return placeRepository.findAll();
     }
@@ -102,7 +121,7 @@ public class PlaceServiceImpl implements PlaceService, RatedService {
 		return placeRepository.findAll(specification);
 	}
 	
-	public List<Place> getTopPlaces(Specification<Place> specification, int nubmerOfPlaces) {
+	public List<Place> findTopPlaces(Specification<Place> specification, int nubmerOfPlaces) {
 		Pageable pagable = new PageRequest(0, nubmerOfPlaces, PlaceSpecifications.getTopSort());
 		return placeRepository.findAll(specification, pagable).getContent();
 	}

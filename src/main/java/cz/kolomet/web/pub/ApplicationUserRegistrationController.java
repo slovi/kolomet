@@ -32,8 +32,8 @@ import cz.kolomet.service.ApplicationRoleService;
 import cz.kolomet.service.ApplicationUserService;
 import cz.kolomet.service.CountryStateService;
 import cz.kolomet.service.exception.ExistingUserException;
+import cz.kolomet.service.exception.ServiceExpcetion;
 import cz.kolomet.util.web.ajax.AjaxResponse;
-import flexjson.JSONSerializer;
 
 @Controller
 @RequestMapping("/public/applicationuserregistrations")
@@ -57,8 +57,13 @@ public class ApplicationUserRegistrationController extends AbstractPublicControl
 	@RequestMapping(params = "token")
 	public String activeAccount(@RequestParam(value = "token", required = true) String token, RedirectAttributes redirectAttributes) {
 		
-		applicationUserService.activateApplicationUser(token);
-		redirectAttributes.addFlashAttribute("registrationSuccess", true);		
+		try {
+			applicationUserService.activateApplicationUser(token);
+			redirectAttributes.addFlashAttribute("registrationResult", "registration_user_success_activate");
+		} catch (ServiceExpcetion e) {
+			redirectAttributes.addFlashAttribute("registrationResult", e.getCode());
+			redirectAttributes.addFlashAttribute("registrationResultArgs", e.getArguments());
+		}
 		return "redirect:public/places";
 	}
 	
@@ -153,12 +158,12 @@ public class ApplicationUserRegistrationController extends AbstractPublicControl
         uiModel.addAttribute("registrationRequest_lastmodified_date_format", DateTimeFormat.patternForStyle("MM", LocaleContextHolder.getLocale()));
     }
 	
-    public void populateEditForm(Model uiModel, ApplicationUserRegistration applicationUserRegistration) {
+    void populateEditForm(Model uiModel, ApplicationUserRegistration applicationUserRegistration) {
     	applicationUserRegistration.clearCaptchaText();
         uiModel.addAttribute("applicationUserRegistration", applicationUserRegistration);
         addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("applicationusers", applicationUserService.findAllApplicationUsers());
-        uiModel.addAttribute("addedFiles", new JSONSerializer().serialize(applicationUserRegistration.getFileInfos()));
+        uiModel.addAttribute("addedFiles", jsonSerializer.toJsonArray(applicationUserRegistration.getFileInfos()));
         uiModel.addAttribute("countryStates", countryStateService.findAllCountryStates());
     }
 	

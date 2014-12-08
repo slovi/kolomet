@@ -16,6 +16,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.core.convert.ConversionService;
+import org.springframework.js.ajax.AjaxHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -26,6 +27,7 @@ import cz.kolomet.domain.PhotoContainerService;
 import cz.kolomet.domain.Product;
 import cz.kolomet.dto.FileInfo;
 import cz.kolomet.security.ApplicationUserDetails;
+import cz.kolomet.util.json.JsonSerializer;
 import cz.kolomet.util.web.Regex;
 
 public class AbstractController implements MessageSourceAware {
@@ -51,12 +53,21 @@ public class AbstractController implements MessageSourceAware {
 	@Value("${menu.google.link}")
 	private String menuGoogleLink;
 	
+	@Value("${domain.static}")
+	private String staticDomain;
+	
 	protected MessageSource messageSource;
 	
 	protected MessageSourceAccessor messageSourceAcessor;
 	
 	@Autowired
 	protected ConversionService converionService;
+	
+	@Autowired
+	protected AjaxHandler ajaxHandler;
+	
+	@Autowired
+	protected JsonSerializer jsonSerializer;
 	
 	@ModelAttribute("menuGoogleLink")
 	public String getMenuGoogleLink() {
@@ -88,6 +99,15 @@ public class AbstractController implements MessageSourceAware {
 		return request.getServletPath();
 	}
 	
+	@ModelAttribute("staticDomain")
+	public String getStaticDomain(HttpServletRequest request) {
+		if (request.getScheme().equals("http") && StringUtils.isNotBlank(staticDomain)) {
+			return "http://" + staticDomain;
+		} else {
+			return "";
+		}
+	}
+	
 	public boolean isTour(HttpServletRequest request) {
 		return getSubContext(request).equals("/tour");
 	}
@@ -109,6 +129,10 @@ public class AbstractController implements MessageSourceAware {
 	@ModelAttribute("categoryPageSize")
 	public int getCategoryPageSize() {
 		return DEFAULT_PAGE_SIZE;
+	}
+	
+	protected boolean isAjaxRequest(HttpServletRequest servletRequest) {
+		return ajaxHandler.isAjaxRequest(servletRequest, null);
 	}
 	
 	protected ApplicationUserDetails getActualUserDetails() {

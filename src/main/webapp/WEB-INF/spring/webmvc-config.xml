@@ -13,7 +13,14 @@
     
     <mvc:annotation-driven conversion-service="applicationConversionService" validator="validator">
     	<mvc:argument-resolvers>
-    		<bean class="org.springframework.data.web.PageableArgumentResolver"/>
+    		<bean class="org.springframework.data.web.PageableHandlerMethodArgumentResolver">
+    			<constructor-arg>
+    				<bean class="cz.kolomet.util.web.PrefixedSortHandlerMethodArgumentResolver">
+    					<property name="prefix" value="page." />
+    				</bean>
+    			</constructor-arg>
+    			<property name="prefix" value="page." />
+    		</bean>
     	</mvc:argument-resolvers>
     	<mvc:message-converters>
     		<bean class="cz.kolomet.util.web.ajax.AjaxResponseTextHttpMessageConverter" />
@@ -84,13 +91,10 @@
         		<value>/WEB-INF/views/**/views.xml</value>
       		</list>
     	</property>
-    	<property name="tilesProperties">
-    		<props>
-    			<prop key="org.apache.tiles.evaluator.AttributeEvaluator">org.apache.tiles.evaluator.el.ELAttributeEvaluator</prop>
-    		</props>
-    	</property>
   	</bean>
 
 	<bean id="applicationConversionService" class="cz.kolomet.web.ApplicationConversionServiceFactoryBean" />
+	
+	<bean class="org.springframework.js.ajax.SpringJavascriptAjaxHandler" />
 		
 </beans>

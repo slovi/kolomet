@@ -27,28 +27,28 @@
     <c:if test="${empty defaultPageSize}">
       <c:set value="10" var="defaultPageSize" />
     </c:if>
-
+    
     <li id="${fn:escapeXml(id)}" class="${styleClass}">      
       <spring:url value="${url}" var="menu_item_url">
 	      <c:if test="${empty renderPageParams or renderPageParams}">
 	      	<spring:param name="page.size" value="${not empty defaultPageSize ? defaultPageSize : param['page.size']}" />
-	      	<spring:param name="page.page" value="1" />
-	      	<c:choose>
-	      		<c:when test="${empty sort}">
-	      			<spring:param name="page.sort" value="created" />
-	      		</c:when>
-	      		<c:otherwise>
-	      			<spring:param name="page.sort" value="${sort}" />	      			
-	      		</c:otherwise>
-	      	</c:choose>
+	      	<spring:param name="page.page" value="0" />
 	      	<c:choose>
 	      		<c:when test="${empty sortDesc or sortDesc}">
-	      			<spring:param name="page.sort.dir" value="desc" />
+	      			<c:set var="ascending" value="desc" />
 	      		</c:when>
 	      		<c:otherwise>
-	      			<spring:param name="page.sort.dir" value="asc" />	      			
+	      			<c:set var="ascending" value="asc" />
 	      		</c:otherwise>
 	      	</c:choose>	      	
+	      	<c:choose>
+	      		<c:when test="${empty sort}">
+	      			<spring:param name="page.sort" value="id,${ascending}" />
+	      		</c:when>
+	      		<c:otherwise>
+	      			<spring:param name="page.sort" value="${sort},${ascending}" />	      			
+	      		</c:otherwise>
+	      	</c:choose>      	
       	</c:if>
       </spring:url>
       <c:choose>

@@ -19,12 +19,17 @@ public class IntroController extends AbstractPublicController implements Initial
 	
 	private PageRequest pageRequest;
 	
+	// TODO predelat na service a dto
+	//@Autowired
+	//private ProductService productService;
+	
 	@Autowired
 	private ProductRepository productRepository;
 	
     @RequestMapping(method=RequestMethod.GET)
     public String index(Model model) {
     	
+		// TODO predelat na service a dto
     	model.addAttribute("products", productRepository.findByPriority(pageRequest));
         return "public/intro/index";
     }
@@ -32,6 +37,7 @@ public class IntroController extends AbstractPublicController implements Initial
     @RequestMapping(value="intro/index", method=RequestMethod.GET)
     public String introIndex(Model model) {
     	
+		// TODO predelat na service a dto
     	model.addAttribute("products", productRepository.findByPriority(pageRequest));
         return "public/intro/index";
     }

@@ -3,21 +3,23 @@ import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import cz.kolomet.domain.codelist.ProductAttributeType;
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)public class ProductAttribute extends BaseDomainEntity implements Serializable {
+public class ProductAttribute extends BaseDomainEntity implements Serializable {
     
     /**
      */
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @Fetch(FetchMode.JOIN)
     private ProductAttributeType attributeType;
     
     @NotNull

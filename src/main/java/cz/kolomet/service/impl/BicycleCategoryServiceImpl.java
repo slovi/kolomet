@@ -35,6 +35,10 @@ public class BicycleCategoryServiceImpl implements BicycleCategoryService {
 	public void deleteBicycleCategory(BicycleCategory bicycleCategory) {
         bicycleCategoryRepository.delete(bicycleCategory);
     }
+	
+	public BicycleCategory getBicycleCategory(Long id) {
+		return bicycleCategoryRepository.getOne(id);
+	}
 
 	public BicycleCategory findBicycleCategory(Long id) {
         return bicycleCategoryRepository.findOne(id);

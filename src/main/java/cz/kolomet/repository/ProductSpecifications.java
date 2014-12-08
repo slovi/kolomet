@@ -12,6 +12,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import javax.persistence.criteria.Subquery;
 
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -24,6 +25,7 @@ import cz.kolomet.domain.Category;
 import cz.kolomet.domain.Producer;
 import cz.kolomet.domain.Product;
 import cz.kolomet.domain.Seller;
+import cz.kolomet.domain.codelist.CategoryType;
 import cz.kolomet.domain.codelist.Region;
 import cz.kolomet.dto.AdminProductFilterDto;
 import cz.kolomet.dto.ProductFilterDto;
@@ -32,16 +34,18 @@ import cz.kolomet.util.db.JpaUtils;
 public class ProductSpecifications {
 	
 	public static Sort getDefaultSort() {
-		Order priorityOrder = new Order(Direction.DESC, "seller.sellerStatus.priority");
-    	Order createdOrder = new Order(Direction.DESC, "created");
-    	return new Sort(priorityOrder, createdOrder);
+    	Order createdOrder = new Order(Direction.DESC, "id");
+    	return new Sort(createdOrder);
 	}
 	
 	public static Sort getDefaultSort(Sort addSort) {
-    	Order priorityOrder = new Order(Direction.DESC, "seller.sellerStatus.priority");
-    	Order createdOrder = new Order(Direction.DESC, "created");
-    	Sort defaultSort = new Sort(priorityOrder, createdOrder);
-    	return addSort.and(defaultSort);
+		if (addSort != null && addSort.getOrderFor("id") != null) {
+			return addSort;
+		} else {
+	    	Order idOrder = new Order(Direction.DESC, "id");
+	    	Sort defaultSort = new Sort(idOrder);
+	    	return addSort.and(defaultSort);
+		}
 	}
 	
 	public static Specification<Product> forAdminProductFiter(final AdminProductFilterDto productFilter, final Long sellerId) {
@@ -88,13 +92,15 @@ public class ProductSpecifications {
 					Join<Product, Producer> producerJoin = root.join("producer");
 					predicates.add(cb.equal(producerJoin, productFilter.getProducer()));
 				}
-				Join<Product, Seller> seller = root.join("seller");
 				if (BooleanUtils.isTrue(productFilter.getCanSendToAllCountry())) {
 					predicates.add(cb.equal(root.get("canSendToAllCountry"), true));
 				}
 				if (productFilter.getRegion() != null) {
-					Join<Seller, Region> region = seller.join("region");
-					predicates.add(cb.equal(region, productFilter.getRegion()));
+					Subquery<Region> regionSubquery = query.subquery(Region.class);
+					Root<Seller> regionSubqueryRoot = regionSubquery.from(Seller.class);
+					regionSubquery.select(regionSubqueryRoot.<Region> get("region"));
+					regionSubquery.where(cb.equal(regionSubqueryRoot, root.get("seller")));
+					predicates.add(cb.equal(regionSubquery, productFilter.getRegion()));
 				}
 				if (productFilter.getProductUsage() != null) {
 					predicates.add(cb.equal(root.get("productUsage"), productFilter.getProductUsage()));
@@ -109,11 +115,21 @@ public class ProductSpecifications {
 					predicates.add(cb.equal(root.get("bicycleCategory"), productFilter.getBicycleCategory()));
 				}
 				if (productFilter.getCategoryType() != null) {
-					Join<Product, Category> category = root.join("category");
-					predicates.add(cb.equal(category.get("categoryType"), productFilter.getCategoryType()));
+					Subquery<CategoryType> categoryTypeSubquery = query.subquery(CategoryType.class);
+					Root<Product> categoryTypeRoot = categoryTypeSubquery.from(Product.class);
+					Join<Product, Category> categoryRoot = categoryTypeRoot.join("category");
+					categoryTypeSubquery.select(categoryRoot.<CategoryType>get("categoryType"));			
+					categoryTypeSubquery.where(cb.equal(categoryTypeRoot, root));
+					predicates.add(cb.equal(categoryTypeSubquery, productFilter.getCategoryType()));
 				}
+				
+				Subquery<Boolean> sellerEnabledSubquery = query.subquery(Boolean.class);
+				Root<Seller> sellerEnabledSubqueryRoot = sellerEnabledSubquery.from(Seller.class);
+				sellerEnabledSubquery.select(sellerEnabledSubqueryRoot.<Boolean> get("enabled"));
+				sellerEnabledSubquery.where(cb.equal(sellerEnabledSubqueryRoot, root.get("seller")));
+				predicates.add(cb.equal(sellerEnabledSubquery, true));
+
 				JpaUtils.addBetweenDatePredicate(predicates, cb, root.<Date> get("validFrom"), root.<Date> get("validTo"), new Date());
-				predicates.add(cb.equal(seller.get("enabled"), true));
 				return cb.and(predicates.toArray(new Predicate[predicates.size()]));
 			}
 		};

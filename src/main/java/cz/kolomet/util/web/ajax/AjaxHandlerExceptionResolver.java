@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.method.HandlerMethod;
@@ -39,7 +39,7 @@ public class AjaxHandlerExceptionResolver extends AbstractHandlerExceptionResolv
 	public AjaxHandlerExceptionResolver() {
 
 		this.messageConverters = new ArrayList<HttpMessageConverter<?>>();
-		this.messageConverters.add(new MappingJacksonHttpMessageConverter());
+		this.messageConverters.add(new MappingJackson2HttpMessageConverter());
 
 		setOrder(AJAX_HANDLER_EXCEPTION_RESOLVER_ORDER);
 	}

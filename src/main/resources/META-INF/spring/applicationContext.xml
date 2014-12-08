@@ -13,23 +13,9 @@
 
 	<context:component-scan base-package="cz.kolomet.service" />
 	
-	<bean id="applicationProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-		<property name="locations">
-    		<list>
-    			<value>classpath:config.properties</value>
-    			<value>classpath:META-INF/version.properties</value>
-    		</list>
-		</property>
-	</bean>		
-	
-	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-    	<property name="properties" ref="applicationProperties" />
-    	<property name="ignoreUnresolvablePlaceholders" value="true" />
-    </bean>
-	
 	<context:spring-configured/>
 
-	<tx:annotation-driven mode="aspectj" transaction-manager="transactionManager"/>
+	<tx:annotation-driven transaction-manager="transactionManager"/>
 	
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
@@ -76,8 +62,13 @@
 		<property name="jpaProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
-				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
 				<prop key="hibernate.ejb.naming_strategy">cz.kolomet.util.db.StandardNamingStrategy</prop>
+				<prop key="hibernate.generate_statistics">${hibernate.generate_statistics}</prop>
+				<prop key="hibernate.cache.use_query_cache">${hibernate.cache.use_query_cache}</prop>
+				<prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory</prop>
+				
+				<prop key="net.sf.ehcache.configurationResourceName">cache/hibernate-cache.xml</prop>
 			</props>
 		</property>
 	</bean>

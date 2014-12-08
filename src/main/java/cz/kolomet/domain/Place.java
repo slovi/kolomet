@@ -1,7 +1,6 @@
 package cz.kolomet.domain;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -16,11 +15,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.BatchSize;
+
 import cz.kolomet.domain.codelist.PlaceType;
 import cz.kolomet.domain.codelist.Region;
 import cz.kolomet.dto.FileInfo;
-import flexjson.JSONDeserializer;
-import flexjson.JSONSerializer;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -58,6 +57,7 @@ public class Place extends BaseDomainEntity implements Commented, PhotoContainer
     private ApplicationUser owner;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "place")
+    @BatchSize(size = 20)
     private List<PlacePhotoUrl> placePhotoUrls = new ArrayList<PlacePhotoUrl>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "place")
@@ -90,11 +90,6 @@ public class Place extends BaseDomainEntity implements Commented, PhotoContainer
 			return false;
 		return true;
 	}
-
-	public static String toJsonArray(Collection<Place> collection, String[] fields) {
-        return new JSONSerializer()
-        .include(fields).exclude("*").serialize(collection);
-    }
     
     public void increaseRate(Integer value) {
     	
@@ -245,21 +240,5 @@ public class Place extends BaseDomainEntity implements Commented, PhotoContainer
 	public void setComments(List<PlaceComment> comments) {
 		this.comments = comments;
 	}
-
-	public String toJson() {
-        return new JSONSerializer().exclude("*.class").serialize(this);
-    }
-
-	public static Place fromJsonToPlace(String json) {
-        return new JSONDeserializer<Place>().use(null, Place.class).deserialize(json);
-    }
-
-	public static String toJsonArray(Collection<Place> collection) {
-        return new JSONSerializer().exclude("*.class").serialize(collection);
-    }
-
-	public static Collection<Place> fromJsonArrayToPlaces(String json) {
-        return new JSONDeserializer<List<Place>>().use(null, ArrayList.class).use("values", Place.class).deserialize(json);
-    }
 
 }

@@ -42,6 +42,11 @@ define(['jquery', 'jquery.lean'], function($) {
 						}
 					});
 				});
+				
+				if (window.location.href.indexOf("login=true") > -1) {
+					loginModal.click();
+				}
+				
 			}
 		}
 		

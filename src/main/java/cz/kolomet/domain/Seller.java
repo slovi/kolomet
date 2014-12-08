@@ -23,7 +23,7 @@ import cz.kolomet.domain.codelist.Region;
 import cz.kolomet.domain.codelist.SellerStatus;
 
 @Entity
-@BatchSize(size = 9)
+@BatchSize(size = 20)
 public class Seller extends BaseDomainEntity implements PhotoContainer, Serializable {
 	
 	@NotNull
@@ -73,14 +73,16 @@ public class Seller extends BaseDomainEntity implements PhotoContainer, Serializ
     private Boolean enabled;
     
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "seller", cascade = CascadeType.ALL)
+    @BatchSize(size = 20)
     private List<SellerPhotoUrl> sellerPhotoUrls = new ArrayList<SellerPhotoUrl>();
     
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "seller", cascade = CascadeType.ALL)
     private List<Product> products = new ArrayList<Product>();
     
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "APPLICATION_USER_ID")
-	@Fetch(FetchMode.SUBSELECT)
+	@Fetch(FetchMode.JOIN)
+    @BatchSize(size = 20)
 	private List<SellerAddress> addresses = new ArrayList<SellerAddress>();
     
     @Override

@@ -67,22 +67,6 @@ public class ProductFilterDto {
 	
 	public static ProductFilterDto initEmpty(BigDecimal maxPriceTo, BigDecimal maxDiscountTo, Integer maxWeightTo) {
 		ProductFilterDto productFilter = new ProductFilterDto();
-		productFilter.category = new Category();
-		productFilter.category.setId(0l);
-		productFilter.categoryType = new CategoryType();
-		productFilter.categoryType.setId(0l);
-		productFilter.region = new Region();
-		productFilter.region.setId(0l);
-		productFilter.producer = new Producer();
-		productFilter.producer.setId(0l);
-		productFilter.productUsage = new ProductUsage();
-		productFilter.productUsage.setId(0l);
-		productFilter.bicycleCategory = new BicycleCategory();
-		productFilter.bicycleCategory.setId(0l);
-		productFilter.figureHeight = new FigureHeight();
-		productFilter.figureHeight.setId(0l);
-		productFilter.productColor = new ProductColor();
-		productFilter.productColor.setId(0l);
 		productFilter.priceFrom = new BigDecimal(0l);
 		productFilter.priceTo = maxPriceTo;
 		productFilter.maxPriceTo = maxPriceTo;

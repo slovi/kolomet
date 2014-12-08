@@ -18,12 +18,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import cz.kolomet.domain.ApplicationUser;
-import cz.kolomet.domain.BasePhoto;
 import cz.kolomet.service.ApplicationRoleService;
 import cz.kolomet.service.ApplicationUserService;
 import cz.kolomet.service.SellerService;
 import cz.kolomet.service.exception.ExistingUserException;
-import flexjson.JSONSerializer;
 
 @RequestMapping("/admin/applicationusers")
 @Controller
@@ -81,9 +79,7 @@ public class ApplicationUserController extends AbstractAdminController {
             return "admin/applicationusers/update";
         }
         try {       	
-        	ApplicationUser existingApplicationUser = applicationUserService.findApplicationUser(applicationUser.getId());
-        	convertApplicationUser(applicationUser, existingApplicationUser);
-        	applicationUserService.updateApplicationUser(existingApplicationUser);
+        	applicationUserService.updateApplicationUser(applicationUser, getActualUserDetails());
         	savePhotos(applicationUser, applicationUserService, httpServletRequest.getSession().getId(), applicationUser.getFileInfos());        	
 	    } catch (ExistingUserException e) {
 	    	bindingResult.rejectValue("username", e.getCode(), e.getArguments(), null);
@@ -139,25 +135,9 @@ public class ApplicationUserController extends AbstractAdminController {
         uiModel.addAttribute("applicationUser", applicationUser);
         addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("applicationroles", applicationRoleService.findAllApplicationRoles());
-        uiModel.addAttribute("applicationusers", applicationUserService.findAllApplicationUsers());
-        uiModel.addAttribute("addedFiles", new JSONSerializer().serialize(applicationUser.getFileInfos()));
+        uiModel.addAttribute("addedFiles", jsonSerializer.toJsonArray(applicationUser.getFileInfos()));
         uiModel.addAttribute("sellers", sellerService.findAllEnabledSellers());
-        uiModel.addAttribute("uploadedFiles", BasePhoto.toJsonArray(applicationUser.getApplicationUserPhotos(), new String[] {"id", "fileName"}));
+        uiModel.addAttribute("uploadedFiles", jsonSerializer.toJsonArray(applicationUser.getApplicationUserPhotos(), new String[] {"id", "fileName"}));
     }
-	
-	private void convertApplicationUser(ApplicationUser applicationUser, ApplicationUser existingApplicationUser) {
-		
-		if (getActualUserDetails().isApplicationUsersAll()) {
-			existingApplicationUser.setEnabled(applicationUser.getEnabled());
-			existingApplicationUser.setRoles(applicationUser.getRoles());
-			existingApplicationUser.setPassword(applicationUser.getPassword());
-			existingApplicationUser.setSeller(applicationUser.getSeller());
-		}
-		existingApplicationUser.setName(applicationUser.getName());
-		existingApplicationUser.setNickname(applicationUser.getNickname());
-		existingApplicationUser.setPhone(applicationUser.getPhone());
-		existingApplicationUser.setSurname(applicationUser.getSurname());
-		existingApplicationUser.setUsername(applicationUser.getUsername());
-	}
 	
 }

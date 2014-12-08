@@ -5,7 +5,7 @@ define(['jquery', 'jquery.block-ui'], function($) {
 		show: function(contextPath) {
 			
 			$.blockUI({ 
-				message: '<h1><img src=\"/kolomet/resources/images/ajax-loader-100.gif\" /></h1>',
+				message: '<h1><img src=\"/resources/images/ajax-loader-100.gif\" /></h1>',
 				onOverlayClick: $.unblockUI,
 				css: { 
 					width: '20%',

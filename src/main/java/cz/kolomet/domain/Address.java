@@ -2,6 +2,7 @@ package cz.kolomet.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
@@ -22,7 +23,7 @@ public class Address implements Serializable {
 	private String houseNr;
 	
     @NotNull
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
 	private CountryState countryState;
     
     public String getAddressString() {

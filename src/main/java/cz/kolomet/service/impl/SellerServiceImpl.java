@@ -3,6 +3,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -90,6 +92,9 @@ public class SellerServiceImpl implements SellerService {
 	@PostAuthorize("isAnonymous() or principal.isSellerOwner(returnObject)")
 	public Seller detail(Long id, String userInfo) {
 		Seller seller = findSeller(id);
+		if (seller == null) {
+			throw new EntityNotFoundException();
+		}
 		visitorActivityLogService.saveVisitorActivityLog(seller, null, userInfo, VisitorActivityType.SELLER_VISIT);
 		return seller;
 	}

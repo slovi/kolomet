@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -17,12 +17,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import cz.kolomet.domain.Product;
 import cz.kolomet.dto.ProductFilterDto;
 import cz.kolomet.repository.ProductAttributeRepository;
+import cz.kolomet.repository.ProductRepository;
 import cz.kolomet.repository.ProductSpecifications;
-import cz.kolomet.repository.ProductUsageRepository;
-import cz.kolomet.repository.RegionRepository;
 import cz.kolomet.service.BicycleCategoryService;
 import cz.kolomet.service.ProductColorService;
 import cz.kolomet.service.ProductService;
+import cz.kolomet.service.ProductUsageService;
+import cz.kolomet.service.RegionService;
+import cz.kolomet.util.PageDto;
 
 @RequestMapping("/public/products")
 @Controller("publicProductController")
@@ -32,16 +34,19 @@ public class ProductController extends AbstractPublicController {
 	private ProductService productService;
 	
 	@Autowired
+	private ProductRepository productRepository;
+	
+	@Autowired
 	private ProductAttributeRepository productAttributeRepository;
 	
 	@Autowired
-	private RegionRepository regionRepository;
-	
-	@Autowired
-	private ProductUsageRepository productUsageRepository;
+	private RegionService regionService;
 	
 	@Autowired
 	private BicycleCategoryService bicycleCategoryService;
+	
+	@Autowired
+	private ProductUsageService productUsageService;
 	
 	@Autowired
 	private ProductColorService productColorService;	
@@ -57,10 +62,18 @@ public class ProductController extends AbstractPublicController {
 	
 	@RequestMapping("/filter")
 	public String filterByProductFilter(@Valid ProductFilterDto productFilter, BindingResult result, Model model, @PageableDefault(DEFAULT_PAGE_SIZE) Pageable pageable) {	
-		populateFilterForm(productFilter, model);
 		
-		Pageable orderedPageable = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(), ProductSpecifications.getDefaultSort(pageable.getSort()));
-		model.addAttribute("products", productService.findProductEntries(ProductSpecifications.forProductFilter(productFilter), orderedPageable));
+		populateFilterForm(productFilter, model);
+		// TODO predelat na service a dto
+		Page<Product> products = productRepository.findCurrentAndNextPage(ProductSpecifications.forProductFilter(productFilter), pageable);
+		model.addAttribute("products", new PageDto(products));
+		if (products.getSort().getOrderFor("finalPrice") != null) {
+			model.addAttribute("priceAscending", products.getSort().getOrderFor("finalPrice").isAscending());
+		}
+		if (products.getSort().getOrderFor("discount") != null) {
+			System.out.println(products.getSort().getOrderFor("discount").isAscending());
+			model.addAttribute("discountAscending", products.getSort().getOrderFor("discount").isAscending());
+		}
 		return "public/products/list_category";
 	}
 	
@@ -93,8 +106,8 @@ public class ProductController extends AbstractPublicController {
 			productFilter.setWeightFrom(0d);
 		}
 		
-		model.addAttribute("regions", regionRepository.findAll());
-		model.addAttribute("productusages", productUsageRepository.findAll());
+		model.addAttribute("regions", regionService.findAllRegions());
+		model.addAttribute("productusages", productUsageService.findAllProductUsages());
 		model.addAttribute("productcolors", productColorService.findAllProductColors());
 		model.addAttribute("bicyclecategories", bicycleCategoryService.findAllBicycleCategorys());
 		model.addAttribute("productFilter", productFilter);

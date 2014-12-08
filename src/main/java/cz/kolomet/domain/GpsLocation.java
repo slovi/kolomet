@@ -15,6 +15,15 @@ public class GpsLocation {
 	@NotNull
 	@NumberFormat(pattern = "###.#################")
 	private Double west;
+	
+	public GpsLocation() {
+		
+	}
+	
+	public GpsLocation(Double north, Double west) {
+		this.north = north;
+		this.west = west;
+	}
 
 	public Double getNorth() {
 		return north;

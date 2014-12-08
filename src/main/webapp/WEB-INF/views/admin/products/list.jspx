@@ -22,7 +22,6 @@
                     <input name="page.page" type="hidden" value="${productsPage.number}"/>
                     <input name="page.size" type="hidden" value="${productsPage.size}"/>
                     <input name="page.sort" type="hidden" value="${param['page.sort']}"/>
-                    <input name="page.sort.dir" type="hidden" value="${param['page.sort.dir']}"/>
                     <spring:message code="button_filter" htmlEscape="false" var="save_button"/>
                     <input id="proceed" type="submit" value="${fn:escapeXml(save_button)}"/>
                     <spring:message code="button_reset" var="button_reset_label"/>

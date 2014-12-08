@@ -4,12 +4,16 @@ require(['../common'], function (common) {
 		
 		require(['lightbox', 'images'], function(lightbox, images) {
 			
-			var detailImage = $('img#detail_image');
-			var fileLoaderUrl = detailImage.data('loader-url');
-			var fileNotFoundUrl = detailImage.data('not-found-url');
-			images.waitForImagesLoad(detailImage, fileLoaderUrl, fileNotFoundUrl, 4, 2000);
+			$(document).ready(function() {
 			
-	    	images.preloadImages('detail_image');
+				var detailImage = $('img#detail_image');
+				var fileLoaderUrl = detailImage.data('loader-url');
+				var fileNotFoundUrl = detailImage.data('not-found-url');
+				images.waitForImagesLoad(detailImage, fileLoaderUrl, fileNotFoundUrl, 4, 2000);
+				
+		    	images.preloadImages('detail_image');
+	    	
+			});
 	    	
 	    });
 	

@@ -8,29 +8,34 @@ import cz.kolomet.domain.codelist.Region;
 
 public interface RegionService {
 	
+	
 	public Page<Region> findRegionEntries(Pageable pageable);  
+	
 	
 	public Region findByGoogleAlias(String googleAlias);
 	
+	
+	public Region findByGoogleAliasEn(String googleAliasEn);
+	
 
-	public abstract long countAllRegions();
-
-
-	public abstract void deleteRegion(Region region);
-
-
-	public abstract Region findRegion(Long id);
+	public long countAllRegions();
 
 
-	public abstract List<Region> findAllRegions();
+	public void deleteRegion(Region region);
 
 
-	public abstract List<Region> findRegionEntries(int firstResult, int maxResults);
+	public Region findRegion(Long id);
 
 
-	public abstract void saveRegion(Region region);
+	public List<Region> findAllRegions();
 
 
-	public abstract Region updateRegion(Region region);
+	public List<Region> findRegionEntries(int firstResult, int maxResults);
+
+
+	public void saveRegion(Region region);
+
+
+	public Region updateRegion(Region region);
 
 }

@@ -2,16 +2,17 @@
 <div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <page:show id="ps_cz_kolomet_domain_codelist_Region" object="${region}" path="${subContext}/admin/regions" z="user-managed">
-        <field:display field="codeKey" id="s_cz_kolomet_domain_codelist_Region_codeKey" object="${region}" z="UJK2spn3YljfmbkDy48rKfKHpow="/>
-        <field:display field="codeDescription" id="s_cz_kolomet_domain_codelist_Region_codeDescription" object="${region}" z="f4nYQlavJ+GaZ25hNc1MChI+aQs="/>
-        <field:display field="createdBy" id="s_cz_kolomet_domain_codelist_Region_createdBy" object="${region}" z="msiHma5eo99FZVkeHitVVuo5AtY="/>
-        <field:display field="lastModifiedBy" id="s_cz_kolomet_domain_codelist_Region_lastModifiedBy" object="${region}" z="8zXGMaXP5NtRtNhklTLAqV+2Ebs="/>
-        <field:display date="true" dateTimePattern="${region_created_date_format}" field="created" id="s_cz_kolomet_domain_codelist_Region_created" object="${region}" z="w0nPnUiqocD5+g+Z4/rJUhxJBcE="/>
-        <field:display date="true" dateTimePattern="${region_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_codelist_Region_lastModified" object="${region}" z="w0nPnUiqocD5+g+Z4/rJUhxJBcE="/>
-        <field:display field="sequenceNr" id="s_cz_kolomet_domain_codelist_Region_sequenceNr" object="${region}" z="db5ez4Q3IwxYujT76JrzG3CnpuQ="/>
-        <field:display field="gpsLocation" id="s_cz_kolomet_domain_codelist_Region_gpsLocation" object="${region}" z="pIN9FjWiy72EMZj7RhfHj+grZoc="/>
+    <page:show id="ps_cz_kolomet_domain_codelist_Region" object="${region}" path="${subContext}/admin/regions">
+        <field:display field="codeKey" id="s_cz_kolomet_domain_codelist_Region_codeKey" object="${region}" />
+        <field:display field="codeDescription" id="s_cz_kolomet_domain_codelist_Region_codeDescription" object="${region}" />
+        <field:display field="createdBy" id="s_cz_kolomet_domain_codelist_Region_createdBy" object="${region}" />
+        <field:display field="lastModifiedBy" id="s_cz_kolomet_domain_codelist_Region_lastModifiedBy" object="${region}" />
+        <field:display date="true" dateTimePattern="${region_created_date_format}" field="created" id="s_cz_kolomet_domain_codelist_Region_created" object="${region}" />
+        <field:display date="true" dateTimePattern="${region_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_codelist_Region_lastModified" object="${region}" />
+        <field:display field="sequenceNr" id="s_cz_kolomet_domain_codelist_Region_sequenceNr" object="${region}" />
+        <field:display field="gpsLocation" id="s_cz_kolomet_domain_codelist_Region_gpsLocation" object="${region}" />
         <field:display field="zoom" id="s_cz_kolomet_domain_codelist_Region_zoom" object="${region}" />
-        <field:display field="googleAlias" id="s_cz_kolomet_domain_codelist_Region_googleAlias" object="${region}" z="4HOrgJ5dJ7XBfFgL+ZbDX5e0EeY="/>
+        <field:display field="googleAlias" id="s_cz_kolomet_domain_codelist_Region_googleAlias" object="${region}" />
+        <field:display field="googleAliasEn" id="s_cz_kolomet_domain_codelist_Region_googleAliasEn" object="${region}" />
     </page:show>
 </div>

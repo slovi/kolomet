@@ -62,8 +62,8 @@ require(['../common'], function (common) {
 				
 				markers = [];
 				
-				dijit.byId('_gpsLocation.north_id').set('value', event.latLng.lat().toString().replace('.', ','));
-				dijit.byId('_gpsLocation.west_id').set('value', event.latLng.lng().toString().replace('.', ','));
+				dijit.byId('_gpsLocation.north_id').set('value', event.latLng.lat().toString());
+				dijit.byId('_gpsLocation.west_id').set('value', event.latLng.lng().toString());
 				
 			    map.setCenter(event.latLng);					
 			    if (map.getZoom() < 8) {

@@ -39,10 +39,10 @@ div#thumbnails div.thumbnail_wrapper div.thumbnail, div.thumbnails_container div
 }
 
 div.files_add {
-	background: #f5f5f5 url('/kolomet/resources/images/input_file.png') no-repeat center center;
+	background: #f5f5f5 url('../../images/input_file.png') no-repeat center center;
 	line-height: 1em !important;
 	border: thin solid black;	
-}
+}	
 
 div.files_add input {
 	width: 120px;

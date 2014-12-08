@@ -1,6 +1,6 @@
 require(['../common'], function (common) {
 	
-	require(['main_default_admin'], function(mainDefaultPublic) {
+	require(['main_default_public'], function(mainDefaultPublic) {
 		
 	});
 

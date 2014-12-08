@@ -12,7 +12,7 @@ public class SecurityContextTestExecutionListener extends AbstractTestExecutionL
 	public void beforeTestMethod(TestContext testContext) throws Exception {
 		
 		SecurityContext securityContext = SecurityContextHolder.createEmptyContext();
-		securityContext.setAuthentication(new UsernamePasswordAuthenticationToken("test", "test"));
+		securityContext.setAuthentication(new UsernamePasswordAuthenticationToken("jiri.slovak@gmail.com", "slovi"));
 		SecurityContextHolder.setContext(securityContext);
 	}
 	

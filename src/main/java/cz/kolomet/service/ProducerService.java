@@ -7,27 +7,28 @@ import cz.kolomet.domain.Producer;
 
 public interface ProducerService {
 	
+	
 	public Page<Producer> findProducerEntries(Pageable pageable);
 	
 
-	public abstract long countAllProducers();
+	public long countAllProducers();
 
 
-	public abstract void deleteProducer(Producer producer);
+	public void deleteProducer(Producer producer);
 
 
-	public abstract Producer findProducer(Long id);
+	public Producer findProducer(Long id);
 
 
-	public abstract List<Producer> findAllProducers();
+	public List<Producer> findAllProducers();
 
 
-	public abstract List<Producer> findProducerEntries(int firstResult, int maxResults);
+	public List<Producer> findProducerEntries(int firstResult, int maxResults);
 
 
-	public abstract void saveProducer(Producer producer);
+	public void saveProducer(Producer producer);
 
 
-	public abstract Producer updateProducer(Producer producer);
+	public Producer updateProducer(Producer producer);
 
 }

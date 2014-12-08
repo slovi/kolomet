@@ -10,21 +10,19 @@
 					<spring:param name="${p.key}" value="${value}" />
 				</c:forEach>
 			</c:if>
-			<c:if test="${p.key eq 'page.sort.dir'}">
-				<c:set value="true" var="sortOrderSet" />
-				<c:if test="${p.value[0] eq 'asc'}">
-					<spring:param name="page.sort.dir" value="desc" />
-				</c:if>
-				<c:if test="${p.value[0] eq 'desc'}">
-					<spring:param name="page.sort.dir" value="asc" />
-				</c:if>
-			</c:if>
 		</c:forEach>
-		<spring:param name="page.sort" value="finalPrice" />
-		<c:if test="${not sortOrderSet}">                    	
-        	<spring:param name="page.sort.dir" value="asc" />
-        </c:if>
+		<c:set var="priceSortDirection" value="${empty priceAscending or not priceAscending ? 'asc' : 'desc'}" />
+		<spring:param name="page.sort" value="finalPrice,${priceSortDirection}" />
+		<c:choose>
+			<c:when test="${not empty priceAscending}">
+	       		<c:set var="priceOrderClass" value="${priceAscending ? 'arrow_box_bottom' : 'arrow_box_top'}" />
+			</c:when>
+			<c:otherwise>
+				<c:set var="priceOrderClass" value="" />
+			</c:otherwise>
+		</c:choose>
 	</spring:url>
+	
 	<spring:url value="${subContext}/public/products/filter" var="sortDiscountUrl">
 		<c:forEach items="${paramValues}" var="p">
 			<c:if test="${p.key ne 'page.sort' and p.key ne 'page.sort.dir'}">
@@ -32,57 +30,20 @@
 					<spring:param name="${p.key}" value="${value}" />
 				</c:forEach>
 			</c:if>
-			<c:if test="${p.key eq 'page.sort.dir'}">
-				<c:set value="true" var="sortOrderSet" />
-				<c:if test="${p.value[0] eq 'asc'}">
-					<spring:param name="page.sort.dir" value="desc" />
-				</c:if>
-				<c:if test="${p.value[0] eq 'desc'}">
-					<spring:param name="page.sort.dir" value="asc" />
-				</c:if>
-			</c:if>
 		</c:forEach>
-		<spring:param name="page.sort" value="discount" />
-		<c:if test="${not sortOrderSet}">                    	
-            <spring:param name="page.sort.dir" value="asc" />
-        </c:if>
-        <c:choose>
-	        <c:when test="${empty sortOrderSet or sortOrderSet eq 'asc'}">
-	        	<c:set var="discountOrderClass" value="arrow_box_top" />	
-	        </c:when>
-	        <c:otherwise>
-	        	<c:set var="discountOrderClass" value="arrow_box_bottom" />
-	        </c:otherwise>
-        </c:choose>
+		<c:set var="discountSortDirection" value="${empty discountAscending or not discountAscending ? 'asc' : 'desc'}" />
+		<spring:param name="page.sort" value="discount,${discountSortDirection}" />
+		<c:choose>
+			<c:when test="${not empty discountAscending}">
+	       		<c:set var="discountOrderClass" value="${discountAscending ? 'arrow_box_bottom' : 'arrow_box_top'}" />
+			</c:when>
+			<c:otherwise>
+				<c:set var="discountOrderClass" value="" />
+			</c:otherwise>
+		</c:choose>
 	</spring:url>
+	
   	<div class="sorting">
-  	
-  		<c:set value="arrow_box_none" var="priceOrderClass" />
-  		<c:set value="arrow_box_none" var="discountOrderClass" />
-  	
- 		<c:choose>
-			<c:when test="${param['page.sort'] eq 'finalPrice'}">
-				<c:choose>
-					<c:when test="${param['page.sort.dir'] eq 'asc'}">
-						<c:set value="arrow_box_top" var="priceOrderClass" />
-					</c:when>
-					<c:otherwise>
-						<c:set value="arrow_box_bottom" var="priceOrderClass" />
-					</c:otherwise>
-				</c:choose>
-			</c:when>
-			<c:when test="${param['page.sort'] eq 'discount'}">
-				<c:choose>
-					<c:when test="${param['page.sort.dir'] eq 'asc'}">
-						<c:set value="arrow_box_top" var="discountOrderClass" />
-					</c:when>
-					<c:otherwise>
-						<c:set value="arrow_box_bottom" var="discountOrderClass" />
-					</c:otherwise>
-				</c:choose>
-			</c:when>
-        </c:choose>
-  	
 	  	Řadit podle: 
 	  	<a id="sort_link_price" href="${sortPriceUrl}" class="arrow_box ${priceOrderClass}"><util:nbsp number="3" />cena<util:nbsp number="3" /></a><util:nbsp number="1" />
 	  	<a id="sort_link_discount" href="${sortDiscountUrl}" class="arrow_box ${discountOrderClass}"><util:nbsp number="3" />sleva<util:nbsp number="3" /></a> 

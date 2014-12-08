@@ -1,16 +1,15 @@
 package cz.kolomet.domain;
 
-import java.util.Collection;
-
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.Size;
 
 import org.apache.commons.io.FilenameUtils;
 
-import flexjson.JSONSerializer;
+import com.fasterxml.jackson.annotation.JsonFilter;
 
 @MappedSuperclass
+@JsonFilter("by name")
 public abstract class BasePhoto extends BaseDomainEntity implements Photo {
 	
 	public static String ORIGINAL_IMG_SUFFIX = "_orig";
@@ -30,10 +29,6 @@ public abstract class BasePhoto extends BaseDomainEntity implements Photo {
     @Size(max = 30)
     @Column(updatable = false)
     protected String contentType;
-    
-    public static <T extends BasePhoto> String toJsonArray(Collection<T> collection, String[] fields) {
-        return new JSONSerializer().include(fields).exclude("*").serialize(collection);
-    }
     
     public static String getPhotoUrlFileName(String fileName, String suffix) {
     	return FilenameUtils.getBaseName(fileName) + suffix + '.' + FilenameUtils.getExtension(fileName);

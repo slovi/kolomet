@@ -15,7 +15,6 @@
 				<c:forEach items="${products.content}" var="product">           
 					<spring:url value="/public/maps" var="mapUrl" />
 					<spring:url value="${product.buyUrl}" var="buyUrl" />
-					<spring:url value="/resources/img/bike_02.jpg" var="productImgUrl" />
 				    <div class="category_unit"> 
 				    	<spring:url value="${subContext}/public/products/detail/${product.id}" var="productIdUrl" />
 				    	<a href="${productIdUrl}">
@@ -57,7 +56,7 @@
 					</div>
 				</c:forEach>
 				<div class="clear text_center next_page_link_wrapper">
-					<c:if test="${products.number + 1 lt products.totalPages}">
+					<c:if test="${products.totalElements gt products.size}">
 						<spring:url value="${subContext}/public/products/filter" var="nextPageUrl">
 							<c:forEach items="${paramValues}" var="p">
 								<c:if test="${p.key ne 'page.size' and p.key ne 'page.page'}">

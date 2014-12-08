@@ -2,23 +2,27 @@ package cz.kolomet.domain.codelist;
 
 import java.io.Serializable;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import cz.kolomet.domain.GpsLocation;
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)public class Region extends Codelist implements Serializable {
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)public class Region extends Codelist implements Serializable {
 	
 	@Embedded
 	private GpsLocation gpsLocation;
 	
 	private String googleAlias;
+	
+	private String googleAliasEn;
 	
 	private Integer zoom;
 
@@ -45,6 +49,14 @@ import cz.kolomet.domain.GpsLocation;
 	public void setGoogleAlias(String googleAlias) {
         this.googleAlias = googleAlias;
     }
+
+	public String getGoogleAliasEn() {
+		return googleAliasEn;
+	}
+
+	public void setGoogleAliasEn(String googleAliasEn) {
+		this.googleAliasEn = googleAliasEn;
+	}
 
 	public String toString() {
         return new ReflectionToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).setExcludeFieldNames("createdBy", "lastModifiedBy", "createdDate", "lastModifiedDate").toString();

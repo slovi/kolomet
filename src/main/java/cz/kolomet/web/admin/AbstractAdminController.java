@@ -2,6 +2,8 @@ package cz.kolomet.web.admin;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,11 +18,15 @@ public class AbstractAdminController extends AbstractController {
 	private NewsItemRepository newsItemRepository;
 	
 	@ModelAttribute("newsItems")
-	public List<NewsItem> loadNewsItems() {
-		return newsItemRepository.findAll();
+	public List<NewsItem> loadNewsItems(HttpServletRequest servletRequest) {
+		if (!isAjaxRequest(servletRequest)) {
+			return newsItemRepository.findAll();
+		} else {
+			return null;
+		}
 	}
 	
-	protected String getUsername() {
+	protected String getActualLoggedUsername() {
 		return getActualUserDetails().getUsername();
 	}
 	

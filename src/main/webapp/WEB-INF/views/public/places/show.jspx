@@ -14,8 +14,10 @@
     
     <div class="general_unit" style="overflow: hidden; padding: 0px;">
     
-        <util:photo-image height="232" imgType="detail" noPhotoUrl="/resources/images/places/no-photo-detail.jpg" 
-        	photos="${place.photos}" width="348" preloaded="true"/>
+    	<spring:url value="/resources/images/ajax-loader.gif" var="loaderUrl" />
+    	<spring:url value="/resources/images/places/no-photo-detail.jpg" var="noPhotoUrl" />
+        <util:photo-image height="232" imgType="detail" noPhotoUrl="${noPhotoUrl}" 
+        	photos="${place.photos}" width="348" loaderUrl="${loaderUrl}" preloaded="true"/>
     
     	<div class="detail_description_wrapper">
 	        <div class="detail_description">

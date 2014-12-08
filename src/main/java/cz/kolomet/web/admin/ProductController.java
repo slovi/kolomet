@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
-import cz.kolomet.domain.BasePhoto;
 import cz.kolomet.domain.Product;
 import cz.kolomet.domain.ProductAttribute;
 import cz.kolomet.domain.Seller;
@@ -43,7 +42,7 @@ import cz.kolomet.service.ProductColorService;
 import cz.kolomet.service.ProductService;
 import cz.kolomet.service.ProductUsageService;
 import cz.kolomet.service.SellerService;
-import flexjson.JSONSerializer;
+import cz.kolomet.util.PageDto;
 
 @RequestMapping("/admin/products")
 @Controller
@@ -184,7 +183,7 @@ public class ProductController extends AbstractAdminController {
         	} else {
         		page = productService.findProductEntries(ProductSpecifications.forAdminProductFiter(productFilter, null), pageable); 
         	}
-        	uiModel.addAttribute("productsPage", page);
+        	uiModel.addAttribute("productsPage", new PageDto(page));
         	uiModel.addAttribute("products", page.getContent());
             uiModel.addAttribute("maxPages", page.getTotalPages());
         } else {
@@ -212,8 +211,8 @@ public class ProductController extends AbstractAdminController {
         	uiModel.addAttribute("sellers", Arrays.asList(new Seller[] {sellerService.findSeller(getActualUserDetails().getSellerId())}));
         }
 
-        uiModel.addAttribute("addedFiles", new JSONSerializer().serialize(product.getFileInfos()));
-        uiModel.addAttribute("uploadedFiles", BasePhoto.toJsonArray(product.getPhotoUrls(), new String[] {"id", "contentType", "fileName"}));
+        uiModel.addAttribute("addedFiles", jsonSerializer.toJsonArray(product.getFileInfos()));
+        uiModel.addAttribute("uploadedFiles", jsonSerializer.toJsonArray(product.getPhotoUrls(), new String[] {"id", "contentType", "fileName"}));
 
     	for (ProductAttributeType type: productAttributeTypeService.findAllProductAttributeTypes()) {
     		if (!product.containsProductAttributeType(type)) {

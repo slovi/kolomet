@@ -22,14 +22,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
-import cz.kolomet.domain.BasePhoto;
 import cz.kolomet.domain.NewsItem;
 import cz.kolomet.domain.NewsItemType;
 import cz.kolomet.dto.EnumDto;
 import cz.kolomet.service.ApplicationUserService;
 import cz.kolomet.service.NewsItemPhotoUrlService;
 import cz.kolomet.service.NewsItemService;
-import flexjson.JSONSerializer;
 
 @RequestMapping("/admin/newsitems")
 @Controller
@@ -101,8 +99,8 @@ public class NewsItemController extends AbstractAdminController {
         uiModel.addAttribute("newsitemphotourls", newsItemPhotoUrlService.findAllNewsItemPhotoUrls());
         uiModel.addAttribute("newsitemtypes", EnumDto.createCollection(NewsItemType.values(), messageSource));
         
-        uiModel.addAttribute("addedFiles", new JSONSerializer().serialize(newsItem.getFileInfos()));
-        uiModel.addAttribute("uploadedFiles", BasePhoto.toJsonArray(newsItem.getNewsItemPhotoUrls(), new String[] {"id", "fileName"}));
+        uiModel.addAttribute("addedFiles", jsonSerializer.toJsonArray(newsItem.getFileInfos()));
+        uiModel.addAttribute("uploadedFiles", jsonSerializer.toJsonArray(newsItem.getNewsItemPhotoUrls(), new String[] {"id", "fileName"}));
         
     }
     

@@ -20,7 +20,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @MappedSuperclass
 @EntityListeners({ org.springframework.data.jpa.domain.support.AuditingEntityListener.class })
-public abstract class BaseDomainEntity implements Auditable<ApplicationUser, Long>, Serializable {
+public abstract class BaseDomainEntity implements DomainEntity, Auditable<ApplicationUser, Long>, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

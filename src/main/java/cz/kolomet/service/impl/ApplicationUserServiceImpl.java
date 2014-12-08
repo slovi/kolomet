@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +21,11 @@ import cz.kolomet.domain.ApplicationUser;
 import cz.kolomet.domain.ApplicationUserPhoto;
 import cz.kolomet.domain.Photo;
 import cz.kolomet.domain.PhotoUrl;
+import cz.kolomet.dto.ApplicationUserFormDto;
 import cz.kolomet.dto.ApplicationUserPasswordDto;
 import cz.kolomet.repository.ApplicationUserPhotoRepository;
 import cz.kolomet.repository.ApplicationUserRepository;
+import cz.kolomet.security.ApplicationUserDetails;
 import cz.kolomet.security.PasswordGenerator;
 import cz.kolomet.service.ApplicationUserService;
 import cz.kolomet.service.MailService;
@@ -84,6 +87,9 @@ public class ApplicationUserServiceImpl extends AbstractPhotoUrlService implemen
 	@Value("${applicationuserregistration.registration.link}")
 	private String registrationLinkBase;
 	
+	@Autowired
+	private Properties applicationProperties;
+	
 	public ApplicationUserPhoto findApplicationUserPhoto(Long id) {
 		return applicationUserPhotoRepository.findOne(id);
 	}
@@ -141,7 +147,7 @@ public class ApplicationUserServiceImpl extends AbstractPhotoUrlService implemen
 	}
 	
 	public void saveApplicationUser(ApplicationUser applicationUser, boolean generatePassword) {
-
+		
     	if (applicationUserRepository.findByUsernameAndEnabled(applicationUser.getUsername(), true) == null) {
     		
     		if (generatePassword) {
@@ -155,6 +161,7 @@ public class ApplicationUserServiceImpl extends AbstractPhotoUrlService implemen
 	        	params.put("applicationuser", applicationUser);
 	        	params.put("password", password);
 	        	
+	        	logger.info("Saving user (" + applicationUser.getUsername() + ") with generated password.");
 	        	mailService.send(applicationUser.getUsername(), newApplicationUserMailSubject, newApplicationUserMailTemplate, params);
 	        	
     		} else {
@@ -174,33 +181,49 @@ public class ApplicationUserServiceImpl extends AbstractPhotoUrlService implemen
 		saveApplicationUser(applicationUser, true);
     }
 	
+	public void saveApplicationUser(ApplicationUserFormDto applicationUser, boolean generatePassword) {
+		
+	}
+	
 	public Page<ApplicationUser> findApplicationUserEntries(Pageable pageable) {
 		return applicationUserRepository.findAll(pageable);
 	}
 	
 	@PreAuthorize("principal.isCapableToUpdateApplicationUser(#applicationUser)")
-    public ApplicationUser updateApplicationUser(ApplicationUser applicationUser) {
+    public ApplicationUser updateApplicationUser(ApplicationUser applicationUser, ApplicationUserDetails actualApplicationUser) {
     	
-    	ApplicationUser existingUser = applicationUserRepository.findByUsernameAndEnabled(applicationUser.getUsername(), true);
+    	ApplicationUser sameUsernameUser = applicationUserRepository.findByUsernameAndEnabled(applicationUser.getUsername(), true);
+    	ApplicationUser existingUser = applicationUserRepository.findOne(applicationUser.getId());
     	
     	// jestlize username existuje, ale jedna se o stejneho uzivatele nebo jestli username neexistuje, muzeme menit
-    	if ((existingUser != null && existingUser.getId().equals(applicationUser.getId())) ||  (existingUser == null)) {
-			String password = applicationUser.getPassword();
-			String existingPassword = existingUser.getPassword();
-			if (!existingPassword.equals(password)) {
-				if (StringUtils.isNotEmpty(password)) {
-					if (StringUtils.isNotEmpty(password)) {
-						applicationUser.setPassword(this.passwordEncoder.encodePassword(password, null));
-					}
-				} else {
-					throw new ApplicationUserPasswordException("Cannot change user password to empty value.");
-				}
-			}
-		    return applicationUserRepository.save(applicationUser);
+    	if (sameUsernameUser == null || sameUsernameUser.getId().equals(existingUser.getId())) {
+    		convertApplicationUser(applicationUser, existingUser, actualApplicationUser);
+		    return applicationUserRepository.save(existingUser);
     	} else {
     		throw new ExistingUserException(applicationUser);
     	}
     }
+	
+	private void convertApplicationUser(ApplicationUser applicationUser, ApplicationUser existingApplicationUser, ApplicationUserDetails actualApplicationUser) {
+		
+		if (actualApplicationUser.isApplicationUsersAll()) {
+			existingApplicationUser.setEnabled(applicationUser.getEnabled());
+			existingApplicationUser.setRoles(applicationUser.getRoles());
+			existingApplicationUser.setSeller(applicationUser.getSeller());
+			String password = applicationUser.getPassword();
+    		String existingPassword = existingApplicationUser.getPassword();
+    		if (!existingPassword.equals(password)) {
+	    		if (StringUtils.isNotEmpty(password) && !existingPassword.equals(passwordEncoder.encodePassword(password, null))) {
+	   				existingApplicationUser.setPassword(this.passwordEncoder.encodePassword(password, null));
+	    		}
+    		}
+		}
+		existingApplicationUser.setName(applicationUser.getName());
+		existingApplicationUser.setNickname(applicationUser.getNickname());
+		existingApplicationUser.setPhone(applicationUser.getPhone());
+		existingApplicationUser.setSurname(applicationUser.getSurname());
+		existingApplicationUser.setUsername(applicationUser.getUsername());
+	}
 
 	@PreAuthorize("principal.isCapableToUpdatePassword(#applicationUserPassword)")
 	public void updatePassword(ApplicationUserPasswordDto applicationUserPassword) {
@@ -257,4 +280,5 @@ public class ApplicationUserServiceImpl extends AbstractPhotoUrlService implemen
 	public List<ApplicationUser> findApplicationUserEntries(int firstResult, int maxResults) {
         return applicationUserRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / maxResults, maxResults)).getContent();
     }
+	
 }

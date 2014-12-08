@@ -23,7 +23,6 @@ import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
 import cz.kolomet.domain.Place;
-import cz.kolomet.domain.PlacePhotoUrl;
 import cz.kolomet.repository.PlaceSpecifications;
 import cz.kolomet.security.ApplicationUserDetails;
 import cz.kolomet.service.ApplicationUserService;
@@ -32,7 +31,6 @@ import cz.kolomet.service.PlaceService;
 import cz.kolomet.service.PlaceTypeService;
 import cz.kolomet.service.RegionService;
 import cz.kolomet.service.exception.ExistingPlaceException;
-import flexjson.JSONSerializer;
 
 @RequestMapping("/admin/places")
 @Controller("adminPlaceController")
@@ -88,7 +86,7 @@ public class PlaceController extends AbstractAdminController {
         	placeService.savePlace(place);
         	savePhotos(place, placePhotoUrlService, httpServletRequest.getSession().getId(), place.getFileInfos());
         	uiModel.asMap().clear();
-        	return "redirect:/public/places/" + place.getId();
+        	return "redirect:public/places/" + place.getId();
         } catch (ExistingPlaceException e) {
         	bindingResult.reject(e.getCode(), e.getArguments(), "");
         	populateEditForm(uiModel, place);
@@ -96,14 +94,15 @@ public class PlaceController extends AbstractAdminController {
         }
     }
     
-    public void populateEditForm(Model uiModel, Place place) {
+    void populateEditForm(Model uiModel, Place place) {
         uiModel.addAttribute("place", place);
         addDateTimeFormatPatterns(uiModel);
-        uiModel.addAttribute("addedFiles", new JSONSerializer().serialize(place.getFileInfos()));
-        uiModel.addAttribute("uploadedFiles", PlacePhotoUrl.toJsonArray(place.getPlacePhotoUrls(), new String[] {"id", "fileName"}));
+        uiModel.addAttribute("addedFiles", jsonSerializer.toJsonArray(place.getFileInfos()));
+        uiModel.addAttribute("uploadedFiles", jsonSerializer.toJsonArray(place.getPlacePhotoUrls(), new String[] {"id", "fileName"}));
         uiModel.addAttribute("placetypes", placeTypeService.findAllPlaceTypes());
         uiModel.addAttribute("regions", regionService.findAllRegions());
         if (getActualUserDetails().isPlacesAll()) {
+        	place.setOwner(getActualUser());
         	uiModel.addAttribute("applicationusers", applicationUserService.findAllApplicationUsers());
         }
     }
@@ -139,7 +138,7 @@ public class PlaceController extends AbstractAdminController {
 	        placeService.updatePlace(existingPlace);      
 	        savePhotos(place, placePhotoUrlService, httpServletRequest.getSession().getId(), place.getFileInfos());
 	        uiModel.asMap().clear();
-	        return "redirect:/public/places/" + place.getId();
+	        return "redirect:public/places/" + place.getId();
 	    } catch (ExistingPlaceException e) {
 	    	bindingResult.reject(e.getCode(), e.getArguments(), "");
 	    	populateEditForm(uiModel, place);
@@ -175,7 +174,7 @@ public class PlaceController extends AbstractAdminController {
         uiModel.asMap().clear();
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
-        return "redirect:/admin/places";
+        return "redirect:admin/places";
     }
 
 	void addDateTimeFormatPatterns(Model uiModel) {

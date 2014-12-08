@@ -51,30 +51,43 @@ public class AbstractPublicController extends AbstractController implements Init
 	@ModelAttribute
 	public void loadMenuModel(Model uiModel, HttpServletRequest request) {
 		
-		if (isTour(request)) {
-			uiModel.addAttribute("regions", regionService.findAllRegions());
-			uiModel.addAttribute("agreementVersion", agreementVersion);
+		long menuModelStart = System.currentTimeMillis();
+		if (logger.isDebugEnabled()) {
+			logger.debug("Loading menu model");
 		}
 		
-		if (isStore(request)) {
-			uiModel.addAttribute("categorys", categoryRepository.find(bikeCategoryTypeId));
-			uiModel.addAttribute("producers", producerService.findAllProducers());
-			uiModel.addAttribute("figureheights", figureHeightsService.findAllFigureHeights());
-			uiModel.addAttribute("newsItems", newsItemRepository.findAll(NewsItemSpecifications.allNewsItems(), new PageRequest(0, newsItemsSize, Direction.DESC, "newsItemDate")).getContent());
-			uiModel.addAttribute("bikeCategoryTypeId", bikeCategoryTypeId);
-			uiModel.addAttribute("otherCategoryTypeId", otherCategoryTypeId);
-			uiModel.addAttribute("agreementVersion", agreementVersion);
+		if (!isAjaxRequest(request)) {
+			if (isTour(request)) {
+				uiModel.addAttribute("regions", regionService.findAllRegions());
+				uiModel.addAttribute("agreementVersion", agreementVersion);
+			}
+			
+			if (isStore(request)) {
+				uiModel.addAttribute("categorys", categoryRepository.find(bikeCategoryTypeId));
+				uiModel.addAttribute("producers", producerService.findAllProducers());
+				uiModel.addAttribute("figureheights", figureHeightsService.findAllFigureHeights());
+				uiModel.addAttribute("bikeCategoryTypeId", bikeCategoryTypeId);
+				uiModel.addAttribute("otherCategoryTypeId", otherCategoryTypeId);
+				uiModel.addAttribute("agreementVersion", agreementVersion);
+			}
+			
+			uiModel.addAttribute("newsItems", newsItemRepository.findAllWithoutCountQueryCacheable(NewsItemSpecifications.allNewsItems(), getNewsItemsPageRequest()));
+			uiModel.addAttribute("newsBanners", newsItemRepository.findAllWithoutCountQueryCacheable(NewsItemSpecifications.allNewsBanners(), getNewsItemsPageRequest()));
 		}
-		
-		uiModel.addAttribute("newsBanners", newsItemRepository.findAll(NewsItemSpecifications.allNewsBanners(), new PageRequest(0, newsItemsSize, Direction.DESC, "newsItemDate")).getContent());
-		
-		return ;
+
+		if (logger.isDebugEnabled()) {
+			logger.debug("Loading menu finished, took: " + (menuModelStart - System.currentTimeMillis()));
+		}
 	}
-	
+
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		this.bikeCategoryTypeId = categoryTypeService.findByCategoryCodeKey("cattype_bike").getId();
 		this.otherCategoryTypeId = categoryTypeService.findByCategoryCodeKey("cattype_other").getId();
+	}
+	
+	private PageRequest getNewsItemsPageRequest() {
+		return new PageRequest(0, newsItemsSize, Direction.DESC, "newsItemDate");
 	}
 
 }

@@ -7,8 +7,9 @@
    		
    		<div class="detail_img left">
    			<spring:url value="/resources/images/ajax-loader.gif" var="loaderUrl" />
+   			<spring:url value="/resources/images/sellers/no-photo-detail.jpg" var="noPhotoUrl" />
            	<util:photo-image photos="${seller.sellerPhotoUrls}" loaderUrl="${loaderUrl}" preloaded="true"
-           		noPhotoUrl="/resources/images/sellers/no-photo-detail.jpg" imgType="" height="338" width="508" />
+           		noPhotoUrl="${noPhotoUrl}" imgType="" height="338" width="508" />
         </div>
         
        	<div class="detail_description right"> 
@@ -100,7 +101,7 @@
                       	</security:authorize>
                   	</tr>
                 </thead>
-                <c:forEach items="${products.content}" var="product">
+                <c:forEach items="${products}" var="product">
                    	<tr>
                    		<spring:url value="${subContext}/public/products/detail" var="productDetailUrl" />
                    		<td><a href="${productDetailUrl}/${product.id}">${product.productName}</a></td>

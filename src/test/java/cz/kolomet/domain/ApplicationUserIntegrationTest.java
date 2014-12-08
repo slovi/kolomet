@@ -1,8 +1,10 @@
 package cz.kolomet.domain;
 import java.util.Iterator;
 import java.util.List;
+
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,7 +18,6 @@ import org.springframework.test.context.support.DirtiesContextTestExecutionListe
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 
-import cz.kolomet.domain.security.SecurityContextTestExecutionListener;
 import cz.kolomet.repository.ApplicationUserRepository;
 import cz.kolomet.service.ApplicationUserService;
 
@@ -25,7 +26,6 @@ import cz.kolomet.service.ApplicationUserService;
 @Transactional
 @Configurable
 @TestExecutionListeners({
-	SecurityContextTestExecutionListener.class, 
 	DependencyInjectionTestExecutionListener.class, 
 	DirtiesContextTestExecutionListener.class, 
 	TransactionalTestExecutionListener.class})
@@ -107,7 +107,7 @@ public class ApplicationUserIntegrationTest {
         obj = applicationUserService.findApplicationUser(id);
         boolean modified =  dod.modifyApplicationUser(obj);
         Integer currentVersion = obj.getVersion();
-        ApplicationUser merged = (ApplicationUser)applicationUserService.updateApplicationUser(obj);
+        ApplicationUser merged = (ApplicationUser)applicationUserService.updateApplicationUser(obj, null);
         applicationUserRepository.flush();
         Assert.assertEquals("Identifier of merged object not the same as identifier of original object", merged.getId(), id);
         Assert.assertTrue("Version for 'ApplicationUser' failed to increment on merge and flush directive", (currentVersion != null && obj.getVersion() > currentVersion) || !modified);

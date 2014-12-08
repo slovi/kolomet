@@ -2,7 +2,7 @@
   	<jsp:directive.page contentType="text/html;charset=UTF-8" />
   	<jsp:output omit-xml-declaration="yes" />
 
-	<c:forEach items="${products.content}" var="product">
+	<c:forEach items="${products}" var="product">
 		<div class="homepage_unit"> 
 			<spring:url value="/store/public/products/detail/${product.id}" var="productIdUrl" />
 	     	<a href="${productIdUrl}">

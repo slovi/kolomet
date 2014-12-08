@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import cz.kolomet.domain.Seller;
 import cz.kolomet.repository.ProductRepository;
+import cz.kolomet.repository.SellerRepository;
 import cz.kolomet.service.SellerService;
 import cz.kolomet.web.pub.AbstractPublicController;
 
@@ -20,6 +21,9 @@ import cz.kolomet.web.pub.AbstractPublicController;
 @Controller("publicSellerController")
 public class SellerController extends AbstractPublicController {
 
+	@Autowired
+	private SellerRepository sellerRepository;
+	
 	@Autowired
 	private SellerService sellerService;
 	
@@ -29,13 +33,15 @@ public class SellerController extends AbstractPublicController {
 	@RequestMapping("/map")
 	public String map(Model model, @RequestParam(value = "regionCodeKey", required = false) String regionCodeKey) {
 		if (StringUtils.isNotEmpty(regionCodeKey)) {
-			model.addAttribute("sellers", sellerService.findByRegionCodeKeyOrderBySellerNameAsc(regionCodeKey));
+			// TODO - predelat na dto
+			model.addAttribute("sellers", sellerRepository.findByRegionCodeKeyOrderBySellerNameAsc(regionCodeKey));
 		}		
 		return "public/sellers/map";
 	}
 	
 	@RequestMapping("/detail/{id}")
 	public String detail(@PathVariable("id") Long id, Model model, HttpServletRequest request) {
+		// TODO - predelat na dto
 		Seller seller = sellerService.detail(id, request.getRemoteAddr());
 		model.addAttribute("seller", seller);
 		model.addAttribute("products", productRepository.findBySellerId(id, new PageRequest(0, 10)));

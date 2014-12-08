@@ -8,8 +8,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -18,13 +16,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 import org.apache.commons.lang3.StringUtils;
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import cz.kolomet.dto.FileInfo;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+@BatchSize(size = 20)
 public class ApplicationUser extends BaseDomainEntity implements PhotoContainer, Serializable {
 	
 	private String name;

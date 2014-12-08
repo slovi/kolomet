@@ -1,13 +1,18 @@
 package cz.kolomet.service;
 
 import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+
 
 import cz.kolomet.domain.ApplicationUser;
 import cz.kolomet.domain.ApplicationUserPhoto;
 import cz.kolomet.domain.PhotoContainerService;
+import cz.kolomet.dto.ApplicationUserFormDto;
 import cz.kolomet.dto.ApplicationUserPasswordDto;
+import cz.kolomet.security.ApplicationUserDetails;
 
 public interface ApplicationUserService extends PhotoContainerService {
 	
@@ -15,7 +20,11 @@ public interface ApplicationUserService extends PhotoContainerService {
 	
 	public void registerApplicationUser(ApplicationUser applicationUser);
 	
+	public void saveApplicationUser(ApplicationUser applicationUser);
+
 	public void saveApplicationUser(ApplicationUser applicationUser, boolean generatePassword);
+	
+	public void saveApplicationUser(ApplicationUserFormDto applicationUser, boolean generatePassword);
 	
 	public void updatePassword(ApplicationUserPasswordDto applicationUserPassword);
 	
@@ -33,9 +42,7 @@ public interface ApplicationUserService extends PhotoContainerService {
 
 	public List<ApplicationUser> findApplicationUserEntries(int firstResult, int maxResults);
 
-	public void saveApplicationUser(ApplicationUser applicationUser);
-
-	public ApplicationUser updateApplicationUser(ApplicationUser applicationUser);
+	public ApplicationUser updateApplicationUser(ApplicationUser applicationUser, ApplicationUserDetails actualApplicationUser);
 	
 	public ApplicationUserPhoto findApplicationUserPhoto(Long id);
 

@@ -15,7 +15,8 @@
    	<div class="detail_header">
    	
    		<spring:url value="/resources/images/ajax-loader.gif" var="loaderUrl" />
-   		<util:photo-image photos="${product.photoUrls}" noPhotoUrl="/resources/images/products/no-photo-detail.jpg" 
+   		<spring:url value="/resources/images/products/no-photo-detail.jpg" var="noPhotoUrl" />
+   		<util:photo-image photos="${product.photoUrls}" noPhotoUrl="${noPhotoUrl}" 
    			loaderUrl="${loaderUrl}" imgType="detail" width="508" height="338" preloaded="true" />
    			    
        	<div class="detail_description right">

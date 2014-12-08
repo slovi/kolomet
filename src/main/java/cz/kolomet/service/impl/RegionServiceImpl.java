@@ -17,6 +17,9 @@ import cz.kolomet.service.RegionService;
 @Transactional
 public class RegionServiceImpl implements RegionService {
 	
+	@Autowired
+	RegionRepository regionRepository;
+	
 	public Page<Region> findRegionEntries(Pageable pageable) {
 		return regionRepository.findAll(pageable);
 	}
@@ -29,9 +32,9 @@ public class RegionServiceImpl implements RegionService {
     	return regionRepository.findByGoogleAlias(googleAlias);
     }
     
-
-	@Autowired
-    RegionRepository regionRepository;
+    public Region findByGoogleAliasEn(String googleAlias) {
+    	return regionRepository.findByGoogleAliasEn(googleAlias);
+    }
 
 	public long countAllRegions() {
         return regionRepository.count();

@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu" id="side_menu" version="2.0">
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" 
+	xmlns:jsp="http://java.sun.com/JSP/Page" 
+	xmlns:spring="http://www.springframework.org/tags" 
+	xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu" 
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" 
+	id="side_menu" version="2.0">
+    
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
 
@@ -31,10 +37,27 @@
 	    			</c:otherwise>
 	    		</c:choose>
 	    	
-				<menu:item url="/tour/public/places?region_id=${region.id}&amp;region_zoom=${region.zoom}&amp;menu=region&amp;gps_north=${region.gpsLocation.north}&amp;gps_west=${region.gpsLocation.west}" 
+				<menu:item url="/tour/public/places?region=${region.id}&amp;region_zoom=${region.zoom}&amp;menu=region&amp;gps_north=${region.gpsLocation.north}&amp;gps_west=${region.gpsLocation.west}" 
 					id="menuitem_${region.codeKey}" styleClass="${styleClass}" label="${region.codeDescription}" />
 			</c:forEach>
 	     </menu:menu>
 	</div>
+	
+	<div id="news_left">
+		<div class="news_content">
+       		<div class="news_header">
+	    		<spring:message code="news_header" />
+       		</div>
+       		<c:forEach items="${newsItems}" var="newsItem">
+	       		<div class="news_item">
+	       			<p>
+	       				<span class="news_item_date"><fmt:formatDate value="${newsItem.newsItemDate}" pattern="${dateFormat}" /></span>
+	       				<br />
+	       				<span class="news_item_content"><c:out value="${newsItem.text}" escapeXml="false" /></span>		        			
+	       			</p>
+	       		</div>
+       		</c:forEach>
+    	</div>
+    </div>
 		
 </div>

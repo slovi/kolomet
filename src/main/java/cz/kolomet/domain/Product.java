@@ -23,8 +23,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.apache.commons.io.FileUtils;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.BatchSize;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
@@ -37,6 +36,7 @@ import cz.kolomet.domain.codelist.ProductUsage;
 import cz.kolomet.dto.FileInfo;
 
 @Entity
+@BatchSize(size = 20)
 public class Product extends BaseDomainEntity implements Cloneable, PhotoContainer, Serializable {
 	
 	public static final Date DEFAULT_VALID_TO_DATE = new DateTime(9999, 12, 31, 0, 0, 0, 0).toDate();
@@ -131,16 +131,12 @@ public class Product extends BaseDomainEntity implements Cloneable, PhotoContain
     
     private ProductState productState;
 
-    /**
-     */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "product", fetch = FetchType.LAZY)
-    @Fetch(FetchMode.SUBSELECT)
+    @BatchSize(size = 20)
     private List<PhotoUrl> photoUrls = new ArrayList<PhotoUrl>();
 
-    /**
-     */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "product", fetch = FetchType.LAZY)
-    @Fetch(FetchMode.SUBSELECT)
+    @BatchSize(size = 20)
     private List<ProductAttribute> productAttributes = new ArrayList<ProductAttribute>();
     
     @Transient

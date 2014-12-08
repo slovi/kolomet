@@ -17,6 +17,12 @@ public interface ProductService {
 	public Page<Product> findProductEntries(Specification<Product> specification, Pageable pageable);
 	
 	
+	public Page<Product> findProductEntriesWithoutCountQuery(Specification<Product> specification, Pageable pageable);
+	
+	
+	public List<Product> findByPriority(Pageable pageable);
+	
+	
 	public Product copyProduct(Long id);
 	
 	
@@ -42,8 +48,8 @@ public interface ProductService {
 
 
 	public List<Product> findProductEntries(int firstResult, int maxResults);
-
-
+	
+	
 	public void saveProduct(Product product);
 
 

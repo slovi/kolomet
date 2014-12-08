@@ -2,19 +2,19 @@
 <div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <form:create id="fc_cz_kolomet_domain_codelist_Region" modelAttribute="region" path="${subContext}/admin/regions" render="${empty dependencies}" z="user-managed">
-        <field:input field="codeKey" id="c_cz_kolomet_domain_codelist_Region_codeKey" max="20" required="true" z="HZg4YSU/I6NX3jmKqSvQollfN+M="/>
-        <field:textarea field="codeDescription" id="c_cz_kolomet_domain_codelist_Region_codeDescription" required="true" z="TOT23ztMe4yEn2xFDJX76niI1gE="/>
-        <field:input field="createdBy" id="c_cz_kolomet_domain_codelist_Region_createdBy" render="false" z="user-managed"/>
-        <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_codelist_Region_lastModifiedBy" render="false" z="user-managed"/>
-        <field:datetime dateTimePattern="${region_created_date_format}" field="c" id="c_cz_kolomet_domain_codelist_Region_created" render="false" z="LhCBMbZahvV38kkdkrW7JPp7HKI="/>
-        <field:datetime dateTimePattern="${region_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_codelist_Region_lastModified" render="false" z="user-managed"/>
-        <field:input field="sequenceNr" id="c_cz_kolomet_domain_codelist_Region_sequenceNr" validationMessageCode="field_invalid_integer" z="qPYL3B6by18Pq42j1l2W45e14Ko="/>
+    <form:create id="fc_cz_kolomet_domain_codelist_Region" modelAttribute="region" path="${subContext}/admin/regions" render="${empty dependencies}">
+        <field:input field="codeKey" id="c_cz_kolomet_domain_codelist_Region_codeKey" max="20" required="true" />
+        <field:textarea field="codeDescription" id="c_cz_kolomet_domain_codelist_Region_codeDescription" required="true" />
+        <field:input field="createdBy" id="c_cz_kolomet_domain_codelist_Region_createdBy" render="false" />
+        <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_codelist_Region_lastModifiedBy" render="false" />
+        <field:datetime dateTimePattern="${region_created_date_format}" field="c" id="c_cz_kolomet_domain_codelist_Region_created" render="false" />
+        <field:datetime dateTimePattern="${region_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_codelist_Region_lastModified" render="false" />
+        <field:input field="sequenceNr" id="c_cz_kolomet_domain_codelist_Region_sequenceNr" validationMessageCode="field_invalid_integer" />
         <field:input field="zoom" id="c_cz_kolomet_domain_codelist_Region_zoom" validationMessageCode="field_invalid_integer" />
-        <field:input field="gpsLocation" id="c_cz_kolomet_domain_codelist_Region_gpsLocation" render="false" z="user-managed"/>
-        <field:input field="gpsLocation.north" id="c_cz_kolomet_domain_codelist_Region_gpsLocation_north" z="5pi7iVBBOOL+I0EXrvsR/9aoda0="/>
-        <field:input field="gpsLocation.west" id="c_cz_kolomet_domain_codelist_Region_gpsLocation_west" z="5pi7iVBBOOL+I0EXrvsR/9aoda0="/>
-        <field:input field="googleAlias" id="c_cz_kolomet_domain_codelist_Region_googleAlias" z="6n0W8NvICnwvWHxHeP+N8BYc0mU="/>
+        <field:input field="gpsLocation.north" id="c_cz_kolomet_domain_codelist_Region_gpsLocation_north" />
+        <field:input field="gpsLocation.west" id="c_cz_kolomet_domain_codelist_Region_gpsLocation_west" />
+        <field:input field="googleAlias" id="c_cz_kolomet_domain_codelist_Region_googleAlias" />
+        <field:input field="googleAliasEn" id="c_cz_kolomet_domain_codelist_Region_googleAliasEn" />
     </form:create>
-    <form:dependency dependencies="${dependencies}" id="d_cz_kolomet_domain_codelist_Region" render="${not empty dependencies}" z="8Qkgvcr6xkMl3Q8bwZG+53n2hNQ="/>
+    <form:dependency dependencies="${dependencies}" id="d_cz_kolomet_domain_codelist_Region" render="${not empty dependencies}" />
 </div>

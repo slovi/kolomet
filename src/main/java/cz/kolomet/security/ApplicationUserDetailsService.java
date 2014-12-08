@@ -5,6 +5,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.transaction.annotation.Transactional;
 
 import cz.kolomet.domain.ApplicationUser;
 import cz.kolomet.repository.ApplicationUserRepository;
@@ -19,6 +20,7 @@ public class ApplicationUserDetailsService implements UserDetailsService {
 	private ApplicationUserRepository applicationUserRepository;
 	
 	@Override
+	@Transactional
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
 		ApplicationUser user = applicationUserRepository.findByUsernameAndEnabled(username, true);
@@ -27,7 +29,7 @@ public class ApplicationUserDetailsService implements UserDetailsService {
 			throw new UsernameNotFoundException("Username \"" + username + "\" not found");
 		}
 		
-		return new ApplicationUserDetails(user);
+		return new ApplicationUserDetails(user); 
 	}
 
 }

@@ -48,9 +48,9 @@
 	                        <field:input field="address.city" id="c_cz_kolomet_domain_Place_address_city" render="false" width="${input_width}" z="9mNJF+/QmefeQOfR2mhIlHMeOSk="/>
 	                        <field:input field="address.zipCode" id="c_cz_kolomet_domain_Place_address_zipCode" render="false" width="${input_width}" z="9mNJF+/QmefeQOfR2mhIlHMeOSk="/>
 	                        <field:textarea field="descriptionLink" id="c_cz_kolomet_domain_Place_descriptionLink" cols="18" />
-	                        <field:input field="gpsLocation.north" id="c_cz_kolomet_domain_Place_gpsLocation_north" required="true" readonly="true" width="${input_width}" />
-	                        <field:input field="gpsLocation.west" id="c_cz_kolomet_domain_Place_gpsLocation_west" required="true" readonly="true" width="${input_width}" />
-	                        <field:input field="region" width="${input_width}" id="c_cz_kolomet_domain_Place_region" readonly="true" />
+	                        <field:input field="gpsLocation.north" id="c_cz_kolomet_domain_Place_gpsLocation_north" required="true" readonly="false" width="${input_width}" />
+	                        <field:input field="gpsLocation.west" id="c_cz_kolomet_domain_Place_gpsLocation_west" required="true" readonly="false" width="${input_width}" />
+	                        <field:input field="region" width="${input_width}" id="c_cz_kolomet_domain_Place_region" readonly="false" />
 	                        <security:authorize access="principal.isPlacesAll()">
 	                        	<field:select field="owner" id="c_cz_kolomet_domain_Place_owner" itemValue="id" itemLabel="username" items="${applicationusers}" path="/admin/applicationusers" width="${input_width}" />
 	                        </security:authorize>

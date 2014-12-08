@@ -16,15 +16,15 @@
     		</div>
 			
 			<div class="filter_right">    
-	      		<field:select id="c_cz_kolomet_domain_Product_category" decorated="false" width="13" cssClass="filter_input" items="${categorys}" field="category" path="/categorys" emptyLabel="Všechny typy kol" renderLabel="true" itemValue="id" itemLabel="codeDescription" inline="true" required="false" />
-	      		<field:select id="c_cz_kolomet_domain_Product_producer" decorated="false" width="13" cssClass="filter_input" items="${producers}" field="producer" path="/producers" emptyLabel="Všechny značky" renderLabel="true" itemValue="id" itemLabel="codeDescription" inline="true" required="false" />
-				<field:select id="c_cz_kolomet_domain_Seller_region" decorated="false" width="13" cssClass="filter_input" items="${regions}" field="region" path="/regions" emptyLabel="Všechny regiony" renderLabel="true" itemValue="id" itemLabel="codeDescription" inline="true" required="false" />
+	      		<field:select id="c_cz_kolomet_domain_Product_category" emptyStringEmptyValue="true" decorated="false" width="13" cssClass="filter_input" items="${categorys}" field="category" path="/categorys" emptyLabel="Všechny typy kol" renderLabel="true" itemValue="id" itemLabel="codeDescription" inline="true" required="false" />
+	      		<field:select id="c_cz_kolomet_domain_Product_producer" emptyStringEmptyValue="true" decorated="false" width="13" cssClass="filter_input" items="${producers}" field="producer" path="/producers" emptyLabel="Všechny značky" renderLabel="true" itemValue="id" itemLabel="codeDescription" inline="true" required="false" />
+				<field:select id="c_cz_kolomet_domain_Seller_region" emptyStringEmptyValue="true" decorated="false" width="13" cssClass="filter_input" items="${regions}" field="region" path="/regions" emptyLabel="Všechny regiony" renderLabel="true" itemValue="id" itemLabel="codeDescription" inline="true" required="false" />
 	     		
-	      		<field:select id="c_cz_kolomet_domain_Product_productUsage" decorated="false" width="13" cssClass="filter_input" itemValue="id" items="${productusages}" field="productUsage" emptyLabel="Všechna použití" renderLabel="true" itemLabel="codeDescription" path="/productusages" inline="true" required="false"/>
-	      		<field:select id="c_cz_kolomet_domain_Product_bicycleCategory" decorated="false" width="13" cssClass="filter_input" items="${bicyclecategories}" field="bicycleCategory" path="/bicyclecategories" emptyLabel="Všechny kategorie" renderLabel="true" itemValue="id" itemLabel="codeDescription" inline="true" required="false" />
-				<field:select id="c_cz_kolomet_domain_Product_figureHeight" decorated="false" width="13" cssClass="filter_input" items="${figureheights}" field="figureHeight" path="/figureheights" emptyLabel="Všechny velikosti" renderLabel="true" itemValue="id" itemLabel="codeDescription" inline="true" required="false" />
+	      		<field:select id="c_cz_kolomet_domain_Product_productUsage" emptyStringEmptyValue="true" decorated="false" width="13" cssClass="filter_input" itemValue="id" items="${productusages}" field="productUsage" emptyLabel="Všechna použití" renderLabel="true" itemLabel="codeDescription" path="/productusages" inline="true" required="false"/>
+	      		<field:select id="c_cz_kolomet_domain_Product_bicycleCategory" emptyStringEmptyValue="true" decorated="false" width="13" cssClass="filter_input" items="${bicyclecategories}" field="bicycleCategory" path="/bicyclecategories" emptyLabel="Všechny kategorie" renderLabel="true" itemValue="id" itemLabel="codeDescription" inline="true" required="false" />
+				<field:select id="c_cz_kolomet_domain_Product_figureHeight" emptyStringEmptyValue="true" decorated="false" width="13" cssClass="filter_input" items="${figureheights}" field="figureHeight" path="/figureheights" emptyLabel="Všechny velikosti" renderLabel="true" itemValue="id" itemLabel="codeDescription" inline="true" required="false" />
 	
-				<field:select id="c_cz_kolomet_domain_Product_productColor" decorated="false" width="13" cssClass="filter_input" itemValue="id" items="${productcolors}" field="productColor" emptyLabel="Všechny barvy" renderLabel="true" itemLabel="codeDescription" path="/productcolors" inline="true" required="false"/>      		
+				<field:select id="c_cz_kolomet_domain_Product_productColor" emptyStringEmptyValue="true" decorated="false" width="13" cssClass="filter_input" itemValue="id" items="${productcolors}" field="productColor" emptyLabel="Všechny barvy" renderLabel="true" itemLabel="codeDescription" path="/productcolors" inline="true" required="false"/>      		
 				<field:checkbox id="c_cz_kolomet_domain_Product_canSendToAllCountry" decorated="false" cssClass="filter_input" field="canSendToAllCountry" />
 				<form:hidden path="categoryType" />
 			</div>
@@ -34,7 +34,6 @@
 	      		<input type="hidden" name="page.page" value="${products.number}" />
 	      		<input type="hidden" name="page.size" value="${products.size}" />
 	      		<input type="hidden" name="page.sort" value="${param['page.sort']}" />
-	      		<input type="hidden" name="page.sort.dir" value="${param['page.sort.dir']}" />
 	          	<input id="button_filter" type="submit" value="${fn:escapeXml(save_filter)}" name="${save_filter}" />
 	          	<spring:message code="button_reset" var="button_reset_label" />      	
 	      		<input type="reset" name="reset" value="${button_reset_label}" />

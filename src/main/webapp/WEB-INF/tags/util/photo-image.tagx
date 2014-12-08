@@ -45,7 +45,7 @@
 				<c:otherwise>
 					<c:choose>
 						<c:when test="${not empty noPhotoUrl}">
-							<spring:url value="${noPhotoUrl}" var="detailImgUrl" />
+							<c:set value="${noPhotoUrl}" var="detailImgUrl" />
 						</c:when>
 						<c:otherwise>
 							<spring:url value="/resources/images/no-photo-${imgType}.jpg" var="detailImgUrl" />

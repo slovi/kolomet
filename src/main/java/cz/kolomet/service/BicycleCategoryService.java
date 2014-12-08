@@ -8,27 +8,31 @@ import cz.kolomet.domain.codelist.BicycleCategory;
 
 public interface BicycleCategoryService {
 	
+	
 	public Page<BicycleCategory> findBicycleCategoryEntries(Pageable pageable);
 	
 
-	public abstract long countAllBicycleCategorys();
+	public long countAllBicycleCategorys();
 
 
-	public abstract void deleteBicycleCategory(BicycleCategory bicycleCategory);
+	public void deleteBicycleCategory(BicycleCategory bicycleCategory);
+
+	
+	public BicycleCategory getBicycleCategory(Long id);
+	
+
+	public BicycleCategory findBicycleCategory(Long id);
 
 
-	public abstract BicycleCategory findBicycleCategory(Long id);
+	public List<BicycleCategory> findAllBicycleCategorys();
 
 
-	public abstract List<BicycleCategory> findAllBicycleCategorys();
+	public List<BicycleCategory> findBicycleCategoryEntries(int firstResult, int maxResults);
 
 
-	public abstract List<BicycleCategory> findBicycleCategoryEntries(int firstResult, int maxResults);
+	public void saveBicycleCategory(BicycleCategory bicycleCategory);
 
 
-	public abstract void saveBicycleCategory(BicycleCategory bicycleCategory);
-
-
-	public abstract BicycleCategory updateBicycleCategory(BicycleCategory bicycleCategory);
+	public BicycleCategory updateBicycleCategory(BicycleCategory bicycleCategory);
 
 }

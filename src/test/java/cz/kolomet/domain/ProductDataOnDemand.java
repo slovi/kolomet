@@ -1,24 +1,26 @@
 package cz.kolomet.domain;
+import java.math.BigDecimal;
+import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+
+import org.joda.time.DateTime;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.stereotype.Component;
+
 import cz.kolomet.domain.codelist.BicycleCategory;
 import cz.kolomet.domain.codelist.FigureHeight;
 import cz.kolomet.domain.codelist.ProductColor;
 import cz.kolomet.domain.codelist.ProductUsage;
 import cz.kolomet.repository.ProductRepository;
 import cz.kolomet.service.ProductService;
-import java.math.BigDecimal;
-import java.security.SecureRandom;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
-import org.springframework.stereotype.Component;
 
 @Configurable
 @Component
@@ -30,6 +32,15 @@ public class ProductDataOnDemand {
 
 	@Autowired
     ApplicationUserDataOnDemand applicationUserDataOnDemand;
+	
+	@Autowired
+	DomainEntityDataOnDemand domainEntityDataOnDemand;
+	
+	@Autowired
+	ProductAttributeDataOnDemand productAttributeDataOnDemand;
+	
+	@Autowired
+	PhotoUrlDataOnDemand photoUrlDataOnDemand;
 
 	@Autowired
     ProductService productService;
@@ -37,36 +48,35 @@ public class ProductDataOnDemand {
 	@Autowired
     ProductRepository productRepository;
 
+	
 	public Product getNewTransientProduct(int index) {
         Product obj = new Product();
         setBicycleCategory(obj, index);
         setBuyUrl(obj, index);
         setCanSendToAllCountry(obj, index);
         setCategory(obj, index);
-        setCopiedFrom(obj, index);
-        setCreated(obj, index);
         setDeliveryForFree(obj, index);
         setDescription(obj, index);
-        setDiscount(obj, index);
         setEnabled(obj, index);
         setFigureHeight(obj, index);
-        setFinalPrice(obj, index);
-        setLastModified(obj, index);
         setPrice(obj, index);
+        setFinalPrice(obj, index);
+        setDiscount(obj, index);
         setProducer(obj, index);
         setProductColor(obj, index);
         setProductName(obj, index);
-        setProductState(obj, index);
         setProductUsage(obj, index);
         setSeller(obj, index);
         setValidFrom(obj, index);
         setValidTo(obj, index);
         setWeight(obj, index);
+        setProductAttributes(obj, index);
+        setPhotoUrls(obj, index);
         return obj;
     }
 
 	public void setBicycleCategory(Product obj, int index) {
-        BicycleCategory bicycleCategory = null;
+        BicycleCategory bicycleCategory = domainEntityDataOnDemand.getRandomDomainEntity(BicycleCategory.class);
         obj.setBicycleCategory(bicycleCategory);
     }
 
@@ -84,18 +94,8 @@ public class ProductDataOnDemand {
     }
 
 	public void setCategory(Product obj, int index) {
-        Category category = null;
+        Category category = domainEntityDataOnDemand.getRandomDomainEntity(Category.class);
         obj.setCategory(category);
-    }
-
-	public void setCopiedFrom(Product obj, int index) {
-        Product copiedFrom = obj;
-        obj.setCopiedFrom(copiedFrom);
-    }
-
-	public void setCreated(Product obj, int index) {
-        Date created = new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH), Calendar.getInstance().get(Calendar.HOUR_OF_DAY), Calendar.getInstance().get(Calendar.MINUTE), Calendar.getInstance().get(Calendar.SECOND) + new Double(Math.random() * 1000).intValue()).getTime();
-        obj.setCreated(created);
     }
 
 	public void setDeliveryForFree(Product obj, int index) {
@@ -108,9 +108,8 @@ public class ProductDataOnDemand {
         obj.setDescription(description);
     }
 
-	public void setDiscount(Product obj, int index) {
-        BigDecimal discount = BigDecimal.valueOf(index);
-        obj.setDiscount(discount);
+	public void setDiscount(Product obj, int index) {;
+        obj.setDiscount(obj.getPrice().subtract(obj.getFinalPrice()));
     }
 
 	public void setEnabled(Product obj, int index) {
@@ -119,38 +118,33 @@ public class ProductDataOnDemand {
     }
 
 	public void setFigureHeight(Product obj, int index) {
-        FigureHeight figureHeight = null;
+        FigureHeight figureHeight = domainEntityDataOnDemand.getRandomDomainEntity(FigureHeight.class);
         obj.setFigureHeight(figureHeight);
     }
+	
+	public void setPrice(Product obj, int index) {
+		BigDecimal price = BigDecimal.valueOf(rnd.nextInt(50000) + 10000);
+		if (price.compareTo(new BigDecimal("1")) == -1 || price.compareTo(new BigDecimal("1000000")) == 1) {
+			price = new BigDecimal("1000000");
+		}
+		obj.setPrice(price);
+	}
 
 	public void setFinalPrice(Product obj, int index) {
-        BigDecimal finalPrice = BigDecimal.valueOf(index);
+        BigDecimal finalPrice = BigDecimal.valueOf(rnd.nextInt(obj.getPrice().intValue() - 1000));
         if (finalPrice.compareTo(new BigDecimal("1")) == -1 || finalPrice.compareTo(new BigDecimal("1000000")) == 1) {
             finalPrice = new BigDecimal("1000000");
         }
         obj.setFinalPrice(finalPrice);
     }
 
-	public void setLastModified(Product obj, int index) {
-        Date lastModified = new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH), Calendar.getInstance().get(Calendar.HOUR_OF_DAY), Calendar.getInstance().get(Calendar.MINUTE), Calendar.getInstance().get(Calendar.SECOND) + new Double(Math.random() * 1000).intValue()).getTime();
-        obj.setLastModified(lastModified);
-    }
-
-	public void setPrice(Product obj, int index) {
-        BigDecimal price = BigDecimal.valueOf(index);
-        if (price.compareTo(new BigDecimal("1")) == -1 || price.compareTo(new BigDecimal("1000000")) == 1) {
-            price = new BigDecimal("1000000");
-        }
-        obj.setPrice(price);
-    }
-
 	public void setProducer(Product obj, int index) {
-        Producer producer = null;
+        Producer producer = domainEntityDataOnDemand.getRandomDomainEntity(Producer.class);
         obj.setProducer(producer);
     }
 
 	public void setProductColor(Product obj, int index) {
-        ProductColor productColor = null;
+        ProductColor productColor = domainEntityDataOnDemand.getRandomDomainEntity(ProductColor.class);
         obj.setProductColor(productColor);
     }
 
@@ -162,36 +156,37 @@ public class ProductDataOnDemand {
         obj.setProductName(productName);
     }
 
-	public void setProductState(Product obj, int index) {
-        ProductState productState = null;
-        obj.setProductState(productState);
-    }
-
 	public void setProductUsage(Product obj, int index) {
-        ProductUsage productUsage = null;
+        ProductUsage productUsage = domainEntityDataOnDemand.getRandomDomainEntity(ProductUsage.class);
         obj.setProductUsage(productUsage);
     }
 
 	public void setSeller(Product obj, int index) {
-        Seller seller = null;
+        Seller seller = domainEntityDataOnDemand.getRandomDomainEntity(Seller.class);
         obj.setSeller(seller);
     }
 
 	public void setValidFrom(Product obj, int index) {
-        Date validFrom = new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH), Calendar.getInstance().get(Calendar.HOUR_OF_DAY), Calendar.getInstance().get(Calendar.MINUTE), Calendar.getInstance().get(Calendar.SECOND) + new Double(Math.random() * 1000).intValue()).getTime();
-        obj.setValidFrom(validFrom);
+        obj.setValidFrom(new Date());
     }
 
 	public void setValidTo(Product obj, int index) {
-        Date validTo = new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH), Calendar.getInstance().get(Calendar.HOUR_OF_DAY), Calendar.getInstance().get(Calendar.MINUTE), Calendar.getInstance().get(Calendar.SECOND) + new Double(Math.random() * 1000).intValue()).getTime();
-        obj.setValidTo(validTo);
+        obj.setValidTo(new DateTime(obj.getValidFrom()).plusMonths(12).toDate());
     }
 
 	public void setWeight(Product obj, int index) {
-        Double weight = new Integer(index).doubleValue();
+        Double weight = new Integer(rnd.nextInt(20) + 1).doubleValue();
         obj.setWeight(weight);
     }
+	
+	public void setProductAttributes(Product obj, int index) {
+		obj.setProductAttributes(productAttributeDataOnDemand.getNewTransientProductAttributeList(obj, index));
+	}
 
+	public void setPhotoUrls(Product obj, int index) {
+		obj.setPhotoUrls(photoUrlDataOnDemand.getNewTransientPhotoUrlList(obj, index));
+	}
+	
 	public Product getSpecificProduct(int index) {
         init();
         if (index < 0) {
@@ -225,8 +220,7 @@ public class ProductDataOnDemand {
         }
         if (!data.isEmpty()) {
             return;
-        }
-        
+        }        
         data = new ArrayList<Product>();
         for (int i = 0; i < 10; i++) {
             Product obj = getNewTransientProduct(i);

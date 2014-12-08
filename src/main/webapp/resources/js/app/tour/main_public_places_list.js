@@ -142,8 +142,10 @@ require(['../common'], function (common) {
 			};
 			
 			function getMarkerIcon(place, largeMarker) {
-				var color = place.placeType.placeTypeColor;
-				return largeMarker ? 'http://maps.google.com/mapfiles/ms/icons/' + color.toLowerCase() + '-dot.png' : contextPath + '/resources/img/places/' + color + '.png';
+				var color = place.placeTypeColor;
+				return largeMarker ? 
+					'http://maps.google.com/mapfiles/ms/icons/' + color.toLowerCase() + '-dot.png' : 
+					(contextPath === '/' ?  '' : contextPath) + '/resources/img/places/' + color + '.png';
 			}
 			
 			function setMapPosition(map, north, west, regionZoom, defaultRegionZoom, defaultCenter, defaultZoom) {

@@ -1,7 +1,7 @@
 require(['../common'], function (common) {
 	
     require(['login'], function(login) {
-    	
+
     	login.prepare();
     	
     	$('#i_place_new.anonymous').click(function(event) {

@@ -7,20 +7,10 @@
     	<spring:url value="${subContext}/public/game" var="registrationUrl" />
     	<a href="${registrationUrl}" class="undecorated">
 	    	<div id="kolomet_game" class="news_content">
-	            <div class="news_header">JEĎTE NA CYKLOVÝLET A HRAJTE „KOLOMET“</div>
-	            <div class="news_item">
-	                <p><span class="news_item_content"></span></p>
-	                <p>
-	                	Ve hře KOLOMET si jako podnikatelé vytváříte Vaši virtuální cyklistickou cestovní kancelář
-	                	<ul>
-	                		<li>objevte zajímavé místo v ČR</li>
-							<li>dojeďte tam na kole</li> 
-							<li>udělejte tomuto místu na <b>KOLOMET.cz</b> reklamu Vašimi fotografiemi a poutavým popisem.</li> 
-							<li>získejte např. přes Facebook co nejvíce „zákazníků“ kteří Vaše tipy na výlet kladně ohodnotí.</li>
-	                	</ul> 
-	                </p>
-	                <p>Za umístění Vašeho tipu v TOP-THREE v měsíci Vám zašleme softwarovou plaketu <b>„KOLOMET enterpreneur AWARD“</b>, kterou si můžete vystavit například na sociálních sítích</p>
-	            </div>
+	    		<b>JEĎTE NA CYKLOVÝLET</b><div><b>A HRAJTE „KOLOMET“</b></div><div><b><span style="font-size:8.0pt;line-height:115%"> </span></b></div><div><ul><li>objevte zajímavé místo v ČR</li><li>dojeďte tam na kole</li><li>udělejte tomuto místu na <b>KOLOMET.cz</b> reklamu Vašimi fotografiemi a poutavým popisem</li><li>získejte např. přes Facebook co nejvíce
+příznivců, kteří Váš tip na výlet kladně ohodnotí</li></ul></div><div><span style="font-family: Calibri; font-size: 11pt; line-height: 115%;"><br /></span></div><div><span style="font-family: Calibri; font-size: 11pt; line-height: 115%;">Za umístění Vašeho tipu v
+TOP-THREE v měsíci Vám zašleme vtipnou softwarovou plaketu „</span><b style="font-family: Calibri; font-size: 11pt; line-height: 115%;">KOLOMET“</b><span style="font-family: Calibri; font-size: 11pt; line-height: 115%;">, kterou si můžete vystavit
+například na sociálních sítích </span></div>
 	        </div>
         </a>
        	<div class="news_content">

@@ -1,4 +1,4 @@
-package cz.kolomet.web.pub;
+package cz.kolomet.web.admin;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -13,7 +13,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import cz.kolomet.dto.ApplicationUserPasswordDto;
 import cz.kolomet.service.ApplicationUserService;
-import cz.kolomet.web.admin.AbstractAdminController;
 
 @RequestMapping("/admin/password/**")
 @Controller
@@ -34,12 +33,12 @@ public class ApplicationUserPasswordController extends AbstractAdminController {
             return "admin/password/update";
         }
         
-        password.setUsername(getUsername());        
+        password.setUsername(getActualLoggedUsername());        
         applicationUserService.updatePassword(password);
         
         redirectAttributes.asMap().clear();
         redirectAttributes.addFlashAttribute("password", password);
-        return "redirect:/admin/password/show";
+        return "redirect:admin/password/show";
     }
 
     @RequestMapping(params = "form", produces = "text/html")

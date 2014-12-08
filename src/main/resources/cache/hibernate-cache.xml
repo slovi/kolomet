@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache class="" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ehcache.xsd">
+
+	<diskStore path="/data/_cache/hibernate" />
+
+	<defaultCache 
+		maxElementsInMemory="200"
+		overflowToDisk="false"
+		diskPersistent="false" />
+
+	<cache name="cz.kolomet.domain.Category" maxElementsInMemory="200" />
+
+	<cache name="cz.kolomet.domain.NewsItem" maxElementsInMemory="200" />
+	
+	<cache name="cz.kolomet.domain.Producer" maxElementsInMemory="200" />
+
+	<cache name="cz.kolomet.domain.codelist.CategoryType" maxElementsInMemory="200" />
+	
+	<cache name="cz.kolomet.domain.codelist.FigureHeight" maxElementsInMemory="200" />
+	
+	<cache name="cz.kolomet.domain.codelist.ProductColor" maxElementsInMemory="200" />
+	
+	<cache name="cz.kolomet.domain.codelist.ProductUsage" maxElementsInMemory="200" />
+	
+	<cache name="cz.kolomet.domain.codelist.Region" maxElementsInMemory="200" />
+	
+	<cache name="cz.kolomet.domain.codelist.BicycleCategory" maxElementsInMemory="200" />
+	
+	<cache name="cz.kolomet.domain.codelist.PlaceType" maxElementsInMemory="200" />
+
+</ehcache>

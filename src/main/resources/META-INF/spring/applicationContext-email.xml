@@ -6,7 +6,15 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<bean class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	<bean class="cz.kolomet.service.impl.MailServiceImpl">
+		<property name="mailSender" ref="mailSender" />
+		<property name="from" value="${mail.sender.from}" />
+		<property name="suppressSending" value="${mail.sender.suppressSending}" />
+		<property name="velcoityEngine" ref="velocityEngine" />
+		<property name="encoding" value="${mail.sender.encoding}" />
+	</bean>
+
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="defaultEncoding" value="${mail.sender.encoding}" />
 		<property name="host" value="${mail.sender.host}" />
 		<property name="username" value="${mail.sender.username}" />
@@ -18,11 +26,13 @@
 				mail.smtp.auth=${mail.sender.auth}
 				mail.smtp.starttls.enable=${mail.sender.tls}
 				mail.smtp.EnableSSL.enable=${mail.sender.ssl}
+				mail.mime.charset=${mail.sender.encoding}
+				mail.smtp.ssl.trust=smtp.gmail.com
 			</value>
 		</property>
 	</bean>
 	
-	<bean class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+	<bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
 		<property name="resourceLoaderPath" value="file://${mail.template.location},classpath:email" />
 		<property name="preferFileSystemAccess" value="true" />
 		<property name="velocityProperties">

@@ -19,7 +19,7 @@ import cz.kolomet.service.ProductService;
 
 @Configurable
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:/META-INF/spring/applicationContext*.xml")
+@ContextConfiguration(locations = "classpath*:META-INF/spring/applicationContext*.xml")
 @Transactional
 @TestExecutionListeners({
 	SecurityContextTestExecutionListener.class, 

@@ -35,7 +35,6 @@ import cz.kolomet.service.SellerService;
 import cz.kolomet.service.SellerStatusService;
 import cz.kolomet.service.exception.ExistingUserException;
 import cz.kolomet.service.exception.ServiceExpcetion;
-import flexjson.JSONSerializer;
 
 @RequestMapping("/admin/sellers")
 @Controllerpublic class SellerController extends AbstractAdminController implements MessageSourceAware {
@@ -172,7 +171,7 @@ import flexjson.JSONSerializer;
         uiModel.addAttribute("countrystates", countryStateService.findAllCountryStates());
         uiModel.addAttribute("regions", regionService.findAllRegions());
         uiModel.addAttribute("sellerstatuses", sellerStatusService.findAllSellerStatuses());
-        uiModel.addAttribute("addedFiles", new JSONSerializer().serialize(sellerDto.getFileInfos()));
+        uiModel.addAttribute("addedFiles", jsonSerializer.toJsonArray(sellerDto.getFileInfos()));
     }
 
 	@RequestMapping(value = "/{id}", params = "form", produces = "text/html")

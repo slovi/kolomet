@@ -1,14 +1,17 @@
 package cz.kolomet.domain.codelist;
 import java.io.Serializable;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import cz.kolomet.domain.PlaceTypeColor;
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)public class PlaceType extends Codelist implements Serializable {
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)public class PlaceType extends Codelist implements Serializable {
 	
 	private PlaceTypeColor placeTypeColor;
 

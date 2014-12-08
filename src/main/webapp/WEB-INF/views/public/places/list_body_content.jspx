@@ -8,7 +8,7 @@
         <div><div id="map-canvas" style="width: 100%; height:400px;"><!----></div><!----></div>
         
         <br/>
-	    <spring:url value="/" var="contextPath" />
+	    <spring:url value="${staticDomain}/" var="contextPath" />
 	    <spring:url value="/tour/public/places" var="placeUrl" />
 	    <spring:url value="/resources/js/gmap.js" var="gmapUrl" />
 	    

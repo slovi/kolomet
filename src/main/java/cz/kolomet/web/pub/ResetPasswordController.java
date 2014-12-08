@@ -3,6 +3,7 @@ package cz.kolomet.web.pub;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,17 +32,19 @@ public class ResetPasswordController extends AbstractPublicController {
 	private ApplicationUserService applicationUserService;
 	
 	@RequestMapping(params = "form", produces = "text/html")
-    public String createForm(@RequestParam("email") String email, Model uiModel) {
+    public String createForm(@RequestParam(value = "email", required = false) String email, Model uiModel) {
 		
 		ResetPasswordDto resetPasswordDto = new ResetPasswordDto();
-		resetPasswordDto.setUsername(email);
+		if (StringUtils.isNotEmpty(email)) {
+			resetPasswordDto.setUsername(email);
+		}
         populateEditForm(uiModel, resetPasswordDto);
         return "public/resetpasswords/create";
     }
 
 	@RequestMapping(method = RequestMethod.POST, produces = "text/html")
-	public String create(@Valid @ModelAttribute("resetPassword") ResetPasswordDto resetPassword, BindingResult bindingResult, RedirectAttributes uiModel,
-			HttpServletRequest httpServletRequest) {
+	public String create(@Valid @ModelAttribute("resetPassword") ResetPasswordDto resetPassword, BindingResult bindingResult, RedirectAttributes redirectModel,
+			Model uiModel, HttpServletRequest httpServletRequest) {
 		if (bindingResult.hasErrors()) {
 			populateEditForm(uiModel, resetPassword);
 			return "public/resetpasswords/create";
@@ -63,16 +66,17 @@ public class ResetPasswordController extends AbstractPublicController {
 		uiModel.asMap().clear();
 		try {
 			applicationUserService.resetPassword(resetPassword.getUsername());
-			uiModel.addFlashAttribute("success", true);
+			redirectModel.addFlashAttribute("successful", "hello");
+			redirectModel.addFlashAttribute("success", Boolean.TRUE);
 		} catch (UserNotFoundException e) {
-			uiModel.addFlashAttribute("success", false);
-			uiModel.addFlashAttribute("username", e.getUsername());
+			redirectModel.addFlashAttribute("success", Boolean.FALSE);
+			redirectModel.addFlashAttribute("username", e.getUsername());
 		}
-		return "redirect:/public/resetpasswords";
+		return "redirect:public/resetpasswords";
 	}
 
 	@RequestMapping(produces = "text/html")
-	public String show(Model uiModel) {
+	public String show(RedirectAttributes uiModel) {
 		return "public/resetpasswords/show";
 	}
 

@@ -13,7 +13,7 @@
         </security:authorize>
         <security:authorize access="isFullyAuthenticated()">
         	<div> 
-        		<spring:url value="/j_spring_security_logout?source=tour" var="logoutUrl" />
+        		<spring:url value="/admin/j_spring_security_logout?source=tour" var="logoutUrl" />
         		<a class="action_button" id="logout_button" rel="logout" name="login" href="${logoutUrl}"><spring:message code="header_logout" /> (<security:authentication property="principal.username"/>)</a>
         	</div>
         </security:authorize>
