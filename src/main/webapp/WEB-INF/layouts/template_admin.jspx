@@ -1,4 +1,8 @@
-<html xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:tiles="http://tiles.apache.org/tags-tiles" xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util">  
+<html xmlns:jsp="http://java.sun.com/JSP/Page" 
+	xmlns:c="http://java.sun.com/jsp/jstl/core" 
+	xmlns:tiles="http://tiles.apache.org/tags-tiles" 
+	xmlns:spring="http://www.springframework.org/tags" 
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util">  
 	
 	<jsp:output doctype-root-element="HTML" doctype-system="about:legacy-compat" />
 	
@@ -7,11 +11,22 @@
 			
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=8" />	
+		<meta http-equiv="X-UA-Compatible" content="IE=8" />
+		<c:if test="${not empty pageDescriptions}">
+			<spring:message code="${pageDescriptions}" var="pageDescriptionsValue" htmlEscape="false" />
+			<meta name="description" content="${pageDescriptionsValue}" />
+		</c:if>
+		<c:if test="${not empty pageKeywords}">
+			<spring:message code="${pageKeywords}" var="pageKeywordsValue" htmlEscape="false" />
+			<meta name="keywords" content="${pageKeywordsValue}" />
+		</c:if>
+		
+		<spring:url value="/favicon.ico" var="faviconUrl" />
+		<link rel="shortcut icon" type="image/x-icon" href="${faviconUrl}" />
 			
 		<tiles:insertAttribute name="scripts"/>
 				
-		<title><spring:message code="application_name" htmlEscape="false"/></title>
+		<title><spring:message code="${pageTitleCode}" htmlEscape="false" /></title>
 	</head>
 	
   	<body class="tundra spring">

@@ -3,8 +3,6 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.EntityNotFoundException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheEvict;
@@ -23,6 +21,7 @@ import cz.kolomet.domain.VisitorActivityLog.VisitorActivityType;
 import cz.kolomet.repository.ProductRepository;
 import cz.kolomet.service.ProductService;
 import cz.kolomet.service.VisitorActivityLogService;
+import cz.kolomet.service.exception.EntityNotFoundException;
 
 @Service
 @Transactional
@@ -38,7 +37,7 @@ public class ProductServiceImpl implements ProductService {
     private ProductRepository productRepository;
 	
 	@PreAuthorize("principal.isCapableToDeleteProduct(#product)")
-	@CacheEvict("cz.kolomet.domain.Product.values.max")
+	@CacheEvict(value = "cz.kolomet.domain.Product.values.max", allEntries = true)
     public void deleteProduct(Product product) {
         product.setEnabled(false);
         product.setValidTo(new Date());
@@ -49,7 +48,7 @@ public class ProductServiceImpl implements ProductService {
 	public Product detail(Long id, String userInfo) {
 		Product product = findProduct(id);
 		if (product == null) {
-			throw new EntityNotFoundException();
+			throw new EntityNotFoundException(id);
 		}
 		visitorActivityLogService.saveVisitorActivityLog(product.getSeller(), product, userInfo, VisitorActivityType.PRODUCT_VISIT);
 		return product;
@@ -61,7 +60,7 @@ public class ProductServiceImpl implements ProductService {
     }
     
 	@PreAuthorize("principal.isCapableToSaveProduct(#product)")
-	@CacheEvict("cz.kolomet.domain.Product.values.max")
+	@CacheEvict(value = "cz.kolomet.domain.Product.values.max", allEntries = true)
     public void saveProduct(Product product) {
 		
 		// prepocitame cenu a ulozime (pokud se jedna o novy produkt, tak nastavime na activni)
@@ -72,14 +71,16 @@ public class ProductServiceImpl implements ProductService {
 		if (product.isCopyState()) {
 			product.setProductState(ProductState.ACTIVE);
 		}
+		product.normalizeBuyUrl();
         productRepository.save(product);
     }
     
 	@PreAuthorize("principal.isCapableToUpdateProduct(#product)")
-	@CacheEvict("cz.kolomet.domain.Product.values.max")
+	@CacheEvict(value = "cz.kolomet.domain.Product.values.max", allEntries = true)
     public Product updateProduct(Product product) {
 		product.computeAndSetDiscount();		
 		product.setProductState(ProductState.ACTIVE);
+		product.normalizeBuyUrl();
         return productRepository.save(product);
     }
 	
@@ -120,7 +121,7 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Override
 	@PreAuthorize("principal.isCapableToEraseProduct(#product)")
-	@CacheEvict("cz.kolomet.domain.Product.values.max")
+	@CacheEvict(value = "cz.kolomet.domain.Product.values.max", allEntries = true)
 	public void eraseProduct(Product product) {
 		productRepository.delete(product);
 	}

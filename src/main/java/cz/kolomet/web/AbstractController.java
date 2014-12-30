@@ -69,6 +69,36 @@ public class AbstractController implements MessageSourceAware {
 	@Autowired
 	protected JsonSerializer jsonSerializer;
 	
+	@ModelAttribute("pageTitleCode")
+	public String getPageTitleCode() {
+		return "page_title_default";
+	}
+	
+	@ModelAttribute("pageTitleArgs")
+	public Object[] getPageTitleArgs() {
+		return new Object[0];
+	}
+	
+	@ModelAttribute("pageDescriptionCode")
+	public String getPageDescription() {
+		return "page_description_default";
+	}
+	
+	@ModelAttribute("pageDescriptionArgs")
+	public Object[] getPageDescriptionArgs() {
+		return new Object[0];
+	}
+	
+	@ModelAttribute("pageKeywordsCode")
+	public String getPageKeywords() {
+		return "page_keywords_default";
+	}
+	
+	@ModelAttribute("pageKeywordsArgs")
+	public Object[] getPageKeywordsArgs() {
+		return new Object[0];
+	}
+	
 	@ModelAttribute("menuGoogleLink")
 	public String getMenuGoogleLink() {
 		return menuGoogleLink;

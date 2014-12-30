@@ -150,7 +150,7 @@ public class Seller extends BaseDomainEntity implements PhotoContainer, Serializ
     }
     
     public void normalizeWebUrl() {
-    	if (StringUtils.isNotEmpty(web) && !web.startsWith("http://")) {
+    	if (StringUtils.isNotEmpty(web) && !web.startsWith("http://") && !web.startsWith("https://")) {
     		this.web = "http://" + web; 
     	}
     }

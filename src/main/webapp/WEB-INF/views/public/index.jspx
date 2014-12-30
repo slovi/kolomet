@@ -7,7 +7,17 @@
 
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>Kolomet</title>
+
+		<spring:message code="page_intro_description" var="pageDescriptions" />
+		<meta name="description" content="${pageDescriptions}" />
+
+		<spring:message code="page_keywords_default" var="pageKeywords" />
+		<meta name="keywords" content="${pageKeywords}" />
+		
+		<spring:url value="/favicon.ico" var="faviconUrl" />
+		<link rel="shortcut icon" type="image/x-icon" href="${faviconUrl}" />
+		
+		<title><spring:message code="page_intro_title" /></title>
 		
 		<spring:url value="/resources/css/style.css?v=${version}" var="default_css_url" />
   		<link rel="stylesheet" type="text/css" href="${default_css_url}" />		
@@ -36,14 +46,14 @@
 	<body>
 		<div style="margin: 60px auto; width: 500px;">
 			<div style="width: 100%; text-align: center; margin-bottom: 20px;">
-				<spring:url value="/resources/img/intro/logo.png" var="logoUrl" />
-				<img alt="kolomet_logo" src="${logoUrl}" />
+				<spring:url value="/resources/img/intro/kolomet_logo.png" var="logoUrl" />
+				<img alt="kolomet logo" src="${logoUrl}" />
 			</div>
 			<div class="homepage_unit">
 				<spring:url value="/store/public/intro/index" var="storeIndexUrl" />
 				<a href="${storeIndexUrl}">
-					<spring:url value="/resources/img/intro/store_final.jpg" var="storeImgUrl" />
-					<img alt="Store" src="${storeImgUrl}" />
+					<spring:url value="/resources/img/intro/kolomet_obchod_vstup.jpg" var="storeImgUrl" />
+					<img alt="kolomet obchod vstup" src="${storeImgUrl}" />
 				</a>
 				<div class="home_description">
 					<p style="font-weight: bold; font-size: 1.1em; margin-bottom: 5px;"><spring:message code="intro.store.1" /></p>
@@ -58,8 +68,8 @@
 			<div class="homepage_unit" style="float: right;">
 				<spring:url value="/tour/public/places" var="tourIndexUrl" />
 				<a href="${tourIndexUrl}">
-					<spring:url value="/resources/img/intro/tour_final.jpg" var="tourImgUrl" />					
-					<img alt="tour_logo" src="${tourImgUrl}" />
+					<spring:url value="/resources/img/intro/kolomet_mista_vstup.jpg" var="tourImgUrl" />					
+					<img alt="kolomet místa vstup" src="${tourImgUrl}" />
 				</a>
 				<!-- odkaz na detail inzerátu -->
 				<div class="home_description">

@@ -44,8 +44,9 @@
     <mvc:view-controller path="/public/dataAccessFailure" view-name="public/dataAccessFailure"/>
     <mvc:view-controller path="/public/accessDenied" view-name="public/accessDenied"/>
 
-    <bean class="org.springframework.context.support.ReloadableResourceBundleMessageSource" id="messageSource" p:basenames="WEB-INF/i18n/messages,WEB-INF/i18n/application,WEB-INF/i18n/errors" p:fallbackToSystemLocale="false">
+    <bean class="org.springframework.context.support.ReloadableResourceBundleMessageSource" id="messageSource" p:basenames="WEB-INF/i18n/messages,WEB-INF/i18n/application,WEB-INF/i18n/errors,WEB-INF/i18n/site-content" p:fallbackToSystemLocale="false">
     	 <property name="useCodeAsDefaultMessage" value="true"/>
+    	 <property name="cacheSeconds" value="${env.cache_properties.seconds}" />
     </bean>
 
     <bean class="org.springframework.ui.context.support.ResourceBundleThemeSource" id="themeSource"/>

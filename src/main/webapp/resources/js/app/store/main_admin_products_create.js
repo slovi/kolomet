@@ -6,7 +6,7 @@ require(['../common'], function (common) {
 			
 	    	inputFile.decorateId('product_files', {});
     		
-			form.computeDifferenceOnKeyUp('_price_id', '_finalPrice_id', '_discount_id');
+			form.computeDifferenceOnKeyUp('_finalPrice_id', '_price_id', '_discount_id');
 			
     	});
 	

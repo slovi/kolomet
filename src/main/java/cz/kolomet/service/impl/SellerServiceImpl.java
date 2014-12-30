@@ -3,8 +3,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.EntityNotFoundException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -29,6 +27,7 @@ import cz.kolomet.security.PasswordGenerator;
 import cz.kolomet.service.MailService;
 import cz.kolomet.service.SellerService;
 import cz.kolomet.service.VisitorActivityLogService;
+import cz.kolomet.service.exception.EntityNotFoundException;
 import cz.kolomet.service.exception.ExistingUserException;
 
 @Service
@@ -93,7 +92,7 @@ public class SellerServiceImpl implements SellerService {
 	public Seller detail(Long id, String userInfo) {
 		Seller seller = findSeller(id);
 		if (seller == null) {
-			throw new EntityNotFoundException();
+			throw new EntityNotFoundException(id);
 		}
 		visitorActivityLogService.saveVisitorActivityLog(seller, null, userInfo, VisitorActivityType.SELLER_VISIT);
 		return seller;
@@ -113,7 +112,6 @@ public class SellerServiceImpl implements SellerService {
     		
     		seller.normalizeWebUrl();
     		seller.setEnabled(true);
-    		seller.normalizeWebUrl();
     		sellerRepository.save(seller);
     		
     		String password = passwordGenerator.generatePassword(user);

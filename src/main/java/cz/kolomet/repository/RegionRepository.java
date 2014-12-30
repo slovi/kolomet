@@ -16,6 +16,9 @@ import cz.kolomet.domain.codelist.Region;
 public interface RegionRepository extends JpaRepository<Region, Long>, JpaSpecificationExecutor<Region> {
 	
 	@QueryHints({ @QueryHint(name = "org.hibernate.cacheable", value ="true") })
+	public Region findByCodeKey(String codeKey);
+	
+	@QueryHints({ @QueryHint(name = "org.hibernate.cacheable", value ="true") })
 	public Region findByGoogleAlias(String googleAlias);
 	
 	@QueryHints({ @QueryHint(name = "org.hibernate.cacheable", value ="true") })

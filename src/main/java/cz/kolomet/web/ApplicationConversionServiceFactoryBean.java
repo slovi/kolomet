@@ -434,7 +434,7 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 
 			@Override
 			public String print(GpsLocation object, Locale locale) {
-				return "[" + object.getNorth() + ", " + object.getWest() + "]";
+				return "[" + object.getNorth() + "N" + ", " + object.getWest() + "E]";
 			}
 
 			@Override

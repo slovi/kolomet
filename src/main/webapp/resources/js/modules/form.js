@@ -70,18 +70,18 @@ define(['jquery', 'jquery.number'], function($) {
 		},
 		
 		computeDifferenceOnKeyUp: function(valueInputFirstId, valueInputSecondId, valueInputDifferenceId) {
-			$("#" + valueInputFirstId).keyup(function(event) {
-				var secondValue = $("#" + valueInputSecondId);
-				if (secondValue.val() && $(this).val()) {
-					computeDifference($(this).val(), secondValue.val(), valueInputDifferenceId);
-				}
-			});
-			$("#" + valueInputSecondId).keyup(function(event) {
+			
+			var differencesHandlerFirstInput = function(event) {
+				var secondValue = $("#" + valueInputSecondId); 
+				computeDifference($(this).val(), secondValue.val(), valueInputDifferenceId);
+			};
+			var differencesHandlerSecondInput = function(event) {
 				var firstValue = $("#" + valueInputFirstId);
-				if (firstValue.val() && $(this).val()) {
-					computeDifference(firstValue.val(), $(this).val(), valueInputDifferenceId);
-				}
-			});
+				computeDifference(firstValue.val(), $(this).val(), valueInputDifferenceId);
+			};
+			
+			$("#" + valueInputFirstId).keyup(differencesHandlerFirstInput).blur(differencesHandlerFirstInput);
+			$("#" + valueInputSecondId).keyup(differencesHandlerSecondInput).blur(differencesHandlerSecondInput);
 			computeDifference($("#" + valueInputFirstId).val(), $("#" + valueInputSecondId).val(), valueInputDifferenceId);
 		}
 	
@@ -131,7 +131,9 @@ define(['jquery', 'jquery.number'], function($) {
 	
 	function computeDifference(firstValue, secondValue, valueInputDifferenceId) {
 		var resultElement = $("#" + valueInputDifferenceId); 
-		resultElement.val(firstValue - secondValue);
+		var resultFirstValue = firstValue ? firstValue : 0;
+		var resultSecondValue = secondValue ? secondValue : 0;
+		resultElement.val(secondValue ? resultFirstValue - resultSecondValue : 0);
 		formatCurrency(resultElement);
 	}
 	

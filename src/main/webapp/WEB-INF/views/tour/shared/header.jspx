@@ -2,10 +2,10 @@
   <jsp:directive.page contentType="text/html;charset=UTF-8" />
   <jsp:output omit-xml-declaration="yes" />
   
-  <spring:url var="logoUrl" value="/resources/img/logotyp_mista.png" />
+  <spring:url var="logoUrl" value="/resources/img/logo_kolomet_mista.png" />
   <div id="header_background"> 
     <div id="header"> 		    
-   		<img src="${logoUrl}" id="logo"/>
+   		<img src="${logoUrl}" alt="logo kolomet místa" id="logo"/>
    		<security:authorize access="isAnonymous()">
    			<div> 
         		<a class="action_button" id="login_modal" rel="login_modal" name="login" href="#login"><spring:message code="header_login" /></a>

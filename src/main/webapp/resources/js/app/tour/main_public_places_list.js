@@ -48,7 +48,7 @@ require(['../common'], function (common) {
 							markers = addPlacesToMap(eval(placesJson), map, largeMarkers);
 						}
 						
-						History.pushState(null, null, '?' + encodeArrayToQueryString(paramsData.paramsArray));					
+						History.pushState(null, 'Kolomet - místa', '?' + encodeArrayToQueryString(paramsData.paramsArray));
 					},
 					{
 						fragments: 'body_footer,body_footer_hidden', 
@@ -91,7 +91,7 @@ require(['../common'], function (common) {
 							markers = addPlacesToMap(eval(placesJson), map, largeMarkers);
 						};
 						
-						History.pushState(null, null, '?' + encodeArrayToQueryString(concatParams(objectToObjectArray(paramsInfo.params), paramsInfo.paramsData.paramsArray)));
+						History.pushState(null, 'Kolomet - místa', '?' + encodeArrayToQueryString(concatParams(objectToObjectArray(paramsInfo.params), paramsInfo.paramsData.paramsArray)));
 					});
 			
 			function removePlaces(markers) {

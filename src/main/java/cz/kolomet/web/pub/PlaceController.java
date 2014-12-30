@@ -57,11 +57,15 @@ public class PlaceController extends AbstractPublicController {
     public String show(@PathVariable("id") Long id, Model uiModel, HttpServletRequest request) {
         
     	addDateTimeFormatPatterns(uiModel);
-        uiModel.addAttribute("place", placeService.findPlace(id));
+    	
+    	Place place = placeService.findPlace(id);
+        uiModel.addAttribute("place", place);
         uiModel.addAttribute("itemId", id);
         
         List<Rate> existingRates = rateService.findRate(RateType.PLACE, id, request.getRemoteAddr());
         uiModel.addAttribute("isRated", !existingRates.isEmpty());
+        uiModel.addAttribute("pageTitleCode", "page_place_detail_title_" + place.getPlaceType().getCodeKey());
+        uiModel.addAttribute("pageDescriptionCode", "page_place_detail_description_" + place.getPlaceType().getCodeKey());
         
         addDateTimeFormatPatterns(uiModel);
         return "public/places/show";
@@ -85,6 +89,14 @@ public class PlaceController extends AbstractPublicController {
 		uiModel.addAttribute("placesJson", jsonSerializer.toJsonArray(placeService.findPlaceDtos(placeSpecification)));
 		uiModel.addAttribute("topPlaces", placeRepository.findAllWithoutCountQuery(
 				placeSpecification, new PageRequest(0, TOP_PLACES_NUMBER, PlaceSpecifications.getTopSort())));
+		
+		if (placeFilter.getRegion() != null) {
+			uiModel.addAttribute("pageTitleCode", "page_place_list_title_filtered");
+			uiModel.addAttribute("pageTitleArgs", " - " + placeFilter.getRegion().getCodeDescription());
+		} else {
+			uiModel.addAttribute("pageTitleCode", "page_place_list_title_all");
+		}
+        uiModel.addAttribute("pageDescriptionCode", "page_place_list_description");
 		
         addDateTimeFormatPatterns(uiModel);
         return "public/places/list";

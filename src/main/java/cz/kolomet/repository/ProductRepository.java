@@ -14,7 +14,7 @@ import cz.kolomet.util.repository.CustomRepository;
 @Repository
 public interface ProductRepository extends CustomRepository<Product, Long> {
 	
-	@Query("select max(p.price) from Product p "
+	@Query("select max(p.finalPrice) from Product p "
 			+ "where 1 = (select s.enabled from Seller s where s = p.seller) "
 				+ "and p.enabled = true and p.validFrom <= CURRENT_DATE and p.validTo >= CURRENT_DATE")
 	BigDecimal findMaxPrice();

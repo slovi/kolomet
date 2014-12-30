@@ -16,7 +16,7 @@
 	</c:if>
 	
 	<c:if test="${not product.anyDiscount}">
-		<span class="price_final"><spring:message code="price" />: <fmt:formatNumber groupingUsed="true" value="${product.price}" /><spring:message code="currency" /></span><br/>
+		<span class="price_final"><spring:message code="price" />: <fmt:formatNumber groupingUsed="true" value="${product.finalPrice}" /><spring:message code="currency" /></span><br/>
 	</c:if>
   
   </c:if>

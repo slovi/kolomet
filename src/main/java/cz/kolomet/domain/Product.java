@@ -23,6 +23,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.BatchSize;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -141,6 +142,12 @@ public class Product extends BaseDomainEntity implements Cloneable, PhotoContain
     
     @Transient
     private List<FileInfo> fileInfos = new ArrayList<FileInfo>();
+    
+    public void normalizeBuyUrl() {
+    	if (StringUtils.isNotEmpty(buyUrl) && !buyUrl.startsWith("http://") && !buyUrl.startsWith("https://")) {
+    		this.buyUrl = "http://" + buyUrl; 
+    	}
+    }
     
     @Override
 	public int hashCode() {

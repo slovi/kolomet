@@ -1,5 +1,6 @@
 package cz.kolomet.web.pub;
 import java.math.BigDecimal;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -14,12 +15,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import cz.kolomet.domain.Producer;
 import cz.kolomet.domain.Product;
 import cz.kolomet.dto.ProductFilterDto;
 import cz.kolomet.repository.ProductAttributeRepository;
 import cz.kolomet.repository.ProductRepository;
 import cz.kolomet.repository.ProductSpecifications;
 import cz.kolomet.service.BicycleCategoryService;
+import cz.kolomet.service.ProducerService;
 import cz.kolomet.service.ProductColorService;
 import cz.kolomet.service.ProductService;
 import cz.kolomet.service.ProductUsageService;
@@ -51,12 +54,17 @@ public class ProductController extends AbstractPublicController {
 	@Autowired
 	private ProductColorService productColorService;	
 	
+	@Autowired
+	private ProducerService producerService;
+	
 	@RequestMapping("/detail/{id}")
 	public String detail(@PathVariable("id") Long id, Model model, HttpServletRequest request) {
 		
 		Product product = productService.detail(id, request.getRemoteAddr());
 		model.addAttribute("product", product);
 		model.addAttribute("productAttributes", productAttributeRepository.findByProductOrderByAttributeType_SequenceNr(product));
+		model.addAttribute("pageTitleCode", "page_product_detail_title");
+		model.addAttribute("pageDescriptionCode", "page_product_detail_description");
 		return "public/products/detail";
 	}
 	
@@ -71,9 +79,19 @@ public class ProductController extends AbstractPublicController {
 			model.addAttribute("priceAscending", products.getSort().getOrderFor("finalPrice").isAscending());
 		}
 		if (products.getSort().getOrderFor("discount") != null) {
-			System.out.println(products.getSort().getOrderFor("discount").isAscending());
 			model.addAttribute("discountAscending", products.getSort().getOrderFor("discount").isAscending());
 		}
+		model.addAttribute("pageTitleCode", "page_product_filter_title");
+		model.addAttribute("pageDescriptionCode", "page_product_filter_description");
+		
+		List<Producer> producers = producerService.findAllProducers();
+    	StringBuilder builder = new StringBuilder();
+    	for (Producer producer: producers) {
+    		builder.append(",");
+    		builder.append(producer.getCodeDescription());
+    	}
+    	model.addAttribute("pageKeywordsArgs", builder.toString());
+		
 		return "public/products/list_category";
 	}
 	

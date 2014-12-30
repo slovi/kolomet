@@ -17,6 +17,11 @@ public class AbstractAdminController extends AbstractController {
 	@Autowired
 	private NewsItemRepository newsItemRepository;
 	
+	@Override
+	public String getPageTitleCode() {
+		return "page_title_admin_default";
+	}
+	
 	@ModelAttribute("newsItems")
 	public List<NewsItem> loadNewsItems(HttpServletRequest servletRequest) {
 		if (!isAjaxRequest(servletRequest)) {
