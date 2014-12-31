@@ -125,7 +125,7 @@ public class ApplicationUserDetails implements UserDetails {
 	}
 	
 	public boolean isCapableToDisplaySeller(Seller seller) {
-		return isSellerOwner(seller);
+		return true;
 	}
 	
 	public boolean isProductOwner(Product product) {

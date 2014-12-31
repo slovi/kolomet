@@ -88,7 +88,7 @@ public class SellerServiceImpl implements SellerService {
 		sellerRepository.delete(seller);
 	}
 	
-	@PostAuthorize("isAnonymous() or principal.isSellerOwner(returnObject)")
+	@PostAuthorize("isAnonymous() or principal.isCapableToDisplaySeller(returnObject)")
 	public Seller detail(Long id, String userInfo) {
 		Seller seller = findSeller(id);
 		if (seller == null) {
@@ -98,7 +98,7 @@ public class SellerServiceImpl implements SellerService {
 		return seller;
 	}
 	
-	@PostAuthorize("isAnonymous() or principal.isSellerOwner(returnObject)")
+	@PostAuthorize("isAnonymous() or principal.isCapableToDisplaySeller(returnObject)")
     public Seller findSeller(Long id) {
         return sellerRepository.findOne(id);
     }

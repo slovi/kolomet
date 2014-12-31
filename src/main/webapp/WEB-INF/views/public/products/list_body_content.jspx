@@ -18,7 +18,7 @@
 				    <div class="category_unit"> 
 				    	<spring:url value="${subContext}/public/products/detail/${product.id}" var="productIdUrl" />
 				    	<a href="${productIdUrl}">
-				    		<util:photo-image photos="${product.photoUrls}" imgType="over" height="146" width="224" />
+				    		<util:photo-image photos="${product.photoUrls}" imgName="${product.productName}" imgType="over" height="146" width="224" />
 				    	</a>
 				    	<div class="cat_description"> 
 				    		<a href="${productIdUrl}" class="label"><c:out value="${product.productName}" /></a>

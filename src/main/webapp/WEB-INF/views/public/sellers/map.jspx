@@ -142,7 +142,7 @@
 		<div class="category_unit"> 
 			<spring:url value="/store/public/sellers/detail/${seller.id}" var="sellerIdUrl" />
 	     	<a href="${sellerIdUrl}">
-	     		<util:photo-image photos="${seller.sellerPhotoUrls}" imgType="over" height="146" width="224" />
+	     		<util:photo-image photos="${seller.sellerPhotoUrls}" imgName="${seller.sellerName}" imgType="over" height="146" width="224" />
 	     	</a>
 	    	<div class="cat_description cat_prodejce_popis"> 
 	    		<a href="${sellersDetailUrl}/${seller.id}" class="label"><spring:eval expression="seller.sellerName" /></a>

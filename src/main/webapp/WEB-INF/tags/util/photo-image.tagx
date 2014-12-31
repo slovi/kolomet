@@ -4,6 +4,7 @@
 	<jsp:directive.attribute name="width" type="java.lang.Integer" required="true" rtexprvalue="true" description="photo width" />
 	<jsp:directive.attribute name="height" type="java.lang.Integer" required="true" rtexprvalue="true" description="photo height" />
 	<jsp:directive.attribute name="imgType" type="java.lang.String" required="false" rtexprvalue="true" description="no image filename" />
+	<jsp:directive.attribute name="imgName" type="java.lang.String" required="true" rtexprvalue="true" description="img name - alt" />
 	<jsp:directive.attribute name="photos" type="java.lang.Object" required="true" rtexprvalue="true" description="size photo" />
   	<jsp:directive.attribute name="render" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Indicate if the contents of this tag and all enclosed tags should be rendered (default 'true')" />
   	<jsp:directive.attribute name="preloaded" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Indicate if the image is preloaded" />
@@ -23,35 +24,41 @@
 						<c:when test="${imgType eq 'detail'}">
 			 				<spring:url value="/file/${photos[0].detailPhotoUrl}?forceSendError=true" var="detailImgUrl" htmlEscape="false" />
 			 				<spring:url value="/file/${photos[0].photoUrl}" var="origImgUrl" htmlEscape="false" />
+		 					<spring:message code="global_image_alt_detail" arguments="${imgName}" var="global_image_alt_detail_result" />
+		 					<spring:message code="global_image_title_detail" arguments="${imgName}" var="global_image_title_detail_result" />
 			 				<c:choose>
 			 					<c:when test="${not empty preloaded and preloaded}">
 					 				<a href="${origImgUrl}" data-lightbox="image-1">
-					 					<img id="detail_image" src="${loaderUrl}" data-preload-img="${detailImgUrl}" alt="detail_img" title="detail_img" data-loader-url="${loaderUrl}" data-not-found-url="${noPhotoUrl}"/>
+					 					<img id="detail_image" src="${loaderUrl}" data-preload-img="${detailImgUrl}" alt="${global_image_alt_detail_result}" title="${global_image_title_detail_result}" data-loader-url="${loaderUrl}" data-not-found-url="${noPhotoUrl}"/>
 					 				</a>		 				
 			 					</c:when>
 			 					<c:otherwise>
 			 						<a href="${origImgUrl}" data-lightbox="image-1">
-					 					<img id="detail_image" src="${detailImgUrl}" alt="detail_img" title="detail_img" data-loader-url="${loaderUrl}" data-not-found-url="${noPhotoUrl}"/>
+					 					<img id="detail_image" src="${detailImgUrl}" alt="${global_image_alt_detail_result}" title="${global_image_title_detail_result}" data-loader-url="${loaderUrl}" data-not-found-url="${noPhotoUrl}"/>
 					 				</a>
 			 					</c:otherwise>
 			 				</c:choose>
 			 			</c:when>
 			 			<c:otherwise>
+			 				<spring:message code="global_image_alt" arguments="${imgName}" var="global_image_alt_result" />
+		 					<spring:message code="global_image_title" arguments="${imgName}" var="global_image_title_result" />
 			 				<spring:url value="/file/${photos[0].overPhotoUrl}" var="detailImgUrl" htmlEscape="false" />
-			 				<img id="detail_image" width="${width}" height="${height}" src="${detailImgUrl}" alt="detail_img" title="detail_img"/>
+			 				<img id="detail_image" width="${width}" height="${height}" src="${detailImgUrl}" alt="${global_image_alt_result}" title="${global_image_title_result}"/>
 			 			</c:otherwise>
 		 			</c:choose>
 				</c:when>
 				<c:otherwise>
+					<spring:message code="global_image_alt" arguments="${imgName}" var="global_image_alt_result" />
+		 			<spring:message code="global_image_title" arguments="${imgName}" var="global_image_title_result" />
 					<c:choose>
 						<c:when test="${not empty noPhotoUrl}">
 							<c:set value="${noPhotoUrl}" var="detailImgUrl" />
 						</c:when>
-						<c:otherwise>
+						<c:otherwise>							
 							<spring:url value="/resources/images/no-photo-${imgType}.jpg" var="detailImgUrl" />
 						</c:otherwise>
 					</c:choose>
-					<img id="detail_image" width="${width}" height="${height}" src="${detailImgUrl}" alt="" title=""/>
+					<img id="detail_image" width="${width}" height="${height}" src="${detailImgUrl}" alt="${global_image_alt_result}" title="${global_image_title_result}"/>
 				</c:otherwise>
 			</c:choose>
 		</div>

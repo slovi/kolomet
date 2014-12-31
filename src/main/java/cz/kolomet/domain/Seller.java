@@ -85,6 +85,10 @@ public class Seller extends BaseDomainEntity implements PhotoContainer, Serializ
     @BatchSize(size = 20)
 	private List<SellerAddress> addresses = new ArrayList<SellerAddress>();
     
+    public boolean isVip() {
+    	return this.sellerStatus != null && this.sellerStatus.isVip();
+    }
+    
     @Override
 	public int hashCode() {
 		final int prime = 31;

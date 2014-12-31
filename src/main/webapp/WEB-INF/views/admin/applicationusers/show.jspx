@@ -18,7 +18,7 @@
         
     <page:show id="ps_cz_kolomet_domain_ApplicationUser" object="${applicationuser}" label="${label}" largeIcons="true"
     	path="${subContext}/admin/applicationusers" create="false" delete="${delete}" update="${update}" list="${list}">
-        <field:files-thumbnails photos="${applicationuser.photos}" id="thumbnails" />
+        <field:files-thumbnails photos="${applicationuser.photos}" imgName="${applicationuser.labelName}" id="thumbnails" />
     	<field:display field="name" id="s_cz_kolomet_domain_ApplicationUser_name" object="${applicationuser}" />
     	<field:display field="surname" id="s_cz_kolomet_domain_ApplicationUser_surname" object="${applicationuser}" />    
         <field:display field="username" id="s_cz_kolomet_domain_ApplicationUser_username" object="${applicationuser}" />

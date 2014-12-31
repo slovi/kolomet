@@ -16,7 +16,7 @@
     
     	<spring:url value="/resources/images/ajax-loader.gif" var="loaderUrl" />
     	<spring:url value="/resources/images/places/no-photo-detail.jpg" var="noPhotoUrl" />
-        <util:photo-image height="232" imgType="detail" noPhotoUrl="${noPhotoUrl}" 
+        <util:photo-image height="232" imgName="${place.name}" imgType="detail" noPhotoUrl="${noPhotoUrl}" 
         	photos="${place.photos}" width="348" loaderUrl="${loaderUrl}" preloaded="true"/>
     
     	<div class="detail_description_wrapper">
@@ -136,7 +136,7 @@
         </security:authorize>
         </div>
         
-        <field:files-thumbnails photos="${place.photos}" id="place_thumbnails" />               
+        <field:files-thumbnails photos="${place.photos}" imgName="${place.name}" id="place_thumbnails" />               
         
     </div>
     

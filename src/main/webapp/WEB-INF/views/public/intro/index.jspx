@@ -6,7 +6,7 @@
 		<div class="homepage_unit"> 
 			<spring:url value="/store/public/products/detail/${product.id}" var="productIdUrl" />
 	     	<a href="${productIdUrl}">
-	     		<util:photo-image photos="${product.photoUrls}" imgType="over" height="146" width="224" />
+	     		<util:photo-image photos="${product.photoUrls}" imgType="over" imgName="${product.productName}" height="146" width="224" />
 	     	</a>
 	     	<div class="home_description"> 
 	     		<c:if test="${fn:length(product.productName) gt 30}">

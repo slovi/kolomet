@@ -16,7 +16,7 @@
    	
    		<spring:url value="/resources/images/ajax-loader.gif" var="loaderUrl" />
    		<spring:url value="/resources/images/products/no-photo-detail.jpg" var="noPhotoUrl" />
-   		<util:photo-image photos="${product.photoUrls}" noPhotoUrl="${noPhotoUrl}" 
+   		<util:photo-image photos="${product.photoUrls}" noPhotoUrl="${noPhotoUrl}" imgName="${product.productName}"
    			loaderUrl="${loaderUrl}" imgType="detail" width="508" height="338" preloaded="true" />
    			    
        	<div class="detail_description right">
@@ -161,7 +161,7 @@
        	
 		<div class="seller_ads">
 		
-			<field:files-thumbnails photos="${product.photos}" id="thumbnails" />
+			<field:files-thumbnails photos="${product.photos}" imgName="${product.productName}" id="thumbnails" />
 			
 			<div class="clear"></div>
 			<security:authorize access="isAuthenticated()">

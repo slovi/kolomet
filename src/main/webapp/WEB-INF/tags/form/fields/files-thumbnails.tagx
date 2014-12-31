@@ -2,6 +2,7 @@
 	<jsp:output omit-xml-declaration="yes" />
 
 	<jsp:directive.attribute name="id" type="java.lang.String" required="true" rtexprvalue="true" description="The identifier for this tag (do not change!)" />
+	<jsp:directive.attribute name="imgName" type="java.lang.String" required="true" rtexprvalue="true" description="Img name - alt, title" />
 	<jsp:directive.attribute name="photos" type="java.util.Collection" required="true" rtexprvalue="true" description="Collection of thumbnails (cz.kolomet.domain.Photo type expected)" />
   
 	<c:if test="${empty render or render}">
@@ -16,7 +17,9 @@
 					<spring:url value="/file/${photos[status.index].origPhotoUrl}" var="origPhotoUrl" htmlEscape="false"/>
 					<div class="thumbnail"> 
 						<a href="#">
-			    			<img class="preloaded" src="${thumbPhotoUrl}" />
+							<spring:message code="global_image_alt_thumbnail" arguments="${imgName},${status.index + 1}" var="global_image_alt_thumbnail_result" />
+		 					<spring:message code="global_image_title_thumbnail" arguments="${imgName},${status.index + 1}" var="global_image_title_thumbnail_result" />
+			    			<img class="preloaded" src="${thumbPhotoUrl}" alt="${global_image_alt_thumbnail_result}" title="${global_image_title_thumbnail_result}" />
 			    			<span style="display: none;"><c:out value="${detailPhotoUrl}" /></span>
 			    			<span style="display: none;"><c:out value="${origPhotoUrl}"/></span>
 			    		</a>
