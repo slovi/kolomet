@@ -1,57 +1,67 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:jsp="http://java.sun.com/JSP/Page" 
-	xmlns:c="http://java.sun.com/jsp/jstl/core" 
-	xmlns:tiles="http://tiles.apache.org/tags-tiles" 
-	xmlns:spring="http://www.springframework.org/tags" 
-	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util">  
-	
-	<jsp:output omit-xml-declaration="true" />
-	<jsp:output doctype-root-element="HTML" doctype-system="about:legacy-compat" />
-	
-	<jsp:directive.page contentType="text/html;charset=UTF-8" />  
-	<jsp:directive.page pageEncoding="UTF-8" /> 
-			
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=8" />
-		<meta name="robots" content="all, follow" />
-		<c:if test="${not empty pageAuthorCode}">
-			<spring:message code="${pageAuthorCode}" var="pageAuthorResult" />
-			<meta name="author" content="${pageAuthorResult}" />
-		</c:if>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+
+	<jsp:scriptlet>
+	 	<![CDATA[
+			out.println();
+			out.write("<!DOCTYPE html>");
+			out.println();
+		]]>
+	</jsp:scriptlet>
+
+	<html xmlns="http://www.w3.org/1999/xhtml"s
+		xmlns:c="http://java.sun.com/jsp/jstl/core" 
+		xmlns:tiles="http://tiles.apache.org/tags-tiles" 
+		xmlns:spring="http://www.springframework.org/tags" 
+		xmlns:util="urn:jsptagdir:/WEB-INF/tags/util">  
 		
-		<c:if test="${not empty pageDescriptions}">
-			<spring:message code="${pageDescriptions}" var="pageDescriptionsValue" htmlEscape="false" />
-			<meta name="description" content="${pageDescriptionsValue}" />
-		</c:if>
-		<c:if test="${not empty pageKeywords}">
-			<spring:message code="${pageKeywords}" var="pageKeywordsValue" htmlEscape="false" />
-			<meta name="keywords" content="${pageKeywordsValue}" />
-		</c:if>
+		<jsp:output omit-xml-declaration="true" />
 		
-		<spring:url value="/favicon.ico" var="faviconUrl" />
-		<link rel="shortcut icon" type="image/x-icon" href="${faviconUrl}" />
-			
-		<tiles:insertAttribute name="scripts"/>
+		<jsp:directive.page contentType="text/html;charset=UTF-8" />  
+		<jsp:directive.page pageEncoding="UTF-8" /> 
 				
-		<title><spring:message code="${pageTitleCode}" htmlEscape="false" /></title>
-	</head>
-	
-  	<body class="tundra spring">
-  		<div id="container">
-		    <tiles:insertAttribute name="header"/>
-		    <tiles:insertAttribute name="menu_main"/>   
-		    <div id="center_container">
-		    	<tiles:insertAttribute name="menu_side"/>
-		    	<div id="content_container">
-		    		<div class="general_unit">
-	    				<tiles:insertAttribute name="body"/>
-	    			</div>
-			    	<tiles:insertAttribute name="footer"/>
-	    		</div> 
-		    </div>
-		    <tiles:insertAttribute name="login" />
-		    <tiles:insertAttribute name="loader" />
-		</div>
-	</body>
-</html>
+		<head>
+			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+			<meta http-equiv="X-UA-Compatible" content="IE=8" />
+			<meta name="robots" content="all, follow" />
+			<c:if test="${not empty pageAuthorCode}">
+				<spring:message code="${pageAuthorCode}" var="pageAuthorResult" />
+				<meta name="author" content="${pageAuthorResult}" />
+			</c:if>
+			
+			<c:if test="${not empty pageDescriptions}">
+				<spring:message code="${pageDescriptions}" var="pageDescriptionsValue" htmlEscape="false" />
+				<meta name="description" content="${pageDescriptionsValue}" />
+			</c:if>
+			<c:if test="${not empty pageKeywords}">
+				<spring:message code="${pageKeywords}" var="pageKeywordsValue" htmlEscape="false" />
+				<meta name="keywords" content="${pageKeywordsValue}" />
+			</c:if>
+			
+			<spring:url value="/favicon.ico" var="faviconUrl" />
+			<link rel="shortcut icon" type="image/x-icon" href="${faviconUrl}" />
+				
+			<tiles:insertAttribute name="scripts"/>
+					
+			<title><spring:message code="${pageTitleCode}" htmlEscape="false" /></title>
+		</head>
+		
+	  	<body class="tundra spring">
+	  		<div id="container">
+			    <tiles:insertAttribute name="header"/>
+			    <tiles:insertAttribute name="menu_main"/>   
+			    <div id="center_container">
+			    	<tiles:insertAttribute name="menu_side"/>
+			    	<div id="content_container">
+			    		<div class="general_unit">
+		    				<tiles:insertAttribute name="body"/>
+		    			</div>
+				    	<tiles:insertAttribute name="footer"/>
+		    		</div> 
+			    </div>
+			    <tiles:insertAttribute name="login" />
+			    <tiles:insertAttribute name="loader" />
+			</div>
+		</body>
+	</html>
+
+</jsp:root>

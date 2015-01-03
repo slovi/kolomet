@@ -3,6 +3,8 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     
+    <h1 style="display: none;">Kolomet - přehled míst</h1>
+    
     <div class="general_unit">
     
         <div><div id="map-canvas" style="width: 100%; height:400px;"><!----></div><!----></div>

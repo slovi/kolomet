@@ -12,6 +12,9 @@
 		<div id="category_content">
 		
 			<c:if test="${not empty products.content}">
+			
+				<h1 style="display: none;">Kolomet - přehled inzerátů</h1>
+			
 				<c:forEach items="${products.content}" var="product">           
 					<spring:url value="/public/maps" var="mapUrl" />
 					<spring:url value="${product.buyUrl}" var="buyUrl" />

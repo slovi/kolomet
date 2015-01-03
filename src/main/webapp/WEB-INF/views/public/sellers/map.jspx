@@ -6,6 +6,8 @@
 
 	<div class="general_unit">
 	
+		<h1 style="display: none;">Kolomet - mapa prodejců</h1>
+	
 		<script type="text/javascript">
 		
 				 var DHTML = (document.getElementById || document.all || document.layers);

@@ -19,11 +19,11 @@
     		<c:set value="" var="hiddenClassOn" />
     		<c:set value="hidden" var="hiddenClassOff" />
     	</c:if>
-		<h1 class="side-menu-header">
+		<div class="side_menu_header">
 	    	<spring:message code="menu_side_regions" />
 	    	<img class="side-menu-arrow-on ${hiddenClassOn}" src="${arrowDownImageUrl}" />
 	    	<img class="side-menu-arrow-off ${hiddenClassOff}" src="${arrowRightImageUrl}" />
-	    </h1>
+	    </div>
 	    <menu:menu id="side_menu_body_regions" styleClass="side-menu-body ${hiddenClassOn}">
 		    <menu:item url="/tour/public/places?menu=region" styleClass="ajaxLink" id="menuitem_category_all" label="Všechny regiony" />
 	    	<c:forEach items="${regions}" var="region">

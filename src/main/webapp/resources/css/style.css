@@ -214,6 +214,12 @@ div#side_menu ul {
 	list-style: none;
 }
 
+div#side_menu div.side_menu_header {
+	font-weight: 700;
+	font-size: 1.3em;
+	margin: 0;
+}
+
 div#side_menu li {
 	padding: 0 0 4px 0;
 }
@@ -226,7 +232,7 @@ div#side_menu img,.right {
 	display: none;
 }
 
-div#side_menu h1 {
+div#side_menu div.side_menu_header {
 	cursor: pointer;
 }
 
@@ -626,7 +632,7 @@ body,div.menu_inline ul ul a {
 	font-weight: 400;
 }
 
-div.menu_inline ul a,a.action_button,div#side_menu h1,a.action_button_dark,.label {
+div.menu_inline ul a,a.action_button,div#side_menu div.side_menu_header,a.action_button_dark,.label {
 	font-family: Helvetica, "Trebuchet MS", Arial, sans-serif;
 	font-size: 1.1em;
 	font-weight: 700;
