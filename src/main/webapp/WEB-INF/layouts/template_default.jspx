@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html xmlns:jsp="http://java.sun.com/JSP/Page" 
 	xmlns:c="http://java.sun.com/jsp/jstl/core" 
 	xmlns:tiles="http://tiles.apache.org/tags-tiles" 
@@ -10,12 +11,21 @@
 	<jsp:directive.page pageEncoding="UTF-8" /> 
 			
 	<head>
+		
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=8" />
+		<meta name="robots" content="all, follow" />
+		
+		<c:if test="${not empty pageAuthorCode}">
+			<spring:message code="${pageAuthorCode}" var="pageAuthorResult" />
+			<meta name="author" content="${pageAuthorResult}" />
+		</c:if>
+		
 		<c:if test="${not empty pageDescriptionCode}">
 			<spring:message code="${pageDescriptionCode}" arguments="${pageDescriptionArgs}" var="pageDescriptions" htmlEscape="false" />
 			<meta name="description" content="${pageDescriptions}" />
 		</c:if>
+		
 		<c:if test="${not empty pageKeywordsCode}">
 			<spring:message code="${pageKeywordsCode}" arguments="${pageKeywordsArgs}" var="pageKeywords" htmlEscape="false" />
 			<meta name="keywords" content="${pageKeywords}" />

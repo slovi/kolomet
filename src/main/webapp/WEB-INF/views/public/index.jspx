@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html xmlns:jsp="http://java.sun.com/JSP/Page" 
 	xmlns:c="http://java.sun.com/jsp/jstl/core" 
 	xmlns:tiles="http://tiles.apache.org/tags-tiles" 
@@ -11,6 +12,11 @@
 
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=8" />
+		<meta name="robots" content="all, follow" />
+
+		<spring:message code="page_author_default" var="pageAuthorResult" />
+		<meta name="author" content="${pageAuthorResult}" />
 
 		<spring:message code="page_intro_description" var="pageDescriptions" />
 		<meta name="description" content="${pageDescriptions}" />
@@ -51,13 +57,13 @@
 		<div style="margin: 60px auto; width: 500px;">
 			<div style="width: 100%; text-align: center; margin-bottom: 20px;">
 				<spring:url value="/resources/img/intro/kolomet_logo.png" var="logoUrl" />
-				<img alt="kolomet logo" src="${logoUrl}" />
+				<img alt="kolomet logo" title="kolomet logo" src="${logoUrl}" />
 			</div>
 			<div class="homepage_unit">
 				<spring:url value="/store/public/intro/index" var="storeIndexUrl" />
 				<a href="${storeIndexUrl}">
 					<spring:url value="/resources/img/intro/kolomet_obchod_vstup.jpg" var="storeImgUrl" />
-					<img alt="kolomet obchod vstup" src="${storeImgUrl}" />
+					<img alt="kolomet obchod vstup" title="kolomet obchod vstup" src="${storeImgUrl}" />
 				</a>
 				<div class="home_description">
 					<p style="font-weight: bold; font-size: 1.1em; margin-bottom: 5px;"><spring:message code="intro.store.1" /></p>
@@ -73,7 +79,7 @@
 				<spring:url value="/tour/public/places" var="tourIndexUrl" />
 				<a href="${tourIndexUrl}">
 					<spring:url value="/resources/img/intro/kolomet_mista_vstup.jpg" var="tourImgUrl" />					
-					<img alt="kolomet místa vstup" src="${tourImgUrl}" />
+					<img alt="kolomet místa vstup" title="kolomet místa vstup" src="${tourImgUrl}" />
 				</a>
 				<!-- odkaz na detail inzerátu -->
 				<div class="home_description">

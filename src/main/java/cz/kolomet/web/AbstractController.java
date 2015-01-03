@@ -69,6 +69,11 @@ public class AbstractController implements MessageSourceAware {
 	@Autowired
 	protected JsonSerializer jsonSerializer;
 	
+	@ModelAttribute("pageAuthorCode")
+	public String pageAuhtorCode() {
+		return "page_author_default";
+	}
+	
 	@ModelAttribute("pageTitleCode")
 	public String getPageTitleCode() {
 		return "page_title_default";
@@ -80,7 +85,7 @@ public class AbstractController implements MessageSourceAware {
 	}
 	
 	@ModelAttribute("pageDescriptionCode")
-	public String getPageDescription() {
+	public String getPageDescriptionCode() {
 		return "page_description_default";
 	}
 	
@@ -90,7 +95,7 @@ public class AbstractController implements MessageSourceAware {
 	}
 	
 	@ModelAttribute("pageKeywordsCode")
-	public String getPageKeywords() {
+	public String getPageKeywordsCode() {
 		return "page_keywords_default";
 	}
 	
