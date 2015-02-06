@@ -38,6 +38,9 @@
 	                <c:out escapeXml="false" value="${place.description}"/>
 	            </p>
 	        </div>
+	        <div id="fb-root" style="float:left;">
+    			<div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-action="like" data-show-faces="true" data-share="false"><jsp:text/></div>
+       		</div>
 	        <div class="detail_author">
 	        	Autor: <c:out value="${place.owner.nickname}" />
 	        </div>
@@ -192,5 +195,15 @@
 	        </c:otherwise>
 	    </c:choose>
     </div>
+    
+    <script>
+		(function(d, s, id) {
+	  		var js, fjs = d.getElementsByTagName(s)[0];
+	  		if (d.getElementById(id)) return;
+	  		js = d.createElement(s); js.id = id;
+	  		js.src = "//connect.facebook.net/cs_CZ/sdk.js#xfbml=1&amp;version=v2.0";
+	  		fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
 
 </div>

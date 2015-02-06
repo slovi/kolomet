@@ -15,6 +15,7 @@
 	<http pattern="/sitemap*" security="none" />
 	<http auto-config="true" use-expressions="true">
 		<intercept-url pattern="/index.jspx" access="permitAll" />
+		<intercept-url pattern="/qr" access="permitAll" />
 		<intercept-url pattern="/intro" access="permitAll" />
 		<intercept-url pattern="/store/public/**" access="permitAll" />
 		<intercept-url pattern="/tour/public/**" access="permitAll" />

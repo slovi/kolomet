@@ -26,7 +26,9 @@
            	<a href="${externalUrlValue}" target="_blank"><c:out value="${seller.web}" /></a>
            	<br/>
            	<br/>
-           	<c:out value="${seller.sellerDescription}" escapeXml="false" />
+           	<div class="description">
+           		<c:out value="${seller.sellerDescription}" escapeXml="false" />
+           	</div>
            	</p>
        	</div>
 

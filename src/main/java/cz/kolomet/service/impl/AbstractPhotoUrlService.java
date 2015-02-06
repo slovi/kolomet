@@ -100,6 +100,7 @@ public abstract class AbstractPhotoUrlService implements PhotoContainerService {
 				logger.debug("Try to resize file (" + file.getAbsolutePath() + ") to target file (" + targetFileName + ") in sync mode, calling doResize");
 				File targetFile = new File(file.getParent(), targetFileName);
 				doResize(file, targetFile, resizeInfo);
+				targetFileCallback.afterResize(targetFile);
 			} else {
 				asyncResizeInfos.add(resizeInfo);
 			}

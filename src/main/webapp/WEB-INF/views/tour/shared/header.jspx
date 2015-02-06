@@ -4,8 +4,11 @@
   
   <spring:url var="logoUrl" value="/resources/img/logo_kolomet_mista.png" />
   <div id="header_background"> 
-    <div id="header"> 		    
-   		<img src="${logoUrl}" alt="logo kolomet místa" id="logo"/>
+    <div id="header"> 	
+    	<spring:url value="/intro" var="introUrl" />	   
+    	<a href="${introUrl}">     
+   			<img src="${logoUrl}" alt="logo kolomet místa" id="logo"/>
+   		</a>
    		<security:authorize access="isAnonymous()">
    			<div> 
         		<a class="action_button" id="login_modal" rel="login_modal" name="login" href="#login"><spring:message code="header_login" /></a>

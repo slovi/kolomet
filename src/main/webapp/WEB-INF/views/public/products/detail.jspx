@@ -56,9 +56,12 @@
         		<c:out value="${product.productName}" />
         	</h1>        	
         	<div class="${description_class}">
-        		<p></p>
+        		<p><jsp:text /></p>
         		<p><c:out escapeXml="false" value="${product.description}" /></p>
         	</div>
+			<div id="fb-root" style="float:left;margin-top: 25px;">
+    			<div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-action="like" data-show-faces="true" data-share="false"><jsp:text/></div>
+       		</div>
         	<div class="order_button">        
         		<c:if test="${not empty product.buyUrl}">
         			<util:external-url activityType="EXTERNAL_PRODUCT_VISIT" productId="${product.id}" sellerId="${product.seller.id}" externalUrl="${product.buyUrl}" />
@@ -211,5 +214,15 @@
 	    	</security:authorize>
     	</security:authorize>
     </div>          
+    
+    <script>
+		(function(d, s, id) {
+	  		var js, fjs = d.getElementsByTagName(s)[0];
+	  		if (d.getElementById(id)) return;
+	  		js = d.createElement(s); js.id = id;
+	  		js.src = "//connect.facebook.net/cs_CZ/sdk.js#xfbml=1&amp;version=v2.0";
+	  		fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
     
 </div>

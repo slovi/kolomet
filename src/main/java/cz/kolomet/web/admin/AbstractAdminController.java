@@ -24,11 +24,7 @@ public class AbstractAdminController extends AbstractController {
 	
 	@ModelAttribute("newsItems")
 	public List<NewsItem> loadNewsItems(HttpServletRequest servletRequest) {
-		if (!isAjaxRequest(servletRequest)) {
-			return newsItemRepository.findAll();
-		} else {
-			return null;
-		}
+		return null;
 	}
 	
 	protected String getActualLoggedUsername() {

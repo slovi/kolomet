@@ -38,6 +38,7 @@ define(['jquery', 'jquery.lean'], function($) {
 							location.reload();
 						} else {
 							var errorHolder = $( ".error", form ); 
+							$("#j_password").val("");
 							errorHolder.html( data );
 						}
 					});

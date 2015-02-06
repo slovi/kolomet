@@ -14,7 +14,7 @@ define(['jquery'], function($) {
 	
 	function toggleMenusVisibility(parentElement, parentElements) {
 		
-		var header = $(".side-menu-header", parentElement);
+		var header = $(".side_menu_header", parentElement);
 		
 		header.click(function(e) {
 			
@@ -37,7 +37,7 @@ define(['jquery'], function($) {
 	
 	function hideMenu(element) {
 		
-		var header = $(".side-menu-header", element);
+		var header = $(".side_menu_header", element);
 		var body = $(".side-menu-body", element);
 		
 		body.hide();
@@ -47,7 +47,7 @@ define(['jquery'], function($) {
 	
 	function toggleMenuVisibility(element) {
 		
-		var header = $(".side-menu-header", element);
+		var header = $(".side_menu_header", element);
 		var body = $(".side-menu-body", element);
 		
 		toggleVisibility(body);

@@ -404,9 +404,10 @@ div.detail_description div.description_short {
 
 div.detail_author {
 	float: right;
-	width: 300px;
+	width: 200px;
 	text-align: right;
 	padding-right: 15px;
+	margin-top: 4px;
 }
 
 div.filters {
@@ -565,7 +566,7 @@ div.detail_description_wrapper {
 
 div.detail_description {
 	padding: 15px;
-	min-height: 280px;
+	min-height: 270px;
 	margin: 0;
 	overflow: auto;
 }
