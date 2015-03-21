@@ -5,7 +5,7 @@
 	<groupId>cz.kolomet</groupId>
 	<artifactId>kolomet</artifactId>
 	<packaging>war</packaging>
-	<version>1.0.88-SNAPSHOT</version>
+	<version>1.0.89-SNAPSHOT</version>
 	<name>kolomet</name>
 
 	<distributionManagement>
