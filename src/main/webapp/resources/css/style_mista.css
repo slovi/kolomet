@@ -8,6 +8,7 @@
 @IMPORT url("./lightbox.css");
 @IMPORT url("./table.css");
 @IMPORT url("./util.css");
+@IMPORT url("./arrow.css");
 
 /* Základní tvary, velikosti, umístění, okraje */
 /* hlavní prvky */
@@ -65,6 +66,10 @@ div#side_menu {
 
 .clear {
 	clear: both
+}
+
+#fb-root {
+	margin-left: 10px;
 }
 
 div#content_container {
@@ -404,7 +409,7 @@ div.detail_description div.description_short {
 
 div.detail_author {
 	float: right;
-	width: 200px;
+	width: 180px;
 	text-align: right;
 	padding-right: 15px;
 	margin-top: 4px;
@@ -560,8 +565,7 @@ div.detail_tag {
 div.detail_description_wrapper {
 	background: #f9F9F9;
 	float: right;
-	width: 330px;
-	overflow: hidden;
+	width: 360px;
 }
 
 div.detail_description {
@@ -574,10 +578,6 @@ div.detail_description {
 div.detail_description div.valid {
 	width: 100%;
 	text-align: center;
-}
-
-div.detail_description {
-	height: 233px;
 }
 
 div.detail_pictures {

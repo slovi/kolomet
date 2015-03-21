@@ -165,6 +165,15 @@
 	            <div>
 	            	<a class="action_button_dark" href="${sellersDetailUrl}/${seller.id}">Detail</a>
 	            </div>
+	            <div>
+	            	<spring:url value="/store/public/products/filter" var="sellerProductsUrl">
+	            		<spring:param name="seller" value="${seller.id}" />
+	            		<spring:param name="page.page" value="0" />
+	            		<spring:param name="page.size" value="${cagegoryPageSize}" />
+	            		<spring:param name="page.sort" value="id,desc" />
+	            	</spring:url>
+	            	<a class="action_button_dark" href="${sellerProductsUrl}">Inzeráty</a>
+	            </div>
 	  		</div>
 	 	</div>
 	</c:forEach>

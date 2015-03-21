@@ -2,7 +2,7 @@ require(['../common'], function (common) {
 
 	require(['main_default_public'], function(mainDefaultPublic) {
 		
-		require(['lightbox', 'images'], function(lightbox, images) {
+		require(['lightbox', 'images', 'fb'], function(lightbox, images, fb) {
 			
 			$(document).ready(function() {
 			
@@ -12,6 +12,8 @@ require(['../common'], function (common) {
 				images.waitForImagesLoad(detailImage, fileLoaderUrl, fileNotFoundUrl, 4, 2000);
 				
 		    	images.preloadImages('detail_image');
+		    	
+		    	fb.init();
 	    	
 			});
 	    	

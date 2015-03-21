@@ -1,5 +1,10 @@
 @charset "utf-8";
 
+a.arrow_box.actual {
+	background-color: #7299b3;
+	color: white; 
+}
+
 a.arrow_box {
 	text-decoration: none;	
 }

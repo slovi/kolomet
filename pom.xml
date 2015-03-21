@@ -5,7 +5,7 @@
 	<groupId>cz.kolomet</groupId>
 	<artifactId>kolomet</artifactId>
 	<packaging>war</packaging>
-	<version>1.0.74-SNAPSHOT</version>
+	<version>1.0.88-SNAPSHOT</version>
 	<name>kolomet</name>
 
 	<distributionManagement>
@@ -136,6 +136,11 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-taglibs</artifactId>
 			<version>${org.springframework.security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.social</groupId>
+			<artifactId>spring-social-facebook</artifactId>
+			<version>1.1.1.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.data</groupId>
@@ -304,6 +309,11 @@
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 			<version>2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.4</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet.jsp.jstl</groupId>

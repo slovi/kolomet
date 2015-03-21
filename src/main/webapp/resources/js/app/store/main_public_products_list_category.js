@@ -34,7 +34,7 @@ require(['../common'], function (common) {
 							nextPageAndSortLinks();
 							var queryStringToPush = '?' + encodeArrayToQueryString(paramsData.paramsArray);
 							console.log("Adding query string to history: " + queryStringToPush);
-							History.pushState(null, null, queryStringToPush);
+							History.pushState(null, 'Kolomet - kola ČR', queryStringToPush);
 						}, 
 						{fragments: 'body_content'});
 				
@@ -49,6 +49,9 @@ require(['../common'], function (common) {
 								nextPageAndSortLinks();
 								$('html,body').animate({scrollTop: $(element).offset().top}, 1000);
 								$(element).closest('div').hide();
+								paramsInfo.paramsData.paramsArray.pop();
+								var queryString = encodeArrayToQueryString(concatParams(objectToObjectArray(paramsInfo.params), paramsInfo.paramsData.paramsArray));
+								History.pushState(null, 'Kolomet - kola ČR', '?' + queryString);
 							});
 							
 					ajaxLink.decorate(
@@ -59,6 +62,7 @@ require(['../common'], function (common) {
 							},
 							function(element, paramsInfo, modelFragmentsData) {		
 								nextPageAndSortLinks();
+								History.pushState(null, 'Kolomet - kola ČR', '?' + encodeArrayToQueryString(concatParams(objectToObjectArray(paramsInfo.params), paramsInfo.paramsData.paramsArray)));
 							});
 				
 				};

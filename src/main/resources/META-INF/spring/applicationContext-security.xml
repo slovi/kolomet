@@ -19,6 +19,10 @@
 		<intercept-url pattern="/intro" access="permitAll" />
 		<intercept-url pattern="/store/public/**" access="permitAll" />
 		<intercept-url pattern="/tour/public/**" access="permitAll" />
+		<intercept-url pattern="/store/connect*" access="isFullyAuthenticated()" />
+		<intercept-url pattern="/store/connect/*" access="isFullyAuthenticated()" />
+		<intercept-url pattern="/store/signin*" access="isFullyAuthenticated()" />
+		<intercept-url pattern="/store/signin/*" access="isFullyAuthenticated()" />
 		<intercept-url pattern="/store/admin/registrationrequests*" access="hasAnyRole('ROLE_per_registrationrequests')" />
 		<intercept-url pattern="/store/admin/registrationrequests/*" access="hasAnyRole('ROLE_per_registrationrequests')" />
 		<intercept-url pattern="/store/admin/applicationusers*" access="hasAnyRole('ROLE_per_applicationusers_all')" />

@@ -2,8 +2,10 @@ require(['../common'], function (common) {
 	
 	require(['main_default_public'], function(mainDefaultPublic) {
 		
-	    require(['lightbox', 'images', 'ajax-submit'], function(lightbox, images, ajaxSubmit) {
+	    require(['lightbox', 'images', 'ajax-submit', 'fb'], function(lightbox, images, ajaxSubmit, fb) {
 	    	
+	    		fb.init();
+	    		
 		    	$(document).ready(function() {
 		    	
 		    	images.preloadImages('detail_image');

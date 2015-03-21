@@ -1,5 +1,6 @@
 package cz.kolomet.web.pub;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -80,22 +81,33 @@ public class PlaceController extends AbstractPublicController {
 		if (!placeFilter.isUsedFilter()) {
 			PlaceFilterDto placeFilterDto = new PlaceFilterDto();
 			placeFilterDto.setPlaceTypes(placeTypes);
+			placeFilter.setPlaceTypes(placeTypes);
 			uiModel.addAttribute("placeFilter", placeFilterDto);
 		} else {
 			uiModel.addAttribute("placeFilter", placeFilter);
 		}
+
+		boolean existsPlaceType = false;
+		if (placeFilter.getPlaceTypes() != null) {
+			for (PlaceType placeType: placeFilter.getPlaceTypes()) {
+				if (placeType != null) {
+					existsPlaceType = true;
+					break;
+				}
+			}
+		}
 		
 		Specification<Place> placeSpecification = PlaceSpecifications.forPlaceFilter(placeFilter);
-		uiModel.addAttribute("placesJson", jsonSerializer.toJsonArray(placeService.findPlaceDtos(placeSpecification)));
-		uiModel.addAttribute("topPlaces", placeRepository.findAllWithoutCountQuery(
-				placeSpecification, new PageRequest(0, TOP_PLACES_NUMBER, PlaceSpecifications.getTopSort())));
-		
-		if (placeFilter.getRegion() != null) {
-			uiModel.addAttribute("pageTitleCode", "page_place_list_title_filtered");
-			uiModel.addAttribute("pageTitleArgs", " - " + placeFilter.getRegion().getCodeDescription());
+		if (existsPlaceType) {
+			uiModel.addAttribute("placesJson", jsonSerializer.toJsonArray(placeService.findPlaceDtos(placeSpecification)));
+			uiModel.addAttribute("topPlaces", placeRepository.findAllWithoutCountQuery(
+					placeSpecification, new PageRequest(0, TOP_PLACES_NUMBER, PlaceSpecifications.getTopSort(placeFilter.isActual()))));
 		} else {
-			uiModel.addAttribute("pageTitleCode", "page_place_list_title_all");
+			uiModel.addAttribute("placesJson", "{}");
+			uiModel.addAttribute("topPlaces", new ArrayList<Place>());
 		}
+		
+		uiModel.addAttribute("pageTitleCode", "page_place_list_title_all");
         uiModel.addAttribute("pageDescriptionCode", "page_place_list_description");
 		
         addDateTimeFormatPatterns(uiModel);

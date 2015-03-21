@@ -24,6 +24,21 @@
     <c:set var="plocale">${pageContext.response.locale}</c:set>
     <c:out value="${fn:replace(plocale, '_', '-')}" default="en" />
   </c:set>
+  
+  <spring:url value="/" var="contextPath" />
+  
+  <script type="text/javascript">
+  
+  	window.app = window.app || {};
+	window.app.locale = '${userLocale}';
+	window.app.contextPath = '${contextPath}';
+	window.app.subContext = '${subContext}';
+	window.app.facebookAppId = '${facebookAppId}';
+	window.app.facebookApp = '${facebookApp}';
+	window.app.facebookAppOwner = '${facebookAppOwner}';
+	window.app.facebookAppOwnerId = '${facebookAppOwnerId}';
+  
+  </script>
 
   <spring:url value="${staticDomain}/resources/js/app${subContext}/${mainJsFileName}.js?v=${version}" var="main_js_url" />
   <spring:url value="${staticDomain}/resources/js/lib/require.js" var="require_js_url" />
@@ -31,25 +46,14 @@
 
   <spring:url value="${staticDomain}/package-resources/dojo/dojo.js" var="dojo_url" />
   <script src="${dojo_url}" type="text/javascript"><!-- required for FF3 and Opera --></script>
-
-  <spring:url value="${staticDomain}/package-resources/spring/Spring.js.uncompressed.js" var="spring_url" />
+	
+  <spring:url value="${staticDomain}/package-resources/spring/Spring.js.uncompressed.js" var="spring_url" /> 
   <script src="${spring_url}" type="text/javascript"><!-- /required for FF3 and Opera --></script>
-  
+	 
   <spring:url value="${staticDomain}/package-resources/spring/Spring-Dojo.js.uncompressed.js" var="spring_dojo_url" />
   <script src="${spring_dojo_url}" type="text/javascript"><!-- required for FF3 and Opera --></script>
   <script language="JavaScript" type="text/javascript">dojo.require("dojo.parser");</script>
   
   <script type="text/javascript">var djConfig = {parseOnLoad: false, isDebug: false, locale: '${fn:toLowerCase(userLocale)}'};</script>
-  
-	<script>
-	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-	
-	  ga('create', 'UA-55300289-2', 'auto');
-	  ga('send', 'pageview');
-	
-	</script>
 
 </jsp:root>

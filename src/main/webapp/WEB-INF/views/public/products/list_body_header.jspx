@@ -22,9 +22,10 @@
 	     		
 	      		<field:select id="c_cz_kolomet_domain_Product_productUsage" emptyStringEmptyValue="true" decorated="false" width="13" cssClass="filter_input" itemValue="id" items="${productusages}" field="productUsage" emptyLabel="Všechna použití" renderLabel="true" itemLabel="codeDescription" path="/productusages" inline="true" required="false"/>
 	      		<field:select id="c_cz_kolomet_domain_Product_bicycleCategory" emptyStringEmptyValue="true" decorated="false" width="13" cssClass="filter_input" items="${bicyclecategories}" field="bicycleCategory" path="/bicyclecategories" emptyLabel="Všechny kategorie" renderLabel="true" itemValue="id" itemLabel="codeDescription" inline="true" required="false" />
-				<field:select id="c_cz_kolomet_domain_Product_figureHeight" emptyStringEmptyValue="true" decorated="false" width="13" cssClass="filter_input" items="${figureheights}" field="figureHeight" path="/figureheights" emptyLabel="Všechny velikosti" renderLabel="true" itemValue="id" itemLabel="codeDescription" inline="true" required="false" />
+				<field:select id="c_cz_kolomet_domain_Product_seller" emptyStringEmptyValue="true" decorated="false" width="13" cssClass="filter_input" items="${sellers}" field="seller" path="/sellers" emptyLabel="Všichni prodejci" renderLabel="true" itemValue="id" itemLabel="sellerName" inline="true" required="false" />
 	
 				<field:select id="c_cz_kolomet_domain_Product_productColor" emptyStringEmptyValue="true" decorated="false" width="13" cssClass="filter_input" itemValue="id" items="${productcolors}" field="productColor" emptyLabel="Všechny barvy" renderLabel="true" itemLabel="codeDescription" path="/productcolors" inline="true" required="false"/>      		
+				<field:select id="c_cz_kolomet_domain_Product_figureHeight" emptyStringEmptyValue="true" decorated="false" width="13" cssClass="filter_input" items="${figureheights}" field="figureHeight" path="/figureheights" emptyLabel="Všechny velikosti" renderLabel="true" itemValue="id" itemLabel="codeDescription" inline="true" required="false" />
 				<field:checkbox id="c_cz_kolomet_domain_Product_canSendToAllCountry" decorated="false" cssClass="filter_input" field="canSendToAllCountry" />
 				<form:hidden path="categoryType" />
 			</div>

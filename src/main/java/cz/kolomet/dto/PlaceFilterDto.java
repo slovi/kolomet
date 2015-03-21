@@ -11,6 +11,8 @@ public class PlaceFilterDto {
 	
 	private List<PlaceType> placeTypes;
 	
+	private boolean actual = true;
+	
 	private boolean usedFilter;
 
 	public Region getRegion() {
@@ -35,6 +37,14 @@ public class PlaceFilterDto {
 
 	public void setUsedFilter(boolean usedFilter) {
 		this.usedFilter = usedFilter;
+	}
+
+	public boolean isActual() {
+		return actual;
+	}
+
+	public void setActual(boolean actual) {
+		this.actual = actual;
 	}
 
 }

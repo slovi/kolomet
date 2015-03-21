@@ -11,9 +11,20 @@
 		
 		<div id="category_content">
 		
-			<c:if test="${not empty products.content}">
-			
+			<c:if test="${not empty filteredCategory}">
+				<div class="general_unit">
+					<h1><c:out value="${filteredCategory.codeDescription}" /></h1>
+					<spring:message code="products_category_description_${filteredCategory.codeKey}" var="filteredCategoryDescription" htmlEscape="false" />
+					<c:if test="${not empty filteredCategoryDescription}">
+						<p><c:out value="${filteredCategoryDescription}" escapeXml="false" /></p>
+					</c:if>
+				</div>
+			</c:if>
+			<c:if test="${empty filteredCategory}">
 				<h1 style="display: none;">Kolomet - přehled inzerátů</h1>
+			</c:if>
+		
+			<c:if test="${not empty products.content}">				
 			
 				<c:forEach items="${products.content}" var="product">           
 					<spring:url value="/public/maps" var="mapUrl" />
@@ -32,12 +43,10 @@
 			         		<p><spring:message code="label_cz_kolomet_domain_product_category" />: <c:out value="${product.category.codeDescription}" /></p>
 			         		<p>
 			         			<spring:eval expression="product.getColorAttribute()" var="colorAttribute" />
-			         			<spring:message code="label_cz_kolomet_domain_product_productcolor" />: <c:out value="${product.productColor.codeDescription}" /><c:if test="${not empty colorAttribute and not empty colorAttribute.attributeValue}">, </c:if>
 			         			<c:if test="${not empty colorAttribute and not empty colorAttribute.attributeValue}">
 									<c:out value="${colorAttribute.attributeType.codeDescription}" />: <c:out value="${colorAttribute.attributeValue}" />
 			         			</c:if>
 			         		</p>
-			         		<p><spring:message code="label_cz_kolomet_domain_product_figureheight" />: <c:out value="${product.figureHeight.codeDescription}" /></p>
 				        </div>
 				        <div class="cat_seller"> 
 				        	<p>
@@ -68,7 +77,7 @@
 									</c:forEach>
 								</c:if>
 							</c:forEach>
-							<spring:param name="page.page" value="${products.number + 2}" />
+							<spring:param name="page.page" value="${products.number + 1}" />
 							<spring:param name="page.size" value="${products.size}" />
 						</spring:url>
 						<a id="next_page_link_${products.number}" class="next_page_link action_button_dark" href="${nextPageUrl}">
@@ -78,7 +87,7 @@
 				</div>
 			</c:if>
 			<c:if test="${empty products.content}">
-				<div class="general_unit" style="margin: 40px 60px 20px 60px;">
+				<div class="general_unit">
 					<spring:message code="entity_not_found" />
 				</div>
 			</c:if>	

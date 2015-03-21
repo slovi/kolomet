@@ -44,6 +44,9 @@ define(['jquery', 'loader'], function($, loader) {
 			paramsData.paramsArray.push({name: 'ajaxSource', value: paramsData.ajaxSource});
 			paramsData.paramsArray.push({name: 'fragments', value: paramsData.fragments});
 			paramsData.paramsArray.push({name: 'modelFragments', value: paramsData.modelFragments});
+			if (paramsData.append) {
+				paramsData.paramsArray.push({name: 'append', value: paramsData.append});
+			}
 			
 			$.ajax({
 		        url: url,

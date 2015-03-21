@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beansProjectDescription>
 	<version>1</version>
-	<pluginVersion><![CDATA[3.2.0.201303060654-RELEASE]]></pluginVersion>
+	<pluginVersion><![CDATA[3.6.3.201411271034-RELEASE]]></pluginVersion>
 	<configSuffixes>
 		<configSuffix><![CDATA[xml]]></configSuffix>
 	</configSuffixes>
@@ -10,7 +10,17 @@
 		<config>src/main/resources/META-INF/spring/applicationContext-security.xml</config>
 		<config>src/main/resources/META-INF/spring/applicationContext-email.xml</config>
 		<config>src/main/webapp/WEB-INF/spring/webmvc-config.xml</config>
+		<config>src/main/resources/META-INF/spring/applicationContext-facebook.xml</config>
 	</configs>
+	<autoconfigs>
+		<config>src/main/resources/META-INF/spring/applicationContext-config.xml</config>
+		<config>src/main/resources/META-INF/spring/applicationContext.xml</config>
+		<config>src/main/resources/META-INF/spring/applicationContext-json.xml</config>
+		<config>src/main/resources/META-INF/spring/applicationContext-jpa.xml</config>
+		<config>src/test/resources/META-INF/spring/applicationContext-test.xml</config>
+		<config>src/main/resources/META-INF/spring/applicationContext-jcaptcha.xml</config>
+		<config>src/main/resources/META-INF/spring/applicationContext-cache.xml</config>
+	</autoconfigs>
 	<configSets>
 	</configSets>
 </beansProjectDescription>

@@ -29,12 +29,12 @@
 			 				<c:choose>
 			 					<c:when test="${not empty preloaded and preloaded}">
 					 				<a href="${origImgUrl}" data-lightbox="image-1">
-					 					<img id="detail_image" src="${loaderUrl}" data-preload-img="${detailImgUrl}" alt="${global_image_alt_detail_result}" title="${global_image_title_detail_result}" data-loader-url="${loaderUrl}" data-not-found-url="${noPhotoUrl}"/>
+					 					<img id="detail_image" rel="image_src" src="${loaderUrl}" data-preload-img="${detailImgUrl}" alt="${global_image_alt_detail_result}" title="${global_image_title_detail_result}" data-loader-url="${loaderUrl}" data-not-found-url="${noPhotoUrl}"/>
 					 				</a>		 				
 			 					</c:when>
 			 					<c:otherwise>
 			 						<a href="${origImgUrl}" data-lightbox="image-1">
-					 					<img id="detail_image" src="${detailImgUrl}" alt="${global_image_alt_detail_result}" title="${global_image_title_detail_result}" data-loader-url="${loaderUrl}" data-not-found-url="${noPhotoUrl}"/>
+					 					<img id="detail_image" rel="image_src" src="${detailImgUrl}" alt="${global_image_alt_detail_result}" title="${global_image_title_detail_result}" data-loader-url="${loaderUrl}" data-not-found-url="${noPhotoUrl}"/>
 					 				</a>
 			 					</c:otherwise>
 			 				</c:choose>
@@ -43,7 +43,7 @@
 			 				<spring:message code="global_image_alt" arguments="${imgName}" var="global_image_alt_result" />
 		 					<spring:message code="global_image_title" arguments="${imgName}" var="global_image_title_result" />
 			 				<spring:url value="/file/${photos[0].overPhotoUrl}" var="detailImgUrl" htmlEscape="false" />
-			 				<img id="detail_image" width="${width}" height="${height}" src="${detailImgUrl}" alt="${global_image_alt_result}" title="${global_image_title_result}"/>
+			 				<img id="detail_image" width="${width}" height="${height}" rel="image_src" src="${detailImgUrl}" alt="${global_image_alt_result}" title="${global_image_title_result}"/>
 			 			</c:otherwise>
 		 			</c:choose>
 				</c:when>
@@ -58,7 +58,7 @@
 							<spring:url value="/resources/images/no-photo-${imgType}.jpg" var="detailImgUrl" />
 						</c:otherwise>
 					</c:choose>
-					<img id="detail_image" width="${width}" height="${height}" src="${detailImgUrl}" alt="${global_image_alt_result}" title="${global_image_title_result}"/>
+					<img id="detail_image" width="${width}" height="${height}" rel="image_src" src="${detailImgUrl}" alt="${global_image_alt_result}" title="${global_image_title_result}"/>
 				</c:otherwise>
 			</c:choose>
 		</div>

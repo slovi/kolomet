@@ -8,15 +8,22 @@
     		<spring:message code="${registrationResult}" arguments="${registrationResultArgs}" />
     	</div>
     </c:if>
-    
+
+	<div class="general_unit">
+    	<h1><spring:message code="places_filter_h1" /></h1>
+		<p><spring:message code="places_filter_text" /></p>
+	</div>
+	    
     <div class="general_unit">
     
     	<div id="places_general_unit_filter" class="general_unit_filter">
     		<div>
-				<form:form id="place_filter_form" method="get" modelAttribute="placeFilter">
+    			<spring:url value="/tour/public/places" var="filterPlacesActionUrl" />
+				<form:form id="place_filter_form" action="${filterPlacesActionUrl}" method="get" modelAttribute="placeFilter">
 				
 					<input type="hidden" name="usedFilter" value="true" />
 					<input type="hidden" name="region" value="" />
+					<input type="hidden" name="actual" value="${placeFilter.actual}" />
 				
 					<b><spring:message code="places_filter_placetype" /></b>:<util:nbsp number="5" /> 
 				

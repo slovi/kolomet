@@ -35,6 +35,9 @@ require(['../common'], function (common) {
 				History.log('statechange:', State.data, State.title, State.url);
 			});
 			
+			// sort links
+			sortLinks();
+			
 			// form fields
 			ajaxSubmit.decorate(
 					'form#place_filter_form input[type=checkbox]',
@@ -43,12 +46,13 @@ require(['../common'], function (common) {
 						
 						removePlaces(markers);
 						
-						var placesJson = modelFragmentsData['placesJson'];
+						var placesJson = eval(modelFragmentsData['placesJson']);
 						if (placesJson) {
-							markers = addPlacesToMap(eval(placesJson), map, largeMarkers);
+							markers = addPlacesToMap(placesJson, map, largeMarkers);
 						}
 						
-						History.pushState(null, 'Kolomet - místa', '?' + encodeArrayToQueryString(paramsData.paramsArray));
+						History.pushState(null, 'Cyklovýlety a cykloturistika', '?' + encodeArrayToQueryString(paramsData.paramsArray));
+						sortLinks();
 					},
 					{
 						fragments: 'body_footer,body_footer_hidden', 
@@ -69,7 +73,7 @@ require(['../common'], function (common) {
 						
 						filterRegionInput.val('');
 						var data = {paramsArray: filterForm.serializeArray(), fragments: 'body_footer,body_footer_hidden', modelFragments: 'placesJson'};
-						filterRegionInput.val(params['region_id']);												
+						filterRegionInput.val(params['region']);
 						
 						return data;
 						
@@ -91,8 +95,21 @@ require(['../common'], function (common) {
 							markers = addPlacesToMap(eval(placesJson), map, largeMarkers);
 						};
 						
-						History.pushState(null, 'Kolomet - místa', '?' + encodeArrayToQueryString(concatParams(objectToObjectArray(paramsInfo.params), paramsInfo.paramsData.paramsArray)));
+						History.pushState(null, 'Cyklovýlety a cykloturistika', '?' + encodeArrayToQueryString(concatParams(objectToObjectArray(paramsInfo.params), paramsInfo.paramsData.paramsArray)));
+						sortLinks();
 					});
+			
+			function sortLinks() {
+				ajaxLink.decorate(
+						'div.sorting a', 
+						'click',
+						function(element, modelFragmentsData) {
+							return {fragments: 'body_footer,body_footer_hidden'}
+						},
+						function(element, paramsInfo, modelFragmentsData) {
+							sortLinks();
+						});
+			}
 			
 			function removePlaces(markers) {
 				for (var i = 0; i < markers.length; i++) {

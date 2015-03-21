@@ -6,6 +6,7 @@ require.config({
 		// libs
 		'async': '../../lib/async',
 		'canvas-to-blob': '../../lib/canvas-to-blob.min',
+		'facebook': '//connect.facebook.net/cs_CZ/all',
 		'jquery': '../../lib/jquery-1.11.0.min',
 		'jquery.block-ui': '../../lib/jquery.blockUI',
 		'jquery.iframe-transport': '../../lib/jquery.iframe-transport',
@@ -29,6 +30,7 @@ require.config({
 		'ajax-link': '../../modules/ajax-link',
 		'ajax-submit': '../../modules/ajax-submit',
 		'config-service': '../../modules/config-service',
+		'fb': '../../modules/fb',
 		'form': '../../modules/form', 
 		'http-service': '../../modules/http-service',
 		'input-file': '../../modules/input-file/input-file',
@@ -73,6 +75,9 @@ require.config({
 		},
 		'mustache': {
 			exports: 'Mustache'
+		},
+		'facebook': {
+			exports: 'FB'
 		}
 	},
 	map: {

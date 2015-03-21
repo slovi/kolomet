@@ -30,7 +30,7 @@
 			<spring:message code="page_intro_description" var="pageDescriptions" htmlEscape="false" />
 			<meta name="description" content="${pageDescriptions}" />
 	
-			<spring:message code="page_keywords_default" var="pageKeywords" htmlEscape="false" />
+			<spring:message code="page_intro_keywords" var="pageKeywords" htmlEscape="false" />
 			<meta name="keywords" content="${pageKeywords}" />
 			
 			<spring:url value="/favicon.ico" var="faviconUrl" />
@@ -40,6 +40,9 @@
 			
 			<spring:url value="/resources/css/style.css?v=${version}" var="default_css_url" />
 	  		<link rel="stylesheet" type="text/css" href="${default_css_url}" />		
+			
+			<spring:url value="/resources/js/lib/jquery-1.11.0.min.js?v=${version}" var="jquery_url" />
+	  		<script language="javascript" type="text/javascript" src="${jquery_url}"><jsp:text/></script>
 					
 			<style type="text/css">
 				body {
@@ -51,7 +54,7 @@
 				}
 				
 				div.homepage_unit div.home_description {
-					height: auto;
+					height: 230px;
 				}
 				
 				div.homepage_unit div.home_seller {
@@ -59,6 +62,19 @@
 				}
 				
 			</style>
+			
+			<script type="text/javascript">
+			
+				$(document).ready(function() {
+					var homeDescriptions = $('div.home_description');
+					homeDescriptions.css('cursor', 'pointer');
+					homeDescriptions.click(function(event) {
+						var href = $('div.home_seller a', $(this).parent()).attr('href');
+						location.href = href;
+					});
+				});
+			
+			</script>
 			
 		</head>
 	
@@ -78,8 +94,8 @@
 						<img alt="kolomet obchod vstup" title="kolomet obchod vstup" src="${storeImgUrl}" />
 					</a>
 					<div class="home_description">
-						<p style="font-weight: bold; font-size: 1.1em; margin-bottom: 5px;"><spring:message code="intro.store.1" /></p>
-						<p style="font-style: italic; color: #f1941c; font-weight: bold;"><spring:message code="intro.store.2" /></p>
+						<p style="font-weight: bold; font-size: 1.1em; margin-bottom: 5px;"><spring:message code="intro.store.1" htmlEscape="false" /></p>
+						<p style="font-style: italic; color: #f1941c; font-weight: bold;"><spring:message code="intro.store.2" htmlEscape="false" /></p>
 					</div>
 					<div class="home_seller">
 						<center>
@@ -95,9 +111,9 @@
 					</a>
 					<!-- odkaz na detail inzerátu -->
 					<div class="home_description">
-						<p style="font-weight: bold; font-size: 1.1em; margin-bottom: 5px;"><spring:message code="intro.tour.1" /></p>
+						<p style="font-weight: bold; font-size: 1.1em; margin-bottom: 5px;"><spring:message code="intro.tour.1" htmlEscape="false" /></p>
 						<!-- odkaz na detail inzerátu -->
-						<p style="font-style: italic; color: #f1941c; font-weight: bold;"><spring:message code="intro.tour.2" /></p>
+						<p style="font-style: italic; color: #f1941c; font-weight: bold;"><spring:message code="intro.tour.2" htmlEscape="false" /></p>
 					</div>
 					<div class="home_seller">
 						<center>

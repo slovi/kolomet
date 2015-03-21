@@ -11,7 +11,9 @@
         <br/>
         <br/>
         <field:editor field="text" id="c_cz_kolomet_domain_NewsItem_text" renderLinkMenu="true" required="true" z="user-managed"/>
-        <field:checkbox field="enabled" id="c_cz_kolomet_domain_NewsItem_enabled" z="4dW1KYPDc1uE1qbCHNRQWsxtRwQ="/>
+        <field:checkbox field="enabled" id="c_cz_kolomet_domain_NewsItem_enabled" />
+        <field:hidden field="sendToFacebook" id="c_cz_kolomet_domain_NewsItem_sendToFacebook" />
+        <field:hidden field="facebookHeaderText" id="c_cz_kolomet_domain_NewsItem_facebookHeaderText" />
         <field:input field="createdBy" id="c_cz_kolomet_domain_NewsItem_createdBy" render="false" z="user-managed"/>
         <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_NewsItem_lastModifiedBy" render="false" z="user-managed"/>
         <field:datetime dateTimePattern="${newsItem_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_NewsItem_lastModified" render="false" z="user-managed"/>

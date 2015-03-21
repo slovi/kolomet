@@ -140,6 +140,10 @@
 		<servlet-name>kolomet</servlet-name>
 		<url-pattern>/qr</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>kolomet</servlet-name>
+		<url-pattern>/connect/*</url-pattern>
+	</servlet-mapping>
 	
 	<!-- Handles resources requests -->
 	<servlet>

@@ -3,6 +3,7 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <form:create id="fc_cz_kolomet_domain_NewsItem" displayStayButton="true" modelAttribute="newsItem" multipart="true" path="${subContext}/admin/newsitems" render="${empty dependencies}" z="user-managed">
+    	<input id="sendToFacebookAcessToken" type="hidden" name="accessToken" />
         <field:datetime dateTimePattern="${newsItem_newsitemdate_date_format}" field="newsItemDate" id="c_cz_kolomet_domain_NewsItem_newsItemDate" z="FB5WVicWURlynFC/lm03NXQZr5Y="/>
         <field:select field="newsItemType" id="c_cz_kolomet_domain_NewsItem_newsItemType" itemLabel="label" itemValue="value" items="${newsitemtypes}" path="newsitemtypes" z="user-managed"/>
         <br/>
@@ -12,6 +13,8 @@
         <br/>
         <field:editor field="text" id="c_cz_kolomet_domain_NewsItem_text" renderLinkMenu="true" required="true" z="user-managed"/>
         <field:checkbox field="enabled" id="c_cz_kolomet_domain_NewsItem_enabled" z="4dW1KYPDc1uE1qbCHNRQWsxtRwQ="/>
+        <field:checkbox field="sendToFacebook" id="c_cz_kolomet_domain_NewsItem_sendToFacebook" />
+        <field:input field="facebookHeaderText" id="c_cz_kolomet_domain_NewsItem_facebookHeaderText" width="50" />
         <field:input field="createdBy" id="c_cz_kolomet_domain_NewsItem_createdBy" render="false" z="user-managed"/>
         <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_NewsItem_lastModifiedBy" render="false" z="user-managed"/>
         <field:datetime dateTimePattern="${newsItem_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_NewsItem_lastModified" render="false" z="user-managed"/>

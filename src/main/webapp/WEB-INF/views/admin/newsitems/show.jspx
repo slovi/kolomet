@@ -9,6 +9,8 @@
         <field:display bool="true" field="enabled" id="s_cz_kolomet_domain_NewsItem_enabled" object="${newsitem}" z="user-managed"/>
         <field:display field="createdBy" id="s_cz_kolomet_domain_NewsItem_createdBy" object="${newsitem}" z="ex1aZ5Kgjm6G5x1r4zScv0D6hcg="/>
         <field:display field="lastModifiedBy" id="s_cz_kolomet_domain_NewsItem_lastModifiedBy" object="${newsitem}" z="5upWll7zUOdOC1M1Us5SfMOgL4c="/>
+        <field:display bool="true" field="sendToFacebook" id="c_cz_kolomet_domain_NewsItem_sendToFacebook" object="${newsitem}" />
+        <field:display field="facebookHeaderText" id="c_cz_kolomet_domain_NewsItem_facebookHeaderText" object="${newsitem}" />
         <field:display date="true" dateTimePattern="${newsItem_created_date_format}" field="created" id="s_cz_kolomet_domain_NewsItem_created" object="${newsitem}" z="ANB/ArDQRzIJIhVJyq6HJoAobqE="/>
         <field:display date="true" dateTimePattern="${newsItem_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_NewsItem_lastModified" object="${newsitem}" z="ANB/ArDQRzIJIhVJyq6HJoAobqE="/>
         <field:display field="contents" id="s_cz_kolomet_domain_NewsItem_contents" object="${newsitem}" render="false" z="user-managed"/>

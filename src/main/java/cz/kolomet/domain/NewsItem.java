@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -28,6 +29,9 @@ public class NewsItem extends BaseDomainEntity implements PhotoContainer, Serial
 	@NotNull
 	private Boolean enabled = true;
 	
+	@NotNull
+	private Boolean sendToFacebook = false;
+	
 	@DateTimeFormat(style="MS")
 	private Date newsItemDate = new Date();
 	
@@ -35,13 +39,26 @@ public class NewsItem extends BaseDomainEntity implements PhotoContainer, Serial
 	@NotNull
 	private String text;
 	
+	private String facebookHeaderText;
+	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "newsItem", cascade = CascadeType.ALL)
     private List<NewsItemPhotoUrl> newsItemPhotoUrls = new ArrayList<NewsItemPhotoUrl>();
 
 	private NewsItemType newsItemType;
 	
 	@Transient
+	private String accessToken;
+	
+	@Transient
     private List<FileInfo> fileInfos = new ArrayList<FileInfo>();
+	
+	public NewsItem() {
+		
+	}
+	
+	public NewsItem(String text) {
+		this.text = text;
+	}
 
 	@Override
 	public List<? extends Photo> getPhotos() {
@@ -51,6 +68,29 @@ public class NewsItem extends BaseDomainEntity implements PhotoContainer, Serial
 	@Override
 	public String getPhotoType() {
 		return NewsItemPhotoUrl.PHOTO_URL_PREFIX;
+	}
+	
+	public String getFacebookText() {
+		if (StringUtils.isNotBlank(text)) {
+			return text.replaceAll("\\<[^>]*>","");
+		} else {
+			return text;
+		}
+	}
+	
+	public String getContainedUrl() {
+		
+		final String hrefAttributePatternStart = "href=\"";
+		final String hrefAttributePatternEnd = "\"";
+		
+		if (StringUtils.isNotBlank(text)) {
+			int hrefIndexStart = text.indexOf(hrefAttributePatternStart);
+			if (hrefIndexStart > -1) {
+				final String urlSubstring = text.substring(hrefIndexStart + hrefAttributePatternStart.length()); 
+				return urlSubstring.substring(0, urlSubstring.indexOf(hrefAttributePatternEnd) - hrefAttributePatternEnd.length() + 1);
+			}
+		}
+		return null;
 	}
 
 	@Override
@@ -71,6 +111,14 @@ public class NewsItem extends BaseDomainEntity implements PhotoContainer, Serial
         this.enabled = enabled;
     }
 
+	public Boolean getSendToFacebook() {
+		return sendToFacebook;
+	}
+
+	public void setSendToFacebook(Boolean sendToFacebook) {
+		this.sendToFacebook = sendToFacebook;
+	}
+
 	public Date getNewsItemDate() {
         return this.newsItemDate;
     }
@@ -87,6 +135,14 @@ public class NewsItem extends BaseDomainEntity implements PhotoContainer, Serial
         this.text = text;
     }
 
+	public String getFacebookHeaderText() {
+		return facebookHeaderText;
+	}
+
+	public void setFacebookHeaderText(String facebookHeaderText) {
+		this.facebookHeaderText = facebookHeaderText;
+	}
+
 	public List<NewsItemPhotoUrl> getNewsItemPhotoUrls() {
         return this.newsItemPhotoUrls;
     }
@@ -102,6 +158,14 @@ public class NewsItem extends BaseDomainEntity implements PhotoContainer, Serial
 	public void setNewsItemType(NewsItemType newsItemType) {
         this.newsItemType = newsItemType;
     }
+
+	public String getAccessToken() {
+		return accessToken;
+	}
+
+	public void setAccessToken(String accessToken) {
+		this.accessToken = accessToken;
+	}
 
 	public List<FileInfo> getFileInfos() {
 		return fileInfos;

@@ -28,7 +28,7 @@ import cz.kolomet.domain.BaseDomainEntity;
     private Integer sequenceNr = 0;
     
     public static Sort defaultSort() {
-    	Order sequenceNrOrder = new Order(Direction.DESC, "sequenceNr");
+    	Order sequenceNrOrder = new Order(Direction.ASC, "sequenceNr");
     	Order codeDescriptionOrder = new Order(Direction.ASC, "codeDescription");
     	return new Sort(sequenceNrOrder, codeDescriptionOrder);
     }

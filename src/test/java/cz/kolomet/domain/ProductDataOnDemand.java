@@ -2,6 +2,7 @@ package cz.kolomet.domain;
 import java.math.BigDecimal;
 import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -119,7 +120,7 @@ public class ProductDataOnDemand {
 
 	public void setFigureHeight(Product obj, int index) {
         FigureHeight figureHeight = domainEntityDataOnDemand.getRandomDomainEntity(FigureHeight.class);
-        obj.setFigureHeight(figureHeight);
+        obj.setFigureHeights(Arrays.asList(figureHeight));
     }
 	
 	public void setPrice(Product obj, int index) {
@@ -145,7 +146,7 @@ public class ProductDataOnDemand {
 
 	public void setProductColor(Product obj, int index) {
         ProductColor productColor = domainEntityDataOnDemand.getRandomDomainEntity(ProductColor.class);
-        obj.setProductColor(productColor);
+        obj.setProductColors(Arrays.asList(productColor));
     }
 
 	public void setProductName(Product obj, int index) {

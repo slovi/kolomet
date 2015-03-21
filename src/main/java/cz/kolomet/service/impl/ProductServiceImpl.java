@@ -41,7 +41,7 @@ public class ProductServiceImpl implements ProductService {
     public void deleteProduct(Product product) {
         product.setEnabled(false);
         product.setValidTo(new Date());
-        product.setProductState(ProductState.DELETED);
+        product.setProductState(ProductState.DELETED);        
     }
 	
 	@PostAuthorize("isAnonymous() or principal.isCapableToDisplayProduct(returnObject)")
@@ -123,6 +123,7 @@ public class ProductServiceImpl implements ProductService {
 	@PreAuthorize("principal.isCapableToEraseProduct(#product)")
 	@CacheEvict(value = "cz.kolomet.domain.Product.values.max", allEntries = true)
 	public void eraseProduct(Product product) {
+		productRepository.deleteCopiedFrom(product);
 		productRepository.delete(product);
 	}
 

@@ -56,6 +56,18 @@ public class AbstractController implements MessageSourceAware {
 	@Value("${domain.static}")
 	private String staticDomain;
 	
+	@Value("${facebook.appId}")
+	private String facebookAppId;
+	
+	@Value("${facebook.app}")
+	private String facebookApp;
+	
+	@Value("${facebook.appOwner}")
+	private String facebookAppOwner;
+	
+	@Value("${facebook.appOwnerId}")
+	private String facebookAppOwnerId;
+	
 	protected MessageSource messageSource;
 	
 	protected MessageSourceAccessor messageSourceAcessor;
@@ -164,6 +176,26 @@ public class AbstractController implements MessageSourceAware {
 	@ModelAttribute("categoryPageSize")
 	public int getCategoryPageSize() {
 		return DEFAULT_PAGE_SIZE;
+	}
+	
+	@ModelAttribute("facebookAppId")
+	public String getFacebookAppId() {
+		return facebookAppId;
+	}
+	
+	@ModelAttribute("facebookApp")
+	public String getFacebookApp() {
+		return facebookApp;
+	}
+	
+	@ModelAttribute("facebookAppOwner")
+	public String getFacebookAppOwner() {
+		return facebookAppOwner;
+	}
+	
+	@ModelAttribute("facebookAppOwnerId")
+	public String getFacebookAppOwnerId() {
+		return facebookAppOwnerId;
 	}
 	
 	protected boolean isAjaxRequest(HttpServletRequest servletRequest) {

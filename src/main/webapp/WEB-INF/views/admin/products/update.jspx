@@ -50,12 +50,12 @@
         <field:input field="contents" id="c_cz_kolomet_domain_Product_contents" render="false" z="user-managed"/>
         <field:select field="productUsage" id="c_cz_kolomet_domain_Product_productUsage" itemLabel="codeDescription" itemValue="id" items="${productusages}" path="/admin/productusages" z="user-managed"/>
         <field:select field="bicycleCategory" id="c_cz_kolomet_domain_Product_bicycleCategory" itemLabel="codeDescription" itemValue="id" items="${bicyclecategories}" path="/admin/bicyclecategories" z="user-managed"/>
-        <field:select field="figureHeight" id="c_cz_kolomet_domain_Product_figureHeight" itemLabel="codeDescription" itemValue="id" items="${figureheights}" path="/admin/figureheights" z="user-managed"/>
-        <field:select emptyLabel="..." field="productColor" id="c_cz_kolomet_domain_Product_productColor" itemLabel="codeDescription" itemValue="id" items="${productcolors}" path="/admin/productcolors" z="user-managed"/>
+        <field:checkboxes id="c_cz_kolomet_domain_Product_figureHeight" itemLabel="codeDescription" itemValue="id" items="${figureheights}" field="figureHeights" cssClass="checkboxes" />
+        <field:checkboxes id="c_cz_kolomet_domain_Product_productColor" itemLabel="codeDescription" itemValue="id" items="${productcolors}" field="productColors" cssClass="checkboxes" />
         <c:set var="weightLabel">
             <spring:message code="label_cz_kolomet_domain_product_weight"/> (<spring:message code="weight_units"/>)        	
         </c:set>
-        <field:input field="weight" id="c_cz_kolomet_domain_Product_weight" label="${weightLabel}" required="true" validationMessageCode="typeMismatch.product.weight" validationRegex="(([1-9][0-9]{0,2}(,[0-9]{1,2})?)|(1000(,[0-9]{1,2})?))" z="user-managed"/>
+        <field:input field="weight" id="c_cz_kolomet_domain_Product_weight" label="${weightLabel}" validationMessageCode="typeMismatch.product.weight" validationRegex="(([1-9][0-9]{0,2}(,[0-9]{1,2})?)|(1000(,[0-9]{1,2})?))" z="user-managed"/>
         <field:input field="buyUrl" id="c_cz_kolomet_domain_Product_buyUrl" required="true" width="50" z="user-managed"/>
         <br/>
         <br/>

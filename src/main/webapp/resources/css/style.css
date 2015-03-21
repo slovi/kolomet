@@ -26,6 +26,16 @@ span.discount {
 	font-size: 1.5em;
 }
 
+div#category_content {
+	padding: 10px;
+	margin-top: 30px;
+}
+
+div#category_content .general_unit {
+	margin: 5px;
+	width: 912px;
+}
+
 div#container,div#header_background,div#menu_background {
 	width: 100%;
 	min-width: 1200px;
@@ -117,6 +127,20 @@ div.button_filter {
 
 input#button_filter {
 	display: none;
+}
+
+div.checkboxes div.checkboxes_values_wrapper {
+	margin-left: 210px;
+}
+
+div.checkboxes div.checkboxes_values_wrapper div {
+	float: left;
+	width: 120px;
+}
+
+div.checkboxes div label {
+	width: 100px;
+	float: none;
 }
 
 div.slider input {
@@ -372,7 +396,13 @@ div.category_unit div.cat_seller div {
 }
 
 div.category_unit div.cat_prodejce_popis div {
-	margin: 34px auto 0 auto !important;
+	margin: 12px auto 0 auto !important;
+}
+
+div.category_unit div.cat_prodejce_popis div a {
+	display: block;
+	width: 100px;
+	margin: auto;
 }
 
 div.detail_description div.order_button {
@@ -383,7 +413,7 @@ div.detail_description div.order_button {
 div.detail_description div.description {
 	width: 100%;
 	overflow-y: scroll; 
-	height: 160px;
+	height: 150px;
 }
 
 div.detail_description div.description_short {
@@ -576,7 +606,7 @@ div.detail_specifications {
 
 table.left_column {
 	width: 48%;
-	margin: 0 6px 0 0;
+	margin: 0 3px 0 0;
 	float: left;
 }
 

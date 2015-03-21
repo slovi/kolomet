@@ -205,7 +205,7 @@ define([ 'jquery' , 'jquery.fileupload', 'jquery.iframe-transport', 'http-servic
 		} else {
 			html.insertBefore(context.children().last());
 		}
-		$('button.cancel', html).click(function(e) {					
+		$('input.cancel', html).click(function(e) {					
 			
 			e.preventDefault();
 			
@@ -246,7 +246,7 @@ define([ 'jquery' , 'jquery.fileupload', 'jquery.iframe-transport', 'http-servic
 	
 	function getFiles(context) {
 		var files = [];
-		$('button.cancel', context).each(function(index, element) {
+		$('input.cancel', context).each(function(index, element) {
 			files[index] = $(element).data().files[0];
 		});
 		return files;

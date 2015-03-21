@@ -7,6 +7,7 @@ import org.springframework.format.annotation.NumberFormat.Style;
 
 import cz.kolomet.domain.Category;
 import cz.kolomet.domain.Producer;
+import cz.kolomet.domain.Seller;
 import cz.kolomet.domain.codelist.BicycleCategory;
 import cz.kolomet.domain.codelist.CategoryType;
 import cz.kolomet.domain.codelist.FigureHeight;
@@ -55,6 +56,8 @@ public class ProductFilterDto {
 	private FigureHeight figureHeight;
 	
 	private ProductColor productColor;
+	
+	private Seller seller;
 	
 	private Boolean canSendToAllCountry;
 	
@@ -221,6 +224,14 @@ public class ProductFilterDto {
 
 	public void setMaxWeightTo(Double maxWeightTo) {
 		this.maxWeightTo = maxWeightTo;
+	}
+
+	public Seller getSeller() {
+		return seller;
+	}
+
+	public void setSeller(Seller seller) {
+		this.seller = seller;
 	}
 
 }

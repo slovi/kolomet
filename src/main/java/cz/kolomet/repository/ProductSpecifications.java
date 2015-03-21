@@ -1,9 +1,11 @@
 package cz.kolomet.repository;
 
 import static cz.kolomet.util.db.JpaUtils.addBetweenNumberPredicate;
+import static cz.kolomet.util.db.JpaUtils.addBetweenNumberPredicateAddNullPredicate;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -26,6 +28,8 @@ import cz.kolomet.domain.Producer;
 import cz.kolomet.domain.Product;
 import cz.kolomet.domain.Seller;
 import cz.kolomet.domain.codelist.CategoryType;
+import cz.kolomet.domain.codelist.FigureHeight;
+import cz.kolomet.domain.codelist.ProductColor;
 import cz.kolomet.domain.codelist.Region;
 import cz.kolomet.dto.AdminProductFilterDto;
 import cz.kolomet.dto.ProductFilterDto;
@@ -83,7 +87,7 @@ public class ProductSpecifications {
 				List<Predicate> predicates = new ArrayList<Predicate>();
 				addBetweenNumberPredicate(predicates, cb, root.<BigDecimal> get("finalPrice"), productFilter.getPriceFrom(), productFilter.getPriceTo());
 				addBetweenNumberPredicate(predicates, cb, root.<BigDecimal> get("discount"), productFilter.getDiscountFrom(), productFilter.getDiscountTo());
-				addBetweenNumberPredicate(predicates, cb, root.<Double> get("weight"), productFilter.getWeightFrom(), productFilter.getWeightTo());
+				addBetweenNumberPredicateAddNullPredicate(predicates, cb, root.<Double> get("weight"), productFilter.getWeightFrom(), productFilter.getWeightTo());
 				
 				if (productFilter.getCategory() != null && !productFilter.getCategory().getCodeKey().equals(Category.ALL_CATEGORY_CODE_KEY)) {
 					predicates.add(cb.equal(root.get("category"), productFilter.getCategory()));
@@ -106,13 +110,16 @@ public class ProductSpecifications {
 					predicates.add(cb.equal(root.get("productUsage"), productFilter.getProductUsage()));
 				}
 				if (productFilter.getFigureHeight() != null) {
-					predicates.add(cb.equal(root.get("figureHeight"), productFilter.getFigureHeight()));
+					predicates.add(cb.isMember(productFilter.getFigureHeight(), root.<Collection<FigureHeight>> get("figureHeights")));
 				}
 				if (productFilter.getProductColor() != null) {
-					predicates.add(cb.equal(root.get("productColor"), productFilter.getProductColor()));
+					predicates.add(cb.isMember(productFilter.getProductColor(), root.<Collection<ProductColor>> get("productColors")));
 				}
 				if (productFilter.getBicycleCategory() != null) {
 					predicates.add(cb.equal(root.get("bicycleCategory"), productFilter.getBicycleCategory()));
+				}
+				if (productFilter.getSeller() != null) {
+					predicates.add(cb.equal(root.get("seller"), productFilter.getSeller()));
 				}
 				if (productFilter.getCategoryType() != null) {
 					Subquery<CategoryType> categoryTypeSubquery = query.subquery(CategoryType.class);

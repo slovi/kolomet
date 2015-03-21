@@ -126,4 +126,9 @@ public class PlaceServiceImpl implements PlaceService, RatedService {
 		return placeRepository.findAll(specification, pagable).getContent();
 	}
 	
+	public List<Place> findTopPlaces(Specification<Place> specification, int nubmerOfPlaces, boolean actual) {
+		Pageable pagable = new PageRequest(0, nubmerOfPlaces, PlaceSpecifications.getTopSort(actual));
+		return placeRepository.findAll(specification, pagable).getContent();
+	}
+	
 }

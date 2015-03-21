@@ -1,4 +1,4 @@
-<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:fn="http://java.sun.com/jsp/jstl/functions" version="2.0">
 
 	<jsp:scriptlet>
 	 	<![CDATA[
@@ -45,6 +45,7 @@
 			<title><spring:message code="${pageTitleCode}" arguments="${pageTitleArgs}" htmlEscape="false" /></title>
 		</head>
 		
+		<div id="fb-root"><jsp:text /></div>
 	  	<body class="tundra spring">
 	  		<div id="container">
 			    <tiles:insertAttribute name="header"/>
@@ -60,5 +61,16 @@
 			    <tiles:insertAttribute name="loader" />
 			</div>
 		</body>
+		
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		
+		  ga('create', 'UA-55300289-2', 'auto');
+		  ga('send', 'pageview');
+		</script>
+		
 	</html>
 </jsp:root>

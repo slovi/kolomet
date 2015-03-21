@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -39,7 +40,12 @@ public interface ProductRepository extends CustomRepository<Product, Long> {
 			"select p from Product p "
 			+ "inner join p.seller s "
 			+ "where s.enabled = true and s.id = :sellerId and p.enabled = true "
-				+ "and p.validFrom <= CURRENT_DATE and p.validTo >= CURRENT_DATE")
+				+ "and p.validFrom <= CURRENT_DATE and p.validTo >= CURRENT_DATE "
+			+ "order by p.id desc")
 	List<Product> findBySellerId(@Param("sellerId") Long sellerId, Pageable pageable);
+	
+	@Modifying
+	@Query("update Product set copiedFrom = null where copiedFrom = :copiedFrom")
+	void deleteCopiedFrom(@Param("copiedFrom") Product product);
 	
 }

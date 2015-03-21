@@ -12,7 +12,7 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     
-    <div class="general_unit" style="overflow: hidden; padding: 0px;">
+    <div style="min-height: 327px;padding:0;" class="general_unit">
     
     	<spring:url value="/resources/images/ajax-loader.gif" var="loaderUrl" />
     	<spring:url value="/resources/images/places/no-photo-detail.jpg" var="noPhotoUrl" />
@@ -39,7 +39,9 @@
 	            </p>
 	        </div>
 	        <div id="fb-root" style="float:left;">
-    			<div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-action="like" data-show-faces="true" data-share="false"><jsp:text/></div>
+	        	<div class="fb-like" data-href="http://facebook.com/kolomet.cz" data-layout="button" data-action="like" data-show-faces="false" data-share="false"><jsp:text/></div>
+    			<util:nbsp />
+    			<div class="fb-share-button" data-href="http://www.kolomet.cz/tour/public/places/${place.id}" data-layout="button"><jsp:text /></div>
        		</div>
 	        <div class="detail_author">
 	        	Autor: <c:out value="${place.owner.nickname}" />
@@ -67,8 +69,8 @@
                 </p>
             </div>
         </div>
-        
     </div>
+
     <div class="general_unit" style="min-height: 165px;">
     	<div class="left_column">
         <table>
@@ -195,15 +197,5 @@
 	        </c:otherwise>
 	    </c:choose>
     </div>
-    
-    <script>
-		(function(d, s, id) {
-	  		var js, fjs = d.getElementsByTagName(s)[0];
-	  		if (d.getElementById(id)) return;
-	  		js = d.createElement(s); js.id = id;
-	  		js.src = "//connect.facebook.net/cs_CZ/sdk.js#xfbml=1&amp;version=v2.0";
-	  		fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));
-	</script>
 
 </div>

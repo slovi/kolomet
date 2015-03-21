@@ -17,6 +17,9 @@ import cz.kolomet.service.FigureHeightService;
 @Transactional
 public class FigureHeightServiceImpl implements FigureHeightService {
 	
+	@Autowired
+	FigureHeightRepository figureHeightRepository;
+	
 	public Page<FigureHeight> findFigureHeightEntries(Pageable pageable) {
 		return figureHeightRepository.findAll(pageable);
 	}
@@ -24,10 +27,6 @@ public class FigureHeightServiceImpl implements FigureHeightService {
     public List<FigureHeight> findAllFigureHeights() {
         return figureHeightRepository.findAll(Codelist.defaultSort());
     }
-	
-
-	@Autowired
-    FigureHeightRepository figureHeightRepository;
 
 	public long countAllFigureHeights() {
         return figureHeightRepository.count();

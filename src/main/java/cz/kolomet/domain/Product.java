@@ -11,9 +11,12 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Transient;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
@@ -92,11 +95,20 @@ public class Product extends BaseDomainEntity implements Cloneable, PhotoContain
     @ManyToOne(fetch = FetchType.LAZY)
     private BicycleCategory bicycleCategory;
     
-    @ManyToOne(fetch = FetchType.LAZY)
-    private FigureHeight figureHeight;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+    		name="PRODUCT_FIGURE_HEIGHT",
+    		joinColumns={@JoinColumn(name="PRODUCT_ID", referencedColumnName="ID")},
+    		inverseJoinColumns={@JoinColumn(name="FIGURE_HEIGHT_ID", referencedColumnName="ID")})
+    @OrderBy("sequenceNr ASC, codeDescription ASC")
+    private List<FigureHeight> figureHeights;
     
-    @ManyToOne(fetch = FetchType.LAZY)
-    private ProductColor productColor;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+    		name="PRODUCT_PRODUCT_COLOR",
+    		joinColumns={@JoinColumn(name="PRODUCT_ID", referencedColumnName="ID")},
+    		inverseJoinColumns={@JoinColumn(name="PRODUCT_COLOR_ID", referencedColumnName="ID")})
+    private List<ProductColor> productColors;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PRODUCT_ID")
@@ -120,10 +132,9 @@ public class Product extends BaseDomainEntity implements Cloneable, PhotoContain
     
     private Boolean deliveryForFree;
     
-    @NotNull
     @Min(1)
     @Max(1000)
-    @NumberFormat(pattern = "###")
+    @NumberFormat(pattern = "###.#################")
     private Double weight;
     
     @NotNull
@@ -269,8 +280,8 @@ public class Product extends BaseDomainEntity implements Cloneable, PhotoContain
     	}
     }
     
-    public void copyAllPhotoUrlFiles(File baseFolder, File targetFolder) {
-    	for (PhotoUrl photoUrl: getCopiedFrom().getPhotoUrls()) {
+    public void copyAllPhotoUrlFiles(Product copiedFrom, File baseFolder, File targetFolder) {
+    	for (PhotoUrl photoUrl: copiedFrom.getPhotoUrls()) {
     		copyPhotoUrlFiles(photoUrl.getFileName(), baseFolder, targetFolder);
     	}
     }
@@ -444,20 +455,20 @@ public class Product extends BaseDomainEntity implements Cloneable, PhotoContain
         this.bicycleCategory = bicycleCategory;
     }
 
-	public FigureHeight getFigureHeight() {
-        return this.figureHeight;
+	public List<FigureHeight> getFigureHeights() {
+        return this.figureHeights;
     }
 
-	public void setFigureHeight(FigureHeight figureHeight) {
-        this.figureHeight = figureHeight;
+	public void setFigureHeights(List<FigureHeight> figureHeights) {
+        this.figureHeights = figureHeights;
     }
 
-	public ProductColor getProductColor() {
-        return this.productColor;
+	public List<ProductColor> getProductColors() {
+        return this.productColors;
     }
 
-	public void setProductColor(ProductColor productColor) {
-        this.productColor = productColor;
+	public void setProductColors(List<ProductColor> productColors) {
+        this.productColors = productColors;
     }
 
 	public Product getCopiedFrom() {

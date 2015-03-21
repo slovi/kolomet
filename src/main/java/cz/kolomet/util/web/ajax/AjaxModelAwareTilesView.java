@@ -33,7 +33,7 @@ public class AjaxModelAwareTilesView extends AjaxTilesView {
 	protected void writeModelFragmentValue(String modelFragment, Object modelFragmentValue, HttpServletResponse response) throws Exception {
 
 		PrintWriter writer = response.getWriter(); 
-		writer.println("<span id=\"model__" + modelFragment + "\">");
+		writer.println("<span id=\"model__" + modelFragment + "\" style=\"display: none;\">");
 		writer.println(modelFragmentValue);
 		writer.println("</span>");
 		writer.flush();

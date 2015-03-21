@@ -81,12 +81,18 @@ public class PlaceSpecifications {
 	}
 	
 	public static Sort getTopSort() {
-		
-		Order rankingOrder = new Order(Direction.DESC, "qualityRanking");
-		Order nrOfRankingsOrder = new Order(Direction.DESC, "nrOfRankings");
+		return getTopSort(true);
+	}
+	
+	public static Sort getTopSort(boolean actual) {
 		Order idOrder = new Order(Direction.DESC, "id");
-		
-		return new Sort(rankingOrder, nrOfRankingsOrder, idOrder);
+		if (actual) {
+			return new Sort(idOrder);
+		} else {
+			Order rankingOrder = new Order(Direction.DESC, "qualityRanking");
+			Order nrOfRankingsOrder = new Order(Direction.DESC, "nrOfRankings");
+			return new Sort(rankingOrder, nrOfRankingsOrder, idOrder);
+		}
 	}
 	
 }

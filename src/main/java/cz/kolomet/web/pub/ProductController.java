@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,7 @@ import cz.kolomet.service.ProductColorService;
 import cz.kolomet.service.ProductService;
 import cz.kolomet.service.ProductUsageService;
 import cz.kolomet.service.RegionService;
+import cz.kolomet.service.SellerService;
 import cz.kolomet.util.PageDto;
 
 @RequestMapping("/public/products")
@@ -57,6 +59,9 @@ public class ProductController extends AbstractPublicController {
 	@Autowired
 	private ProducerService producerService;
 	
+	@Autowired
+	private SellerService sellerService;
+	
 	@RequestMapping("/detail/{id}")
 	public String detail(@PathVariable("id") Long id, Model model, HttpServletRequest request) {
 		
@@ -64,12 +69,22 @@ public class ProductController extends AbstractPublicController {
 		model.addAttribute("product", product);
 		model.addAttribute("productAttributes", productAttributeRepository.findByProductOrderByAttributeType_SequenceNr(product));
 		model.addAttribute("pageTitleCode", "page_product_detail_title");
+		model.addAttribute("pageTitleArgs", product.getProductName());
 		model.addAttribute("pageDescriptionCode", "page_product_detail_description");
+		model.addAttribute("pageDescriptionArgs", product.getProductName());
 		return "public/products/detail";
 	}
 	
 	@RequestMapping("/filter")
-	public String filterByProductFilter(@Valid ProductFilterDto productFilter, BindingResult result, Model model, @PageableDefault(DEFAULT_PAGE_SIZE) Pageable pageable) {	
+	public String filterByProductFilter(@Valid ProductFilterDto productFilter, BindingResult result, Model model, @PageableDefault(DEFAULT_PAGE_SIZE) Pageable tempPageable, HttpServletRequest servletRequest) {	
+		
+		Pageable pageable = null;
+		String append = servletRequest.getParameter("append");
+		if (!Boolean.valueOf(append)) {
+			pageable = new PageRequest(0, (tempPageable.getPageNumber() + 1) * tempPageable.getPageSize(), tempPageable.getSort());
+		} else {
+			pageable = new PageRequest(tempPageable.getPageNumber(), tempPageable.getPageSize(), tempPageable.getSort());
+		}
 		
 		populateFilterForm(productFilter, model);
 		// TODO predelat na service a dto
@@ -81,7 +96,13 @@ public class ProductController extends AbstractPublicController {
 		if (products.getSort().getOrderFor("discount") != null) {
 			model.addAttribute("discountAscending", products.getSort().getOrderFor("discount").isAscending());
 		}
-		model.addAttribute("pageTitleCode", "page_product_filter_title");
+		if (productFilter.getCategory() == null) {
+			model.addAttribute("pageTitleCode", "page_product_filter_title");
+		} else {
+			model.addAttribute("filteredCategory", productFilter.getCategory());
+			model.addAttribute("pageTitleCode", "page_product_filter_title_args");
+			model.addAttribute("pageTitleArgs", new Object[] {productFilter.getCategory().getCodeDescription()});
+		}
 		model.addAttribute("pageDescriptionCode", "page_product_filter_description");
 		
 		List<Producer> producers = producerService.findAllProducers();
@@ -129,6 +150,7 @@ public class ProductController extends AbstractPublicController {
 		model.addAttribute("productcolors", productColorService.findAllProductColors());
 		model.addAttribute("bicyclecategories", bicycleCategoryService.findAllBicycleCategorys());
 		model.addAttribute("productFilter", productFilter);
+		model.addAttribute("sellers", sellerService.findAllSellers());
 	}
 	
 }

@@ -59,8 +59,10 @@
         		<p><jsp:text /></p>
         		<p><c:out escapeXml="false" value="${product.description}" /></p>
         	</div>
-			<div id="fb-root" style="float:left;margin-top: 25px;">
-    			<div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-action="like" data-show-faces="true" data-share="false"><jsp:text/></div>
+			<div style="float:left;margin-top: 25px;">
+    			<div class="fb-like" data-href="http://facebook.com/kolomet.cz" data-layout="button" data-action="like" data-show-faces="false" data-share="false"><jsp:text/></div>
+    			<util:nbsp />
+				<div class="fb-share-button" data-href="http://www.kolomet.cz/store/public/products/detail/${product.id}" data-layout="button"><jsp:text /></div>
        		</div>
         	<div class="order_button">        
         		<c:if test="${not empty product.buyUrl}">
@@ -99,7 +101,11 @@
        			</tr>
        			<tr>
        				<td><b><spring:message code="label_cz_kolomet_domain_product_figureheight" /></b></td>
-       				<td><c:out value="${product.figureHeight.codeDescription}" /></td>
+       				<td>
+       					<c:forEach items="${product.figureHeights}" var="figureHeight">
+       						<c:out value="${figureHeight.codeDescription}" />, 
+       					</c:forEach>
+       				</td>
        			</tr>
        			<tr>
        				<td><b><spring:message code="label_cz_kolomet_domain_product_bicyclecategory" /></b></td>
@@ -121,11 +127,15 @@
        			</tr>
        			<tr>
        				<td><b><spring:message code="label_cz_kolomet_domain_product_productcolor" /></b></td>
-       				<td><c:out value="${product.productColor.codeDescription}" /></td>
+       				<td>
+       					<c:forEach items="${product.productColors}" var="productColor">
+       						<c:out value="${productColor.codeDescription}" />, 
+       					</c:forEach>
+       				</td>       					
        			</tr>
        			
         		<c:forEach items="${productAttributes}" var="attribute">        			
-        			<c:if test="${not attribute.colorAttribute or (attribute.colorAttribute and not empty attribute.attributeValue)}">
+        			<c:if test="${not empty attribute.attributeValue}">
 	        			<tr>
 	        				<td><b><c:out value="${attribute.attributeType.codeDescription}" /></b></td>
 	        				<td>
@@ -137,15 +147,18 @@
 	        			</tr>
         			</c:if>
         		</c:forEach>
-        		<tr>
-       				<td><b><spring:message code="label_cz_kolomet_domain_product_validfrom" /></b></td>
-       				<td><spring:eval expression="product.validFrom" /></td>
-       			</tr>
-       			<tr>
-       				<td><b><spring:message code="label_cz_kolomet_domain_product_validto" /></b></td>
-       				<td><spring:eval expression="product.validTo" /></td>
-       			</tr>
-       		</table>        		          
+        		
+        		<security:authorize access="isAuthenticated()">
+	        		<tr>
+	       				<td><b><spring:message code="label_cz_kolomet_domain_product_validfrom" /></b></td>
+	       				<td><spring:eval expression="product.validFrom" /></td>
+	       			</tr>
+	       			<tr>
+	       				<td><b><spring:message code="label_cz_kolomet_domain_product_validto" /></b></td>
+	       				<td><spring:eval expression="product.validTo" /></td>
+	       			</tr>
+       			</security:authorize>
+       		</table>   		          
        		<table class="right_column">
        			<tr>
        				<td><b><spring:message code="label_cz_kolomet_domain_seller_region" /></b></td>
@@ -213,16 +226,6 @@
 	    		<util:quicklinks update="${update}" copy="${copy}" create="false" erase="${erase}" list="true" itemId="${product.id}" typeName="product" delete="${delete}" typeNamePlural="products" path="${subContext}/admin/products" largeIcons="true" />
 	    	</security:authorize>
     	</security:authorize>
-    </div>          
-    
-    <script>
-		(function(d, s, id) {
-	  		var js, fjs = d.getElementsByTagName(s)[0];
-	  		if (d.getElementById(id)) return;
-	  		js = d.createElement(s); js.id = id;
-	  		js.src = "//connect.facebook.net/cs_CZ/sdk.js#xfbml=1&amp;version=v2.0";
-	  		fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));
-	</script>
+    </div>
     
 </div>

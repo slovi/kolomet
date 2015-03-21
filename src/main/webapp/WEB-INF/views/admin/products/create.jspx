@@ -25,33 +25,33 @@
         <c:set var="discountLabel">
             <spring:message code="label_cz_kolomet_domain_product_discount" htmlEscape="false"/> (<spring:message code="currency_short"/>)        	
         </c:set>
-        <field:input field="discount" id="c_cz_kolomet_domain_Product_discount" label="${discountLabel}" readonly="true" required="true" validationMessageCode="field_invalid_number" z="user-managed"/>
-        <field:select field="copiedFrom" id="c_cz_kolomet_domain_Product_copiedFrom" itemValue="id" items="${products}" path="/admin/products" render="false" z="user-managed"/>
-        <field:select field="productState" id="c_cz_kolomet_domain_Product_productState" items="${productstates}" path="productstates" render="false" z="user-managed"/>
-        <field:select field="category" id="c_cz_kolomet_domain_Product_category" itemLabel="codeDescription" itemValue="id" items="${categorys}" path="/admin/categorys" z="user-managed"/>
-        <field:select field="producer" id="c_cz_kolomet_domain_Product_producer" itemLabel="codeDescription" itemValue="id" items="${producers}" path="/admin/producers" z="user-managed"/>
-        <field:datetime dateTimePattern="${product_validfrom_date_format}" field="validFrom" id="c_cz_kolomet_domain_Product_validFrom" required="true" z="user-managed"/>
-        <field:datetime dateTimePattern="${product_validto_date_format}" field="validTo" id="c_cz_kolomet_domain_Product_validTo" required="true" z="user-managed"/>
+        <field:input field="discount" id="c_cz_kolomet_domain_Product_discount" label="${discountLabel}" readonly="true" required="true" validationMessageCode="field_invalid_number" />
+        <field:select field="copiedFrom" id="c_cz_kolomet_domain_Product_copiedFrom" itemValue="id" items="${products}" path="/admin/products" render="false" />
+        <field:select field="productState" id="c_cz_kolomet_domain_Product_productState" items="${productstates}" path="productstates" render="false" />
+        <field:select field="category" id="c_cz_kolomet_domain_Product_category" itemLabel="codeDescription" itemValue="id" items="${categorys}" path="/admin/categorys" />
+        <field:select field="producer" id="c_cz_kolomet_domain_Product_producer" itemLabel="codeDescription" itemValue="id" items="${producers}" path="/admin/producers" />
+        <field:datetime dateTimePattern="${product_validfrom_date_format}" field="validFrom" id="c_cz_kolomet_domain_Product_validFrom" required="true" />
+        <field:datetime dateTimePattern="${product_validto_date_format}" field="validTo" id="c_cz_kolomet_domain_Product_validTo" required="true" />
         <security:authorize access="principal.isSellersAll()">
-        	<field:select field="seller" id="c_cz_kolomet_domain_Product_seller" itemLabel="sellerName" itemValue="id" items="${sellers}" path="/admin/sellers" z="user-managed"/>
+        	<field:select field="seller" id="c_cz_kolomet_domain_Product_seller" itemLabel="sellerName" itemValue="id" items="${sellers}" path="/admin/sellers" />
         </security:authorize>
-        <field:simple field="photoUrls" id="c_cz_kolomet_domain_Product_photoUrls" messageCode="entity_reference_not_managed" messageCodeAttribute="Photo Url" render="false" z="user-managed"/>
-        <field:simple field="productAttributes" id="c_cz_kolomet_domain_Product_productAttributes" messageCode="entity_reference_not_managed" messageCodeAttribute="Product Attribute" render="false" z="user-managed"/>
-        <field:checkbox field="enabled" id="c_cz_kolomet_domain_Product_enabled" render="false" z="user-managed"/>
-        <field:checkbox field="canSendToAllCountry" id="c_cz_kolomet_domain_Product_canSendToAllCountry" z="8sX6jZghVHGKYZWe/Q5nXF2KvS0="/>
-        <field:checkbox field="deliveryForFree" id="c_cz_kolomet_domain_Product_deliveryForFree" z="fRG9Ng4/rQFL+PQE55LHK066xN0="/>
-        <field:input field="createdBy" id="c_cz_kolomet_domain_Product_createdBy" render="false" z="user-managed"/>
-        <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_Product_lastModifiedBy" render="false" z="user-managed"/>
-        <field:datetime dateTimePattern="${product_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_Product_lastModified" render="false" z="user-managed"/>
-        <field:input field="contents" id="c_cz_kolomet_domain_Product_contents" render="false" z="user-managed"/>
-        <field:select field="productUsage" id="c_cz_kolomet_domain_Product_productUsage" itemLabel="codeDescription" itemValue="id" items="${productusages}" path="/admin/productusages" z="user-managed"/>
-        <field:select field="bicycleCategory" id="c_cz_kolomet_domain_Product_bicycleCategory" itemLabel="codeDescription" itemValue="id" items="${bicyclecategories}" path="/admin/bicyclecategories" z="user-managed"/>
-        <field:select field="figureHeight" id="c_cz_kolomet_domain_Product_figureHeight" itemLabel="codeDescription" itemValue="id" items="${figureheights}" path="/admin/figureheights" z="user-managed"/>
-        <field:select emptyLabel="..." field="productColor" id="c_cz_kolomet_domain_Product_productColor" itemLabel="codeDescription" itemValue="id" items="${productcolors}" path="/admin/productcolors" z="user-managed"/>
+        <field:simple field="photoUrls" id="c_cz_kolomet_domain_Product_photoUrls" messageCode="entity_reference_not_managed" messageCodeAttribute="Photo Url" render="false" />
+        <field:simple field="productAttributes" id="c_cz_kolomet_domain_Product_productAttributes" messageCode="entity_reference_not_managed" messageCodeAttribute="Product Attribute" render="false" />
+        <field:checkbox field="enabled" id="c_cz_kolomet_domain_Product_enabled" render="false" />
+        <field:checkbox field="canSendToAllCountry" id="c_cz_kolomet_domain_Product_canSendToAllCountry" />
+        <field:checkbox field="deliveryForFree" id="c_cz_kolomet_domain_Product_deliveryForFree" />
+        <field:input field="createdBy" id="c_cz_kolomet_domain_Product_createdBy" render="false" />
+        <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_Product_lastModifiedBy" render="false" />
+        <field:datetime dateTimePattern="${product_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_Product_lastModified" render="false" />
+        <field:input field="contents" id="c_cz_kolomet_domain_Product_contents" render="false" />
+        <field:select field="productUsage" id="c_cz_kolomet_domain_Product_productUsage" itemLabel="codeDescription" itemValue="id" items="${productusages}" path="/admin/productusages" />
+        <field:select field="bicycleCategory" id="c_cz_kolomet_domain_Product_bicycleCategory" itemLabel="codeDescription" itemValue="id" items="${bicyclecategories}" path="/admin/bicyclecategories" />        
+        <field:checkboxes id="c_cz_kolomet_domain_Product_figureHeight" itemLabel="codeDescription" itemValue="id" items="${figureheights}" field="figureHeights" cssClass="checkboxes" />
+        <field:checkboxes id="c_cz_kolomet_domain_Product_productColor" itemLabel="codeDescription" itemValue="id" items="${productcolors}" field="productColors" cssClass="checkboxes" />
         <c:set var="weightLabel">
             <spring:message code="label_cz_kolomet_domain_product_weight"/> (<spring:message code="weight_units"/>)        	
         </c:set>
-        <field:input field="weight" id="c_cz_kolomet_domain_Product_weight" label="${weightLabel}" required="true" validationMessageCode="typeMismatch.product.weight" validationRegex="(([1-9][0-9]{0,2}(,[0-9]{1,2})?)|(1000(,[0-9]{1,2})?))" z="user-managed"/>
+        <field:input field="weight" id="c_cz_kolomet_domain_Product_weight" label="${weightLabel}" validationMessageCode="typeMismatch.product.weight" validationRegex="(([1-9][0-9]{0,2}(,[0-9]{1,2})?)|(1000(,[0-9]{1,2})?))" z="user-managed"/>
         <field:input field="buyUrl" id="c_cz_kolomet_domain_Product_buyUrl" required="true" width="50" z="user-managed"/>
         <br/>
         <spring:message code="label_cz_kolomet_domain_product_productattributes" var="productattributes_panel_label"/>

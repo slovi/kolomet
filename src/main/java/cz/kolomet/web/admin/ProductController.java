@@ -95,7 +95,8 @@ public class ProductController extends AbstractAdminController {
     	Product product = productService.copyProduct(id);
     	File targetFolder = new File(new File(rootDir, tempDir), httpServletRequest.getSession().getId());
     	FileUtils.forceMkdir(targetFolder);
-    	product.copyAllPhotoUrlFiles(getDestFolder(product.getCopiedFrom()), targetFolder);
+    	Product copiedProduct = productService.findProduct(id);
+    	product.copyAllPhotoUrlFiles(copiedProduct, getDestFolder(copiedProduct), targetFolder);
         populateEditForm(uiModel, product);
         return "admin/products/create";
     }
