@@ -327,6 +327,11 @@ div.homepage_unit div.home_description {
 	margin: 0;
 }
 
+div.homepage_unit div.home_description h2 {
+	color: #f1941c;
+	margin: .4em 0;
+}
+
 div.homepage_unit div.home_description div.description {
 	width: 100%;
 	height: 60px;

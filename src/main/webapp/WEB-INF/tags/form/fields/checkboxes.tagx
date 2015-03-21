@@ -1,0 +1,58 @@
+<jsp:root xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:spring="http://www.springframework.org/tags" 
+	xmlns:utilfn="http://www.easyjavacode.com/util-fn"
+	xmlns:grid="urn:jsptagdir:/WEB-INF/tags/grid" version="2.0">
+
+	<jsp:output omit-xml-declaration="yes" />
+	<jsp:directive.attribute name="id" required="true"/>
+	<jsp:directive.attribute name="field" type="java.lang.String" required="true" rtexprvalue="true" description="The field exposed from the form backing object" />
+	<jsp:directive.attribute name="cssClass" type="java.lang.String" required="false" rtexprvalue="true" description="Css class" />
+	<jsp:directive.attribute name="label" type="java.lang.String" required="false" rtexprvalue="true" description="The label used for this field, will default to a message bundle if not supplied" />
+	<jsp:directive.attribute name="items" required="true" type="java.util.Collection"/>
+	<jsp:directive.attribute name="itemLabel" required="true"/>
+	<jsp:directive.attribute name="itemValue" required="false"/>
+	<jsp:directive.attribute name="render" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Indicate if the contents of this tag and all enclosed tags should be rendered (default 'true')" />	
+	<jsp:directive.attribute name="decorated" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Render dojo select" />
+
+	<c:if test="${empty render or render}">
+
+		<c:set value="${fn:length(items)}" var="itemsSize" />
+		
+		<c:if test="${empty label}">
+      		<spring:message code="label_${fn:toLowerCase(fn:substringAfter(id,'_'))}" var="label" htmlEscape="false" />
+    	</c:if>
+    	<c:set var="sec_field">
+      		<spring:escapeBody javaScriptEscape="true">${field}</spring:escapeBody>
+    	</c:set>
+	
+		<script type="text/javascript">dojo.require("dijit.form.CheckBox");</script>
+		<div id="_${sec_id}_id" class="${cssClass}">
+			<label for="_${sec_field}_id">
+		        <c:out value="${fn:escapeXml(label)}" />:
+		    </label>
+		    <div class="checkboxes_values_wrapper">
+				<c:choose>					
+					<c:when test="${not empty itemValue}">
+						<form:checkboxes id="_${sec_field}_id" element="div" items="${items}" 
+							itemLabel="${itemLabel}" itemValue="${itemValue}" path="${field}" />
+					</c:when>
+					<c:otherwise>
+						<form:checkboxes id="_${sec_field}_id" element="div" items="${items}" itemLabel="${itemLabel}" path="${field}" />
+					</c:otherwise>
+				</c:choose>			
+				<c:if test="${decorated}">
+			      <script type="text/javascript">
+			      	Spring.addDecoration(new Spring.ElementDecoration({elementId : '_${sec_field}_id', widgetType : 'dijit.form.CheckBox', widgetAttrs : {}}));
+			      </script>
+			  	</c:if>
+		  	</div>
+		</div>
+		<div class="clear" style="clear: both"><jsp:text /></div>
+		<br />
+		<br />
+	</c:if>
+
+</jsp:root>

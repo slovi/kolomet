@@ -54,7 +54,9 @@
 				}
 				
 				div.homepage_unit div.home_description {
-					height: 230px;
+					height: 200px;
+					text-align: center;
+					padding-top: 0px;
 				}
 				
 				div.homepage_unit div.home_seller {
@@ -94,7 +96,8 @@
 						<img alt="kolomet obchod vstup" title="kolomet obchod vstup" src="${storeImgUrl}" />
 					</a>
 					<div class="home_description">
-						<p style="font-weight: bold; font-size: 1.1em; margin-bottom: 5px;"><spring:message code="intro.store.1" htmlEscape="false" /></p>
+						<h2><spring:message code="intro.store.head" /></h2>
+						<p style="text-align: left; font-weight: bold; font-size: 1.1em; margin-bottom: 5px;"><spring:message code="intro.store.1" htmlEscape="false" /></p>
 						<p style="font-style: italic; color: #f1941c; font-weight: bold;"><spring:message code="intro.store.2" htmlEscape="false" /></p>
 					</div>
 					<div class="home_seller">
@@ -111,7 +114,8 @@
 					</a>
 					<!-- odkaz na detail inzerátu -->
 					<div class="home_description">
-						<p style="font-weight: bold; font-size: 1.1em; margin-bottom: 5px;"><spring:message code="intro.tour.1" htmlEscape="false" /></p>
+						<h2><spring:message code="intro.tour.head" /></h2>
+						<p style="text-align: left; font-weight: bold; font-size: 1.1em; margin-bottom: 5px;"><spring:message code="intro.tour.1" htmlEscape="false" /></p>
 						<!-- odkaz na detail inzerátu -->
 						<p style="font-style: italic; color: #f1941c; font-weight: bold;"><spring:message code="intro.tour.2" htmlEscape="false" /></p>
 					</div>
