@@ -8,6 +8,7 @@
   <jsp:directive.attribute name="label" type="java.lang.String" required="false" rtexprvalue="true" description="The label used for this menu item" />
   <jsp:directive.attribute name="styleClass" type="java.lang.String" required="false" rtexprvalue="true" description="The styleClass for this category (if not set the empty class is used)"/>
   <jsp:directive.attribute name="messageCode" type="java.lang.String" required="false" rtexprvalue="true" description="The global message code to be used (works in conjunction with label)" />
+  <jsp:directive.attribute name="messageCodeTitle" type="java.lang.String" required="false" rtexprvalue="true" description="The global message title code to be used (works in conjunction with label)" />
   <jsp:directive.attribute name="sort" type="java.lang.String" required="false" rtexprvalue="true" description="Sort attribute sent to controller as request param" />
   <jsp:directive.attribute name="sortDesc" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Sort Desc attribute sent to controller as request param" />
   <jsp:directive.attribute name="render" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Indicate if the contents of this tag and all enclosed tags should be rendered (default 'true')" />
@@ -22,6 +23,13 @@
 
     <c:if test="${not empty messageCode}">
       <spring:message code="${messageCode}" var="label" arguments="${label}" htmlEscape="false" />
+    </c:if>
+    
+    <c:if test="${empty messageCodeTitle}">
+    	<c:set var="title" value="${label}" />
+    </c:if>
+    <c:if test="${not empty messageCodeTitle}">
+    	<spring:message code="${messageCodeTitle}" var="title" htmlEscape="false" />
     </c:if>
     
     <c:if test="${empty defaultPageSize}">
@@ -53,12 +61,12 @@
       </spring:url>
       <c:choose>
       	<c:when test="${not empty blank and blank}">
-      	  <a href="${menu_item_url}" target="_blank" title="${fn:escapeXml(label)}" class="${styleClass}">
+      	  <a href="${menu_item_url}" target="_blank" title="${title}" class="${styleClass}">
 	        <c:out value="${label}" escapeXml="false"/>
 	      </a>
       	</c:when>
       	<c:otherwise>
-	      <a href="${menu_item_url}" title="${fn:escapeXml(label)}" class="${styleClass}">
+	      <a href="${menu_item_url}" title="${title}" class="${styleClass}">
 	        <c:out value="${label}" escapeXml="false"/>
 	      </a>
       	</c:otherwise>

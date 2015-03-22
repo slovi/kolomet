@@ -12,6 +12,7 @@
     			<menu:item url="/store/public/sellers/map" messageCode="menu_main_sellers" id="sellers" renderPageParams="false" />
     			<menu:item url="/store/public/about" messageCode="menu_main_about" id="about" renderPageParams="false" />
     			
+    			<menu:item url="https://www.youtube.com/channel/UCjttZgTs3dS2HKcu76iQzbg/feed" messageCode="menu_main_help" messageCodeTitle="menu_main_help_title" id="help" renderPageParams="false" styleClass="admin" blank="true" />
     			<security:authorize access="isFullyAuthenticated() and (principal.isProductsOwn() or principal.isProductsAll())">
 	    			<menu:category id="admin_menu" styleClass="admin" messageCode="menu_main_our_kolomet" url="#">
 	    			

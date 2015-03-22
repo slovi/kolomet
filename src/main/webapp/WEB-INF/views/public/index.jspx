@@ -59,10 +59,6 @@
 					padding-top: 0px;
 				}
 				
-				div.homepage_unit div.home_seller {
-					min-height: inherit;
-				}
-				
 			</style>
 			
 			<script type="text/javascript">
@@ -71,7 +67,7 @@
 					var homeDescriptions = $('div.home_description');
 					homeDescriptions.css('cursor', 'pointer');
 					homeDescriptions.click(function(event) {
-						var href = $('div.home_seller a', $(this).parent()).attr('href');
+						var href = $('a:first', $(this).parent()).attr('href');
 						location.href = href;
 					});
 				});
@@ -100,11 +96,6 @@
 						<p style="text-align: left; font-weight: bold; font-size: 1.1em; margin-bottom: 5px;"><spring:message code="intro.store.1" htmlEscape="false" /></p>
 						<p style="font-style: italic; color: #f1941c; font-weight: bold;"><spring:message code="intro.store.2" htmlEscape="false" /></p>
 					</div>
-					<div class="home_seller">
-						<center>
-							<a href="${storeIndexUrl}" style="font-size: 1.5em;"><spring:message code="intro.store.link" /></a>
-						</center>
-					</div>
 				</div>
 				<div class="homepage_unit" style="float: right;">
 					<spring:url value="/tour/public/places" var="tourIndexUrl" />
@@ -118,11 +109,6 @@
 						<p style="text-align: left; font-weight: bold; font-size: 1.1em; margin-bottom: 5px;"><spring:message code="intro.tour.1" htmlEscape="false" /></p>
 						<!-- odkaz na detail inzerátu -->
 						<p style="font-style: italic; color: #f1941c; font-weight: bold;"><spring:message code="intro.tour.2" htmlEscape="false" /></p>
-					</div>
-					<div class="home_seller">
-						<center>
-							<a href="${tourIndexUrl}" style="font-size: 1.5em;"><spring:message code="intro.tour.link" /></a>
-						</center>
 					</div>
 				</div>
 			</div>

@@ -11,6 +11,7 @@
     			<menu:item url="/tour/public/places" messageCode="menu_main_places_intro" id="intro" renderPageParams="false" />
     			<menu:item url="/tour/public/game" messageCode="menu_main_places_game" id="intro" renderPageParams="false" />
     		
+    			<menu:item url="https://www.youtube.com/channel/UCjttZgTs3dS2HKcu76iQzbg/feed" messageCode="menu_main_help" messageCodeTitle="menu_main_help_title" id="help" renderPageParams="false" styleClass="admin" blank="true" />
     			<security:authorize access="isFullyAuthenticated()">
 	    			<menu:category id="admin_menu" styleClass="admin" messageCode="menu_main_our_kolomet" url="#">
 
