@@ -42,6 +42,18 @@ div#header {
 	width: 1188px;
 	height: 125px;
 	margin: 0 auto;
+	background: url(../img/background/mista_bg.png) no-repeat;
+}
+
+div#header div.login-area {
+	margin-top: 50px;
+	float: right;
+}
+
+div#header div.login-area div.fb-like {
+	margin-top: 20px;
+	float: right;
+	width: 90px;
 }
 
 div#menu_container {
@@ -520,11 +532,6 @@ a.action_button {
 
 a.action_button_dark {
 	padding: 12px 30px 12px 30px;
-}
-
-div#header a.action_button {
-	margin: 50px 0 0 0;
-	float: right;
 }
 
 /* detail */
@@ -1101,11 +1108,6 @@ p.price,p.detail_price {
 	color: white;
 	font-weight: bold;
 	font-size: 1.1em;
-}
-
-/* Hlavní styly pro mutaci: Místa */
-div#header {
-	background: url(../img/background/mista_bg.png) no-repeat;
 }
 
 #mista_mapa {

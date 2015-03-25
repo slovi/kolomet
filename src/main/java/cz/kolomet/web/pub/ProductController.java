@@ -72,6 +72,14 @@ public class ProductController extends AbstractPublicController {
 		model.addAttribute("pageTitleArgs", product.getProductName());
 		model.addAttribute("pageDescriptionCode", "page_product_detail_description");
 		model.addAttribute("pageDescriptionArgs", product.getProductName());
+		model.addAttribute("ogTitleCode", "page_product_detail_og_title");
+		model.addAttribute("ogTitleArgs", product.getProductName());
+		model.addAttribute("ogDescriptionCode", "page_product_detail_og_description");
+		model.addAttribute("ogDescriptionArgs", product.getProductName());
+		model.addAttribute("ogType", "kolomet:product");
+		if (!product.getPhotos().isEmpty()) {
+			model.addAttribute("ogImage",  "http://www.kolomet.cz/file/" + product.getPhotos().get(0).getDetailPhotoUrl());
+		}
 		return "public/products/detail";
 	}
 	

@@ -1,7 +1,9 @@
 require(['../common'], function (common) {
 	
 	// detail
-    require(['side_menu', 'login', ], function(sideMenu, login) {
+    require(['side_menu', 'login', 'fb'], function(sideMenu, login, fb) {
+    	
+    	fb.init();
     	
     	sideMenu.prepare();
     	

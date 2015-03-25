@@ -13,6 +13,7 @@
 	<http pattern="/favicon*" security="none" />
 	<http pattern="/robots*" security="none" />
 	<http pattern="/sitemap*" security="none" />
+	<http pattern="/google*" security="none" />
 	<http auto-config="true" use-expressions="true">
 		<intercept-url pattern="/index.jspx" access="permitAll" />
 		<intercept-url pattern="/qr" access="permitAll" />

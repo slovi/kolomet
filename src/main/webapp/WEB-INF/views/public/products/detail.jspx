@@ -59,9 +59,7 @@
         		<p><jsp:text /></p>
         		<p><c:out escapeXml="false" value="${product.description}" /></p>
         	</div>
-			<div style="float:left;margin-top: 25px;">
-    			<div class="fb-like" data-href="http://facebook.com/kolomet.cz" data-layout="button" data-action="like" data-show-faces="false" data-share="false"><jsp:text/></div>
-    			<util:nbsp />
+			<div id="fb-root" style="float:left;margin-top: 25px;">
 				<div class="fb-share-button" data-href="http://www.kolomet.cz/store/public/products/detail/${product.id}" data-layout="button"><jsp:text /></div>
        		</div>
         	<div class="order_button">        

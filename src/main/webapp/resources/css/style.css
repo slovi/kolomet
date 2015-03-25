@@ -526,9 +526,15 @@ div.next_page_link_wrapper {
 	padding: 20px;
 }
 
-div#header a.action_button {
+div#header div.login-area {
 	margin: 50px 0 0 0;
 	float: right;
+}
+
+div#header div.login-area div.fb-like {
+	margin-top: 20px;
+	float: right;
+	width: 90px;
 }
 
 /* detail */

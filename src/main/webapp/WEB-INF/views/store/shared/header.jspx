@@ -9,18 +9,19 @@
     	<a href="${introUrl}">    
    			<img src="${logoUrl}" alt="logo kolomet obchod" id="logo"/>
    		</a>
-   		<security:authorize access="isAnonymous()">
-   			<div> 
-        		<a class="action_button" id="login_modal" rel="login_modal" name="login" href="#login"><spring:message code="header_login" /></a>
+        	<div class="login-area">
+		   		<security:authorize access="isAnonymous()">
+	        		<a class="action_button" id="login_modal" rel="login_modal" name="login" href="#login"><spring:message code="header_login" /></a>
+		        </security:authorize>
+		        <security:authorize access="isFullyAuthenticated()">
+        			<spring:url value="/admin/j_spring_security_logout?source=store" var="logoutUrl" />
+        			<a class="action_button" id="logout_button" rel="logout" name="login" href="${logoutUrl}"><spring:message code="header_logout" /> (<security:authentication property="principal.username"/>)</a>
+        		</security:authorize>
+        		<div id="fb-root" style="height: 40px; overflow: hidden">
+        			<div class="fb-like" data-href="http://facebook.com/kolomet.cz" data-layout="button" data-action="like" data-show-faces="false" data-share="false"><jsp:text/></div>
+        		</div>
         	</div>
-        </security:authorize>
-        <security:authorize access="isFullyAuthenticated()">
-        	<div> 
-        		<spring:url value="/admin/j_spring_security_logout?source=store" var="logoutUrl" />
-        		<a class="action_button" id="logout_button" rel="logout" name="login" href="${logoutUrl}"><spring:message code="header_logout" /> (<security:authentication property="principal.username"/>)</a>
-        	</div>
-        </security:authorize>
-    </div>
+   	</div>
    </div>
   
 </jsp:root>

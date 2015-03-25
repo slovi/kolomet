@@ -13,5 +13,7 @@ public interface Photo {
 	public String getThumbPhotoUrl();
 	
 	public String getOverPhotoUrl();
+	
+	public String getDetailPhotoUrl();
 
 }

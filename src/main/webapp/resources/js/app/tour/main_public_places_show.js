@@ -4,8 +4,6 @@ require(['../common'], function (common) {
 		
 	    require(['lightbox', 'images', 'ajax-submit', 'fb'], function(lightbox, images, ajaxSubmit, fb) {
 	    	
-	    		fb.init();
-	    		
 		    	$(document).ready(function() {
 		    	
 		    	images.preloadImages('detail_image');
@@ -31,6 +29,8 @@ require(['../common'], function (common) {
 				    		el.html(el.html().replace(/\n/g, '<br/>'));
 				    	});
 		    			
+				    	fb.init();
+				    	
 		    		}, {fragments: 'body'});
 		    	}
 		    	

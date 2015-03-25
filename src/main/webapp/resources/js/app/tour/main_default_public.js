@@ -1,7 +1,9 @@
 require(['../common'], function (common) {
 	
-    require(['login'], function(login) {
+    require(['login', 'fb'], function(login, fb) {
 
+    	fb.init();
+    	
     	login.prepare();
     	
     	$('#i_place_new.anonymous').click(function(event) {

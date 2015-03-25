@@ -23,6 +23,22 @@
 			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 			<meta http-equiv="X-UA-Compatible" content="IE=8" />
 			<meta name="robots" content="all, follow" />
+			
+			<c:if test="${not empty ogTitleCode}">
+				<spring:message code="${ogTitleCode}" arguments="${ogTitleArgs}" var="ogTitle" />
+				<meta content="${ogTitle}" property="og:title" />
+			</c:if>
+			<c:if test="${not empty ogDescriptionCode}">
+				<spring:message code="${ogDescriptionCode}" arguments="${ogDescriptionArgs}" var="ogDescription" />
+				<meta content="${ogDescription}" property="og:description" />
+			</c:if>
+			<c:if test="${not empty ogImage}">
+				<meta content="${ogImage}" property="og:image" />
+			</c:if>
+			<c:if test="${not empty ogType}">
+				<meta content="article" property="og:type" />
+			</c:if>
+			
 			<c:if test="${not empty pageAuthorCode}">
 				<spring:message code="${pageAuthorCode}" var="pageAuthorResult" />
 				<meta name="author" content="${pageAuthorResult}" />

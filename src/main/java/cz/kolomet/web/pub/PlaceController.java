@@ -68,6 +68,14 @@ public class PlaceController extends AbstractPublicController {
         uiModel.addAttribute("pageTitleCode", "page_place_detail_title_" + place.getPlaceType().getCodeKey());
         uiModel.addAttribute("pageDescriptionCode", "page_place_detail_description_" + place.getPlaceType().getCodeKey());
         
+        uiModel.addAttribute("ogTitleCode", "page_place_detail_og_title_"  + place.getPlaceType().getCodeKey());
+        uiModel.addAttribute("ogTitleArgs", place.getName());
+        uiModel.addAttribute("ogDescriptionCode", "page_place_detail_description_" + place.getPlaceType().getCodeKey());
+        uiModel.addAttribute("ogType", "kolomet:place");
+		if (!place.getPhotos().isEmpty()) {
+			uiModel.addAttribute("ogImage", "http://www.kolomet.cz/file/" + place.getPhotos().get(0).getDetailPhotoUrl());
+		}
+        
         addDateTimeFormatPatterns(uiModel);
         return "public/places/show";
     }
