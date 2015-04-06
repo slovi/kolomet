@@ -37,6 +37,11 @@ import cz.kolomet.util.db.JpaUtils;
 
 public class ProductSpecifications {
 	
+	public static Sort getCheapestSort() {
+		Order cheapestOrder = new Order(Direction.ASC, "finalPrice");
+    	return new Sort(cheapestOrder);
+	}
+	
 	public static Sort getDefaultSort() {
     	Order createdOrder = new Order(Direction.DESC, "id");
     	return new Sort(createdOrder);

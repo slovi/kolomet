@@ -2,23 +2,27 @@
 <div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <form:create id="fc_cz_kolomet_domain_NewsItem" displayStayButton="true" modelAttribute="newsItem" multipart="true" path="${subContext}/admin/newsitems" render="${empty dependencies}" z="user-managed">
+    <form:create id="fc_cz_kolomet_domain_NewsItem" displayStayButton="true" modelAttribute="newsItem" multipart="true" path="${subContext}/admin/newsitems" render="${empty dependencies}">
     	<input id="sendToFacebookAcessToken" type="hidden" name="accessToken" />
-        <field:datetime dateTimePattern="${newsItem_newsitemdate_date_format}" field="newsItemDate" id="c_cz_kolomet_domain_NewsItem_newsItemDate" z="FB5WVicWURlynFC/lm03NXQZr5Y="/>
-        <field:select field="newsItemType" id="c_cz_kolomet_domain_NewsItem_newsItemType" itemLabel="label" itemValue="value" items="${newsitemtypes}" path="newsitemtypes" z="user-managed"/>
+        <field:datetime dateTimePattern="${newsItem_newsitemdate_date_format}" field="newsItemDate" id="c_cz_kolomet_domain_NewsItem_newsItemDate" />
+        <field:select field="newsItemType" id="c_cz_kolomet_domain_NewsItem_newsItemType" itemLabel="label" itemValue="value" items="${newsitemtypes}" path="newsitemtypes" />
+        <field:checkbox field="missingRegion" id="c_cz_kolomet_domain_NewsItem_missingRegion" />
+        <field:select field="region" id="c_cz_kolomet_domain_NewsItem_region" itemLabel="codeDescription" itemValue="id" items="${regions}" path="regions" emptyLabel="..." />
         <br/>
         <spring:url value="/" var="context_path"/>
         <spring:message arguments="${context_path}" code="newsitem_help"/>
         <br/>
         <br/>
-        <field:editor field="text" id="c_cz_kolomet_domain_NewsItem_text" renderLinkMenu="true" required="true" z="user-managed"/>
-        <field:checkbox field="enabled" id="c_cz_kolomet_domain_NewsItem_enabled" z="4dW1KYPDc1uE1qbCHNRQWsxtRwQ="/>
+        <field:editor field="text" id="c_cz_kolomet_domain_NewsItem_text" renderLinkMenu="true" required="true" />
+        <field:checkbox field="enabled" id="c_cz_kolomet_domain_NewsItem_enabled" />
         <field:checkbox field="sendToFacebook" id="c_cz_kolomet_domain_NewsItem_sendToFacebook" />
-        <field:input field="facebookHeaderText" id="c_cz_kolomet_domain_NewsItem_facebookHeaderText" width="50" />
-        <field:input field="createdBy" id="c_cz_kolomet_domain_NewsItem_createdBy" render="false" z="user-managed"/>
-        <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_NewsItem_lastModifiedBy" render="false" z="user-managed"/>
-        <field:datetime dateTimePattern="${newsItem_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_NewsItem_lastModified" render="false" z="user-managed"/>
-        <field:simple field="newsItemPhotoUrls" id="c_cz_kolomet_domain_NewsItem_newsItemPhotoUrls" messageCode="entity_reference_not_managed" messageCodeAttribute="News Item Photo Url" render="false" z="user-managed"/>
+        <field:textarea field="facebookHeaderText" id="c_cz_kolomet_domain_NewsItem_facebookHeaderText" cols="83" width="50" />
+        <field:input field="itemTipLink" id="c_cz_kolomet_domain_NewsItem_itemtiplink" width="50" />
+        <field:input field="itemTipProductId" id="c_cz_kolomet_domain_NewsItem_itemtipproductid" width="50" />
+        <field:input field="createdBy" id="c_cz_kolomet_domain_NewsItem_createdBy" render="false" />
+        <field:input field="lastModifiedBy" id="c_cz_kolomet_domain_NewsItem_lastModifiedBy" render="false" />
+        <field:datetime dateTimePattern="${newsItem_lastmodified_date_format}" field="lastModified" id="c_cz_kolomet_domain_NewsItem_lastModified" render="false" />
+        <field:simple field="newsItemPhotoUrls" id="c_cz_kolomet_domain_NewsItem_newsItemPhotoUrls" messageCode="entity_reference_not_managed" messageCodeAttribute="News Item Photo Url" render="false" />
         <util:panel id="fc_cz_kolomet_domain_Newsitem_newsItemPhotoUrls" title="NewsItemPhotoUrls">
         	<spring:url value="/resources/images/products/no-photo-detail.jpg" var="fileNotFoundUrl"/>
             <spring:url value="/store/admin/newsitemphotourls/file" var="uploadFileUrl"/>

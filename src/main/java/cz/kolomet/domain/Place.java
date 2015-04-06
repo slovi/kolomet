@@ -7,9 +7,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
@@ -22,7 +21,6 @@ import cz.kolomet.domain.codelist.Region;
 import cz.kolomet.dto.FileInfo;
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Place extends BaseDomainEntity implements Commented, PhotoContainer, Serializable {
 
     @NotNull
@@ -63,8 +61,21 @@ public class Place extends BaseDomainEntity implements Commented, PhotoContainer
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "place")
     private List<PlaceComment> comments = new ArrayList<PlaceComment>();
     
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "visitedPlaces", cascade = CascadeType.REMOVE)
+    private List<ApplicationUser> visitedUsers = new ArrayList<ApplicationUser>();
+    
     @Transient
     private List<FileInfo> fileInfos = new ArrayList<FileInfo>();
+    
+    public void addVisitedUser(ApplicationUser applicationUser) {
+    	this.visitedUsers.add(applicationUser);
+    	applicationUser.getVisitedPlaces().add(this);
+    }
+    
+    public void removeVisitedUser(ApplicationUser applicationUser) {
+    	this.visitedUsers.remove(applicationUser);
+    	applicationUser.getVisitedPlaces().remove(this);
+    }
     
     @Override
 	public int hashCode() {
@@ -231,6 +242,14 @@ public class Place extends BaseDomainEntity implements Commented, PhotoContainer
 
 	public void setPlacePhotoUrls(List<PlacePhotoUrl> placePhotoUrls) {
 		this.placePhotoUrls = placePhotoUrls;
+	}
+
+	public List<ApplicationUser> getVisitedUsers() {
+		return visitedUsers;
+	}
+
+	public void setVisitedUsers(List<ApplicationUser> visitedUsers) {
+		this.visitedUsers = visitedUsers;
 	}
 
 	public List<PlaceComment> getComments() {

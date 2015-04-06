@@ -11,6 +11,16 @@ require(['../common'], function (common) {
     		$("#login_modal").click();
     	});
     	
+    	$('#comment_button.anonymous').click(function(event) {
+    		event.preventDefault();
+    		$("#login_modal").click();
+    	});
+    	
+    	$('#comments_box .comment_box .comment_box_response a.anonymous').click(function(event) {
+    		event.preventDefault();
+    		$("#login_modal").click();
+    	});
+    	
     	setInterval(animateStoreButton, 5000);
     	
     	function animateStoreButton() {
@@ -24,4 +34,5 @@ require(['../common'], function (common) {
     	}
     	
     });
+    
 });

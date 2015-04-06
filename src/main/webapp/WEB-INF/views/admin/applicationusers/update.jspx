@@ -17,6 +17,7 @@
         <field:input field="nickname" required="false" id="c_cz_kolomet_domain_ApplicationUser_nickname" />
         <spring:message code="typeMismatch.email" var="invalidEmail" />
         <field:input field="username" id="c_cz_kolomet_domain_ApplicationUser_username" validationRegex="${regex.email}" validationMessage="${invalidEmail}" />
+        <field:input field="phone" id="c_cz_kolomet_domain_ApplicationUser_phone" validationRegex="${regex.phone}" validationMessage="${invalidPhone}" />
 
         <security:authorize access="principal.isApplicationUsersAll()">
 	       	<field:input field="password" id="c_cz_kolomet_domain_ApplicationUser_password" />

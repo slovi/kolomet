@@ -11,13 +11,15 @@ import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 
+import cz.kolomet.util.StringUtils;
+
 public class JsonSerializerImpl implements JsonSerializer {
 	
 	private ObjectMapper mapper;
 	
 	public<T> String toJsonArray(Collection<T> collection) {
 		try {
-			return mapper.writeValueAsString(collection);
+			return StringUtils.escapeJavaString(mapper.writeValueAsString(collection));
 		} catch (JsonProcessingException e) {
 			throw new JsonException(e);
 		}
@@ -29,7 +31,7 @@ public class JsonSerializerImpl implements JsonSerializer {
 		SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter.filterOutAllExcept(fields);
     	FilterProvider provider = new SimpleFilterProvider().addFilter("by name", filter);
 		try {
-			return mapper.writer(provider).writeValueAsString(collection);
+			return StringUtils.escapeJavaString(mapper.writer(provider).writeValueAsString(collection));
 		} catch (JsonProcessingException e) {
 			throw new JsonException(e);
 		}

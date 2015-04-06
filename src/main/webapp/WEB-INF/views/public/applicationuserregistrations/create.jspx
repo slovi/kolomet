@@ -31,6 +31,9 @@
         <field:input field="postCode" required="true" validationRegex="${regex.postalCode}" validationMessageCode="typeMismatch.postalCode" id="c_cz_kolomet_domain_ApplicationUser_postCode" />
         <field:select field="countryState" id="c_cz_kolomet_domain_ApplicationUser_countryState" itemLabel="codeDescription" itemValue="id" items="${countryStates}" path="/admin/countryStates" />
         <field:input field="phone"  required="false" validationRegex="${regex.phone}" id="c_cz_kolomet_domain_ApplicationUser_phone" />
+        <div class="info_label">
+        	<strong><spring:message code="label_cz_kolomet_domain_applicationuser_username_info" />:</strong>
+        </div>
         <field:input field="username" required="true" validationRegex="${regex.email}" id="c_cz_kolomet_domain_ApplicationUser_username" /> <!-- email -->
         <field:input field="password" required="true" type="password" id="c_cz_kolomet_domain_ApplicationUser_password" render="true" z="user-managed"/>
         <field:input field="passwordConfirm" required="true" type="password" id="c_cz_kolomet_domain_ApplicationUser_password_confirm" render="true" z="user-managed"/>

@@ -28,6 +28,7 @@ import cz.kolomet.dto.EnumDto;
 import cz.kolomet.service.ApplicationUserService;
 import cz.kolomet.service.NewsItemPhotoUrlService;
 import cz.kolomet.service.NewsItemService;
+import cz.kolomet.service.RegionService;
 
 @RequestMapping("/admin/newsitems")
 @Controller
@@ -42,8 +43,11 @@ public class NewsItemController extends AbstractAdminController {
 	@Autowired
 	private ApplicationUserService applicationUserService;
 	
+	@Autowired
+	private RegionService regionService;
+	
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
-    public String create(@Valid NewsItem newsItem, @RequestParam(value = "stay", required = false) String stay, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) throws IOException {
+    public String create(@Valid NewsItem newsItem, BindingResult bindingResult, @RequestParam(value = "stay", required = false) String stay, Model uiModel, HttpServletRequest httpServletRequest) throws IOException {
         
     	if (bindingResult.hasErrors()) {
             populateEditForm(uiModel, newsItem);
@@ -98,6 +102,7 @@ public class NewsItemController extends AbstractAdminController {
         uiModel.addAttribute("applicationusers", applicationUserService.findAllApplicationUsers());
         uiModel.addAttribute("newsitemphotourls", newsItemPhotoUrlService.findAllNewsItemPhotoUrls());
         uiModel.addAttribute("newsitemtypes", EnumDto.createCollection(NewsItemType.values(), messageSource));
+        uiModel.addAttribute("regions", regionService.findAllRegions());
         
         uiModel.addAttribute("addedFiles", jsonSerializer.toJsonArray(newsItem.getFileInfos()));
         uiModel.addAttribute("uploadedFiles", jsonSerializer.toJsonArray(newsItem.getNewsItemPhotoUrls(), new String[] {"id", "fileName"}));
@@ -136,8 +141,6 @@ public class NewsItemController extends AbstractAdminController {
         NewsItem newsItem = newsItemService.findNewsItem(id);
         newsItemService.deleteNewsItem(newsItem);
         uiModel.asMap().clear();
-        uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
-        uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
         return "redirect:/admin/newsitems";
     }
 

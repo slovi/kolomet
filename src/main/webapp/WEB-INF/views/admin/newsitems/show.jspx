@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" 
+	xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" 
+	xmlns:jsp="http://java.sun.com/JSP/Page" 
+	xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" 
+	xmlns:spring="http://www.springframework.org/tags" version="2.0">
+	
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <page:show id="ps_cz_kolomet_domain_NewsItem" object="${newsitem}" path="${subContext}/admin/newsitems" z="user-managed">
-        <field:display date="true" dateTimePattern="${newsItem_newsitemdate_date_format}" field="newsItemDate" id="s_cz_kolomet_domain_NewsItem_newsItemDate" object="${newsitem}" z="WvUoKBJa3/eh80tAtu1QKYWcPag="/>
-        <field:display enumValue="true" field="newsItemType" id="s_cz_kolomet_domain_NewsItem_newsItemType" object="${newsitem}" z="user-managed"/>
-        <field:display field="text" id="s_cz_kolomet_domain_NewsItem_text" object="${newsitem}" z="HFJFPDfqDM2yxLZBaNesLBpdA60="/>
-        <field:display bool="true" field="enabled" id="s_cz_kolomet_domain_NewsItem_enabled" object="${newsitem}" z="user-managed"/>
-        <field:display field="createdBy" id="s_cz_kolomet_domain_NewsItem_createdBy" object="${newsitem}" z="ex1aZ5Kgjm6G5x1r4zScv0D6hcg="/>
-        <field:display field="lastModifiedBy" id="s_cz_kolomet_domain_NewsItem_lastModifiedBy" object="${newsitem}" z="5upWll7zUOdOC1M1Us5SfMOgL4c="/>
+    <page:show id="ps_cz_kolomet_domain_NewsItem" object="${newsitem}" path="${subContext}/admin/newsitems">
+        <field:display date="true" dateTimePattern="${newsItem_newsitemdate_date_format}" field="newsItemDate" id="s_cz_kolomet_domain_NewsItem_newsItemDate" object="${newsitem}" />
+        <field:display enumValue="true" field="newsItemType" id="s_cz_kolomet_domain_NewsItem_newsItemType" object="${newsitem}" />
+        <field:display field="region.codeDescription" id="s_cz_kolomet_domain_NewsItem_region" object="${newsitem}" />
+        <field:display field="text" id="s_cz_kolomet_domain_NewsItem_text" object="${newsitem}" />
+        <div class="clear"><jsp:text/></div>
+        <field:display bool="true" field="enabled" id="s_cz_kolomet_domain_NewsItem_enabled" object="${newsitem}" />
+        <field:display field="createdBy" id="s_cz_kolomet_domain_NewsItem_createdBy" object="${newsitem}" />
+        <field:display field="lastModifiedBy" id="s_cz_kolomet_domain_NewsItem_lastModifiedBy" object="${newsitem}" />
         <field:display bool="true" field="sendToFacebook" id="c_cz_kolomet_domain_NewsItem_sendToFacebook" object="${newsitem}" />
         <field:display field="facebookHeaderText" id="c_cz_kolomet_domain_NewsItem_facebookHeaderText" object="${newsitem}" />
-        <field:display date="true" dateTimePattern="${newsItem_created_date_format}" field="created" id="s_cz_kolomet_domain_NewsItem_created" object="${newsitem}" z="ANB/ArDQRzIJIhVJyq6HJoAobqE="/>
-        <field:display date="true" dateTimePattern="${newsItem_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_NewsItem_lastModified" object="${newsitem}" z="ANB/ArDQRzIJIhVJyq6HJoAobqE="/>
-        <field:display field="contents" id="s_cz_kolomet_domain_NewsItem_contents" object="${newsitem}" render="false" z="user-managed"/>
+        <field:display date="true" dateTimePattern="${newsItem_created_date_format}" field="created" id="s_cz_kolomet_domain_NewsItem_created" object="${newsitem}" />
+        <field:display date="true" dateTimePattern="${newsItem_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_NewsItem_lastModified" object="${newsitem}" />
+        <field:display field="contents" id="s_cz_kolomet_domain_NewsItem_contents" object="${newsitem}" render="false" />
+        <field:display field="itemTipLink" id="s_cz_kolomet_domain_NewsItem_itemtiplink" object="${newsitem}" />
+        <field:display field="itemTipProductId" id="s_cz_kolomet_domain_NewsItem_itemtipproductid" object="${newsitem}" />
         <br/>
         <c:set scope="request" value="${newsitem.id}" var="parentEntityId"/>
         <h2>

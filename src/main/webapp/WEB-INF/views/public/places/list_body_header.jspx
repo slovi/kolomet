@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div id="body_header" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="http://www.springframework.org/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:spring="http://www.springframework.org/tags" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
+<div id="body_header" 
+	xmlns:c="http://java.sun.com/jsp/jstl/core" 
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions" 
+	xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" 
+	xmlns:form="http://www.springframework.org/tags/form" 
+	xmlns:jsp="http://java.sun.com/JSP/Page" 
+	xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" 
+	xmlns:spring="http://www.springframework.org/tags" 
+	xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"  
+	xmlns:security="http://www.springframework.org/security/tags" 
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
+    
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     
@@ -9,10 +21,29 @@
     	</div>
     </c:if>
 
-	<div class="general_unit">
-    	<h1><spring:message code="places_filter_h1" /></h1>
-		<p><spring:message code="places_filter_text" /></p>
-	</div>
+		<c:if test="${not empty newsItemTips}">
+		<div id="news_item_tips" class="general_unit">
+			<c:forEach items="${newsItemTips}" var="newsItemTip" varStatus="status">
+				<c:choose>
+					<c:when test="${status.index gt 0}">
+						<c:set value="display: none" var="display" />
+					</c:when>
+					<c:otherwise>
+						<c:set value="display: block" var="display" />
+					</c:otherwise>
+				</c:choose>
+				
+				<div class="tip_wrapper" style="${display}">
+					<div class="tip_content" data-tip-url="${newsItemTip.itemTipLink}">
+					<!-- 
+						<b><span class="news_item_date"><fmt:formatDate value="${newsItemTip.newsItemDate}" pattern="${dateFormat}" /></span></b>
+					 -->						
+						<c:out value="${newsItemTip.text}" escapeXml="false" />
+					</div>
+				</div>
+			</c:forEach>
+		</div>
+	</c:if>
 	    
     <div class="general_unit">
     
@@ -20,16 +51,14 @@
     		<div>
     			<spring:url value="/tour/public/places" var="filterPlacesActionUrl" />
 				<form:form id="place_filter_form" action="${filterPlacesActionUrl}" method="get" modelAttribute="placeFilter">
-				
-					<input type="hidden" name="usedFilter" value="true" />
-					<input type="hidden" name="region" value="" />
-					<input type="hidden" name="actual" value="${placeFilter.actual}" />
-				
-					<b><spring:message code="places_filter_placetype" /></b>:<util:nbsp number="5" /> 
+
+					<b><spring:message code="places_filter_placetype" /></b>:<util:nbsp number="5" />
+					<input type="hidden" name="usedFilter" value="true" /> 					
 				
 		    		<c:forEach items="${placeTypes}" var="placeType" varStatus="status">
 		    			<form:checkbox id="place_type_${status.index}" path="placeTypes[${status.index}]" value="${placeType}" /><util:nbsp number="1" /><c:out value="${placeType.codeDescription}" /><util:nbsp number="6" />
 		    		</c:forEach>
+					
     		</form:form>
 			</div>    		
     	</div>

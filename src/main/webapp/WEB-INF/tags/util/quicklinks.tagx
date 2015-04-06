@@ -14,6 +14,7 @@
   <jsp:directive.attribute name="typeNamePlural" type="java.lang.String" required="true" rtexprvalue="true" description="type name plural" />
   <jsp:directive.attribute name="detailUrl" type="java.lang.String" required="false" rtexprvalue="true" description="detail url" />
   <jsp:directive.attribute name="largeIcons" type="java.lang.Boolean" required="false" rtexprvalue="true" description="render large icons?" />
+  <jsp:directive.attribute name="parentEntityId" type="java.lang.Long" required="false" rtexprvalue="true" description="parent entity id" />
 
   <c:if test="${empty render or render}">
   
@@ -76,6 +77,9 @@
 	     <c:if test="${update}">
 	       <spring:url value="${path}/${itemId}" var="update_form_url">
 	         <spring:param name="form" />
+	         <c:if test="${not empty parentEntityId}">
+	         	<spring:param name="parentEntityId" value="${parentEntityId}" />
+	         </c:if>
 	       </spring:url>
 	       <c:choose>
 		       <c:when test="${largeIcons}">
@@ -124,7 +128,10 @@
 	   </span>	  
 	   <span>
 	     <c:if test="${list}">
-	       	<spring:url value="${path}" var="list_form_url" />
+	       	<spring:url value="${path}" var="list_form_url">
+	       		<spring:param name="page.size" value="10" />
+	       		<spring:param name="page.sort" value="id,desc" />
+	       	</spring:url>
 	       	<c:choose>
 	       		<c:when test="${largeIcons}">
 	       			<spring:url value="/resources/images/list_48.png" var="list_image_url" />

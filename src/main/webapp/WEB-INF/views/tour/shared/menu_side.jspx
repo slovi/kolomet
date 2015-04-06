@@ -25,11 +25,12 @@
 	    	<img class="side-menu-arrow-off ${hiddenClassOff}" src="${arrowRightImageUrl}" />
 	    </div>
 	    <menu:menu id="side_menu_body_regions" styleClass="side-menu-body ${hiddenClassOn}">
-		    <menu:item url="/tour/public/places?menu=region" styleClass="ajaxLink" id="menuitem_category_all" label="Všechny regiony" />
+		    <menu:item url="/tour/public/places?menu=region&amp;region=&amp;region_zoom=&amp;menu=region&amp;gps_north=&amp;gps_west=" 
+		    	styleClass="ajaxLink" id="menuitem_category_all" label="Všechny regiony" renderPageParams="false" />
 	    	<c:forEach items="${regions}" var="region">
 	    	
 	    		<c:choose>
-	    			<c:when test="${param.region_id eq region.id}">
+	    			<c:when test="${param.region eq region.id}">
 	    				<c:set var="styleClass" value="current ajaxLink" />
 	    			</c:when>
 	    			<c:otherwise>
@@ -38,7 +39,7 @@
 	    		</c:choose>
 	    	
 				<menu:item url="/tour/public/places?region=${region.id}&amp;region_zoom=${region.zoom}&amp;menu=region&amp;gps_north=${region.gpsLocation.north}&amp;gps_west=${region.gpsLocation.west}" 
-					id="menuitem_${region.codeKey}" styleClass="${styleClass}" label="${region.codeDescription}" />
+					id="menuitem_${region.codeKey}" styleClass="${styleClass}" label="${region.codeDescription}" renderPageParams="false" />
 			</c:forEach>
 	     </menu:menu>
 	</div>

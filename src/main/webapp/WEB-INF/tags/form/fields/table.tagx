@@ -117,7 +117,7 @@
 			        <c:set var="prop" value="${prop[subprop]}" />
 			    </c:if>
 			</c:forTokens>
-            <td>
+            <td style="max-width: 300px; overflow: hidden">
               <c:choose>
                 <c:when test="${columnType eq 'date'}">
                   <spring:escapeBody>

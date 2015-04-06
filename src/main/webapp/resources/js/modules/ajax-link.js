@@ -22,37 +22,14 @@ define(['jquery', 'http-service', 'jquery.history'], function($, httpService) {
 		event.preventDefault();
 		
 		var href = $(element).attr('href');
-		var params = parseQueryString(href);	
+		var params = httpService.deserializeObjectFromUrl(href);	
 		
 		var paramsData = paramsCallback(element, params);
-		
 		paramsData.ajaxSource = 'a#' + $(element).attr('id');
 		
-		httpService.sendAndRerender(href, 'GET', paramsData, function(modelFragmentsData) {
-			successCallback(element, {params: params, paramsData: paramsData}, modelFragmentsData);
+		httpService.sendAndRerender(href, 'GET', paramsData, function() {
+			successCallback(element, $.extend(params, paramsData));
 		});
-	}
-	
-	function parseQueryString(url) {
-		
-		var params = {}, queries, temp, i, l;
-		var queryStringIndex = url.indexOf('?');
-		var queryString;
-		
-		if (queryStringIndex > 0) {
-			queryString = url.substring(queryStringIndex + 1);
-		} else {
-			queryString = url;
-		}
-	 
-	    queries = queryString.split("&");
-	 
-	    for ( i = 0, l = queries.length; i < l; i++ ) {
-	        temp = queries[i].split('=');
-	        params[temp[0]] = temp[1];
-	    }
-	 
-	    return params;
 	}
 	
 });

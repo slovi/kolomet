@@ -5,7 +5,7 @@
 	<groupId>cz.kolomet</groupId>
 	<artifactId>kolomet</artifactId>
 	<packaging>war</packaging>
-	<version>1.0.95-SNAPSHOT</version>
+	<version>1.0.103-SNAPSHOT</version>
 	<name>kolomet</name>
 
 	<distributionManagement>
@@ -215,6 +215,11 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 			<version>3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>18.0</version>
 		</dependency>
 
 		<dependency>

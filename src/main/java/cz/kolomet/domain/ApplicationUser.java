@@ -55,6 +55,13 @@ public class ApplicationUser extends BaseDomainEntity implements PhotoContainer,
 	@Fetch(FetchMode.SUBSELECT)
 	private List<ApplicationUserAddress> addresses = new ArrayList<ApplicationUserAddress>();
 	
+	@ManyToMany
+	  @JoinTable(
+	      name="APPLICATION_USER_PLACE",
+	      joinColumns={@JoinColumn(name="USER_ID", referencedColumnName="ID")},
+	      inverseJoinColumns={@JoinColumn(name="PLACE_ID", referencedColumnName="ID")})
+	private List<Place> visitedPlaces = new ArrayList<Place>();
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "SELLER_ID")
 	private Seller seller;
@@ -216,6 +223,14 @@ public class ApplicationUser extends BaseDomainEntity implements PhotoContainer,
 
 	public void setRoles(List<ApplicationRole> roles) {
 		this.roles = roles;
+	}
+
+	public List<Place> getVisitedPlaces() {
+		return visitedPlaces;
+	}
+
+	public void setVisitedPlaces(List<Place> visitedPlaces) {
+		this.visitedPlaces = visitedPlaces;
 	}
 
 	public List<FileInfo> getFileInfos() {

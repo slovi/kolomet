@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import cz.kolomet.domain.Producer;
-import cz.kolomet.repository.ProductRepository;
 import cz.kolomet.repository.ProductSpecifications;
 import cz.kolomet.service.ProducerService;
+import cz.kolomet.service.ProductService;
 
 @RequestMapping("/public")
 @Controller
@@ -29,7 +29,7 @@ public class IntroController extends AbstractPublicController implements Initial
 	//private ProductService productService;
 	
 	@Autowired
-	private ProductRepository productRepository;
+	private ProductService productService;
 	
 	@Autowired
 	private ProducerService producerService;
@@ -48,7 +48,7 @@ public class IntroController extends AbstractPublicController implements Initial
     public String index(Model model) {
     	
 		// TODO predelat na service a dto
-    	model.addAttribute("products", productRepository.findByPriority(pageRequest));
+    	model.addAttribute("products", productService.findRandomByPriority(pageRequest));
     	
     	List<Producer> producers = producerService.findAllProducers();
     	StringBuilder builder = new StringBuilder();
@@ -64,7 +64,7 @@ public class IntroController extends AbstractPublicController implements Initial
     public String introIndex(Model model) {
     	
 		// TODO predelat na service a dto
-    	model.addAttribute("products", productRepository.findByPriority(pageRequest));
+    	model.addAttribute("products", productService.findRandomByPriority(pageRequest));
     	
     	List<Producer> producers = producerService.findAllProducers();
     	StringBuilder builder = new StringBuilder();
@@ -80,7 +80,7 @@ public class IntroController extends AbstractPublicController implements Initial
     @Override
     public void afterPropertiesSet() throws Exception {
     	super.afterPropertiesSet();
-    	this.pageRequest = new PageRequest(0, productsSize, ProductSpecifications.getDefaultSort());
+    	this.pageRequest = new PageRequest(0, productsSize, ProductSpecifications.getCheapestSort());
     }
     
 }

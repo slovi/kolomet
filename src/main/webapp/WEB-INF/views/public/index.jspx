@@ -54,7 +54,7 @@
 				}
 				
 				div.homepage_unit div.home_description {
-					height: 200px;
+					height: inherit;
 					text-align: center;
 					padding-top: 0px;
 				}

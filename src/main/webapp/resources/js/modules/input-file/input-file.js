@@ -255,11 +255,12 @@ define([ 'jquery' , 'jquery.fileupload', 'jquery.iframe-transport', 'http-servic
 	// acutally uploaded files - internal model is model of jquery input-file.js
 	function convertUploadedFileFromInternalModel(uploadedFile, configuration) {
 		
-		var fileUrl = configuration.get('fileTempBaseUrl') + '/' + uploadedFile.name;
-		var fileDeleteUrl = configuration.get('fileTempBaseDeleteUrl') + '/' + uploadedFile.name;
+		var fileName = uploadedFile.name.removeDiacritics();
+		var fileUrl = configuration.get('fileTempBaseUrl') + '/' + fileName;
+		var fileDeleteUrl = configuration.get('fileTempBaseDeleteUrl') + '/' + fileName;
 		
 		return {
-			name: uploadedFile.name, 
+			name: fileName, 
 			contentType: uploadedFile.type,
 			fileThumbUrl: fileUrl + '?format=_thumb',
 			fileDetailUrl: fileUrl + '?format=_detail&forceSendError=true',

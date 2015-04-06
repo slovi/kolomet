@@ -16,46 +16,45 @@
     
 	<div id="mista_top_mista">
 		<br/>
-       	<div class="sorting" style="margin:10px 6px 6px 6px;width:696px;">
-       		<span style="font-size: 1.4em"><b>Top 3 místa:</b></span><util:nbsp number="3" />
-       		<spring:url value="/tour/public/places" var="actual_places_url">
-       			<spring:param name="actual" value="true" />
-       			<c:forEach items="${placeFilter.placeTypes}" var="placeType" varStatus="status">
-  					<spring:param name="placeTypes[${status.index}]" value="${placeType.id}" />
-  				</c:forEach>
-  				<spring:param name="region" value="${placeFilter.region.id}" />
-  				<spring:param name="usedFilter" value="true" />
-       		</spring:url>
-	  		<a id="sort_link_actual" href="${actual_places_url}" class="arrow_box ${placeFilter.actual ? 'actual' : ''}"><util:nbsp number="3" />Nejnovější<util:nbsp number="3" /></a><util:nbsp number="2" />
-       		<spring:url value="/tour/public/places" var="top_places_url">
-       			<spring:param name="actual" value="false" />
-       			<c:forEach items="${placeFilter.placeTypes}" var="placeType" varStatus="status">
-  					<spring:param name="placeTypes[${status.index}]" value="${placeType.id}" />
-  				</c:forEach>
-  				<spring:param name="region" value="${placeFilter.region.id}" />
-  				<spring:param name="usedFilter" value="true" />
-       		</spring:url>
-       		<a id="sort_link_best" href="${top_places_url}" class="arrow_box ${placeFilter.actual ? '' : 'actual'}"><util:nbsp number="3" />Nejlépe hodnocené<util:nbsp number="3" /></a>
-       	</div>
+		<c:if test="${not empty topPlaces}">
+	       	<div class="sorting" style="margin:10px 6px 6px 6px;width:696px;">
+	       		<span style="font-size: 1.4em"><b>Top 3 místa:</b></span><util:nbsp number="3" />
+	       		<spring:url value="/tour/public/places" var="actual_places_url">
+	       			<spring:param name="actual" value="true" />
+	       		</spring:url>
+		  		<a id="sort_link_actual" href="${actual_places_url}" class="arrow_box ${placeFilter.actual ? 'actual' : ''}"><util:nbsp number="3" />Nejnovější<util:nbsp number="3" /></a><util:nbsp number="2" />
+	       		<spring:url value="/tour/public/places" var="top_places_url">
+	       			<spring:param name="actual" value="false" />
+	       		</spring:url>
+	       		<a id="sort_link_best" href="${top_places_url}" class="arrow_box ${placeFilter.actual ? '' : 'actual'}"><util:nbsp number="3" />Nejlépe hodnocené<util:nbsp number="3" /></a>
+	       	</div>
+       	</c:if>
        	<br />
-       	<c:forEach items="${topPlaces}" var="place">
-       		<div class="homepage_unit"> 
-       			<spring:url value="/tour/public/places/${place.id}" var="placeUrl" />
-                <a href="${placeUrl}"><util:photo-image imgName="${place.name}" height="146" width="224" photos="${place.photos}" imgType="over" /></a>
-                <div class="home_description"> 
-                	<a href="${placeUrl}" class="label"><c:out value="${place.name}"/></a>
-                    <p class="price"><spring:message code="label_cz_kolomet_domain_place_region" />: <c:out value="${place.region.codeDescription}" /></p>
-                    <p><c:out escapeXml="false" value="${fn:substring(place.description, 0 , 30)}"/></p>
-                </div>
-                <div class="home_seller"> 
-                	<b>Hodnocení místa: <c:if test="${not empty place.qualityRanking}"> (<fmt:formatNumber value="${place.qualityRanking}" />)</c:if></b>
-                	<p style="line-height:16px;"> 
-                		<util:rating rating="${place.qualityRanking}" isRated="true" entityId="${place.id}" rateType="place" /><br/>
-                		<spring:message code="place_detail_rating_nr"/>: <c:out value="${place.nrOfRankings}"/> 
-                    </p>                                
-                </div>
-         	</div>
-         </c:forEach>
+       	<div style="overflow: auto;">
+	       	<c:forEach items="${topPlaces}" var="place">
+	       		<div class="homepage_unit"> 
+	       			<spring:url value="/tour/public/places/${place.id}" var="placeUrl" />
+	                <a href="${placeUrl}"><util:photo-image imgName="${place.name}" height="146" width="224" photos="${place.photos}" imgType="over" /></a>
+	                <div class="home_description"> 
+	                	<a href="${placeUrl}" class="label"><c:out value="${place.name}"/></a>
+	                    <p class="price"><spring:message code="label_cz_kolomet_domain_place_region" />: <c:out value="${place.region.codeDescription}" /></p>
+	                    <p><c:out escapeXml="false" value="${fn:substring(place.description, 0 , 30)}"/></p>
+	                </div>
+	                <div class="home_seller"> 
+	                	<b>Hodnocení místa: <c:if test="${not empty place.qualityRanking}"> (<fmt:formatNumber value="${place.qualityRanking}" />)</c:if></b>
+	                	<p style="line-height:16px;"> 
+	                		<util:rating rating="${place.qualityRanking}" isRated="true" entityId="${place.id}" rateType="place" /><br/>
+	                		<spring:message code="place_detail_rating_nr"/>: <c:out value="${place.nrOfRankings}"/> 
+	                    </p>                                
+	                </div>
+	         	</div>
+	         </c:forEach>
+         </div>	    
     </div>
+    
+    <div class="general_unit">
+    	<h1><spring:message code="places_filter_h1" /></h1>
+		<p><spring:message code="places_filter_text" /></p>
+	</div>
     
 </div>

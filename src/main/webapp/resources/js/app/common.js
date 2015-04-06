@@ -1,3 +1,58 @@
+
+String.prototype.removeDiacritics = function() {
+	
+	sdiak='áäčďéěíĺľňóôőöŕšťúůűüýřžÁÄČĎÉĚÍĹĽŇÓÔŐÖŔŠŤÚŮŰÜÝŘŽ';
+	bdiak='aacdeeillnoooorstuuuuyrzAACDEEILLNOOOORSTUUUUYRZ';
+	
+	var tx = ''; 
+	var txt = this;
+	
+	for(p=0;p<txt.length;p++) { 
+		if (sdiak.indexOf(txt.charAt(p)) != -1) { 
+			tx += bdiak.charAt(sdiak.indexOf(txt.charAt(p)));
+		} else {
+			tx += txt.charAt(p);
+		}
+	}
+	return tx;
+}
+
+function concatParams(array1, array2) {
+	var keys = {};
+	var newArray = [];
+	$.each(array1, function(i, field) {
+		if (keys[field.name] != 'exist') {
+			newArray.push(field);
+		}
+		keys[field.name] = 'exist';
+	});
+	$.each(array2, function(i, field) {
+		if (keys[field.name] != 'exist') {
+			newArray.push(field);
+		}
+		keys[field.name] = 'exist';
+	});
+	return newArray;
+}
+
+function objectToObjectArray(object) {
+	var objectArray = [];
+	for (key in object) {
+		objectArray.push({name: key, value: object[key]});
+	} 
+	return objectArray;
+}
+
+function encodeArrayToQueryString(params) {
+	var urlString = [];
+	for (var i = 0; i < params.length; i++) {
+		if (params[i].name != 'ajaxSource') {
+			urlString.push(params[i].name + '=' + params[i].value);
+		}
+	}
+	return urlString.join('&');
+}
+
 require.config({
 	
 	urlArgs: 'v=${project.version}',
@@ -5,8 +60,12 @@ require.config({
 		
 		// libs
 		'async': '../../lib/async',
+		'bootstrap': '../../lib/bootstrap.min',
 		'canvas-to-blob': '../../lib/canvas-to-blob.min',
+		'docs': '../../lib/docs.min',
 		'facebook': '//connect.facebook.net/cs_CZ/all',
+		'ie-viewport-bug-workaround': '../../lib/ie10-viewport-bug-workaround',
+		'jssor-slider': '../../lib/jssor.slider.mini',
 		'jquery': '../../lib/jquery-1.11.0.min',
 		'jquery.block-ui': '../../lib/jquery.blockUI',
 		'jquery.iframe-transport': '../../lib/jquery.iframe-transport',
@@ -37,12 +96,21 @@ require.config({
 		'images': '../../modules/images',
 		'loader': '../../modules/loader',
 		'login': '../../modules/login', 
+		'map-places': '../../modules/map-places',
+		'place-banners': '../../modules/place-banners',
+		'partner-links': '../../modules/partner-links',
 		'side_menu': '../../modules/side_menu',
 		'slider': '../../modules/slider',
 		'template-service': '../../modules/template-service'
 		
 	},
 	shim: {
+		'bootstrap': {
+			deps: ['jquery']
+		},
+		'docs': {
+			deps: ['bootstrap']
+		},
 		'jquery.te': {
 			deps: ['jquery.snippet', 'jquery']
 		},

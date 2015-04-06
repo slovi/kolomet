@@ -1,5 +1,7 @@
 package cz.kolomet.service.impl;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.access.prepost.PostAuthorize;
@@ -54,6 +57,19 @@ public class ProductServiceImpl implements ProductService {
 		return product;
 	}
     
+	public List<Product> findRandomByPriority(Pageable pageable) {
+		
+		Pageable randomPageRequest = new PageRequest(pageable.getPageNumber(), pageable.getPageSize() * 3, pageable.getSort());
+		List<Product> products = productRepository.findByPriority(randomPageRequest);
+		if (products.size() > pageable.getPageSize()) {
+			List<Product> resultList = new ArrayList<Product>(products);
+			Collections.shuffle(resultList);
+			return resultList.subList(0, pageable.getPageSize());
+		} else {
+			return products;
+		}
+	}
+	
 	@PostAuthorize("isAnonymous() or principal.isCapableToDisplayProduct(returnObject)")
     public Product findProduct(Long id) {
         return productRepository.findOne(id);

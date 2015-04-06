@@ -1,22 +1,22 @@
 define(['jquery', 'http-service'], function($, httpService) {
 	
 	return {
-		decorateId: function(id, eventType, successCallback, options) {				
+		decorateId: function(id, eventType, paramsCallback, successCallback) {				
 			$('#' + id).bind(eventType, function(event) {
-				doDecoration($(this), event, successCallback, options);
+				doDecoration($(this), event, paramsCallback, successCallback);
 			});
 		},
 		
-		decorate: function(expr, eventType, successCallback, options) {
+		decorate: function(expr, eventType, paramsCallback, successCallback) {
 			$(expr).each(function(index, element) {
 				$(element).bind(eventType, function(event) {
-					doDecoration(element, event, successCallback, options);
+					doDecoration(element, event, paramsCallback, successCallback);
 				});
 			});
 		}
 	};
 	
-	function doDecoration(element, event, successCallback, options) {
+	function doDecoration(element, event, paramsCallback, successCallback) {
 		
 		if ($(element).attr('type') == 'submit') {
 			event.preventDefault();
@@ -26,14 +26,15 @@ define(['jquery', 'http-service'], function($, httpService) {
 		var action = closestForm.attr('action');
 		var method = closestForm.attr('method');
 		
-		var paramsData = {};
-		paramsData.paramsArray = closestForm.serializeArray();
-		paramsData.fragments = options.fragments;
-		paramsData.modelFragments = options.modelFragments;
-		paramsData.ajaxSource = $(element).attr('id');
+		var formString = closestForm.serialize();
+		var params = httpService.deserializeObjectFromUrl(formString);
+		params.ajaxSource = $(element).attr('id');
 		
-		httpService.sendAndRerender(action, method, paramsData, function(modelFragmentsData) {
-			successCallback(element, paramsData, modelFragmentsData);
+		var resultParams = paramsCallback(element, params);
+		
+		// $.param hack - post data are not converted correctly in case of JSON object
+		httpService.sendAndRerender(action, method, resultParams, function() {
+			successCallback(element, resultParams);
 		});
 	}
 

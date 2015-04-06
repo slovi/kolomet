@@ -2,8 +2,8 @@ package cz.kolomet.service.impl;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.social.facebook.api.FacebookLink;
 import org.springframework.social.facebook.api.FeedOperations;
+import org.springframework.social.facebook.api.PostData;
 import org.springframework.social.facebook.api.impl.FacebookTemplate;
 import org.springframework.stereotype.Service;
 
@@ -37,11 +37,18 @@ public class FacebookServiceImpl implements FacebookService {
 		FacebookTemplate facebookTemplate = new FacebookTemplate(newsItem.getAccessToken(), facebookApp);
 		FeedOperations operations = facebookTemplate.feedOperations();
 		
-		String newsItemUrl = newsItem.getContainedUrl();
-		String resultUrl = StringUtils.isNotBlank(newsItemUrl) ? newsItemUrl : newsItemLink;
+		String resultUrl = newsItem.getContainedUrl();
+		if (StringUtils.isBlank(resultUrl)) {
+			resultUrl = newsItem.getItemTipLink();
+			if (StringUtils.isBlank(resultUrl)) {
+				resultUrl = newsItemLink;
+			}
+		}
 		String facebookHeaderText = StringUtils.isNotBlank(newsItem.getFacebookHeaderText()) ? newsItem.getFacebookHeaderText() : newsItemCaption;
-		FacebookLink facebookLink = new FacebookLink(resultUrl, facebookHeaderText, facebookHeaderText, newsItem.getFacebookText());
-		operations.postLink(ownerId, newsItemMessage, facebookLink);
+		
+		PostData postData = new PostData(ownerId);
+		postData.link(resultUrl).name(facebookHeaderText).description(newsItem.getFacebookText()).picture(newsItem.getContainedImageUrl());
+		operations.post(postData);
 	}
 
 }

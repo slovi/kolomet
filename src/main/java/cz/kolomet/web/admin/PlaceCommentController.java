@@ -39,7 +39,7 @@ public class PlaceCommentController extends AbstractPublicController {
 	
     @RequestMapping(params = "form", produces = "text/html")
     public String createForm(@RequestParam(value = "parentEntityId", required = true) Long placeId, Model uiModel) {
-    	uiModel.addAttribute("place", placeId);
+    	uiModel.addAttribute("placeId", placeId);
         populateEditForm(uiModel, new PlaceComment());
         List<String[]> dependencies = new ArrayList<String[]>();
         if (placeService.countAllPlaces() == 0) {
@@ -57,7 +57,14 @@ public class PlaceCommentController extends AbstractPublicController {
         }
         uiModel.asMap().clear();
         placeCommentService.savePlaceComment(placeComment);
-        return "redirect:/public/places/" + placeComment.getPlace().getId();
+        return "redirect:public/places/" + placeComment.getPlace().getId();
+    }
+    
+    @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
+    public String updateForm(@RequestParam(value = "parentEntityId", required = true) Long placeId, @PathVariable("id") Long id, Model uiModel) {
+    	uiModel.addAttribute("placeId", placeId);
+    	populateEditForm(uiModel, placeCommentService.findPlaceComment(id));
+    	return "admin/placecomments/update";
     }
     
     @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
@@ -68,7 +75,7 @@ public class PlaceCommentController extends AbstractPublicController {
         }
         uiModel.asMap().clear();
         placeCommentService.updatePlaceComment(placeComment);
-        return "redirect:/public/places/" + placeComment.getPlace().getId();
+        return "redirect:public/places/" + placeComment.getPlace().getId();
     }
     
     void populateEditForm(Model uiModel, PlaceComment placeComment) {
@@ -111,20 +118,12 @@ public class PlaceCommentController extends AbstractPublicController {
         return "admin/placecomments/show";
     }
 
-	@RequestMapping(value = "/{id}", params = "form", produces = "text/html")
-    public String updateForm(@PathVariable("id") Long id, Model uiModel) {
-        populateEditForm(uiModel, placeCommentService.findPlaceComment(id));
-        return "admin/placecomments/update";
-    }
-
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
     public String delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         PlaceComment placeComment = placeCommentService.findPlaceComment(id);
         placeCommentService.deletePlaceComment(placeComment);
         uiModel.asMap().clear();
-        uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
-        uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
-        return "redirect:/admin/placecomments";
+        return "redirect:public/places/" + placeComment.getId();
     }
 
 	void addDateTimeFormatPatterns(Model uiModel) {

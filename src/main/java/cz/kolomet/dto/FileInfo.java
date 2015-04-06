@@ -1,5 +1,8 @@
 package cz.kolomet.dto;
 
+import java.text.Normalizer;
+import java.text.Normalizer.Form;
+
 
 public class FileInfo {
 	

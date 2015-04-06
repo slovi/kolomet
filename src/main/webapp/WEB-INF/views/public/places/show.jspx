@@ -38,8 +38,24 @@
 	                <c:out escapeXml="false" value="${place.description}"/>
 	            </p>
 	        </div>
-	        <div id="fb-root" style="float:left;">
-    			<div class="fb-share-button" data-href="http://www.kolomet.cz/tour/public/places/${place.id}" data-layout="button"><jsp:text /></div>
+	        <div style="float:left; margin-left: 20px">
+    			<div id="fb-root"><jsp:text/></div>
+				<c:if test="${not empty ogTitleCode}">
+					<spring:message code="${ogTitleCode}" arguments="${ogTitleArgs}" var="ogTitle" />
+				</c:if>
+				<c:if test="${not empty ogDescriptionCode}">
+					<spring:message code="${ogDescriptionCode}" arguments="${ogDescriptionArgs}" var="ogDescription" />
+				</c:if>
+				<spring:url value="/resources/images/facebook.png" var="fbIcon" />
+				<span style="vertical-align: super;">Sdílet:</span><util:nbsp number="2" /> 
+				<a href="http://www.kolomet.cz/tour/public/places/${place.id}" data-image="${ogImage}" data-title="${ogTitle}" data-desc="${ogDescription}" class="fb_share">
+    				<img src="${fbIcon}" alt="" title="Sdílet na facebooku" />
+				</a>
+				<!-- 
+				<a href="https://plus.google.com/share?url={URL}" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+					<img src="https://www.gstatic.com/images/icons/gplus-20.png" alt="Share on Google+"/>
+				</a>
+				 -->
        		</div>
 	        <div class="detail_author">
 	        	Autor: <c:out value="${place.owner.nickname}" />
@@ -65,6 +81,17 @@
                         <spring:message code="place_detail_showinmap"/>
                     </a>                    
                 </p>
+                <security:authorize access="isFullyAuthenticated()">
+	                <br/>
+	                <c:choose>
+	                	<c:when test="${isVisited}">
+			                Byl jsem zde: <input id="beenThereInput" style="height: 1em;" type="checkbox" checked="checked" data-place-id="${place.id}" />
+	                	</c:when>
+	                	<c:otherwise>
+	                		Byl jsem zde: <input id="beenThereInput" style="height: 1em;" type="checkbox" data-place-id="${place.id}" />
+	                	</c:otherwise>
+	                </c:choose>
+                </security:authorize>
             </div>
         </div>
     </div>
@@ -154,7 +181,7 @@
  	</security:authorize>
  	
     
-    <div class="general_unit_empty">
+    <div id="comments_box" class="general_unit_empty">
       
         <spring:url value="${subContext}/admin/placecomments?form" var="commentsUrl">
 	        <spring:param name="parentEntityId" value="${place.id}"/>
@@ -186,7 +213,16 @@
 	        	<c:if test="${authenticated}">
 		            <div style="width: 696px;">
 		                <p style="text-align: center;">
-		                    <spring:message code="place_detail_comments_no_comment"/>: <a href="${commentsUrl}">
+		                    <spring:message code="place_detail_comments_no_comment"/>: <a id="comment_button" href="${commentsUrl}">
+		                        <spring:message code="place_detail_comments_new_comment"/>
+		                    </a>
+		                </p>
+		            </div>
+	            </c:if>
+	            <c:if test="${not authenticated}">
+		            <div style="width: 696px;">
+		                <p style="text-align: center;">
+		                    <spring:message code="place_detail_comments_no_comment"/>: <a id="comment_button" href="#" class="anonymous">
 		                        <spring:message code="place_detail_comments_new_comment"/>
 		                    </a>
 		                </p>

@@ -9,15 +9,18 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import cz.kolomet.domain.ApplicationUser;
 import cz.kolomet.domain.Place;
 import cz.kolomet.domain.RateType;
 import cz.kolomet.domain.codelist.PlaceType;
 import cz.kolomet.dto.PlaceDto;
+import cz.kolomet.repository.ApplicationUserRepository;
 import cz.kolomet.repository.PlaceRepository;
 import cz.kolomet.repository.PlaceSpecifications;
 import cz.kolomet.service.PlaceService;
@@ -32,23 +35,36 @@ public class PlaceServiceImpl implements PlaceService, RatedService {
 	
 	@Autowired
     private PlaceRepository placeRepository;
+	
+	@Autowired
+	private ApplicationUserRepository applicationUserRepository;
 
+	@Override
 	public long countAllPlaces() {
         return placeRepository.count();
     }
 
+	@Override
 	@PreAuthorize("principal.isCapableToDeletePlace(#place)")
 	public void deletePlace(Place place) {
         placeRepository.delete(place);
     }
 
+	@Override
 	@PostAuthorize("isAnonymous() or principal.isCapableToDisplayPlace(returnObject)")
 	public Place findPlace(Long id) {
         return placeRepository.findOne(id);
     }
 
-	public List<PlaceDto> findPlaceDtos(Specification<Place> specification) {
+	@Override
+	public List<PlaceDto> findPlaceDtos(Specification<Place> specification, ApplicationUser applicationUser) {
+		
 		List<Place> places = findPlaceEntries(specification);
+		List<Place> visitedPlaces = null;
+		if (applicationUser != null) {
+			visitedPlaces = findPlaceEntries(Specifications.where(specification).and(PlaceSpecifications.visitedPlaces(applicationUser.getId())));
+		}
+		
 		List<PlaceDto> placeDtos = new ArrayList<PlaceDto>();
 		for (Place place: places) {
 			PlaceDto placeDto = new PlaceDto();
@@ -58,19 +74,25 @@ public class PlaceServiceImpl implements PlaceService, RatedService {
 			PlaceType placeType = place.getPlaceType();
 			placeDto.setPlaceType(placeType.getCodeDescription());
 			placeDto.setPlaceTypeColor(placeType.getPlaceTypeColor().toString());
+			if (visitedPlaces != null && visitedPlaces.contains(place)) {
+				placeDto.setBeenThere(true);
+			}
 			placeDtos.add(placeDto);
 		}
 		return placeDtos;
 	}
 	
+	@Override
 	public List<Place> findAllPlaces() {
         return placeRepository.findAll();
     }
 
+	@Override
 	public List<Place> findPlaceEntries(int firstResult, int maxResults) {
         return placeRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / maxResults, maxResults)).getContent();
     }
 
+	@Override
 	@PreAuthorize("principal.isCapableToSavePlace(#place)")
 	public void savePlace(Place place) {
 		
@@ -86,6 +108,7 @@ public class PlaceServiceImpl implements PlaceService, RatedService {
         placeRepository.save(place);
     }
 
+	@Override
 	@PreAuthorize("principal.isCapableToUpdatePlace(#place)")
 	public Place updatePlace(Place place) {
 		
@@ -113,22 +136,35 @@ public class PlaceServiceImpl implements PlaceService, RatedService {
 		return rateType == RateType.PLACE;
 	}
 	
+	@Override
 	public Page<Place> findPlaceEntries(Specification<Place> specification, Pageable pageable) {
 		return placeRepository.findAll(specification, pageable);
 	}
 	
+	@Override
 	public List<Place> findPlaceEntries(Specification<Place> specification) {
 		return placeRepository.findAll(specification);
 	}
 	
+	@Override
 	public List<Place> findTopPlaces(Specification<Place> specification, int nubmerOfPlaces) {
 		Pageable pagable = new PageRequest(0, nubmerOfPlaces, PlaceSpecifications.getTopSort());
 		return placeRepository.findAll(specification, pagable).getContent();
 	}
 	
-	public List<Place> findTopPlaces(Specification<Place> specification, int nubmerOfPlaces, boolean actual) {
-		Pageable pagable = new PageRequest(0, nubmerOfPlaces, PlaceSpecifications.getTopSort(actual));
-		return placeRepository.findAll(specification, pagable).getContent();
+	@Override
+	public void assignVisitedUser(Long placeId, Boolean beenThere, ApplicationUser applicationUser) {
+		ApplicationUser reloadedApplicationUser = applicationUserRepository.findOne(applicationUser.getId());
+		assignVisitedUser(findPlace(placeId), beenThere, reloadedApplicationUser);
+	}
+	
+	@Override
+	public void assignVisitedUser(Place place, Boolean beenThere, ApplicationUser applicationUser) {
+		if (beenThere) {
+			place.addVisitedUser(applicationUser);
+		} else {
+			place.removeVisitedUser(applicationUser);
+		}
 	}
 	
 }

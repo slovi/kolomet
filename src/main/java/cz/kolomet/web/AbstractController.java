@@ -259,7 +259,7 @@ public class AbstractController implements MessageSourceAware {
 		File parent = new File(getTempDir(), folder);
 		try {
 			FileUtils.forceMkdir(parent);
-			File dest = new File(parent, file.getOriginalFilename());
+			File dest = new File(parent, cz.kolomet.util.StringUtils.removeDiakritics(file.getOriginalFilename()));
 			logger.debug("Saving uploaded file from (" + file.getOriginalFilename() + ") to dest (" + dest.getAbsolutePath() + ")");
 			file.transferTo(dest);
 			photoContainerService.createThumbnail(dest);

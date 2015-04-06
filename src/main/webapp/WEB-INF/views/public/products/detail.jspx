@@ -59,8 +59,19 @@
         		<p><jsp:text /></p>
         		<p><c:out escapeXml="false" value="${product.description}" /></p>
         	</div>
-			<div id="fb-root" style="float:left;margin-top: 25px;">
-				<div class="fb-share-button" data-href="http://www.kolomet.cz/store/public/products/detail/${product.id}" data-layout="button"><jsp:text /></div>
+			<div style="float:left;margin-top: 32px;">
+				<div id="fb-root"><jsp:text/></div>
+				<c:if test="${not empty ogTitleCode}">
+					<spring:message code="${ogTitleCode}" arguments="${ogTitleArgs}" var="ogTitle" />
+				</c:if>
+				<c:if test="${not empty ogDescriptionCode}">
+					<spring:message code="${ogDescriptionCode}" arguments="${ogDescriptionArgs}" var="ogDescription" />
+				</c:if>
+				<span style="vertical-align: super;">Sdílet:</span><util:nbsp number="2" />
+				<spring:url value="/resources/images/facebook.png" var="fbIcon" />
+				<a href="http://www.kolomet.cz/store/public/products/detail/${product.id}" data-image="${ogImage}" data-title="${ogTitle}" data-desc="${ogDescription}" class="fb_share">
+    				<img src="${fbIcon}" alt="" title="Sdílet na facebooku" />
+				</a>
        		</div>
         	<div class="order_button">        
         		<c:if test="${not empty product.buyUrl}">
@@ -157,7 +168,16 @@
 	       			</tr>
        			</security:authorize>
        		</table>   		          
-       		<table class="right_column">
+       		
+       	</div>
+       	
+		<div class="seller_ads">
+
+			<div class="thumbnails">		
+				<field:files-thumbnails photos="${product.photos}" imgName="${product.productName}" id="thumbnails" />
+			</div>
+			
+			<table class="right_column">
        			<tr>
        				<td><b><spring:message code="label_cz_kolomet_domain_seller_region" /></b></td>
        				<td><c:out value="${product.seller.region.codeDescription}" /></td>
@@ -171,16 +191,10 @@
        				<td><util:boolean value="${product.canSendToAllCountry}" /></td>
        			</tr>
             </table>
-       	</div>
-       	
-		<div class="seller_ads">
-		
-			<field:files-thumbnails photos="${product.photos}" imgName="${product.productName}" id="thumbnails" />
 			
-			<div class="clear"></div>
 			<security:authorize access="isAuthenticated()">
 	    		<security:authorize access="principal.isProductOwner(#product)">
-					<div style="margin-top: 300px;">
+					<div>
 						<table>
 							<thead>
 								<tr>
@@ -221,7 +235,9 @@
 	    		<security:authorize access="principal.isCapableToCopyProduct(#product)" var="copy" />
 	    		<security:authorize access="principal.isCapableToDeleteProduct(#product)" var="delete" />
 	    		<security:authorize access="principal.isCapableToEraseProduct(#product)" var="erase" />
-	    		<util:quicklinks update="${update}" copy="${copy}" create="false" erase="${erase}" list="true" itemId="${product.id}" typeName="product" delete="${delete}" typeNamePlural="products" path="${subContext}/admin/products" largeIcons="true" />
+	    		<spring:message code="menu_item_product_new_label" var="typeName" htmlEscape="false" />
+	    		<spring:message code="menu_item_product_list_label" var="typeNamePlural" htmlEscape="false" />
+	    		<util:quicklinks update="${update}" copy="${copy}" create="false" erase="${erase}" list="true" itemId="${product.id}" typeName="${typeName}" delete="${delete}" typeNamePlural="${typeNamePlural}" path="${subContext}/admin/products" largeIcons="true" />
 	    	</security:authorize>
     	</security:authorize>
     </div>

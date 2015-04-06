@@ -29,7 +29,7 @@ public class PlaceJsonTest {
 	@Transactional
 	public void testMarshall() {
 		
-		List<PlaceDto> placeCollection = placeService.findPlaceDtos(PlaceSpecifications.forPlaceFilter(new PlaceFilterDto()));
+		List<PlaceDto> placeCollection = placeService.findPlaceDtos(PlaceSpecifications.forPlaceFilter(new PlaceFilterDto()), null);
 		
 		System.out.println(jsonSerializer.toJsonArray(placeCollection, 
 				new String[] {"id", "name", "placeType", "placeTypeColor", "gpsLocation", "north", "west"}));

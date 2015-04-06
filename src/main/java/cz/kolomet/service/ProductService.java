@@ -11,6 +11,9 @@ import cz.kolomet.domain.Product;
 public interface ProductService { 
 	
 	
+	public List<Product> findRandomByPriority(Pageable pageable);
+	
+	
 	public List<Product> findProductEntries(Specification<Product> specification);
 	
 	

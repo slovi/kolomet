@@ -3,11 +3,18 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>    
     
-    <div class="general_unit">
+    <spring:message code="page_place_list_myplaces_all" var="myPlacesAllText" />
+    <spring:message code="page_place_list_myplaces_own" var="myPlacesOwnText" />
     
-        <div><div id="map-canvas" style="width: 100%; height:400px;"><!----></div><!----></div>
-        
-        <br/>
+    <div class="general_unit" style="padding: 10px;">
+    	
+        <div id="map_content"><div id="map-canvas" style="width: 100%; height:400px;"><!----></div><!----></div>
+
+		<div id="map_footer">
+    		<spring:url value="/tour/public/places" var="my_places_url" />
+    		<a id="my_places_link" href="${my_places_url}" class="arrow_box actual"><util:nbsp number="3" /><c:out value="${myPlacesOwnText}" escapeXml="false" /><util:nbsp number="3" /></a><util:nbsp number="2" />
+    	</div>
+
 	    <spring:url value="${staticDomain}/" var="contextPath" />
 	    <spring:url value="/tour/public/places" var="placeUrl" />
 	    <spring:url value="/resources/js/gmap.js" var="gmapUrl" />
@@ -15,13 +22,14 @@
         <span id="map_config" class="config" style="display: none;">
         	<![CDATA[
     			{ 
-    				"contextPath": "${contextPath}", 
-    				"placesJson": ${placesJson}, 
+    				"myPlacesText": "${myPlacesOwnText}",
+					"allPlacesText": "${myPlacesAllText}",
     				"placeUrl": "${placeUrl}", 
     				"highlight": "${param.highlight}",
     				"initWest": "${param.gps_west}",
     				"initNorth": "${param.gps_north}",
-    				"initZoom": "${param.gps_region_zoom}" 
+    				"initZoom": "${param.gps_region_zoom}",
+    				"placeTypes": ${placeTypesJson}
     			}
     		]]>
         </span>

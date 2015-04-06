@@ -130,7 +130,9 @@
 	    		<security:authorize access="principal.isCapableToUpdateSeller(#seller)" var="update" />
 	    		<security:authorize access="principal.isCapableToDeleteSeller(#seller)" var="delete" />
 	    		<security:authorize access="principal.isCapableToEraseSeller(#seller)" var="erase" />
-	    		<util:quicklinks update="${update}" create="false" erase="${erase}" list="true" itemId="${seller.id}" typeName="seller" delete="${delete}" typeNamePlural="sellers" path="${subContext}/admin/sellers" largeIcons="true" />
+	    		<spring:message code="menu_item_seller_new_label" var="typeName" htmlEscape="false" />
+	    		<spring:message code="menu_item_seller_list_label" var="typeNamePlural" htmlEscape="false" />
+	    		<util:quicklinks update="${update}" create="false" erase="${erase}" list="true" itemId="${seller.id}" typeName="${typeName}" delete="${delete}" typeNamePlural="${typeNamePlural}" path="${subContext}/admin/sellers" largeIcons="true" />
 	    	</security:authorize>
     	</security:authorize>
     </div>

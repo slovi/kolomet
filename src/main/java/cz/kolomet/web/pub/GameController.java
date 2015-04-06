@@ -11,6 +11,7 @@ public class GameController extends AbstractPublicController {
 	
     @RequestMapping
     public String index(Model model) {
+    	model.addAttribute("newsBanners", newsItemService.findPlaceNewsBanners(getNewsItemsPageRequest()));
         return "public/game/index";
     }
 

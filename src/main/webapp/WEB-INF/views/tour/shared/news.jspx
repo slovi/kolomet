@@ -4,23 +4,18 @@
     <jsp:output omit-xml-declaration="yes"/>
     
     <div id="news">
-    	<spring:url value="${subContext}/public/game" var="registrationUrl" />
-    	<a href="${registrationUrl}" class="undecorated">
-	    	<div id="kolomet_game" class="news_content">
-	    		<spring:message code="tour_shared_news" htmlEscape="false" />
-	        </div>
-        </a>
        	<div class="news_content">
-       		<div class="news_header">
-	    		<spring:message code="news_banners_header" />
+       		<div class="news_items">
+       			<c:if test="${empty newsBannersRenderedByJson or not newsBannersRenderedByJson}">
+		       		<c:forEach items="${newsBanners}" var="newsItem">
+			       		<div class="news_item">
+			       			<p>
+			       				<span class="news_item_content"><c:out value="${newsItem.text}" escapeXml="false" /></span>		        			
+			       			</p>
+			       		</div>
+		       		</c:forEach>
+	       		</c:if>
        		</div>
-       		<c:forEach items="${newsBanners}" var="newsItem">
-	       		<div class="news_item">
-	       			<p>
-	       				<span class="news_item_content"><c:out value="${newsItem.text}" escapeXml="false" /></span>		        			
-	       			</p>
-	       		</div>
-       		</c:forEach>
     	</div>
     </div>
     

@@ -56,6 +56,21 @@ public class PlaceSpecifications {
 		};
 		
 	}
+	
+	public static Specification<Place> visitedPlaces(final Long userId) {
+		
+		return new Specification<Place>() {
+			
+			@Override
+			public Predicate toPredicate(Root<Place> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+				
+				Join<Place, ApplicationUser> visitedUserJoin = root.join("visitedUsers");
+				return cb.equal(visitedUserJoin.get("id"), userId);
+			}
+			
+		};
+		
+	}
 
 	public static Specification<Place> forPlaceFilter(final PlaceFilterDto placeFilterDto) {
 		

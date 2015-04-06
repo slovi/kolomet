@@ -2,12 +2,15 @@ define(['jquery', 'loader'], function($, loader) {
 	
 	return {
 		
-		send: function(url, method, data, success) {
+		sendAjax: function(config) {
+			
+			var data = this.serializeObjectToUrl(config.data);
 			
 			$.ajax({
-		        url: url,
-		        type: method,
+		        url: config.url,
+		        type: config.method,
 		        data: data,
+		        dataType: config.dataType,
 		        beforeSend: function(xhr) {
 		        	
 		        	loader.show();
@@ -16,12 +19,14 @@ define(['jquery', 'loader'], function($, loader) {
 		        success: function(data) {		    
 					
 					loader.hide();
-					success(data);
+					config.success(data);
 		        },
 		        error: function(xhr, status, errorThrown) {
 		        	
 		        	loader.hide();
-		        	if (data.jqXHR.responseJSON) {
+		        	if (xhr.statusText) {
+		        		alert('Error: ' + xhr.statusText);
+		        	} else if (xhr.responseJSON) {
 		        		alert('Error: ' + xhr.responseJSON.ajaxError.errorDescription);
 		        	} else {
 		        		alert('Error: ' + errorThrown);
@@ -35,69 +40,124 @@ define(['jquery', 'loader'], function($, loader) {
 			
 		},
 		
-		sendAndRerender: function(url, method, paramsData, success) {
+		sendGetJson: function(url, data, success) {
 			
-			if (!paramsData.paramsArray) {
-				paramsData.paramsArray = [];
-			}
+			var config = {
+					url: url,
+					method: 'GET',
+					data: data,
+					dataType: 'json',
+					success: success
+			};
 			
-			paramsData.paramsArray.push({name: 'ajaxSource', value: paramsData.ajaxSource});
-			paramsData.paramsArray.push({name: 'fragments', value: paramsData.fragments});
-			paramsData.paramsArray.push({name: 'modelFragments', value: paramsData.modelFragments});
-			if (paramsData.append) {
-				paramsData.paramsArray.push({name: 'append', value: paramsData.append});
-			}
+			this.sendAjax(config);
 			
-			$.ajax({
-		        url: url,
-		        type: method,
-		        data: paramsData.paramsArray,
-		        beforeSend: function(xhr) {
-		        	
-		        	loader.show();
-		        	
-		        },
-		        success: function(data) {
-		        	
-		        	var nodes = $(data);
-					
-		        	var offset = 0;
-		        	if (paramsData.fragments) {
-						var fragments = paramsData.fragments.split(',');
-						for (var i = 0; i < fragments.length; i++) {
-							var fragment = $('#' + $.trim(fragments[i])); 
-							if (paramsData.append) {
-								fragment.append(nodes[i]);
-							} else {
-								fragment.empty();
-								fragment.html(nodes[i]);
+		},
+		
+		send: function(url, method, data, success) {
+			
+			var config = {
+					url: url,
+					method: method,
+					data: data,
+					success: success
+			};
+			
+			this.sendAjax(config)
+		},
+		
+		sendAndRerender: function(url, method, params, success) {
+			
+			var config = {
+					url: url,
+					method: method,
+					data: params,
+					dataType: 'html',
+					success: function(data) {
+						
+						var nodes = $.parseHTML(data);
+						
+			        	var offset = 0;
+			        	if (params.fragments) {
+			        		var fragments = params.fragments.split(',');
+							for (var i = 0; i < fragments.length; i++) {
+								var fragment = $('#' + $.trim(fragments[i])); 
+								if (params.append) {
+									fragment.append(nodes[i]);
+								} else {
+									fragment.empty();
+									fragment.html(nodes[i]);
+								}
+								offset++;
 							}
-							offset++;
-						}
-		        	}
-					
-		        	var modelFragmentsData = [];
-		        	if (paramsData.modelFragments) {
-						var modelFragments = paramsData.modelFragments.split(',');
-						for (var i = 0; i < modelFragments.length; i++) {
-							modelFragmentsData[modelFragments[i]] = $(nodes[i + offset]).text();
-						}
-		        	}
-					
-		        	success(modelFragmentsData);
-		        	
-					loader.hide();
-		        },
-		        error: function(xhr, status, errorThrown) {
-		        	
-		        	// show error pane
-		        },
-		        complete: function(xhr) {
-		        	
-		        	// complete request
-		        }
-			});
+			        	}
+			        	
+			        	success(data);
+			        	
+					}
+			}
+			
+			this.sendAjax(config);
+			
+		},
+		
+		serializeObjectToUrl: function(object, options) {
+			
+			var excludes = options;
+			if (excludes) {
+				for (var i = 0; i < excludes.length; i++) {
+					delete object[excludes[i]];
+				}
+			}
+			return $.param(object, true);
+		},
+		
+		deserializeObjectFromUrl: function(urlToDeserialize, options) {
+			
+			// https://regex101.com/
+			var re = /(([^\?&=]+)(\[[0-9]\])|([^\?&=]+))=([^&]*)/g;
+			var params = {}, e;
+			var excludes = options || [];
+
+			if (urlToDeserialize) {
+				var url = _decode(urlToDeserialize);
+	            if (url.substr(0, 1) == '?') {
+	            	url = url.substr(1);
+	            }
+
+	            while (e = re.exec(url)) {
+	                var k = typeof e[2] === 'undefined' ? e[1] : e[2];
+	                if ($.inArray(k, excludes) < 0) {
+		                var v = e[5];
+		                if (params[k] !== undefined) {
+		                    if (!$.isArray(params[k])) {
+		                        params[k] = [params[k]];
+		                    }
+		                    params[k].push(v);
+		                } else {
+		                    params[k] = v;
+		                }
+	                }
+	            }
+	        }
+	        return params;
+		},
+		
+		deserializeObjectFromWindowLocation: function(options) {
+			
+			if (window.location) {
+				if (window.location.search) {
+					var url = window.location.search.substring(1, window.location.search.length);
+					return this.deserializeObjectFromUrl(url, options);
+				}
+			}
+			return {};
 		}
+		
 	};
+	
+	function _decode(str) {
+		return decodeURIComponent(str.replace(/\+/g, ' '));
+	}
 	
 });

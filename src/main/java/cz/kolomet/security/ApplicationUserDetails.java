@@ -34,14 +34,24 @@ public class ApplicationUserDetails implements UserDetails {
 	}
 	
 	public static ApplicationUser getActualApplicationUser() {
-		return getActualApplicationUserDetails().getUser();
+		ApplicationUserDetails applicationUserDetails = getActualApplicationUserDetails();
+		if (applicationUserDetails != null) {
+			return applicationUserDetails.getUser();
+		} else {
+			return null;
+		}
 	}
 	
 	public static ApplicationUserDetails getActualApplicationUserDetails() {
 		SecurityContext context = SecurityContextHolder.getContext();
 		Authentication authentication = context.getAuthentication();
-		Object principal = authentication.getPrincipal();
-		return principal instanceof ApplicationUserDetails ? (ApplicationUserDetails) principal : null;
+		if (authentication != null) {
+			Object principal = authentication.getPrincipal();
+			if (principal != null && principal instanceof ApplicationUserDetails) {
+				return  (ApplicationUserDetails) principal;
+			}
+		}
+		return null;
 	}
 	
 	public boolean isPlacesOwn() {
@@ -161,7 +171,7 @@ public class ApplicationUserDetails implements UserDetails {
 	}
 		
 	public boolean isPlaceOwner(Place place) {
-		return isPlacesAll() || (isPlacesOwn() && getUserId().equals(place.getCreatedBy().getId()));
+		return isPlacesAll() || (isPlacesOwn() && getUserId().equals(place.getOwner().getId()));
 	}
 	
 	public boolean isCapableToSavePlace(Place place) {
@@ -181,11 +191,11 @@ public class ApplicationUserDetails implements UserDetails {
 	}
 	
 	public boolean isCapableToSavePlaceComment(PlaceComment placeComment) {
-		return true;
+		return isPlaceOwner(placeComment.getPlace());
 	}
 	
 	public boolean isCapableToUpdatePlaceComment(PlaceComment placeComment) {
-		return isPlacesAll();
+		return isPlaceOwner(placeComment.getPlace());
 	}
 	
 	public boolean isCapableToDeletePlaceComment(PlaceComment placeComment) {

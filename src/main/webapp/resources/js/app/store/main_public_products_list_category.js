@@ -2,9 +2,11 @@ require(['../common'], function (common) {
 
 	require(['main_default_public'], function(mainDefaultPublic) {
 		
-	    require(['form', 'slider', 'ajax-submit', 'ajax-link', 'jquery.history'], function(form, slider, ajaxSubmit, ajaxLink, history) {
+	    require(['form', 'slider', 'ajax-submit', 'ajax-link', 'http-service', 'jquery.history'], function(form, slider, ajaxSubmit, ajaxLink, httpService, history) {
 	    	
 	    	$(document).ready(function() {
+	    		
+	    		var excludedHistoryParams = ['ajaxSource', 'fragments'];
 	    		
 	    		History.Adapter.bind(window, 'statechange', function() {
 					var State = History.getState();
@@ -30,39 +32,42 @@ require(['../common'], function (common) {
 				ajaxSubmit.decorateId(
 						'button_filter', 
 						'click', 
-						function(element, paramsData, modelFragmentsData) {
+						function(element, params) {
+							params.fragments = 'body_content';
+							return params;
+						},
+						function(element, params) {
 							nextPageAndSortLinks();
-							var queryStringToPush = '?' + encodeArrayToQueryString(paramsData.paramsArray);
-							console.log("Adding query string to history: " + queryStringToPush);
-							History.pushState(null, 'Kolomet - kola ČR', queryStringToPush);
-						}, 
-						{fragments: 'body_content'});
+							History.pushState(null, 'Kolomet - kola ČR', '?' + httpService.serializeObjectToUrl(params, excludedHistoryParams));
+						});
 				
 				var nextPageAndSortLinks = function() {
 					ajaxLink.decorate(
 							'div#category_content div:last a.next_page_link', 
 							'click',
-							function(element, modelFragmentsData) {
-								return {fragments: 'body_content', append: true}
+							function(element, params) {
+								params.fragments = 'body_content';
+								params.append = true;
+								return params;
 							},
-							function(element, paramsInfo, modelFragmentsData) {		
+							function(element, params) {		
 								nextPageAndSortLinks();
 								$('html,body').animate({scrollTop: $(element).offset().top}, 1000);
 								$(element).closest('div').hide();
-								paramsInfo.paramsData.paramsArray.pop();
-								var queryString = encodeArrayToQueryString(concatParams(objectToObjectArray(paramsInfo.params), paramsInfo.paramsData.paramsArray));
-								History.pushState(null, 'Kolomet - kola ČR', '?' + queryString);
+								//paramsInfo.paramsData.paramsArray.pop();
+								History.pushState(null, 'Kolomet - kola ČR', '?' + httpService.serializeObjectToUrl(params, excludedHistoryParams));
 							});
 							
 					ajaxLink.decorate(
 							'span#body_content div.sorting a', 
 							'click',
-							function(element, modelFragmentsData) {
-								return {fragments: 'body_content'}
+							function(element, params) {
+								params.fragments = 'body_content';
+								return params;
 							},
-							function(element, paramsInfo, modelFragmentsData) {		
+							function(element, params) {		
 								nextPageAndSortLinks();
-								History.pushState(null, 'Kolomet - kola ČR', '?' + encodeArrayToQueryString(concatParams(objectToObjectArray(paramsInfo.params), paramsInfo.paramsData.paramsArray)));
+								History.pushState(null, 'Kolomet - kola ČR', '?' + httpService.serializeObjectToUrl(params, excludedHistoryParams));
 							});
 				
 				};

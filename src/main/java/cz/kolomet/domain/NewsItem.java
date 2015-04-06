@@ -10,6 +10,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
@@ -19,6 +20,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import cz.kolomet.domain.codelist.Region;
 import cz.kolomet.dto.FileInfo;
 
 @Entity
@@ -46,11 +48,20 @@ public class NewsItem extends BaseDomainEntity implements PhotoContainer, Serial
 
 	private NewsItemType newsItemType;
 	
+	private String itemTipLink;
+	
+	private Long itemTipProductId;
+	
 	@Transient
 	private String accessToken;
 	
 	@Transient
     private List<FileInfo> fileInfos = new ArrayList<FileInfo>();
+	
+	@ManyToOne
+	private Region region;
+	
+	private Boolean missingRegion = false;
 	
 	public NewsItem() {
 		
@@ -76,6 +87,21 @@ public class NewsItem extends BaseDomainEntity implements PhotoContainer, Serial
 		} else {
 			return text;
 		}
+	}
+	
+	public String getContainedImageUrl() {
+		
+		final String hrefAttributePatternStart = "src=\"";
+		final String hrefAttributePatternEnd = "\"";
+		
+		if (StringUtils.isNotBlank(text)) {
+			int hrefIndexStart = text.indexOf(hrefAttributePatternStart);
+			if (hrefIndexStart > -1) {
+				final String urlSubstring = text.substring(hrefIndexStart + hrefAttributePatternStart.length()); 
+				return urlSubstring.substring(0, urlSubstring.indexOf(hrefAttributePatternEnd) - hrefAttributePatternEnd.length() + 1);
+			}
+		}
+		return null;
 	}
 	
 	public String getContainedUrl() {
@@ -173,6 +199,38 @@ public class NewsItem extends BaseDomainEntity implements PhotoContainer, Serial
 
 	public void setFileInfos(List<FileInfo> fileInfos) {
 		this.fileInfos = fileInfos;
+	}
+
+	public String getItemTipLink() {
+		return itemTipLink;
+	}
+
+	public void setItemTipLink(String itemTipLink) {
+		this.itemTipLink = itemTipLink;
+	}
+
+	public Long getItemTipProductId() {
+		return itemTipProductId;
+	}
+
+	public void setItemTipProductId(Long itemTipProductId) {
+		this.itemTipProductId = itemTipProductId;
+	}
+
+	public Region getRegion() {
+		return region;
+	}
+
+	public void setRegion(Region region) {
+		this.region = region;
+	}
+
+	public Boolean getMissingRegion() {
+		return missingRegion;
+	}
+
+	public void setMissingRegion(Boolean missingRegion) {
+		this.missingRegion = missingRegion;
 	}
 
 }

@@ -11,10 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import cz.kolomet.repository.CategoryRepository;
-import cz.kolomet.repository.NewsItemRepository;
-import cz.kolomet.repository.NewsItemSpecifications;
 import cz.kolomet.service.CategoryTypeService;
 import cz.kolomet.service.FigureHeightService;
+import cz.kolomet.service.NewsItemService;
 import cz.kolomet.service.ProducerService;
 import cz.kolomet.service.RegionService;
 import cz.kolomet.web.AbstractController;
@@ -40,13 +39,13 @@ public class AbstractPublicController extends AbstractController implements Init
 	private CategoryTypeService categoryTypeService;
 	
 	@Autowired
-	private NewsItemRepository newsItemRepository;
-	
-	@Autowired
 	private FigureHeightService figureHeightsService;
 	
 	@Autowired
 	private RegionService regionService;
+	
+	@Autowired
+	protected NewsItemService newsItemService;
 	
 	@ModelAttribute
 	public void loadMenuModel(Model uiModel, HttpServletRequest request) {
@@ -59,7 +58,7 @@ public class AbstractPublicController extends AbstractController implements Init
 		if (!isAjaxRequest(request)) {
 			if (isTour(request)) {
 				uiModel.addAttribute("regions", regionService.findAllRegions());
-				uiModel.addAttribute("agreementVersion", agreementVersion);
+				uiModel.addAttribute("agreementVersion", agreementVersion);				
 			}
 			
 			if (isStore(request)) {
@@ -69,10 +68,10 @@ public class AbstractPublicController extends AbstractController implements Init
 				uiModel.addAttribute("bikeCategoryTypeId", bikeCategoryTypeId);
 				uiModel.addAttribute("otherCategoryTypeId", otherCategoryTypeId);
 				uiModel.addAttribute("agreementVersion", agreementVersion);
+				uiModel.addAttribute("newsBanners", newsItemService.findProductNewsBanners(getNewsItemsPageRequest()));
 			}
 			
-			uiModel.addAttribute("newsItems", newsItemRepository.findAllWithoutCountQueryCacheable(NewsItemSpecifications.allNewsItems(), getNewsItemsPageRequest()));
-			uiModel.addAttribute("newsBanners", newsItemRepository.findAllWithoutCountQueryCacheable(NewsItemSpecifications.allNewsBanners(), getNewsItemsPageRequest()));
+			uiModel.addAttribute("newsItems", newsItemService.findAllNewsItems(getNewsItemsPageRequest()));
 		}
 
 		if (logger.isDebugEnabled()) {
@@ -86,7 +85,7 @@ public class AbstractPublicController extends AbstractController implements Init
 		this.otherCategoryTypeId = categoryTypeService.findByCategoryCodeKey("cattype_other").getId();
 	}
 	
-	private PageRequest getNewsItemsPageRequest() {
+	protected PageRequest getNewsItemsPageRequest() {
 		return new PageRequest(0, newsItemsSize, Direction.DESC, "newsItemDate");
 	}
 

@@ -11,7 +11,7 @@
 
     <form:create id="fc_cz_kolomet_domain_PlaceComment" modelAttribute="placeComment" path="${subContext}/admin/placecomments" render="${empty dependencies}" z="CDmFtUSV1Q5d3g4ssmAJCcAlHzo=">
 
-        <input name="place" type="hidden" value="${place}"/>
+        <input name="place" type="hidden" value="${placeId}"/>
         
         <security:authorize access="principal.isPlacesAll()" var="admin" />
         

@@ -9,6 +9,7 @@ public class PlaceDto {
 	private String placeType;
 	private String placeTypeColor;
 	private GpsLocation gpsLocation;
+	private boolean beenThere;
 	
 	public Long getId() {
 		return id;
@@ -48,6 +49,14 @@ public class PlaceDto {
 	
 	public void setGpsLocation(GpsLocation gpsLocation) {
 		this.gpsLocation = gpsLocation;
+	}
+
+	public boolean isBeenThere() {
+		return beenThere;
+	}
+
+	public void setBeenThere(boolean beenThere) {
+		this.beenThere = beenThere;
 	}
 	
 }

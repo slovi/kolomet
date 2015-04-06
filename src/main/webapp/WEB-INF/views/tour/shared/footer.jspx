@@ -3,6 +3,22 @@
   	
   	<jsp:directive.page contentType="text/html;charset=UTF-8"/>
   	<jsp:output omit-xml-declaration="yes"/>
+  	
+ 	<br/>
+ 	<div id="partner_links_wrapper">
+ 		<div class="partner_link_label">
+			Partnerské weby:
+		</div>  			
+ 		<div id="partners_links">  				
+		  	<c:if test="${not empty newsItemPartners}">
+  				<c:forEach items="${newsItemPartners}" var="newsItemPartner">
+	  				<div class="partner_link">
+	  					<c:out value="${newsItemPartner.text}" escapeXml="false" />
+			  		</div>
+		  		</c:forEach>
+		  	</c:if>
+  		</div>
+ 	</div>
 
 	<p>2014 Kolomet &#169; &#32; &#32; |
 	

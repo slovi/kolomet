@@ -94,6 +94,12 @@ div#content_container_short {
 	margin-left: 260px;
 }
 
+div#map_footer {
+	text-align: right;
+	font-size: 1.2em;
+	margin-top: 10px;
+}
+
 div#news {
 	width: 220px;
 	float: right;
@@ -497,6 +503,13 @@ div#content_container_short {
 	padding: 10px 0 0 0;
 }
 
+div#content_container_short div#news_item_tips {
+	padding: 10px;
+	width: 688px;
+	min-height: 110px;
+	overflow: hidden;
+}
+
 /* generic */
 div#content_container div.general_unit {
 	padding: 10px 10px;
@@ -506,6 +519,14 @@ div#content_container div.general_unit {
 div#content_container_short div.general_unit {
 	margin: 0 230px 6px 6px;
 	padding: 15px;
+}
+
+/* generic */
+div#content_container_short div.general_unit h2 {
+	color: #7299b3;
+	text-align: center;
+	font-weight: 700;
+	font-size: 1.6em;
 }
 
 /* generic */
@@ -878,6 +899,23 @@ div#footer {
 	border-top: 1px solid #58585a;
 }
 
+div#partner_links_wrapper {
+	font-size: 1.2em;
+	margin-left: 10px;
+	overflow: auto;
+}
+
+div.partner_link_label {
+	float: left;
+	width: 120px;
+	padding-top: 4px;
+}
+
+div.partner_link {
+	float: left;
+	width: 100px;
+}
+
 /* Barvy - vedlejší menu a další */
 div#side_menu div.side-menu,div#content_container_short div.homepage_unit
 	{
@@ -1176,21 +1214,6 @@ div#side_menu a.current {
 div.step .current {
 	background: #497f96;
 	color: white;
-}
-
-.current:after {
-	right: 0px;
-	top: 50%;
-	border: solid transparent;
-	content: " ";
-	height: 0;
-	width: 0;
-	position: absolute;
-	pointer-events: none;
-	border-color: #f9f9f9;
-	border-left-color: #497f96;
-	border-width: 13px;
-	margin-top: -13px;
 }
 
 form table td {
