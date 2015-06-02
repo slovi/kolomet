@@ -60,18 +60,7 @@
         		<p><c:out escapeXml="false" value="${product.description}" /></p>
         	</div>
 			<div style="float:left;margin-top: 32px;">
-				<div id="fb-root"><jsp:text/></div>
-				<c:if test="${not empty ogTitleCode}">
-					<spring:message code="${ogTitleCode}" arguments="${ogTitleArgs}" var="ogTitle" />
-				</c:if>
-				<c:if test="${not empty ogDescriptionCode}">
-					<spring:message code="${ogDescriptionCode}" arguments="${ogDescriptionArgs}" var="ogDescription" />
-				</c:if>
-				<span style="vertical-align: super;">Sdílet:</span><util:nbsp number="2" />
-				<spring:url value="/resources/images/facebook.png" var="fbIcon" />
-				<a href="http://www.kolomet.cz/store/public/products/detail/${product.id}" data-image="${ogImage}" data-title="${ogTitle}" data-desc="${ogDescription}" class="fb_share">
-    				<img src="${fbIcon}" alt="" title="Sdílet na facebooku" />
-				</a>
+				<util:facebook id="fb_link" fbLink="${fbLink}" />
        		</div>
         	<div class="order_button">        
         		<c:if test="${not empty product.buyUrl}">

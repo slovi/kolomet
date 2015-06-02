@@ -1,10 +1,16 @@
 package cz.kolomet.service.impl;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -20,16 +26,20 @@ import cz.kolomet.domain.Place;
 import cz.kolomet.domain.RateType;
 import cz.kolomet.domain.codelist.PlaceType;
 import cz.kolomet.dto.PlaceDto;
+import cz.kolomet.dto.PlaceFilterDto;
+import cz.kolomet.dto.PlaceMapDto;
 import cz.kolomet.repository.ApplicationUserRepository;
 import cz.kolomet.repository.PlaceRepository;
 import cz.kolomet.repository.PlaceSpecifications;
 import cz.kolomet.service.PlaceService;
 import cz.kolomet.service.RatedService;
+import cz.kolomet.service.UrlService;
 import cz.kolomet.service.exception.ExistingPlaceException;
+import cz.kolomet.util.StringUtils;
 
 @Service
 @Transactional
-public class PlaceServiceImpl implements PlaceService, RatedService {
+public class PlaceServiceImpl implements PlaceService, RatedService, InitializingBean {
 
 	private static final Double LOCATION_RADIUS = 0.0006d;
 	
@@ -38,6 +48,27 @@ public class PlaceServiceImpl implements PlaceService, RatedService {
 	
 	@Autowired
 	private ApplicationUserRepository applicationUserRepository;
+	
+	private DecimalFormat decimalFormat;
+	
+	@Value("${domain.dynamic}")
+	private String domain;
+	
+	@Value("${domain.google.static}")
+	private String googleStaticDomain;
+	
+	@Autowired
+	private UrlService urlService;
+
+	@Override
+	public PlaceMapDto findPlaceMapDto(PlaceFilterDto placeFilterDto, Long user) {
+		
+		List<PlaceDto> placesDtos = findPlaceDtos(placeFilterDto, user); 
+
+		PlaceMapDto placeMapDto = new PlaceMapDto();
+		placeMapDto.setPlaces(placesDtos);
+		return placeMapDto;
+	}
 
 	@Override
 	public long countAllPlaces() {
@@ -57,12 +88,14 @@ public class PlaceServiceImpl implements PlaceService, RatedService {
     }
 
 	@Override
-	public List<PlaceDto> findPlaceDtos(Specification<Place> specification, ApplicationUser applicationUser) {
+	public List<PlaceDto> findPlaceDtos(PlaceFilterDto placeFilterDto, Long applicationUser) {
 		
-		List<Place> places = findPlaceEntries(specification);
+		Specification<Place> placeSpecification = PlaceSpecifications.forPlaceFilter(placeFilterDto);
+		
+		List<Place> places = findPlaceEntries(placeSpecification);
 		List<Place> visitedPlaces = null;
 		if (applicationUser != null) {
-			visitedPlaces = findPlaceEntries(Specifications.where(specification).and(PlaceSpecifications.visitedPlaces(applicationUser.getId())));
+			visitedPlaces = findPlaceEntries(Specifications.where(placeSpecification).and(PlaceSpecifications.visitedPlaces(applicationUser)));
 		}
 		
 		List<PlaceDto> placeDtos = new ArrayList<PlaceDto>();
@@ -74,9 +107,16 @@ public class PlaceServiceImpl implements PlaceService, RatedService {
 			PlaceType placeType = place.getPlaceType();
 			placeDto.setPlaceType(placeType.getCodeDescription());
 			placeDto.setPlaceTypeColor(placeType.getPlaceTypeColor().toString());
+			placeDto.setUrl("tour/public/places/" + place.getSimplifiedName());
 			if (visitedPlaces != null && visitedPlaces.contains(place)) {
 				placeDto.setBeenThere(true);
 			}
+			if (placeFilterDto.getRegion() != null) {
+				placeDto.setIconUrl(domain + (placeDto.isBeenThere() ? placeType.getMyLargeIconUrl() : placeType.getLargeIconUrl()));
+			} else {
+				placeDto.setIconUrl(domain + (placeDto.isBeenThere() ? placeType.getMyIconUrl() : placeType.getIconUrl()));
+			}
+			placeDto.setLargeIconUrl(domain + placeType.getMyLargeIconUrl());
 			placeDtos.add(placeDto);
 		}
 		return placeDtos;
@@ -105,6 +145,7 @@ public class PlaceServiceImpl implements PlaceService, RatedService {
 		if (!placesInSameRadius.isEmpty()) {
 			throw new ExistingPlaceException(placesInSameRadius.get(0));
 		}
+		place.simplifyName();
         placeRepository.save(place);
     }
 
@@ -121,6 +162,7 @@ public class PlaceServiceImpl implements PlaceService, RatedService {
 		if (!placesInSameRadius.isEmpty()) {
 			throw new ExistingPlaceException(placesInSameRadius.get(0));
 		}
+		place.simplifyNameAnyway();
         return placeRepository.save(place);
     }
 
@@ -165,6 +207,72 @@ public class PlaceServiceImpl implements PlaceService, RatedService {
 		} else {
 			place.removeVisitedUser(applicationUser);
 		}
+	}
+	
+	
+	public String generateStaticMapLink(PlaceFilterDto placeFilterDto, Long user) {
+		
+		StringBuilder link = new StringBuilder();
+		link.append("?size=600x400");
+		link.append("&format=jpg");
+		if (placeFilterDto.getRegion() != null && placeFilterDto.getRegion().getGpsLocation() != null && 
+			placeFilterDto.supportsRegionStaticMapLinkGeneration()) {
+			link.append("&center=");
+			link.append(decimalFormat.format(placeFilterDto.getRegion().getGpsLocation().getNorth()));
+			link.append(",");
+			link.append(decimalFormat.format(placeFilterDto.getRegion().getGpsLocation().getWest()));
+			if (placeFilterDto.getRegion().getZoom() != null) {
+				link.append("&zoom=");
+				link.append(placeFilterDto.getRegion().getZoom());
+			} else {
+				link.append("&zoom=");
+				link.append(placeFilterDto.getDefaultRegionZoom());
+			}
+		} else {
+			link.append("&center=");
+			link.append(decimalFormat.format(placeFilterDto.getDefaultCenterNorth()));
+			link.append(",");
+			link.append(decimalFormat.format(placeFilterDto.getDefaultCenterWest()));
+			link.append("&zoom=");
+			link.append(placeFilterDto.getDefaultZoom());
+		}
+		
+		Map<String, StringBuilder> placeTypesBuilders = new HashMap<String, StringBuilder>();
+		
+		List<PlaceDto> placeDtos = findPlaceDtos(placeFilterDto, user);  
+	
+		for (PlaceDto placeDto: placeDtos) {
+			StringBuilder builder = placeTypesBuilders.get(placeDto.getPlaceType());
+			if (builder == null) {
+				builder = new StringBuilder();
+				builder.append("icon:");
+				builder.append(placeDto.getLargeIconUrl());
+				placeTypesBuilders.put(placeDto.getPlaceType(), builder);
+			}
+			if (placeDto.isBeenThere()) {
+				builder.append(StringUtils.encodeUrl("|"));
+				builder.append(decimalFormat.format(placeDto.getGpsLocation().getNorth()));
+				builder.append(",");
+				builder.append(decimalFormat.format(placeDto.getGpsLocation().getWest()));
+			}
+		}
+		for (StringBuilder placeTypeBuilder: placeTypesBuilders.values()) {
+			link.append("&markers=");
+			link.append(placeTypeBuilder);
+		}
+		try {
+			return urlService.shortUrl(googleStaticDomain + link.toString());
+		} catch (Exception e) {
+			return googleStaticDomain + link.toString();
+		}
+	}
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		
+		DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+		symbols.setDecimalSeparator('.');
+		this.decimalFormat = new DecimalFormat("#.000", symbols);
 	}
 	
 }

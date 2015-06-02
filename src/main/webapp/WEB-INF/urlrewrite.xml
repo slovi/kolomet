@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 4.0//EN"
+        "http://www.tuckey.org/res/dtds/urlrewrite4.0.dtd">
+
+<!-- Configuration file for UrlRewriteFilter http://www.tuckey.org/urlrewrite/ -->
+<urlrewrite use-context="false">
+	
+	<!-- inzeraty -->
+	
+	<rule>
+		<from>/vyhodna-kola</from>
+		<to>/store/public/intro/index</to>
+	</rule>
+	
+	<outbound-rule>
+		<from>/store/public/intro/index</from>
+		<to>/vyhodna-kola</to>
+	</outbound-rule>
+	
+	<rule>
+		<from>/o-nas</from>
+		<to>/store/public/about</to>
+	</rule>
+	
+	<outbound-rule>
+		<from>/store/public/about</from>
+		<to>/o-nas</to>
+	</outbound-rule>
+	
+	<rule>
+		<from>/prodejci</from>
+		<to>/store/public/sellers/map</to>
+	</rule>
+	
+	<outbound-rule>
+		<from>/store/public/sellers/map(\??)(.*)</from>
+		<to>/prodejci$1$2</to>
+	</outbound-rule>
+	
+	<rule>
+		<from>/prodejce/(.*)__([0-9]+)\??(.*)$</from>
+		<to>/store/public/sellers/detail/$2</to>
+	</rule>
+	
+	<rule>
+		<from>/prodejce/(.*)$</from>
+		<to>/store/public/sellers/detail/$1</to>
+	</rule>
+	
+	<outbound-rule>
+		<from>/store/public/sellers/detail/(.*)</from>
+		<to>/prodejce/$1</to>
+	</outbound-rule>
+	
+	<rule>
+		<from>/kola(\??)(.*)</from>
+		<to>/store/public/products/filter$1$2</to>
+	</rule>
+	
+	<outbound-rule>
+		<from>/store/public/products/filter(\??)(.*)</from>
+		<to>/kola$1$2</to>
+	</outbound-rule>
+	
+	<rule>
+		<from>/kolo/(.*)__([0-9]+)\??(.*)$</from>
+		<to>/store/public/products/detail/$2</to>
+	</rule>
+	
+	<rule>
+		<from>/kolo/(.*)</from>
+		<to>/store/public/products/detail/$1</to>
+	</rule>
+	
+	<outbound-rule>
+		<from>/store/public/products/detail/(.*)</from>
+		<to>/kolo/$1</to>
+	</outbound-rule>
+	
+	<!-- mista -->
+	
+	<rule>
+		<from>/mista/(.*)__([0-9]+)$</from>
+		<to>/tour/public/places/$2</to>
+	</rule>
+	
+	<rule>
+		<from>/mista</from>
+		<to>/tour/public/places</to>
+	</rule>
+	
+	<outbound-rule>
+		<from>/tour/public/places(\??)(.*)</from>
+		<to>/mista$1$2</to>
+	</outbound-rule>
+	
+	<rule>
+		<from>/hra</from>
+		<to>/tour/public/game</to>
+	</rule>
+	
+	<outbound-rule>
+		<from>/tour/public/game</from>
+		<to>/hra</to>
+	</outbound-rule>
+
+	<rule>
+		<from>/uvodni-stranka</from>
+		<to>/intro</to>
+	</rule>
+
+	<outbound-rule>
+		<from>/intro</from>
+		<to>/uvodni-stranka</to>
+	</outbound-rule>
+
+</urlrewrite>

@@ -14,6 +14,9 @@ public interface ProductService {
 	public List<Product> findRandomByPriority(Pageable pageable);
 	
 	
+	public Page<Product> findCurrentAndNextPage(Specification<Product> specification, Pageable pageable);
+	
+	
 	public List<Product> findProductEntries(Specification<Product> specification);
 	
 	
@@ -66,5 +69,6 @@ public interface ProductService {
 	
 	
 	public BigDecimal findMaxDiscount();
+	
 
 }

@@ -43,10 +43,13 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
 	public void saveCategory(Category category) {
+		category.simplifyName();
         categoryRepository.save(category);
     }
 
 	public Category updateCategory(Category category) {
+		category.simplifyName();
         return categoryRepository.save(category);
     }
+
 }

@@ -8,14 +8,22 @@ import org.springframework.data.jpa.domain.Specification;
 
 
 
+
+
+
 import cz.kolomet.domain.ApplicationUser;
 import cz.kolomet.domain.Place;
 import cz.kolomet.dto.PlaceDto;
+import cz.kolomet.dto.PlaceFilterDto;
+import cz.kolomet.dto.PlaceMapDto;
 
 public interface PlaceService {
 	
 	
-	public List<PlaceDto> findPlaceDtos(Specification<Place> specification, ApplicationUser applicationUser);
+	public PlaceMapDto findPlaceMapDto(PlaceFilterDto placeFilterDto, Long user);
+	
+	
+	public List<PlaceDto> findPlaceDtos(PlaceFilterDto placeFilterDto, Long user);
 	
 	
 	public Page<Place> findPlaceEntries(Specification<Place> specification, Pageable pageable);
@@ -52,6 +60,9 @@ public interface PlaceService {
 	
 	
 	public void assignVisitedUser(Place place, Boolean beenThere, ApplicationUser user);	
+	
+	
+	public String generateStaticMapLink(PlaceFilterDto placeFilterDto, Long user);
 
 
 }

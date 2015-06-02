@@ -33,7 +33,7 @@
        	<div style="overflow: auto;">
 	       	<c:forEach items="${topPlaces}" var="place">
 	       		<div class="homepage_unit"> 
-	       			<spring:url value="/tour/public/places/${place.id}" var="placeUrl" />
+	       			<spring:url value="/tour/public/places/${place.simplifiedName}" var="placeUrl" />
 	                <a href="${placeUrl}"><util:photo-image imgName="${place.name}" height="146" width="224" photos="${place.photos}" imgType="over" /></a>
 	                <div class="home_description"> 
 	                	<a href="${placeUrl}" class="label"><c:out value="${place.name}"/></a>
@@ -54,7 +54,7 @@
     
     <div class="general_unit">
     	<h1><spring:message code="places_filter_h1" /></h1>
-		<p><spring:message code="places_filter_text" /></p>
+		<p><spring:message code="places_filter_text" htmlEscape="false" /></p>
 	</div>
     
 </div>

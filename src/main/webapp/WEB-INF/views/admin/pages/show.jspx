@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" 
+	xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" 
+	xmlns:jsp="http://java.sun.com/JSP/Page" 
+	xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" 
+	xmlns:spring="http://www.springframework.org/tags" version="2.0">
+	
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_cz_kolomet_domain_NewsItem" object="${page}" path="${subContext}/admin/pages">
+        <field:display field="name" id="s_cz_kolomet_domain_Page_name" object="${page}" />
+		<field:display field="width" id="s_cz_kolomet_domain_Page_width" object="${page}" />
+		<br/>
+		
+		<div style="width: ${page.width}px;border: solid thin;">
+			<c:out value="${page.text}" escapeXml="false" />
+		</div>
+		
+		<br/>
+
+    </page:show>
+</div>

@@ -8,6 +8,8 @@ import java.util.List;
 import javax.persistence.Cacheable;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
@@ -46,6 +48,7 @@ public class NewsItem extends BaseDomainEntity implements PhotoContainer, Serial
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "newsItem", cascade = CascadeType.ALL)
     private List<NewsItemPhotoUrl> newsItemPhotoUrls = new ArrayList<NewsItemPhotoUrl>();
 
+	@Enumerated(EnumType.STRING)
 	private NewsItemType newsItemType;
 	
 	private String itemTipLink;

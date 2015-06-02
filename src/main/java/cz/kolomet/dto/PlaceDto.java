@@ -5,11 +5,22 @@ import cz.kolomet.domain.GpsLocation;
 public class PlaceDto {
 	
 	private Long id;
+	
 	private String name;
+	
 	private String placeType;
+	
 	private String placeTypeColor;
+	
 	private GpsLocation gpsLocation;
+	
 	private boolean beenThere;
+
+	private String url;
+	
+	private String iconUrl;
+	
+	private String largeIconUrl;
 	
 	public Long getId() {
 		return id;
@@ -57,6 +68,30 @@ public class PlaceDto {
 
 	public void setBeenThere(boolean beenThere) {
 		this.beenThere = beenThere;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public String getIconUrl() {
+		return iconUrl;
+	}
+
+	public void setIconUrl(String iconUrl) {
+		this.iconUrl = iconUrl;
+	}
+
+	public String getLargeIconUrl() {
+		return largeIconUrl;
+	}
+
+	public void setLargeIconUrl(String largeIconUrl) {
+		this.largeIconUrl = largeIconUrl;
 	}
 	
 }

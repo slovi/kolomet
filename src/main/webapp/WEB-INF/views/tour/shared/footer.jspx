@@ -10,13 +10,13 @@
 			Partnerské weby:
 		</div>  			
  		<div id="partners_links">  				
-		  	<c:if test="${not empty newsItemPartners}">
-  				<c:forEach items="${newsItemPartners}" var="newsItemPartner">
+ 			<c:if test="${empty newsPartnersRenderedByJson or not newsPartnersRenderedByJson}">
+		    	<c:forEach items="${newsItemPartners}" var="newsItemPartner">
 	  				<div class="partner_link">
 	  					<c:out value="${newsItemPartner.text}" escapeXml="false" />
 			  		</div>
 		  		</c:forEach>
-		  	</c:if>
+	       	</c:if>
   		</div>
  	</div>
 

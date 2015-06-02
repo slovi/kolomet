@@ -63,7 +63,7 @@ import cz.kolomet.service.exception.ServiceExpcetion;
 	
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String show(@PathVariable("id") Long id, Model uiModel) {
-        return "redirect:/public/sellers/detail/" + id;
+        return "redirect:public/sellers/detail/" + id;
     }
 	
     @RequestMapping(params = "form", produces = "text/html")
@@ -101,7 +101,7 @@ import cz.kolomet.service.exception.ServiceExpcetion;
         	sellerService.saveSeller(seller);
         	savePhotos(seller, sellerPhotoUrlService, httpServletRequest.getSession().getId(), sellerDto.getFileInfos());
         	uiModel.asMap().clear();
-        	return "redirect:/public/sellers/detail/" + seller.getId();
+        	return "redirect:public/sellers/detail/" + seller.getId();
         } catch (ServiceExpcetion e) {
         	bindingResult.rejectValue("personEmail", e.getCode(), e.getArguments(), null);
         	populateEditForm(uiModel, sellerDto);
@@ -129,7 +129,7 @@ import cz.kolomet.service.exception.ServiceExpcetion;
         	savePhotos(seller, sellerPhotoUrlService, httpServletRequest.getSession().getId(), sellerDto.getFileInfos());
         	sellerService.updateSeller(seller);
         	uiModel.asMap().clear();
-        	return "redirect:/public/sellers/detail/" + seller.getId();
+        	return "redirect:public/sellers/detail/" + seller.getId();
         } catch (ExistingUserException e) {
         	bindingResult.rejectValue("addressEmail", e.getCode(), new Object[] {e.getApplicationUser().getUsername()}, null);
         	populateEditForm(uiModel, sellerDto);
@@ -162,7 +162,7 @@ import cz.kolomet.service.exception.ServiceExpcetion;
     public String erase(@PathVariable("id") Long id, Model uiModel) {
         Seller seller = sellerService.findSeller(id);
         sellerService.eraseSeller(seller);
-        return "redirect:/admin/sellers";
+        return "redirect:admin/sellers";
     }
     
     void populateEditForm(Model uiModel, SellerDto sellerDto) {
@@ -191,7 +191,7 @@ import cz.kolomet.service.exception.ServiceExpcetion;
         uiModel.asMap().clear();
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
-        return "redirect:/admin/sellers";
+        return "redirect:admin/sellers";
     }
 
 	private void convert(SellerDto sellerDto, Seller seller) {
@@ -210,7 +210,7 @@ import cz.kolomet.service.exception.ServiceExpcetion;
 		seller.setPersonSurname(sellerDto.getPersonSurname());
 		seller.setPersonEmail(sellerDto.getPersonEmail());
 		
-        if (getActualUserDetails().isSellersOwn()) {
+        if (getActualUserDetails().isSellersAll()) {
         	seller.setSellerStatus(sellerDto.getSellerStatus());
         	seller.setEnabled(sellerDto.getEnabled());
         }

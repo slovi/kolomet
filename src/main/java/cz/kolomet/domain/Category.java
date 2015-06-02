@@ -11,6 +11,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import cz.kolomet.domain.codelist.CategoryType;
+import cz.kolomet.util.StringUtils;
 
 @Entity
 @Cacheable
@@ -25,6 +26,8 @@ public class Category extends BaseDomainEntity implements Serializable {
     @Size(max = 20)
     private String codeKey;
 
+    private String simplifiedName;
+    
     /**
      */
     @NotNull
@@ -34,6 +37,10 @@ public class Category extends BaseDomainEntity implements Serializable {
 	@NotNull
 	@ManyToOne
 	private CategoryType categoryType;
+	
+	public void simplifyName() {
+		this.simplifiedName = StringUtils.simplify(this.codeDescription);
+	}
 
 	public String getCodeKey() {
         return this.codeKey;
@@ -42,6 +49,14 @@ public class Category extends BaseDomainEntity implements Serializable {
 	public void setCodeKey(String codeKey) {
         this.codeKey = codeKey;
     }
+
+	public String getSimplifiedName() {
+		return simplifiedName;
+	}
+
+	public void setSimplifiedName(String simplifiedName) {
+		this.simplifiedName = simplifiedName;
+	}
 
 	public String getCodeDescription() {
         return this.codeDescription;

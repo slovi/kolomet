@@ -4,16 +4,16 @@
   
   <jsp:directive.attribute name="mainJsFileName" type="java.lang.String" required="true" rtexprvalue="true" description="The name of main js file." />
   
-  <spring:url value="${staticDomain}/resources/css/style_mista.css?v=${version}" var="default_css_url" />
+  <spring:url value="/resources/css/style_mista.css?v=${version}" var="default_css_url" />
   <link rel="stylesheet" type="text/css" href="${default_css_url}" />
   
-  <spring:url value="${staticDomain}/package-resources/dijit/themes/tundra/tundra.css" var="tundra_url" />
+  <spring:url value="/package-resources/dijit/themes/tundra/tundra.css" var="tundra_url" />
   <link rel="stylesheet" type="text/css" href="${tundra_url}" />
   
-  <spring:url value="${staticDomain}/resources/css/standard_places.css" var="standard_css_url" />
+  <spring:url value="/resources/css/standard_places.css" var="standard_css_url" />
   <link rel="stylesheet" type="text/css" href="${standard_css_url}" />
 
-  <spring:url value="${staticDomain}/resources/images/favicon.ico" var="favicon" />
+  <spring:url value="/resources/images/favicon.ico" var="favicon" />
   <link rel="SHORTCUT ICON" href="${favicon}" />
 
   <!-- Get the user local from the page context (it was set by Spring MVC's locale resolver) -->
@@ -27,6 +27,7 @@
   <script type="text/javascript">
   
   	window.app = window.app || {};
+  	window.app.apiKey = 'AIzaSyAbbZrV_w_DmKzCVuFSxgkBs4pvi1gk1VA';
   	window.app.locale = '${userLocale}';
   	window.app.contextPath = '${contextPath}';
   	window.app.subContext = '${subContext}';
@@ -35,19 +36,24 @@
 	window.app.facebookAppOwner = '${facebookAppOwner}';
 	window.app.facebookAppOwnerId = '${facebookAppOwnerId}';
   
+	var semicolonIndex = window.app.contextPath.indexOf(';'); 
+	if (semicolonIndex > 0) {
+		window.app.contextPath = window.app.contextPath.substring(0, semicolonIndex);
+	}
+	
   </script>
 
-  <spring:url value="${staticDomain}/resources/js/app${subContext}/${mainJsFileName}.js?v=${version}" var="main_js_url" />
-  <spring:url value="${staticDomain}/resources/js/lib/require.js" var="require_js_url" />
+  <spring:url value="/resources/js/app${subContext}/${mainJsFileName}.js?v=${version}" var="main_js_url" />
+  <spring:url value="/resources/js/lib/require.js" var="require_js_url" />
   <script data-main="${main_js_url}" src="${require_js_url}"><!-- --></script>  
 
-  <spring:url value="${staticDomain}/package-resources/dojo/dojo.js" var="dojo_url" />
+  <spring:url value="/package-resources/dojo/dojo.js" var="dojo_url" />
   <script src="${dojo_url}" type="text/javascript"><!-- required for FF3 and Opera --></script>
 
-  <spring:url value="${staticDomain}/package-resources/spring/Spring.js.uncompressed.js" var="spring_url" />
+  <spring:url value="/package-resources/spring/Spring.js.uncompressed.js" var="spring_url" />
   <script src="${spring_url}" type="text/javascript"><!-- /required for FF3 and Opera --></script>
   
-  <spring:url value="${staticDomain}/package-resources/spring/Spring-Dojo.js.uncompressed.js" var="spring_dojo_url" />
+  <spring:url value="/package-resources/spring/Spring-Dojo.js.uncompressed.js" var="spring_dojo_url" />
   <script src="${spring_dojo_url}" type="text/javascript"><!-- required for FF3 and Opera --></script>
   <script language="JavaScript" type="text/javascript">dojo.require("dojo.parser");</script>
 

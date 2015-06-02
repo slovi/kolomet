@@ -41,7 +41,7 @@ import cz.kolomet.dto.FileInfo;
 
 @Entity
 @BatchSize(size = 20)
-public class Product extends BaseDomainEntity implements Cloneable, PhotoContainer, Serializable {
+public class Product extends BaseDomainEntity implements Cloneable, PhotoContainer, Serializable, SimpleNameIdentifiable {
 	
 	public static final Date DEFAULT_VALID_TO_DATE = new DateTime(9999, 12, 31, 0, 0, 0, 0).toDate();
 	
@@ -151,8 +151,22 @@ public class Product extends BaseDomainEntity implements Cloneable, PhotoContain
     @BatchSize(size = 20)
     private List<ProductAttribute> productAttributes = new ArrayList<ProductAttribute>();
     
+    private String simplifiedName;
+    
     @Transient
     private List<FileInfo> fileInfos = new ArrayList<FileInfo>();
+    
+    public void simplifyName() {
+    	if (StringUtils.isBlank(this.simplifiedName)) {
+    		this.simplifiedName = cz.kolomet.util.StringUtils.simplify(
+    				this.producer.getCodeDescription() + "-" + this.category.getCodeDescription() + "-" + this.productName + "__" + this.getId());
+    	}
+    }
+    
+    public void simplifyNameAnyway() {
+   		this.simplifiedName = cz.kolomet.util.StringUtils.simplify(
+   				this.producer.getCodeDescription() + "-" + this.category.getCodeDescription() + "-" + this.productName + "__" + this.getId());
+    }
     
     public void normalizeBuyUrl() {
     	if (StringUtils.isNotEmpty(buyUrl) && !buyUrl.startsWith("http://") && !buyUrl.startsWith("https://")) {
@@ -558,5 +572,14 @@ public class Product extends BaseDomainEntity implements Cloneable, PhotoContain
 	public void setProductAttributes(List<ProductAttribute> productAttributes) {
         this.productAttributes = productAttributes;
     }
+
+	public String getSimplifiedName() {
+		this.simplifyName(); // TODO temp
+		return simplifiedName;
+	}
+
+	public void setSimplifiedName(String simplifiedName) {
+		this.simplifiedName = simplifiedName;
+	}
 
 }

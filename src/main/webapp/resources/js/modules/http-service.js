@@ -2,13 +2,15 @@ define(['jquery', 'loader'], function($, loader) {
 	
 	return {
 		
-		sendAjax: function(config) {
+		sendAjax: function(config, serializeData) {
 			
-			var data = this.serializeObjectToUrl(config.data);
+			var data = (!(typeof serializeData === 'undefined') && serializeData == false) ? JSON.stringify(config.data) : this.serializeObjectToUrl(config.data);
+			var contentType = config.contentType ? config.contentType : 'application/x-www-form-urlencoded; charset=UTF-8'; 
 			
 			$.ajax({
 		        url: config.url,
 		        type: config.method,
+		        contentType: contentType,
 		        data: data,
 		        dataType: config.dataType,
 		        beforeSend: function(xhr) {
@@ -98,6 +100,24 @@ define(['jquery', 'loader'], function($, loader) {
 			}
 			
 			this.sendAjax(config);
+			
+		},
+		
+		shortUrl: function(url, success) {
+			
+			var data = {};
+			data.longUrl = url;
+			
+			var config = {
+				url: 'https://www.googleapis.com/urlshortener/v1/url?key=' + window.app.apiKey,
+				method: 'POST',
+				data: data,
+				contentType: 'application/json',
+				dataType: 'json',
+				success: success
+			};
+			
+			this.sendAjax(config, false);
 			
 		},
 		

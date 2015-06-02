@@ -5,7 +5,7 @@
 	<groupId>cz.kolomet</groupId>
 	<artifactId>kolomet</artifactId>
 	<packaging>war</packaging>
-	<version>1.0.103-SNAPSHOT</version>
+	<version>1.0.23-SNAPSHOT</version>
 	<name>kolomet</name>
 
 	<distributionManagement>
@@ -400,6 +400,17 @@
 			<version>${jackson-2-version}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.tuckey</groupId>
+			<artifactId>urlrewritefilter</artifactId>
+			<version>4.0.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.code</groupId>
+			<artifactId>sitemapgen4j</artifactId>
+			<version>1.0.1</version>
+		</dependency>
 	</dependencies>
 
 	<build>

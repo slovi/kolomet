@@ -2,7 +2,7 @@ require(['../common'], function (common) {
 	
 	require(['main_default_public'], function(mainDefaultPublic) {
 		
-	    require(['lightbox', 'images', 'ajax-submit', 'fb', 'place-banners', 'http-service'], function(lightbox, images, ajaxSubmit, fb, placeBanners, httpService) {
+	    require(['lightbox', 'images', 'ajax-submit', 'fb', 'http-service'], function(lightbox, images, ajaxSubmit, fb, httpService) {
 	    	
 		    	$(document).ready(function() {
 		    	
@@ -13,8 +13,6 @@ require(['../common'], function (common) {
 				var fileNotFoundUrl = detailImage.data('not-found-url');
 				images.waitForImagesLoad(detailImage, fileLoaderUrl, fileNotFoundUrl, 4, 2000);
 		    	
-				placeBanners.render();
-				
 		    	for (var i = 0; i < 5; i++) {		    		
 		    		
 		    		ajaxSubmit.decorateId(
@@ -54,7 +52,7 @@ require(['../common'], function (common) {
 		    		httpService.send(window.app.contextPath + 'tour/public/places/assign', 'POST', {placeId: placeId, beenThere: beenThere}, function() {});
 		    	});
 		    	
-		    	fb.initShareButtons('.fb_share');
+		    	fb.initSharerButtons('.fb_share');
 	    	});
 	    	
 	    });

@@ -12,6 +12,10 @@
 	        </definition>
         </put-attribute>
     </definition>
+    <definition extends="tour/template_fullscreen" name="tour/public/places/list_fullscreen">
+    	<put-attribute cascade="true" name="mainJsFileName" value="main_public_places_list"/>
+    	<put-attribute name="body" value="/WEB-INF/views/public/places/list_fullscreen.jspx"/>
+    </definition>
 	<definition extends="tour/template_default" name="tour/public/places/show">
 		<put-attribute cascade="true" name="mainJsFileName" value="main_public_places_show"/>
         <put-attribute name="body" value="/WEB-INF/views/public/places/show.jspx"/>

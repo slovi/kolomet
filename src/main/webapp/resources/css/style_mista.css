@@ -598,7 +598,7 @@ div.detail_description_wrapper {
 
 div.detail_description {
 	padding: 15px;
-	min-height: 270px;
+	height: 270px;
 	margin: 0;
 	overflow: auto;
 }
@@ -756,7 +756,12 @@ div.homepage_unit a {
 }
 
 p {
-	margin: 0;
+	padding: 0;
+	border: 0;
+	nobreak;
+}
+
+div.homepage_unit p {
 	padding: 0;
 	border: 0;
 	nobreak;

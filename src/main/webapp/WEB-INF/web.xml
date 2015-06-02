@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
-<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.5" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	version="2.5"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
 
 	<display-name>kolomet</display-name>
@@ -36,12 +38,33 @@
 	</filter-mapping>
 
 	<filter>
+		<filter-name>UrlRewriteFilter</filter-name>
+		<filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
+		<init-param>
+			<param-name>confReloadCheckInterval</param-name>
+			<param-value>5</param-value>
+		</init-param>
+<!-- 		<init-param> -->
+<!-- 			<param-name>logLevel</param-name> -->
+<!-- 			<param-value>DEBUG</param-value> -->
+<!-- 		</init-param> -->
+	</filter>
+	<filter-mapping>
+		<filter-name>UrlRewriteFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+
+	<filter>
 		<filter-name>openEntityManageInViewFilter</filter-name>
 		<filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>openEntityManageInViewFilter</filter-name>
 		<servlet-name>kolomet</servlet-name>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>openEntityManageInViewFilter</filter-name>
@@ -55,6 +78,8 @@
 	<filter-mapping>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
 
 	<filter>
@@ -65,7 +90,7 @@
 		<filter-name>multipartFilter</filter-name>
 		<servlet-name>kolomet</servlet-name>
 	</filter-mapping>
-	
+
 	<filter>
 		<filter-name>HttpMethodFilter</filter-name>
 		<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
@@ -144,7 +169,7 @@
 		<servlet-name>kolomet</servlet-name>
 		<url-pattern>/connect/*</url-pattern>
 	</servlet-mapping>
-	
+
 	<!-- Handles resources requests -->
 	<servlet>
 		<servlet-name>resources</servlet-name>
@@ -166,7 +191,7 @@
 		<servlet-name>uploadedFiles</servlet-name>
 		<url-pattern>/file/*</url-pattern>
 	</servlet-mapping>
-	
+
 	<!-- Handles captcha requests -->
 	<servlet>
 		<servlet-name>captcha</servlet-name>
@@ -177,7 +202,7 @@
 		<servlet-name>captcha</servlet-name>
 		<url-pattern>/captcha/*</url-pattern>
 	</servlet-mapping>
-	
+
 	<welcome-file-list>
 		<welcome-file>index.jspx</welcome-file>
 	</welcome-file-list>
@@ -195,7 +220,7 @@
 		<error-code>404</error-code>
 		<location>/store/public/resourceNotFound</location>
 	</error-page>
-	
+
 	<jsp-config>
 		<taglib>
 			<taglib-uri>http://www.kolomet.cz/tags/util</taglib-uri>

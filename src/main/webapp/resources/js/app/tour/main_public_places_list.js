@@ -7,29 +7,27 @@ require(['../common'], function (common) {
 	    	
 	    	var configHtml = $('#map_config').html();
 	    	var config = JSON.parse(configHtml);
-	    	var excludedHistoryParams = ['ajaxSource', 'fragments'];
+	    	var excludedHistoryParams = ['ajaxSource', 'fragments', 'highlight', 'user'];
+	    	
+	    	var updateFacebookLink = function(data) {
+	    	}
 	    	
 	    	// model used to filtering
 	    	var placeFilterDto = httpService.deserializeObjectFromWindowLocation();
 	    	if (typeof placeFilterDto.usedFilter === 'undefined' || placeFilterDto.usedFilter === 'false') {
 	    		placeFilterDto.placeTypes = eval(config.placeTypes);
-	    		placeFilterDto.gps_north = config.initNorth;
-	    		placeFilterDto.gps_west = config.initWest;
-	    		placeFilterDto.region_zoom = config.initZoom;
+	    		placeFilterDto.defaultZoom = 7;
+	    		placeFilterDto.defaultRegionZoom = 9;
+	    		placeFilterDto.defaultCenterWest = 15.5;
+	    		placeFilterDto.defaultCenterNorth = 49.8; 
 	    	}
-	    	
-	    	// google map and ajax-enabled side menu	    	
-	    	config.defaultZoom = 7;
-			config.defaultRegionZoom = 9;
-			config.defaultCenter = new google.maps.LatLng(49.8, 15.5); 			
 
 			var mapOptions = {
-				zoom: config.defaultZoom,
-				center: config.defaultCenter
+				zoom: placeFilterDto.defaultZoom,
 			};
 
 			var placesMap = placesMap.createMap(document.getElementById('map-canvas'), mapOptions, config);
-			placesMap.init(placeFilterDto);
+			placesMap.init(placeFilterDto, updateFacebookLink);
 			partnerLinks.render(placeFilterDto);
 			placeBanners.render(placeFilterDto);
 			
@@ -39,7 +37,12 @@ require(['../common'], function (common) {
 			});
 			
 			// sort links
-			sortLinks();						
+			sortLinks();
+			
+			$('#my_places_link_anonymous').click(function(event) {
+	    		event.preventDefault();
+	    		$("#login_modal").click();
+	    	});
 			
 			$('#my_places_link').click(function(event) {
 				event.preventDefault();
@@ -63,7 +66,7 @@ require(['../common'], function (common) {
 					function(element, params) {
 						
 						$.extend(placeFilterDto, params);
-						placesMap.updateMap(placeFilterDto);
+						placesMap.updateMap(placeFilterDto, updateFacebookLink);
 						
 						History.pushState(null, 'Cyklovýlety a cykloturistika', '?' + httpService.serializeObjectToUrl(placeFilterDto, excludedHistoryParams));
 						sortLinks();
@@ -83,7 +86,7 @@ require(['../common'], function (common) {
 						$("ul#side_menu_body_regions li a").removeClass('current');
 						$(element).addClass('current');						
 						
-						placesMap.updateMap(placeFilterDto);
+						placesMap.updateMap(placeFilterDto, updateFacebookLink);
 						placesMap.setMapPosition(placeFilterDto);
 						partnerLinks.render(placeFilterDto);
 						placeBanners.render(placeFilterDto);
@@ -110,7 +113,7 @@ require(['../common'], function (common) {
 			
 		    var animateNewsItemTips = function () {
 		    	
-		    	fb.initShareButtons('.fb_share');
+		    	fb.initSharerButtons('.fb_share');
 				
 				var i = 0;
 				var tips = $('#news_item_tips div.tip_wrapper');

@@ -34,6 +34,7 @@
         :
       </label>
       <div class="box" id="_${fn:escapeXml(id)}_${fn:escapeXml(field)}_id">
+      	<util:nbsp />
         <c:set var="prop" value="${object}" />
         <c:forTokens items="${field}" delims="." var="subprop">
 		    <c:if test="${not empty prop}">

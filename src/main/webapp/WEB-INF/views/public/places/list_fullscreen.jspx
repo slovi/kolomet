@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div id="body_content" class="fullscreen" 
+	xmlns:c="http://java.sun.com/jsp/jstl/core" 
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions" 
+	xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" 
+	xmlns:form="http://www.springframework.org/tags/form" 
+	xmlns:jsp="http://java.sun.com/JSP/Page" 
+	xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" 
+	xmlns:spring="http://www.springframework.org/tags" 
+	xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields"
+	xmlns:security="http://www.springframework.org/security/tags"  
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
+	
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>    
+    
+    <spring:message code="page_place_list_myplaces_all" var="myPlacesAllText" />
+    <spring:message code="page_place_list_myplaces_own" var="myPlacesOwnText" />
+    
+    <div class="fullscreen">
+    	
+        <div id="map_content" class="fullscreen"><div id="map-canvas" class="fullscreen"><!----></div><!----></div>
+
+	    <spring:url value="/" var="contextPath" />
+	    <spring:url value="/tour/public/places" var="placeUrl" />
+	    <spring:url value="/resources/js/gmap.js" var="gmapUrl" />
+	    
+        <span id="map_config" class="config" style="display: none;">
+        	<![CDATA[
+    			{ 
+    				"myPlacesText": "${myPlacesOwnText}",
+					"allPlacesText": "${myPlacesAllText}",
+    				"placeUrl": "${placeUrl}", 
+    				"highlight": "${param.highlight}",
+    				"initWest": "${param.gps_west}",
+    				"initNorth": "${param.gps_north}",
+    				"initZoom": "${param.gps_region_zoom}",
+    				"placeTypes": ${placeTypesJson},
+    				"defaultZoom": 8
+    			}
+    		]]>
+        </span>
+    </div>
+
+</div>

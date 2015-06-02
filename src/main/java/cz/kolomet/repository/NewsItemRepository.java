@@ -2,10 +2,7 @@ package cz.kolomet.repository;
 
 import java.util.List;
 
-import javax.persistence.QueryHint;
-
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.data.jpa.repository.QueryHints;
 import org.springframework.stereotype.Repository;
 
 import cz.kolomet.domain.NewsItem;

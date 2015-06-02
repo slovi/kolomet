@@ -24,11 +24,13 @@ import cz.kolomet.domain.codelist.SellerStatus;
 
 @Entity
 @BatchSize(size = 20)
-public class Seller extends BaseDomainEntity implements PhotoContainer, Serializable {
+public class Seller extends BaseDomainEntity implements PhotoContainer, Serializable, SimpleNameIdentifiable {
 	
 	@NotNull
 	@Size(max = 20)
 	private String sellerName;
+	
+	private String simplifiedName;
 
     /**
      */
@@ -84,6 +86,16 @@ public class Seller extends BaseDomainEntity implements PhotoContainer, Serializ
 	@Fetch(FetchMode.JOIN)
     @BatchSize(size = 20)
 	private List<SellerAddress> addresses = new ArrayList<SellerAddress>();
+    
+    public void simplifyName() {
+    	if (StringUtils.isBlank(this.simplifiedName)) {
+    		this.simplifiedName = cz.kolomet.util.StringUtils.simplify(this.getSellerName() + "__" + this.getId());
+    	}
+    }
+    
+    public void simplifyNameAnyway() {
+    	this.simplifiedName = cz.kolomet.util.StringUtils.simplify(this.getSellerName() + "__" + this.getId());
+    }
     
     public boolean isVip() {
     	return this.sellerStatus != null && this.sellerStatus.isVip();
@@ -216,6 +228,15 @@ public class Seller extends BaseDomainEntity implements PhotoContainer, Serializ
 
 	public void setSellerName(String sellerName) {
 		this.sellerName = sellerName;
+	}
+
+	public String getSimplifiedName() {
+		this.simplifyName(); // TODO temp
+		return simplifiedName;
+	}
+
+	public void setSimplifiedName(String simplifiedName) {
+		this.simplifiedName = simplifiedName;
 	}
 
 	public String getSellerDescription() {

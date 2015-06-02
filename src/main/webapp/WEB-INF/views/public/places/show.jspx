@@ -39,18 +39,7 @@
 	            </p>
 	        </div>
 	        <div style="float:left; margin-left: 20px">
-    			<div id="fb-root"><jsp:text/></div>
-				<c:if test="${not empty ogTitleCode}">
-					<spring:message code="${ogTitleCode}" arguments="${ogTitleArgs}" var="ogTitle" />
-				</c:if>
-				<c:if test="${not empty ogDescriptionCode}">
-					<spring:message code="${ogDescriptionCode}" arguments="${ogDescriptionArgs}" var="ogDescription" />
-				</c:if>
-				<spring:url value="/resources/images/facebook.png" var="fbIcon" />
-				<span style="vertical-align: super;">Sdílet:</span><util:nbsp number="2" /> 
-				<a href="http://www.kolomet.cz/tour/public/places/${place.id}" data-image="${ogImage}" data-title="${ogTitle}" data-desc="${ogDescription}" class="fb_share">
-    				<img src="${fbIcon}" alt="" title="Sdílet na facebooku" />
-				</a>
+    			<util:facebook id="fb_link" fbLink="${fbLink}" />
 				<!-- 
 				<a href="https://plus.google.com/share?url={URL}" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
 					<img src="https://www.gstatic.com/images/icons/gplus-20.png" alt="Share on Google+"/>

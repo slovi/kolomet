@@ -32,6 +32,10 @@
     <put-attribute name="footer" value="/WEB-INF/views/tour/shared/footer.jspx" />
   </definition>
   
+  <definition name="tour/template_fullscreen" extends="template_fullscreen">
+  	<put-attribute name="scripts" value="/WEB-INF/views/tour/shared/scripts_fullscreen.jspx" />
+  </definition>
+  
   <definition name="tour/template_wide" extends="template_wide">
   	<put-attribute name="scripts" value="/WEB-INF/views/tour/shared/scripts.jspx" />
     <put-attribute name="header" value="/WEB-INF/views/tour/shared/header.jspx" />

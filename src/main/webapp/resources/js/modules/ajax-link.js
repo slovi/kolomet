@@ -27,7 +27,13 @@ define(['jquery', 'http-service', 'jquery.history'], function($, httpService) {
 		var paramsData = paramsCallback(element, params);
 		paramsData.ajaxSource = 'a#' + $(element).attr('id');
 		
-		httpService.sendAndRerender(href, 'GET', paramsData, function() {
+		var hrefResult = href;
+		var exclamationIndex = href.indexOf('?'); 
+		if (exclamationIndex > 0) {
+			hrefResult = href.substring(0, exclamationIndex);
+		}
+		
+		httpService.sendAndRerender(hrefResult, 'GET', paramsData, function() {
 			successCallback(element, $.extend(params, paramsData));
 		});
 	}

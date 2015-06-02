@@ -23,6 +23,9 @@ public class NewsItemPhotoUrlServiceImpl extends AbstractPhotoUrlService impleme
 	@Value("${newsitem.img.thumbnail.height}")
 	private Integer thumbnailHeight;
 	
+	@Autowired
+	NewsItemPhotoUrlRepository newsItemPhotoUrlRepository;
+	
     public void deleteNewsItemPhotoUrl(NewsItemPhotoUrl newsItemPhotoUrl) {
         newsItemPhotoUrlRepository.delete(newsItemPhotoUrl);
         super.deletePhoto(newsItemPhotoUrl);
@@ -52,31 +55,33 @@ public class NewsItemPhotoUrlServiceImpl extends AbstractPhotoUrlService impleme
     	// TODO - optimize this cast
 		newsItemPhotoUrlRepository.save((NewsItemPhotoUrl) photo);
 	}
-	
 
-	@Autowired
-    NewsItemPhotoUrlRepository newsItemPhotoUrlRepository;
-
+    @Override
 	public long countAllNewsItemPhotoUrls() {
         return newsItemPhotoUrlRepository.count();
     }
 
+    @Override
 	public NewsItemPhotoUrl findNewsItemPhotoUrl(Long id) {
         return newsItemPhotoUrlRepository.findOne(id);
     }
-
+    
+    @Override
 	public List<NewsItemPhotoUrl> findAllNewsItemPhotoUrls() {
         return newsItemPhotoUrlRepository.findAll();
     }
 
+    @Override
 	public List<NewsItemPhotoUrl> findNewsItemPhotoUrlEntries(int firstResult, int maxResults) {
         return newsItemPhotoUrlRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / maxResults, maxResults)).getContent();
     }
 
+    @Override
 	public void saveNewsItemPhotoUrl(NewsItemPhotoUrl newsItemPhotoUrl) {
         newsItemPhotoUrlRepository.save(newsItemPhotoUrl);
     }
 
+    @Override
 	public NewsItemPhotoUrl updateNewsItemPhotoUrl(NewsItemPhotoUrl newsItemPhotoUrl) {
         return newsItemPhotoUrlRepository.save(newsItemPhotoUrl);
     }

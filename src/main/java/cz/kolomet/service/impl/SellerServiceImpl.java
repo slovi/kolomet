@@ -74,7 +74,11 @@ public class SellerServiceImpl implements SellerService {
 	}
 	
 	public List<Seller> findByRegionCodeKeyOrderBySellerNameAsc(String regionCodeKey) {
-		return sellerRepository.findByRegionCodeKeyOrderBySellerNameAsc(regionCodeKey);
+		List<Seller> sellers = sellerRepository.findByRegionCodeKeyOrderBySellerNameAsc(regionCodeKey);
+		for (Seller seller: sellers) { // TODO temp
+			seller.simplifyName();
+		}
+		return sellers;
 	}
     
 	@PreAuthorize("principal.isCapableToDeleteSeller(#seller)")
@@ -94,6 +98,7 @@ public class SellerServiceImpl implements SellerService {
 		if (seller == null) {
 			throw new EntityNotFoundException(id);
 		}
+		seller.simplifyName();
 		visitorActivityLogService.saveVisitorActivityLog(seller, null, userInfo, VisitorActivityType.SELLER_VISIT);
 		return seller;
 	}
@@ -112,6 +117,7 @@ public class SellerServiceImpl implements SellerService {
     		
     		seller.normalizeWebUrl();
     		seller.setEnabled(true);
+    		seller.simplifyName();
     		sellerRepository.save(seller);
     		
     		String password = passwordGenerator.generatePassword(user);
@@ -138,6 +144,7 @@ public class SellerServiceImpl implements SellerService {
     @PreAuthorize("principal.isCapableToUpdateSeller(#seller)")
     public Seller updateSeller(Seller seller) {
     	seller.normalizeWebUrl();
+    	seller.simplifyNameAnyway();
 		return sellerRepository.save(seller);
     }
     

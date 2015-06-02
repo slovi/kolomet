@@ -27,7 +27,7 @@ public abstract class AbstractPhotoUrlService implements PhotoContainerService {
 	private ImageService imageService;
 	
 	@Autowired
-	protected TaskExecutor executor;
+	protected TaskExecutor defaultExecutor;
 	
 	public abstract ResizeInfo[] getThumbnailResizeInfos();
 	
@@ -108,7 +108,7 @@ public abstract class AbstractPhotoUrlService implements PhotoContainerService {
 		
 		if (!asyncResizeInfos.isEmpty()) {
 		
-			executor.execute(new Runnable() {
+			defaultExecutor.execute(new Runnable() {
 				
 				@Override
 				public void run() {
@@ -188,15 +188,15 @@ public abstract class AbstractPhotoUrlService implements PhotoContainerService {
 	public void setImageService(ImageService imageService) {
 		this.imageService = imageService;
 	}
-
-	public TaskExecutor getExecutor() {
-		return executor;
-	}
-
-	public void setExecutor(TaskExecutor executor) {
-		this.executor = executor;
-	}
 	
+	public TaskExecutor getDefaultExecutor() {
+		return defaultExecutor;
+	}
+
+	public void setDefaultExecutor(TaskExecutor defaultExecutor) {
+		this.defaultExecutor = defaultExecutor;
+	}
+
 	interface AfterResizeCallback {
 		public void afterResize(File file);
 	}

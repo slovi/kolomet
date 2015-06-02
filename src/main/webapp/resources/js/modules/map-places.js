@@ -1,42 +1,48 @@
-define(['async!https://maps.googleapis.com/maps/api/js?key=AIzaSyAbbZrV_w_DmKzCVuFSxgkBs4pvi1gk1VA&amp;sensor=true&amp;language=cs', 'http-service', 'jquery'], 
+define(['async!https://maps.googleapis.com/maps/api/js?key=' + window.app.apiKey + '&amp;sensor=true&amp;language=cs', 'http-service', 'jquery'], 
 		function(googleMap, httpService, $) {
 
 	return {
-		createMap: function(mapElement, mapOptions, config) {	
+		createMap: function(mapElement, mapOptions) {	
 			
-			var PlacesMap = function(mapElement, mapOptions, config) {
+			var PlacesMap = function(mapElement, mapOptions) {
 				
 				this.myPlaces = false;
-				this.config = config;
 				this.places = {};
 			    this.googleMap = {};
-			    this.largeMarkers = false;
 			    this.markers = [];
+			    this.params = {};
 			    
 			}
 			
 			PlacesMap.prototype = {
 			
-				init: function(params) {
+				init: function(params, success) {
 
 					this.googleMap = new google.maps.Map(mapElement, mapOptions);
-					
+					this.params = params;
 					var instance = this;
 					this.fetchPlaces(params, function(data) {
-						instance.places = data;
-						instance.setMapPosition(params); // must be called before addPlacesToMap, becase mapPoistion define largeMarkers
-						instance.addPlacesToMap(data);
+						instance.places = data.places;
+						instance.setMapPosition(params);
+						instance.addPlacesToMap(data.places);
+						if (success) {
+							success(data);
+						}
 					});
 				},
 				
-			    updateMap: function(params) {
+			    updateMap: function(params, success) {
 			    	
 			    	var instance = this;
+			    	this.params = params;
 			    	this.fetchPlaces(params, function(data) {
 			    		instance.removePlaces();
-			    		instance.places = data;
+			    		instance.places = data.places;
 						if (instance.places) {
-							return instance.addPlacesToMap(data);
+							instance.addPlacesToMap(data.places);
+							if (success) {
+								success(data);
+							}
 						}
 			    	});
 				},
@@ -69,19 +75,17 @@ define(['async!https://maps.googleapis.com/maps/api/js?key=AIzaSyAbbZrV_w_DmKzCV
 				setMapPosition: function(params) {
 					var north = params.gps_north;
 					var west = params.gps_west;
-					var regionZoom = params.region_zoom;
 					if (north && west) {
+						var regionZoom = params.region_zoom;
 						this.googleMap.setCenter(new google.maps.LatLng(north, west));
 						if (regionZoom) {
 							this.googleMap.setZoom(parseInt(regionZoom));
 						} else {
-							this.googleMap.setZoom(config.defaultRegionZoom);
+							this.googleMap.setZoom(params.defaultRegionZoom);
 						}
-						this.largeMarkers = true;
 					} else {
-						this.googleMap.setCenter(config.defaultCenter);
-						this.googleMap.setZoom(config.defaultZoom);
-						this.largeMarkers = false;
+						this.googleMap.setCenter(new google.maps.LatLng(params.defaultCenterNorth, params.defaultCenterWest));
+						this.googleMap.setZoom(params.defaultZoom);
 					}
 				},
 			    
@@ -91,7 +95,11 @@ define(['async!https://maps.googleapis.com/maps/api/js?key=AIzaSyAbbZrV_w_DmKzCV
 					
 					for (var i = 0; i < places.length; i++) {
 						var place = places[i];
-						var highlight = place.id === config.highlightPlaceId;    					
+						var highlight = undefined;
+						
+						if (this.params.highlight) {
+							highlight = place.id === parseInt(this.params.highlight);
+						}
 						
 						if (place.gpsLocation) {
 							
@@ -101,10 +109,10 @@ define(['async!https://maps.googleapis.com/maps/api/js?key=AIzaSyAbbZrV_w_DmKzCV
 									var infowindow = new google.maps.InfoWindow({
 										content: '<h2 class="title">' + place.name + '</h2>'
 									});
-									marker = this.createMarkerFromPlace(place, true, config); 
+									marker = this.createMarkerFromPlace(place); 
 									infowindow.open(googleMap, marker);
 								} else {
-									marker = this.createMarkerFromPlace(place, this.largeMarkers, config);
+									marker = this.createMarkerFromPlace(place);
 								}
 								this.markers.push(marker);
 								
@@ -114,40 +122,36 @@ define(['async!https://maps.googleapis.com/maps/api/js?key=AIzaSyAbbZrV_w_DmKzCV
 							}
 						};
 					}
+					
+					delete this.params.user;
 				},
 				
-				createMarkerFromPlace: function (place, largeMarkers, config) {
+				createMarkerFromPlace: function (place) {
 					return new google.maps.Marker({
 					    map: this.googleMap,
 					    draggable: false,
 					    position: new google.maps.LatLng(place.gpsLocation.north, place.gpsLocation.west),
-					    icon: this.getMarkerIcon(place, largeMarkers),
+					    icon: this.getMarkerIcon(place),
 					    title: place.name,
-					    url: config.placeUrl + "/" + place.id
+					    url: place.url
 					});
 				},
 				
-				getMarkerIcon: function (place, largeMarker) {
-					var color = place.placeTypeColor;
-					var fileName;
-					if (largeMarker) {
-						fileName = color + (place.beenThere ? '_my_large' : '') + '.png'
-					} else {
-						fileName = color + (place.beenThere ? '_my' : '') + '.png'
-					}
-					return (window.app.contextPath === '/' ?  '' : window.app.contextPath) + '/resources/img/places/' + fileName;
+				getMarkerIcon: function (place) {
+					return place.iconUrl;
 				},
 				
 				fetchPlaces: function(params, success) {
-					httpService.sendGetJson(window.app.contextPath + 'tour/public/places', params, function(data) {
-						console.log('fetched number of places: ' + data);
+					httpService.sendGetJson(window.app.contextPath + 'tour/public/places/listjson', params, function(data) {
+						console.log('fetched number of places: ' + (data.places ? data.places.length : 0));
+						console.log('fetched static map link: ' + data.staticMapLink);
 						success(data);
 					});
 				}
 					
 			}
 			
-			return new PlacesMap(mapElement, mapOptions, config);
+			return new PlacesMap(mapElement, mapOptions);
 		
 		}
 	

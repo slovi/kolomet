@@ -12,7 +12,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import cz.kolomet.dto.PlaceDto;
 import cz.kolomet.dto.PlaceFilterDto;
-import cz.kolomet.repository.PlaceSpecifications;
 import cz.kolomet.service.PlaceService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -29,10 +28,9 @@ public class PlaceJsonTest {
 	@Transactional
 	public void testMarshall() {
 		
-		List<PlaceDto> placeCollection = placeService.findPlaceDtos(PlaceSpecifications.forPlaceFilter(new PlaceFilterDto()), null);
+		List<PlaceDto> placeCollection = placeService.findPlaceDtos(new PlaceFilterDto(), null);
 		
-		System.out.println(jsonSerializer.toJsonArray(placeCollection, 
-				new String[] {"id", "name", "placeType", "placeTypeColor", "gpsLocation", "north", "west"}));
+		System.out.println(jsonSerializer.toJsonArray(placeCollection));
 	}
 
 }

@@ -3,6 +3,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,6 @@ import cz.kolomet.domain.Producer;
 import cz.kolomet.domain.Product;
 import cz.kolomet.dto.ProductFilterDto;
 import cz.kolomet.repository.ProductAttributeRepository;
-import cz.kolomet.repository.ProductRepository;
 import cz.kolomet.repository.ProductSpecifications;
 import cz.kolomet.service.BicycleCategoryService;
 import cz.kolomet.service.ProducerService;
@@ -37,9 +37,6 @@ public class ProductController extends AbstractPublicController {
 	
 	@Autowired
 	private ProductService productService;
-	
-	@Autowired
-	private ProductRepository productRepository;
 	
 	@Autowired
 	private ProductAttributeRepository productAttributeRepository;
@@ -63,7 +60,7 @@ public class ProductController extends AbstractPublicController {
 	private SellerService sellerService;
 	
 	@RequestMapping("/detail/{id}")
-	public String detail(@PathVariable("id") Long id, Model model, HttpServletRequest request) {
+	public String detail(@PathVariable("id") Long id, Model model, HttpServletRequest request, HttpServletResponse response) {
 		
 		Product product = productService.detail(id, request.getRemoteAddr());
 		model.addAttribute("product", product);
@@ -77,8 +74,9 @@ public class ProductController extends AbstractPublicController {
 		model.addAttribute("ogDescriptionCode", "page_product_detail_og_description");
 		model.addAttribute("ogDescriptionArgs", product.getProductName());
 		model.addAttribute("ogType", "kolomet:product");
+		model.addAttribute("fbLink", response.encodeURL(getDynamicDomain(request) + "store/public/products/detail/" + product.getId() + "?version=" + getVersion()));
 		if (!product.getPhotos().isEmpty()) {
-			model.addAttribute("ogImage",  "http://www.kolomet.cz/file/" + product.getPhotos().get(0).getDetailPhotoUrl());
+			model.addAttribute("ogImage",  getDynamicDomain(request) + "file/" + product.getPhotos().get(0).getDetailPhotoUrl());
 		}
 		return "public/products/detail";
 	}
@@ -88,7 +86,7 @@ public class ProductController extends AbstractPublicController {
 		
 		Pageable pageable = null;
 		String append = servletRequest.getParameter("append");
-		if (!Boolean.valueOf(append)) {
+		if (Boolean.valueOf(append)) {
 			pageable = new PageRequest(0, (tempPageable.getPageNumber() + 1) * tempPageable.getPageSize(), tempPageable.getSort());
 		} else {
 			pageable = new PageRequest(tempPageable.getPageNumber(), tempPageable.getPageSize(), tempPageable.getSort());
@@ -96,7 +94,8 @@ public class ProductController extends AbstractPublicController {
 		
 		populateFilterForm(productFilter, model);
 		// TODO predelat na service a dto
-		Page<Product> products = productRepository.findCurrentAndNextPage(ProductSpecifications.forProductFilter(productFilter), pageable);
+		Page<Product> products = productService.findCurrentAndNextPage(ProductSpecifications.forProductFilter(productFilter), pageable);
+		
 		model.addAttribute("products", new PageDto(products));
 		if (products.getSort().getOrderFor("finalPrice") != null) {
 			model.addAttribute("priceAscending", products.getSort().getOrderFor("finalPrice").isAscending());

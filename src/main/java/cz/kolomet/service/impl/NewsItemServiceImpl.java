@@ -17,7 +17,6 @@ import cz.kolomet.domain.Place;
 import cz.kolomet.domain.PlaceComment;
 import cz.kolomet.domain.codelist.Region;
 import cz.kolomet.dto.NewsItemDto;
-import cz.kolomet.dto.PlaceFilterDto;
 import cz.kolomet.repository.NewsItemRepository;
 import cz.kolomet.repository.NewsItemSpecifications;
 import cz.kolomet.repository.PlaceRepository;
@@ -79,8 +78,8 @@ public class NewsItemServiceImpl implements NewsItemService {
 	}
 	
 	@Override
-	public List<NewsItem> findAllPartnerLinks(PlaceFilterDto placeFilter) {
-		return newsItemRepository.findAll(NewsItemSpecifications.partnerLinks(placeFilter.getRegion()));
+	public List<NewsItem> findAllPartnerLinks(Region region) {
+		return newsItemRepository.findAll(NewsItemSpecifications.partnerLinks(region));
 	}
 	
 	public Page<NewsItem> findNewsItemEntries(Pageable pageable) {

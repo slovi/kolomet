@@ -40,5 +40,14 @@ public class NewsItemTest {
 		assertEquals("test test test test test test test test test test test test test", item4.getFacebookText());
 		
 	}
+	
+	@Test
+	public void testTest() {
+		
+		NewsItem item = new NewsItem("<div> <img alt=\"Koruna Vysociny\" src=\"http://www.kolomet.cz//file/newsitem/111/BANNER_Vrcharska_koruna Vysociny_orig.jpg\" style=\"float:left;margin: 5px 15px 0 0\" title=\"SOUTEZ_I\" /> </div><div><br /></div><div><div><span style=\"background-color: rgb(249, 249, 249); font-size: 1.4em;\"><b>Vrchařská koruna Vysočiny</b></span></div><div><br /></div><div>Vrchařská koruna Vysočiny je akce pro všechny milovníky cyklistiky, fotografování, </div><div>krásné přírody a prostě pro ty, co mají rádi Vysočinu v okolí horní Svratky</div><div>a nebojí se k jejímu poznání šlápnout do pedálů.</div></div>");
+		System.out.println(item.getFacebookHeaderText());
+		System.out.println(item.getFacebookText());
+		System.out.println(item.getContainedImageUrl());
+	}
 
 }

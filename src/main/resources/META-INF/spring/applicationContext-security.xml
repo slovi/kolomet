@@ -48,6 +48,10 @@
 		<intercept-url pattern="/store/admin/region/*" access="hasAnyRole('ROLE_per_regions')" />
 		<intercept-url pattern="/store/admin/password*" access="isFullyAuthenticated()" />
 		<intercept-url pattern="/store/admin/password/*" access="isFullyAuthenticated()" />
+		<intercept-url pattern="/store/admin/pages*" access="hasAnyRole('ROLE_per_pages')" />
+		<intercept-url pattern="/store/admin/pages/*" access="hasAnyRole('ROLE_per_pages')" />
+		<intercept-url pattern="/store/admin/pagephotourls" access="hasAnyRole('ROLE_per_pages')" />
+		<intercept-url pattern="/store/admin/pagephotourls/*" access="hasAnyRole('ROLE_per_pages')" />
 		<intercept-url pattern="/store/admin/products*" access="hasAnyRole('ROLE_per_products')" />
 		<intercept-url pattern="/store/admin/products/*" access="hasAnyRole('ROLE_per_products')" />
 		<intercept-url pattern="/store/admin/photourls*" access="hasAnyRole('ROLE_per_products')" />

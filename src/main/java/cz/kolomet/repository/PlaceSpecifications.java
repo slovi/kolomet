@@ -88,6 +88,9 @@ public class PlaceSpecifications {
 					Expression<PlaceType> placeType = root.get("placeType");
 					predicates.add(placeType.in(placeFilterDto.getPlaceTypes()));
 				}
+				if (placeFilterDto.getUser() != null) {
+					predicates.add(visitedPlaces(placeFilterDto.getUser()).toPredicate(root, query, cb));
+				}
 				
 				return cb.and(predicates.toArray(new Predicate[0]));
 			}

@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div id="body_content" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="http://www.springframework.org/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:spring="http://www.springframework.org/tags" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
+<div id="body_content" 
+	xmlns:c="http://java.sun.com/jsp/jstl/core" 
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions" 
+	xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" 
+	xmlns:form="http://www.springframework.org/tags/form" 
+	xmlns:jsp="http://java.sun.com/JSP/Page" 
+	xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" 
+	xmlns:spring="http://www.springframework.org/tags" 
+	xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields"
+	xmlns:security="http://www.springframework.org/security/tags"  
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
+	
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>    
     
@@ -11,12 +22,24 @@
         <div id="map_content"><div id="map-canvas" style="width: 100%; height:400px;"><!----></div><!----></div>
 
 		<div id="map_footer">
+			<security:authorize access="isAuthenticated()" var="authenticated" />
     		<spring:url value="/tour/public/places" var="my_places_url" />
-    		<a id="my_places_link" href="${my_places_url}" class="arrow_box actual"><util:nbsp number="3" /><c:out value="${myPlacesOwnText}" escapeXml="false" /><util:nbsp number="3" /></a><util:nbsp number="2" />
+    		
+    		<c:choose>
+    			<c:when test="${authenticated}">
+		    		<a id="my_places_link" href="${my_places_url}" class="arrow_box actual"><util:nbsp number="3" /><c:out value="${myPlacesOwnText}" escapeXml="false" /><util:nbsp number="3" /></a><util:nbsp number="2" />
+    			</c:when>
+    			<c:otherwise>
+    				<a id="my_places_link_anonymous" href="#" class="arrow_box actual anonymous"><util:nbsp number="3" /><c:out value="${myPlacesOwnText}" escapeXml="false" /><util:nbsp number="3" /></a><util:nbsp number="2" />
+    			</c:otherwise>
+    		</c:choose>
+	    	<c:if test="${authenticated}">
+				<div style="float:right;margin-top: -3px;">
+					<util:facebook id="my_places_fb_link" fbLink="${fbLink}" />
+				</div>
+	      	</c:if>
     	</div>
 
-	    <spring:url value="${staticDomain}/" var="contextPath" />
-	    <spring:url value="/tour/public/places" var="placeUrl" />
 	    <spring:url value="/resources/js/gmap.js" var="gmapUrl" />
 	    
         <span id="map_config" class="config" style="display: none;">
@@ -24,31 +47,10 @@
     			{ 
     				"myPlacesText": "${myPlacesOwnText}",
 					"allPlacesText": "${myPlacesAllText}",
-    				"placeUrl": "${placeUrl}", 
-    				"highlight": "${param.highlight}",
-    				"initWest": "${param.gps_west}",
-    				"initNorth": "${param.gps_north}",
-    				"initZoom": "${param.gps_region_zoom}",
-    				"placeTypes": ${placeTypesJson}
+    				"placeTypes": ${placeTypesJson}    				
     			}
     		]]>
         </span>
     </div>
-    
-	
-	<c:set value="${param.highlight}" var="highlight" />
-	<c:if test="${empty highlight}">
-		<c:set value="0" var="highlight" />
-	</c:if>
-	
-	<c:set value="${param.gps_north}" var="gpsNorth" />
-	<c:set value="${param.gps_west}" var="gpsWest" />
-	
-	<c:if test="${empty gpsNorth}">
-		<c:set value="null" var="gpsNorth" />
-	</c:if>
-	<c:if test="${empty gpsWest}">
-		<c:set value="null" var="gpsWest" />
-	</c:if>
 
 </div>

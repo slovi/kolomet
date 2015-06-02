@@ -9,7 +9,6 @@ import org.springframework.data.domain.Pageable;
 import cz.kolomet.domain.NewsItem;
 import cz.kolomet.domain.codelist.Region;
 import cz.kolomet.dto.NewsItemDto;
-import cz.kolomet.dto.PlaceFilterDto;
 
 public interface NewsItemService {
 	
@@ -35,7 +34,7 @@ public interface NewsItemService {
 	public List<NewsItemDto> findAllPartnerLinksDtos(Region region);
 	
 	
-	public List<NewsItem> findAllPartnerLinks(PlaceFilterDto placeFilter);
+	public List<NewsItem> findAllPartnerLinks(Region region);
 	
 	
 	public List<NewsItem> findAllNewsItems(Pageable pageable);

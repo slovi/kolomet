@@ -40,7 +40,7 @@
 	                        </div>
 	                    </div>
 	                    <div style="width: 300px;">
-	                        <field:select field="placeType" id="c_cz_kolomet_domain_Place_placeType" itemLabel="codeDescription" itemValue="id" items="${placetypes}" path="/admin/placetypes" required="true" width="${input_width}" />
+	                        <field:select field="placeType" id="c_cz_kolomet_domain_Place_placeType" itemLabel="codeDescription" emptyLabel="..." itemValue="id" items="${placetypes}" path="/admin/placetypes" required="true" width="${input_width}" />
 	                        <field:input field="name" id="c_cz_kolomet_domain_Place_name" required="true" width="${input_width}" z="user-managed"/>
 	                        <field:input field="bikeRoadNr" id="c_cz_kolomet_domain_Place_bikeRoadNr" required="false" validationMessageCode="field_invalid_integer" width="${input_width}" z="user-managed"/>
 	                        <field:input field="address.street" id="c_cz_kolomet_domain_Place_address_street" render="false" width="${input_width}" z="9mNJF+/QmefeQOfR2mhIlHMeOSk="/>

@@ -1,7 +1,6 @@
 package cz.kolomet.web.admin;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -19,8 +18,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.util.UriUtils;
-import org.springframework.web.util.WebUtils;
 
 import cz.kolomet.domain.NewsItem;
 import cz.kolomet.domain.NewsItemType;
@@ -31,8 +28,7 @@ import cz.kolomet.service.NewsItemService;
 import cz.kolomet.service.RegionService;
 
 @RequestMapping("/admin/newsitems")
-@Controller
-public class NewsItemController extends AbstractAdminController {
+@Controllerpublic class NewsItemController extends AbstractAdminController {
 	
 	@Autowired
 	private NewsItemService newsItemService;
@@ -144,14 +140,4 @@ public class NewsItemController extends AbstractAdminController {
         return "redirect:/admin/newsitems";
     }
 
-	String encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {
-        String enc = httpServletRequest.getCharacterEncoding();
-        if (enc == null) {
-            enc = WebUtils.DEFAULT_CHARACTER_ENCODING;
-        }
-        try {
-            pathSegment = UriUtils.encodePathSegment(pathSegment, enc);
-        } catch (UnsupportedEncodingException uee) {}
-        return pathSegment;
-    }
 }

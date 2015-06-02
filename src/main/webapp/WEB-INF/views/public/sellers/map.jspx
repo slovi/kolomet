@@ -140,14 +140,13 @@
 	</div>
 
 	<c:forEach items="${sellers}" var="seller">	
-		<spring:url value="/store/public/sellers/detail" var="sellersDetailUrl" />
+		<spring:url value="/store/public/sellers/detail/${seller.simplifiedName}" var="sellersDetailUrl" />
 		<div class="category_unit"> 
-			<spring:url value="/store/public/sellers/detail/${seller.id}" var="sellerIdUrl" />
-	     	<a href="${sellerIdUrl}">
+	     	<a href="${sellersDetailUrl}">
 	     		<util:photo-image photos="${seller.sellerPhotoUrls}" imgName="${seller.sellerName}" imgType="over" height="146" width="224" />
 	     	</a>
 	    	<div class="cat_description cat_prodejce_popis"> 
-	    		<a href="${sellersDetailUrl}/${seller.id}" class="label"><spring:eval expression="seller.sellerName" /></a>
+	    		<a href="${sellersDetailUrl}" class="label"><spring:eval expression="seller.sellerName" /></a>
 	        	<p>${seller.sellerTitle}
 	        	<br />
 	        	<a href="${seller.web}" target="_blank"><spring:eval expression="seller.web" /></a></p>
@@ -163,7 +162,7 @@
 	    	</div>
 	    	<div class="cat_seller cat_prodejce_popis"> 
 	            <div>
-	            	<a class="action_button_dark" href="${sellersDetailUrl}/${seller.id}">Detail</a>
+	            	<a class="action_button_dark" href="${sellersDetailUrl}">Detail</a>
 	            </div>
 	            <div>
 	            	<spring:url value="/store/public/products/filter" var="sellerProductsUrl">

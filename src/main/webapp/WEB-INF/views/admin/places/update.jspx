@@ -5,6 +5,7 @@
 	xmlns:jsp="http://java.sun.com/JSP/Page" 
 	xmlns:spring="http://www.springframework.org/tags" 
 	xmlns:security="http://www.springframework.org/security/tags"
+	xmlns:spring-form="http://www.springframework.org/tags/form" 
 	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
     
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
@@ -17,6 +18,10 @@
 	    </h2>
 	    <c:set value="12" var="input_width"/>
 	    <form:update id="fu_cz_kolomet_domain_Place" renderInTab="false" modelAttribute="place" multipart="true" path="${subContext}/admin/places" versionField="Version" z="user-managed">
+	    
+	    	<spring-form:hidden path="qualityRanking" />
+	    	<spring-form:hidden path="nrOfRankings" />
+	    
 	        <div>
 	            <div class="step">
 	                <div style="width:640px; height: 40px;">

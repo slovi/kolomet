@@ -22,15 +22,25 @@
     	<field:display field="name" id="s_cz_kolomet_domain_ApplicationUser_name" object="${applicationuser}" />
     	<field:display field="surname" id="s_cz_kolomet_domain_ApplicationUser_surname" object="${applicationuser}" />    
         <field:display field="username" id="s_cz_kolomet_domain_ApplicationUser_username" object="${applicationuser}" />
-        <field:display field="phone" id="s_cz_kolomet_domain_ApplicationUser_phone" object="${applicationuser}" render="${not empty applicationuser.phone}" />
+        <field:display field="phone" id="s_cz_kolomet_domain_ApplicationUser_phone" object="${applicationuser}" />
         <field:display field="nickname" id="s_cz_kolomet_domain_ApplicationUser_nickname" object="${applicationuser}" />
+        <c:forEach items="${applicationuser.addresses}" var="address" varStatus="status">
+        	<div class="info_label">
+        		<strong><c:out value="Adresa ${status.index + 1}: ${address.addressType}" /></strong><br />
+        	</div>
+	        <field:display field="street" id="c_cz_kolomet_domain_ApplicationUser_street" object="${address}" />
+	        <field:display field="houseNr" id="c_cz_kolomet_domain_ApplicationUser_houseNr" object="${address}" />
+	        <field:display field="city" id="c_cz_kolomet_domain_ApplicationUser_city" object="${address}" />
+	        <field:display field="postCode" id="c_cz_kolomet_domain_ApplicationUser_postCode" object="${address}" />
+	        <field:display field="countryState.codeDescription" id="c_cz_kolomet_domain_ApplicationUser_countryState" object="${address}" />
+        </c:forEach>
         <security:authorize access="principal.isApplicationUsersAll()">
         	<field:display field="password" id="s_cz_kolomet_domain_ApplicationUser_password" object="${applicationuser}" />
 	        <field:display field="createdBy" id="s_cz_kolomet_domain_ApplicationUser_createdBy" object="${applicationuser}" />
     	    <field:display field="lastModifiedBy" id="s_cz_kolomet_domain_ApplicationUser_lastModifiedBy" object="${applicationuser}" />
 	        <field:display date="true" dateTimePattern="${applicationUser_created_date_format}" field="created" id="s_cz_kolomet_domain_ApplicationUser_created" object="${applicationuser}" />
     	    <field:display date="true" dateTimePattern="${applicationUser_lastmodified_date_format}" field="lastModified" id="s_cz_kolomet_domain_ApplicationUser_lastModified" object="${applicationuser}" />
-	        <field:display field="enabled" id="s_cz_kolomet_domain_ApplicationUser_enabled" object="${applicationuser}" />
+	        <field:display field="enabled" bool="true" id="s_cz_kolomet_domain_ApplicationUser_enabled" object="${applicationuser}" />
 	        <field:display collectionItemProperty="roleName" field="roles" id="s_cz_kolomet_domain_ApplicationUser_roles" object="${applicationuser}" />
         </security:authorize>
     </page:show>

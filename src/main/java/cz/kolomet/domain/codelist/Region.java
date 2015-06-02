@@ -25,6 +25,8 @@ import cz.kolomet.domain.GpsLocation;
 	private String googleAliasEn;
 	
 	private Integer zoom;
+	
+	private Boolean generateStaticMapLink;
 
 	public Integer getZoom() {
 		return zoom;
@@ -56,6 +58,14 @@ import cz.kolomet.domain.GpsLocation;
 
 	public void setGoogleAliasEn(String googleAliasEn) {
 		this.googleAliasEn = googleAliasEn;
+	}
+
+	public Boolean getGenerateStaticMapLink() {
+		return generateStaticMapLink;
+	}
+
+	public void setGenerateStaticMapLink(Boolean generateStaticMapLink) {
+		this.generateStaticMapLink = generateStaticMapLink;
 	}
 
 	public String toString() {

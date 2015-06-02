@@ -16,6 +16,9 @@ import cz.kolomet.service.PlaceTypeService;
 @Transactional
 public class PlaceTypeServiceImpl implements PlaceTypeService {
 	
+	@Autowired
+	PlaceTypeRepository placeTypeRepository;
+	
 	@Override
 	public List<PlaceType> findAllPlaceTypes() {
 		return placeTypeRepository.findAll(Codelist.defaultSort());
@@ -25,10 +28,6 @@ public class PlaceTypeServiceImpl implements PlaceTypeService {
 	public Page<PlaceType> findPlaceTypeEntries(Pageable pageable) {
         return placeTypeRepository.findAll(pageable);
     }
-	
-
-	@Autowired
-    PlaceTypeRepository placeTypeRepository;
 
 	public long countAllPlaceTypes() {
         return placeTypeRepository.count();

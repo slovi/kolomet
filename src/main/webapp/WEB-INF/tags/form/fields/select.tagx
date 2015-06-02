@@ -10,6 +10,7 @@
   <jsp:directive.attribute name="items" type="java.util.Collection" required="true" rtexprvalue="true" description="The name of the collection displayed in the select box" />
   <jsp:directive.attribute name="label" type="java.lang.String" required="false" rtexprvalue="true" description="The label used for this field, will default to a message bundle if not supplied" />
   <jsp:directive.attribute name="emptyLabel" type="java.lang.String" required="false" rtexprvalue="true" description="The label used for this field, will default to a message bundle if not supplied" />
+  <jsp:directive.attribute name="addEmptyLabel" type="java.lang.Boolean" required="false" rtexprvalue="true" description="The label used for this field, will default to a message bundle if not supplied" />
   <jsp:directive.attribute name="emptyStringEmptyValue" type="java.lang.Boolean" required="false" rtexprvalue="true" description="The value used for this field" />
   <jsp:directive.attribute name="itemLabel" type="java.lang.String" required="false" rtexprvalue="true" description="Name of the property mapped to the inner text of the 'option' tag (will override the configured converter)" />
   <jsp:directive.attribute name="itemLabelCode" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Item label will be resolved from messagesource" />
@@ -141,7 +142,7 @@
                       <c:choose>
                         <c:when test="${multiple}">
                           <form:select id="_${sec_field}_id" style="width: ${width}em;" path="${sec_field}" disabled="${disabled}" multiple="${multiple}">
-                          	<c:if test="${not empty emptyLabel}">
+                          	<c:if test="${not empty emptyLabel or addEmptyLabel}">
                           		<form:option value="" label="${emptyLabel}" disabled="${disabled}">&#32;</form:option>
                           	</c:if>
       						<form:options items="${items}" disabled="${disabled}" />
@@ -149,7 +150,7 @@
                         </c:when>
                         <c:otherwise>
                           <form:select id="_${sec_field}_id" style="width: ${width}em;" path="${sec_field}" disabled="${disabled}">
-                          	<c:if test="${not empty emptyLabel}">
+                          	<c:if test="${not empty emptyLabel or addEmptyLabel}">
                           		<form:option value="" label="${emptyLabel}" disabled="${disabled}">&#32;</form:option>
                           	</c:if>
       						<form:options items="${items}" disabled="${disabled}" />
@@ -161,7 +162,7 @@
                       <c:choose>
                         <c:when test="${multiple}">
                           <form:select id="_${sec_field}_id" style="width: ${width}em;" path="${sec_field}" disabled="${disabled}" multiple="${multiple}">
-                          	<c:if test="${not empty emptyLabel}">
+                          	<c:if test="${not empty emptyLabel or addEmptyLabel}">
                           		<form:option value="" label="${emptyLabel}">&#32;</form:option>
                           	</c:if>
       						<form:options items="${items}" itemLabel="${sec_itemLabel}" />
@@ -169,7 +170,7 @@
                         </c:when>
                         <c:otherwise>
                           <form:select id="_${sec_field}_id" style="width: ${width}em;" path="${sec_field}" disabled="${disabled}">
-                          	<c:if test="${not empty emptyLabel}">
+                          	<c:if test="${not empty emptyLabel or addEmptyLabel}">
                           		<form:option value="" label="${emptyLabel}" disabled="${disabled}">&#32;</form:option>
                           	</c:if>
       						<form:options items="${items}" itemLabel="${sec_itemLabel}" disabled="${disabled}" />
@@ -288,7 +289,15 @@
           <c:choose>
             <c:when test="${multiple == false}">
             	<c:if test="${decorated}">
-	              <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_${sec_field}_id', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
+            		<c:choose>
+            			<c:when test="${not empty emptyLabel}">
+            				<c:set value=", value: '...'" var="emptyLabelValue" />
+            			</c:when>
+						<c:otherwise>
+							<c:set value="" var="emptyLabelValue" />
+						</c:otherwise>
+            		</c:choose>            		
+	              <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_${sec_field}_id', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true, required : ${required}${emptyLabelValue}}})); </script>
             	</c:if>
             </c:when>
             <!-- disabled due to http://jira.springframework.org/browse/ROO-909 <c:otherwise> <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_${field}_id', widgetType: 'dijit.form.MultiSelect', widgetAttrs : {}})); </script> </c:otherwise> -->

@@ -86,7 +86,7 @@ public class ProductController extends AbstractAdminController {
     
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String show(@PathVariable("id") Long id, Model uiModel) {
-        return "redirect:/public/products/detail/" + id;
+        return "redirect:public/products/detail/" + id;
     }
     
     @RequestMapping(value = "/{id}", params = "copy", produces = "text/html")
@@ -113,14 +113,14 @@ public class ProductController extends AbstractAdminController {
     public String delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         Product product = productService.findProduct(id);
         productService.deleteProduct(product);
-        return "redirect:/public/products/detail/" + id;
+        return "redirect:public/products/detail/" + id;
     }
     
     @RequestMapping(value = "/{id}", params = {"erase"}, method = RequestMethod.DELETE, produces = "text/html")
     public String erase(@PathVariable("id") Long id, Model uiModel) {
         Product product = productService.findProduct(id);
         productService.eraseProduct(product);
-        return "redirect:/admin/products";
+        return "redirect:admin/products";
     }
     
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
@@ -142,7 +142,7 @@ public class ProductController extends AbstractAdminController {
         
         productService.saveProduct(product);
        	saveCopied(product, photoUrlService, httpServletRequest.getSession().getId(), product.getFileInfos());
-        return "redirect:/public/products/detail/" + product.getId();
+        return "redirect:public/products/detail/" + product.getId();
     }
     
     @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
@@ -170,7 +170,7 @@ public class ProductController extends AbstractAdminController {
         productService.updateProduct(product);
         savePhotos(product, photoUrlService, httpServletRequest.getSession().getId(), product.getFileInfos());
         
-        return "redirect:/public/products/detail/" + product.getId();
+        return "redirect:public/products/detail/" + product.getId();
     }
     
     @RequestMapping(produces = "text/html")

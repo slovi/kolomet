@@ -50,7 +50,7 @@ public class PlaceController extends AbstractAdminController {
 	
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String show(@PathVariable("id") Long id, Model uiModel) {
-        return "redirect:/public/places/" + id;
+        return "redirect:public/places/" + id;
     }
     
     @RequestMapping(produces = "text/html")

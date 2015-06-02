@@ -1,0 +1,6 @@
+update news_item set news_item_type = 'NEWS_ITEM' where news_item_type = 0;
+update news_item set news_item_type = 'BANNER_PLACES' where news_item_type = 1;
+update news_item set news_item_type = 'BANNER_PRODUCTS' where news_item_type = 2;
+update news_item set news_item_type = 'BANNER_ALL' where news_item_type = 3;
+update news_item set news_item_type = 'WEEKEND_TIP' where news_item_type = 4;
+update news_item set news_item_type = 'PARTNER_LINK' where news_item_type = 5;

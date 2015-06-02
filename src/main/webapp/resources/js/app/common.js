@@ -63,7 +63,7 @@ require.config({
 		'bootstrap': '../../lib/bootstrap.min',
 		'canvas-to-blob': '../../lib/canvas-to-blob.min',
 		'docs': '../../lib/docs.min',
-		'facebook': '//connect.facebook.net/cs_CZ/all',
+		'facebook': '../../lib/facebook-all',
 		'ie-viewport-bug-workaround': '../../lib/ie10-viewport-bug-workaround',
 		'jssor-slider': '../../lib/jssor.slider.mini',
 		'jquery': '../../lib/jquery-1.11.0.min',

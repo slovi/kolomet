@@ -4,14 +4,26 @@ public enum PlaceTypeColor {
 		
 	BLUE, GREEN, RED, YELLOW, ORANGE;
 	
-	private String markerImgUrl;
+	private static final String RESOURCES_IMG_PLACES = "resources/img/places/";
 
-	private PlaceTypeColor() {
-		this.markerImgUrl = "/resources/img/places/" + this.name().toLowerCase() + ".png"; 
+	public String getIconUrl() {
+		return createImgUrl("");
 	}
-	
-	public String getMarkerImgUrl() {
-		return markerImgUrl;
+
+	public String getMyIconUrl() {
+		return createImgUrl("_my");
 	}
-	
+
+	public String getLargeIconUrl() {
+		return createImgUrl("");
+	}
+
+	public String getMyLargeIconUrl() {
+		return createImgUrl("_my_large");
+	}
+
+	private String createImgUrl(String suffix) {
+		return RESOURCES_IMG_PLACES + this.name() + suffix + ".png";
+	}
+
 }

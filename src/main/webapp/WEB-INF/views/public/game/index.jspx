@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <div xmlns:jsp="http://java.sun.com/JSP/Page" 
+	xmlns:c="http://java.sun.com/jsp/jstl/core" 
 	xmlns:spring="http://www.springframework.org/tags" 
 	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
   
@@ -8,9 +9,7 @@
   
 	<div class="general_unit">
 		<div class="inner_content">	
-	
-			<spring:message code="public_game_index" htmlEscape="false" />
-						
+			<c:out value="${page.text}" escapeXml="false" />
 		</div>
 	</div>
 </div>

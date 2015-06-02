@@ -146,5 +146,28 @@ public class ProductSpecifications {
 			}
 		};
 	}
+	
+	public static Specification<Product> enabledProduct() {
+		return new Specification<Product>() {
+
+			@Override
+			public Predicate toPredicate(Root<Product> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+
+				List<Predicate> predicates = new ArrayList<Predicate>();
+				
+				predicates.add(cb.equal(root.<Boolean> get("enabled"), true));
+				
+				Subquery<Boolean> sellerEnabledSubquery = query.subquery(Boolean.class);
+				Root<Seller> sellerEnabledSubqueryRoot = sellerEnabledSubquery.from(Seller.class);
+				sellerEnabledSubquery.select(sellerEnabledSubqueryRoot.<Boolean> get("enabled"));
+				sellerEnabledSubquery.where(cb.equal(sellerEnabledSubqueryRoot, root.get("seller")));
+				predicates.add(cb.equal(sellerEnabledSubquery, true));
+				
+				JpaUtils.addBetweenDatePredicate(predicates, cb, root.<Date> get("validFrom"), root.<Date> get("validTo"), new Date());
+				return cb.and(predicates.toArray(new Predicate[predicates.size()]));
+			}
+			
+		};
+	}
 
 }

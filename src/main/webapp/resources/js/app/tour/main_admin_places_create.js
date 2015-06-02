@@ -2,7 +2,7 @@ require(['../common'], function (common) {
 	
 	require(['main_default_admin'], function(mainDefaultPublic) {
 		
-	    require(['async!https://maps.googleapis.com/maps/api/js?key=AIzaSyAbbZrV_w_DmKzCVuFSxgkBs4pvi1gk1VA&amp;sensor=true&amp;language=cs', 'input-file', 'form', 'images', 'template-service', 'jquery'], function(gmaps, inputFile, form, images, templateService, $) {
+	    require(['async!https://maps.googleapis.com/maps/api/js?key=' + window.app.apiKey + '&amp;sensor=true&amp;language=cs', 'input-file', 'form', 'images', 'template-service', 'jquery'], function(gmaps, inputFile, form, images, templateService, $) {
 	    	
 	    	var template = '<div class="file_item thumbnail_wrapper"><span>{{name}}</span><div class="thumbnail"><img alt="" src="{{fileThumbUrl}}" /></div></div>';
 	    	

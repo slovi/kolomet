@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import cz.kolomet.domain.Category;
 import cz.kolomet.domain.Product;
 import cz.kolomet.util.repository.CustomRepository;
 
@@ -34,6 +35,18 @@ public interface ProductRepository extends CustomRepository<Product, Long> {
 			+ "where 1 = (select s.enabled from Seller s where s = p.seller) "
 				+ "and p.enabled = true and p.validFrom <= CURRENT_DATE and p.validTo >= CURRENT_DATE")
 	List<Product> findByPriority(Pageable pageable);
+	
+	@Query(
+			"select p from Product p inner join p.category c "
+			+ "where 1 = (select s.enabled from Seller s where s = p.seller) "
+				+ "and p.enabled = true and p.validFrom <= CURRENT_DATE and p.validTo >= CURRENT_DATE and c = :category")
+	List<Product> findByPriorityAndCategory(Pageable pageable, @Param("category") Category c);
+	
+	@Query(
+			"select p from Product p inner join p.category c "
+			+ "where 1 = (select s.enabled from Seller s where s = p.seller) "
+				+ "and p.enabled = true and p.validFrom <= CURRENT_DATE and p.validTo >= CURRENT_DATE and c not in :categories")
+	List<Product> findByPriorityAndNotCategoryIn(Pageable pageable, @Param("categories") List<Category> categories);
 	
 	@Query(
 			"select p from Product p "

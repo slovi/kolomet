@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+    <definition extends="store/template_admin" name="store/admin/pages/list">
+        <put-attribute name="body" value="/WEB-INF/views/admin/pages/list.jspx"/>
+    </definition>
+	<definition extends="store/template_admin" name="store/admin/pages/show">
+        <put-attribute name="body" value="/WEB-INF/views/admin/pages/show.jspx"/>
+    </definition>
+	<definition extends="store/template_admin" name="store/admin/pages/create">
+		<put-attribute name="mainJsFileName" value="main_admin_pages_create" cascade="true" />
+        <put-attribute name="body" value="/WEB-INF/views/admin/pages/create.jspx"/>
+    </definition>
+	<definition extends="store/template_admin" name="store/admin/pages/update">
+		<put-attribute name="mainJsFileName" value="main_admin_pages_create" cascade="true" />
+        <put-attribute name="body" value="/WEB-INF/views/admin/pages/update.jspx"/>
+    </definition>
+</tiles-definitions>

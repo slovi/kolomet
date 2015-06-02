@@ -53,8 +53,8 @@ public class AbstractController implements MessageSourceAware {
 	@Value("${menu.google.link}")
 	private String menuGoogleLink;
 	
-	@Value("${domain.static}")
-	private String staticDomain;
+	@Value("${domain.dynamic}")	
+	private String dynamicDomain;
 	
 	@Value("${facebook.appId}")
 	private String facebookAppId;
@@ -146,13 +146,9 @@ public class AbstractController implements MessageSourceAware {
 		return request.getServletPath();
 	}
 	
-	@ModelAttribute("staticDomain")
-	public String getStaticDomain(HttpServletRequest request) {
-		if (request.getScheme().equals("http") && StringUtils.isNotBlank(staticDomain)) {
-			return "http://" + staticDomain;
-		} else {
-			return "";
-		}
+	@ModelAttribute("dynamicDomain")
+	public String getDynamicDomain(HttpServletRequest request) {
+		return dynamicDomain;
 	}
 	
 	public boolean isTour(HttpServletRequest request) {

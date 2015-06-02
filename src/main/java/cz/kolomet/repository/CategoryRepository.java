@@ -15,7 +15,7 @@ import cz.kolomet.domain.Category;
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Long>, JpaSpecificationExecutor<Category> {
 	
-	List<Category> findByCodeKey(String codeKey);
+	Category findByCodeKey(String codeKey);
 	
 	@Query("select c from Category c join fetch c.categoryType ct where ct.id = :categoryTypeId order by c.codeDescription asc")
 	@QueryHints({ @QueryHint(name = "org.hibernate.cacheable", value ="true") })

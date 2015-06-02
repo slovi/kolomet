@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheEvict;
@@ -18,9 +19,11 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import cz.kolomet.domain.Category;
 import cz.kolomet.domain.Product;
 import cz.kolomet.domain.ProductState;
 import cz.kolomet.domain.VisitorActivityLog.VisitorActivityType;
+import cz.kolomet.repository.CategoryRepository;
 import cz.kolomet.repository.ProductRepository;
 import cz.kolomet.service.ProductService;
 import cz.kolomet.service.VisitorActivityLogService;
@@ -28,10 +31,19 @@ import cz.kolomet.service.exception.EntityNotFoundException;
 
 @Service
 @Transactional
-public class ProductServiceImpl implements ProductService {
+public class ProductServiceImpl implements ProductService, InitializingBean {
 	
 	@Value("${img.rootdir}")
 	protected String rootDir;
+	
+	private Category categoryScooter;
+	
+	private Category categoryChildren;
+	
+	private List<Category> categoriesChildrenAndScooter;
+	
+	@Autowired
+	private CategoryRepository categoryRepository;
 	
 	@Autowired
 	private VisitorActivityLogService visitorActivityLogService;
@@ -39,6 +51,7 @@ public class ProductServiceImpl implements ProductService {
 	@Autowired
     private ProductRepository productRepository;
 	
+	@Override
 	@PreAuthorize("principal.isCapableToDeleteProduct(#product)")
 	@CacheEvict(value = "cz.kolomet.domain.Product.values.max", allEntries = true)
     public void deleteProduct(Product product) {
@@ -47,22 +60,43 @@ public class ProductServiceImpl implements ProductService {
         product.setProductState(ProductState.DELETED);        
     }
 	
+	@Override
 	@PostAuthorize("isAnonymous() or principal.isCapableToDisplayProduct(returnObject)")
 	public Product detail(Long id, String userInfo) {
 		Product product = findProduct(id);
 		if (product == null) {
 			throw new EntityNotFoundException(id);
 		}
+		product.simplifyName();
 		visitorActivityLogService.saveVisitorActivityLog(product.getSeller(), product, userInfo, VisitorActivityType.PRODUCT_VISIT);
 		return product;
 	}
+	
+	@Override
+	public Page<Product> findCurrentAndNextPage(Specification<Product> specification, Pageable pageable) {
+		Page<Product> products = productRepository.findCurrentAndNextPage(specification, pageable);
+		// TODO temp
+		for (Product product: products) {
+			product.simplifyName();
+		}
+		return products;
+	}
     
+	@Override
 	public List<Product> findRandomByPriority(Pageable pageable) {
 		
-		Pageable randomPageRequest = new PageRequest(pageable.getPageNumber(), pageable.getPageSize() * 3, pageable.getSort());
-		List<Product> products = productRepository.findByPriority(randomPageRequest);
+		Pageable randomPageRequest = new PageRequest(pageable.getPageNumber(), 10, pageable.getSort());
+		
+		List<Product> products = new ArrayList<Product>(); 
+		products.addAll(productRepository.findByPriorityAndCategory(randomPageRequest, categoryChildren));
+		products.addAll(productRepository.findByPriorityAndCategory(randomPageRequest, categoryScooter));
+		products.addAll(productRepository.findByPriorityAndNotCategoryIn(randomPageRequest, categoriesChildrenAndScooter));
+		
 		if (products.size() > pageable.getPageSize()) {
 			List<Product> resultList = new ArrayList<Product>(products);
+			for (Product product: resultList) { // TODO temp
+				product.simplifyName(); 
+			}
 			Collections.shuffle(resultList);
 			return resultList.subList(0, pageable.getPageSize());
 		} else {
@@ -88,6 +122,7 @@ public class ProductServiceImpl implements ProductService {
 			product.setProductState(ProductState.ACTIVE);
 		}
 		product.normalizeBuyUrl();
+		product.simplifyName();
         productRepository.save(product);
     }
     
@@ -97,6 +132,7 @@ public class ProductServiceImpl implements ProductService {
 		product.computeAndSetDiscount();		
 		product.setProductState(ProductState.ACTIVE);
 		product.normalizeBuyUrl();
+		product.simplifyNameAnyway();
         return productRepository.save(product);
     }
 	
@@ -168,6 +204,25 @@ public class ProductServiceImpl implements ProductService {
 	@Cacheable(value = "cz.kolomet.domain.Product.values.max", key = "'maxDiscount'")
 	public BigDecimal findMaxDiscount() {
 		return productRepository.findMaxDiscount();
+	}
+	
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		
+		this.categoryChildren = categoryRepository.findByCodeKey("cat_bike_children");
+		this.categoryScooter = categoryRepository.findByCodeKey("cat_bike_scooter");
+		
+		if (categoryChildren == null) {
+			throw new IllegalStateException("category children cannot be null");
+		}
+		
+		if (categoryScooter == null) {
+			throw new IllegalStateException("category scooter cannot be null");
+		}
+		
+		this.categoriesChildrenAndScooter = new ArrayList<Category>();
+		this.categoriesChildrenAndScooter.add(categoryChildren);
+		this.categoriesChildrenAndScooter.add(categoryScooter);
 	}
 	
 }

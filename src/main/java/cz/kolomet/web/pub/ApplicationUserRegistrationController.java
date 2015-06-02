@@ -71,6 +71,7 @@ public class ApplicationUserRegistrationController extends AbstractPublicControl
     public String createForm(Model uiModel) {
     	ApplicationUserRegistration registration = new ApplicationUserRegistration();
         populateEditForm(uiModel, registration);
+        uiModel.addAttribute("newsBanners", newsItemService.findPlaceNewsBanners(getNewsItemsPageRequest()));
         return "public/applicationuserregistrations/create";
     }
     
@@ -133,6 +134,7 @@ public class ApplicationUserRegistrationController extends AbstractPublicControl
 		applicationUser.setUsername(applicationUserRegistration.getUsername());		
 		applicationUser.setNickname(applicationUserRegistration.getNickname());
 		applicationUser.setSurname(applicationUserRegistration.getSurname());
+		applicationUser.setPhone(applicationUserRegistration.getPhone());
 		applicationUser.addRole(applicationRoleService.findApplicationRole("role_user"));
 		applicationUser.addAddress(address);
 		
@@ -169,6 +171,7 @@ public class ApplicationUserRegistrationController extends AbstractPublicControl
 	
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String show(@PathVariable("id") Long id, Model uiModel) {
+    	uiModel.addAttribute("newsBanners", newsItemService.findPlaceNewsBanners(getNewsItemsPageRequest()));
         return "public/applicationuserregistrations/show";
     }
     

@@ -79,6 +79,10 @@
 				            <hr color="#f9f9f9" width="85%" align="center" size="1" />
 				            <menu:item id="i_newsitem_list" messageCode="global_menu_list" url="/store/admin/newsitems" z="KOnlcMRbr4BntwwokrnIdkGVvTE="/>
 			            </security:authorize>
+			            <security:authorize access="hasAnyRole('ROLE_per_pages')"> 
+				            <hr color="#f9f9f9" width="85%" align="center" size="1" />
+				            <menu:item id="i_page_list" messageCode="global_menu_list" url="/store/admin/pages" z="KOnlcMRbr4BntwwokrnIdkGVvTE="/>
+			            </security:authorize>
 						<security:authorize access="principal.isProductsAll()">
 							<hr color="#f9f9f9" width="85%" align="center" size="1" /> 
 		    				<menu:item url="${menuGoogleLink}" blank="true" messageCode="menu_main_google_analytics" id="google_analytics" renderPageParams="false"/>

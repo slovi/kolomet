@@ -29,7 +29,12 @@
 		<put-attribute name="login" value="/WEB-INF/views/login.jspx" />
 		<put-attribute name="loader" value="/WEB-INF/views/loader.jspx" />
 	</definition>
-
+	
+	<definition name="template_fullscreen" template="/WEB-INF/layouts/template_fullscreen.jspx">
+		<put-attribute name="mainJsFileName" value="main_default_admin" cascade="true" />		
+		<put-attribute name="loader" value="/WEB-INF/views/loader.jspx" />
+	</definition>
+	
 	<definition name="template_wide" template="/WEB-INF/layouts/template_wide.jspx">
 		<put-attribute name="mainJsFileName" value="main_default_public" cascade="true" />
 		<put-attribute name="login" value="/WEB-INF/views/login.jspx" />

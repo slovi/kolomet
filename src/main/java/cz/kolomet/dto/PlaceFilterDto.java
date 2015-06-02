@@ -11,6 +11,14 @@ public class PlaceFilterDto {
 	
 	private List<PlaceType> placeTypes;
 	
+	private Integer defaultZoom = 7;
+	
+	private Integer defaultRegionZoom = 9;
+	
+	private Double defaultCenterWest = 15.5d;
+	
+	private Double defaultCenterNorth = 49.8d;
+	
 	private boolean actual = true;
 	
 	private boolean usedFilter;
@@ -18,6 +26,8 @@ public class PlaceFilterDto {
 	private boolean visitedPlaces;
 	
 	private Long visitedUser;
+	
+	private Long user;
 
 	public boolean existsPlaceType() {		
 		if (getPlaceTypes() != null) {
@@ -28,6 +38,10 @@ public class PlaceFilterDto {
 			}
 		}
 		return false;
+	}
+	
+	public boolean supportsRegionStaticMapLinkGeneration() {
+		return region == null || (region != null && region.getGenerateStaticMapLink());
 	}
 	
 	public Region getRegion() {
@@ -44,6 +58,38 @@ public class PlaceFilterDto {
 
 	public void setPlaceTypes(List<PlaceType> placeTypes) {
 		this.placeTypes = placeTypes;
+	}
+
+	public Integer getDefaultZoom() {
+		return defaultZoom;
+	}
+
+	public void setDefaultZoom(Integer defaultZoom) {
+		this.defaultZoom = defaultZoom;
+	}
+
+	public Integer getDefaultRegionZoom() {
+		return defaultRegionZoom;
+	}
+
+	public void setDefaultRegionZoom(Integer defaultRegionZoom) {
+		this.defaultRegionZoom = defaultRegionZoom;
+	}
+
+	public Double getDefaultCenterWest() {
+		return defaultCenterWest;
+	}
+
+	public void setDefaultCenterWest(Double defaultCenterWest) {
+		this.defaultCenterWest = defaultCenterWest;
+	}
+
+	public Double getDefaultCenterNorth() {
+		return defaultCenterNorth;
+	}
+
+	public void setDefaultCenterNorth(Double defaultCenterNorth) {
+		this.defaultCenterNorth = defaultCenterNorth;
 	}
 
 	public boolean isUsedFilter() {
@@ -76,6 +122,14 @@ public class PlaceFilterDto {
 
 	public void setVisitedUser(Long visitedUser) {
 		this.visitedUser = visitedUser;
+	}
+
+	public Long getUser() {
+		return user;
+	}
+
+	public void setUser(Long user) {
+		this.user = user;
 	}
 
 }

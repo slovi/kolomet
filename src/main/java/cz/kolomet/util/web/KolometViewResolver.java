@@ -38,6 +38,7 @@ public class KolometViewResolver extends UrlBasedViewResolver {
 			String redirectUrl = viewName.substring(REDIRECT_URL_PREFIX.length());
 			String resultRedirectUrl = appendServletPath(redirectUrl);
 			RedirectView view = new AjaxRedirectView(resultRedirectUrl, isRedirectContextRelative(), isRedirectHttp10Compatible());
+			view.setExposeModelAttributes(false);
 			return applyLifecycleMethods(viewName, view);
 		}
 		// Check for special "forward:" prefix.

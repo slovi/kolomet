@@ -12,8 +12,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
+import javax.swing.text.DefaultEditorKit.BeepAction;
 import javax.validation.constraints.NotNull;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.BatchSize;
 
 import cz.kolomet.domain.codelist.PlaceType;
@@ -21,10 +23,12 @@ import cz.kolomet.domain.codelist.Region;
 import cz.kolomet.dto.FileInfo;
 
 @Entity
-public class Place extends BaseDomainEntity implements Commented, PhotoContainer, Serializable {
+public class Place extends BaseDomainEntity implements Commented, PhotoContainer, Serializable, SimpleNameIdentifiable {
 
     @NotNull
     private String name;
+    
+    private String simplifiedName;
 
     private String description;
 
@@ -66,6 +70,16 @@ public class Place extends BaseDomainEntity implements Commented, PhotoContainer
     
     @Transient
     private List<FileInfo> fileInfos = new ArrayList<FileInfo>();
+    
+    public void simplifyName() {
+    	if (StringUtils.isBlank(this.simplifiedName)) {
+    		this.simplifiedName = cz.kolomet.util.StringUtils.simplify(this.getName() + "__" + this.getId());
+    	}
+    }
+    
+    public void simplifyNameAnyway() {
+    	this.simplifiedName = cz.kolomet.util.StringUtils.simplify(this.getName() + "__" + this.getId());
+    }
     
     public void addVisitedUser(ApplicationUser applicationUser) {
     	this.visitedUsers.add(applicationUser);
@@ -154,6 +168,15 @@ public class Place extends BaseDomainEntity implements Commented, PhotoContainer
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getSimplifiedName() {
+		this.simplifyName(); // TODO temp
+		return simplifiedName;
+	}
+
+	public void setSimplifiedName(String simplifiedName) {
+		this.simplifiedName = simplifiedName;
 	}
 
 	public String getDescription() {

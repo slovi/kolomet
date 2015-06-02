@@ -15,6 +15,22 @@ import cz.kolomet.domain.PlaceTypeColor;
 	
 	private PlaceTypeColor placeTypeColor;
 
+	public String getIconUrl() {
+		return placeTypeColor.getIconUrl(); 
+	}
+
+	public String getMyIconUrl() {
+		return placeTypeColor.getMyIconUrl();
+	}
+	
+	public String getLargeIconUrl() {
+		return placeTypeColor.getLargeIconUrl();
+	}
+	
+	public String getMyLargeIconUrl() {
+		return placeTypeColor.getMyLargeIconUrl();
+	}
+	
 	public PlaceTypeColor getPlaceTypeColor() {
         return this.placeTypeColor;
     }

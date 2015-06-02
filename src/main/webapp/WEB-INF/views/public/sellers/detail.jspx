@@ -111,8 +111,8 @@
                 </thead>
                 <c:forEach items="${products}" var="product">
                    	<tr>
-                   		<spring:url value="${subContext}/public/products/detail" var="productDetailUrl" />
-                   		<td><a href="${productDetailUrl}/${product.id}">${product.productName}</a></td>
+                   		<spring:url value="${subContext}/public/products/detail/${product.simplifiedName}" var="productDetailUrl" />
+                   		<td><a href="${productDetailUrl}">${product.productName}</a></td>
                        	<td class="text_right"><b><fmt:formatNumber groupingUsed="true" value="${product.finalPrice}" /></b></td>
                        	<security:authorize access="!isAuthenticated() or (isAuthenticated() and !principal.isSellerOwner(#seller))">
     						<td class="text_right"><fmt:formatNumber groupingUsed="true" value="${product.discount}" /></td>

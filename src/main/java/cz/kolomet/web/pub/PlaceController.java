@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.joda.time.format.DateTimeFormat;
@@ -23,17 +24,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 
+import cz.kolomet.domain.ApplicationUser;
 import cz.kolomet.domain.Place;
 import cz.kolomet.domain.Rate;
 import cz.kolomet.domain.RateType;
 import cz.kolomet.domain.codelist.PlaceType;
 import cz.kolomet.domain.codelist.Region;
+import cz.kolomet.dto.PlaceDto;
 import cz.kolomet.dto.PlaceFilterDto;
+import cz.kolomet.dto.PlaceMapDto;
 import cz.kolomet.repository.PlaceRepository;
 import cz.kolomet.repository.PlaceSpecifications;
 import cz.kolomet.service.PlaceService;
 import cz.kolomet.service.PlaceTypeService;
 import cz.kolomet.service.RateService;
+import cz.kolomet.util.StringUtils;
 
 @RequestMapping("/public/places")
 @Controller("publicPlaceController")public class PlaceController extends AbstractPublicController {
@@ -60,14 +65,14 @@ import cz.kolomet.service.RateService;
 	}
 	
 	@RequestMapping(value = "/rate", method = RequestMethod.POST, produces = "text/html")
-    public String rate(@Valid Rate rate, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
+    public String rate(@Valid Rate rate, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest, HttpServletResponse response) {
 		rate.setIpAddress(httpServletRequest.getRemoteAddr());
         rateService.saveRate(rate);        
-        return show(rate.getEntityId(), uiModel, httpServletRequest);
+        return show(rate.getEntityId(), uiModel, httpServletRequest, response);
     }
 	
     @RequestMapping(value = "/{id}", produces = "text/html")
-    public String show(@PathVariable("id") Long id, Model uiModel, HttpServletRequest request) {
+    public String show(@PathVariable("id") Long id, Model uiModel, HttpServletRequest request, HttpServletResponse response) {
         
     	addDateTimeFormatPatterns(uiModel);
     	
@@ -75,6 +80,7 @@ import cz.kolomet.service.RateService;
         uiModel.addAttribute("place", place);
         uiModel.addAttribute("itemId", id);
         uiModel.addAttribute("newsBanners", newsItemService.findPlaceNewsBanners(place.getRegion(), getNewsItemsPageRequest()));
+        uiModel.addAttribute("newsItemPartners", newsItemService.findAllPartnerLinks(place.getRegion()));
         
         List<Rate> existingRates = rateService.findRate(RateType.PLACE, id, request.getRemoteAddr());
         uiModel.addAttribute("isRated", !existingRates.isEmpty());
@@ -89,9 +95,9 @@ import cz.kolomet.service.RateService;
         uiModel.addAttribute("ogTitleCode", "page_place_detail_og_title_"  + place.getPlaceType().getCodeKey());
         uiModel.addAttribute("ogTitleArgs", place.getName());
         uiModel.addAttribute("ogDescriptionCode", "page_place_detail_og_description_" + place.getPlaceType().getCodeKey());
-        uiModel.addAttribute("ogType", "kolomet:place");
+        uiModel.addAttribute("fbLink", response.encodeURL(getDynamicDomain(request) + "tour/public/places/" + place.getId() + "?version=" + getVersion()));
 		if (!place.getPhotos().isEmpty()) {
-			uiModel.addAttribute("ogImage", "http://www.kolomet.cz/file/" + place.getPhotos().get(0).getDetailPhotoUrl());
+			uiModel.addAttribute("ogImage", getDynamicDomain(request) + "file/" + place.getPhotos().get(0).getDetailPhotoUrl());
 		}
         
         addDateTimeFormatPatterns(uiModel);
@@ -100,7 +106,7 @@ import cz.kolomet.service.RateService;
 
     @ResponseBody
     @RequestMapping(value = "/partners", produces = "application/json")
-    public String listNewsItemsJson(@RequestParam(value = "region", required = false) Region region) {
+    public String listNewsItemsPartnersJson(@RequestParam(value = "region", required = false) Region region) {
     	return jsonSerializer.toJsonArray(newsItemService.findAllPartnerLinksDtos(region));
     }
     
@@ -111,11 +117,15 @@ import cz.kolomet.service.RateService;
     }
     
     @ResponseBody
-    @RequestMapping(produces = "application/json")
-    public String listJson(@Valid PlaceFilterDto placeFilter, Model uiModel) {
-    	if (placeFilter.existsPlaceType()) {
-    		Specification<Place> placeSpecification = PlaceSpecifications.forPlaceFilter(placeFilter);
-    		return jsonSerializer.toJsonArray(placeService.findPlaceDtos(placeSpecification, getActualUser()));
+    @RequestMapping(value = "listjson", produces = "application/json")
+    public String listJson(@Valid PlaceFilterDto placeFilter, Model uiModel, HttpServletRequest request, HttpServletResponse response) {
+    	if (placeFilter.existsPlaceType()) {    	
+    		ApplicationUser user = getActualUser();
+    		PlaceMapDto placeMapDto = placeService.findPlaceMapDto(placeFilter, user != null ? user.getId() : null);
+    		for (PlaceDto placeDto: placeMapDto.getPlaces()) {
+    			placeDto.setUrl(response.encodeURL(request.getContextPath() + "/" + placeDto.getUrl()));
+    		}
+    		return jsonSerializer.toJson(placeMapDto);
     	} else {
     		return "{}";
     	}
@@ -139,7 +149,7 @@ import cz.kolomet.service.RateService;
 		} else {
 			uiModel.addAttribute("placeFilter", placeFilter);
 		}
-
+		
 		Specification<Place> placeSpecification = PlaceSpecifications.forPlaceFilter(placeFilter);
 		if (placeFilter.existsPlaceType()) {
 			uiModel.addAttribute("topPlaces", placeRepository.findAllWithoutCountQuery(
@@ -147,12 +157,32 @@ import cz.kolomet.service.RateService;
 		} else {			
 			uiModel.addAttribute("topPlaces", new ArrayList<Place>());
 		}
+
+		if (placeFilter.getRegion() != null) {
+			uiModel.addAttribute("pageKeywordsArgs", new Object[] {","+placeFilter.getRegion().getCodeDescription()});
+		}
+		
 		uiModel.addAttribute("newsBannersRenderedByJson", true);
+		uiModel.addAttribute("newsPartnersRenderedByJson", true);
 		uiModel.addAttribute("newsItemTips", newsItemService.findAllWeekendTips());
+		uiModel.addAttribute("pageKeywordsArgs", new Object[] {});
 		uiModel.addAttribute("pageTitleCode", "page_place_list_title_all");
         uiModel.addAttribute("pageDescriptionCode", "page_place_list_description");
+        uiModel.addAttribute("ogTitleCode", "places_list_facebook_link_title");
+        uiModel.addAttribute("ogDescriptionCode", "places_list_facebook_link_description");
+        
+        if (placeFilter.getUser() == null && getActualUser() != null) {
+        	placeFilter.setUser(getActualUser().getId());
+        }
+        if (getActualUser() != null) {
+        	uiModel.addAttribute("fbLink", StringUtils.encodeUrl(getDynamicDomain(request) + "tour/public/places?user=" + getActualUser().getId() + "&version=" + getVersion() + "&time=" + System.currentTimeMillis()));
+        }
+        if (placeFilter.getUser() != null || getActualUser() != null) {
+        	uiModel.addAttribute("ogImage", placeService.generateStaticMapLink(placeFilter, placeFilter.getUser() != null ? placeFilter.getUser() : getActualUser().getId()));
+        }
 		
         addDateTimeFormatPatterns(uiModel);
+        
         return "public/places/list";
     }
 

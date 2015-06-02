@@ -1,5 +1,8 @@
 package cz.kolomet.util;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import org.apache.commons.lang3.text.translate.EntityArrays;
 import org.apache.commons.lang3.text.translate.LookupTranslator;
 import org.apache.commons.lang3.text.translate.UnicodeEscaper;
@@ -9,6 +12,22 @@ public class StringUtils {
 	private static String sdiak = "áäčďéěíĺľňóôőöŕšťúůűüýřžÁÄČĎÉĚÍĹĽŇÓÔŐÖŔŠŤÚŮŰÜÝŘŽ";
 	private static String bdiak = "aacdeeillnoooorstuuuuyrzAACDEEILLNOOOORSTUUUUYRZ";
 
+	public static String encodeUrl(String url) {
+		return encodeUrl(url, "UTF-8");
+	}
+	
+	public static String encodeUrl(String url, String encoding) {
+		try {
+			return URLEncoder.encode(url, encoding);
+		} catch (UnsupportedEncodingException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	public static String simplify(String value) {
+		return StringUtils.removeDiakritics(value).toLowerCase().replaceAll(" ", "-");
+	}
+	
 	public static String removeDiakritics(String value) {
 
 		String tx = "";

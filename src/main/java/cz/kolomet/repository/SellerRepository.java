@@ -19,7 +19,7 @@ public interface SellerRepository extends JpaSpecificationExecutor<Seller>, JpaR
 	
 	public List<Seller> findByEnabledOrderBySellerNameAsc(Boolean enabled);
 	
-	@Query("select s from Seller s inner join s.region r where r.codeKey = :regionCodeKey order by s.sellerName asc")
+	@Query("select s from Seller s inner join s.region r where r.codeKey = :regionCodeKey and s.enabled = true order by s.sellerName asc")
 	public List<Seller> findByRegionCodeKeyOrderBySellerNameAsc(@Param("regionCodeKey") String regionCodeKey);
 	
 	@QueryHints({ @QueryHint(name = "org.hibernate.cacheable", value ="true") })
