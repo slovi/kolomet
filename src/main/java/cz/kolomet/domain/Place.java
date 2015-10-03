@@ -77,7 +77,7 @@ public class Place extends BaseDomainEntity implements Commented, PhotoContainer
     	}
     }
     
-    public void simplifyNameAnyway() {
+    public void forceSimplifyName() {
     	this.simplifiedName = cz.kolomet.util.StringUtils.simplify(this.getName() + "__" + this.getId());
     }
     

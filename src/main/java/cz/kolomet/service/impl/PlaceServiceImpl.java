@@ -145,8 +145,8 @@ public class PlaceServiceImpl implements PlaceService, RatedService, Initializin
 		if (!placesInSameRadius.isEmpty()) {
 			throw new ExistingPlaceException(placesInSameRadius.get(0));
 		}
-		place.simplifyName();
         placeRepository.save(place);
+        place.simplifyName();
     }
 
 	@Override
@@ -162,7 +162,7 @@ public class PlaceServiceImpl implements PlaceService, RatedService, Initializin
 		if (!placesInSameRadius.isEmpty()) {
 			throw new ExistingPlaceException(placesInSameRadius.get(0));
 		}
-		place.simplifyNameAnyway();
+		place.forceSimplifyName();
         return placeRepository.save(place);
     }
 
